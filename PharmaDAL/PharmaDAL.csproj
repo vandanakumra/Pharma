@@ -49,7 +49,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Item_Master.cs">
+    <Compile Include="Entity\AccountLedgerMaster.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\AccountLedgerType.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\AccountType.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CompanyMaster.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CustomerLedger.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CustomerType.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\InterestType.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ItemMaster.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PersonalLedger.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PersonLedgerType.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PersonRouteMaster.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\PharmaEntity.Context.cs">
@@ -67,6 +97,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PharmaEntity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entity\RecordType.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\SupplierLedger.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Master\CompanyDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,8 +111,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PharmaEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
     <None Include="Entity\PharmaEntity.edmx.diagram">
       <DependentUpon>PharmaEntity.edmx</DependentUpon>
@@ -83,19 +118,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PharmaBusinessObjects\PharmaBusinessObjects.csproj">
+      <Project>{8e5639a3-828c-488e-8080-5f335bb8f6b8}</Project>
+      <Name>PharmaBusinessObjects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Entity\PharmaEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PharmaEntity.Context.cs</LastGenOutput>
       <DependentUpon>PharmaEntity.edmx</DependentUpon>
+      <LastGenOutput>PharmaEntity.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Entity\PharmaEntity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PharmaEntity.edmx</DependentUpon>
       <LastGenOutput>PharmaEntity.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

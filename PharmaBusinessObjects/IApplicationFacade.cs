@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmaBusinessObjects.Master;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace PharmaBusinessObjects
 
         #region Company Master
 
-
+        List<Company> GetCompanies();
         #endregion
 
     }

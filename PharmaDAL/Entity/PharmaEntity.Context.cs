@@ -25,6 +25,18 @@ namespace PharmaDAL.Entity
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Item_Master> Item_Master { get; set; }
+        public virtual DbSet<AccountLedgerMaster> AccountLedgerMaster { get; set; }
+        public virtual DbSet<AccountLedgerType> AccountLedgerType { get; set; }
+        public virtual DbSet<AccountType> AccountType { get; set; }
+        public virtual DbSet<CompanyMaster> CompanyMaster { get; set; }
+        public virtual DbSet<CustomerLedger> CustomerLedger { get; set; }
+        public virtual DbSet<CustomerType> CustomerType { get; set; }
+        public virtual DbSet<InterestType> InterestType { get; set; }
+        public virtual DbSet<ItemMaster> ItemMaster { get; set; }
+        public virtual DbSet<PersonalLedger> PersonalLedger { get; set; }
+        public virtual DbSet<PersonLedgerType> PersonLedgerType { get; set; }
+        public virtual DbSet<PersonRouteMaster> PersonRouteMaster { get; set; }
+        public virtual DbSet<RecordType> RecordType { get; set; }
+        public virtual DbSet<SupplierLedger> SupplierLedger { get; set; }
     }
 }

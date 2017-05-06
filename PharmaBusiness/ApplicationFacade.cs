@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Master;
+using PharmaBusiness.Master;
 
 namespace PharmaBusiness
 {
@@ -16,6 +18,10 @@ namespace PharmaBusiness
 
         #region Company Master
 
+        public List<Company> GetCompanies()
+        {
+            return new CompanyBiz().GetCompanies();
+        }
 
         #endregion
 
