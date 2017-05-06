@@ -12,43 +12,44 @@ namespace PharmaDAL.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class ITEM_MASTER
+    public partial class Item_Master
     {
-        public string COMPCD { get; set; }
-        public string ACNO { get; set; }
-        public string ACNAME { get; set; }
-        public Nullable<double> CONVRATE { get; set; }
-        public string ALT_NAME { get; set; }
-        public string SIZE { get; set; }
-        public Nullable<double> PRATE { get; set; }
-        public Nullable<double> MRP { get; set; }
-        public Nullable<double> SRATE { get; set; }
-        public Nullable<double> SPLRATE { get; set; }
-        public Nullable<double> WSRATE { get; set; }
-        public Nullable<double> EXCISES { get; set; }
+        public int ID { get; set; }
+        public string ItemCode { get; set; }
+        public string ItemName { get; set; }
+        public string CompCode { get; set; }
+        public string ALTName { get; set; }
+        public string Size { get; set; }
+        public Nullable<double> ConvRate { get; set; }
+        public Nullable<double> Case_QTY { get; set; }
+        public Nullable<double> Rate { get; set; }
+        public Nullable<double> PRate { get; set; }
+        public Nullable<double> SRate { get; set; }
+        public double MRP { get; set; }
+        public Nullable<double> SPLRate { get; set; }
+        public Nullable<double> WSRate { get; set; }
+        public Nullable<double> SExcise { get; set; }
         public Nullable<double> SC { get; set; }
-        public Nullable<double> STAX { get; set; }
-        public Nullable<double> SCHEME1 { get; set; }
-        public Nullable<double> SCHEME2 { get; set; }
-        public Nullable<double> EXCISEP { get; set; }
+        public Nullable<double> STax { get; set; }
+        public Nullable<double> PExcise { get; set; }
+        public Nullable<double> Scheme1 { get; set; }
+        public Nullable<double> Scheme2 { get; set; }
         public string UPC { get; set; }
-        public string HALF { get; set; }
+        public string Half { get; set; }
         public string QTR { get; set; }
         public Nullable<double> SPLDIS { get; set; }
         public Nullable<double> DISQTY { get; set; }
         public Nullable<double> PSPLDIS { get; set; }
         public Nullable<double> PDIS { get; set; }
         public Nullable<double> PSC { get; set; }
-        public Nullable<double> PTAX { get; set; }
-        public Nullable<double> CASE_QTY { get; set; }
-        public string LOCATION { get; set; }
-        public string STYPE { get; set; }
+        public Nullable<double> PTax { get; set; }
+        public string Location { get; set; }
+        public string SType { get; set; }
         public Nullable<double> MAX_QTY { get; set; }
         public Nullable<int> MIN_STOCK { get; set; }
         public Nullable<int> MAX_STOCK { get; set; }
-        public Nullable<double> RATE { get; set; }
         public Nullable<double> FIXDIS { get; set; }
         public Nullable<double> MAXDIS { get; set; }
-        public bool STATUS { get; set; }
+        public bool Status { get; set; }
     }
 }

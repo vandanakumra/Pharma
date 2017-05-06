@@ -25,6 +25,6 @@ namespace PharmaDAL.Entity
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ITEM_MASTER> ITEM_MASTER { get; set; }
+        public virtual DbSet<Item_Master> Item_Master { get; set; }
     }
 }

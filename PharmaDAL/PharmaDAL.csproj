@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\ITEM_MASTER.cs">
+    <Compile Include="Entity\Item_Master.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\PharmaEntity.Context.cs">

@@ -4,186 +4,147 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'PharmaDB.dbo.ITEM_MASTER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ITEM_MASTER">
+    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Item_Master">
           <Key>
-            <PropertyRef Name="STATUS" />
+            <PropertyRef Name="ItemCode" />
           </Key>
-          <Property Name="COMPCD" Type="nvarchar" MaxLength="3" />
-          <Property Name="ACNO" Type="varchar" MaxLength="9" />
-          <Property Name="ACNAME" Type="nvarchar" MaxLength="30" />
-          <Property Name="CONVRATE" Type="float" />
-          <Property Name="ALT_NAME" Type="nvarchar" MaxLength="10" />
-          <Property Name="SIZE" Type="nvarchar" MaxLength="10" />
-          <Property Name="PRATE" Type="float" />
-          <Property Name="MRP" Type="float" />
-          <Property Name="SRATE" Type="float" />
-          <Property Name="SPLRATE" Type="float" />
-          <Property Name="WSRATE" Type="float" />
-          <Property Name="EXCISES" Type="float" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCode" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="30" />
+          <Property Name="CompCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="ALTName" Type="nvarchar" MaxLength="10" />
+          <Property Name="Size" Type="nvarchar" MaxLength="10" />
+          <Property Name="ConvRate" Type="float" />
+          <Property Name="Case_QTY" Type="float" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="PRate" Type="float" />
+          <Property Name="SRate" Type="float" />
+          <Property Name="MRP" Type="float" Nullable="false" />
+          <Property Name="SPLRate" Type="float" />
+          <Property Name="WSRate" Type="float" />
+          <Property Name="SExcise" Type="float" />
           <Property Name="SC" Type="float" />
-          <Property Name="STAX" Type="float" />
-          <Property Name="SCHEME1" Type="float" />
-          <Property Name="SCHEME2" Type="float" />
-          <Property Name="EXCISEP" Type="float" />
+          <Property Name="STax" Type="float" />
+          <Property Name="PExcise" Type="float" />
+          <Property Name="Scheme1" Type="float" />
+          <Property Name="Scheme2" Type="float" />
           <Property Name="UPC" Type="nvarchar" MaxLength="16" />
-          <Property Name="HALF" Type="nvarchar" MaxLength="1" />
+          <Property Name="Half" Type="nvarchar" MaxLength="1" />
           <Property Name="QTR" Type="nvarchar" MaxLength="1" />
           <Property Name="SPLDIS" Type="float" />
           <Property Name="DISQTY" Type="float" />
           <Property Name="PSPLDIS" Type="float" />
           <Property Name="PDIS" Type="float" />
           <Property Name="PSC" Type="float" />
-          <Property Name="PTAX" Type="float" />
-          <Property Name="CASE_QTY" Type="float" />
-          <Property Name="LOCATION" Type="nvarchar" MaxLength="5" />
-          <Property Name="STYPE" Type="nvarchar" MaxLength="6" />
+          <Property Name="PTax" Type="float" />
+          <Property Name="Location" Type="nvarchar" MaxLength="5" />
+          <Property Name="SType" Type="nvarchar" MaxLength="6" />
           <Property Name="MAX_QTY" Type="float" />
           <Property Name="MIN_STOCK" Type="int" />
           <Property Name="MAX_STOCK" Type="int" />
-          <Property Name="RATE" Type="float" />
           <Property Name="FIXDIS" Type="float" />
           <Property Name="MAXDIS" Type="float" />
-          <Property Name="STATUS" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityContainer Name="PharmaDBModelStoreContainer">
-          <EntitySet Name="ITEM_MASTER" EntityType="Self.ITEM_MASTER" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ITEM_MASTER].[COMPCD] AS [COMPCD], 
-    [ITEM_MASTER].[ACNO] AS [ACNO], 
-    [ITEM_MASTER].[ACNAME] AS [ACNAME], 
-    [ITEM_MASTER].[CONVRATE] AS [CONVRATE], 
-    [ITEM_MASTER].[ALT_NAME] AS [ALT_NAME], 
-    [ITEM_MASTER].[SIZE] AS [SIZE], 
-    [ITEM_MASTER].[PRATE] AS [PRATE], 
-    [ITEM_MASTER].[MRP] AS [MRP], 
-    [ITEM_MASTER].[SRATE] AS [SRATE], 
-    [ITEM_MASTER].[SPLRATE] AS [SPLRATE], 
-    [ITEM_MASTER].[WSRATE] AS [WSRATE], 
-    [ITEM_MASTER].[EXCISES] AS [EXCISES], 
-    [ITEM_MASTER].[SC] AS [SC], 
-    [ITEM_MASTER].[STAX] AS [STAX], 
-    [ITEM_MASTER].[SCHEME1] AS [SCHEME1], 
-    [ITEM_MASTER].[SCHEME2] AS [SCHEME2], 
-    [ITEM_MASTER].[EXCISEP] AS [EXCISEP], 
-    [ITEM_MASTER].[UPC] AS [UPC], 
-    [ITEM_MASTER].[HALF] AS [HALF], 
-    [ITEM_MASTER].[QTR] AS [QTR], 
-    [ITEM_MASTER].[SPLDIS] AS [SPLDIS], 
-    [ITEM_MASTER].[DISQTY] AS [DISQTY], 
-    [ITEM_MASTER].[PSPLDIS] AS [PSPLDIS], 
-    [ITEM_MASTER].[PDIS] AS [PDIS], 
-    [ITEM_MASTER].[PSC] AS [PSC], 
-    [ITEM_MASTER].[PTAX] AS [PTAX], 
-    [ITEM_MASTER].[CASE_QTY] AS [CASE_QTY], 
-    [ITEM_MASTER].[LOCATION] AS [LOCATION], 
-    [ITEM_MASTER].[STYPE] AS [STYPE], 
-    [ITEM_MASTER].[MAX_QTY] AS [MAX_QTY], 
-    [ITEM_MASTER].[MIN_STOCK] AS [MIN_STOCK], 
-    [ITEM_MASTER].[MAX_STOCK] AS [MAX_STOCK], 
-    [ITEM_MASTER].[RATE] AS [RATE], 
-    [ITEM_MASTER].[FIXDIS] AS [FIXDIS], 
-    [ITEM_MASTER].[MAXDIS] AS [MAXDIS], 
-    [ITEM_MASTER].[STATUS] AS [STATUS]
-    FROM [dbo].[ITEM_MASTER] AS [ITEM_MASTER]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Item_Master" EntityType="Self.Item_Master" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ITEM_MASTER">
+        <EntityContainer Name="PharmaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Item_Master" EntityType="PharmaDBModel.Item_Master" />
+        </EntityContainer>
+        <EntityType Name="Item_Master">
           <Key>
-            <PropertyRef Name="STATUS" />
+            <PropertyRef Name="ItemCode" />
           </Key>
-          <Property Name="COMPCD" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="ACNO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="ACNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CONVRATE" Type="Double" />
-          <Property Name="ALT_NAME" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="SIZE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="PRATE" Type="Double" />
-          <Property Name="MRP" Type="Double" />
-          <Property Name="SRATE" Type="Double" />
-          <Property Name="SPLRATE" Type="Double" />
-          <Property Name="WSRATE" Type="Double" />
-          <Property Name="EXCISES" Type="Double" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="ItemName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CompCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="ALTName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ConvRate" Type="Double" />
+          <Property Name="Case_QTY" Type="Double" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="PRate" Type="Double" />
+          <Property Name="SRate" Type="Double" />
+          <Property Name="MRP" Type="Double" Nullable="false" />
+          <Property Name="SPLRate" Type="Double" />
+          <Property Name="WSRate" Type="Double" />
+          <Property Name="SExcise" Type="Double" />
           <Property Name="SC" Type="Double" />
-          <Property Name="STAX" Type="Double" />
-          <Property Name="SCHEME1" Type="Double" />
-          <Property Name="SCHEME2" Type="Double" />
-          <Property Name="EXCISEP" Type="Double" />
+          <Property Name="STax" Type="Double" />
+          <Property Name="PExcise" Type="Double" />
+          <Property Name="Scheme1" Type="Double" />
+          <Property Name="Scheme2" Type="Double" />
           <Property Name="UPC" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="HALF" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Half" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="QTR" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="SPLDIS" Type="Double" />
           <Property Name="DISQTY" Type="Double" />
           <Property Name="PSPLDIS" Type="Double" />
           <Property Name="PDIS" Type="Double" />
           <Property Name="PSC" Type="Double" />
-          <Property Name="PTAX" Type="Double" />
-          <Property Name="CASE_QTY" Type="Double" />
-          <Property Name="LOCATION" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="STYPE" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="PTax" Type="Double" />
+          <Property Name="Location" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="SType" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="MAX_QTY" Type="Double" />
           <Property Name="MIN_STOCK" Type="Int32" />
           <Property Name="MAX_STOCK" Type="Int32" />
-          <Property Name="RATE" Type="Double" />
           <Property Name="FIXDIS" Type="Double" />
           <Property Name="MAXDIS" Type="Double" />
-          <Property Name="STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="PharmaDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ITEM_MASTER" EntityType="Self.ITEM_MASTER" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PharmaDBModelStoreContainer" CdmEntityContainer="PharmaDBEntities">
-          <EntitySetMapping Name="ITEM_MASTER">
-            <EntityTypeMapping TypeName="PharmaDBModel.ITEM_MASTER">
-              <MappingFragment StoreEntitySet="ITEM_MASTER">
-                <ScalarProperty Name="COMPCD" ColumnName="COMPCD" />
-                <ScalarProperty Name="ACNO" ColumnName="ACNO" />
-                <ScalarProperty Name="ACNAME" ColumnName="ACNAME" />
-                <ScalarProperty Name="CONVRATE" ColumnName="CONVRATE" />
-                <ScalarProperty Name="ALT_NAME" ColumnName="ALT_NAME" />
-                <ScalarProperty Name="SIZE" ColumnName="SIZE" />
-                <ScalarProperty Name="PRATE" ColumnName="PRATE" />
-                <ScalarProperty Name="MRP" ColumnName="MRP" />
-                <ScalarProperty Name="SRATE" ColumnName="SRATE" />
-                <ScalarProperty Name="SPLRATE" ColumnName="SPLRATE" />
-                <ScalarProperty Name="WSRATE" ColumnName="WSRATE" />
-                <ScalarProperty Name="EXCISES" ColumnName="EXCISES" />
-                <ScalarProperty Name="SC" ColumnName="SC" />
-                <ScalarProperty Name="STAX" ColumnName="STAX" />
-                <ScalarProperty Name="SCHEME1" ColumnName="SCHEME1" />
-                <ScalarProperty Name="SCHEME2" ColumnName="SCHEME2" />
-                <ScalarProperty Name="EXCISEP" ColumnName="EXCISEP" />
-                <ScalarProperty Name="UPC" ColumnName="UPC" />
-                <ScalarProperty Name="HALF" ColumnName="HALF" />
-                <ScalarProperty Name="QTR" ColumnName="QTR" />
-                <ScalarProperty Name="SPLDIS" ColumnName="SPLDIS" />
-                <ScalarProperty Name="DISQTY" ColumnName="DISQTY" />
-                <ScalarProperty Name="PSPLDIS" ColumnName="PSPLDIS" />
-                <ScalarProperty Name="PDIS" ColumnName="PDIS" />
-                <ScalarProperty Name="PSC" ColumnName="PSC" />
-                <ScalarProperty Name="PTAX" ColumnName="PTAX" />
-                <ScalarProperty Name="CASE_QTY" ColumnName="CASE_QTY" />
-                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
-                <ScalarProperty Name="STYPE" ColumnName="STYPE" />
-                <ScalarProperty Name="MAX_QTY" ColumnName="MAX_QTY" />
-                <ScalarProperty Name="MIN_STOCK" ColumnName="MIN_STOCK" />
-                <ScalarProperty Name="MAX_STOCK" ColumnName="MAX_STOCK" />
-                <ScalarProperty Name="RATE" ColumnName="RATE" />
-                <ScalarProperty Name="FIXDIS" ColumnName="FIXDIS" />
+          <EntitySetMapping Name="Item_Master">
+            <EntityTypeMapping TypeName="PharmaDBModel.Item_Master">
+              <MappingFragment StoreEntitySet="Item_Master">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="MAXDIS" ColumnName="MAXDIS" />
-                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="FIXDIS" ColumnName="FIXDIS" />
+                <ScalarProperty Name="MAX_STOCK" ColumnName="MAX_STOCK" />
+                <ScalarProperty Name="MIN_STOCK" ColumnName="MIN_STOCK" />
+                <ScalarProperty Name="MAX_QTY" ColumnName="MAX_QTY" />
+                <ScalarProperty Name="SType" ColumnName="SType" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="PTax" ColumnName="PTax" />
+                <ScalarProperty Name="PSC" ColumnName="PSC" />
+                <ScalarProperty Name="PDIS" ColumnName="PDIS" />
+                <ScalarProperty Name="PSPLDIS" ColumnName="PSPLDIS" />
+                <ScalarProperty Name="DISQTY" ColumnName="DISQTY" />
+                <ScalarProperty Name="SPLDIS" ColumnName="SPLDIS" />
+                <ScalarProperty Name="QTR" ColumnName="QTR" />
+                <ScalarProperty Name="Half" ColumnName="Half" />
+                <ScalarProperty Name="UPC" ColumnName="UPC" />
+                <ScalarProperty Name="Scheme2" ColumnName="Scheme2" />
+                <ScalarProperty Name="Scheme1" ColumnName="Scheme1" />
+                <ScalarProperty Name="PExcise" ColumnName="PExcise" />
+                <ScalarProperty Name="STax" ColumnName="STax" />
+                <ScalarProperty Name="SC" ColumnName="SC" />
+                <ScalarProperty Name="SExcise" ColumnName="SExcise" />
+                <ScalarProperty Name="WSRate" ColumnName="WSRate" />
+                <ScalarProperty Name="SPLRate" ColumnName="SPLRate" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="SRate" ColumnName="SRate" />
+                <ScalarProperty Name="PRate" ColumnName="PRate" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Case_QTY" ColumnName="Case_QTY" />
+                <ScalarProperty Name="ConvRate" ColumnName="ConvRate" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="ALTName" ColumnName="ALTName" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
