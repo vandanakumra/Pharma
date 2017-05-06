@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace PharmaBusinessObjects
 {
-    public class Class1
+    public interface IApplicationFacade
     {
+
+        #region Item Master
+
+
+        #endregion
+
+        #region Company Master
+
+
+        #endregion
+
     }
 }
