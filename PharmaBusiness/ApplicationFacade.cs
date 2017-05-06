@@ -20,7 +20,15 @@ namespace PharmaBusiness
 
         public List<Company> GetCompanies()
         {
-            return new CompanyBiz().GetCompanies();
+            try
+            {
+                return new CompanyBiz().GetCompanies();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         #endregion
