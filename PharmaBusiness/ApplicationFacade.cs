@@ -33,5 +33,61 @@ namespace PharmaBusiness
 
         #endregion
 
+        #region Account Ledger
+
+        public List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgers()
+        {
+            try
+            {
+                return new AccountLedgerMasterBiz().GetAccountLedgers();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerById(int accountLedgerID)
+        {
+            try
+            {
+                return new AccountLedgerMasterBiz().GetAccountLedgerById(accountLedgerID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p)
+        {
+
+            try
+            {
+                return new AccountLedgerMasterBiz().AddAccountLedger(p);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public int UpdateAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p)
+        {
+            try
+            {
+                return new AccountLedgerMasterBiz().UpdateAccountLedger(p);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        #endregion
+
     }
 }

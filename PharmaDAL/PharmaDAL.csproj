@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommonDao.cs" />
     <Compile Include="Entity\AccountLedgerMaster.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
@@ -103,15 +104,16 @@
     <Compile Include="Entity\SupplierLedger.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Master\AccountLedgerMasterDao.cs" />
     <Compile Include="Master\CompanyDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="Entity\PharmaEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PharmaEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="Entity\PharmaEntity.edmx.diagram">
       <DependentUpon>PharmaEntity.edmx</DependentUpon>
     </None>
@@ -126,6 +128,7 @@
       <Name>PharmaBusinessObjects</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Entity\PharmaEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

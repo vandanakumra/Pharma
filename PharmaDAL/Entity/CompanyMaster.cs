@@ -11,11 +11,9 @@ namespace PharmaDAL.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class CompanyMaster
     {
-        
         public int CompanyId { get; set; }
         public string CompanyCode { get; set; }
         public string CompanyName { get; set; }

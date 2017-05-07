@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6ff4b1c0b7444e58914a5abcad0871c3" Name="Diagram1">
+      <Diagram DiagramId="4d83bc95fc344c91ad6dfdddc31d1133" Name="Diagram1">
         <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerMaster" Width="1.5" PointX="10" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="7.75" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.AccountType" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
@@ -18,10 +18,10 @@
         <EntityTypeShape EntityType="PharmaDBModel.PersonRouteMaster" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.RecordType" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.SupplierLedger" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
-        <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_AccountLedgerMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_AccountLedgerMaster1" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_AccountLedgerType" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_AccountType" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_CreditControlCode" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_DebitControlCode" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_ItemMaster_AccountLedgerMaster" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_CustomerLedger_CustomerLedger" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_CustomerLedger_CustomerType" ManuallyRouted="false" />

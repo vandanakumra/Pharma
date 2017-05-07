@@ -40,7 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AccountLedgerType.cs" />
+    <Compile Include="Common\AccountType.cs" />
+    <Compile Include="Common\CustomerType.cs" />
+    <Compile Include="Common\InterestType.cs" />
+    <Compile Include="Common\PersonLedgerType.cs" />
+    <Compile Include="Common\RecordType.cs" />
     <Compile Include="IApplicationFacade.cs" />
+    <Compile Include="Master\AccountLedgerMaster.cs" />
     <Compile Include="Master\Company.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

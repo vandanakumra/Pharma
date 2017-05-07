@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationFacade.cs" />
+    <Compile Include="Master\AccountLedgerMasterBiz.cs" />
     <Compile Include="Master\CompanyBiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

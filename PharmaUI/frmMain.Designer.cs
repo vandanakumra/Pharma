@@ -72,7 +72,7 @@
             this.accountLedgerMenuItem,
             this.personLedgerMenuItem});
             this.accountMenuItem.Name = "accountMenuItem";
-            this.accountMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.accountMenuItem.Size = new System.Drawing.Size(152, 22);
             this.accountMenuItem.Text = "Account";
             // 
             // accountLedgerMenuItem
@@ -80,6 +80,7 @@
             this.accountLedgerMenuItem.Name = "accountLedgerMenuItem";
             this.accountLedgerMenuItem.Size = new System.Drawing.Size(158, 22);
             this.accountLedgerMenuItem.Text = "Account Ledger";
+            this.accountLedgerMenuItem.Click += new System.EventHandler(this.accountLedgerMenuItem_Click);
             // 
             // personLedgerMenuItem
             // 
@@ -90,27 +91,27 @@
             // companyMenuItem
             // 
             this.companyMenuItem.Name = "companyMenuItem";
-            this.companyMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.companyMenuItem.Size = new System.Drawing.Size(152, 22);
             this.companyMenuItem.Text = "Company";
             this.companyMenuItem.Click += new System.EventHandler(this.companyMenuItem_Click);
             // 
             // itemMenuItem
             // 
             this.itemMenuItem.Name = "itemMenuItem";
-            this.itemMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.itemMenuItem.Size = new System.Drawing.Size(152, 22);
             this.itemMenuItem.Text = "Item";
             // 
             // personRouteMenuItem
             // 
             this.personRouteMenuItem.Name = "personRouteMenuItem";
-            this.personRouteMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.personRouteMenuItem.Size = new System.Drawing.Size(152, 22);
             this.personRouteMenuItem.Text = "Person & Route";
             this.personRouteMenuItem.Click += new System.EventHandler(this.personRouteToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // statusStrip
@@ -125,7 +126,7 @@
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(23, 23);
             // 
-            // Main
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -134,7 +135,7 @@
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "Main";
+            this.Name = "frmMain";
             this.Text = "Main";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

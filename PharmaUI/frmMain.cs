@@ -85,5 +85,13 @@ namespace PharmaUI
             childForm.Text = "Company Information";
             childForm.Show();
         }
+
+        private void accountLedgerMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAccountLedgerMaster childForm = new frmAccountLedgerMaster();
+            childForm.MdiParent = this;
+            childForm.Text = "Account Ledger Information";
+            childForm.Show();
+        }
     }
 }

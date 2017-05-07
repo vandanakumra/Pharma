@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAccountLedgerMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAccountLedgerMaster.Designer.cs">
+      <DependentUpon>frmAccountLedgerMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCompany.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAccountLedgerMaster.resx">
+      <DependentUpon>frmAccountLedgerMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCompany.resx">
       <DependentUpon>frmCompany.cs</DependentUpon>
     </EmbeddedResource>

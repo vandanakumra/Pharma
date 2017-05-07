@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -216,30 +216,6 @@
           <Property Name="DLNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TINNo" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <Association Name="FK_AccountLedgerMaster_AccountLedgerMaster">
-          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
-          <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountLedgerMaster">
-              <PropertyRef Name="AccountLedgerID" />
-            </Principal>
-            <Dependent Role="AccountLedgerMaster1">
-              <PropertyRef Name="DebitControlCodeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccountLedgerMaster_AccountLedgerMaster1">
-          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
-          <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountLedgerMaster">
-              <PropertyRef Name="AccountLedgerID" />
-            </Principal>
-            <Dependent Role="AccountLedgerMaster1">
-              <PropertyRef Name="CreditControlCodeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
           <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="*" />
@@ -261,6 +237,30 @@
             </Principal>
             <Dependent Role="AccountLedgerMaster">
               <PropertyRef Name="AccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountLedgerMaster_CreditControlCode">
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountLedgerMaster">
+              <PropertyRef Name="AccountLedgerID" />
+            </Principal>
+            <Dependent Role="AccountLedgerMaster1">
+              <PropertyRef Name="CreditControlCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountLedgerMaster_DebitControlCode">
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountLedgerMaster">
+              <PropertyRef Name="AccountLedgerID" />
+            </Principal>
+            <Dependent Role="AccountLedgerMaster1">
+              <PropertyRef Name="DebitControlCodeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -410,14 +410,6 @@
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerMaster" Association="Self.FK_AccountLedgerMaster_AccountLedgerMaster">
-            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
-            <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerMaster1" Association="Self.FK_AccountLedgerMaster_AccountLedgerMaster1">
-            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
-            <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
-          </AssociationSet>
           <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerType" Association="Self.FK_AccountLedgerMaster_AccountLedgerType">
             <End Role="AccountLedgerType" EntitySet="AccountLedgerType" />
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
@@ -425,6 +417,14 @@
           <AssociationSet Name="FK_AccountLedgerMaster_AccountType" Association="Self.FK_AccountLedgerMaster_AccountType">
             <End Role="AccountType" EntitySet="AccountType" />
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountLedgerMaster_CreditControlCode" Association="Self.FK_AccountLedgerMaster_CreditControlCode">
+            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+            <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountLedgerMaster_DebitControlCode" Association="Self.FK_AccountLedgerMaster_DebitControlCode">
+            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+            <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
@@ -490,12 +490,12 @@
           <Property Name="DebitControlCodeID" Type="Int32" Nullable="false" />
           <Property Name="CreditControlCodeID" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="AccountLedgerMaster1" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerMaster" FromRole="AccountLedgerMaster" ToRole="AccountLedgerMaster1" />
-          <NavigationProperty Name="AccountLedgerMaster2" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerMaster" FromRole="AccountLedgerMaster1" ToRole="AccountLedgerMaster" />
-          <NavigationProperty Name="AccountLedgerMaster11" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerMaster1" FromRole="AccountLedgerMaster" ToRole="AccountLedgerMaster1" />
-          <NavigationProperty Name="AccountLedgerMaster3" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerMaster1" FromRole="AccountLedgerMaster1" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="AccountLedgerType" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerType" FromRole="AccountLedgerMaster" ToRole="AccountLedgerType" />
           <NavigationProperty Name="AccountType" Relationship="Self.FK_AccountLedgerMaster_AccountType" FromRole="AccountLedgerMaster" ToRole="AccountType" />
+          <NavigationProperty Name="AccountLedgerMaster1" Relationship="Self.FK_AccountLedgerMaster_CreditControlCode" FromRole="AccountLedgerMaster" ToRole="AccountLedgerMaster1" />
+          <NavigationProperty Name="AccountLedgerMaster2" Relationship="Self.FK_AccountLedgerMaster_CreditControlCode" FromRole="AccountLedgerMaster1" ToRole="AccountLedgerMaster" />
+          <NavigationProperty Name="AccountLedgerMaster11" Relationship="Self.FK_AccountLedgerMaster_DebitControlCode" FromRole="AccountLedgerMaster" ToRole="AccountLedgerMaster1" />
+          <NavigationProperty Name="AccountLedgerMaster3" Relationship="Self.FK_AccountLedgerMaster_DebitControlCode" FromRole="AccountLedgerMaster1" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="AccountLedgerMaster" ToRole="ItemMaster" />
         </EntityType>
         <EntityType Name="AccountLedgerType">
@@ -717,30 +717,6 @@
           <Property Name="TINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_SupplierLedger_SalesPersonMaster" FromRole="SupplierLedger" ToRole="PersonRouteMaster" />
         </EntityType>
-        <Association Name="FK_AccountLedgerMaster_AccountLedgerMaster">
-          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
-          <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountLedgerMaster">
-              <PropertyRef Name="AccountLedgerID" />
-            </Principal>
-            <Dependent Role="AccountLedgerMaster1">
-              <PropertyRef Name="DebitControlCodeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccountLedgerMaster_AccountLedgerMaster1">
-          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
-          <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountLedgerMaster">
-              <PropertyRef Name="AccountLedgerID" />
-            </Principal>
-            <Dependent Role="AccountLedgerMaster1">
-              <PropertyRef Name="CreditControlCodeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
           <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="*" />
@@ -762,6 +738,30 @@
             </Principal>
             <Dependent Role="AccountLedgerMaster">
               <PropertyRef Name="AccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountLedgerMaster_CreditControlCode">
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountLedgerMaster">
+              <PropertyRef Name="AccountLedgerID" />
+            </Principal>
+            <Dependent Role="AccountLedgerMaster1">
+              <PropertyRef Name="CreditControlCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountLedgerMaster_DebitControlCode">
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountLedgerMaster">
+              <PropertyRef Name="AccountLedgerID" />
+            </Principal>
+            <Dependent Role="AccountLedgerMaster1">
+              <PropertyRef Name="DebitControlCodeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -911,14 +911,6 @@
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" />
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" />
-          <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerMaster" Association="Self.FK_AccountLedgerMaster_AccountLedgerMaster">
-            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
-            <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerMaster1" Association="Self.FK_AccountLedgerMaster_AccountLedgerMaster1">
-            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
-            <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
-          </AssociationSet>
           <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerType" Association="Self.FK_AccountLedgerMaster_AccountLedgerType">
             <End Role="AccountLedgerType" EntitySet="AccountLedgerType" />
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
@@ -926,6 +918,14 @@
           <AssociationSet Name="FK_AccountLedgerMaster_AccountType" Association="Self.FK_AccountLedgerMaster_AccountType">
             <End Role="AccountType" EntitySet="AccountType" />
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountLedgerMaster_CreditControlCode" Association="Self.FK_AccountLedgerMaster_CreditControlCode">
+            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+            <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountLedgerMaster_DebitControlCode" Association="Self.FK_AccountLedgerMaster_DebitControlCode">
+            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+            <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemMaster_AccountLedgerMaster" Association="Self.FK_ItemMaster_AccountLedgerMaster">
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />

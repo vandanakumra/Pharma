@@ -33,14 +33,14 @@ namespace PharmaDAL.Entity
         public int CreditControlCodeID { get; set; }
         public bool Status { get; set; }
     
+        public virtual AccountLedgerType AccountLedgerType { get; set; }
+        public virtual AccountType AccountType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountLedgerMaster> AccountLedgerMaster1 { get; set; }
         public virtual AccountLedgerMaster AccountLedgerMaster2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountLedgerMaster> AccountLedgerMaster11 { get; set; }
         public virtual AccountLedgerMaster AccountLedgerMaster3 { get; set; }
-        public virtual AccountLedgerType AccountLedgerType { get; set; }
-        public virtual AccountType AccountType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemMaster> ItemMaster { get; set; }
     }

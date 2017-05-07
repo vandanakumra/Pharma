@@ -20,5 +20,13 @@ namespace PharmaBusinessObjects
         List<Company> GetCompanies();
         #endregion
 
+        #region  Account Ledger Master
+
+        List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgers();
+        PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerById(int accountLedgerID);
+        int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
+        int UpdateAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
+        #endregion
+
     }
 }
