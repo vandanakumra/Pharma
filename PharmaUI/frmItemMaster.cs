@@ -43,7 +43,7 @@ namespace PharmaUI
         {
             try
             {
-                var form = new Item();
+                var form = new frmItemMasterAddUpdate();
                 form.Show(this);
             }
             catch (Exception)
