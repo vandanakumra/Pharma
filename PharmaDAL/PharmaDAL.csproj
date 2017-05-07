@@ -110,11 +110,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <EntityDeploy Include="Entity\PharmaEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PharmaEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="Entity\PharmaEntity.edmx.diagram">
       <DependentUpon>PharmaEntity.edmx</DependentUpon>
     </None>

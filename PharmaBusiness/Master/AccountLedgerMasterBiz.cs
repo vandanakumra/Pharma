@@ -57,7 +57,6 @@ namespace PharmaBusiness.Master
             return new AccountLedgerMasterDao().UpdateAccountLedger(p);
         }
 
-
         internal List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int ledgerTypeID, string searchString = null)
         {
             CommonDao commonDao = new CommonDao();
@@ -80,6 +79,27 @@ namespace PharmaBusiness.Master
             return accountLedgerMasterList; 
         }
 
+        internal List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetDebitCreditControlCodes()
+        {
 
+            CommonDao commonDao = new CommonDao();
+
+            var accountLedgerMasterList = new AccountLedgerMasterDao().GetAccountLedgers().Where(p=>p.AccountLedgerTypeSystemName == "ControlCodes").ToList();
+
+            //var accountLedgerTypeList = commonDao.GetAccountLedgerTypes() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
+            //var AccountTypeList = commonDao.GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
+            //var creditControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == 1).ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
+            //var debitControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == 2).ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
+
+            //foreach (var accountLedger in accountLedgerMasterList)
+            //{
+            //    accountLedger.AccountLedgerTypeList = accountLedgerTypeList ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
+            //    accountLedger.AccountTypeList = AccountTypeList ?? new List<PharmaBusinessObjects.Common.AccountType>();
+            //    accountLedger.CreditControlCodeList = creditControlCodeList ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
+            //    accountLedger.DebitControlCodeList = debitControlCodeList ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
+            //}
+
+            return accountLedgerMasterList;
+        }
     }
 }

@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4d83bc95fc344c91ad6dfdddc31d1133" Name="Diagram1">
+      <Diagram DiagramId="c239dc1946ee4ebca9ddd5c07406dad8" Name="Diagram1">
         <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerMaster" Width="1.5" PointX="10" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="7.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="7.75" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.AccountType" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CompanyMaster" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CustomerLedger" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />

@@ -10,6 +10,7 @@ namespace PharmaBusinessObjects.Common
     {
         public int AccountLedgerTypeID { get; set; }
         public string AccountLedgerTypeName { get; set; }
+        public string AccountLedgerTypeSystemName { get; set; }
         public bool Status { get; set; }
     }
 }

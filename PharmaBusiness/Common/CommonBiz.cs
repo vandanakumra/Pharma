@@ -11,14 +11,20 @@ namespace PharmaBusiness.Common
     {
         public List<PharmaBusinessObjects.Common.AccountType> GetAccountTypes()
         {
-            return new CommonDao().GetAccountTypes();
+            List<PharmaBusinessObjects.Common.AccountType> accountTypes = new CommonDao().GetAccountTypes();
+
+            foreach (var accountType in accountTypes)
+            {
+                accountType.AccountTypeDisplayName = accountType.AccountTypeShortName + " - " + accountType.AccountTypeName;
+            }
+
+            return accountTypes;
         }
 
         public List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypes()
         {
             return new CommonDao().GetAccountLedgerTypes();
         }
-
 
         public List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypesWithAll()
         {
@@ -43,7 +49,6 @@ namespace PharmaBusiness.Common
         {
             return new CommonDao().GetPersonLedgerTypes();
         }
-
 
         public List<PharmaBusinessObjects.Common.RecordType> GetRecordTypes()
         {

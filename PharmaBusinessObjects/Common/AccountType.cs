@@ -12,5 +12,7 @@ namespace PharmaBusinessObjects.Common
         public string AccountTypeName { get; set; }
         public string AccountTypeShortName { get; set; }
         public bool Status { get; set; }
+        
+        public string AccountTypeDisplayName { get; set; }
     }
 }

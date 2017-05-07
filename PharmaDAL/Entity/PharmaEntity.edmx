@@ -16,8 +16,8 @@
           <Property Name="OpeningBalance" Type="float" Nullable="false" />
           <Property Name="CreditDebit" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="AccountTypeId" Type="int" Nullable="false" />
-          <Property Name="DebitControlCodeID" Type="int" Nullable="false" />
-          <Property Name="CreditControlCodeID" Type="int" Nullable="false" />
+          <Property Name="DebitControlCodeID" Type="int" />
+          <Property Name="CreditControlCodeID" Type="int" />
           <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AccountLedgerType">
@@ -26,6 +26,7 @@
           </Key>
           <Property Name="AccountLedgerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountLedgerTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SystemName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AccountType">
@@ -241,7 +242,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AccountLedgerMaster_CreditControlCode">
-          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="0..1" />
           <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccountLedgerMaster">
@@ -253,7 +254,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AccountLedgerMaster_DebitControlCode">
-          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="0..1" />
           <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccountLedgerMaster">
@@ -487,8 +488,8 @@
           <Property Name="OpeningBalance" Type="Double" Nullable="false" />
           <Property Name="CreditDebit" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="AccountTypeId" Type="Int32" Nullable="false" />
-          <Property Name="DebitControlCodeID" Type="Int32" Nullable="false" />
-          <Property Name="CreditControlCodeID" Type="Int32" Nullable="false" />
+          <Property Name="DebitControlCodeID" Type="Int32" />
+          <Property Name="CreditControlCodeID" Type="Int32" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AccountLedgerType" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerType" FromRole="AccountLedgerMaster" ToRole="AccountLedgerType" />
           <NavigationProperty Name="AccountType" Relationship="Self.FK_AccountLedgerMaster_AccountType" FromRole="AccountLedgerMaster" ToRole="AccountType" />
@@ -504,6 +505,7 @@
           </Key>
           <Property Name="AccountLedgerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountLedgerTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SystemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerType" FromRole="AccountLedgerType" ToRole="AccountLedgerMaster" />
         </EntityType>
@@ -742,7 +744,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AccountLedgerMaster_CreditControlCode">
-          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="0..1" />
           <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccountLedgerMaster">
@@ -754,7 +756,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AccountLedgerMaster_DebitControlCode">
-          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="0..1" />
           <End Role="AccountLedgerMaster1" Type="Self.AccountLedgerMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccountLedgerMaster">
@@ -999,6 +1001,7 @@
               <MappingFragment StoreEntitySet="AccountLedgerType">
                 <ScalarProperty Name="AccountLedgerTypeID" ColumnName="AccountLedgerTypeID" />
                 <ScalarProperty Name="AccountLedgerTypeName" ColumnName="AccountLedgerTypeName" />
+                <ScalarProperty Name="SystemName" ColumnName="SystemName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>

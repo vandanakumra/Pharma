@@ -169,7 +169,7 @@ namespace PharmaBusiness
             {
                 return new AccountLedgerMasterBiz().AddAccountLedger(p);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -189,6 +189,19 @@ namespace PharmaBusiness
             }
         }
 
+       public  List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetDebitCreditControlCodes()
+        {
+            try
+            {
+                return new AccountLedgerMasterBiz().GetDebitCreditControlCodes();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         #endregion
 
@@ -199,6 +212,43 @@ namespace PharmaBusiness
         {
             return new CommonBiz().GetAccountLedgerTypesWithAll();
         }
+
+        public List<PharmaBusinessObjects.Common.AccountType> GetAccountTypes()
+        {
+            return new CommonBiz().GetAccountTypes();
+        }
+
+        public List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypes()
+        {
+            return new CommonBiz().GetAccountLedgerTypes();
+        }
+
+        public List<PharmaBusinessObjects.Common.CustomerType> GetCustomerTypes()
+        {
+            return new CommonBiz().GetCustomerTypes();
+        }
+
+        public List<PharmaBusinessObjects.Common.InterestType> GetInterestTypes()
+        {
+            return new CommonBiz().GetInterestTypes();
+        }
+
+        public List<PharmaBusinessObjects.Common.PersonLedgerType> GetPersonLedgerTypes()
+        {
+            return new CommonBiz().GetPersonLedgerTypes();
+        }
+
+        public List<PharmaBusinessObjects.Common.RecordType> GetRecordTypes()
+        {
+            return new CommonBiz().GetRecordTypes();
+        }
+
+
+
+
+
+
+
         #endregion
 
     }
