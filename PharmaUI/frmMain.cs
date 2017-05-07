@@ -117,5 +117,11 @@ namespace PharmaUI
             childForm.Text = "Account Ledger Information";
             childForm.Show();
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            List<Control> allControls = ExtensionMethods.GetAllControls(this);
+            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
+        }
     }
 }

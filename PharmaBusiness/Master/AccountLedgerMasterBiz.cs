@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Common;
+﻿using PharmaBusiness.Common;
+using PharmaDAL.Common;
 using PharmaDAL.Master;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace PharmaBusiness.Master
             var accountLedgerMasterList = new AccountLedgerMasterDao().GetAccountLedgers();
 
             var accountLedgerTypeList = commonDao.GetAccountLedgerTypes() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
-            var AccountTypeList = commonDao.GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
+            var AccountTypeList = new CommonBiz().GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
             var creditControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == 1).ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
             var debitControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == 2).ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
 
@@ -39,7 +40,7 @@ namespace PharmaBusiness.Master
 
             PharmaBusinessObjects.Master.AccountLedgerMaster accountLedger =  new AccountLedgerMasterDao().GetAccountLedgerById(accountLedgerID);
             accountLedger.AccountLedgerTypeList = commonDao.GetAccountLedgerTypes() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
-            accountLedger.AccountTypeList = commonDao.GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
+            accountLedger.AccountTypeList = new CommonBiz().GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
             accountLedger.CreditControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == 1).ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
             accountLedger.DebitControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == 2).ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
 
@@ -64,7 +65,7 @@ namespace PharmaBusiness.Master
             var accountLedgerMasterList = new AccountLedgerMasterDao().GetAccountLedgerByLedgerTypeIdAndSearch(ledgerTypeID,searchString);
 
             var accountLedgerTypeList = commonDao.GetAccountLedgerTypes() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
-            var AccountTypeList = commonDao.GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
+            var AccountTypeList = new CommonBiz().GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
             var creditControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == 1).ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
             var debitControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == 2).ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
 
