@@ -57,9 +57,8 @@ namespace PharmaUI
             
             if (accountLedgerTypes.FirstOrDefault().AccountLedgerTypeSystemName != "ControlCodes")
             {
-                var debitCreditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
-                var debitControlCodes = applicationFacade.GetDebitCreditControlCodes();
-                var creditControlCodes = applicationFacade.GetDebitCreditControlCodes();
+                var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+                var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
 
                 cbDebitControlCode.DataSource = debitControlCodes;
                 cbCreditControlCode.DataSource = creditControlCodes;
@@ -90,9 +89,8 @@ namespace PharmaUI
 
             if (accountLedger.AccountLedgerTypeSystemName != "ControlCodes")
             {
-                var debitCreditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
-                var debitControlCodes = applicationFacade.GetDebitCreditControlCodes();
-                var creditControlCodes = applicationFacade.GetDebitCreditControlCodes();
+                var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+                var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
 
                 cbDebitControlCode.DataSource = debitControlCodes;
                 cbCreditControlCode.DataSource = creditControlCodes;
