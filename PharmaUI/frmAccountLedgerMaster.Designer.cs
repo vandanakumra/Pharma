@@ -40,12 +40,14 @@
             // 
             // dgvAccountLedger
             // 
-            this.dgvAccountLedger.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvAccountLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAccountLedger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccountLedger.Location = new System.Drawing.Point(12, 145);
             this.dgvAccountLedger.Name = "dgvAccountLedger";
-            this.dgvAccountLedger.Size = new System.Drawing.Size(1130, 236);
+            this.dgvAccountLedger.ReadOnly = true;
+            this.dgvAccountLedger.Size = new System.Drawing.Size(1130, 260);
             this.dgvAccountLedger.TabIndex = 0;
             // 
             // panel1
@@ -101,6 +103,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(294, 23);
             this.txtSearch.TabIndex = 5;
+            this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
             // 
             // btnAddNewLedger
             // 
@@ -122,7 +125,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1154, 405);
+            this.ClientSize = new System.Drawing.Size(1154, 427);
             this.ControlBox = false;
             this.Controls.Add(this.btnAddNewLedger);
             this.Controls.Add(this.txtSearch);

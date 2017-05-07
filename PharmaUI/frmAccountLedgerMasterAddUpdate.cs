@@ -49,17 +49,19 @@ namespace PharmaUI
             cbAccountLedgerType.ValueMember = "AccountLedgerTypeID";
             cbAccountLedgerType.DisplayMember = "AccountLedgerTypeName";
 
-
             cbAccountType.DataSource = applicationFacade.GetAccountTypes();
             cbAccountType.ValueMember = "AccountTypeID";
             cbAccountType.DisplayMember = "AccountTypeDisplayName";
+
+            cbDebitCredit.SelectedItem = "C";
             
             if (accountLedgerTypes.FirstOrDefault().AccountLedgerTypeSystemName != "ControlCodes")
             {
-                var debitCreditControlCodes = applicationFacade.GetDebitCreditControlCodes();
+                var debitControlCodes = applicationFacade.GetDebitCreditControlCodes();
+                var creditControlCodes = applicationFacade.GetDebitCreditControlCodes();
 
-                cbDebitControlCode.DataSource = debitCreditControlCodes;
-                cbCreditControlCode.DataSource = debitCreditControlCodes;
+                cbDebitControlCode.DataSource = debitControlCodes;
+                cbCreditControlCode.DataSource = creditControlCodes;
 
                 cbDebitControlCode.ValueMember = "AccountLedgerID";
                 cbDebitControlCode.DisplayMember = "AccountLedgerCode";
@@ -87,10 +89,11 @@ namespace PharmaUI
 
             if (accountLedger.AccountLedgerTypeSystemName != "ControlCodes")
             {
-                var debitCreditControlCodes = applicationFacade.GetDebitCreditControlCodes();
+                var debitControlCodes = applicationFacade.GetDebitCreditControlCodes();
+                var creditControlCodes = applicationFacade.GetDebitCreditControlCodes();
 
-                cbDebitControlCode.DataSource = debitCreditControlCodes;
-                cbCreditControlCode.DataSource = debitCreditControlCodes;
+                cbDebitControlCode.DataSource = debitControlCodes;
+                cbCreditControlCode.DataSource = creditControlCodes;
 
                 cbDebitControlCode.ValueMember = "AccountLedgerID";
                 cbDebitControlCode.DisplayMember = "AccountLedgerCode";
@@ -140,7 +143,7 @@ namespace PharmaUI
 
             applicationFacade.AddAccountLedger(model);
 
-
+            this.Close();
         }
     }
 }

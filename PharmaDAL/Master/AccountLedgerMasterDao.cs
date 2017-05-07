@@ -49,6 +49,9 @@ namespace PharmaDAL.Master
                     AccountType = p.AccountType.AccountTypeName,
                     CreditControlCodeID = p.CreditControlCodeID,
                     DebitControlCodeID = p.DebitControlCodeID,
+                    DebitControlCode = p.AccountLedgerMaster3.AccountLedgerName,
+                    CreditControlCode = p.AccountLedgerMaster2.AccountLedgerName,
+
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit
                 }).FirstOrDefault();
@@ -60,7 +63,7 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q=>q.AccountLedgerID) : 1;
+                var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q=>q.AccountLedgerID) + 1 : 1;
 
                 var accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
 
@@ -71,7 +74,8 @@ namespace PharmaDAL.Master
                     AccountLedgerTypeId = p.AccountLedgerTypeId,                   
                     AccountTypeId = p.AccountTypeId,                      
                     OpeningBalance = p.OpeningBalance,
-                    CreditDebit = p.CreditDebit
+                    CreditDebit = p.CreditDebit,
+                    Status = true
                 };
 
                 var accountLedger=  new Common.CommonDao().GetAccountLedgerTypes().Where(q => q.AccountLedgerTypeID == p.AccountLedgerTypeId).FirstOrDefault();
@@ -116,8 +120,8 @@ namespace PharmaDAL.Master
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 var accountLedgers = (from p in context.AccountLedgerMaster
-                                      where ledgerTypeID == 0 || p.AccountLedgerTypeId == ledgerTypeID
-                                      && searchString == null || p.AccountLedgerName.Contains(searchString)
+                                      where (ledgerTypeID == 0 || p.AccountLedgerTypeId == ledgerTypeID)
+                                      && (string.IsNullOrEmpty(searchString) || p.AccountLedgerName.Contains(searchString))
                                       select new PharmaBusinessObjects.Master.AccountLedgerMaster()
                                       {
                                           AccountLedgerID = p.AccountLedgerID,
@@ -130,6 +134,8 @@ namespace PharmaDAL.Master
                                           AccountType = p.AccountType.AccountTypeName,
                                           CreditControlCodeID = p.CreditControlCodeID,
                                           DebitControlCodeID = p.DebitControlCodeID,
+                                          DebitControlCode = p.AccountLedgerMaster3.AccountLedgerName,
+                                          CreditControlCode = p.AccountLedgerMaster2.AccountLedgerName,
                                           OpeningBalance = p.OpeningBalance,
                                           CreditDebit = p.CreditDebit
 

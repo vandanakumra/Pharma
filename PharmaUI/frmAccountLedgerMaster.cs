@@ -69,34 +69,62 @@ namespace PharmaUI
                 dgvAccountLedger.Columns[i].Visible = false;
             }
 
+            dgvAccountLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvAccountLedger.AllowUserToAddRows = false;
+            dgvAccountLedger.AllowUserToDeleteRows = false;
+            dgvAccountLedger.ReadOnly = true;
+            
+
+           
             dgvAccountLedger.Columns["AccountLedgerCode"].Visible = true;
             dgvAccountLedger.Columns["AccountLedgerCode"].HeaderText = "Account No";
+            //dgvAccountLedger.Columns["AccountLedgerCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       
+
 
             dgvAccountLedger.Columns["AccountLedgerType"].Visible = true;
             dgvAccountLedger.Columns["AccountLedgerType"].HeaderText = "Ledger Type";
+           // dgvAccountLedger.Columns["AccountLedgerType"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvAccountLedger.Columns["AccountLedgerName"].Visible = true;
             dgvAccountLedger.Columns["AccountLedgerName"].HeaderText = "Account Name";
+            //dgvAccountLedger.Columns["AccountLedgerName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvAccountLedger.Columns["AccountType"].Visible = true;
             dgvAccountLedger.Columns["AccountType"].HeaderText = "Account Type";
+            //dgvAccountLedger.Columns["AccountType"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvAccountLedger.Columns["OpeningBalance"].Visible = true;
             dgvAccountLedger.Columns["OpeningBalance"].HeaderText = "Opening Balance";
+            //dgvAccountLedger.Columns["OpeningBalance"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvAccountLedger.Columns["DebitControlCode"].Visible = true;
             dgvAccountLedger.Columns["DebitControlCode"].HeaderText = "Debit";
+            //dgvAccountLedger.Columns["DebitControlCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvAccountLedger.Columns["CreditControlCode"].Visible = true;
             dgvAccountLedger.Columns["CreditControlCode"].HeaderText = "Credit";
+            //dgvAccountLedger.Columns["CreditControlCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
         }
 
         private void btnAddNewLedger_Click(object sender, EventArgs e)
         {
             frmAccountLedgerMasterAddUpdate form = new frmAccountLedgerMasterAddUpdate();
+            form.FormClosed += Form_FormClosed;
             form.ShowDialog();
 
+        }
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LoadCombo();
+            LoadDataGrid(0);
+
+        }
+
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            LoadDataGrid((int)cbLedgerType.SelectedValue);
         }
     }
 }
