@@ -33,32 +33,35 @@
             this.btnAddItem = new System.Windows.Forms.Button();
             this.dgvItemList = new System.Windows.Forms.DataGridView();
             this.panelItemInfo = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).BeginInit();
             this.SuspendLayout();
             // 
             // tbxSearchItem
             // 
-            this.tbxSearchItem.Location = new System.Drawing.Point(101, 38);
+            this.tbxSearchItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxSearchItem.Location = new System.Drawing.Point(100, 80);
             this.tbxSearchItem.Name = "tbxSearchItem";
-            this.tbxSearchItem.Size = new System.Drawing.Size(296, 20);
+            this.tbxSearchItem.Size = new System.Drawing.Size(296, 23);
             this.tbxSearchItem.TabIndex = 2;
             // 
             // lblSearchItem
             // 
             this.lblSearchItem.AutoSize = true;
-            this.lblSearchItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchItem.Location = new System.Drawing.Point(12, 38);
+            this.lblSearchItem.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchItem.Location = new System.Drawing.Point(11, 80);
             this.lblSearchItem.Name = "lblSearchItem";
-            this.lblSearchItem.Size = new System.Drawing.Size(83, 17);
+            this.lblSearchItem.Size = new System.Drawing.Size(78, 19);
             this.lblSearchItem.TabIndex = 1;
             this.lblSearchItem.Text = "Search Item";
             // 
             // btnAddItem
             // 
+            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddItem.Image = global::PharmaUI.Properties.Resources.AddItem;
-            this.btnAddItem.Location = new System.Drawing.Point(967, 26);
+            this.btnAddItem.Location = new System.Drawing.Point(923, 68);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(111, 35);
+            this.btnAddItem.Size = new System.Drawing.Size(154, 35);
             this.btnAddItem.TabIndex = 3;
             this.btnAddItem.Text = "Add Item";
             this.btnAddItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -67,31 +70,55 @@
             // 
             // dgvItemList
             // 
+            this.dgvItemList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItemList.Location = new System.Drawing.Point(15, 67);
+            this.dgvItemList.Location = new System.Drawing.Point(15, 115);
             this.dgvItemList.Name = "dgvItemList";
-            this.dgvItemList.Size = new System.Drawing.Size(1063, 271);
+            this.dgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvItemList.Size = new System.Drawing.Size(1063, 236);
             this.dgvItemList.TabIndex = 4;
             // 
             // panelItemInfo
             // 
-            this.panelItemInfo.Location = new System.Drawing.Point(15, 345);
+            this.panelItemInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelItemInfo.Location = new System.Drawing.Point(15, 357);
             this.panelItemInfo.Name = "panelItemInfo";
-            this.panelItemInfo.Size = new System.Drawing.Size(1063, 122);
+            this.panelItemInfo.Size = new System.Drawing.Size(1063, 110);
             this.panelItemInfo.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            this.panel1.AccessibleName = "";
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.ForeColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.panel1.Size = new System.Drawing.Size(1079, 56);
+            this.panel1.TabIndex = 6;
+            this.panel1.Tag = "";
             // 
             // frmItemMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 479);
+            this.ClientSize = new System.Drawing.Size(1091, 479);
+            this.ControlBox = false;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelItemInfo);
             this.Controls.Add(this.dgvItemList);
             this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.lblSearchItem);
             this.Controls.Add(this.tbxSearchItem);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmItemMaster";
-            this.Text = "Item Master";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmItemMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).EndInit();
@@ -106,5 +133,6 @@
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.DataGridView dgvItemList;
         private System.Windows.Forms.Panel panelItemInfo;
+        private System.Windows.Forms.Panel panel1;
     }
 }

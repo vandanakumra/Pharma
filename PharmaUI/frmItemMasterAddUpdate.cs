@@ -9,41 +9,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PharmaBusiness;
 using PharmaBusinessObjects.Master;
+using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
+using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI
 {
     public partial class frmItemMasterAddUpdate : Form
     {
-        ApplicationFacade applicationFacade;
-        public frmItemMasterAddUpdate()
+        IApplicationFacade applicationFacade;
+        private bool isInEditMode = false;
+
+        public frmItemMasterAddUpdate(bool isInEditMode = false)
         {
+            this.isInEditMode = isInEditMode;
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
-
-            //Fill the company list
-            cbxComanyCode.DataSource = applicationFacade.GetCompanies();
-            cbxComanyCode.DisplayMember = "CompanyName";
-            cbxComanyCode.ValueMember = "CompanyCode";
-
-            //Fill sale type list
-            cbxSaleType.DataSource = applicationFacade.GetAccountLedgerBySystemName("SaleLedger");
-            cbxSaleType.DisplayMember = "AccountLedgerType";
-            cbxSaleType.ValueMember = "AccountLedgerTypeId";
+            applicationFacade = new ApplicationFacade();          
         }
 
-        private void cbxComanyCode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbxComanyCode.SelectedItem == null) return;
-
-            Company selectedCompany = cbxComanyCode.SelectedItem as Company;
-            if (selectedCompany != null)
-                tbxItemCode.Text = applicationFacade.GetNextItemCode(Convert.ToString(selectedCompany.CompanyCode));
-        }
-
+       
         private void btnAction_Click(object sender, EventArgs e)
         {
             try
             {
+                Choice choice;
+                Status status;
+
                 Item item = new Item();
                 item.ItemCode = tbxItemCode.Text;
                 item.ItemName = tbxItemName.Text;
@@ -62,12 +53,15 @@ namespace PharmaUI
                 item.Scheme1 = ExtensionMethods.SafeConversionDouble(tbxScheme1.Text);
                 item.Scheme2 = ExtensionMethods.SafeConversionDouble(tbxScheme2.Text);
                 item.PurchaseExcise = ExtensionMethods.SafeConversionDouble(tbxPurchaseExcise.Text);
-                item.UPC = tbxUPC.Text;
-                item.IsHalfScheme = Convert.ToBoolean(chbxHalfScheme.Checked);
-                item.IsQTRScheme = Convert.ToBoolean(chbxQuarterScheme.Checked);
+                item.UPC = tbxUPC.Text;             
+                Enum.TryParse<Choice>(cbxHalfScheme.SelectedValue.ToString(), out choice);               
+                item.IsHalfScheme = choice == Choice.Yes;
+                Enum.TryParse<Choice>(cbxQtrScheme.SelectedValue.ToString(), out choice);
+                item.IsQTRScheme = choice == Choice.Yes;
                 item.SpecialDiscount = ExtensionMethods.SafeConversionDouble(tbxSpecialDiscount.Text);
                 item.SpecialDiscountOnQty = ExtensionMethods.SafeConversionDouble(tbxSpecialDiscountOnQty.Text);
-                item.IsFixedDiscount = Convert.ToBoolean(chbxFixedDiscount.Checked);
+                Enum.TryParse<Choice>(cbxFixedDiscount.SelectedValue.ToString(), out choice);
+                item.IsFixedDiscount = choice == Choice.Yes;
                 item.FixedDiscountRate = ExtensionMethods.SafeConversionDouble(tbxFixedDiscountRate.Text);
                 item.MaximumQty = ExtensionMethods.SafeConversionDouble(tbxMaxQty.Text);
                 item.MaximumDiscount = ExtensionMethods.SafeConversionDouble(tbxMaxDiscount.Text);
@@ -79,16 +73,103 @@ namespace PharmaUI
                 item.Location = tbxLocation.Text;
                 item.MinimumStock = ExtensionMethods.SafeConversionInt(tbxMinimumStock.Text);
                 item.MaximumStock = ExtensionMethods.SafeConversionInt(tbxMaximumStock.Text);
-                item.SaleTypeId = 1;
-                item.Status = Convert.ToBoolean(chbxStatus.Checked);
+                item.SaleTypeId =( cbxSaleType.SelectedItem as AccountLedgerMaster).AccountLedgerID;
+                Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+                item.Status = status == Status.Active;
 
-                applicationFacade.AddNewItem(item);
+                bool actionResult = false;
+                // if form is in Edit mode then udate item , else add item 
+                if (!isInEditMode)
+                {
+                    actionResult= applicationFacade.AddNewItem(item);
+                }
+                else
+                {
+                    actionResult= applicationFacade.UpdateItem(item);
+                }
+
+                //Close this form if operation is successful
+                if (actionResult)
+                {
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
                 throw;
             }
 
+        }
+
+        private void frmItemMasterAddUpdate_Load(object sender, EventArgs e)
+        {
+            this.Dock = DockStyle.Fill;
+            panel1.Width = this.Width;
+
+            Label lbl = new Label();
+            lbl.Width = panel1.Width;
+            lbl.Dock = DockStyle.Fill;
+            lbl.TextAlign = ContentAlignment.MiddleCenter;
+            lbl.Top = 10;
+            lbl.Text = "Item Master - Add";
+            panel1.Controls.Add(lbl);
+
+            cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
+            cbxFixedDiscount.SelectedIndexChanged += CbxFixedDiscount_SelectedIndexChanged;
+
+            //Fill half Scheme options
+            cbxHalfScheme.DataSource = Enum.GetValues(typeof(Enums.Choice));
+
+            //Fill qtr Scheme options
+            cbxQtrScheme.DataSource = Enum.GetValues(typeof(Enums.Choice));
+
+            //Fill fixed discount options
+            cbxFixedDiscount.DataSource = Enum.GetValues(typeof(Enums.Choice));
+
+            //Fill status options
+            cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
+
+            //Fill the company list
+            cbxComanyCode.DataSource = applicationFacade.GetCompanies();
+            cbxComanyCode.DisplayMember = "CompanyName";
+            cbxComanyCode.ValueMember = "CompanyCode";
+
+            //Fill sale type list
+            cbxSaleType.DataSource = applicationFacade.GetAccountLedgerBySystemName("SaleLedger");
+            cbxSaleType.DisplayMember = "AccountLedgerName";
+            cbxSaleType.ValueMember = "AccountLedgerID";
+
+        }
+
+        private void CbxFixedDiscount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxFixedDiscount.SelectedItem == null) return;
+
+            Choice choice;
+            Enum.TryParse<Choice>(cbxHalfScheme.SelectedValue.ToString(), out choice);
+
+            if (choice == Choice.Yes)
+            {
+                tbxFixedDiscountRate.ReadOnly = false;
+            }
+        }
+
+        private void CbxComanyCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxComanyCode.SelectedItem == null) return;
+
+            Company selectedCompany = cbxComanyCode.SelectedItem as Company;
+
+            if (selectedCompany != null)
+            {
+                tbxItemCode.Text = applicationFacade.GetNextItemCode(Convert.ToString(selectedCompany.CompanyCode));
+            }
+                
+        }
+
+        private void btnRevert_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

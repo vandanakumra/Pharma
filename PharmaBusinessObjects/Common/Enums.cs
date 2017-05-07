@@ -8,8 +8,16 @@ namespace PharmaBusinessObjects.Common
 {
     public class Enums
     {
+        public enum Choice
+        {
+            No,
+            Yes
+        };
 
-       
-
+        public enum Status
+        {
+            Inactive,
+            Active
+        };
     }
 }
