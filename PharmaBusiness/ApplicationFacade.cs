@@ -13,11 +13,80 @@ namespace PharmaBusiness
     {
         #region Item Master
 
+        /// <summary>
+        /// Fetch all the active items
+        /// </summary>
+        /// <returns>List of items</returns>
+        public List<Item> GetAllItems()
+        {
+            try
+            {
+                return new ItemBiz().GetAllItems();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        /// <summary>
+        /// Add new item to ItemMaster
+        /// </summary>
+        /// <param name="newItem"></param>
+        /// <returns>true if added successfully</returns>
+        public bool AddNewItem(Item newItem)
+        {
+            try
+            {
+                return new ItemBiz().AddNewItem(newItem);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Update an existing item from ItemMaster
+        /// </summary>
+        /// <param name="existingItem"></param>
+        /// <returns>True if updated is succesfull</returns>
+        public bool UpdateItem(Item existingItem)
+        {
+            try
+            {
+                return new ItemBiz().UpdateItem(existingItem);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Delete an existing item from ItemMaster
+        /// </summary>
+        /// <param name="existingItem"></param>
+        /// <returns>True if deletion is successfull</returns>
+        public bool DeleteItem(Item existingItem)
+        {
+            try
+            {
+                return new ItemBiz().DeleteItem(existingItem);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Company Master
 
+        /// <summary>
+        /// Add new company to CompanyMaster
+        /// </summary>
+        /// <returns>List of companies</returns>
         public List<Company> GetCompanies()
         {
             try

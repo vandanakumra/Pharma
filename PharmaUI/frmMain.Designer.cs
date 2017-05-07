@@ -100,6 +100,7 @@
             this.itemMenuItem.Name = "itemMenuItem";
             this.itemMenuItem.Size = new System.Drawing.Size(152, 22);
             this.itemMenuItem.Text = "Item";
+            this.itemMenuItem.Click += new System.EventHandler(this.itemMenuItem_Click);
             // 
             // personRouteMenuItem
             // 
