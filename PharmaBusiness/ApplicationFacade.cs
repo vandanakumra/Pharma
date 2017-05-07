@@ -189,11 +189,11 @@ namespace PharmaBusiness
             }
         }
 
-       public  List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetDebitCreditControlCodes()
+       public  List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerBySystemName(string systemName)
         {
             try
             {
-                return new AccountLedgerMasterBiz().GetDebitCreditControlCodes();
+                return new AccountLedgerMasterBiz().GetAccountLedgerBySystemName(systemName);
             }
             catch (Exception)
             {

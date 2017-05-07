@@ -12,37 +12,37 @@ namespace PharmaBusinessObjects.Master
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
         public string CompanyCode { get; set; }
-        public Nullable<double> ConversionRate { get; set; }
+        public double ? ConversionRate { get; set; }
         public string ShortName { get; set; }
         public string Packing { get; set; }
-        public Nullable<double> PurchaseRate { get; set; }
+        public double ? PurchaseRate { get; set; }
         public double MRP { get; set; }
-        public Nullable<double> SaleRate { get; set; }
-        public Nullable<double> SpecialRate { get; set; }
-        public Nullable<double> WholeSaleRate { get; set; }
-        public Nullable<double> SaleExcise { get; set; }
-        public Nullable<double> SurchargeOnSale { get; set; }
-        public Nullable<double> TaxOnSale { get; set; }
-        public Nullable<double> Scheme1 { get; set; }
-        public Nullable<double> Scheme2 { get; set; }
-        public Nullable<double> PurchaseExcise { get; set; }
+        public double ? SaleRate { get; set; }
+        public double ? SpecialRate { get; set; }
+        public double ? WholeSaleRate { get; set; }
+        public double ? SaleExcise { get; set; }
+        public double ? SurchargeOnSale { get; set; }
+        public double ? TaxOnSale { get; set; }
+        public double ? Scheme1 { get; set; }
+        public double ? Scheme2 { get; set; }
+        public double ? PurchaseExcise { get; set; }
         public string UPC { get; set; }
         public bool IsHalfScheme { get; set; }
         public bool IsQTRScheme { get; set; }
-        public Nullable<double> SpecialDiscount { get; set; }
-        public Nullable<double> SpecialDiscountOnQty { get; set; }
+        public double ? SpecialDiscount { get; set; }
+        public double ? SpecialDiscountOnQty { get; set; }
         public bool IsFixedDiscount { get; set; }
-        public Nullable<double> FixedDiscountRate { get; set; }
-        public Nullable<double> MaximumQty { get; set; }
-        public Nullable<double> MaximumDiscount { get; set; }
-        public Nullable<double> SurchargeOnPurchase { get; set; }
-        public Nullable<double> TaxOnPurchase { get; set; }
-        public Nullable<double> DiscountRecieved { get; set; }
-        public Nullable<double> SpecialDiscountRecieved { get; set; }
-        public Nullable<double> QtyPerCase { get; set; }
+        public double ? FixedDiscountRate { get; set; }
+        public double ? MaximumQty { get; set; }
+        public double ? MaximumDiscount { get; set; }
+        public double ? SurchargeOnPurchase { get; set; }
+        public double ? TaxOnPurchase { get; set; }
+        public double ? DiscountRecieved { get; set; }
+        public double ? SpecialDiscountRecieved { get; set; }
+        public double ? QtyPerCase { get; set; }
         public string Location { get; set; }
-        public Nullable<int> MinimumStock { get; set; }
-        public Nullable<int> MaximumStock { get; set; }
+        public int ? MinimumStock { get; set; }
+        public int ? MaximumStock { get; set; }
         public int SaleTypeId { get; set; }
         public bool Status { get; set; }
     }

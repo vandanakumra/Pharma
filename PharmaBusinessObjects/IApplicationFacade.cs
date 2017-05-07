@@ -32,7 +32,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int LedgerTypeID,string searchString = null);
         int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
         int UpdateAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
-        List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetDebitCreditControlCodes();
+        List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerBySystemName(string systemName);
         #endregion
 
         #region Common
