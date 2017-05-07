@@ -63,7 +63,7 @@ namespace PharmaDAL.Master
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 int _result = 0;
-                int totalItemsFromSameCompany = GetAllItems().Where(x => x.CompanyCode == newItem.CompanyCode).Count();
+                int totalItemsFromSameCompany = TotalItemsFromSameCompany(newItem.CompanyCode);
                 ItemMaster newItemMasterDB = new ItemMaster()
                 {
                     ItemCode = String.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
@@ -183,6 +183,15 @@ namespace PharmaDAL.Master
                     return true;
                 else
                     return false;
+            }
+        }
+
+        public int TotalItemsFromSameCompany(string companyCode)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                int totalItemsFromSameCompany = GetAllItems().Where(x => x.CompanyCode == companyCode).Count();
+                return totalItemsFromSameCompany;
             }
         }
     }

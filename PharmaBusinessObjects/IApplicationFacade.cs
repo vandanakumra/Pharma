@@ -16,6 +16,7 @@ namespace PharmaBusinessObjects
         bool AddNewItem(Item newItem);
         bool UpdateItem(Item existingItem);
         bool DeleteItem(Item existingItem);
+        string GetNextItemCode(string companyCode);
 
         #endregion
 

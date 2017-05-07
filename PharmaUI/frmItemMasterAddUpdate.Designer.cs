@@ -29,165 +29,165 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.textBox25 = new System.Windows.Forms.TextBox();
-            this.textBox26 = new System.Windows.Forms.TextBox();
-            this.textBox27 = new System.Windows.Forms.TextBox();
-            this.textBox28 = new System.Windows.Forms.TextBox();
-            this.textBox29 = new System.Windows.Forms.TextBox();
-            this.textBox30 = new System.Windows.Forms.TextBox();
-            this.textBox31 = new System.Windows.Forms.TextBox();
-            this.textBox32 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.lblCompanyCode = new System.Windows.Forms.Label();
+            this.lblItemCode = new System.Windows.Forms.Label();
+            this.lblItemName = new System.Windows.Forms.Label();
+            this.lblConvRate = new System.Windows.Forms.Label();
+            this.lblShortName = new System.Windows.Forms.Label();
+            this.lblPacking = new System.Windows.Forms.Label();
+            this.lblPurchaseRate = new System.Windows.Forms.Label();
+            this.lblMRP = new System.Windows.Forms.Label();
+            this.lblSaleRate = new System.Windows.Forms.Label();
+            this.lblSpecialRate = new System.Windows.Forms.Label();
+            this.lblWhSaleRate = new System.Windows.Forms.Label();
+            this.lblSaleExcise = new System.Windows.Forms.Label();
+            this.lblSCSale = new System.Windows.Forms.Label();
+            this.lblSaleTax = new System.Windows.Forms.Label();
+            this.lblScheme1 = new System.Windows.Forms.Label();
+            this.lblScheme2 = new System.Windows.Forms.Label();
+            this.lblPurchaseExcise = new System.Windows.Forms.Label();
+            this.lblUPC = new System.Windows.Forms.Label();
+            this.lblHalfScheme = new System.Windows.Forms.Label();
+            this.lblQtrScheme = new System.Windows.Forms.Label();
+            this.lblSpclDiscount = new System.Windows.Forms.Label();
+            this.lblSpclDiscOnQty = new System.Windows.Forms.Label();
+            this.lblFixedDiscount = new System.Windows.Forms.Label();
+            this.lblFixedDisRate = new System.Windows.Forms.Label();
+            this.lblMaxQty = new System.Windows.Forms.Label();
+            this.lblMaxDisc = new System.Windows.Forms.Label();
+            this.lblSCOnPurchase = new System.Windows.Forms.Label();
+            this.lblTaxOnPurchase = new System.Windows.Forms.Label();
+            this.lblDiscountRec = new System.Windows.Forms.Label();
+            this.lblSplDiscRecieved = new System.Windows.Forms.Label();
+            this.lblQtyPerCase = new System.Windows.Forms.Label();
+            this.lblLocation = new System.Windows.Forms.Label();
+            this.lblMinStock = new System.Windows.Forms.Label();
+            this.lblMaxStock = new System.Windows.Forms.Label();
+            this.lblSaleType = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.tbxItemCode = new System.Windows.Forms.TextBox();
+            this.tbxItemName = new System.Windows.Forms.TextBox();
+            this.tbxConvRate = new System.Windows.Forms.TextBox();
+            this.tbxShortName = new System.Windows.Forms.TextBox();
+            this.tbxPacking = new System.Windows.Forms.TextBox();
+            this.tbxPurchaseRate = new System.Windows.Forms.TextBox();
+            this.tbxMRP = new System.Windows.Forms.TextBox();
+            this.tbxSaleRate = new System.Windows.Forms.TextBox();
+            this.tbxSpecialRate = new System.Windows.Forms.TextBox();
+            this.tbxWholeSaleRate = new System.Windows.Forms.TextBox();
+            this.tbxSaleExcise = new System.Windows.Forms.TextBox();
+            this.tbxSCOnSale = new System.Windows.Forms.TextBox();
+            this.tbxTaxOnSale = new System.Windows.Forms.TextBox();
+            this.tbxScheme1 = new System.Windows.Forms.TextBox();
+            this.tbxScheme2 = new System.Windows.Forms.TextBox();
+            this.tbxPurchaseExcise = new System.Windows.Forms.TextBox();
+            this.tbxUPC = new System.Windows.Forms.TextBox();
+            this.tbxSpecialDiscountOnQty = new System.Windows.Forms.TextBox();
+            this.tbxSpecialDiscount = new System.Windows.Forms.TextBox();
+            this.tbxFixedDiscountRate = new System.Windows.Forms.TextBox();
+            this.tbxMaxQty = new System.Windows.Forms.TextBox();
+            this.tbxMaxDiscount = new System.Windows.Forms.TextBox();
+            this.tbxSCOnPurchase = new System.Windows.Forms.TextBox();
+            this.tbxTaxOnPurchase = new System.Windows.Forms.TextBox();
+            this.tbxDiscountRecieved = new System.Windows.Forms.TextBox();
+            this.tbxSpecialDiscountRecieved = new System.Windows.Forms.TextBox();
+            this.tbxQtyPerCase = new System.Windows.Forms.TextBox();
+            this.tbxLocation = new System.Windows.Forms.TextBox();
+            this.tbxMaximumStock = new System.Windows.Forms.TextBox();
+            this.tbxMinimumStock = new System.Windows.Forms.TextBox();
+            this.chbxHalfScheme = new System.Windows.Forms.CheckBox();
+            this.chbxQuarterScheme = new System.Windows.Forms.CheckBox();
+            this.chbxFixedDiscount = new System.Windows.Forms.CheckBox();
+            this.chbxStatus = new System.Windows.Forms.CheckBox();
+            this.cbxComanyCode = new System.Windows.Forms.ComboBox();
+            this.cbxSaleType = new System.Windows.Forms.ComboBox();
+            this.btnAction = new System.Windows.Forms.Button();
+            this.btnRevert = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.label12, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.label13, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.label14, 0, 13);
-            this.tableLayoutPanel1.Controls.Add(this.label15, 0, 14);
-            this.tableLayoutPanel1.Controls.Add(this.label16, 0, 15);
-            this.tableLayoutPanel1.Controls.Add(this.label17, 0, 16);
-            this.tableLayoutPanel1.Controls.Add(this.label18, 0, 17);
-            this.tableLayoutPanel1.Controls.Add(this.label19, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label20, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label21, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label22, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label23, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label24, 4, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label25, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label26, 4, 7);
-            this.tableLayoutPanel1.Controls.Add(this.label27, 4, 8);
-            this.tableLayoutPanel1.Controls.Add(this.label28, 4, 9);
-            this.tableLayoutPanel1.Controls.Add(this.label29, 4, 10);
-            this.tableLayoutPanel1.Controls.Add(this.label30, 4, 11);
-            this.tableLayoutPanel1.Controls.Add(this.label31, 4, 12);
-            this.tableLayoutPanel1.Controls.Add(this.label32, 4, 13);
-            this.tableLayoutPanel1.Controls.Add(this.label33, 4, 14);
-            this.tableLayoutPanel1.Controls.Add(this.label34, 4, 15);
-            this.tableLayoutPanel1.Controls.Add(this.label35, 4, 16);
-            this.tableLayoutPanel1.Controls.Add(this.label36, 4, 17);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox3, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox4, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textBox5, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textBox6, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.textBox7, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.textBox8, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.textBox9, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.textBox10, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.textBox11, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.textBox12, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.textBox13, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.textBox14, 1, 13);
-            this.tableLayoutPanel1.Controls.Add(this.textBox15, 1, 14);
-            this.tableLayoutPanel1.Controls.Add(this.textBox16, 1, 15);
-            this.tableLayoutPanel1.Controls.Add(this.textBox17, 1, 16);
-            this.tableLayoutPanel1.Controls.Add(this.textBox18, 1, 17);
-            this.tableLayoutPanel1.Controls.Add(this.textBox19, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textBox20, 5, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox21, 5, 5);
-            this.tableLayoutPanel1.Controls.Add(this.textBox22, 5, 6);
-            this.tableLayoutPanel1.Controls.Add(this.textBox23, 5, 7);
-            this.tableLayoutPanel1.Controls.Add(this.textBox24, 5, 8);
-            this.tableLayoutPanel1.Controls.Add(this.textBox25, 5, 9);
-            this.tableLayoutPanel1.Controls.Add(this.textBox26, 5, 10);
-            this.tableLayoutPanel1.Controls.Add(this.textBox27, 5, 11);
-            this.tableLayoutPanel1.Controls.Add(this.textBox28, 5, 12);
-            this.tableLayoutPanel1.Controls.Add(this.textBox29, 5, 13);
-            this.tableLayoutPanel1.Controls.Add(this.textBox30, 5, 15);
-            this.tableLayoutPanel1.Controls.Add(this.textBox31, 5, 14);
-            this.tableLayoutPanel1.Controls.Add(this.textBox32, 5, 16);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox1, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox2, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox3, 5, 4);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox4, 5, 17);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 30);
+            this.tableLayoutPanel1.Controls.Add(this.lblCompanyCode, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblItemCode, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblItemName, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblConvRate, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblShortName, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblPacking, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblPurchaseRate, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblMRP, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblSaleRate, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblSpecialRate, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblWhSaleRate, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblSaleExcise, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.lblSCSale, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblSaleTax, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.lblScheme1, 0, 14);
+            this.tableLayoutPanel1.Controls.Add(this.lblScheme2, 0, 15);
+            this.tableLayoutPanel1.Controls.Add(this.lblPurchaseExcise, 0, 16);
+            this.tableLayoutPanel1.Controls.Add(this.lblUPC, 0, 17);
+            this.tableLayoutPanel1.Controls.Add(this.lblHalfScheme, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblQtrScheme, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblSpclDiscount, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblSpclDiscOnQty, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblFixedDiscount, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblFixedDisRate, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblMaxQty, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblMaxDisc, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblSCOnPurchase, 4, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblTaxOnPurchase, 4, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblDiscountRec, 4, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblSplDiscRecieved, 4, 11);
+            this.tableLayoutPanel1.Controls.Add(this.lblQtyPerCase, 4, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblLocation, 4, 13);
+            this.tableLayoutPanel1.Controls.Add(this.lblMinStock, 4, 14);
+            this.tableLayoutPanel1.Controls.Add(this.lblMaxStock, 4, 15);
+            this.tableLayoutPanel1.Controls.Add(this.lblSaleType, 4, 16);
+            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 4, 17);
+            this.tableLayoutPanel1.Controls.Add(this.tbxItemCode, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbxItemName, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbxConvRate, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tbxShortName, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.tbxPacking, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tbxPurchaseRate, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tbxMRP, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.tbxSaleRate, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.tbxSpecialRate, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.tbxWholeSaleRate, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.tbxSaleExcise, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.tbxSCOnSale, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.tbxTaxOnSale, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.tbxScheme1, 1, 14);
+            this.tableLayoutPanel1.Controls.Add(this.tbxScheme2, 1, 15);
+            this.tableLayoutPanel1.Controls.Add(this.tbxPurchaseExcise, 1, 16);
+            this.tableLayoutPanel1.Controls.Add(this.tbxUPC, 1, 17);
+            this.tableLayoutPanel1.Controls.Add(this.tbxSpecialDiscountOnQty, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tbxSpecialDiscount, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbxFixedDiscountRate, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.tbxMaxQty, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tbxMaxDiscount, 5, 7);
+            this.tableLayoutPanel1.Controls.Add(this.tbxSCOnPurchase, 5, 8);
+            this.tableLayoutPanel1.Controls.Add(this.tbxTaxOnPurchase, 5, 9);
+            this.tableLayoutPanel1.Controls.Add(this.tbxDiscountRecieved, 5, 10);
+            this.tableLayoutPanel1.Controls.Add(this.tbxSpecialDiscountRecieved, 5, 11);
+            this.tableLayoutPanel1.Controls.Add(this.tbxQtyPerCase, 5, 12);
+            this.tableLayoutPanel1.Controls.Add(this.tbxLocation, 5, 13);
+            this.tableLayoutPanel1.Controls.Add(this.tbxMaximumStock, 5, 15);
+            this.tableLayoutPanel1.Controls.Add(this.tbxMinimumStock, 5, 14);
+            this.tableLayoutPanel1.Controls.Add(this.chbxHalfScheme, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.chbxQuarterScheme, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.chbxFixedDiscount, 5, 4);
+            this.tableLayoutPanel1.Controls.Add(this.chbxStatus, 5, 17);
+            this.tableLayoutPanel1.Controls.Add(this.cbxComanyCode, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbxSaleType, 5, 16);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(25, 30);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 18;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.555555F));
@@ -208,764 +208,777 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.555555F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.555555F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.555555F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(752, 462);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(724, 462);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // label1
+            // lblCompanyCode
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblCompanyCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Item Code";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyCode.AutoSize = true;
+            this.lblCompanyCode.Location = new System.Drawing.Point(3, 0);
+            this.lblCompanyCode.Name = "lblCompanyCode";
+            this.lblCompanyCode.Size = new System.Drawing.Size(127, 25);
+            this.lblCompanyCode.TabIndex = 0;
+            this.lblCompanyCode.Text = "Company Code";
+            this.lblCompanyCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label2
+            // lblItemCode
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblItemCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Item Name";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblItemCode.AutoSize = true;
+            this.lblItemCode.Location = new System.Drawing.Point(3, 25);
+            this.lblItemCode.Name = "lblItemCode";
+            this.lblItemCode.Size = new System.Drawing.Size(127, 25);
+            this.lblItemCode.TabIndex = 1;
+            this.lblItemCode.Text = "Item Code";
+            this.lblItemCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label3
+            // lblItemName
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblItemName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 25);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Company Code";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblItemName.AutoSize = true;
+            this.lblItemName.Location = new System.Drawing.Point(3, 50);
+            this.lblItemName.Name = "lblItemName";
+            this.lblItemName.Size = new System.Drawing.Size(127, 25);
+            this.lblItemName.TabIndex = 2;
+            this.lblItemName.Text = "Item Name";
+            this.lblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label4
+            // lblConvRate
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblConvRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 75);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(125, 25);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "ConversionRate";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblConvRate.AutoSize = true;
+            this.lblConvRate.Location = new System.Drawing.Point(3, 75);
+            this.lblConvRate.Name = "lblConvRate";
+            this.lblConvRate.Size = new System.Drawing.Size(127, 25);
+            this.lblConvRate.TabIndex = 3;
+            this.lblConvRate.Text = "Conversion Rate";
+            this.lblConvRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label5
+            // lblShortName
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblShortName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 100);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(125, 25);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "ShortName";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblShortName.AutoSize = true;
+            this.lblShortName.Location = new System.Drawing.Point(3, 100);
+            this.lblShortName.Name = "lblShortName";
+            this.lblShortName.Size = new System.Drawing.Size(127, 25);
+            this.lblShortName.TabIndex = 4;
+            this.lblShortName.Text = "Short Name";
+            this.lblShortName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label6
+            // lblPacking
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblPacking.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 125);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(125, 25);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Packing";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPacking.AutoSize = true;
+            this.lblPacking.Location = new System.Drawing.Point(3, 125);
+            this.lblPacking.Name = "lblPacking";
+            this.lblPacking.Size = new System.Drawing.Size(127, 25);
+            this.lblPacking.TabIndex = 5;
+            this.lblPacking.Text = "Packing";
+            this.lblPacking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label7
+            // lblPurchaseRate
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblPurchaseRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 150);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(125, 25);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "PurchaseRate";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPurchaseRate.AutoSize = true;
+            this.lblPurchaseRate.Location = new System.Drawing.Point(3, 150);
+            this.lblPurchaseRate.Name = "lblPurchaseRate";
+            this.lblPurchaseRate.Size = new System.Drawing.Size(127, 25);
+            this.lblPurchaseRate.TabIndex = 6;
+            this.lblPurchaseRate.Text = "Purchase Rate";
+            this.lblPurchaseRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label8
+            // lblMRP
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblMRP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 175);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(125, 25);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "MRP";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMRP.AutoSize = true;
+            this.lblMRP.Location = new System.Drawing.Point(3, 175);
+            this.lblMRP.Name = "lblMRP";
+            this.lblMRP.Size = new System.Drawing.Size(127, 25);
+            this.lblMRP.TabIndex = 7;
+            this.lblMRP.Text = "MRP";
+            this.lblMRP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label9
+            // lblSaleRate
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSaleRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 200);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(125, 25);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "SaleRate";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSaleRate.AutoSize = true;
+            this.lblSaleRate.Location = new System.Drawing.Point(3, 200);
+            this.lblSaleRate.Name = "lblSaleRate";
+            this.lblSaleRate.Size = new System.Drawing.Size(127, 25);
+            this.lblSaleRate.TabIndex = 8;
+            this.lblSaleRate.Text = "Sale Rate";
+            this.lblSaleRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label10
+            // lblSpecialRate
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSpecialRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 225);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(125, 25);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "SpecialRate";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSpecialRate.AutoSize = true;
+            this.lblSpecialRate.Location = new System.Drawing.Point(3, 225);
+            this.lblSpecialRate.Name = "lblSpecialRate";
+            this.lblSpecialRate.Size = new System.Drawing.Size(127, 25);
+            this.lblSpecialRate.TabIndex = 9;
+            this.lblSpecialRate.Text = "Special Rate";
+            this.lblSpecialRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label11
+            // lblWhSaleRate
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblWhSaleRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 250);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(125, 25);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "WholeSaleRate";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblWhSaleRate.AutoSize = true;
+            this.lblWhSaleRate.Location = new System.Drawing.Point(3, 250);
+            this.lblWhSaleRate.Name = "lblWhSaleRate";
+            this.lblWhSaleRate.Size = new System.Drawing.Size(127, 25);
+            this.lblWhSaleRate.TabIndex = 10;
+            this.lblWhSaleRate.Text = "Whole Sale Rate";
+            this.lblWhSaleRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label12
+            // lblSaleExcise
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSaleExcise.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 275);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(125, 25);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "SaleExcise";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSaleExcise.AutoSize = true;
+            this.lblSaleExcise.Location = new System.Drawing.Point(3, 275);
+            this.lblSaleExcise.Name = "lblSaleExcise";
+            this.lblSaleExcise.Size = new System.Drawing.Size(127, 25);
+            this.lblSaleExcise.TabIndex = 11;
+            this.lblSaleExcise.Text = "Sale Excise";
+            this.lblSaleExcise.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label13
+            // lblSCSale
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSCSale.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 300);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(125, 25);
-            this.label13.TabIndex = 12;
-            this.label13.Text = "SurchargeOnSale";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSCSale.AutoSize = true;
+            this.lblSCSale.Location = new System.Drawing.Point(3, 300);
+            this.lblSCSale.Name = "lblSCSale";
+            this.lblSCSale.Size = new System.Drawing.Size(127, 25);
+            this.lblSCSale.TabIndex = 12;
+            this.lblSCSale.Text = "Surcharge On Sale";
+            this.lblSCSale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label14
+            // lblSaleTax
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSaleTax.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 325);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(125, 25);
-            this.label14.TabIndex = 13;
-            this.label14.Text = "TaxOnSale";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSaleTax.AutoSize = true;
+            this.lblSaleTax.Location = new System.Drawing.Point(3, 325);
+            this.lblSaleTax.Name = "lblSaleTax";
+            this.lblSaleTax.Size = new System.Drawing.Size(127, 25);
+            this.lblSaleTax.TabIndex = 13;
+            this.lblSaleTax.Text = "Tax On Sale";
+            this.lblSaleTax.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label15
+            // lblScheme1
             // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblScheme1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 350);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(125, 25);
-            this.label15.TabIndex = 14;
-            this.label15.Text = "Scheme1";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblScheme1.AutoSize = true;
+            this.lblScheme1.Location = new System.Drawing.Point(3, 350);
+            this.lblScheme1.Name = "lblScheme1";
+            this.lblScheme1.Size = new System.Drawing.Size(127, 25);
+            this.lblScheme1.TabIndex = 14;
+            this.lblScheme1.Text = "Scheme1";
+            this.lblScheme1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label16
+            // lblScheme2
             // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblScheme2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 375);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(125, 25);
-            this.label16.TabIndex = 15;
-            this.label16.Text = "Scheme2";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblScheme2.AutoSize = true;
+            this.lblScheme2.Location = new System.Drawing.Point(3, 375);
+            this.lblScheme2.Name = "lblScheme2";
+            this.lblScheme2.Size = new System.Drawing.Size(127, 25);
+            this.lblScheme2.TabIndex = 15;
+            this.lblScheme2.Text = "Scheme2";
+            this.lblScheme2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label17
+            // lblPurchaseExcise
             // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblPurchaseExcise.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 400);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(125, 25);
-            this.label17.TabIndex = 16;
-            this.label17.Text = "PurchaseExcise";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPurchaseExcise.AutoSize = true;
+            this.lblPurchaseExcise.Location = new System.Drawing.Point(3, 400);
+            this.lblPurchaseExcise.Name = "lblPurchaseExcise";
+            this.lblPurchaseExcise.Size = new System.Drawing.Size(127, 25);
+            this.lblPurchaseExcise.TabIndex = 16;
+            this.lblPurchaseExcise.Text = "Purchase Excise";
+            this.lblPurchaseExcise.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label18
+            // lblUPC
             // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblUPC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(3, 425);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(125, 37);
-            this.label18.TabIndex = 17;
-            this.label18.Text = "UPC";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblUPC.AutoSize = true;
+            this.lblUPC.Location = new System.Drawing.Point(3, 425);
+            this.lblUPC.Name = "lblUPC";
+            this.lblUPC.Size = new System.Drawing.Size(127, 37);
+            this.lblUPC.TabIndex = 17;
+            this.lblUPC.Text = "UPC";
+            this.lblUPC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label19
+            // lblHalfScheme
             // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblHalfScheme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(395, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(125, 25);
-            this.label19.TabIndex = 18;
-            this.label19.Text = "IsHalfScheme";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHalfScheme.AutoSize = true;
+            this.lblHalfScheme.Location = new System.Drawing.Point(373, 0);
+            this.lblHalfScheme.Name = "lblHalfScheme";
+            this.lblHalfScheme.Size = new System.Drawing.Size(127, 25);
+            this.lblHalfScheme.TabIndex = 18;
+            this.lblHalfScheme.Text = "Half Scheme";
+            this.lblHalfScheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label20
+            // lblQtrScheme
             // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblQtrScheme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(395, 25);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(125, 25);
-            this.label20.TabIndex = 19;
-            this.label20.Text = "IsQTRScheme";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblQtrScheme.AutoSize = true;
+            this.lblQtrScheme.Location = new System.Drawing.Point(373, 25);
+            this.lblQtrScheme.Name = "lblQtrScheme";
+            this.lblQtrScheme.Size = new System.Drawing.Size(127, 25);
+            this.lblQtrScheme.TabIndex = 19;
+            this.lblQtrScheme.Text = "Quarter Scheme";
+            this.lblQtrScheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label21
+            // lblSpclDiscount
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSpclDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(395, 50);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(125, 25);
-            this.label21.TabIndex = 20;
-            this.label21.Text = "SpecialDiscount";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSpclDiscount.AutoSize = true;
+            this.lblSpclDiscount.Location = new System.Drawing.Point(373, 50);
+            this.lblSpclDiscount.Name = "lblSpclDiscount";
+            this.lblSpclDiscount.Size = new System.Drawing.Size(127, 25);
+            this.lblSpclDiscount.TabIndex = 20;
+            this.lblSpclDiscount.Text = "Special Discount";
+            this.lblSpclDiscount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label22
+            // lblSpclDiscOnQty
             // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSpclDiscOnQty.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(395, 75);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(125, 25);
-            this.label22.TabIndex = 21;
-            this.label22.Text = "SpecialDiscountOnQty";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSpclDiscOnQty.AutoSize = true;
+            this.lblSpclDiscOnQty.Location = new System.Drawing.Point(373, 75);
+            this.lblSpclDiscOnQty.Name = "lblSpclDiscOnQty";
+            this.lblSpclDiscOnQty.Size = new System.Drawing.Size(127, 25);
+            this.lblSpclDiscOnQty.TabIndex = 21;
+            this.lblSpclDiscOnQty.Text = "Special Discount On Quantity";
+            this.lblSpclDiscOnQty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label23
+            // lblFixedDiscount
             // 
-            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblFixedDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(395, 100);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(125, 25);
-            this.label23.TabIndex = 22;
-            this.label23.Text = "IsFixedDiscount";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblFixedDiscount.AutoSize = true;
+            this.lblFixedDiscount.Location = new System.Drawing.Point(373, 100);
+            this.lblFixedDiscount.Name = "lblFixedDiscount";
+            this.lblFixedDiscount.Size = new System.Drawing.Size(127, 25);
+            this.lblFixedDiscount.TabIndex = 22;
+            this.lblFixedDiscount.Text = "Fixed Discount";
+            this.lblFixedDiscount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label24
+            // lblFixedDisRate
             // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblFixedDisRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(395, 125);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(125, 25);
-            this.label24.TabIndex = 23;
-            this.label24.Text = "FixedDiscountRate";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblFixedDisRate.AutoSize = true;
+            this.lblFixedDisRate.Location = new System.Drawing.Point(373, 125);
+            this.lblFixedDisRate.Name = "lblFixedDisRate";
+            this.lblFixedDisRate.Size = new System.Drawing.Size(127, 25);
+            this.lblFixedDisRate.TabIndex = 23;
+            this.lblFixedDisRate.Text = "Fixed Discount Rate";
+            this.lblFixedDisRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label25
+            // lblMaxQty
             // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblMaxQty.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(395, 150);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(125, 25);
-            this.label25.TabIndex = 24;
-            this.label25.Text = "MaximumQty";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMaxQty.AutoSize = true;
+            this.lblMaxQty.Location = new System.Drawing.Point(373, 150);
+            this.lblMaxQty.Name = "lblMaxQty";
+            this.lblMaxQty.Size = new System.Drawing.Size(127, 25);
+            this.lblMaxQty.TabIndex = 24;
+            this.lblMaxQty.Text = "Maximum Quantity";
+            this.lblMaxQty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label26
+            // lblMaxDisc
             // 
-            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblMaxDisc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(395, 175);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(125, 25);
-            this.label26.TabIndex = 25;
-            this.label26.Text = "MaximumDiscount";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMaxDisc.AutoSize = true;
+            this.lblMaxDisc.Location = new System.Drawing.Point(373, 175);
+            this.lblMaxDisc.Name = "lblMaxDisc";
+            this.lblMaxDisc.Size = new System.Drawing.Size(127, 25);
+            this.lblMaxDisc.TabIndex = 25;
+            this.lblMaxDisc.Text = "Maximum Discount";
+            this.lblMaxDisc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label27
+            // lblSCOnPurchase
             // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSCOnPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(395, 200);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(125, 25);
-            this.label27.TabIndex = 26;
-            this.label27.Text = "SurchargeOnPurchase";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSCOnPurchase.AutoSize = true;
+            this.lblSCOnPurchase.Location = new System.Drawing.Point(373, 200);
+            this.lblSCOnPurchase.Name = "lblSCOnPurchase";
+            this.lblSCOnPurchase.Size = new System.Drawing.Size(127, 25);
+            this.lblSCOnPurchase.TabIndex = 26;
+            this.lblSCOnPurchase.Text = "Surcharge On Purchase";
+            this.lblSCOnPurchase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label28
+            // lblTaxOnPurchase
             // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblTaxOnPurchase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(395, 225);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(125, 25);
-            this.label28.TabIndex = 27;
-            this.label28.Text = "TaxOnPurchase";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTaxOnPurchase.AutoSize = true;
+            this.lblTaxOnPurchase.Location = new System.Drawing.Point(373, 225);
+            this.lblTaxOnPurchase.Name = "lblTaxOnPurchase";
+            this.lblTaxOnPurchase.Size = new System.Drawing.Size(127, 25);
+            this.lblTaxOnPurchase.TabIndex = 27;
+            this.lblTaxOnPurchase.Text = "Tax On Purchase";
+            this.lblTaxOnPurchase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label29
+            // lblDiscountRec
             // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblDiscountRec.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(395, 250);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(125, 25);
-            this.label29.TabIndex = 28;
-            this.label29.Text = "DiscountRecieved";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDiscountRec.AutoSize = true;
+            this.lblDiscountRec.Location = new System.Drawing.Point(373, 250);
+            this.lblDiscountRec.Name = "lblDiscountRec";
+            this.lblDiscountRec.Size = new System.Drawing.Size(127, 25);
+            this.lblDiscountRec.TabIndex = 28;
+            this.lblDiscountRec.Text = "Discount Recieved";
+            this.lblDiscountRec.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label30
+            // lblSplDiscRecieved
             // 
-            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSplDiscRecieved.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(395, 275);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(125, 25);
-            this.label30.TabIndex = 29;
-            this.label30.Text = "SpecialDiscountRecieved";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSplDiscRecieved.AutoSize = true;
+            this.lblSplDiscRecieved.Location = new System.Drawing.Point(373, 275);
+            this.lblSplDiscRecieved.Name = "lblSplDiscRecieved";
+            this.lblSplDiscRecieved.Size = new System.Drawing.Size(127, 25);
+            this.lblSplDiscRecieved.TabIndex = 29;
+            this.lblSplDiscRecieved.Text = "Special Discount Recieved";
+            this.lblSplDiscRecieved.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label31
+            // lblQtyPerCase
             // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblQtyPerCase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(395, 300);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(125, 25);
-            this.label31.TabIndex = 30;
-            this.label31.Text = "QtyPerCase";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblQtyPerCase.AutoSize = true;
+            this.lblQtyPerCase.Location = new System.Drawing.Point(373, 300);
+            this.lblQtyPerCase.Name = "lblQtyPerCase";
+            this.lblQtyPerCase.Size = new System.Drawing.Size(127, 25);
+            this.lblQtyPerCase.TabIndex = 30;
+            this.lblQtyPerCase.Text = "Quantity Per Case";
+            this.lblQtyPerCase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label32
+            // lblLocation
             // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(395, 325);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(125, 25);
-            this.label32.TabIndex = 31;
-            this.label32.Text = "Location";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLocation.AutoSize = true;
+            this.lblLocation.Location = new System.Drawing.Point(373, 325);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(127, 25);
+            this.lblLocation.TabIndex = 31;
+            this.lblLocation.Text = "Location";
+            this.lblLocation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label33
+            // lblMinStock
             // 
-            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblMinStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(395, 350);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(125, 25);
-            this.label33.TabIndex = 32;
-            this.label33.Text = "MinimumStock";
-            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMinStock.AutoSize = true;
+            this.lblMinStock.Location = new System.Drawing.Point(373, 350);
+            this.lblMinStock.Name = "lblMinStock";
+            this.lblMinStock.Size = new System.Drawing.Size(127, 25);
+            this.lblMinStock.TabIndex = 32;
+            this.lblMinStock.Text = "Minimum Stock";
+            this.lblMinStock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label34
+            // lblMaxStock
             // 
-            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblMaxStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(395, 375);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(125, 25);
-            this.label34.TabIndex = 33;
-            this.label34.Text = "MaximumStock";
-            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMaxStock.AutoSize = true;
+            this.lblMaxStock.Location = new System.Drawing.Point(373, 375);
+            this.lblMaxStock.Name = "lblMaxStock";
+            this.lblMaxStock.Size = new System.Drawing.Size(127, 25);
+            this.lblMaxStock.TabIndex = 33;
+            this.lblMaxStock.Text = "Maximum Stock";
+            this.lblMaxStock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label35
+            // lblSaleType
             // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblSaleType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(395, 400);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(125, 25);
-            this.label35.TabIndex = 34;
-            this.label35.Text = "SaleType";
-            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSaleType.AutoSize = true;
+            this.lblSaleType.Location = new System.Drawing.Point(373, 400);
+            this.lblSaleType.Name = "lblSaleType";
+            this.lblSaleType.Size = new System.Drawing.Size(127, 25);
+            this.lblSaleType.TabIndex = 34;
+            this.lblSaleType.Text = "SaleType";
+            this.lblSaleType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label36
+            // lblStatus
             // 
-            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(395, 425);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(125, 37);
-            this.label36.TabIndex = 35;
-            this.label36.Text = "Status";
-            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(373, 425);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(127, 37);
+            this.lblStatus.TabIndex = 35;
+            this.lblStatus.Text = "Status";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox1
+            // tbxItemCode
             // 
-            this.textBox1.Location = new System.Drawing.Point(134, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(142, 20);
-            this.textBox1.TabIndex = 36;
+            this.tbxItemCode.Location = new System.Drawing.Point(136, 28);
+            this.tbxItemCode.Name = "tbxItemCode";
+            this.tbxItemCode.ReadOnly = true;
+            this.tbxItemCode.Size = new System.Drawing.Size(142, 20);
+            this.tbxItemCode.TabIndex = 37;
             // 
-            // textBox2
+            // tbxItemName
             // 
-            this.textBox2.Location = new System.Drawing.Point(134, 28);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(142, 20);
-            this.textBox2.TabIndex = 37;
+            this.tbxItemName.Location = new System.Drawing.Point(136, 53);
+            this.tbxItemName.Name = "tbxItemName";
+            this.tbxItemName.Size = new System.Drawing.Size(142, 20);
+            this.tbxItemName.TabIndex = 38;
             // 
-            // textBox3
+            // tbxConvRate
             // 
-            this.textBox3.Location = new System.Drawing.Point(134, 53);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(142, 20);
-            this.textBox3.TabIndex = 38;
+            this.tbxConvRate.Location = new System.Drawing.Point(136, 78);
+            this.tbxConvRate.Name = "tbxConvRate";
+            this.tbxConvRate.Size = new System.Drawing.Size(142, 20);
+            this.tbxConvRate.TabIndex = 39;
             // 
-            // textBox4
+            // tbxShortName
             // 
-            this.textBox4.Location = new System.Drawing.Point(134, 78);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(142, 20);
-            this.textBox4.TabIndex = 39;
+            this.tbxShortName.Location = new System.Drawing.Point(136, 103);
+            this.tbxShortName.Name = "tbxShortName";
+            this.tbxShortName.Size = new System.Drawing.Size(142, 20);
+            this.tbxShortName.TabIndex = 40;
             // 
-            // textBox5
+            // tbxPacking
             // 
-            this.textBox5.Location = new System.Drawing.Point(134, 103);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(142, 20);
-            this.textBox5.TabIndex = 40;
+            this.tbxPacking.Location = new System.Drawing.Point(136, 128);
+            this.tbxPacking.Name = "tbxPacking";
+            this.tbxPacking.Size = new System.Drawing.Size(142, 20);
+            this.tbxPacking.TabIndex = 41;
             // 
-            // textBox6
+            // tbxPurchaseRate
             // 
-            this.textBox6.Location = new System.Drawing.Point(134, 128);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(142, 20);
-            this.textBox6.TabIndex = 41;
+            this.tbxPurchaseRate.Location = new System.Drawing.Point(136, 153);
+            this.tbxPurchaseRate.Name = "tbxPurchaseRate";
+            this.tbxPurchaseRate.Size = new System.Drawing.Size(142, 20);
+            this.tbxPurchaseRate.TabIndex = 42;
             // 
-            // textBox7
+            // tbxMRP
             // 
-            this.textBox7.Location = new System.Drawing.Point(134, 153);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(142, 20);
-            this.textBox7.TabIndex = 42;
+            this.tbxMRP.Location = new System.Drawing.Point(136, 178);
+            this.tbxMRP.Name = "tbxMRP";
+            this.tbxMRP.Size = new System.Drawing.Size(142, 20);
+            this.tbxMRP.TabIndex = 43;
             // 
-            // textBox8
+            // tbxSaleRate
             // 
-            this.textBox8.Location = new System.Drawing.Point(134, 178);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(142, 20);
-            this.textBox8.TabIndex = 43;
+            this.tbxSaleRate.Location = new System.Drawing.Point(136, 203);
+            this.tbxSaleRate.Name = "tbxSaleRate";
+            this.tbxSaleRate.Size = new System.Drawing.Size(142, 20);
+            this.tbxSaleRate.TabIndex = 44;
             // 
-            // textBox9
+            // tbxSpecialRate
             // 
-            this.textBox9.Location = new System.Drawing.Point(134, 203);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(142, 20);
-            this.textBox9.TabIndex = 44;
+            this.tbxSpecialRate.Location = new System.Drawing.Point(136, 228);
+            this.tbxSpecialRate.Name = "tbxSpecialRate";
+            this.tbxSpecialRate.Size = new System.Drawing.Size(142, 20);
+            this.tbxSpecialRate.TabIndex = 45;
             // 
-            // textBox10
+            // tbxWholeSaleRate
             // 
-            this.textBox10.Location = new System.Drawing.Point(134, 228);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(142, 20);
-            this.textBox10.TabIndex = 45;
+            this.tbxWholeSaleRate.Location = new System.Drawing.Point(136, 253);
+            this.tbxWholeSaleRate.Name = "tbxWholeSaleRate";
+            this.tbxWholeSaleRate.Size = new System.Drawing.Size(142, 20);
+            this.tbxWholeSaleRate.TabIndex = 46;
             // 
-            // textBox11
+            // tbxSaleExcise
             // 
-            this.textBox11.Location = new System.Drawing.Point(134, 253);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(142, 20);
-            this.textBox11.TabIndex = 46;
+            this.tbxSaleExcise.Location = new System.Drawing.Point(136, 278);
+            this.tbxSaleExcise.Name = "tbxSaleExcise";
+            this.tbxSaleExcise.Size = new System.Drawing.Size(142, 20);
+            this.tbxSaleExcise.TabIndex = 47;
             // 
-            // textBox12
+            // tbxSCOnSale
             // 
-            this.textBox12.Location = new System.Drawing.Point(134, 278);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(142, 20);
-            this.textBox12.TabIndex = 47;
+            this.tbxSCOnSale.Location = new System.Drawing.Point(136, 303);
+            this.tbxSCOnSale.Name = "tbxSCOnSale";
+            this.tbxSCOnSale.Size = new System.Drawing.Size(142, 20);
+            this.tbxSCOnSale.TabIndex = 48;
             // 
-            // textBox13
+            // tbxTaxOnSale
             // 
-            this.textBox13.Location = new System.Drawing.Point(134, 303);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(142, 20);
-            this.textBox13.TabIndex = 48;
+            this.tbxTaxOnSale.Location = new System.Drawing.Point(136, 328);
+            this.tbxTaxOnSale.Name = "tbxTaxOnSale";
+            this.tbxTaxOnSale.Size = new System.Drawing.Size(142, 20);
+            this.tbxTaxOnSale.TabIndex = 49;
             // 
-            // textBox14
+            // tbxScheme1
             // 
-            this.textBox14.Location = new System.Drawing.Point(134, 328);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(142, 20);
-            this.textBox14.TabIndex = 49;
+            this.tbxScheme1.Location = new System.Drawing.Point(136, 353);
+            this.tbxScheme1.Name = "tbxScheme1";
+            this.tbxScheme1.Size = new System.Drawing.Size(142, 20);
+            this.tbxScheme1.TabIndex = 50;
             // 
-            // textBox15
+            // tbxScheme2
             // 
-            this.textBox15.Location = new System.Drawing.Point(134, 353);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(142, 20);
-            this.textBox15.TabIndex = 50;
+            this.tbxScheme2.Location = new System.Drawing.Point(136, 378);
+            this.tbxScheme2.Name = "tbxScheme2";
+            this.tbxScheme2.Size = new System.Drawing.Size(142, 20);
+            this.tbxScheme2.TabIndex = 51;
             // 
-            // textBox16
+            // tbxPurchaseExcise
             // 
-            this.textBox16.Location = new System.Drawing.Point(134, 378);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(142, 20);
-            this.textBox16.TabIndex = 51;
+            this.tbxPurchaseExcise.Location = new System.Drawing.Point(136, 403);
+            this.tbxPurchaseExcise.Name = "tbxPurchaseExcise";
+            this.tbxPurchaseExcise.Size = new System.Drawing.Size(142, 20);
+            this.tbxPurchaseExcise.TabIndex = 52;
             // 
-            // textBox17
+            // tbxUPC
             // 
-            this.textBox17.Location = new System.Drawing.Point(134, 403);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(142, 20);
-            this.textBox17.TabIndex = 52;
+            this.tbxUPC.Location = new System.Drawing.Point(136, 428);
+            this.tbxUPC.Name = "tbxUPC";
+            this.tbxUPC.Size = new System.Drawing.Size(142, 20);
+            this.tbxUPC.TabIndex = 53;
             // 
-            // textBox18
+            // tbxSpecialDiscountOnQty
             // 
-            this.textBox18.Location = new System.Drawing.Point(134, 428);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(142, 20);
-            this.textBox18.TabIndex = 53;
+            this.tbxSpecialDiscountOnQty.Location = new System.Drawing.Point(506, 78);
+            this.tbxSpecialDiscountOnQty.Name = "tbxSpecialDiscountOnQty";
+            this.tbxSpecialDiscountOnQty.Size = new System.Drawing.Size(142, 20);
+            this.tbxSpecialDiscountOnQty.TabIndex = 54;
             // 
-            // textBox19
+            // tbxSpecialDiscount
             // 
-            this.textBox19.Location = new System.Drawing.Point(526, 78);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(142, 20);
-            this.textBox19.TabIndex = 54;
+            this.tbxSpecialDiscount.Location = new System.Drawing.Point(506, 53);
+            this.tbxSpecialDiscount.Name = "tbxSpecialDiscount";
+            this.tbxSpecialDiscount.Size = new System.Drawing.Size(142, 20);
+            this.tbxSpecialDiscount.TabIndex = 55;
             // 
-            // textBox20
+            // tbxFixedDiscountRate
             // 
-            this.textBox20.Location = new System.Drawing.Point(526, 53);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(142, 20);
-            this.textBox20.TabIndex = 55;
+            this.tbxFixedDiscountRate.Location = new System.Drawing.Point(506, 128);
+            this.tbxFixedDiscountRate.Name = "tbxFixedDiscountRate";
+            this.tbxFixedDiscountRate.Size = new System.Drawing.Size(142, 20);
+            this.tbxFixedDiscountRate.TabIndex = 56;
             // 
-            // textBox21
+            // tbxMaxQty
             // 
-            this.textBox21.Location = new System.Drawing.Point(526, 128);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(142, 20);
-            this.textBox21.TabIndex = 56;
+            this.tbxMaxQty.Location = new System.Drawing.Point(506, 153);
+            this.tbxMaxQty.Name = "tbxMaxQty";
+            this.tbxMaxQty.Size = new System.Drawing.Size(142, 20);
+            this.tbxMaxQty.TabIndex = 57;
             // 
-            // textBox22
+            // tbxMaxDiscount
             // 
-            this.textBox22.Location = new System.Drawing.Point(526, 153);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(142, 20);
-            this.textBox22.TabIndex = 57;
+            this.tbxMaxDiscount.Location = new System.Drawing.Point(506, 178);
+            this.tbxMaxDiscount.Name = "tbxMaxDiscount";
+            this.tbxMaxDiscount.Size = new System.Drawing.Size(142, 20);
+            this.tbxMaxDiscount.TabIndex = 58;
             // 
-            // textBox23
+            // tbxSCOnPurchase
             // 
-            this.textBox23.Location = new System.Drawing.Point(526, 178);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(142, 20);
-            this.textBox23.TabIndex = 58;
+            this.tbxSCOnPurchase.Location = new System.Drawing.Point(506, 203);
+            this.tbxSCOnPurchase.Name = "tbxSCOnPurchase";
+            this.tbxSCOnPurchase.Size = new System.Drawing.Size(142, 20);
+            this.tbxSCOnPurchase.TabIndex = 59;
             // 
-            // textBox24
+            // tbxTaxOnPurchase
             // 
-            this.textBox24.Location = new System.Drawing.Point(526, 203);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(142, 20);
-            this.textBox24.TabIndex = 59;
+            this.tbxTaxOnPurchase.Location = new System.Drawing.Point(506, 228);
+            this.tbxTaxOnPurchase.Name = "tbxTaxOnPurchase";
+            this.tbxTaxOnPurchase.Size = new System.Drawing.Size(142, 20);
+            this.tbxTaxOnPurchase.TabIndex = 60;
             // 
-            // textBox25
+            // tbxDiscountRecieved
             // 
-            this.textBox25.Location = new System.Drawing.Point(526, 228);
-            this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(142, 20);
-            this.textBox25.TabIndex = 60;
+            this.tbxDiscountRecieved.Location = new System.Drawing.Point(506, 253);
+            this.tbxDiscountRecieved.Name = "tbxDiscountRecieved";
+            this.tbxDiscountRecieved.Size = new System.Drawing.Size(142, 20);
+            this.tbxDiscountRecieved.TabIndex = 61;
             // 
-            // textBox26
+            // tbxSpecialDiscountRecieved
             // 
-            this.textBox26.Location = new System.Drawing.Point(526, 253);
-            this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(142, 20);
-            this.textBox26.TabIndex = 61;
+            this.tbxSpecialDiscountRecieved.Location = new System.Drawing.Point(506, 278);
+            this.tbxSpecialDiscountRecieved.Name = "tbxSpecialDiscountRecieved";
+            this.tbxSpecialDiscountRecieved.Size = new System.Drawing.Size(142, 20);
+            this.tbxSpecialDiscountRecieved.TabIndex = 62;
             // 
-            // textBox27
+            // tbxQtyPerCase
             // 
-            this.textBox27.Location = new System.Drawing.Point(526, 278);
-            this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(142, 20);
-            this.textBox27.TabIndex = 62;
+            this.tbxQtyPerCase.Location = new System.Drawing.Point(506, 303);
+            this.tbxQtyPerCase.Name = "tbxQtyPerCase";
+            this.tbxQtyPerCase.Size = new System.Drawing.Size(142, 20);
+            this.tbxQtyPerCase.TabIndex = 63;
+            // 
+            // tbxLocation
             // 
-            // textBox28
+            this.tbxLocation.Location = new System.Drawing.Point(506, 328);
+            this.tbxLocation.Name = "tbxLocation";
+            this.tbxLocation.Size = new System.Drawing.Size(142, 20);
+            this.tbxLocation.TabIndex = 64;
             // 
-            this.textBox28.Location = new System.Drawing.Point(526, 303);
-            this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(142, 20);
-            this.textBox28.TabIndex = 63;
+            // tbxMaximumStock
             // 
-            // textBox29
+            this.tbxMaximumStock.Location = new System.Drawing.Point(506, 378);
+            this.tbxMaximumStock.Name = "tbxMaximumStock";
+            this.tbxMaximumStock.Size = new System.Drawing.Size(142, 20);
+            this.tbxMaximumStock.TabIndex = 65;
             // 
-            this.textBox29.Location = new System.Drawing.Point(526, 328);
-            this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(142, 20);
-            this.textBox29.TabIndex = 64;
+            // tbxMinimumStock
             // 
-            // textBox30
+            this.tbxMinimumStock.Location = new System.Drawing.Point(506, 353);
+            this.tbxMinimumStock.Name = "tbxMinimumStock";
+            this.tbxMinimumStock.Size = new System.Drawing.Size(142, 20);
+            this.tbxMinimumStock.TabIndex = 66;
             // 
-            this.textBox30.Location = new System.Drawing.Point(526, 378);
-            this.textBox30.Name = "textBox30";
-            this.textBox30.Size = new System.Drawing.Size(142, 20);
-            this.textBox30.TabIndex = 65;
+            // chbxHalfScheme
             // 
-            // textBox31
+            this.chbxHalfScheme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.chbxHalfScheme.AutoSize = true;
+            this.chbxHalfScheme.Location = new System.Drawing.Point(506, 3);
+            this.chbxHalfScheme.Name = "chbxHalfScheme";
+            this.chbxHalfScheme.Size = new System.Drawing.Size(15, 19);
+            this.chbxHalfScheme.TabIndex = 68;
+            this.chbxHalfScheme.UseVisualStyleBackColor = true;
             // 
-            this.textBox31.Location = new System.Drawing.Point(526, 353);
-            this.textBox31.Name = "textBox31";
-            this.textBox31.Size = new System.Drawing.Size(142, 20);
-            this.textBox31.TabIndex = 66;
+            // chbxQuarterScheme
             // 
-            // textBox32
+            this.chbxQuarterScheme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.chbxQuarterScheme.AutoSize = true;
+            this.chbxQuarterScheme.Location = new System.Drawing.Point(506, 28);
+            this.chbxQuarterScheme.Name = "chbxQuarterScheme";
+            this.chbxQuarterScheme.Size = new System.Drawing.Size(15, 19);
+            this.chbxQuarterScheme.TabIndex = 69;
+            this.chbxQuarterScheme.UseVisualStyleBackColor = true;
             // 
-            this.textBox32.Location = new System.Drawing.Point(526, 403);
-            this.textBox32.Name = "textBox32";
-            this.textBox32.Size = new System.Drawing.Size(142, 20);
-            this.textBox32.TabIndex = 67;
+            // chbxFixedDiscount
             // 
-            // checkBox1
+            this.chbxFixedDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.chbxFixedDiscount.AutoSize = true;
+            this.chbxFixedDiscount.Location = new System.Drawing.Point(506, 103);
+            this.chbxFixedDiscount.Name = "chbxFixedDiscount";
+            this.chbxFixedDiscount.Size = new System.Drawing.Size(15, 19);
+            this.chbxFixedDiscount.TabIndex = 70;
+            this.chbxFixedDiscount.UseVisualStyleBackColor = true;
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(526, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 68;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            // chbxStatus
             // 
-            // checkBox2
+            this.chbxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.chbxStatus.AutoSize = true;
+            this.chbxStatus.Location = new System.Drawing.Point(506, 428);
+            this.chbxStatus.Name = "chbxStatus";
+            this.chbxStatus.Size = new System.Drawing.Size(15, 31);
+            this.chbxStatus.TabIndex = 71;
+            this.chbxStatus.UseVisualStyleBackColor = true;
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(526, 28);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(15, 14);
-            this.checkBox2.TabIndex = 69;
-            this.checkBox2.UseVisualStyleBackColor = true;
+            // cbxComanyCode
             // 
-            // checkBox3
+            this.cbxComanyCode.FormattingEnabled = true;
+            this.cbxComanyCode.Location = new System.Drawing.Point(136, 3);
+            this.cbxComanyCode.Name = "cbxComanyCode";
+            this.cbxComanyCode.Size = new System.Drawing.Size(142, 21);
+            this.cbxComanyCode.TabIndex = 72;
+            this.cbxComanyCode.SelectedIndexChanged += new System.EventHandler(this.cbxComanyCode_SelectedIndexChanged);
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(526, 103);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(15, 14);
-            this.checkBox3.TabIndex = 70;
-            this.checkBox3.UseVisualStyleBackColor = true;
+            // cbxSaleType
             // 
-            // checkBox4
+            this.cbxSaleType.FormattingEnabled = true;
+            this.cbxSaleType.Location = new System.Drawing.Point(506, 403);
+            this.cbxSaleType.Name = "cbxSaleType";
+            this.cbxSaleType.Size = new System.Drawing.Size(142, 21);
+            this.cbxSaleType.TabIndex = 73;
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(526, 428);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(15, 14);
-            this.checkBox4.TabIndex = 71;
-            this.checkBox4.UseVisualStyleBackColor = true;
+            // btnAction
             // 
-            // button1
+            this.btnAction.Location = new System.Drawing.Point(309, 498);
+            this.btnAction.Name = "btnAction";
+            this.btnAction.Size = new System.Drawing.Size(75, 23);
+            this.btnAction.TabIndex = 1;
+            this.btnAction.Text = "Action";
+            this.btnAction.UseVisualStyleBackColor = true;
+            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
-            this.button1.Location = new System.Drawing.Point(309, 498);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Action";
-            this.button1.UseVisualStyleBackColor = true;
+            // btnRevert
             // 
-            // button2
+            this.btnRevert.Location = new System.Drawing.Point(390, 498);
+            this.btnRevert.Name = "btnRevert";
+            this.btnRevert.Size = new System.Drawing.Size(75, 23);
+            this.btnRevert.TabIndex = 2;
+            this.btnRevert.Text = "Revert";
+            this.btnRevert.UseVisualStyleBackColor = true;
             // 
-            this.button2.Location = new System.Drawing.Point(390, 498);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Revert";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // Item
+            // frmItemMasterAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 533);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnRevert);
+            this.Controls.Add(this.btnAction);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Item";
+            this.Name = "frmItemMasterAddUpdate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Item";
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -977,79 +990,79 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.TextBox textBox23;
-        private System.Windows.Forms.TextBox textBox24;
-        private System.Windows.Forms.TextBox textBox25;
-        private System.Windows.Forms.TextBox textBox26;
-        private System.Windows.Forms.TextBox textBox27;
-        private System.Windows.Forms.TextBox textBox28;
-        private System.Windows.Forms.TextBox textBox29;
-        private System.Windows.Forms.TextBox textBox30;
-        private System.Windows.Forms.TextBox textBox31;
-        private System.Windows.Forms.TextBox textBox32;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Button btnAction;
+        private System.Windows.Forms.Button btnRevert;
+        private System.Windows.Forms.Label lblCompanyCode;
+        private System.Windows.Forms.Label lblItemCode;
+        private System.Windows.Forms.Label lblItemName;
+        private System.Windows.Forms.Label lblConvRate;
+        private System.Windows.Forms.Label lblShortName;
+        private System.Windows.Forms.Label lblPacking;
+        private System.Windows.Forms.Label lblPurchaseRate;
+        private System.Windows.Forms.Label lblMRP;
+        private System.Windows.Forms.Label lblSaleRate;
+        private System.Windows.Forms.Label lblSpecialRate;
+        private System.Windows.Forms.Label lblWhSaleRate;
+        private System.Windows.Forms.Label lblSaleExcise;
+        private System.Windows.Forms.Label lblSCSale;
+        private System.Windows.Forms.Label lblSaleTax;
+        private System.Windows.Forms.Label lblScheme1;
+        private System.Windows.Forms.Label lblScheme2;
+        private System.Windows.Forms.Label lblPurchaseExcise;
+        private System.Windows.Forms.Label lblUPC;
+        private System.Windows.Forms.Label lblHalfScheme;
+        private System.Windows.Forms.Label lblQtrScheme;
+        private System.Windows.Forms.Label lblSpclDiscount;
+        private System.Windows.Forms.Label lblSpclDiscOnQty;
+        private System.Windows.Forms.Label lblFixedDiscount;
+        private System.Windows.Forms.Label lblFixedDisRate;
+        private System.Windows.Forms.Label lblMaxQty;
+        private System.Windows.Forms.Label lblMaxDisc;
+        private System.Windows.Forms.Label lblSCOnPurchase;
+        private System.Windows.Forms.Label lblTaxOnPurchase;
+        private System.Windows.Forms.Label lblDiscountRec;
+        private System.Windows.Forms.Label lblSplDiscRecieved;
+        private System.Windows.Forms.Label lblQtyPerCase;
+        private System.Windows.Forms.Label lblLocation;
+        private System.Windows.Forms.Label lblMinStock;
+        private System.Windows.Forms.Label lblMaxStock;
+        private System.Windows.Forms.Label lblSaleType;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.TextBox tbxItemCode;
+        private System.Windows.Forms.TextBox tbxItemName;
+        private System.Windows.Forms.TextBox tbxConvRate;
+        private System.Windows.Forms.TextBox tbxShortName;
+        private System.Windows.Forms.TextBox tbxPacking;
+        private System.Windows.Forms.TextBox tbxPurchaseRate;
+        private System.Windows.Forms.TextBox tbxMRP;
+        private System.Windows.Forms.TextBox tbxSaleRate;
+        private System.Windows.Forms.TextBox tbxSpecialRate;
+        private System.Windows.Forms.TextBox tbxWholeSaleRate;
+        private System.Windows.Forms.TextBox tbxSaleExcise;
+        private System.Windows.Forms.TextBox tbxSCOnSale;
+        private System.Windows.Forms.TextBox tbxTaxOnSale;
+        private System.Windows.Forms.TextBox tbxScheme1;
+        private System.Windows.Forms.TextBox tbxScheme2;
+        private System.Windows.Forms.TextBox tbxPurchaseExcise;
+        private System.Windows.Forms.TextBox tbxUPC;
+        private System.Windows.Forms.TextBox tbxSpecialDiscountOnQty;
+        private System.Windows.Forms.TextBox tbxSpecialDiscount;
+        private System.Windows.Forms.TextBox tbxFixedDiscountRate;
+        private System.Windows.Forms.TextBox tbxMaxQty;
+        private System.Windows.Forms.TextBox tbxMaxDiscount;
+        private System.Windows.Forms.TextBox tbxSCOnPurchase;
+        private System.Windows.Forms.TextBox tbxTaxOnPurchase;
+        private System.Windows.Forms.TextBox tbxDiscountRecieved;
+        private System.Windows.Forms.TextBox tbxSpecialDiscountRecieved;
+        private System.Windows.Forms.TextBox tbxQtyPerCase;
+        private System.Windows.Forms.TextBox tbxLocation;
+        private System.Windows.Forms.TextBox tbxMaximumStock;
+        private System.Windows.Forms.TextBox tbxMinimumStock;
+        private System.Windows.Forms.CheckBox chbxHalfScheme;
+        private System.Windows.Forms.CheckBox chbxQuarterScheme;
+        private System.Windows.Forms.CheckBox chbxFixedDiscount;
+        private System.Windows.Forms.CheckBox chbxStatus;
+        private System.Windows.Forms.ComboBox cbxComanyCode;
+        private System.Windows.Forms.ComboBox cbxSaleType;
     }
 }
