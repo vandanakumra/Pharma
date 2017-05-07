@@ -1,6 +1,6 @@
 ﻿namespace PharmaUI
 {
-    partial class Item
+    partial class frmItemMasterAddUpdate
     {
         /// <summary>
         /// Required designer variable.

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PharmaUI
 {
-    public partial class Item : Form
+    public partial class frmItemMasterAddUpdate : Form
     {
-        public Item()
+        public frmItemMasterAddUpdate()
         {
             InitializeComponent();
         }      
