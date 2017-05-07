@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PharmaBusinessObjects;
 using PharmaBusinessObjects.Master;
 using PharmaBusiness.Master;
+using PharmaBusiness.Common;
 
 namespace PharmaBusiness
 {
@@ -128,6 +129,21 @@ namespace PharmaBusiness
                 throw;
             }
         }
+
+        public List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int ledgerTypeID, string searchString = null)
+        {
+            try
+            {
+                return new AccountLedgerMasterBiz().GetAccountLedgerByLedgerTypeIdAndSearch(ledgerTypeID, searchString);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p)
         {
 
@@ -156,6 +172,15 @@ namespace PharmaBusiness
         }
 
 
+        #endregion
+
+
+        #region Common
+
+        public List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypesWithAll()
+        {
+            return new CommonBiz().GetAccountLedgerTypesWithAll();
+        }
         #endregion
 
     }

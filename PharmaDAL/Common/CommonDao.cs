@@ -35,7 +35,6 @@ namespace PharmaDAL.Common
             }
         }
 
-
         public List<PharmaBusinessObjects.Common.CustomerType> GetCustomerTypes()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -49,8 +48,7 @@ namespace PharmaDAL.Common
                 }).ToList();
             }
         }
-
-
+        
         public List<PharmaBusinessObjects.Common.InterestType> GetInterestTypes()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -63,8 +61,7 @@ namespace PharmaDAL.Common
                 }).ToList();
             }
         }
-
-
+        
         public List<PharmaBusinessObjects.Common.PersonLedgerType> GetPersonLedgerTypes()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -77,8 +74,7 @@ namespace PharmaDAL.Common
                 }).ToList();
             }
         }
-
-
+        
 
         public List<PharmaBusinessObjects.Common.RecordType> GetRecordTypes()
         {

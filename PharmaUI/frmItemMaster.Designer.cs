@@ -92,6 +92,7 @@
             this.Controls.Add(this.tbxSearchItem);
             this.Name = "frmItemMaster";
             this.Text = "Item Master";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmItemMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).EndInit();
             this.ResumeLayout(false);

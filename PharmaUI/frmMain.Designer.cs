@@ -72,7 +72,7 @@
             this.accountLedgerMenuItem,
             this.personLedgerMenuItem});
             this.accountMenuItem.Name = "accountMenuItem";
-            this.accountMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.accountMenuItem.Size = new System.Drawing.Size(147, 22);
             this.accountMenuItem.Text = "Account";
             // 
             // accountLedgerMenuItem
@@ -91,28 +91,28 @@
             // companyMenuItem
             // 
             this.companyMenuItem.Name = "companyMenuItem";
-            this.companyMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.companyMenuItem.Size = new System.Drawing.Size(147, 22);
             this.companyMenuItem.Text = "Company";
             this.companyMenuItem.Click += new System.EventHandler(this.companyMenuItem_Click);
             // 
             // itemMenuItem
             // 
             this.itemMenuItem.Name = "itemMenuItem";
-            this.itemMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.itemMenuItem.Size = new System.Drawing.Size(147, 22);
             this.itemMenuItem.Text = "Item";
             this.itemMenuItem.Click += new System.EventHandler(this.itemMenuItem_Click);
             // 
             // personRouteMenuItem
             // 
             this.personRouteMenuItem.Name = "personRouteMenuItem";
-            this.personRouteMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.personRouteMenuItem.Size = new System.Drawing.Size(147, 22);
             this.personRouteMenuItem.Text = "Person & Route";
             this.personRouteMenuItem.Click += new System.EventHandler(this.personRouteToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // statusStrip
@@ -131,6 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(632, 453);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
@@ -138,6 +139,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "frmMain";
             this.Text = "Main";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
