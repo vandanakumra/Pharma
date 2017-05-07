@@ -54,7 +54,6 @@ namespace PharmaDAL.Master
 
         }
 
-
         public int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -76,7 +75,6 @@ namespace PharmaDAL.Master
             }
         }
 
-
         public int UpdateAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -96,6 +94,36 @@ namespace PharmaDAL.Master
                 }
                 
                 return context.SaveChanges();
+            }
+
+        }
+
+
+        public List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int ledgerTypeID, string searchString = null)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                var accountLedgers = (from p in context.AccountLedgerMaster
+                                      where p.AccountLedgerTypeId == 0 || p.AccountLedgerTypeId == ledgerTypeID
+                                      && p.AccountLedgerName == null || p.AccountLedgerName.Contains(searchString)
+                                      select new PharmaBusinessObjects.Master.AccountLedgerMaster()
+                                      {
+                                          AccountLedgerID = p.AccountLedgerID,
+                                          AccountLedgerName = p.AccountLedgerName,
+                                          AccountLedgerCode = p.AccountLedgerCode,
+                                          AccountLedgerTypeId = p.AccountLedgerTypeId,
+                                          AccountLedgerType = p.AccountLedgerType.AccountLedgerTypeName,
+                                          AccountTypeId = p.AccountTypeId,
+                                          AccountType = p.AccountType.AccountTypeName,
+                                          CreditControlCodeID = p.CreditControlCodeID,
+                                          DebitControlCodeID = p.DebitControlCodeID,
+                                          OpeningBalance = p.OpeningBalance,
+                                          CreditDebit = p.CreditDebit
+
+                                      }).ToList();
+
+                return accountLedgers;
+                
             }
 
         }

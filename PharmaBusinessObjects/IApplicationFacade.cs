@@ -29,9 +29,17 @@ namespace PharmaBusinessObjects
 
         List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgers();
         PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerById(int accountLedgerID);
+        List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int LedgerTypeID,string searchString = null);
         int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
         int UpdateAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
         #endregion
 
+        #region Common
+
+        List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypesWithAll();
+
+
+        #endregion
     }
+        
 }

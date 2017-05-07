@@ -50,6 +50,7 @@
             this.Controls.Add(this.dgvCompanyList);
             this.Name = "frmCompany";
             this.Text = "Company";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmCompany_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompanyList)).EndInit();
             this.ResumeLayout(false);
