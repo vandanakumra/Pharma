@@ -14,7 +14,7 @@ namespace PharmaUI
 {
     public partial class frmItemMaster : Form
     {
-        ApplicationFacade applicationFacade;
+        IApplicationFacade applicationFacade;
         public frmItemMaster()
         {
             InitializeComponent();
@@ -51,6 +51,13 @@ namespace PharmaUI
             dgvItemList.Columns["ShortName"].Visible = true;
             dgvItemList.Columns["MRP"].Visible = true;
 
+            dgvItemList.DoubleClick += DgvItemList_DoubleClick;
+
+        }
+
+        private void DgvItemList_DoubleClick(object sender, EventArgs e)
+        {
+            
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
