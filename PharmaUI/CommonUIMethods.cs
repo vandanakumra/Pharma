@@ -14,5 +14,31 @@ namespace PharmaUI
             var property = instance.GetType().GetProperty(propertyName);
             return (T)property.GetCustomAttributes(attrType, false).First();
         }
+        
+        public static double ? SafeConversionDouble(string inputVal)
+        {
+            double outputVal;
+            if (!double.TryParse(inputVal, out outputVal))
+            {
+                return null;
+            }
+            else
+            {
+                return outputVal;
+            }
+        }
+
+        public static int? SafeConversionInt(string inputVal)
+        {
+            int outputVal;
+            if (!int.TryParse(inputVal, out outputVal))
+            {
+                return null;
+            }
+            else
+            {
+                return outputVal;
+            }
+        }
     }
 }

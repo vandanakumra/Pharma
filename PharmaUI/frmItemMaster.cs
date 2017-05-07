@@ -14,16 +14,16 @@ namespace PharmaUI
 {
     public partial class frmItemMaster : Form
     {
-        ApplicationFacade _applicationFacade;
+        ApplicationFacade applicationFacade;
         public frmItemMaster()
         {
             InitializeComponent();
-            _applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade();
         }
 
         private void frmItemMaster_Load(object sender, EventArgs e)
         {
-            dgvItemList.DataSource = _applicationFacade.GetAllItems();
+            dgvItemList.DataSource = applicationFacade.GetAllItems();
 
 
             for (int i = 0; i < dgvItemList.Columns.Count; i++)

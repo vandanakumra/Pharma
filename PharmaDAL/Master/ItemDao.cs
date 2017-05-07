@@ -60,58 +60,67 @@ namespace PharmaDAL.Master
 
         public bool AddNewItem(Item newItem)
         {
-            using (PharmaDBEntities context = new PharmaDBEntities())
+            try
             {
-                int _result = 0;
-                int totalItemsFromSameCompany = GetAllItems().Where(x => x.CompanyCode == newItem.CompanyCode).Count();
-                ItemMaster newItemMasterDB = new ItemMaster()
+                using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    ItemCode = String.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
-                    ItemName = newItem.ItemName,
-                    CompanyCode = newItem.CompanyCode,
-                    ConversionRate = newItem.ConversionRate,
-                    ShortName = newItem.ShortName,
-                    Packing = newItem.Packing,
-                    PurchaseRate = newItem.PurchaseRate,
-                    MRP = newItem.MRP,
-                    SaleRate = newItem.SaleRate,
-                    SpecialRate = newItem.SpecialRate,
-                    WholeSaleRate = newItem.WholeSaleRate,
-                    SaleExcise = newItem.SaleExcise,
-                    SurchargeOnSale = newItem.SurchargeOnSale,
-                    TaxOnSale = newItem.TaxOnSale,
-                    Scheme1 = newItem.Scheme1,
-                    Scheme2 = newItem.Scheme2,
-                    PurchaseExcise = newItem.PurchaseExcise,
-                    UPC = newItem.UPC,
-                    IsHalfScheme = newItem.IsHalfScheme,
-                    IsQTRScheme = newItem.IsQTRScheme,
-                    SpecialDiscount = newItem.SpecialDiscount,
-                    SpecialDiscountOnQty = newItem.SpecialDiscountOnQty,
-                    IsFixedDiscount = newItem.IsFixedDiscount,
-                    FixedDiscountRate = newItem.FixedDiscountRate,
-                    MaximumQty = newItem.MaximumQty,
-                    MaximumDiscount = newItem.MaximumDiscount,
-                    SurchargeOnPurchase = newItem.SurchargeOnPurchase,
-                    TaxOnPurchase = newItem.TaxOnPurchase,
-                    DiscountRecieved = newItem.DiscountRecieved,
-                    SpecialDiscountRecieved = newItem.SpecialDiscountRecieved,
-                    QtyPerCase = newItem.QtyPerCase,
-                    Location = newItem.Location,
-                    MinimumStock = newItem.MinimumStock,
-                    MaximumStock = newItem.MaximumStock,
-                    SaleTypeId = newItem.SaleTypeId,
-                    Status = newItem.Status
-                };
+                    int _result = 0;
+                    int totalItemsFromSameCompany = TotalItemsFromSameCompany(newItem.CompanyCode);
+                    totalItemsFromSameCompany++;
+                    ItemMaster newItemMasterDB = new ItemMaster()
+                    {
+                        ItemCode = String.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
+                        ItemName = newItem.ItemName,
+                        CompanyCode = newItem.CompanyCode,
+                        ConversionRate = newItem.ConversionRate,
+                        ShortName = newItem.ShortName,
+                        Packing = newItem.Packing,
+                        PurchaseRate = newItem.PurchaseRate,
+                        MRP = newItem.MRP,
+                        SaleRate = newItem.SaleRate,
+                        SpecialRate = newItem.SpecialRate,
+                        WholeSaleRate = newItem.WholeSaleRate,
+                        SaleExcise = newItem.SaleExcise,
+                        SurchargeOnSale = newItem.SurchargeOnSale,
+                        TaxOnSale = newItem.TaxOnSale,
+                        Scheme1 = newItem.Scheme1,
+                        Scheme2 = newItem.Scheme2,
+                        PurchaseExcise = newItem.PurchaseExcise,
+                        UPC = newItem.UPC,
+                        IsHalfScheme = newItem.IsHalfScheme,
+                        IsQTRScheme = newItem.IsQTRScheme,
+                        SpecialDiscount = newItem.SpecialDiscount,
+                        SpecialDiscountOnQty = newItem.SpecialDiscountOnQty,
+                        IsFixedDiscount = newItem.IsFixedDiscount,
+                        FixedDiscountRate = newItem.FixedDiscountRate,
+                        MaximumQty = newItem.MaximumQty,
+                        MaximumDiscount = newItem.MaximumDiscount,
+                        SurchargeOnPurchase = newItem.SurchargeOnPurchase,
+                        TaxOnPurchase = newItem.TaxOnPurchase,
+                        DiscountRecieved = newItem.DiscountRecieved,
+                        SpecialDiscountRecieved = newItem.SpecialDiscountRecieved,
+                        QtyPerCase = newItem.QtyPerCase,
+                        Location = newItem.Location,
+                        MinimumStock = newItem.MinimumStock,
+                        MaximumStock = newItem.MaximumStock,
+                        SaleTypeId = newItem.SaleTypeId,
+                        Status = newItem.Status
+                    };
 
-                context.ItemMaster.Add(newItemMasterDB);
-                _result = context.SaveChanges();
+                    context.ItemMaster.Add(newItemMasterDB);
+                    _result = context.SaveChanges();
 
-                if (_result > 0)
-                    return true;
-                else
-                    return false;
+                    if (_result > 0)
+                        return true;
+                    else
+                        return false;
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         public bool UpdateItem(Item existingItem)
@@ -183,6 +192,15 @@ namespace PharmaDAL.Master
                     return true;
                 else
                     return false;
+            }
+        }
+
+        public int TotalItemsFromSameCompany(string companyCode)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                int totalItemsFromSameCompany = GetAllItems().Where(x => x.CompanyCode == companyCode).Count();
+                return totalItemsFromSameCompany;
             }
         }
     }

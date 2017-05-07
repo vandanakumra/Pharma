@@ -29,5 +29,13 @@ namespace PharmaBusiness.Master
         {
             return new ItemDao().DeleteItem(existingItem);
         }
+
+        internal string GetNextItemCode(string companyCode)
+        {
+            int totalItemsFromSameCompany =  new ItemDao().TotalItemsFromSameCompany(companyCode);
+            totalItemsFromSameCompany++;
+            string getNextItemCode=String.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0'));
+            return getNextItemCode;
+        }
     }
 }

@@ -80,6 +80,24 @@ namespace PharmaBusiness
                 throw;
             }
         }
+
+        /// <summary>
+        /// Get next item code based on the company code
+        /// </summary>
+        /// <param name="companyCode"></param>
+        /// <returns>next item code</returns>
+        public string GetNextItemCode(string companyCode)
+        {
+            try
+            {
+                return new ItemBiz().GetNextItemCode(companyCode);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Company Master
@@ -171,11 +189,11 @@ namespace PharmaBusiness
             }
         }
 
-       public  List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetDebitCreditControlCodes()
+       public  List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerBySystemName(string systemName)
         {
             try
             {
-                return new AccountLedgerMasterBiz().GetDebitCreditControlCodes();
+                return new AccountLedgerMasterBiz().GetAccountLedgerBySystemName(systemName);
             }
             catch (Exception)
             {
