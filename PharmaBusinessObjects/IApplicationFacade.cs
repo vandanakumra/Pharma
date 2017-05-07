@@ -12,6 +12,10 @@ namespace PharmaBusinessObjects
 
         #region Item Master
 
+        List<Item> GetAllItems();
+        bool AddNewItem(Item newItem);
+        bool UpdateItem(Item existingItem);
+        bool DeleteItem(Item existingItem);
 
         #endregion
 

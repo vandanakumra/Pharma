@@ -104,6 +104,7 @@
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Master\CompanyDao.cs" />
+    <Compile Include="Master\ItemDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

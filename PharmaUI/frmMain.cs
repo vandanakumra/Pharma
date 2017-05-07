@@ -80,9 +80,33 @@ namespace PharmaUI
 
         private void companyMenuItem_Click(object sender, EventArgs e)
         {
+            this.IsMdiContainer = true;
             frmCompany childForm = new frmCompany();
             childForm.MdiParent = this;
             childForm.Text = "Company Information";
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.ControlBox = false;
+            childForm.MaximizeBox = false;
+            childForm.MinimizeBox = false;
+            childForm.ShowIcon = false;
+            childForm.Dock = DockStyle.Fill;
+
+            childForm.Show();
+        }
+
+        private void itemMenuItem_Click(object sender, EventArgs e)
+        {
+            this.IsMdiContainer = true;
+            frmItemMaster childForm = new frmItemMaster();
+            childForm.MdiParent = this;
+            childForm.Text = "Item Information";
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.ControlBox = false;
+            childForm.MaximizeBox = false;
+            childForm.MinimizeBox = false;
+            childForm.ShowIcon = false;
+            childForm.Dock = DockStyle.Fill;
+
             childForm.Show();
         }
     }
