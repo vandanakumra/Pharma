@@ -31,12 +31,18 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int LedgerTypeID,string searchString = null);
         int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
         int UpdateAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
+        List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetDebitCreditControlCodes();
         #endregion
 
         #region Common
 
         List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypesWithAll();
-
+        List<PharmaBusinessObjects.Common.AccountType> GetAccountTypes();
+        List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypes();
+        List<PharmaBusinessObjects.Common.CustomerType> GetCustomerTypes();
+        List<PharmaBusinessObjects.Common.InterestType> GetInterestTypes();
+        List<PharmaBusinessObjects.Common.PersonLedgerType> GetPersonLedgerTypes();
+        List<PharmaBusinessObjects.Common.RecordType> GetRecordTypes();
 
         #endregion
     }

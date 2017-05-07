@@ -21,6 +21,7 @@ namespace PharmaDAL.Master
                     AccountLedgerCode = p.AccountLedgerCode,
                     AccountLedgerTypeId = p.AccountLedgerTypeId,
                     AccountLedgerType = p.AccountLedgerType.AccountLedgerTypeName,
+                    AccountLedgerTypeSystemName = p.AccountLedgerType.SystemName,
                     AccountTypeId = p.AccountTypeId,
                     AccountType = p.AccountType.AccountTypeName,
                     CreditControlCodeID = p.CreditControlCodeID,
@@ -43,6 +44,7 @@ namespace PharmaDAL.Master
                     AccountLedgerCode = p.AccountLedgerCode,
                     AccountLedgerTypeId = p.AccountLedgerTypeId,
                     AccountLedgerType = p.AccountLedgerType.AccountLedgerTypeName,
+                    AccountLedgerTypeSystemName = p.AccountLedgerType.SystemName,
                     AccountTypeId = p.AccountTypeId,
                     AccountType = p.AccountType.AccountTypeName,
                     CreditControlCodeID = p.CreditControlCodeID,
@@ -58,17 +60,27 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
+                var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q=>q.AccountLedgerID) : 1;
+
+                var accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
+
                 AccountLedgerMaster table = new AccountLedgerMaster() {
                     
                     AccountLedgerName = p.AccountLedgerName,
-                    AccountLedgerCode = p.AccountLedgerCode,
+                    AccountLedgerCode = accountLedgerCode,
                     AccountLedgerTypeId = p.AccountLedgerTypeId,                   
-                    AccountTypeId = p.AccountTypeId,                   
-                    CreditControlCodeID = p.CreditControlCodeID,
-                    DebitControlCodeID = p.DebitControlCodeID,
+                    AccountTypeId = p.AccountTypeId,                      
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit
                 };
+
+                var accountLedger=  new Common.CommonDao().GetAccountLedgerTypes().Where(q => q.AccountLedgerTypeID == p.AccountLedgerTypeId).FirstOrDefault();
+
+                if (accountLedger.AccountLedgerTypeSystemName != "ControlCodes")
+                {
+                    table.CreditControlCodeID = p.CreditControlCodeID;
+                    table.DebitControlCodeID = p.DebitControlCodeID;
+                }
 
                 context.AccountLedgerMaster.Add(table);
                 return context.SaveChanges();
@@ -104,8 +116,8 @@ namespace PharmaDAL.Master
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 var accountLedgers = (from p in context.AccountLedgerMaster
-                                      where p.AccountLedgerTypeId == 0 || p.AccountLedgerTypeId == ledgerTypeID
-                                      && p.AccountLedgerName == null || p.AccountLedgerName.Contains(searchString)
+                                      where ledgerTypeID == 0 || p.AccountLedgerTypeId == ledgerTypeID
+                                      && searchString == null || p.AccountLedgerName.Contains(searchString)
                                       select new PharmaBusinessObjects.Master.AccountLedgerMaster()
                                       {
                                           AccountLedgerID = p.AccountLedgerID,
@@ -113,6 +125,7 @@ namespace PharmaDAL.Master
                                           AccountLedgerCode = p.AccountLedgerCode,
                                           AccountLedgerTypeId = p.AccountLedgerTypeId,
                                           AccountLedgerType = p.AccountLedgerType.AccountLedgerTypeName,
+                                          AccountLedgerTypeSystemName = p.AccountLedgerType.SystemName,
                                           AccountTypeId = p.AccountTypeId,
                                           AccountType = p.AccountType.AccountTypeName,
                                           CreditControlCodeID = p.CreditControlCodeID,

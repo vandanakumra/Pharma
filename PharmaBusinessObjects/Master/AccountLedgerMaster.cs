@@ -10,16 +10,17 @@ namespace PharmaBusinessObjects.Master
     {
         public int AccountLedgerID { get; set; }
         public string AccountLedgerCode { get; set; }
-        public string AccountLedgerName { get; set; }
+        public string AccountLedgerName { get; set; }       
         public int AccountLedgerTypeId { get; set; }
         public string AccountLedgerType { get; set; }
+        public string AccountLedgerTypeSystemName { get; set; }
         public double OpeningBalance { get; set; }
         public string CreditDebit { get; set; }
         public int AccountTypeId { get; set; }
         public string AccountType { get; set; }
-        public int DebitControlCodeID { get; set; }
+        public int? DebitControlCodeID { get; set; }
         public string DebitControlCode { get; set; }
-        public int CreditControlCodeID { get; set; }
+        public int? CreditControlCodeID { get; set; }
         public string CreditControlCode { get; set; }
         public bool Status { get; set; }
 

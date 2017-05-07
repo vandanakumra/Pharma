@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Master;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,13 +44,103 @@ namespace PharmaUI
 
         private void FillCombo()
         {
-           
+            var accountLedgerTypes = applicationFacade.GetAccountLedgerTypes();
+            cbAccountLedgerType.DataSource = accountLedgerTypes;
+            cbAccountLedgerType.ValueMember = "AccountLedgerTypeID";
+            cbAccountLedgerType.DisplayMember = "AccountLedgerTypeName";
+
+
+            cbAccountType.DataSource = applicationFacade.GetAccountTypes();
+            cbAccountType.ValueMember = "AccountTypeID";
+            cbAccountType.DisplayMember = "AccountTypeDisplayName";
+            
+            if (accountLedgerTypes.FirstOrDefault().AccountLedgerTypeSystemName != "ControlCodes")
+            {
+                var debitCreditControlCodes = applicationFacade.GetDebitCreditControlCodes();
+
+                cbDebitControlCode.DataSource = debitCreditControlCodes;
+                cbCreditControlCode.DataSource = debitCreditControlCodes;
+
+                cbDebitControlCode.ValueMember = "AccountLedgerID";
+                cbDebitControlCode.DisplayMember = "AccountLedgerCode";
+
+                cbCreditControlCode.ValueMember = "AccountLedgerID";
+                cbCreditControlCode.DisplayMember = "AccountLedgerCode";
+
+               gbBalanceSheet.Visible = true;
+            }
+            else
+            {
+                cbDebitControlCode.DataSource = null;
+                cbCreditControlCode.DataSource = null;
+                gbBalanceSheet.Visible = false;
+            }
+
+            cbAccountLedgerType.SelectedIndexChanged += CbAccountLedgerType_SelectedIndexChanged;
                  
+        }
+
+        private void CbAccountLedgerType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            var accountLedger = applicationFacade.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == (int)cbAccountLedgerType.SelectedValue).FirstOrDefault();
+
+            if (accountLedger.AccountLedgerTypeSystemName != "ControlCodes")
+            {
+                var debitCreditControlCodes = applicationFacade.GetDebitCreditControlCodes();
+
+                cbDebitControlCode.DataSource = debitCreditControlCodes;
+                cbCreditControlCode.DataSource = debitCreditControlCodes;
+
+                cbDebitControlCode.ValueMember = "AccountLedgerID";
+                cbDebitControlCode.DisplayMember = "AccountLedgerCode";
+
+                cbCreditControlCode.ValueMember = "AccountLedgerID";
+                cbCreditControlCode.DisplayMember = "AccountLedgerCode";
+
+                gbBalanceSheet.Visible = true;
+            }
+            else
+            {
+                cbDebitControlCode.DataSource = null;
+                cbCreditControlCode.DataSource = null;
+                gbBalanceSheet.Visible = false;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(tbAccountName.Text))
+            {
+                throw new Exception("Account Name can not be blank");
+            }
+
+            if (string.IsNullOrEmpty(tbOpeningBalance.Text))
+            {
+                throw new Exception("Account Name can not be blank");
+            }
+            
+            AccountLedgerMaster model = new AccountLedgerMaster();
+            model.AccountLedgerTypeId = (int)cbAccountLedgerType.SelectedValue;
+            model.AccountLedgerName = tbAccountName.Text;            
+            model.AccountTypeId = (int)cbAccountType.SelectedValue;
+            model.OpeningBalance = Convert.ToDouble(tbOpeningBalance.Text);
+            model.CreditDebit = cbDebitCredit.Text;
+
+            if (cbDebitControlCode.DataSource != null)
+            {
+                model.DebitControlCodeID = (int)cbDebitControlCode.SelectedValue;
+                model.CreditControlCodeID = (int)cbCreditControlCode.SelectedValue;
+            }
+
+            applicationFacade.AddAccountLedger(model);
+
+
         }
     }
 }

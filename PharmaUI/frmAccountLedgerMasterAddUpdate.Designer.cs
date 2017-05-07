@@ -33,21 +33,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtAccountLedgerCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbAccountName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tbOpeningBalance = new System.Windows.Forms.TextBox();
+            this.cbDebitCredit = new System.Windows.Forms.ComboBox();
             this.cbAccountType = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cbDebitControlCode = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cbCreditControlCode = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbBalanceSheet = new System.Windows.Forms.GroupBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox1.SuspendLayout();
+            this.gbBalanceSheet.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -62,6 +62,7 @@
             // 
             // cbAccountLedgerType
             // 
+            this.cbAccountLedgerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAccountLedgerType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbAccountLedgerType.FormattingEnabled = true;
             this.cbAccountLedgerType.Location = new System.Drawing.Point(163, 65);
@@ -98,13 +99,13 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Account Name";
             // 
-            // textBox1
+            // tbAccountName
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox1.Location = new System.Drawing.Point(163, 173);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(212, 23);
-            this.textBox1.TabIndex = 5;
+            this.tbAccountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.tbAccountName.Location = new System.Drawing.Point(163, 173);
+            this.tbAccountName.Name = "tbAccountName";
+            this.tbAccountName.Size = new System.Drawing.Size(212, 23);
+            this.tbAccountName.TabIndex = 5;
             // 
             // label4
             // 
@@ -116,25 +117,30 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Opening Balance";
             // 
-            // textBox2
+            // tbOpeningBalance
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox2.Location = new System.Drawing.Point(163, 211);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(212, 23);
-            this.textBox2.TabIndex = 7;
+            this.tbOpeningBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.tbOpeningBalance.Location = new System.Drawing.Point(163, 211);
+            this.tbOpeningBalance.Name = "tbOpeningBalance";
+            this.tbOpeningBalance.Size = new System.Drawing.Size(212, 23);
+            this.tbOpeningBalance.TabIndex = 7;
             // 
-            // comboBox1
+            // cbDebitCredit
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(381, 210);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(90, 24);
-            this.comboBox1.TabIndex = 8;
+            this.cbDebitCredit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDebitCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbDebitCredit.FormattingEnabled = true;
+            this.cbDebitCredit.Items.AddRange(new object[] {
+            "C",
+            "D"});
+            this.cbDebitCredit.Location = new System.Drawing.Point(381, 210);
+            this.cbDebitCredit.Name = "cbDebitCredit";
+            this.cbDebitCredit.Size = new System.Drawing.Size(90, 24);
+            this.cbDebitCredit.TabIndex = 8;
             // 
             // cbAccountType
             // 
+            this.cbAccountType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAccountType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbAccountType.FormattingEnabled = true;
             this.cbAccountType.Location = new System.Drawing.Point(163, 134);
@@ -154,6 +160,7 @@
             // 
             // cbDebitControlCode
             // 
+            this.cbDebitControlCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDebitControlCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbDebitControlCode.FormattingEnabled = true;
             this.cbDebitControlCode.Location = new System.Drawing.Point(130, 29);
@@ -173,6 +180,7 @@
             // 
             // cbCreditControlCode
             // 
+            this.cbCreditControlCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCreditControlCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCreditControlCode.FormattingEnabled = true;
             this.cbCreditControlCode.Location = new System.Drawing.Point(130, 68);
@@ -190,34 +198,35 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "Credit";
             // 
-            // groupBox1
+            // gbBalanceSheet
             // 
-            this.groupBox1.Controls.Add(this.cbDebitControlCode);
-            this.groupBox1.Controls.Add(this.cbCreditControlCode);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(33, 249);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(438, 116);
-            this.groupBox1.TabIndex = 15;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Balance Sheet Codes";
+            this.gbBalanceSheet.Controls.Add(this.cbDebitControlCode);
+            this.gbBalanceSheet.Controls.Add(this.cbCreditControlCode);
+            this.gbBalanceSheet.Controls.Add(this.label6);
+            this.gbBalanceSheet.Controls.Add(this.label7);
+            this.gbBalanceSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbBalanceSheet.Location = new System.Drawing.Point(33, 249);
+            this.gbBalanceSheet.Name = "gbBalanceSheet";
+            this.gbBalanceSheet.Size = new System.Drawing.Size(438, 116);
+            this.gbBalanceSheet.TabIndex = 15;
+            this.gbBalanceSheet.TabStop = false;
+            this.gbBalanceSheet.Text = "Balance Sheet Codes";
             // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(129, 386);
+            this.btnSave.Location = new System.Drawing.Point(129, 376);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(83, 48);
             this.btnSave.TabIndex = 16;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(237, 386);
+            this.btnCancel.Location = new System.Drawing.Point(237, 376);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(83, 48);
             this.btnCancel.TabIndex = 17;
@@ -245,18 +254,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 437);
+            this.ClientSize = new System.Drawing.Size(492, 429);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbBalanceSheet);
             this.Controls.Add(this.cbAccountType);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.cbDebitCredit);
+            this.Controls.Add(this.tbOpeningBalance);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbAccountName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtAccountLedgerCode);
             this.Controls.Add(this.label2);
@@ -267,8 +276,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmAccountLedgerMasterAddUpdate_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbBalanceSheet.ResumeLayout(false);
+            this.gbBalanceSheet.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,17 +290,17 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtAccountLedgerCode;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbAccountName;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox tbOpeningBalance;
+        private System.Windows.Forms.ComboBox cbDebitCredit;
         private System.Windows.Forms.ComboBox cbAccountType;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbDebitControlCode;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbCreditControlCode;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbBalanceSheet;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel panel1;

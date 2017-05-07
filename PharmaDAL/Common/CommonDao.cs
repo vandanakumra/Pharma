@@ -30,7 +30,8 @@ namespace PharmaDAL.Common
                 return context.AccountLedgerType.Where(p => p.Status).Select(p => new PharmaBusinessObjects.Common.AccountLedgerType()
                 {
                     AccountLedgerTypeID = p.AccountLedgerTypeID,
-                    AccountLedgerTypeName = p.AccountLedgerTypeName                    
+                    AccountLedgerTypeName = p.AccountLedgerTypeName   ,
+                    AccountLedgerTypeSystemName = p.SystemName                 
                 }).ToList();
             }
         }

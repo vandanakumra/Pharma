@@ -22,6 +22,7 @@ namespace PharmaDAL.Entity
     
         public int AccountLedgerTypeID { get; set; }
         public string AccountLedgerTypeName { get; set; }
+        public string SystemName { get; set; }
         public bool Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
