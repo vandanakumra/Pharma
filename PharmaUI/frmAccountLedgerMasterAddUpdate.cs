@@ -15,8 +15,8 @@ namespace PharmaUI
 {
     public partial class frmAccountLedgerMasterAddUpdate : Form
     {
-       
         IApplicationFacade applicationFacade;
+        private int AccountLedgerId{ get; set; }
 
         public frmAccountLedgerMasterAddUpdate()
         {
@@ -25,9 +25,85 @@ namespace PharmaUI
             applicationFacade = new ApplicationFacade();
         }
 
+        public frmAccountLedgerMasterAddUpdate(int accountLedgerId)
+        {
+            InitializeComponent();
+            applicationFacade = new ApplicationFacade();
+            this.AccountLedgerId = accountLedgerId;
+        }
+
 
         private void frmAccountLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {
+            FormLoad();
+
+            if (this.AccountLedgerId > 0)
+            {               
+                FillFormForUpdate();
+            }
+            else
+            {
+                FillCombo();
+            }
+
+        }
+
+        private void FillFormForUpdate()
+        {
+            cbAccountLedgerType.SelectedIndexChanged -= CbAccountLedgerType_SelectedIndexChanged;
+
+            var accountLedgerMaster = applicationFacade.GetAccountLedgerById(this.AccountLedgerId);
+
+            cbAccountLedgerType.DataSource = accountLedgerMaster.AccountLedgerTypeList;
+            cbAccountLedgerType.ValueMember = "AccountLedgerTypeID";
+            cbAccountLedgerType.DisplayMember = "AccountLedgerTypeName";
+
+            cbAccountType.DataSource = accountLedgerMaster.AccountTypeList;
+            cbAccountType.ValueMember = "AccountTypeID";
+            cbAccountType.DisplayMember = "AccountTypeDisplayName";
+
+            if (accountLedgerMaster.AccountLedgerTypeSystemName != "ControlCodes")
+            {
+                var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+                var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+
+                cbDebitControlCode.DataSource = debitControlCodes;
+                cbCreditControlCode.DataSource = creditControlCodes;
+
+                cbDebitControlCode.ValueMember = "AccountLedgerID";
+                cbDebitControlCode.DisplayMember = "AccountLedgerCode";
+
+                cbCreditControlCode.ValueMember = "AccountLedgerID";
+                cbCreditControlCode.DisplayMember = "AccountLedgerCode";
+
+                cbCreditControlCode.SelectedValue = accountLedgerMaster.CreditControlCodeID;
+                cbDebitControlCode.SelectedValue = accountLedgerMaster.DebitControlCodeID;
+
+                gbBalanceSheet.Visible = true;
+            }
+            else
+            {
+                cbDebitControlCode.DataSource = null;
+                cbCreditControlCode.DataSource = null;
+                gbBalanceSheet.Visible = false;
+            }
+
+            cbAccountLedgerType.SelectedValue = accountLedgerMaster.AccountLedgerTypeId;
+           // cbAccountType.SelectedValue = accountLedgerMaster.AccountTypeId;
+            cbDebitCredit.SelectedItem = accountLedgerMaster.CreditDebit;
+
+            tbAccountName.Text = accountLedgerMaster.AccountLedgerName;
+            txtAccountLedgerCode.Text = accountLedgerMaster.AccountLedgerCode;
+            tbOpeningBalance.Text = Convert.ToString(accountLedgerMaster.OpeningBalance);
+
+
+        }
+
+        private void FormLoad()
+        {
+            List<Control> allControls = ExtensionMethods.GetAllControls(this);
+            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
+
             panel1.Width = this.Width;
 
             Label lbl = new Label();
@@ -35,11 +111,18 @@ namespace PharmaUI
             lbl.Dock = DockStyle.Fill;
             lbl.TextAlign = ContentAlignment.MiddleCenter;
             lbl.Top = 10;
-            lbl.Text = "Account Ledger Master - ADD";
+            lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
+
+            if (this.AccountLedgerId > 0)
+            {
+                lbl.Text = "Account Ledger Master - Update";
+            }
+            else
+            {
+                lbl.Text = "Account Ledger Master - Add";
+            }
+
             panel1.Controls.Add(lbl);
-
-            FillCombo();
-
         }
 
         private void FillCombo()
@@ -140,8 +223,10 @@ namespace PharmaUI
                 model.DebitControlCodeID = (int)cbDebitControlCode.SelectedValue;
                 model.CreditControlCodeID = (int)cbCreditControlCode.SelectedValue;
             }
+            model.AccountLedgerID = this.AccountLedgerId;
 
-            applicationFacade.AddAccountLedger(model);
+
+            var abc= this.AccountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
 
             this.Close();
         }

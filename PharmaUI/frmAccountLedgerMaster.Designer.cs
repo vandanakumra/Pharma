@@ -49,6 +49,7 @@
             this.dgvAccountLedger.ReadOnly = true;
             this.dgvAccountLedger.Size = new System.Drawing.Size(1130, 260);
             this.dgvAccountLedger.TabIndex = 0;
+            this.dgvAccountLedger.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccountLedger_CellContentDoubleClick);
             // 
             // panel1
             // 

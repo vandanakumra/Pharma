@@ -17,14 +17,16 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
 
         public frmAccountLedgerMaster()
-        {
-           
+        {           
             InitializeComponent();
             applicationFacade = new ApplicationFacade();
         }
 
         private void frmAccountLedgerMaster_Load(object sender, EventArgs e)
         {
+            List<Control> allControls = ExtensionMethods.GetAllControls(this);
+            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
+
             this.Dock = DockStyle.Fill;
             panel1.Width = this.Width;
 
@@ -32,7 +34,8 @@ namespace PharmaUI
             lbl.Width = panel1.Width;
             lbl.Dock = DockStyle.Fill;           
             lbl.TextAlign = ContentAlignment.MiddleCenter;
-            lbl.Top = 10;          
+            lbl.Top = 10;
+            lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
             lbl.Text = "Account Ledger Master";
             panel1.Controls.Add(lbl);
 
@@ -123,6 +126,23 @@ namespace PharmaUI
         }
 
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            LoadDataGrid((int)cbLedgerType.SelectedValue);
+        }
+
+        private void dgvAccountLedger_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            PharmaBusinessObjects.Master.AccountLedgerMaster model = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.Rows[e.RowIndex].DataBoundItem;
+
+            frmAccountLedgerMasterAddUpdate form = new frmAccountLedgerMasterAddUpdate(model.AccountLedgerID);
+            form.FormClosed += Form_FormClosed1;
+            form.FormClosed += Form_FormClosed1;
+            form.Show();
+
+
+        }
+
+        private void Form_FormClosed1(object sender, FormClosedEventArgs e)
         {
             LoadDataGrid((int)cbLedgerType.SelectedValue);
         }
