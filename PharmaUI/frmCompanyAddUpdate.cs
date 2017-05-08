@@ -55,9 +55,9 @@ namespace PharmaUI
                 txtCompanyName.Text = company.CompanyName;
                 txtBillingPrefRating.Text = company.BillingPreferenceRating.ToString();
                 txtOrderPrefRating.Text = company.OrderPreferenceRating.ToString();
-                cbxDI.SelectedValue = company.IsDirect ? Enums.DI.Direct : Enums.DI.Indirect;
-                cbxSSRequired.SelectedValue = company.StockSummaryRequired ? Enums.Choice.Yes : Enums.Choice.No;
-                cbxStatus.SelectedValue = company.Status ? Enums.Status.Active : Enums.Status.Inactive;
+                cbxDI.SelectedItem = company.IsDirect ? Enums.DI.Direct : Enums.DI.Indirect;
+                cbxSSRequired.SelectedItem = company.StockSummaryRequired ? Enums.Choice.Yes : Enums.Choice.No;
+                cbxStatus.SelectedItem = company.Status ? Enums.Status.Active : Enums.Status.Inactive;
 
             }
         }

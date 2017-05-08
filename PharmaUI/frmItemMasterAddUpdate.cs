@@ -51,7 +51,7 @@ namespace PharmaUI
             cbxStatus.SelectedItem = Status.Active;
 
             //Fill the company list
-            cbxComanyCode.DataSource = applicationFacade.GetCompanies();
+            cbxComanyCode.DataSource = applicationFacade.GetCompanies(String.Empty);
             cbxComanyCode.DisplayMember = "CompanyName";
             cbxComanyCode.ValueMember = "CompanyCode";
 

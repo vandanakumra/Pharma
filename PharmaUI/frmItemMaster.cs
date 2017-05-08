@@ -36,6 +36,9 @@ namespace PharmaUI
             panel1.Controls.Add(lbl);
 
             LoadDataGrid();
+
+            dgvItemList.CellDoubleClick += DgvItemList_CellDoubleClick;
+            dgvItemList.KeyDown += DgvCompanyList_KeyDown;
         }
 
         private void DgvItemList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -96,10 +99,7 @@ namespace PharmaUI
             dgvItemList.Columns["Scheme2"].Visible = true;
             dgvItemList.Columns["Location"].Visible = true;
             dgvItemList.Columns["MaximumStock"].Visible = true;
-            dgvItemList.Columns["MinimumStock"].Visible = true;
-
-            dgvItemList.CellDoubleClick += DgvItemList_CellDoubleClick;
-            dgvItemList.KeyDown += DgvCompanyList_KeyDown;
+            dgvItemList.Columns["MinimumStock"].Visible = true;           
         }
 
         private void DgvCompanyList_KeyDown(object sender, KeyEventArgs e)
@@ -108,7 +108,7 @@ namespace PharmaUI
             {
                 if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    Item itemToBeRemoved = (Item)dgvItemList.CurrentRow.DataBoundItem;
+                    Item itemToBeRemoved = (Item)dgvItemList.SelectedRows[0].DataBoundItem;
                     applicationFacade.DeleteItem(itemToBeRemoved);
                     LoadDataGrid();
                 }
