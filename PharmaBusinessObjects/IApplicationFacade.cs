@@ -21,8 +21,11 @@ namespace PharmaBusinessObjects
         #endregion
 
         #region Company Master
-
-        List<Company> GetCompanies();
+        List<Company> GetCompanies(string searchText);
+        PharmaBusinessObjects.Master.Company GetCompanyById(int companyId);
+        int AddCompany(PharmaBusinessObjects.Master.Company company);
+        int UpdateCompany(PharmaBusinessObjects.Master.Company company);
+        int DeleteCompany(int companyId);        
         #endregion
 
         #region  Account Ledger Master

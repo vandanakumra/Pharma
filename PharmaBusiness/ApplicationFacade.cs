@@ -106,11 +106,11 @@ namespace PharmaBusiness
         /// Add new company to CompanyMaster
         /// </summary>
         /// <returns>List of companies</returns>
-        public List<Company> GetCompanies()
+        public List<Company> GetCompanies(string searchText)
         {
             try
             {
-                return new CompanyBiz().GetCompanies();
+                return new CompanyBiz().GetCompanies(searchText);
             }
             catch (Exception)
             {
@@ -119,6 +119,57 @@ namespace PharmaBusiness
             }
         }
 
+        public PharmaBusinessObjects.Master.Company GetCompanyById(int companyID)
+        {
+            try
+            {
+                return new CompanyBiz().GetCompanyById(companyID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int AddCompany(PharmaBusinessObjects.Master.Company company)
+        {
+
+            try
+            {
+                return new CompanyBiz().AddCompany(company);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+        public int UpdateCompany(PharmaBusinessObjects.Master.Company company)
+        {
+            try
+            {
+                return new CompanyBiz().UpdateCompany(company);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public int DeleteCompany(int companyId)
+        {
+            try
+            {
+                return new CompanyBiz().DeleteCompany(companyId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
 
         #region Account Ledger

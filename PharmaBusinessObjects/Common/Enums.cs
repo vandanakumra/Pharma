@@ -19,5 +19,11 @@ namespace PharmaBusinessObjects.Common
             Inactive,
             Active
         };
+
+        public enum DI
+        {
+            Indirect,
+            Direct
+        };
     }
 }
