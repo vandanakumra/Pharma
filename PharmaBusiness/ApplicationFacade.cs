@@ -98,6 +98,21 @@ namespace PharmaBusiness
             }
         }
 
+             /// <summary>
+             /// Fetch all the active items by Search
+             /// </summary>
+             /// <returns>List of items</returns>
+        public List<Item> GetAllItemsBySearch(string searchString)
+        {
+            try
+            {
+                return new ItemBiz().GetAllItemsBySearch(searchString);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Company Master

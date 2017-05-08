@@ -15,6 +15,12 @@ namespace PharmaBusiness.Master
             return new ItemDao().GetAllItems();
         }
 
+        internal List<Item> GetAllItemsBySearch(string searchString)
+        {
+            return new ItemDao().GetAllItemsBySearch(searchString);
+        }
+        
+
         internal bool AddNewItem(Item newItem)
         {
             return new ItemDao().AddNewItem(newItem);

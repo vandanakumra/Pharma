@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Master;
 
 namespace PharmaUI
 {
@@ -34,7 +35,46 @@ namespace PharmaUI
             lbl.Text = "Item Master";
             panel1.Controls.Add(lbl);
 
-            dgvItemList.DataSource = applicationFacade.GetAllItems();
+            LoadDataGrid();
+        }
+
+        private void DgvItemList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex != -1)
+            {
+                frmItemMasterAddUpdate form = new frmItemMasterAddUpdate(true);
+                Item existingItem = (Item)dgvItemList.CurrentRow.DataBoundItem;
+                form.frmItemMasterAddUpdate_Fill_UsingExistingItem(existingItem);
+                form.FormClosed += Form_FormClosed;
+                form.ShowDialog();
+            }          
+        }
+
+        
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var form = new frmItemMasterAddUpdate();
+                form.FormClosed += Form_FormClosed;
+                form.ShowDialog();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {          
+            LoadDataGrid();
+        }
+
+        private void LoadDataGrid()
+        {
+            dgvItemList.DataSource = applicationFacade.GetAllItemsBySearch(txtSearch.Text);
+
             for (int i = 0; i < dgvItemList.Columns.Count; i++)
             {
                 dgvItemList.Columns[i].Visible = false;
@@ -50,27 +90,34 @@ namespace PharmaUI
             dgvItemList.Columns["CompanyCode"].Visible = true;
             dgvItemList.Columns["ShortName"].Visible = true;
             dgvItemList.Columns["MRP"].Visible = true;
+            dgvItemList.Columns["Packing"].Visible = true;
+            dgvItemList.Columns["SaleRate"].Visible = true;
+            dgvItemList.Columns["Scheme1"].Visible = true;
+            dgvItemList.Columns["Scheme2"].Visible = true;
+            dgvItemList.Columns["Location"].Visible = true;
+            dgvItemList.Columns["MaximumStock"].Visible = true;
+            dgvItemList.Columns["MinimumStock"].Visible = true;
 
-            dgvItemList.DoubleClick += DgvItemList_DoubleClick;
-
+            dgvItemList.CellDoubleClick += DgvItemList_CellDoubleClick;
+            dgvItemList.KeyDown += DgvCompanyList_KeyDown;
         }
 
-        private void DgvItemList_DoubleClick(object sender, EventArgs e)
+        private void DgvCompanyList_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (e.KeyCode == Keys.Delete && dgvItemList.SelectedRows.Count > 0)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    Item itemToBeRemoved = (Item)dgvItemList.CurrentRow.DataBoundItem;
+                    applicationFacade.DeleteItem(itemToBeRemoved);
+                    LoadDataGrid();
+                }
+            }
         }
 
-        private void btnAddItem_Click(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                var form = new frmItemMasterAddUpdate();
-                form.Show(this);
-            }
-            catch (Exception)
-            {
-
-            }
+            LoadDataGrid();
         }
     }
 }

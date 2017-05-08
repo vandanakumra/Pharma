@@ -203,5 +203,56 @@ namespace PharmaDAL.Master
                 return totalItemsFromSameCompany;
             }
         }
+
+
+        public List<Item> GetAllItemsBySearch(string searchString = null)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.ItemMaster.Where(p => p.Status
+                                                && (string.IsNullOrEmpty(searchString) || p.ItemName.Contains(searchString))
+                                                ).Select(p => new Item()
+                {
+                    ItemID = p.ItemID,
+                    ItemCode = p.ItemCode,
+                    ItemName = p.ItemName,
+                    CompanyCode = p.CompanyCode,
+                    ConversionRate = p.ConversionRate,
+                    ShortName = p.ShortName,
+                    Packing = p.Packing,
+                    PurchaseRate = p.PurchaseRate,
+                    MRP = p.MRP,
+                    SaleRate = p.SaleRate,
+                    SpecialRate = p.SpecialRate,
+                    WholeSaleRate = p.WholeSaleRate,
+                    SaleExcise = p.SaleExcise,
+                    SurchargeOnSale = p.SurchargeOnSale,
+                    TaxOnSale = p.TaxOnSale,
+                    Scheme1 = p.Scheme1,
+                    Scheme2 = p.Scheme2,
+                    PurchaseExcise = p.PurchaseExcise,
+                    UPC = p.UPC,
+                    IsHalfScheme = p.IsHalfScheme,
+                    IsQTRScheme = p.IsQTRScheme,
+                    SpecialDiscount = p.SpecialDiscount,
+                    SpecialDiscountOnQty = p.SpecialDiscountOnQty,
+                    IsFixedDiscount = p.IsFixedDiscount,
+                    FixedDiscountRate = p.FixedDiscountRate,
+                    MaximumQty = p.MaximumQty,
+                    MaximumDiscount = p.MaximumDiscount,
+                    SurchargeOnPurchase = p.SurchargeOnPurchase,
+                    TaxOnPurchase = p.TaxOnPurchase,
+                    DiscountRecieved = p.DiscountRecieved,
+                    SpecialDiscountRecieved = p.SpecialDiscountRecieved,
+                    QtyPerCase = p.QtyPerCase,
+                    Location = p.Location,
+                    MinimumStock = p.MinimumStock,
+                    MaximumStock = p.MaximumStock,
+                    SaleTypeId = p.SaleTypeId,
+                    Status = p.Status
+
+                }).ToList();
+            }
+        }
     }
 }

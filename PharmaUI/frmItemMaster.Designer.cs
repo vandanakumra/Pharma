@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbxSearchItem = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearchItem = new System.Windows.Forms.Label();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.dgvItemList = new System.Windows.Forms.DataGridView();
@@ -37,13 +37,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).BeginInit();
             this.SuspendLayout();
             // 
-            // tbxSearchItem
+            // txtSearch
             // 
-            this.tbxSearchItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxSearchItem.Location = new System.Drawing.Point(100, 80);
-            this.tbxSearchItem.Name = "tbxSearchItem";
-            this.tbxSearchItem.Size = new System.Drawing.Size(296, 23);
-            this.tbxSearchItem.TabIndex = 2;
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(100, 80);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(296, 23);
+            this.txtSearch.TabIndex = 2;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // lblSearchItem
             // 
@@ -116,7 +117,7 @@
             this.Controls.Add(this.dgvItemList);
             this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.lblSearchItem);
-            this.Controls.Add(this.tbxSearchItem);
+            this.Controls.Add(this.txtSearch);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmItemMaster";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -128,7 +129,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox tbxSearchItem;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearchItem;
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.DataGridView dgvItemList;

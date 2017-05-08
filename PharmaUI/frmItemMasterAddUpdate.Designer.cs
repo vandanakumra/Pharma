@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblCompanyCode = new System.Windows.Forms.Label();
             this.lblItemCode = new System.Windows.Forms.Label();
@@ -101,10 +102,12 @@
             this.cbxQtrScheme = new System.Windows.Forms.ComboBox();
             this.cbxFixedDiscount = new System.Windows.Forms.ComboBox();
             this.cbxStatus = new System.Windows.Forms.ComboBox();
-            this.btnAction = new System.Windows.Forms.Button();
-            this.btnRevert = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProviderItem = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderItem)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -694,6 +697,8 @@
             this.tbxItemName.Name = "tbxItemName";
             this.tbxItemName.Size = new System.Drawing.Size(142, 20);
             this.tbxItemName.TabIndex = 41;
+            this.tbxItemName.Validating += new System.ComponentModel.CancelEventHandler(this.tbxItemName_Validating);
+            this.tbxItemName.Validated += new System.EventHandler(this.tbxItemName_Validated);
             // 
             // tbxConvRate
             // 
@@ -701,6 +706,7 @@
             this.tbxConvRate.Name = "tbxConvRate";
             this.tbxConvRate.Size = new System.Drawing.Size(142, 20);
             this.tbxConvRate.TabIndex = 42;
+            this.tbxConvRate.Text = "0";
             // 
             // tbxShortName
             // 
@@ -715,6 +721,7 @@
             this.tbxPacking.Name = "tbxPacking";
             this.tbxPacking.Size = new System.Drawing.Size(142, 20);
             this.tbxPacking.TabIndex = 44;
+            this.tbxPacking.Text = "0";
             // 
             // tbxPurchaseRate
             // 
@@ -722,6 +729,7 @@
             this.tbxPurchaseRate.Name = "tbxPurchaseRate";
             this.tbxPurchaseRate.Size = new System.Drawing.Size(142, 20);
             this.tbxPurchaseRate.TabIndex = 45;
+            this.tbxPurchaseRate.Text = "0";
             // 
             // tbxMRP
             // 
@@ -729,6 +737,7 @@
             this.tbxMRP.Name = "tbxMRP";
             this.tbxMRP.Size = new System.Drawing.Size(142, 20);
             this.tbxMRP.TabIndex = 46;
+            this.tbxMRP.Text = "0";
             // 
             // tbxSaleRate
             // 
@@ -736,6 +745,7 @@
             this.tbxSaleRate.Name = "tbxSaleRate";
             this.tbxSaleRate.Size = new System.Drawing.Size(142, 20);
             this.tbxSaleRate.TabIndex = 47;
+            this.tbxSaleRate.Text = "0";
             // 
             // tbxSpecialRate
             // 
@@ -743,6 +753,7 @@
             this.tbxSpecialRate.Name = "tbxSpecialRate";
             this.tbxSpecialRate.Size = new System.Drawing.Size(142, 20);
             this.tbxSpecialRate.TabIndex = 48;
+            this.tbxSpecialRate.Text = "0";
             // 
             // tbxWholeSaleRate
             // 
@@ -750,6 +761,7 @@
             this.tbxWholeSaleRate.Name = "tbxWholeSaleRate";
             this.tbxWholeSaleRate.Size = new System.Drawing.Size(142, 20);
             this.tbxWholeSaleRate.TabIndex = 49;
+            this.tbxWholeSaleRate.Text = "0";
             // 
             // tbxSaleExcise
             // 
@@ -757,6 +769,7 @@
             this.tbxSaleExcise.Name = "tbxSaleExcise";
             this.tbxSaleExcise.Size = new System.Drawing.Size(142, 20);
             this.tbxSaleExcise.TabIndex = 50;
+            this.tbxSaleExcise.Text = "0";
             // 
             // tbxSCOnSale
             // 
@@ -764,6 +777,7 @@
             this.tbxSCOnSale.Name = "tbxSCOnSale";
             this.tbxSCOnSale.Size = new System.Drawing.Size(142, 20);
             this.tbxSCOnSale.TabIndex = 51;
+            this.tbxSCOnSale.Text = "0";
             // 
             // tbxTaxOnSale
             // 
@@ -771,6 +785,7 @@
             this.tbxTaxOnSale.Name = "tbxTaxOnSale";
             this.tbxTaxOnSale.Size = new System.Drawing.Size(142, 20);
             this.tbxTaxOnSale.TabIndex = 52;
+            this.tbxTaxOnSale.Text = "0";
             // 
             // tbxScheme1
             // 
@@ -778,6 +793,7 @@
             this.tbxScheme1.Name = "tbxScheme1";
             this.tbxScheme1.Size = new System.Drawing.Size(142, 20);
             this.tbxScheme1.TabIndex = 53;
+            this.tbxScheme1.Text = "0";
             // 
             // tbxScheme2
             // 
@@ -785,6 +801,7 @@
             this.tbxScheme2.Name = "tbxScheme2";
             this.tbxScheme2.Size = new System.Drawing.Size(142, 20);
             this.tbxScheme2.TabIndex = 54;
+            this.tbxScheme2.Text = "0";
             // 
             // tbxPurchaseExcise
             // 
@@ -792,6 +809,7 @@
             this.tbxPurchaseExcise.Name = "tbxPurchaseExcise";
             this.tbxPurchaseExcise.Size = new System.Drawing.Size(142, 20);
             this.tbxPurchaseExcise.TabIndex = 55;
+            this.tbxPurchaseExcise.Text = "0";
             // 
             // tbxUPC
             // 
@@ -806,6 +824,7 @@
             this.tbxSpecialDiscountOnQty.Name = "tbxSpecialDiscountOnQty";
             this.tbxSpecialDiscountOnQty.Size = new System.Drawing.Size(142, 20);
             this.tbxSpecialDiscountOnQty.TabIndex = 60;
+            this.tbxSpecialDiscountOnQty.Text = "0";
             // 
             // tbxSpecialDiscount
             // 
@@ -813,6 +832,7 @@
             this.tbxSpecialDiscount.Name = "tbxSpecialDiscount";
             this.tbxSpecialDiscount.Size = new System.Drawing.Size(142, 20);
             this.tbxSpecialDiscount.TabIndex = 59;
+            this.tbxSpecialDiscount.Text = "0";
             // 
             // tbxFixedDiscountRate
             // 
@@ -821,6 +841,7 @@
             this.tbxFixedDiscountRate.ReadOnly = true;
             this.tbxFixedDiscountRate.Size = new System.Drawing.Size(142, 20);
             this.tbxFixedDiscountRate.TabIndex = 62;
+            this.tbxFixedDiscountRate.Text = "0";
             // 
             // tbxMaxQty
             // 
@@ -828,6 +849,7 @@
             this.tbxMaxQty.Name = "tbxMaxQty";
             this.tbxMaxQty.Size = new System.Drawing.Size(142, 20);
             this.tbxMaxQty.TabIndex = 63;
+            this.tbxMaxQty.Text = "0";
             // 
             // tbxMaxDiscount
             // 
@@ -835,6 +857,7 @@
             this.tbxMaxDiscount.Name = "tbxMaxDiscount";
             this.tbxMaxDiscount.Size = new System.Drawing.Size(142, 20);
             this.tbxMaxDiscount.TabIndex = 64;
+            this.tbxMaxDiscount.Text = "0";
             // 
             // tbxSCOnPurchase
             // 
@@ -842,6 +865,7 @@
             this.tbxSCOnPurchase.Name = "tbxSCOnPurchase";
             this.tbxSCOnPurchase.Size = new System.Drawing.Size(142, 20);
             this.tbxSCOnPurchase.TabIndex = 65;
+            this.tbxSCOnPurchase.Text = "0";
             // 
             // tbxTaxOnPurchase
             // 
@@ -849,6 +873,7 @@
             this.tbxTaxOnPurchase.Name = "tbxTaxOnPurchase";
             this.tbxTaxOnPurchase.Size = new System.Drawing.Size(142, 20);
             this.tbxTaxOnPurchase.TabIndex = 66;
+            this.tbxTaxOnPurchase.Text = "0";
             // 
             // tbxDiscountRecieved
             // 
@@ -856,6 +881,7 @@
             this.tbxDiscountRecieved.Name = "tbxDiscountRecieved";
             this.tbxDiscountRecieved.Size = new System.Drawing.Size(142, 20);
             this.tbxDiscountRecieved.TabIndex = 67;
+            this.tbxDiscountRecieved.Text = "0";
             // 
             // tbxSpecialDiscountRecieved
             // 
@@ -863,6 +889,7 @@
             this.tbxSpecialDiscountRecieved.Name = "tbxSpecialDiscountRecieved";
             this.tbxSpecialDiscountRecieved.Size = new System.Drawing.Size(142, 20);
             this.tbxSpecialDiscountRecieved.TabIndex = 68;
+            this.tbxSpecialDiscountRecieved.Text = "0";
             // 
             // tbxQtyPerCase
             // 
@@ -870,6 +897,7 @@
             this.tbxQtyPerCase.Name = "tbxQtyPerCase";
             this.tbxQtyPerCase.Size = new System.Drawing.Size(142, 20);
             this.tbxQtyPerCase.TabIndex = 69;
+            this.tbxQtyPerCase.Text = "0";
             // 
             // tbxLocation
             // 
@@ -884,6 +912,7 @@
             this.tbxMaximumStock.Name = "tbxMaximumStock";
             this.tbxMaximumStock.Size = new System.Drawing.Size(142, 20);
             this.tbxMaximumStock.TabIndex = 72;
+            this.tbxMaximumStock.Text = "0";
             // 
             // tbxMinimumStock
             // 
@@ -891,6 +920,7 @@
             this.tbxMinimumStock.Name = "tbxMinimumStock";
             this.tbxMinimumStock.Size = new System.Drawing.Size(142, 20);
             this.tbxMinimumStock.TabIndex = 71;
+            this.tbxMinimumStock.Text = "0";
             // 
             // cbxComanyCode
             // 
@@ -946,25 +976,25 @@
             this.cbxStatus.Size = new System.Drawing.Size(142, 21);
             this.cbxStatus.TabIndex = 74;
             // 
-            // btnAction
+            // btnSave
             // 
-            this.btnAction.Location = new System.Drawing.Point(311, 531);
-            this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(75, 23);
-            this.btnAction.TabIndex = 80;
-            this.btnAction.Text = "Action";
-            this.btnAction.UseVisualStyleBackColor = true;
-            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
+            this.btnSave.Location = new System.Drawing.Point(311, 531);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 30);
+            this.btnSave.TabIndex = 80;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnRevert
+            // btnCancel
             // 
-            this.btnRevert.Location = new System.Drawing.Point(392, 531);
-            this.btnRevert.Name = "btnRevert";
-            this.btnRevert.Size = new System.Drawing.Size(75, 23);
-            this.btnRevert.TabIndex = 81;
-            this.btnRevert.Text = "Revert";
-            this.btnRevert.UseVisualStyleBackColor = true;
-            this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
+            this.btnCancel.Location = new System.Drawing.Point(392, 531);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 30);
+            this.btnCancel.TabIndex = 81;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // panel1
             // 
@@ -982,6 +1012,10 @@
             this.panel1.TabIndex = 3;
             this.panel1.Tag = "";
             // 
+            // errorProviderItem
+            // 
+            this.errorProviderItem.ContainerControl = this;
+            // 
             // frmItemMasterAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -989,8 +1023,8 @@
             this.ClientSize = new System.Drawing.Size(776, 566);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnRevert);
-            this.Controls.Add(this.btnAction);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmItemMasterAddUpdate";
@@ -998,6 +1032,7 @@
             this.Load += new System.EventHandler(this.frmItemMasterAddUpdate_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderItem)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1005,8 +1040,8 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnAction;
-        private System.Windows.Forms.Button btnRevert;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblCompanyCode;
         private System.Windows.Forms.Label lblItemCode;
         private System.Windows.Forms.Label lblItemName;
@@ -1080,5 +1115,6 @@
         private System.Windows.Forms.ComboBox cbxQtrScheme;
         private System.Windows.Forms.ComboBox cbxFixedDiscount;
         private System.Windows.Forms.ComboBox cbxStatus;
+        private System.Windows.Forms.ErrorProvider errorProviderItem;
     }
 }
