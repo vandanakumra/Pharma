@@ -24,14 +24,55 @@ namespace PharmaUI
         {
             this.isInEditMode = isInEditMode;
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();          
+            applicationFacade = new ApplicationFacade();
+
+            LoadCombo();
         }
 
-       
-        private void btnAction_Click(object sender, EventArgs e)
+        private void LoadCombo()
+        {
+            cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
+            cbxFixedDiscount.SelectedIndexChanged += CbxFixedDiscount_SelectedIndexChanged;
+
+            //Fill half Scheme options
+            cbxHalfScheme.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxHalfScheme.SelectedItem = Choice.No;
+
+            //Fill qtr Scheme options
+            cbxQtrScheme.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxQtrScheme.SelectedItem = Choice.No;
+
+            //Fill fixed discount options
+            cbxFixedDiscount.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxFixedDiscount.SelectedItem = Choice.No;
+
+            //Fill status options
+            cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
+            cbxStatus.SelectedItem = Status.Active;
+
+            //Fill the company list
+            cbxComanyCode.DataSource = applicationFacade.GetCompanies(String.Empty);
+            cbxComanyCode.DisplayMember = "CompanyName";
+            cbxComanyCode.ValueMember = "CompanyCode";
+
+            //Fill sale type list
+            cbxSaleType.DataSource = applicationFacade.GetAccountLedgerBySystemName("SaleLedger");
+            cbxSaleType.DisplayMember = "AccountLedgerName";
+            cbxSaleType.ValueMember = "AccountLedgerID";
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
+                if (String.IsNullOrWhiteSpace(tbxItemName.Text))
+                {
+                    errorProviderItem.SetError(tbxItemName,"Item Name field is Required");
+                    tbxItemName.Focus();
+                    tbxItemName.SelectAll();
+                    return;
+                }
+
                 Choice choice;
                 Status status;
 
@@ -103,6 +144,9 @@ namespace PharmaUI
 
         private void frmItemMasterAddUpdate_Load(object sender, EventArgs e)
         {
+            List<Control> allControls = ExtensionMethods.GetAllControls(this);
+            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
+
             this.Dock = DockStyle.Fill;
             panel1.Width = this.Width;
 
@@ -111,34 +155,46 @@ namespace PharmaUI
             lbl.Dock = DockStyle.Fill;
             lbl.TextAlign = ContentAlignment.MiddleCenter;
             lbl.Top = 10;
-            lbl.Text = "Item Master - Add";
+
+            if (isInEditMode)
+            {
+                lbl.Text = "Item Master - Update";
+            }
+            else
+            {
+                lbl.Text = "Item Master - Add";
+            }
+            
             panel1.Controls.Add(lbl);
 
-            cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
-            cbxFixedDiscount.SelectedIndexChanged += CbxFixedDiscount_SelectedIndexChanged;
-
-            //Fill half Scheme options
-            cbxHalfScheme.DataSource = Enum.GetValues(typeof(Enums.Choice));
-
-            //Fill qtr Scheme options
-            cbxQtrScheme.DataSource = Enum.GetValues(typeof(Enums.Choice));
-
-            //Fill fixed discount options
-            cbxFixedDiscount.DataSource = Enum.GetValues(typeof(Enums.Choice));
-
-            //Fill status options
-            cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
-
-            //Fill the company list
-            cbxComanyCode.DataSource = applicationFacade.GetCompanies();
-            cbxComanyCode.DisplayMember = "CompanyName";
-            cbxComanyCode.ValueMember = "CompanyCode";
-
-            //Fill sale type list
-            cbxSaleType.DataSource = applicationFacade.GetAccountLedgerBySystemName("SaleLedger");
-            cbxSaleType.DisplayMember = "AccountLedgerName";
-            cbxSaleType.ValueMember = "AccountLedgerID";
-
+            //Event to allow only decimal entry
+            {
+                tbxConvRate.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxPacking.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxPurchaseRate.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxMRP.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxSaleRate.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxSpecialRate.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxWholeSaleRate.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxSaleExcise.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxSCOnSale.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxScheme1.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxScheme2.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxPurchaseExcise.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxSpecialDiscount.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxSpecialDiscountOnQty.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxFixedDiscountRate.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxMaxQty.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxMaxDiscount.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxSCOnPurchase.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxTaxOnPurchase.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxDiscountRecieved.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxSpecialDiscountRecieved.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxQtyPerCase.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxMinimumStock.KeyPress += TbxAllowDecimal_KeyPress;
+                tbxMaximumStock.KeyPress += TbxAllowDecimal_KeyPress;
+            }
+            
         }
 
         private void CbxFixedDiscount_SelectedIndexChanged(object sender, EventArgs e)
@@ -146,30 +202,110 @@ namespace PharmaUI
             if (cbxFixedDiscount.SelectedItem == null) return;
 
             Choice choice;
-            Enum.TryParse<Choice>(cbxHalfScheme.SelectedValue.ToString(), out choice);
+            Enum.TryParse<Choice>(cbxFixedDiscount.SelectedItem.ToString(), out choice);
 
             if (choice == Choice.Yes)
             {
                 tbxFixedDiscountRate.ReadOnly = false;
             }
+            else
+            {
+                tbxFixedDiscountRate.ReadOnly = true;
+            }
         }
 
         private void CbxComanyCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbxComanyCode.SelectedItem == null) return;
+            //if (cbxComanyCode.SelectedItem == null) return;
 
-            Company selectedCompany = cbxComanyCode.SelectedItem as Company;
+            //Company selectedCompany = cbxComanyCode.SelectedItem as Company;
 
-            if (selectedCompany != null)
-            {
-                tbxItemCode.Text = applicationFacade.GetNextItemCode(Convert.ToString(selectedCompany.CompanyCode));
-            }
+            //if (selectedCompany != null && !isInEditMode)
+            //{
+            //    tbxItemCode.Text = applicationFacade.GetNextItemCode(Convert.ToString(selectedCompany.CompanyCode));
+            //}
                 
         }
 
-        private void btnRevert_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public void frmItemMasterAddUpdate_Fill_UsingExistingItem(Item existingItem)
+        {
+            if (existingItem!=null)
+            {
+                tbxItemCode.Text = existingItem.ItemCode;
+                tbxItemName.Text = existingItem.ItemName;
+                cbxComanyCode.SelectedValue = existingItem.CompanyCode;
+                tbxConvRate.Text =Convert.ToString(existingItem.ConversionRate);
+                tbxShortName.Text = existingItem.ShortName;
+                tbxPacking.Text = existingItem.Packing;
+                tbxPurchaseRate.Text = Convert.ToString(existingItem.PurchaseRate);
+                tbxMRP.Text = Convert.ToString(existingItem.MRP);
+                tbxSaleRate.Text = Convert.ToString(existingItem.SaleRate);
+                tbxSpecialRate.Text = Convert.ToString(existingItem.SpecialRate);
+                tbxWholeSaleRate.Text = Convert.ToString(existingItem.WholeSaleRate);
+                tbxSaleExcise.Text = Convert.ToString(existingItem.SaleExcise);
+                tbxSCOnSale.Text = Convert.ToString(existingItem.SurchargeOnSale);
+                tbxTaxOnSale.Text = Convert.ToString(existingItem.TaxOnSale);
+                tbxScheme1.Text = Convert.ToString(existingItem.Scheme1);
+                tbxScheme2.Text = Convert.ToString(existingItem.Scheme2);
+                tbxPurchaseExcise.Text = Convert.ToString(existingItem.PurchaseExcise);
+                tbxUPC.Text = existingItem.UPC;
+                cbxHalfScheme.SelectedItem = existingItem.IsHalfScheme ? Choice.Yes : Choice.No;
+                cbxQtrScheme.SelectedItem = existingItem.IsQTRScheme ? Choice.Yes : Choice.No;
+                tbxSpecialDiscount.Text = Convert.ToString( existingItem.SpecialDiscount);
+                tbxSpecialDiscountOnQty.Text =Convert.ToString( existingItem.SpecialDiscountOnQty);
+                cbxFixedDiscount.SelectedItem = existingItem.IsFixedDiscount ? Choice.Yes : Choice.No;
+                tbxFixedDiscountRate.Text = Convert.ToString(existingItem.FixedDiscountRate);
+                tbxMaxQty.Text = Convert.ToString(existingItem.MaximumQty);
+                tbxMaxDiscount.Text = Convert.ToString(existingItem.MaximumDiscount);
+                tbxSCOnPurchase.Text = Convert.ToString(existingItem.SurchargeOnPurchase);
+                tbxTaxOnPurchase.Text = Convert.ToString(existingItem.TaxOnPurchase);
+                tbxDiscountRecieved.Text = Convert.ToString(existingItem.DiscountRecieved);
+                tbxSpecialDiscountRecieved.Text = Convert.ToString(existingItem.SpecialDiscountRecieved);
+                tbxQtyPerCase.Text = Convert.ToString(existingItem.QtyPerCase);
+                tbxLocation.Text = Convert.ToString(existingItem.Location);
+                tbxMinimumStock.Text = Convert.ToString(existingItem.MinimumStock);
+                tbxMaximumStock.Text = Convert.ToString(existingItem.MaximumStock);
+                cbxSaleType.SelectedValue = existingItem.SaleTypeId;
+                cbxStatus.SelectedItem = existingItem.Status ? Status.Active : Status.Inactive;
+            }
+        }
+
+        private void TbxAllowDecimal_KeyPress(object sender, KeyPressEventArgs e)
+       {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbxItemName_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbxItemName.Text))
+            {
+                errorProviderItem.SetError(tbxItemName, "Item Name field is Required");
+                tbxItemName.Focus();
+                tbxItemName.SelectAll();
+            }
+            else
+            {
+                errorProviderItem.SetError(tbxItemName, String.Empty);
+            }
+        }
+
+        private void tbxItemName_Validated(object sender, EventArgs e)
+        {
+            errorProviderItem.SetError(tbxItemName, String.Empty);
         }
     }
 }

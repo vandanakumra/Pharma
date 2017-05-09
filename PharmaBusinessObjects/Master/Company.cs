@@ -16,5 +16,7 @@ namespace PharmaBusinessObjects.Master
         public int OrderPreferenceRating { get; set; }
         public int BillingPreferenceRating { get; set; }
         public bool StockSummaryRequired { get; set; }
+        public string DirectIndirect { get; set; }
+        public string StockSummaryRequirement { get; set; }
     }
 }

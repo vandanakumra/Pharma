@@ -17,12 +17,15 @@ namespace PharmaBusinessObjects
         bool UpdateItem(Item existingItem);
         bool DeleteItem(Item existingItem);
         string GetNextItemCode(string companyCode);
-
+        List<Item> GetAllItemsBySearch(string searchString);
         #endregion
 
         #region Company Master
-
-        List<Company> GetCompanies();
+        List<Company> GetCompanies(string searchText);
+        PharmaBusinessObjects.Master.Company GetCompanyById(int companyId);
+        int AddCompany(PharmaBusinessObjects.Master.Company company);
+        int UpdateCompany(PharmaBusinessObjects.Master.Company company);
+        int DeleteCompany(int companyId);        
         #endregion
 
         #region  Account Ledger Master
