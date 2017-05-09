@@ -181,10 +181,9 @@ namespace PharmaBusiness
             try
             {
                 return new AccountLedgerMasterBiz().UpdateAccountLedger(p);
-            }
+            }            
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -204,7 +203,6 @@ namespace PharmaBusiness
 
 
         #endregion
-
 
         #region Common
 
@@ -248,6 +246,48 @@ namespace PharmaBusiness
 
 
 
+
+        #endregion
+
+        #region Personal Ledger
+
+        public List<PharmaBusinessObjects.Master.PersonalLedger> GetPersonalLedgers()
+        {
+            try
+            {
+                return new PersonalLedgerBiz().GetPersonalLedgers();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p)
+        {
+            try
+            {
+                return new PersonalLedgerBiz().AddPersonalLedger(p);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p)
+        {
+            try
+            {
+                return new PersonalLedgerBiz().UpdatePersonalLedger(p);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
 
         #endregion
 

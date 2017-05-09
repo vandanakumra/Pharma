@@ -46,6 +46,13 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Common.RecordType> GetRecordTypes();
 
         #endregion
+
+        #region Personal Ledger
+
+        List<PharmaBusinessObjects.Master.PersonalLedger> GetPersonalLedgers();
+        int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p);
+        int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p);
+        #endregion
     }
-        
+
 }

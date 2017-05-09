@@ -72,7 +72,7 @@
             this.accountLedgerMenuItem,
             this.personLedgerMenuItem});
             this.accountMenuItem.Name = "accountMenuItem";
-            this.accountMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.accountMenuItem.Size = new System.Drawing.Size(152, 22);
             this.accountMenuItem.Text = "Account";
             // 
             // accountLedgerMenuItem
@@ -86,33 +86,34 @@
             // 
             this.personLedgerMenuItem.Name = "personLedgerMenuItem";
             this.personLedgerMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.personLedgerMenuItem.Text = "Person Ledger";
+            this.personLedgerMenuItem.Text = "Personol Diary";
+            this.personLedgerMenuItem.Click += new System.EventHandler(this.personLedgerMenuItem_Click);
             // 
             // companyMenuItem
             // 
             this.companyMenuItem.Name = "companyMenuItem";
-            this.companyMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.companyMenuItem.Size = new System.Drawing.Size(152, 22);
             this.companyMenuItem.Text = "Company";
             this.companyMenuItem.Click += new System.EventHandler(this.companyMenuItem_Click);
             // 
             // itemMenuItem
             // 
             this.itemMenuItem.Name = "itemMenuItem";
-            this.itemMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.itemMenuItem.Size = new System.Drawing.Size(152, 22);
             this.itemMenuItem.Text = "Item";
             this.itemMenuItem.Click += new System.EventHandler(this.itemMenuItem_Click);
             // 
             // personRouteMenuItem
             // 
             this.personRouteMenuItem.Name = "personRouteMenuItem";
-            this.personRouteMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.personRouteMenuItem.Size = new System.Drawing.Size(152, 22);
             this.personRouteMenuItem.Text = "Person & Route";
             this.personRouteMenuItem.Click += new System.EventHandler(this.personRouteToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // statusStrip

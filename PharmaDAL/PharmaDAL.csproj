@@ -107,6 +107,7 @@
     <Compile Include="Master\AccountLedgerMasterDao.cs" />
     <Compile Include="Master\CompanyDao.cs" />
     <Compile Include="Master\ItemDao.cs" />
+    <Compile Include="Master\PersonalLedgerMasterDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

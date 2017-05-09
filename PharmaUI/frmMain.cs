@@ -112,16 +112,44 @@ namespace PharmaUI
 
         private void accountLedgerMenuItem_Click(object sender, EventArgs e)
         {
+            //frmAccountLedgerMaster childForm = new frmAccountLedgerMaster();
+            //childForm.MdiParent = this;
+            //childForm.Text = "Account Ledger Information";
+            //childForm.Show();
+
             frmAccountLedgerMaster childForm = new frmAccountLedgerMaster();
             childForm.MdiParent = this;
             childForm.Text = "Account Ledger Information";
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.ControlBox = false;
+            childForm.MaximizeBox = false;
+            childForm.MinimizeBox = false;
+            childForm.ShowIcon = false;
+            childForm.Dock = DockStyle.Fill;
+
             childForm.Show();
+
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             List<Control> allControls = ExtensionMethods.GetAllControls(this);
             allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
+        }
+
+        private void personLedgerMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPersonalLedgerMaster childForm = new frmPersonalLedgerMaster();
+            childForm.MdiParent = this;
+            childForm.Text = "Personal Diary";
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.ControlBox = false;
+            childForm.MaximizeBox = false;
+            childForm.MinimizeBox = false;
+            childForm.ShowIcon = false;
+            childForm.Dock = DockStyle.Fill;
+
+            childForm.Show();
         }
     }
 }

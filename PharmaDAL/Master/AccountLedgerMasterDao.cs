@@ -2,6 +2,7 @@
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.AccountLedgerMaster.Where(p => p.Status).Select(p => new PharmaBusinessObjects.Master.AccountLedgerMaster()
+                return context.AccountLedgerMaster.Select(p => new PharmaBusinessObjects.Master.AccountLedgerMaster()
                 {
                     AccountLedgerID = p.AccountLedgerID,
                     AccountLedgerName = p.AccountLedgerName,
@@ -27,7 +28,8 @@ namespace PharmaDAL.Master
                     CreditControlCodeID = p.CreditControlCodeID,
                     DebitControlCodeID = p.DebitControlCodeID,
                     OpeningBalance = p.OpeningBalance,
-                    CreditDebit = p.CreditDebit                    
+                    CreditDebit = p.CreditDebit,
+                    Status = p.Status           
                 }).ToList();
             }
 
@@ -51,9 +53,10 @@ namespace PharmaDAL.Master
                     DebitControlCodeID = p.DebitControlCodeID,
                     DebitControlCode = p.AccountLedgerMaster3.AccountLedgerName,
                     CreditControlCode = p.AccountLedgerMaster2.AccountLedgerName,
-
                     OpeningBalance = p.OpeningBalance,
-                    CreditDebit = p.CreditDebit
+                    CreditDebit = p.CreditDebit,
+                    Status = p.Status
+                    
                 }).FirstOrDefault();
             }
 
@@ -75,7 +78,7 @@ namespace PharmaDAL.Master
                     AccountTypeId = p.AccountTypeId,                      
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
-                    Status = true
+                    Status = p.Status
                 };
 
                 var accountLedger=  new Common.CommonDao().GetAccountLedgerTypes().Where(q => q.AccountLedgerTypeID == p.AccountLedgerTypeId).FirstOrDefault();
@@ -95,21 +98,28 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                var accountLedgerMaster = context.AccountLedgerMaster.Where(q => q.AccountLedgerID == p.AccountLedgerID).FirstOrDefault();
-
-                if (accountLedgerMaster != null)
+                try
                 {
-                    accountLedgerMaster.AccountLedgerName = p.AccountLedgerName;
-                    accountLedgerMaster.AccountLedgerCode = p.AccountLedgerCode;
-                    accountLedgerMaster.AccountLedgerTypeId = p.AccountLedgerTypeId;
-                    accountLedgerMaster.AccountTypeId = p.AccountTypeId;
-                    accountLedgerMaster.CreditControlCodeID = p.CreditControlCodeID;
-                    accountLedgerMaster.DebitControlCodeID = p.DebitControlCodeID;
-                    accountLedgerMaster.OpeningBalance = p.OpeningBalance;
-                    accountLedgerMaster.CreditDebit = p.CreditDebit;
+                    var accountLedgerMaster = context.AccountLedgerMaster.Where(q => q.AccountLedgerID == p.AccountLedgerID).FirstOrDefault();
+
+                    if (accountLedgerMaster != null)
+                    {
+                        accountLedgerMaster.AccountLedgerName = p.AccountLedgerName;
+                        accountLedgerMaster.AccountLedgerCode = p.AccountLedgerCode;
+                        accountLedgerMaster.AccountLedgerTypeId = p.AccountLedgerTypeId;
+                        accountLedgerMaster.AccountTypeId = p.AccountTypeId;
+                        accountLedgerMaster.CreditControlCodeID = p.CreditControlCodeID;
+                        accountLedgerMaster.DebitControlCodeID = p.DebitControlCodeID;
+                        accountLedgerMaster.OpeningBalance = p.OpeningBalance;
+                        accountLedgerMaster.CreditDebit = p.CreditDebit;
+                    }
+
+                    return context.SaveChanges();
                 }
-                
-                return context.SaveChanges();
+                catch (DbEntityValidationException ex)
+                {
+                    throw ex;
+                }
             }
 
         }
@@ -137,8 +147,8 @@ namespace PharmaDAL.Master
                                           DebitControlCode = p.AccountLedgerMaster3.AccountLedgerName,
                                           CreditControlCode = p.AccountLedgerMaster2.AccountLedgerName,
                                           OpeningBalance = p.OpeningBalance,
-                                          CreditDebit = p.CreditDebit
-
+                                          CreditDebit = p.CreditDebit,
+                                          Status = p.Status
                                       }).ToList();
 
                 return accountLedgers;

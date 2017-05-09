@@ -16,7 +16,7 @@ namespace PharmaUI
     public partial class frmAccountLedgerMasterAddUpdate : Form
     {
         IApplicationFacade applicationFacade;
-        private int AccountLedgerId{ get; set; }
+        private int AccountLedgerId { get; set; }
 
         public frmAccountLedgerMasterAddUpdate()
         {
@@ -38,11 +38,16 @@ namespace PharmaUI
             FormLoad();
 
             if (this.AccountLedgerId > 0)
-            {               
+            {
+                //lblAccNo.Visible = true;
+                //txtAccountLedgerCode.Visible = true;
+
                 FillFormForUpdate();
             }
             else
             {
+                //lblAccNo.Visible = false;
+                //txtAccountLedgerCode.Visible = false;
                 FillCombo();
             }
 
@@ -89,7 +94,7 @@ namespace PharmaUI
             }
 
             cbAccountLedgerType.SelectedValue = accountLedgerMaster.AccountLedgerTypeId;
-           // cbAccountType.SelectedValue = accountLedgerMaster.AccountTypeId;
+            // cbAccountType.SelectedValue = accountLedgerMaster.AccountTypeId;
             cbDebitCredit.SelectedItem = accountLedgerMaster.CreditDebit;
 
             tbAccountName.Text = accountLedgerMaster.AccountLedgerName;
@@ -137,7 +142,7 @@ namespace PharmaUI
             cbAccountType.DisplayMember = "AccountTypeDisplayName";
 
             cbDebitCredit.SelectedItem = "C";
-            
+
             if (accountLedgerTypes.FirstOrDefault().AccountLedgerTypeSystemName != "ControlCodes")
             {
                 var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
@@ -152,7 +157,7 @@ namespace PharmaUI
                 cbCreditControlCode.ValueMember = "AccountLedgerID";
                 cbCreditControlCode.DisplayMember = "AccountLedgerCode";
 
-               gbBalanceSheet.Visible = true;
+                gbBalanceSheet.Visible = true;
             }
             else
             {
@@ -162,7 +167,7 @@ namespace PharmaUI
             }
 
             cbAccountLedgerType.SelectedIndexChanged += CbAccountLedgerType_SelectedIndexChanged;
-                 
+
         }
 
         private void CbAccountLedgerType_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,7 +206,7 @@ namespace PharmaUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(tbAccountName.Text))
+            if (string.IsNullOrEmpty(tbAccountName.Text))
             {
                 throw new Exception("Account Name can not be blank");
             }
@@ -210,13 +215,14 @@ namespace PharmaUI
             {
                 throw new Exception("Account Name can not be blank");
             }
-            
+
             AccountLedgerMaster model = new AccountLedgerMaster();
             model.AccountLedgerTypeId = (int)cbAccountLedgerType.SelectedValue;
-            model.AccountLedgerName = tbAccountName.Text;            
+            model.AccountLedgerName = tbAccountName.Text;
             model.AccountTypeId = (int)cbAccountType.SelectedValue;
             model.OpeningBalance = Convert.ToDouble(tbOpeningBalance.Text);
             model.CreditDebit = cbDebitCredit.Text;
+            model.AccountLedgerCode = txtAccountLedgerCode.Text;
 
             if (cbDebitControlCode.DataSource != null)
             {
@@ -226,9 +232,23 @@ namespace PharmaUI
             model.AccountLedgerID = this.AccountLedgerId;
 
 
-            var abc= this.AccountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
+            var abc = this.AccountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
 
             this.Close();
+        }
+
+        private void tbOpeningBalance_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

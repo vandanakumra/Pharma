@@ -51,6 +51,7 @@
     <Compile Include="Master\AccountLedgerMaster.cs" />
     <Compile Include="Master\Company.cs" />
     <Compile Include="Master\Item.cs" />
+    <Compile Include="Master\PersonalLedger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

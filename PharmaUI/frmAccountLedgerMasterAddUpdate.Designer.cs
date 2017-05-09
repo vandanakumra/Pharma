@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.cbAccountLedgerType = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblAccNo = new System.Windows.Forms.Label();
             this.txtAccountLedgerCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbAccountName = new System.Windows.Forms.TextBox();
@@ -70,15 +70,15 @@
             this.cbAccountLedgerType.Size = new System.Drawing.Size(212, 24);
             this.cbAccountLedgerType.TabIndex = 1;
             // 
-            // label2
+            // lblAccNo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(33, 104);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 19);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Account Number";
+            this.lblAccNo.AutoSize = true;
+            this.lblAccNo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccNo.Location = new System.Drawing.Point(33, 104);
+            this.lblAccNo.Name = "lblAccNo";
+            this.lblAccNo.Size = new System.Drawing.Size(113, 19);
+            this.lblAccNo.TabIndex = 2;
+            this.lblAccNo.Text = "Account Number";
             // 
             // txtAccountLedgerCode
             // 
@@ -93,7 +93,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(33, 175);
+            this.label3.Location = new System.Drawing.Point(33, 173);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(99, 19);
             this.label3.TabIndex = 4;
@@ -111,7 +111,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(33, 213);
+            this.label4.Location = new System.Drawing.Point(33, 210);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 19);
             this.label4.TabIndex = 6;
@@ -124,6 +124,8 @@
             this.tbOpeningBalance.Name = "tbOpeningBalance";
             this.tbOpeningBalance.Size = new System.Drawing.Size(212, 23);
             this.tbOpeningBalance.TabIndex = 7;
+            this.tbOpeningBalance.Text = "0.00";
+            this.tbOpeningBalance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbOpeningBalance_KeyPress);
             // 
             // cbDebitCredit
             // 
@@ -205,7 +207,7 @@
             this.gbBalanceSheet.Controls.Add(this.label6);
             this.gbBalanceSheet.Controls.Add(this.label7);
             this.gbBalanceSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbBalanceSheet.Location = new System.Drawing.Point(33, 249);
+            this.gbBalanceSheet.Location = new System.Drawing.Point(26, 240);
             this.gbBalanceSheet.Name = "gbBalanceSheet";
             this.gbBalanceSheet.Size = new System.Drawing.Size(438, 116);
             this.gbBalanceSheet.TabIndex = 15;
@@ -254,7 +256,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 428);
+            this.ClientSize = new System.Drawing.Size(476, 432);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCancel);
@@ -268,7 +270,7 @@
             this.Controls.Add(this.tbAccountName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtAccountLedgerCode);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblAccNo);
             this.Controls.Add(this.cbAccountLedgerType);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -287,7 +289,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbAccountLedgerType;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblAccNo;
         private System.Windows.Forms.TextBox txtAccountLedgerCode;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbAccountName;

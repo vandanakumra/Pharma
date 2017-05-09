@@ -89,6 +89,18 @@
     <Compile Include="frmItemMasterAddUpdate.Designer.cs">
       <DependentUpon>frmItemMasterAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPersonalLedgerMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPersonalLedgerMaster.Designer.cs">
+      <DependentUpon>frmPersonalLedgerMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPersonalLedgerMasterAddUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPersonalLedgerMasterAddUpdate.Designer.cs">
+      <DependentUpon>frmPersonalLedgerMasterAddUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAccountLedgerMaster.resx">
@@ -108,6 +120,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmItemMasterAddUpdate.resx">
       <DependentUpon>frmItemMasterAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPersonalLedgerMaster.resx">
+      <DependentUpon>frmPersonalLedgerMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPersonalLedgerMasterAddUpdate.resx">
+      <DependentUpon>frmPersonalLedgerMasterAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
