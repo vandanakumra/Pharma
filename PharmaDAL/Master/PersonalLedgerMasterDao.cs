@@ -9,11 +9,11 @@ namespace PharmaDAL.Master
 {
     public class PersonalLedgerMasterDao
     {
-        public List<PharmaBusinessObjects.Master.PersonalLedger> GetPersonalLedgers()
+        public List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.PersonalLedger.Select(p => new PharmaBusinessObjects.Master.PersonalLedger()
+                return context.PersonalLedger.Select(p => new PharmaBusinessObjects.Master.PersonalLedgerMaster()
                 {
                     PersonalLedgerId = p.PersonalLedgerId,
                     PersonalLedgerCode = p.PersonalLedgerCode,
@@ -33,7 +33,7 @@ namespace PharmaDAL.Master
 
         }
 
-        public int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p)
+        public int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -62,7 +62,7 @@ namespace PharmaDAL.Master
             }
         }
 
-        public int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p)
+        public int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -95,15 +95,6 @@ namespace PharmaDAL.Master
             }
 
         }
-
-
-
-
-
-
-
-
-
 
     }
 }

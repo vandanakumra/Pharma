@@ -22,6 +22,7 @@ namespace PharmaDAL.Entity
     
         public int InterestTypeId { get; set; }
         public string InterestType1 { get; set; }
+        public string SystemName { get; set; }
         public bool Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -43,9 +43,12 @@
     <Compile Include="ApplicationFacade.cs" />
     <Compile Include="Common\CommonBiz.cs" />
     <Compile Include="Master\AccountLedgerMasterBiz.cs" />
-    <Compile Include="Master\CompanyBiz.cs" />
-    <Compile Include="Master\ItemBiz.cs" />
-    <Compile Include="Master\PersonalLedgerBiz.cs" />
+    <Compile Include="Master\CompanyMasterBiz.cs" />
+    <Compile Include="Master\CustomerLedgerMasterBiz.cs" />
+    <Compile Include="Master\ItemMasterBiz.cs" />
+    <Compile Include="Master\PersonalLedgerMasterBiz.cs" />
+    <Compile Include="Master\PersonRouteMasterBiz.cs" />
+    <Compile Include="Master\SupplierLedgerMasterBiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

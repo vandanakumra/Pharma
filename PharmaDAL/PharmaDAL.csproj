@@ -105,9 +105,12 @@
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Master\AccountLedgerMasterDao.cs" />
-    <Compile Include="Master\CompanyDao.cs" />
-    <Compile Include="Master\ItemDao.cs" />
+    <Compile Include="Master\CompanyMasterDao.cs" />
+    <Compile Include="Master\CustomerLedgerMasterDao.cs" />
+    <Compile Include="Master\ItemDaoMaster.cs" />
     <Compile Include="Master\PersonalLedgerMasterDao.cs" />
+    <Compile Include="Master\PersonRouteMasterDao.cs" />
+    <Compile Include="Master\SupplierLedgerMasterDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

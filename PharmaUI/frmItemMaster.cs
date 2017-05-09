@@ -46,7 +46,7 @@ namespace PharmaUI
             if(e.RowIndex != -1)
             {
                 frmItemMasterAddUpdate form = new frmItemMasterAddUpdate(true);
-                Item existingItem = (Item)dgvItemList.CurrentRow.DataBoundItem;
+                ItemMaster existingItem = (ItemMaster)dgvItemList.CurrentRow.DataBoundItem;
                 form.frmItemMasterAddUpdate_Fill_UsingExistingItem(existingItem);
                 form.FormClosed += Form_FormClosed;
                 form.ShowDialog();
@@ -108,7 +108,7 @@ namespace PharmaUI
             {
                 if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    Item itemToBeRemoved = (Item)dgvItemList.SelectedRows[0].DataBoundItem;
+                    ItemMaster itemToBeRemoved = (ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;
                     applicationFacade.DeleteItem(itemToBeRemoved);
                     LoadDataGrid();
                 }

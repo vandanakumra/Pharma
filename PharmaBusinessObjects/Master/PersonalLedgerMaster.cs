@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmaBusinessObjects.Master
 {
-    public class PersonalLedger
+    public class PersonalLedgerMaster
     {
         public int PersonalLedgerId { get; set; }
         public string PersonalLedgerCode { get; set; }
@@ -14,9 +14,9 @@ namespace PharmaBusinessObjects.Master
         public string PersonalLedgerShortName { get; set; }
         public string Address { get; set; }
         public string ContactPerson { get; set; }
-        public int? Mobile { get; set; }
-        public int? Pager { get; set; }
-        public int? Fax { get; set; }
+        public string Mobile { get; set; }
+        public string Pager { get; set; }
+        public string Fax { get; set; }
         public string OfficePhone { get; set; }
         public string ResidentPhone { get; set; }
         public string EmailAddress { get; set; }

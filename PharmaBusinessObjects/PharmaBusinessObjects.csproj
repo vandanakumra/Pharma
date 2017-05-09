@@ -49,9 +49,12 @@
     <Compile Include="Common\RecordType.cs" />
     <Compile Include="IApplicationFacade.cs" />
     <Compile Include="Master\AccountLedgerMaster.cs" />
-    <Compile Include="Master\Company.cs" />
-    <Compile Include="Master\Item.cs" />
-    <Compile Include="Master\PersonalLedger.cs" />
+    <Compile Include="Master\CompanyMaster.cs" />
+    <Compile Include="Master\CustomerLedgerMaster.cs" />
+    <Compile Include="Master\ItemMaster.cs" />
+    <Compile Include="Master\PersonalLedgerMaster.cs" />
+    <Compile Include="Master\PersonRouteMaster.cs" />
+    <Compile Include="Master\SupplierLedgerMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

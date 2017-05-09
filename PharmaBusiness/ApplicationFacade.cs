@@ -18,11 +18,11 @@ namespace PharmaBusiness
         /// Fetch all the active items
         /// </summary>
         /// <returns>List of items</returns>
-        public List<Item> GetAllItems()
+        public List<ItemMaster> GetAllItems()
         {
             try
             {
-                return new ItemBiz().GetAllItems();
+                return new ItemMasterBiz().GetAllItems();
             }
             catch (Exception)
             {
@@ -35,11 +35,11 @@ namespace PharmaBusiness
         /// </summary>
         /// <param name="newItem"></param>
         /// <returns>true if added successfully</returns>
-        public bool AddNewItem(Item newItem)
+        public bool AddNewItem(ItemMaster newItem)
         {
             try
             {
-                return new ItemBiz().AddNewItem(newItem);
+                return new ItemMasterBiz().AddNewItem(newItem);
             }
             catch (Exception)
             {
@@ -52,11 +52,11 @@ namespace PharmaBusiness
         /// </summary>
         /// <param name="existingItem"></param>
         /// <returns>True if updated is succesfull</returns>
-        public bool UpdateItem(Item existingItem)
+        public bool UpdateItem(ItemMaster existingItem)
         {
             try
             {
-                return new ItemBiz().UpdateItem(existingItem);
+                return new ItemMasterBiz().UpdateItem(existingItem);
             }
             catch (Exception)
             {
@@ -69,11 +69,11 @@ namespace PharmaBusiness
         /// </summary>
         /// <param name="existingItem"></param>
         /// <returns>True if deletion is successfull</returns>
-        public bool DeleteItem(Item existingItem)
+        public bool DeleteItem(ItemMaster existingItem)
         {
             try
             {
-                return new ItemBiz().DeleteItem(existingItem);
+                return new ItemMasterBiz().DeleteItem(existingItem);
             }
             catch (Exception)
             {
@@ -90,7 +90,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new ItemBiz().GetNextItemCode(companyCode);
+                return new ItemMasterBiz().GetNextItemCode(companyCode);
             }
             catch (Exception)
             {
@@ -102,11 +102,11 @@ namespace PharmaBusiness
              /// Fetch all the active items by Search
              /// </summary>
              /// <returns>List of items</returns>
-        public List<Item> GetAllItemsBySearch(string searchString)
+        public List<ItemMaster> GetAllItemsBySearch(string searchString)
         {
             try
             {
-                return new ItemBiz().GetAllItemsBySearch(searchString);
+                return new ItemMasterBiz().GetAllItemsBySearch(searchString);
             }
             catch (Exception)
             {
@@ -121,11 +121,11 @@ namespace PharmaBusiness
         /// Add new company to CompanyMaster
         /// </summary>
         /// <returns>List of companies</returns>
-        public List<Company> GetCompanies(string searchText)
+        public List<CompanyMaster> GetCompanies(string searchText)
         {
             try
             {
-                return new CompanyBiz().GetCompanies(searchText);
+                return new CompanyMasterBiz().GetCompanies(searchText);
             }
             catch (Exception)
             {
@@ -134,11 +134,11 @@ namespace PharmaBusiness
             }
         }
 
-        public PharmaBusinessObjects.Master.Company GetCompanyById(int companyID)
+        public PharmaBusinessObjects.Master.CompanyMaster GetCompanyById(int companyID)
         {
             try
             {
-                return new CompanyBiz().GetCompanyById(companyID);
+                return new CompanyMasterBiz().GetCompanyById(companyID);
             }
             catch (Exception)
             {
@@ -147,12 +147,12 @@ namespace PharmaBusiness
             }
         }
 
-        public int AddCompany(PharmaBusinessObjects.Master.Company company)
+        public int AddCompany(PharmaBusinessObjects.Master.CompanyMaster company)
         {
 
             try
             {
-                return new CompanyBiz().AddCompany(company);
+                return new CompanyMasterBiz().AddCompany(company);
             }
             catch (Exception ex)
             {
@@ -161,11 +161,11 @@ namespace PharmaBusiness
             }
 
         }
-        public int UpdateCompany(PharmaBusinessObjects.Master.Company company)
+        public int UpdateCompany(PharmaBusinessObjects.Master.CompanyMaster company)
         {
             try
             {
-                return new CompanyBiz().UpdateCompany(company);
+                return new CompanyMasterBiz().UpdateCompany(company);
             }
             catch (Exception)
             {
@@ -177,7 +177,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CompanyBiz().DeleteCompany(companyId);
+                return new CompanyMasterBiz().DeleteCompany(companyId);
             }
             catch (Exception)
             {
@@ -187,7 +187,7 @@ namespace PharmaBusiness
         }
         #endregion
 
-        #region Account Ledger
+        #region Account Ledger Master
 
         public List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgers()
         {
@@ -315,13 +315,13 @@ namespace PharmaBusiness
 
         #endregion
 
-        #region Personal Ledger
+        #region Personal Ledger Master
 
-        public List<PharmaBusinessObjects.Master.PersonalLedger> GetPersonalLedgers()
+        public List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers()
         {
             try
             {
-                return new PersonalLedgerBiz().GetPersonalLedgers();
+                return new PersonalLedgerMasterBiz().GetPersonalLedgers();
             }
             catch (Exception)
             {
@@ -329,11 +329,11 @@ namespace PharmaBusiness
                 throw;
             }
         }
-        public int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p)
+        public int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
             try
             {
-                return new PersonalLedgerBiz().AddPersonalLedger(p);
+                return new PersonalLedgerMasterBiz().AddPersonalLedger(p);
             }
             catch (Exception)
             {
@@ -341,11 +341,11 @@ namespace PharmaBusiness
                 throw;
             }
         }
-        public int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p)
+        public int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
             try
             {
-                return new PersonalLedgerBiz().UpdatePersonalLedger(p);
+                return new PersonalLedgerMasterBiz().UpdatePersonalLedger(p);
             }
             catch (Exception)
             {
@@ -356,6 +356,133 @@ namespace PharmaBusiness
         }
 
         #endregion
+
+        #region  Supplier Ledger Master
+
+        public List<SupplierLedgerMaster> GetSupplierLedgers()
+        {
+            try
+            {
+                return new SupplierLedgerMasterBiz().GetSupplierLedgers();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int AddSupplierLedger(SupplierLedgerMaster p)
+        {
+            try
+            {
+                return new SupplierLedgerMasterBiz().AddSupplierLedger(p);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int UpdateSupplierLedger(SupplierLedgerMaster p)
+        {
+            try
+            {
+                return new SupplierLedgerMasterBiz().UpdateSupplierLedger(p);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Person Route Master
+
+        public List<PersonRouteMaster> GetPersonRoutes()
+        {
+            try
+            {
+                return new PersonRouteMasterBiz().GetPersonRoutes();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int AddPersonRoute(PersonRouteMaster p)
+        {
+            try
+            {
+                return new PersonRouteMasterBiz().AddPersonRoute(p);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int UpdatePersonRoute(PersonRouteMaster p)
+        {
+            try
+            {
+                return new PersonRouteMasterBiz().UpdatePersonRoute(p);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Customer Ledger Master
+
+        public List<CustomerLedgerMaster> GetCustomerLedgers()
+        {
+            try
+            {
+                return new CustomerLedgerMasterBiz().GetCustomerLedgers();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int AddCustomerLedger(CustomerLedgerMaster p)
+        {
+            try
+            {
+                return new CustomerLedgerMasterBiz().AddCustomerLedger(p);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int UpdateCustomerLedger(CustomerLedgerMaster p)
+        {
+            try
+            {
+                return new CustomerLedgerMasterBiz().UpdateCustomerLedger(p);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #endregion
+
+
+
 
     }
 }

@@ -57,7 +57,8 @@ namespace PharmaDAL.Common
                 return context.InterestType.Where(p => p.Status).Select(p => new PharmaBusinessObjects.Common.InterestType()
                 {
                     InterestTypeId = p.InterestTypeId,
-                    InterestTypeName = p.InterestType1,                   
+                    InterestTypeName = p.InterestType1,  
+                    SystemName = p.SystemName   ,              
                     Status = p.Status
                 }).ToList();
             }
@@ -85,6 +86,7 @@ namespace PharmaDAL.Common
                 {
                     RecordTypeId = p.RecordTypeId,
                     RecordTypeName = p.RecordType1,
+                    SystemName = p.SystemName,
                     Status = p.Status
                 }).ToList();
             }

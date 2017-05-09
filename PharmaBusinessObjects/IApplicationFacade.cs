@@ -12,19 +12,19 @@ namespace PharmaBusinessObjects
 
         #region Item Master
 
-        List<Item> GetAllItems();
-        bool AddNewItem(Item newItem);
-        bool UpdateItem(Item existingItem);
-        bool DeleteItem(Item existingItem);
+        List<ItemMaster> GetAllItems();
+        bool AddNewItem(ItemMaster newItem);
+        bool UpdateItem(ItemMaster existingItem);
+        bool DeleteItem(ItemMaster existingItem);
         string GetNextItemCode(string companyCode);
-        List<Item> GetAllItemsBySearch(string searchString);
+        List<ItemMaster> GetAllItemsBySearch(string searchString);
         #endregion
 
         #region Company Master
-        List<Company> GetCompanies(string searchText);
-        PharmaBusinessObjects.Master.Company GetCompanyById(int companyId);
-        int AddCompany(PharmaBusinessObjects.Master.Company company);
-        int UpdateCompany(PharmaBusinessObjects.Master.Company company);
+        List<CompanyMaster> GetCompanies(string searchText);
+        PharmaBusinessObjects.Master.CompanyMaster GetCompanyById(int companyId);
+        int AddCompany(PharmaBusinessObjects.Master.CompanyMaster company);
+        int UpdateCompany(PharmaBusinessObjects.Master.CompanyMaster company);
         int DeleteCompany(int companyId);        
         #endregion
 
@@ -50,11 +50,37 @@ namespace PharmaBusinessObjects
 
         #endregion
 
-        #region Personal Ledger
+        #region Personal Ledger Master
 
-        List<PharmaBusinessObjects.Master.PersonalLedger> GetPersonalLedgers();
-        int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p);
-        int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p);
+        List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers();
+        int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p);
+        int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p);
+        #endregion
+
+        #region Supplier Ledger Master
+
+        List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers();
+        int AddSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
+
+        int UpdateSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
+
+        #endregion
+
+        #region Person Route Master
+
+        List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutes();
+        int AddPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p);
+
+        int UpdatePersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p);
+
+        #endregion
+
+        #region Customer Ledger Master
+
+        List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers();
+        int AddCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
+        int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
+
         #endregion
     }
 

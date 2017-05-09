@@ -76,10 +76,10 @@ namespace PharmaUI
                 Choice choice;
                 Status status;
 
-                Item item = new Item();
+                ItemMaster item = new ItemMaster();
                 item.ItemCode = tbxItemCode.Text;
                 item.ItemName = tbxItemName.Text;
-                item.CompanyCode = (cbxComanyCode.SelectedItem as Company).CompanyCode;
+                item.CompanyCode = (cbxComanyCode.SelectedItem as CompanyMaster).CompanyCode;
                 item.ConversionRate = ExtensionMethods.SafeConversionDouble(tbxConvRate.Text);
                 item.ShortName = tbxShortName.Text;
                 item.Packing = tbxPacking.Text;
@@ -232,7 +232,7 @@ namespace PharmaUI
             this.Close();
         }
 
-        public void frmItemMasterAddUpdate_Fill_UsingExistingItem(Item existingItem)
+        public void frmItemMasterAddUpdate_Fill_UsingExistingItem(ItemMaster existingItem)
         {
             if (existingItem!=null)
             {

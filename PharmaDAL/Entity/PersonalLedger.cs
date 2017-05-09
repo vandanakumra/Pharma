@@ -20,9 +20,9 @@ namespace PharmaDAL.Entity
         public string PersonalLedgerShortName { get; set; }
         public string Address { get; set; }
         public string ContactPerson { get; set; }
-        public Nullable<int> Mobile { get; set; }
-        public Nullable<int> Pager { get; set; }
-        public Nullable<int> Fax { get; set; }
+        public string Mobile { get; set; }
+        public string Pager { get; set; }
+        public string Fax { get; set; }
         public string OfficePhone { get; set; }
         public string ResidentPhone { get; set; }
         public string EmailAddress { get; set; }

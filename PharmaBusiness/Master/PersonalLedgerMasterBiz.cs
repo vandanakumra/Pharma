@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace PharmaBusiness.Master
 {
-    internal class PersonalLedgerBiz
+    internal class PersonalLedgerMasterBiz
     {
-        internal List<PharmaBusinessObjects.Master.PersonalLedger> GetPersonalLedgers()
+        internal List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers()
         {
             return new PersonalLedgerMasterDao().GetPersonalLedgers();
         }
 
-        internal int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p)
+        internal int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
             return new PersonalLedgerMasterDao().AddPersonalLedger(p);
         }
 
-        internal int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedger p)
+        internal int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
             return new PersonalLedgerMasterDao().UpdatePersonalLedger(p);
         }

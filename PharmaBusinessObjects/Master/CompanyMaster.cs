@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmaBusinessObjects.Master
 {
-    public class Company
+    public class CompanyMaster
     {
         public int CompanyId { get; set; }
         public string CompanyCode { get; set; }

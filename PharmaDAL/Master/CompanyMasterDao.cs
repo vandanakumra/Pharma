@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PharmaDAL.Entity;
-using PharmaBusinessObjects.Master;
 using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaDAL.Master
 {
-    public class CompanyDao
+    public class CompanyMasterDao
     {
-        public List<Company> GetCompanies(string searchText)
+        public List<PharmaBusinessObjects.Master.CompanyMaster> GetCompanies(string searchText)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                List<Company> companyList = context.CompanyMaster.Where(p => p.Status && (string.IsNullOrEmpty(searchText) || p.CompanyName.Contains(searchText))).Select(p => new Company()
+                List<PharmaBusinessObjects.Master.CompanyMaster> companyList = context.CompanyMaster.Where(p => (string.IsNullOrEmpty(searchText) || p.CompanyName.Contains(searchText))).Select(p => new PharmaBusinessObjects.Master.CompanyMaster()
                                             {
                                                 CompanyId = p.CompanyId,
                                                 CompanyName = p.CompanyName,
@@ -36,11 +35,11 @@ namespace PharmaDAL.Master
             }
         }
 
-        public Company GetCompanyById(int companyId)
+        public PharmaBusinessObjects.Master.CompanyMaster GetCompanyById(int companyId)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.CompanyMaster.Where(p => p.CompanyId == companyId).Select(p => new Company()
+                return context.CompanyMaster.Where(p => p.CompanyId == companyId).Select(p => new PharmaBusinessObjects.Master.CompanyMaster()
                 {
                     CompanyId = p.CompanyId,
                     CompanyName = p.CompanyName,
@@ -54,7 +53,7 @@ namespace PharmaDAL.Master
             }
         }
 
-        public int AddCompany(PharmaBusinessObjects.Master.Company company)
+        public int AddCompany(PharmaBusinessObjects.Master.CompanyMaster company)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -64,7 +63,7 @@ namespace PharmaDAL.Master
 
                 var companyCode = maxCompanyCode.ToString().PadLeft(3, '0');
 
-                CompanyMaster table = new CompanyMaster()
+                Entity.CompanyMaster table = new Entity.CompanyMaster()
                 {
                     CompanyCode = companyCode,
                     Status = company.Status,
@@ -80,7 +79,7 @@ namespace PharmaDAL.Master
             }
         }
 
-        public int UpdateCompany(PharmaBusinessObjects.Master.Company company)
+        public int UpdateCompany(PharmaBusinessObjects.Master.CompanyMaster company)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {

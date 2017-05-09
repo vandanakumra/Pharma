@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PharmaDAL.Entity;
-using PharmaBusinessObjects.Master;
 
 namespace PharmaDAL.Master
 {
-    public class ItemDao
+    public class ItemDaoMaster
     {
-        public List<Item> GetAllItems()
+        public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItems()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.ItemMaster.Where(p => p.Status).Select(p => new Item()
+                return context.ItemMaster.Select(p => new PharmaBusinessObjects.Master.ItemMaster()
                 {
                     ItemID = p.ItemID,
                     ItemCode = p.ItemCode,
@@ -58,7 +57,7 @@ namespace PharmaDAL.Master
             }
         }
 
-        public bool AddNewItem(Item newItem)
+        public bool AddNewItem(PharmaBusinessObjects.Master.ItemMaster newItem)
         {
             try
             {
@@ -67,9 +66,9 @@ namespace PharmaDAL.Master
                     int _result = 0;
                     int totalItemsFromSameCompany = TotalItemsFromSameCompany(newItem.CompanyCode);
                     totalItemsFromSameCompany++;
-                    ItemMaster newItemMasterDB = new ItemMaster()
+                    Entity.ItemMaster newItemMasterDB = new Entity.ItemMaster()
                     {
-                        ItemCode = String.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
+                        ItemCode = string.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
                         ItemName = newItem.ItemName,
                         CompanyCode = newItem.CompanyCode,
                         ConversionRate = newItem.ConversionRate,
@@ -123,12 +122,14 @@ namespace PharmaDAL.Master
 
         }
 
-        public bool UpdateItem(Item existingItem)
+        public bool UpdateItem(PharmaBusinessObjects.Master.ItemMaster existingItem)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 int _result = 0;
-                ItemMaster existingItemDB = context.ItemMaster.Where(p => p.ItemCode == existingItem.ItemCode && p.Status).FirstOrDefault();
+
+                Entity.ItemMaster existingItemDB = context.ItemMaster.Where(p => p.ItemCode == existingItem.ItemCode && p.Status).FirstOrDefault();
+
                 if (existingItemDB != null)
                 {
                     existingItemDB.ItemName = existingItem.ItemName;
@@ -176,17 +177,17 @@ namespace PharmaDAL.Master
             }
         }
 
-        public bool DeleteItem(Item existingItem)
+        public bool DeleteItem(PharmaBusinessObjects.Master.ItemMaster existingItem)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 int _result = 0;
 
-                ItemMaster existingItemDB = context.ItemMaster.Where(p => p.ItemCode == existingItem.ItemCode && p.Status).FirstOrDefault();
+                Entity.ItemMaster existingItemDB = context.ItemMaster.Where(p => p.ItemCode == existingItem.ItemCode && p.Status).FirstOrDefault();
 
                 if (existingItemDB != null)
                 {
-                    context.ItemMaster.Remove(existingItemDB);
+                    context.ItemMaster.Remove((Entity.ItemMaster)existingItemDB);
                 }
                 _result = context.SaveChanges();
 
@@ -207,13 +208,13 @@ namespace PharmaDAL.Master
         }
 
 
-        public List<Item> GetAllItemsBySearch(string searchString = null)
+        public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 return context.ItemMaster.Where(p => p.Status
                                                 && (string.IsNullOrEmpty(searchString) || p.ItemName.Contains(searchString))
-                                                ).Select(p => new Item()
+                                                ).Select(p => new PharmaBusinessObjects.Master.ItemMaster()
                 {
                     ItemID = p.ItemID,
                     ItemCode = p.ItemCode,

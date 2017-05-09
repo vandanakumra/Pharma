@@ -11,6 +11,7 @@ namespace PharmaBusinessObjects.Common
 
         public int InterestTypeId { get; set; }
         public string InterestTypeName { get; set; }
+        public string SystemName { get; set; }
         public bool Status { get; set; }
     }
 }

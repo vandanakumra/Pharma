@@ -10,6 +10,7 @@ namespace PharmaBusinessObjects.Common
     {
         public int RecordTypeId { get; set; }
         public string RecordTypeName { get; set; }
+        public string SystemName { get; set; }
         public bool Status { get; set; }
     }
 }

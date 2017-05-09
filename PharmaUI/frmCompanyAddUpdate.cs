@@ -47,7 +47,7 @@ namespace PharmaUI
 
         private void FillFormForUpdate()
         {
-            Company company = applicationFacade.GetCompanyById(this.CompanyId);
+            CompanyMaster company = applicationFacade.GetCompanyById(this.CompanyId);
 
             if(company != null)
             {
@@ -113,7 +113,7 @@ namespace PharmaUI
             Choice choice;
             DI di;
 
-            Company company = new Company();
+            CompanyMaster company = new CompanyMaster();
             company.CompanyCode = txtCompanyCode.Text;
             company.CompanyId = this.CompanyId;
             company.CompanyName = txtCompanyName.Text;
