@@ -181,7 +181,9 @@ namespace PharmaDAL.Master
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 int _result = 0;
+
                 ItemMaster existingItemDB = context.ItemMaster.Where(p => p.ItemCode == existingItem.ItemCode && p.Status).FirstOrDefault();
+
                 if (existingItemDB != null)
                 {
                     context.ItemMaster.Remove(existingItemDB);

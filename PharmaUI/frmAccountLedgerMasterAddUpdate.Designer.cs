@@ -47,6 +47,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbxStatus = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.gbBalanceSheet.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,7 +113,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(33, 210);
+            this.label4.Location = new System.Drawing.Point(33, 243);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 19);
             this.label4.TabIndex = 6;
@@ -120,7 +122,7 @@
             // tbOpeningBalance
             // 
             this.tbOpeningBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.tbOpeningBalance.Location = new System.Drawing.Point(163, 211);
+            this.tbOpeningBalance.Location = new System.Drawing.Point(163, 244);
             this.tbOpeningBalance.Name = "tbOpeningBalance";
             this.tbOpeningBalance.Size = new System.Drawing.Size(212, 23);
             this.tbOpeningBalance.TabIndex = 7;
@@ -135,7 +137,7 @@
             this.cbDebitCredit.Items.AddRange(new object[] {
             "C",
             "D"});
-            this.cbDebitCredit.Location = new System.Drawing.Point(381, 210);
+            this.cbDebitCredit.Location = new System.Drawing.Point(381, 243);
             this.cbDebitCredit.Name = "cbDebitCredit";
             this.cbDebitCredit.Size = new System.Drawing.Size(90, 24);
             this.cbDebitCredit.TabIndex = 8;
@@ -207,7 +209,7 @@
             this.gbBalanceSheet.Controls.Add(this.label6);
             this.gbBalanceSheet.Controls.Add(this.label7);
             this.gbBalanceSheet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbBalanceSheet.Location = new System.Drawing.Point(26, 240);
+            this.gbBalanceSheet.Location = new System.Drawing.Point(26, 273);
             this.gbBalanceSheet.Name = "gbBalanceSheet";
             this.gbBalanceSheet.Size = new System.Drawing.Size(438, 116);
             this.gbBalanceSheet.TabIndex = 15;
@@ -217,7 +219,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(129, 376);
+            this.btnSave.Location = new System.Drawing.Point(129, 409);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(83, 48);
             this.btnSave.TabIndex = 16;
@@ -228,7 +230,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(237, 376);
+            this.btnCancel.Location = new System.Drawing.Point(237, 409);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(83, 48);
             this.btnCancel.TabIndex = 17;
@@ -252,12 +254,33 @@
             this.panel1.TabIndex = 18;
             this.panel1.Tag = "";
             // 
+            // cbxStatus
+            // 
+            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxStatus.FormattingEnabled = true;
+            this.cbxStatus.Location = new System.Drawing.Point(163, 211);
+            this.cbxStatus.Name = "cbxStatus";
+            this.cbxStatus.Size = new System.Drawing.Size(212, 21);
+            this.cbxStatus.TabIndex = 25;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(33, 211);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 19);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Status";
+            // 
             // frmAccountLedgerMasterAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(476, 432);
+            this.ClientSize = new System.Drawing.Size(472, 493);
             this.ControlBox = false;
+            this.Controls.Add(this.cbxStatus);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -306,5 +329,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox cbxStatus;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -47,9 +47,9 @@
             this.dgvAccountLedger.Location = new System.Drawing.Point(12, 145);
             this.dgvAccountLedger.Name = "dgvAccountLedger";
             this.dgvAccountLedger.ReadOnly = true;
+            this.dgvAccountLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAccountLedger.Size = new System.Drawing.Size(1130, 260);
             this.dgvAccountLedger.TabIndex = 0;
-            this.dgvAccountLedger.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccountLedger_CellContentDoubleClick);
             // 
             // panel1
             // 
@@ -104,7 +104,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(294, 23);
             this.txtSearch.TabIndex = 5;
-            this.txtSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearch_KeyPress);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnAddNewLedger
             // 

@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Master;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI
 {
@@ -57,6 +59,9 @@ namespace PharmaUI
         {
             cbAccountLedgerType.SelectedIndexChanged -= CbAccountLedgerType_SelectedIndexChanged;
 
+            cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
+            cbxStatus.SelectedItem = Enums.Status.Active;
+
             var accountLedgerMaster = applicationFacade.GetAccountLedgerById(this.AccountLedgerId);
 
             cbAccountLedgerType.DataSource = accountLedgerMaster.AccountLedgerTypeList;
@@ -93,9 +98,9 @@ namespace PharmaUI
                 gbBalanceSheet.Visible = false;
             }
 
-            cbAccountLedgerType.SelectedValue = accountLedgerMaster.AccountLedgerTypeId;
-            // cbAccountType.SelectedValue = accountLedgerMaster.AccountTypeId;
+            cbAccountLedgerType.SelectedValue = accountLedgerMaster.AccountLedgerTypeId;            
             cbDebitCredit.SelectedItem = accountLedgerMaster.CreditDebit;
+            cbxStatus.SelectedItem = accountLedgerMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
 
             tbAccountName.Text = accountLedgerMaster.AccountLedgerName;
             txtAccountLedgerCode.Text = accountLedgerMaster.AccountLedgerCode;
@@ -132,6 +137,9 @@ namespace PharmaUI
 
         private void FillCombo()
         {
+            cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
+            cbxStatus.SelectedItem = Enums.Status.Active;
+
             var accountLedgerTypes = applicationFacade.GetAccountLedgerTypes();
             cbAccountLedgerType.DataSource = accountLedgerTypes;
             cbAccountLedgerType.ValueMember = "AccountLedgerTypeID";
@@ -216,6 +224,8 @@ namespace PharmaUI
                 throw new Exception("Account Name can not be blank");
             }
 
+            Status status;
+
             AccountLedgerMaster model = new AccountLedgerMaster();
             model.AccountLedgerTypeId = (int)cbAccountLedgerType.SelectedValue;
             model.AccountLedgerName = tbAccountName.Text;
@@ -231,10 +241,15 @@ namespace PharmaUI
             }
             model.AccountLedgerID = this.AccountLedgerId;
 
+            Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+            model.Status = status == Status.Active;
 
-            var abc = this.AccountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
+            var result = this.AccountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
 
-            this.Close();
+            if (result > 0)
+            {
+                this.Close();
+            }
         }
 
         private void tbOpeningBalance_KeyPress(object sender, KeyPressEventArgs e)

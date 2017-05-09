@@ -194,6 +194,7 @@
             // 
             // cbxStatus
             // 
+            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxStatus.FormattingEnabled = true;
             this.cbxStatus.Location = new System.Drawing.Point(218, 138);
             this.cbxStatus.Name = "cbxStatus";
@@ -202,6 +203,7 @@
             // 
             // cbxDI
             // 
+            this.cbxDI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxDI.FormattingEnabled = true;
             this.cbxDI.Location = new System.Drawing.Point(218, 169);
             this.cbxDI.Name = "cbxDI";

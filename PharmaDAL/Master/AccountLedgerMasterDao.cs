@@ -39,7 +39,7 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.AccountLedgerMaster.Where(p =>p.AccountLedgerID == accountLedgerID && p.Status).Select(p => new PharmaBusinessObjects.Master.AccountLedgerMaster()
+                return context.AccountLedgerMaster.Where(p =>p.AccountLedgerID == accountLedgerID).Select(p => new PharmaBusinessObjects.Master.AccountLedgerMaster()
                 {
                     AccountLedgerID = p.AccountLedgerID,
                     AccountLedgerName = p.AccountLedgerName,
@@ -112,6 +112,7 @@ namespace PharmaDAL.Master
                         accountLedgerMaster.DebitControlCodeID = p.DebitControlCodeID;
                         accountLedgerMaster.OpeningBalance = p.OpeningBalance;
                         accountLedgerMaster.CreditDebit = p.CreditDebit;
+                        accountLedgerMaster.Status = p.Status;
                     }
 
                     return context.SaveChanges();
