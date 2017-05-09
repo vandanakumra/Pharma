@@ -67,8 +67,7 @@ namespace PharmaUI
             {
                 if (String.IsNullOrWhiteSpace(tbxItemName.Text))
                 {
-                    errorProviderItem.SetError(tbxItemName,"Item Name field is Required");
-                    tbxItemName.Focus();
+                    errorProviderItem.SetError(tbxItemName, Constants.Messages.RequiredField);
                     tbxItemName.SelectAll();
                     return;
                 }
@@ -94,8 +93,8 @@ namespace PharmaUI
                 item.Scheme1 = ExtensionMethods.SafeConversionDouble(tbxScheme1.Text);
                 item.Scheme2 = ExtensionMethods.SafeConversionDouble(tbxScheme2.Text);
                 item.PurchaseExcise = ExtensionMethods.SafeConversionDouble(tbxPurchaseExcise.Text);
-                item.UPC = tbxUPC.Text;             
-                Enum.TryParse<Choice>(cbxHalfScheme.SelectedValue.ToString(), out choice);               
+                item.UPC = tbxUPC.Text;
+                Enum.TryParse<Choice>(cbxHalfScheme.SelectedValue.ToString(), out choice);
                 item.IsHalfScheme = choice == Choice.Yes;
                 Enum.TryParse<Choice>(cbxQtrScheme.SelectedValue.ToString(), out choice);
                 item.IsQTRScheme = choice == Choice.Yes;
@@ -114,7 +113,7 @@ namespace PharmaUI
                 item.Location = tbxLocation.Text;
                 item.MinimumStock = ExtensionMethods.SafeConversionInt(tbxMinimumStock.Text);
                 item.MaximumStock = ExtensionMethods.SafeConversionInt(tbxMaximumStock.Text);
-                item.SaleTypeId =( cbxSaleType.SelectedItem as AccountLedgerMaster).AccountLedgerID;
+                item.SaleTypeId = (cbxSaleType.SelectedItem as AccountLedgerMaster).AccountLedgerID;
                 Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
                 item.Status = status == Status.Active;
 
@@ -122,11 +121,11 @@ namespace PharmaUI
                 // if form is in Edit mode then udate item , else add item 
                 if (!isInEditMode)
                 {
-                    actionResult= applicationFacade.AddNewItem(item);
+                    actionResult = applicationFacade.AddNewItem(item);
                 }
                 else
                 {
-                    actionResult= applicationFacade.UpdateItem(item);
+                    actionResult = applicationFacade.UpdateItem(item);
                 }
 
                 //Close this form if operation is successful
@@ -144,29 +143,7 @@ namespace PharmaUI
 
         private void frmItemMasterAddUpdate_Load(object sender, EventArgs e)
         {
-            List<Control> allControls = ExtensionMethods.GetAllControls(this);
-            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
-
-            this.Dock = DockStyle.Fill;
-            panel1.Width = this.Width;
-
-            Label lbl = new Label();
-            lbl.Width = panel1.Width;
-            lbl.Dock = DockStyle.Fill;
-            lbl.TextAlign = ContentAlignment.MiddleCenter;
-            lbl.Top = 10;
-
-            if (isInEditMode)
-            {
-                lbl.Text = "Item Master - Update";
-            }
-            else
-            {
-                lbl.Text = "Item Master - Add";
-            }
-            
-            panel1.Controls.Add(lbl);
-
+            ExtensionMethods.FormLoad(this, isInEditMode ? "Item Master - Update" : "Item Master - Add");
             //Event to allow only decimal entry
             {
                 tbxConvRate.KeyPress += TbxAllowDecimal_KeyPress;
@@ -193,9 +170,10 @@ namespace PharmaUI
                 tbxQtyPerCase.KeyPress += TbxAllowDecimal_KeyPress;
                 tbxMinimumStock.KeyPress += TbxAllowDecimal_KeyPress;
                 tbxMaximumStock.KeyPress += TbxAllowDecimal_KeyPress;
-            }
-            
+            }          
         }
+
+       
 
         private void CbxFixedDiscount_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -224,22 +202,23 @@ namespace PharmaUI
             //{
             //    tbxItemCode.Text = applicationFacade.GetNextItemCode(Convert.ToString(selectedCompany.CompanyCode));
             //}
-                
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            errorProviderItem.Clear();
             this.Close();
         }
 
         public void frmItemMasterAddUpdate_Fill_UsingExistingItem(ItemMaster existingItem)
         {
-            if (existingItem!=null)
+            if (existingItem != null)
             {
                 tbxItemCode.Text = existingItem.ItemCode;
                 tbxItemName.Text = existingItem.ItemName;
                 cbxComanyCode.SelectedValue = existingItem.CompanyCode;
-                tbxConvRate.Text =Convert.ToString(existingItem.ConversionRate);
+                tbxConvRate.Text = Convert.ToString(existingItem.ConversionRate);
                 tbxShortName.Text = existingItem.ShortName;
                 tbxPacking.Text = existingItem.Packing;
                 tbxPurchaseRate.Text = Convert.ToString(existingItem.PurchaseRate);
@@ -256,8 +235,8 @@ namespace PharmaUI
                 tbxUPC.Text = existingItem.UPC;
                 cbxHalfScheme.SelectedItem = existingItem.IsHalfScheme ? Choice.Yes : Choice.No;
                 cbxQtrScheme.SelectedItem = existingItem.IsQTRScheme ? Choice.Yes : Choice.No;
-                tbxSpecialDiscount.Text = Convert.ToString( existingItem.SpecialDiscount);
-                tbxSpecialDiscountOnQty.Text =Convert.ToString( existingItem.SpecialDiscountOnQty);
+                tbxSpecialDiscount.Text = Convert.ToString(existingItem.SpecialDiscount);
+                tbxSpecialDiscountOnQty.Text = Convert.ToString(existingItem.SpecialDiscountOnQty);
                 cbxFixedDiscount.SelectedItem = existingItem.IsFixedDiscount ? Choice.Yes : Choice.No;
                 tbxFixedDiscountRate.Text = Convert.ToString(existingItem.FixedDiscountRate);
                 tbxMaxQty.Text = Convert.ToString(existingItem.MaximumQty);
@@ -276,12 +255,11 @@ namespace PharmaUI
         }
 
         private void TbxAllowDecimal_KeyPress(object sender, KeyPressEventArgs e)
-       {
+        {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
-
             // only allow one decimal point
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
@@ -293,19 +271,16 @@ namespace PharmaUI
         {
             if (string.IsNullOrEmpty(tbxItemName.Text))
             {
-                errorProviderItem.SetError(tbxItemName, "Item Name field is Required");
-                tbxItemName.Focus();
-                tbxItemName.SelectAll();
+                errorProviderItem.SetError((sender as Control), Constants.Messages.RequiredField);
+                (sender as TextBox).SelectAll();
             }
             else
             {
-                errorProviderItem.SetError(tbxItemName, String.Empty);
+                errorProviderItem.SetError((sender as Control), String.Empty);
             }
         }
 
-        private void tbxItemName_Validated(object sender, EventArgs e)
-        {
-            errorProviderItem.SetError(tbxItemName, String.Empty);
-        }
+       
+      
     }
 }

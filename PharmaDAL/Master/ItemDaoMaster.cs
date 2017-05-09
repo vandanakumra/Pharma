@@ -169,6 +169,7 @@ namespace PharmaDAL.Master
                     existingItemDB.Status = existingItem.Status;
                 }
                 _result = context.SaveChanges();
+                _result = 1;
 
                 if (_result > 0)
                     return true;

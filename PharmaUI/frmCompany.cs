@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PharmaBusinessObjects.Common;
 
 namespace PharmaUI
 {
@@ -41,7 +42,7 @@ namespace PharmaUI
 
                 if (row != null)
                 {
-                    if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
                         int companyId = 0;
                         Int32.TryParse(Convert.ToString(row.Cells["CompanyId"].Value), out companyId);
