@@ -36,8 +36,8 @@ namespace PharmaUI
 
 
         private void frmAccountLedgerMasterAddUpdate_Load(object sender, EventArgs e)
-        {
-            FormLoad();
+        {                       
+            ExtensionMethods.FormLoad(this, (this.AccountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
 
             if (this.AccountLedgerId > 0)
             {
@@ -109,32 +109,7 @@ namespace PharmaUI
 
         }
 
-        private void FormLoad()
-        {
-            List<Control> allControls = ExtensionMethods.GetAllControls(this);
-            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
-
-            panel1.Width = this.Width;
-
-            Label lbl = new Label();
-            lbl.Width = panel1.Width;
-            lbl.Dock = DockStyle.Fill;
-            lbl.TextAlign = ContentAlignment.MiddleCenter;
-            lbl.Top = 10;
-            lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
-
-            if (this.AccountLedgerId > 0)
-            {
-                lbl.Text = "Account Ledger Master - Update";
-            }
-            else
-            {
-                lbl.Text = "Account Ledger Master - Add";
-            }
-
-            panel1.Controls.Add(lbl);
-        }
-
+       
         private void FillCombo()
         {
             cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));

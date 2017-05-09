@@ -46,7 +46,6 @@
             this.gbBalanceSheet = new System.Windows.Forms.GroupBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.cbxStatus = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbBalanceSheet.SuspendLayout();
@@ -139,7 +138,7 @@
             "D"});
             this.cbDebitCredit.Location = new System.Drawing.Point(381, 243);
             this.cbDebitCredit.Name = "cbDebitCredit";
-            this.cbDebitCredit.Size = new System.Drawing.Size(90, 24);
+            this.cbDebitCredit.Size = new System.Drawing.Size(83, 24);
             this.cbDebitCredit.TabIndex = 8;
             // 
             // cbAccountType
@@ -238,22 +237,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // panel1
-            // 
-            this.panel1.AccessibleName = "";
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
-            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(488, 56);
-            this.panel1.TabIndex = 18;
-            this.panel1.Tag = "";
-            // 
             // cbxStatus
             // 
             this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -277,11 +260,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 493);
+            this.ClientSize = new System.Drawing.Size(468, 489);
             this.ControlBox = false;
             this.Controls.Add(this.cbxStatus);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.gbBalanceSheet);
@@ -328,7 +310,6 @@
         private System.Windows.Forms.GroupBox gbBalanceSheet;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cbxStatus;
         private System.Windows.Forms.Label label2;
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace PharmaUI
 
             return list;
         }
+
         public static List<Control> GetAllControls(Control container)
         {
             return GetAllControls(container, new List<Control>());
@@ -36,8 +38,8 @@ namespace PharmaUI
             var property = instance.GetType().GetProperty(propertyName);
             return (T)property.GetCustomAttributes(attrType, false).First();
         }
-        
-        public static double ? SafeConversionDouble(string inputVal)
+
+        public static double? SafeConversionDouble(string inputVal)
         {
             double outputVal;
             if (!double.TryParse(inputVal, out outputVal))
@@ -50,9 +52,57 @@ namespace PharmaUI
             }
         }
 
+        internal static void FormLoad(Form form, string lblText)
+        {
+
+            List<Control> allControls = ExtensionMethods.GetAllControls(form);
+            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
+
+            Panel panel1 = new Panel();
+            panel1.Location = new Point(0, 0);
+            panel1.BackColor = Color.MidnightBlue;
+            panel1.Width = form.Width;
+            panel1.Height = 50;
+            panel1.Margin = new Padding(3, 3, 3, 3);
+            panel1.Padding = new Padding(3, 3, 3, 3);
+            panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel1.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
+
+            Label lbl = new Label();
+            lbl.Width = panel1.Width;
+            lbl.Dock = DockStyle.Fill;
+            lbl.TextAlign = ContentAlignment.MiddleCenter;
+            lbl.Top = 10;
+            lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
+            lbl.Text = lblText;
+            lbl.ForeColor = Color.White;
+            panel1.Controls.Add(lbl);
+
+            form.Controls.Add(panel1);
+        }
+
+        public static void SetFormProperties(Form frm, Panel pnl)
+        {
+            foreach (Form control in pnl.Controls)
+            {
+                pnl.Controls.Remove(control);
+            }
+
+            frm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            frm.ControlBox = false;
+            frm.Text = "";
+            frm.TopLevel = false;
+            frm.AutoScroll = true;
+            frm.ShowIcon = false;
+            frm.Width = pnl.Width;
+            frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            pnl.Controls.Add(frm);
+        }
+
         public static int? SafeConversionInt(string inputVal)
         {
             int outputVal;
+
             if (!int.TryParse(inputVal, out outputVal))
             {
                 return null;

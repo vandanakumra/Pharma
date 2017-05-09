@@ -33,7 +33,6 @@
             this.btnAddItem = new System.Windows.Forms.Button();
             this.dgvItemList = new System.Windows.Forms.DataGridView();
             this.panelItemInfo = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,29 +89,12 @@
             this.panelItemInfo.Size = new System.Drawing.Size(1063, 110);
             this.panelItemInfo.TabIndex = 5;
             // 
-            // panel1
-            // 
-            this.panel1.AccessibleName = "";
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
-            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(1079, 56);
-            this.panel1.TabIndex = 6;
-            this.panel1.Tag = "";
-            // 
             // frmItemMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1091, 479);
             this.ControlBox = false;
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelItemInfo);
             this.Controls.Add(this.dgvItemList);
             this.Controls.Add(this.btnAddItem);
@@ -134,6 +116,5 @@
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.DataGridView dgvItemList;
         private System.Windows.Forms.Panel panelItemInfo;
-        private System.Windows.Forms.Panel panel1;
     }
 }

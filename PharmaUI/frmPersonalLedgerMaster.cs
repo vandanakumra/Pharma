@@ -25,22 +25,7 @@ namespace PharmaUI
 
         private void frmPersonalLedgerMaster_Load(object sender, EventArgs e)
         {
-            List<Control> allControls = ExtensionMethods.GetAllControls(this);
-            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
-
-            this.Dock = DockStyle.Fill;
-            panel1.Width = this.Width;
-
-            Label lbl = new Label();
-            lbl.Width = panel1.Width;
-            lbl.Dock = DockStyle.Fill;
-            lbl.TextAlign = ContentAlignment.MiddleCenter;
-            lbl.Top = 10;
-            lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
-            lbl.Text = "Personal Diary";
-            panel1.Controls.Add(lbl);
-
-
+            ExtensionMethods.FormLoad(this, "Personal Diary");
             FillGrid();
 
         }

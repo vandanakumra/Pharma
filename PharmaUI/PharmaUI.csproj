@@ -77,6 +77,12 @@
     <Compile Include="frmCompanyAddUpdate.Designer.cs">
       <DependentUpon>frmCompanyAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCustomerLedgerMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomerLedgerMaster.Designer.cs">
+      <DependentUpon>frmCustomerLedgerMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmItemMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,12 @@
     <Compile Include="frmItemMasterAddUpdate.Designer.cs">
       <DependentUpon>frmItemMasterAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainForm.Designer.cs">
+      <DependentUpon>frmMainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPersonalLedgerMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +118,18 @@
     </Compile>
     <Compile Include="frmPersonalLedgerMasterAddUpdate.Designer.cs">
       <DependentUpon>frmPersonalLedgerMasterAddUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPersonRouteMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPersonRouteMaster.Designer.cs">
+      <DependentUpon>frmPersonRouteMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSupplierLedgerMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSupplierLedgerMaster.Designer.cs">
+      <DependentUpon>frmSupplierLedgerMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +145,9 @@
     <EmbeddedResource Include="frmCompanyAddUpdate.resx">
       <DependentUpon>frmCompanyAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomerLedgerMaster.resx">
+      <DependentUpon>frmCustomerLedgerMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmItemMaster.resx">
       <DependentUpon>frmItemMaster.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,11 +157,17 @@
     <EmbeddedResource Include="frmItemMasterAddUpdate.resx">
       <DependentUpon>frmItemMasterAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMainForm.resx">
+      <DependentUpon>frmMainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPersonalLedgerMaster.resx">
       <DependentUpon>frmPersonalLedgerMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPersonalLedgerMasterAddUpdate.resx">
       <DependentUpon>frmPersonalLedgerMasterAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSupplierLedgerMaster.resx">
+      <DependentUpon>frmSupplierLedgerMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

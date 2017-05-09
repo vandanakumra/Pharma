@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvCompanyList = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddNewCompany = new System.Windows.Forms.Button();
@@ -45,24 +44,8 @@
             this.dgvCompanyList.Location = new System.Drawing.Point(12, 106);
             this.dgvCompanyList.Name = "dgvCompanyList";
             this.dgvCompanyList.ReadOnly = true;
-            this.dgvCompanyList.Size = new System.Drawing.Size(1126, 174);
+            this.dgvCompanyList.Size = new System.Drawing.Size(1114, 174);
             this.dgvCompanyList.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.AccessibleName = "";
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
-            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(1142, 56);
-            this.panel1.TabIndex = 1;
-            this.panel1.Tag = "";
             // 
             // txtSearch
             // 
@@ -109,10 +92,8 @@
             this.Controls.Add(this.btnAddNewCompany);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvCompanyList);
             this.Name = "frmCompany";
-            this.Text = "Company";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmCompany_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompanyList)).EndInit();
@@ -124,7 +105,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvCompanyList;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddNewCompany;

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvAccountLedger = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.cbLedgerType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,24 +47,8 @@
             this.dgvAccountLedger.Name = "dgvAccountLedger";
             this.dgvAccountLedger.ReadOnly = true;
             this.dgvAccountLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccountLedger.Size = new System.Drawing.Size(1130, 260);
+            this.dgvAccountLedger.Size = new System.Drawing.Size(1074, 260);
             this.dgvAccountLedger.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.AccessibleName = "";
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
-            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(985, 56);
-            this.panel1.TabIndex = 1;
-            this.panel1.Tag = "";
             // 
             // cbLedgerType
             // 
@@ -112,9 +95,9 @@
             this.btnAddNewLedger.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddNewLedger.Image = global::PharmaUI.Properties.Resources.AddItem;
             this.btnAddNewLedger.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewLedger.Location = new System.Drawing.Point(958, 66);
+            this.btnAddNewLedger.Location = new System.Drawing.Point(910, 63);
             this.btnAddNewLedger.Name = "btnAddNewLedger";
-            this.btnAddNewLedger.Size = new System.Drawing.Size(184, 61);
+            this.btnAddNewLedger.Size = new System.Drawing.Size(176, 61);
             this.btnAddNewLedger.TabIndex = 6;
             this.btnAddNewLedger.Text = "Add New Ledger";
             this.btnAddNewLedger.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -126,18 +109,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1154, 427);
+            this.ClientSize = new System.Drawing.Size(1098, 427);
             this.ControlBox = false;
             this.Controls.Add(this.btnAddNewLedger);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbLedgerType);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvAccountLedger);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAccountLedgerMaster";
-            this.Text = "Account Ledger Master";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmAccountLedgerMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccountLedger)).EndInit();
@@ -149,7 +130,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvAccountLedger;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cbLedgerType;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

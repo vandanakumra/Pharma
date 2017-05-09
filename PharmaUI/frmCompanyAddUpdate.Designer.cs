@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.txtCompanyCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
@@ -46,22 +45,6 @@
             this.cbxDI = new System.Windows.Forms.ComboBox();
             this.cbxSSRequired = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.AccessibleName = "";
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
-            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(-9, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(488, 56);
-            this.panel1.TabIndex = 19;
-            this.panel1.Tag = "";
             // 
             // txtCompanyCode
             // 
@@ -212,6 +195,7 @@
             // 
             // cbxSSRequired
             // 
+            this.cbxSSRequired.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSSRequired.FormattingEnabled = true;
             this.cbxSSRequired.Location = new System.Drawing.Point(218, 254);
             this.cbxSSRequired.Name = "cbxSSRequired";
@@ -240,10 +224,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCompanyCode);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmCompanyAddUpdate";
             this.ShowIcon = false;
-            this.Text = "frmCompanyAddUpdate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmCompanyAddUpdate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -251,8 +235,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtCompanyCode;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCompanyName;

@@ -35,7 +35,8 @@ namespace PharmaUI
 
         private void frmCompanyAddUpdate_Load(object sender, EventArgs e)
         {
-            FormLoad();
+            ExtensionMethods.FormLoad(this, (this.CompanyId > 0) ? "Company Master - Update" : "Company Master - Add");
+
             FillCombo();
 
             if (this.CompanyId > 0)
@@ -76,32 +77,7 @@ namespace PharmaUI
             cbxDI.DataSource = Enum.GetValues(typeof(Enums.DI));
             cbxDI.SelectedItem = Enums.DI.Direct;
         }
-
-        private void FormLoad()
-        {
-            List<Control> allControls = ExtensionMethods.GetAllControls(this);
-            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
-
-            panel1.Width = this.Width;
-
-            Label lbl = new Label();
-            lbl.Width = panel1.Width;
-            lbl.Dock = DockStyle.Fill;
-            lbl.TextAlign = ContentAlignment.MiddleCenter;
-            lbl.Top = 10;
-            lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
-
-            if (this.CompanyId > 0)
-            {
-                lbl.Text = "Company Master - Update";
-            }
-            else
-            {
-                lbl.Text = "Company Master - Add";
-            }
-
-            panel1.Controls.Add(lbl);
-        }
+      
 
         private void btnSave_Click(object sender, EventArgs e)
         {
