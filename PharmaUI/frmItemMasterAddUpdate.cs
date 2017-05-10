@@ -24,7 +24,7 @@ namespace PharmaUI
         {
             this.isInEditMode = isInEditMode;
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
 
             LoadCombo();
         }

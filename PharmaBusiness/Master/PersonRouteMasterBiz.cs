@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace PharmaBusiness.Master
 {
-    internal class PersonRouteMasterBiz
+    internal class PersonRouteMasterBiz : BaseBiz
     {
+        public PersonRouteMasterBiz(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
+
         internal List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutes()
         {
             return new PersonRouteMasterDao().GetPersonRoutes();

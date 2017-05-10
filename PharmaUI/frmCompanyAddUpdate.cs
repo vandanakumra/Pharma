@@ -23,13 +23,13 @@ namespace PharmaUI
         public frmCompanyAddUpdate()
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         public frmCompanyAddUpdate(int companyId)
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.CompanyId = companyId;
         }
 

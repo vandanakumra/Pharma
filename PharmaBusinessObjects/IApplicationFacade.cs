@@ -85,6 +85,17 @@ namespace PharmaBusinessObjects
         int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
 
         #endregion
+
+        #region User Master
+
+        List<PharmaBusinessObjects.Master.UserMaster> GetUsers();
+        PharmaBusinessObjects.Master.UserMaster GetUserByUserName(string userName);
+        PharmaBusinessObjects.Master.UserMaster GetUserByUserId(int userid);
+        int AddUser(PharmaBusinessObjects.Master.UserMaster p);
+        int UpdateUser(PharmaBusinessObjects.Master.UserMaster p);
+
+        #endregion
+
     }
 
 }

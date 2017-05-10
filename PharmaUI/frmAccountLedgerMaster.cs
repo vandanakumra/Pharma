@@ -19,7 +19,7 @@ namespace PharmaUI
         public frmAccountLedgerMaster()
         {           
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         private void frmAccountLedgerMaster_Load(object sender, EventArgs e)

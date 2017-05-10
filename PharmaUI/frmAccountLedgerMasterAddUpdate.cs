@@ -24,13 +24,13 @@ namespace PharmaUI
         {
 
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         public frmAccountLedgerMasterAddUpdate(int accountLedgerId)
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.AccountLedgerId = accountLedgerId;
         }
 

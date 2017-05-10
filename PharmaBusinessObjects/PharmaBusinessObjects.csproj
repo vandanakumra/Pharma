@@ -56,6 +56,7 @@
     <Compile Include="Master\PersonalLedgerMaster.cs" />
     <Compile Include="Master\PersonRouteMaster.cs" />
     <Compile Include="Master\SupplierLedgerMaster.cs" />
+    <Compile Include="Master\UserMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
