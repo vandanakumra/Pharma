@@ -13,6 +13,7 @@ namespace PharmaBusinessObjects.Common
             public const string RequiredField = "Field is Required";
             public const string DeletePrompt = "Do you want to delete ?";
             public const string Confirmation = "Confirmation";
+            public const string InValidEmail = "Please enter valid EmailId";
 
         }
     }

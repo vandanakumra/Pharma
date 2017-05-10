@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +14,14 @@ namespace PharmaUI
         public static PharmaBusinessObjects.Master.UserMaster LoggedInUser { get; set; }
         public static string FontFamily = "Segoe UI";
         public static int FontSize = 10;
+
+        public const string MatchEmailPattern =
+           @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+    + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+    + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+    + @"([a-zA-Z0-9]+[\w-]+\.)+[a-zA-Z]{1}[a-zA-Z0-9-]{1,23})$";
 
         public static List<Control> GetAllControls(Control container, List<Control> list)
         {
@@ -113,5 +122,12 @@ namespace PharmaUI
                 return outputVal;
             }
         }
+
+        public static bool IsValidEmail(string emailaddress)
+        {     
+            if (emailaddress != null) return System.Text.RegularExpressions.Regex.IsMatch(emailaddress, MatchEmailPattern);
+            else return false;
+        }
+       
     }
 }

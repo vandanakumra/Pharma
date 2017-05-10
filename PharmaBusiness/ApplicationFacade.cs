@@ -327,11 +327,11 @@ namespace PharmaBusiness
 
         #region Personal Ledger Master
 
-        public List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers()
+        public List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers(string searchString)
         {
             try
             {
-                return new PersonalLedgerMasterBiz(this.LoggedInUser).GetPersonalLedgers();
+                return new PersonalLedgerMasterBiz(this.LoggedInUser).GetPersonalLedgers(searchString);
             }
             catch (Exception)
             {
@@ -364,6 +364,21 @@ namespace PharmaBusiness
             }
 
         }
+
+        public int DeletePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
+        {
+            try
+            {
+                return new PersonalLedgerMasterBiz(this.LoggedInUser).DeletePersonalLedger(p);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        
 
         #endregion
 
