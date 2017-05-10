@@ -48,6 +48,7 @@
             this.btnAddNewSupplier.Text = "Add New Supplier";
             this.btnAddNewSupplier.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNewSupplier.UseVisualStyleBackColor = true;
+            this.btnAddNewSupplier.Click += new System.EventHandler(this.btnAddNewSupplier_Click);
             // 
             // txtSearch
             // 

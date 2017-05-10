@@ -26,10 +26,5 @@ namespace PharmaBusinessObjects.Common
             Direct
         };
 
-        public enum TaxRetail
-        {
-            Tax,
-            Retail
-        };
     }
 }

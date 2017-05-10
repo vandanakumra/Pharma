@@ -28,5 +28,6 @@ namespace PharmaBusinessObjects.Master
         public string AreaName { get; set; }
         public string DLNo { get; set; }
         public string TINNo { get; set; }
+        public int PurchaseTypeId { get; set; }
     }
 }

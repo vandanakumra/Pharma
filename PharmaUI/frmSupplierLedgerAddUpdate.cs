@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI
 {
@@ -46,19 +47,32 @@ namespace PharmaUI
 
         private void FillFormForUpdate()
         {
-            //SupplierLedgerMaster supplier = applicationFacade.GetSupplierById(this.SupplierId);
+            SupplierLedgerMaster supplier = applicationFacade.GetSupplierLedgerById(this.SupplierId);
 
-            //if (supplier != null)
-            //{
-                //txtCompanyCode.Text = supplier.CompanyCode;
-                //txtCompanyName.Text = supplier.CompanyName;
-                //txtBillingPrefRating.Text = supplier.BillingPreferenceRating.ToString();
-                //txtOrderPrefRating.Text = supplier.OrderPreferenceRating.ToString();
-                //cbxDI.SelectedItem = supplier.IsDirect ? Enums.DI.Direct : Enums.DI.Indirect;////
-                //cbxSSRequired.SelectedItem = supplier.StockSummaryRequired ? Enums.Choice.Yes : Enums.Choice.No;
-                //cbxStatus.SelectedItem = supplier.Status ? Enums.Status.Active : Enums.Status.Inactive;
-
-            //}
+            if (supplier != null)
+            {
+                txtSupplierCode.Text = supplier.SupplierLedgerCode;
+                txtSupplierName.Text = supplier.SupplierLedgerName;
+                txtSupplierShortName.Text = supplier.SupplierLedgerShortName;
+                txtAddress.Text = supplier.Address;
+                txtContactPerson.Text = supplier.ContactPerson;
+                txtEmailAddress.Text = supplier.EmailAddress;
+                txtFax.Text = supplier.Fax;
+                txtMobile.Text = supplier.Mobile;
+                txtPager.Text = supplier.Pager;
+                txtPhoneO.Text = supplier.OfficePhone;
+                txtPhoneR.Text = supplier.ResidentPhone;
+                txtDLNo.Text = supplier.DLNo;
+                txtOpeningBal.Text = supplier.OpeningBal.ToString();
+                txtTin.Text = supplier.TINNo;
+                cbxTextRetail.SelectedItem = supplier.TaxRetail;
+                cbxStatus.SelectedItem = supplier.Status ? Enums.Status.Active : Enums.Status.Inactive;
+                cbxCreditDebit.SelectedItem = supplier.CreditDebit;
+                cbxArea.SelectedValue = supplier.AreaId;
+                
+                //todo ADD SUPPLIER PURCHASE TYPE iD
+                //cbxPurchaseType.SelectedValue = supplier.
+            }
         }
 
         private void FillCombo()
@@ -68,23 +82,80 @@ namespace PharmaUI
             cbxStatus.SelectedItem = Enums.Status.Active;
 
             //Fill Tax/Retail option
-            cbxTextRetail.DataSource = Enum.GetValues(typeof(Enums.TaxRetail));
-            cbxTextRetail.SelectedItem = Enums.Choice.Yes;
-
+            cbxTextRetail.SelectedItem = "R";
+            cbxCreditDebit.SelectedItem = "C";
+    
             //Fill Purchase type option
             cbxPurchaseType.DataSource = applicationFacade.GetAccountLedgerBySystemName("PurchaseLedger");
             cbxPurchaseType.DisplayMember = "AccountLedgerName";
             cbxPurchaseType.ValueMember = "AccountLedgerID";
 
             //Fill area option
-            //cbxArea.DataSource = applicationFacade.GetAre("PurchaseLedger");
-            //cbxPurchaseType.DisplayMember = "AccountLedgerName";
-            //cbxPurchaseType.ValueMember = "AccountLedgerID";
+            cbxArea.DataSource = applicationFacade.GetPersonRoutesBySystemName("AREA");
+            cbxArea.DisplayMember = "PersonRouteName";
+            cbxArea.ValueMember = "PersonRouteID";
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtSupplierName.Text))
+            {
+                throw new Exception("Supplier Name can not be blank");
+            }
+            Status status;
+            int areaId = 0;
+            decimal openingBal = 0.00M;
+            
+            SupplierLedgerMaster supplier = new SupplierLedgerMaster();
+            supplier.SupplierLedgerCode = txtSupplierCode.Text;
+            supplier.SupplierLedgerName = txtSupplierName.Text;
+            supplier.SupplierLedgerShortName = txtSupplierShortName.Text;
+            supplier.Address = txtAddress.Text;
+            supplier.ContactPerson = txtContactPerson.Text;
+            Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+            supplier.Status = status == Status.Active;
+            supplier.CreditDebit = cbxCreditDebit.SelectedItem.ToString();
+            Int32.TryParse(cbxArea.SelectedValue.ToString(), out areaId);
+            supplier.AreaId = areaId;
+            supplier.DLNo = txtDLNo.Text;
+            supplier.EmailAddress = txtEmailAddress.Text;
+            supplier.Fax = txtFax.Text;
+            supplier.Mobile = txtMobile.Text;
+            supplier.OfficePhone = txtPhoneO.Text;
 
+            decimal.TryParse(txtOpeningBal.Text, out openingBal);
+            supplier.OpeningBal = openingBal;
+            supplier.Pager = txtPager.Text;
+            supplier.ResidentPhone = txtPhoneR.Text;
+            supplier.TINNo = txtTin.Text;
+
+            int result = SupplierId > 0 ? applicationFacade.UpdateSupplierLedger(supplier) : applicationFacade.AddSupplierLedger(supplier);
+
+            //Close this form if operation is successful
+            if (result > 0)
+            {
+                this.Close();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtOpeningBal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

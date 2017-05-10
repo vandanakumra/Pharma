@@ -89,8 +89,6 @@ namespace PharmaBusiness.Master
         internal List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerBySystemName(string systemName)
         {
 
-            CommonDao commonDao = new CommonDao();
-
             var accountLedgerMasterList = new AccountLedgerMasterDao().GetAccountLedgers().Where(p=>p.AccountLedgerTypeSystemName == systemName).ToList();          
             return accountLedgerMasterList;
         }

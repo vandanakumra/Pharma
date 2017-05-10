@@ -61,8 +61,8 @@ namespace PharmaBusinessObjects
         #region Supplier Ledger Master
 
         List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers(string searchText);
+        SupplierLedgerMaster GetSupplierLedgerById(int supplierId);
         int AddSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
-
         int UpdateSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
 
         #endregion
@@ -75,6 +75,8 @@ namespace PharmaBusinessObjects
         int UpdatePersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p);
 
         List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesByRecordTypeIdAndSearch(int recordTypeID, string searchString = null);
+
+        List<PersonRouteMaster> GetPersonRoutesBySystemName(string systemName);
 
         #endregion
 

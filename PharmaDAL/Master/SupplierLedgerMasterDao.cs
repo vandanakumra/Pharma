@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Entity;
+﻿using PharmaBusinessObjects.Master;
+using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace PharmaDAL.Master
 {
-    public class SupplierLedgerMasterDao
+    public class SupplierLedgerMasterDao : BaseDao
     {
+        public SupplierLedgerMasterDao(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
 
         public List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers(string searchText)
         {
@@ -41,6 +46,37 @@ namespace PharmaDAL.Master
 
         }
 
+        public SupplierLedgerMaster GetSupplierLedgerById(int supplierId)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.SupplierLedger.Where(p => p.SupplierLedgerId == supplierId).Select(p => new PharmaBusinessObjects.Master.SupplierLedgerMaster()
+                {
+                    SupplierLedgerId = p.SupplierLedgerId,
+                    SupplierLedgerCode = p.SupplierLedgerCode,
+                    SupplierLedgerName = p.SupplierLedgerName,
+                    SupplierLedgerShortName = p.SupplierLedgerShortName,
+                    Address = p.Address,
+                    ContactPerson = p.ContactPerson,
+                    Mobile = p.Mobile,
+                    Pager = p.Pager,
+                    Fax = p.Fax,
+                    OfficePhone = p.OfficePhone,
+                    ResidentPhone = p.ResidentPhone,
+                    EmailAddress = p.EmailAddress,
+                    AreaId = p.AreaId,
+                    AreaName = p.PersonRouteMaster.PersonRouteName,
+                    CreditDebit = p.CreditDebit,
+                    DLNo = p.DLNo,
+                    OpeningBal = p.OpeningBal,
+                    TaxRetail = p.TaxRetail,
+                    TINNo = p.TINNo,
+                    Status = p.Status
+                }).FirstOrDefault();
+
+            }
+        }
+
         public int AddSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -68,7 +104,7 @@ namespace PharmaDAL.Master
                     OpeningBal = p.OpeningBal,
                     TaxRetail = p.TaxRetail,
                     TINNo = p.TINNo,
-                    Status = p.Status
+                    Status = p.Status                   
                 };
 
                 context.SupplierLedger.Add(table);

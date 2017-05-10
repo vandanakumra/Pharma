@@ -278,6 +278,8 @@
             this.txtOpeningBal.Name = "txtOpeningBal";
             this.txtOpeningBal.Size = new System.Drawing.Size(216, 23);
             this.txtOpeningBal.TabIndex = 52;
+            this.txtOpeningBal.Text = "0.00";
+            this.txtOpeningBal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOpeningBal_KeyPress);
             // 
             // label12
             // 
@@ -301,7 +303,11 @@
             // 
             // cbxCreditDebit
             // 
+            this.cbxCreditDebit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCreditDebit.FormattingEnabled = true;
+            this.cbxCreditDebit.Items.AddRange(new object[] {
+            "C",
+            "D"});
             this.cbxCreditDebit.Location = new System.Drawing.Point(551, 315);
             this.cbxCreditDebit.Name = "cbxCreditDebit";
             this.cbxCreditDebit.Size = new System.Drawing.Size(121, 21);
@@ -309,7 +315,11 @@
             // 
             // cbxTextRetail
             // 
+            this.cbxTextRetail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTextRetail.FormattingEnabled = true;
+            this.cbxTextRetail.Items.AddRange(new object[] {
+            "T",
+            "R"});
             this.cbxTextRetail.Location = new System.Drawing.Point(170, 352);
             this.cbxTextRetail.Name = "cbxTextRetail";
             this.cbxTextRetail.Size = new System.Drawing.Size(121, 21);
@@ -327,6 +337,7 @@
             // 
             // cbxStatus
             // 
+            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxStatus.FormattingEnabled = true;
             this.cbxStatus.Location = new System.Drawing.Point(551, 352);
             this.cbxStatus.Name = "cbxStatus";
@@ -345,6 +356,7 @@
             // 
             // cbxArea
             // 
+            this.cbxArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxArea.FormattingEnabled = true;
             this.cbxArea.Location = new System.Drawing.Point(170, 390);
             this.cbxArea.Name = "cbxArea";
@@ -363,6 +375,7 @@
             // 
             // cbxPurchaseType
             // 
+            this.cbxPurchaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxPurchaseType.FormattingEnabled = true;
             this.cbxPurchaseType.Location = new System.Drawing.Point(551, 392);
             this.cbxPurchaseType.Name = "cbxPurchaseType";
@@ -434,6 +447,7 @@
             this.btnCancel.TabIndex = 71;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 

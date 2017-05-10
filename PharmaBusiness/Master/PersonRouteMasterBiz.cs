@@ -35,5 +35,11 @@ namespace PharmaBusiness.Master
 
         }
 
+        internal List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesBySystemName(string systemName)
+        {
+            var personRouteList = new PersonRouteMasterDao().GetPersonRoutes().Where(p => p.SystemName == systemName && p.Status).ToList();
+            return personRouteList;
+        }
+
     }
 }

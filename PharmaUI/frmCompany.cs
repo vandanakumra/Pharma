@@ -108,8 +108,8 @@ namespace PharmaUI
             dgvCompanyList.Columns["CompanyName"].Visible = true;
             dgvCompanyList.Columns["CompanyName"].HeaderText = "Company Name";
 
-            dgvCompanyList.Columns["Status"].Visible = false;
-            //dgvCompanyList.Columns["Status"].HeaderText = "Company Code";
+            dgvCompanyList.Columns["Status"].Visible = true;
+            dgvCompanyList.Columns["Status"].HeaderText = "Status";
 
             dgvCompanyList.Columns["DirectIndirect"].Visible = true;
             dgvCompanyList.Columns["DirectIndirect"].HeaderText = "Direct/Indirect";

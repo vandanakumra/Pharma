@@ -382,6 +382,20 @@ namespace PharmaBusiness
             }
         }
 
+        public SupplierLedgerMaster GetSupplierLedgerById(int supplierId)
+        {
+            try
+            {
+                return new SupplierLedgerMasterBiz(this.LoggedInUser).GetSupplierLedgerById(supplierId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         public int AddSupplierLedger(SupplierLedgerMaster p)
         {
             try
@@ -460,6 +474,19 @@ namespace PharmaBusiness
                 throw;
             }
 
+        }
+
+        public List<PersonRouteMaster> GetPersonRoutesBySystemName(string systemName)
+        {
+            try
+            {
+                return new PersonRouteMasterBiz(this.LoggedInUser).GetPersonRoutesBySystemName(systemName);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #endregion

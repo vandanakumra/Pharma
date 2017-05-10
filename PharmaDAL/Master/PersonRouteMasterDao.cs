@@ -20,7 +20,8 @@ namespace PharmaDAL.Master
                     PersonRouteName = p.PersonRouteName,
                     RecordTypeId = p.RecordTypeId,
                     RecordTypeNme = p.RecordType.RecordType1,                   
-                    Status = p.Status
+                    Status = p.Status,
+                    SystemName = p.RecordType.SystemName
                 }).ToList();
             }
         }
@@ -88,7 +89,8 @@ namespace PharmaDAL.Master
                                           PersonRouteName = p.PersonRouteName,
                                           RecordTypeId = p.RecordTypeId,
                                           RecordTypeNme = p.RecordType.RecordType1,
-                                          Status = p.Status
+                                          Status = p.Status,
+                                          SystemName = p.RecordType.SystemName
                                       }).ToList();
 
                 return personRoutes;

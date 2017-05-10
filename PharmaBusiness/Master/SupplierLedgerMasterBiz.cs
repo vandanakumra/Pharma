@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Master;
+﻿using PharmaBusinessObjects.Master;
+using PharmaDAL.Master;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,22 @@ namespace PharmaBusiness.Master
 
         internal List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers(string searchText)
         {
-            return new SupplierLedgerMasterDao().GetSupplierLedgers(searchText);
+            return new SupplierLedgerMasterDao(this.LoggedInUser).GetSupplierLedgers(searchText);
         }
 
         internal int AddSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p)
         {
-            return new SupplierLedgerMasterDao().AddSupplierLedger(p);
+            return new SupplierLedgerMasterDao(this.LoggedInUser).AddSupplierLedger(p);
         }
 
         internal int UpdateSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p)
         {
-            return new SupplierLedgerMasterDao().UpdateSupplierLedger(p);
+            return new SupplierLedgerMasterDao(this.LoggedInUser).UpdateSupplierLedger(p);
+        }
+
+        internal SupplierLedgerMaster GetSupplierLedgerById(int supplierId)
+        {
+            return new SupplierLedgerMasterDao(this.LoggedInUser).GetSupplierLedgerById(supplierId);
         }
 
     }

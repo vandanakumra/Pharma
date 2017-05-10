@@ -77,7 +77,7 @@ namespace PharmaUI
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-
+            LoadDataGrid();
         }
 
         private void LoadDataGrid()
@@ -126,9 +126,13 @@ namespace PharmaUI
             dgvSupplier.Columns["OfficePhone"].HeaderText = "Office Phone";
             dgvSupplier.Columns["OfficePhone"].FillWeight = 1.5F;
             //dgvAccountLedger.Columns["AccountLedgerCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       
+        }
 
-
-
+        private void btnAddNewSupplier_Click(object sender, EventArgs e)
+        {
+            frmSupplierLedgerAddUpdate form = new frmSupplierLedgerAddUpdate();
+            form.FormClosed += Form_FormClosed;
+            form.ShowDialog();
         }
     }
 }

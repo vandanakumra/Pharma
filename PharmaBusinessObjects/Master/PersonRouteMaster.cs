@@ -14,5 +14,6 @@ namespace PharmaBusinessObjects.Master
         public string RecordTypeNme { get; set; }
         public string PersonRouteName { get; set; }
         public bool Status { get; set; }
+        public string SystemName { get; set; }
     }
 }
