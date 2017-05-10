@@ -59,7 +59,8 @@ namespace PharmaDAL.Master
 
                     if (personRouteMaster != null)
                     {
-                        personRouteMaster.PersonRouteName = p.RecordTypeNme;
+                        personRouteMaster.PersonRouteCode = p.PersonRouteCode;
+                        personRouteMaster.PersonRouteName = p.PersonRouteName;
                         personRouteMaster.Status = p.Status;
                     }
 
@@ -73,6 +74,28 @@ namespace PharmaDAL.Master
 
         }
 
+        public List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesByRecordTypeIdAndSearch(int recordTypeID, string searchString = null)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                var personRoutes = (from p in context.PersonRouteMaster
+                                      where (recordTypeID == 0 || p.RecordTypeId == recordTypeID)
+                                      && (string.IsNullOrEmpty(searchString) || p.PersonRouteName.Contains(searchString))
+                                      select new PharmaBusinessObjects.Master.PersonRouteMaster()
+                                      {
+                                          PersonRouteID = p.PersonRouteID,
+                                          PersonRouteCode = p.PersonRouteCode,
+                                          PersonRouteName = p.PersonRouteName,
+                                          RecordTypeId = p.RecordTypeId,
+                                          RecordTypeNme = p.RecordType.RecordType1,
+                                          Status = p.Status
+                                      }).ToList();
+
+                return personRoutes;
+
+            }
+
+        }
 
 
     }

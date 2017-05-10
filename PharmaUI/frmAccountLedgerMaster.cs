@@ -129,29 +129,11 @@ namespace PharmaUI
 
         }
 
-        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-           
-        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadDataGrid((int)cbLedgerType.SelectedValue);
         }
-
-        //private void dgvAccountLedger_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    PharmaBusinessObjects.Master.AccountLedgerMaster model = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.Rows[e.RowIndex].DataBoundItem;
-
-        //    frmAccountLedgerMasterAddUpdate form = new frmAccountLedgerMasterAddUpdate(model.AccountLedgerID);
-        //    form.FormClosed += Form_FormClosed1;
-        //    form.FormClosed += Form_FormClosed1;
-        //    form.Show();
-        //}
-
-        //private void Form_FormClosed1(object sender, FormClosedEventArgs e)
-        //{
-        //    LoadDataGrid((int)cbLedgerType.SelectedValue);
-        //}
+        
     }
 }

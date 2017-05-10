@@ -307,7 +307,10 @@ namespace PharmaBusiness
             return new CommonBiz().GetRecordTypes();
         }
 
-
+        public List<PharmaBusinessObjects.Common.RecordType> GetRecordTypesWithAll()
+        {
+            return new CommonBiz().GetRecordTypesWithAll();
+        }
 
 
 
@@ -437,6 +440,19 @@ namespace PharmaBusiness
             {
                 throw;
             }
+        }
+
+        public List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesByRecordTypeIdAndSearch(int recordTypeID, string searchString = null)
+        {
+            try
+            {
+                return new PersonRouteMasterBiz().GetPersonRoutesByRecordTypeIdAndSearch(recordTypeID,searchString);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         #endregion

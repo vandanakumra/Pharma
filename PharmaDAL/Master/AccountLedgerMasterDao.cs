@@ -125,7 +125,6 @@ namespace PharmaDAL.Master
 
         }
 
-
         public List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int ledgerTypeID, string searchString = null)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())

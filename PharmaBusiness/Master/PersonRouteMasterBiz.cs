@@ -18,11 +18,16 @@ namespace PharmaBusiness.Master
         {
             return new PersonRouteMasterDao().AddPersonRoute(p);
         }
-
-
+        
         internal int UpdatePersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p)
         {
             return new PersonRouteMasterDao().UpdatePersonRoute(p);
+        }
+
+        internal List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesByRecordTypeIdAndSearch(int recordTypeID, string searchString = null)
+        {
+            return new PersonRouteMasterDao().GetPersonRoutesByRecordTypeIdAndSearch(recordTypeID,searchString);
+
         }
 
     }
