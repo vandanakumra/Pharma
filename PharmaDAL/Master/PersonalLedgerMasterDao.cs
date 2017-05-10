@@ -9,11 +9,13 @@ namespace PharmaDAL.Master
 {
     public class PersonalLedgerMasterDao
     {
-        public List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers()
+        public List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers(string searchString = "")
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.PersonalLedger.Select(p => new PharmaBusinessObjects.Master.PersonalLedgerMaster()
+                return context.PersonalLedger.Where(p=>p.Status
+                  && (string.IsNullOrEmpty(searchString) || p.PersonalLedgerName.Contains(searchString))
+                ).Select(p => new PharmaBusinessObjects.Master.PersonalLedgerMaster()
                 {
                     PersonalLedgerId = p.PersonalLedgerId,
                     PersonalLedgerCode = p.PersonalLedgerCode,
@@ -96,5 +98,19 @@ namespace PharmaDAL.Master
 
         }
 
+        public int DeletePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                var personalLedgerMaster = context.PersonalLedger.FirstOrDefault(q => q.PersonalLedgerCode == p.PersonalLedgerCode);
+
+                if (personalLedgerMaster != null)
+                {
+                    personalLedgerMaster.Status = false;
+                }
+
+                return context.SaveChanges();
+            }
+        }
     }
 }

@@ -124,6 +124,7 @@
             this.tbxEmailAddress.Name = "tbxEmailAddress";
             this.tbxEmailAddress.Size = new System.Drawing.Size(255, 23);
             this.tbxEmailAddress.TabIndex = 24;
+            this.tbxEmailAddress.Validating += new System.ComponentModel.CancelEventHandler(this.tbxEmailAddress_Vaidating);
             // 
             // tbxResidentPhone
             // 
@@ -313,6 +314,7 @@
             this.tbxPersonalLedgerName.Name = "tbxPersonalLedgerName";
             this.tbxPersonalLedgerName.Size = new System.Drawing.Size(255, 23);
             this.tbxPersonalLedgerName.TabIndex = 15;
+            this.tbxPersonalLedgerName.Validating += new System.ComponentModel.CancelEventHandler(this.tbxLedgerName_Validating);
             // 
             // cbxStatus
             // 

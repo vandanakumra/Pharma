@@ -53,9 +53,11 @@ namespace PharmaBusinessObjects
 
         #region Personal Ledger Master
 
-        List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers();
+        List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers(string searchString);
         int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p);
         int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p);
+        int DeletePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p);
+
         #endregion
 
         #region Supplier Ledger Master

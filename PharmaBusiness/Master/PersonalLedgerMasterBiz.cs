@@ -14,9 +14,9 @@ namespace PharmaBusiness.Master
 
         }
     
-        internal List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers()
+        internal List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers(string searchString)
         {
-            return new PersonalLedgerMasterDao().GetPersonalLedgers();
+            return new PersonalLedgerMasterDao().GetPersonalLedgers(searchString);
         }
 
         internal int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
@@ -28,5 +28,12 @@ namespace PharmaBusiness.Master
         {
             return new PersonalLedgerMasterDao().UpdatePersonalLedger(p);
         }
+
+        internal int DeletePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
+        {
+            return new PersonalLedgerMasterDao().DeletePersonalLedger(p);
+        }
+
+        
     }
 }

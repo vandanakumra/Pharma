@@ -18,6 +18,7 @@ namespace PharmaUI
     public partial class frmPersonalLedgerMasterAddUpdate : Form
     {
         IApplicationFacade applicationFacade;
+
         private bool isInEditMode{get;set;}
 
         public frmPersonalLedgerMasterAddUpdate(bool isInEditMode=false)
@@ -43,8 +44,6 @@ namespace PharmaUI
         }
 
 
-
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -57,6 +56,14 @@ namespace PharmaUI
                 if (String.IsNullOrWhiteSpace(tbxPersonalLedgerName.Text))
                 {
                     errorProviderPerLedger.SetError(tbxPersonalLedgerName, Constants.Messages.RequiredField);
+                    tbxPersonalLedgerName.SelectAll();
+                    tbxPersonalLedgerName.Focus();
+                    return;
+                }
+
+                if (String.IsNullOrWhiteSpace(tbxEmailAddress.Text) || !ExtensionMethods.IsValidEmail(tbxEmailAddress.Text))
+                {
+                    errorProviderPerLedger.SetError(tbxEmailAddress, Constants.Messages.InValidEmail);
                     tbxPersonalLedgerName.SelectAll();
                     tbxPersonalLedgerName.Focus();
                     return;
@@ -121,6 +128,32 @@ namespace PharmaUI
                 cbxStatus.SelectedItem= existingItem.Status ? Status.Active : Status.Inactive;
             }
 
+        }
+
+        private void tbxLedgerName_Validating(object sender, CancelEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(tbxPersonalLedgerName.Text))
+            {
+                errorProviderPerLedger.SetError((sender as Control), Constants.Messages.RequiredField);
+                (sender as TextBox).SelectAll();
+            }
+            else
+            {
+                errorProviderPerLedger.SetError((sender as Control), String.Empty);
+            }
+        }
+
+        private void tbxEmailAddress_Vaidating(object sender, CancelEventArgs e)
+        {
+            if (!ExtensionMethods.IsValidEmail(tbxEmailAddress.Text))
+            {
+                errorProviderPerLedger.SetError((sender as Control), Constants.Messages.InValidEmail);
+                (sender as TextBox).SelectAll();
+            }
+            else
+            {
+                errorProviderPerLedger.SetError((sender as Control), String.Empty);
+            }
         }
     }
 }
