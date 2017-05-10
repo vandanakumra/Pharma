@@ -18,7 +18,7 @@ namespace PharmaUI
     public partial class frmItemMasterAddUpdate : Form
     {
         IApplicationFacade applicationFacade;
-        private bool isInEditMode = false;
+        private bool isInEditMode { get; set; }
 
         public frmItemMasterAddUpdate(bool isInEditMode = false)
         {
