@@ -38,6 +38,20 @@
           <Property Name="AccountTypeShortName" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="AuditHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="250" />
+          <Property Name="TableName" Type="varchar" MaxLength="100" />
+          <Property Name="ColumnName" Type="varchar" MaxLength="100" />
+          <Property Name="OldValue" Type="varchar(max)" />
+          <Property Name="NewValue" Type="varchar(max)" />
+          <Property Name="Operation" Type="char" MaxLength="1" />
+          <Property Name="PrimaryKey" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="CompanyMaster">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -218,6 +232,21 @@
           <Property Name="AreaId" Type="int" Nullable="false" />
           <Property Name="DLNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TINNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
@@ -403,6 +432,7 @@
           <EntitySet Name="AccountLedgerMaster" EntityType="Self.AccountLedgerMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountLedgerType" EntityType="Self.AccountLedgerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditHistory" EntityType="Self.AuditHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
@@ -413,6 +443,7 @@
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerType" Association="Self.FK_AccountLedgerMaster_AccountLedgerType">
             <End Role="AccountLedgerType" EntitySet="AccountLedgerType" />
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
@@ -520,6 +551,20 @@
           <Property Name="AccountTypeShortName" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_AccountLedgerMaster_AccountType" FromRole="AccountType" ToRole="AccountLedgerMaster" />
+        </EntityType>
+        <EntityType Name="AuditHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TableName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Operation" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PrimaryKey" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CompanyMaster">
           <Key>
@@ -723,6 +768,21 @@
           <Property Name="TINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_SupplierLedger_SalesPersonMaster" FromRole="SupplierLedger" ToRole="PersonRouteMaster" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
           <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="*" />
@@ -907,6 +967,7 @@
           <EntitySet Name="AccountLedgerMaster" EntityType="Self.AccountLedgerMaster" />
           <EntitySet Name="AccountLedgerType" EntityType="Self.AccountLedgerType" />
           <EntitySet Name="AccountType" EntityType="Self.AccountType" />
+          <EntitySet Name="AuditHistory" EntityType="Self.AuditHistory" />
           <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" />
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" />
@@ -917,6 +978,7 @@
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" />
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerType" Association="Self.FK_AccountLedgerMaster_AccountLedgerType">
             <End Role="AccountLedgerType" EntitySet="AccountLedgerType" />
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
@@ -1017,6 +1079,21 @@
                 <ScalarProperty Name="AccountTypeName" ColumnName="AccountTypeName" />
                 <ScalarProperty Name="AccountTypeShortName" ColumnName="AccountTypeShortName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditHistory">
+            <EntityTypeMapping TypeName="PharmaDBModel.AuditHistory">
+              <MappingFragment StoreEntitySet="AuditHistory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="Operation" ColumnName="Operation" />
+                <ScalarProperty Name="PrimaryKey" ColumnName="PrimaryKey" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1208,6 +1285,22 @@
                 <ScalarProperty Name="AreaId" ColumnName="AreaId" />
                 <ScalarProperty Name="DLNo" ColumnName="DLNo" />
                 <ScalarProperty Name="TINNo" ColumnName="TINNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PharmaDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

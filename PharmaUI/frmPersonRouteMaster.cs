@@ -19,7 +19,7 @@ namespace PharmaUI
         public frmPersonRouteMaster()
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         private void frmPersonRouteMaster_Load(object sender, EventArgs e)

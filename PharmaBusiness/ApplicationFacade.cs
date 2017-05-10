@@ -12,6 +12,13 @@ namespace PharmaBusiness
 {
     public class ApplicationFacade : IApplicationFacade
     {
+        PharmaBusinessObjects.Master.UserMaster LoggedInUser { get; set; }
+        public ApplicationFacade(PharmaBusinessObjects.Master.UserMaster loggedInUser)
+        {
+            this.LoggedInUser = loggedInUser;
+        }
+
+
         #region Item Master
 
         /// <summary>
@@ -22,7 +29,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new ItemMasterBiz().GetAllItems();
+                return new ItemMasterBiz(this.LoggedInUser).GetAllItems();
             }
             catch (Exception)
             {
@@ -39,7 +46,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new ItemMasterBiz().AddNewItem(newItem);
+                return new ItemMasterBiz(this.LoggedInUser).AddNewItem(newItem);
             }
             catch (Exception)
             {
@@ -56,7 +63,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new ItemMasterBiz().UpdateItem(existingItem);
+                return new ItemMasterBiz(this.LoggedInUser).UpdateItem(existingItem);
             }
             catch (Exception)
             {
@@ -73,7 +80,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new ItemMasterBiz().DeleteItem(existingItem);
+                return new ItemMasterBiz(this.LoggedInUser).DeleteItem(existingItem);
             }
             catch (Exception)
             {
@@ -90,7 +97,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new ItemMasterBiz().GetNextItemCode(companyCode);
+                return new ItemMasterBiz(this.LoggedInUser).GetNextItemCode(companyCode);
             }
             catch (Exception)
             {
@@ -106,7 +113,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new ItemMasterBiz().GetAllItemsBySearch(searchString);
+                return new ItemMasterBiz(this.LoggedInUser).GetAllItemsBySearch(searchString);
             }
             catch (Exception)
             {
@@ -125,7 +132,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CompanyMasterBiz().GetCompanies(searchText);
+                return new CompanyMasterBiz(this.LoggedInUser).GetCompanies(searchText);
             }
             catch (Exception)
             {
@@ -138,7 +145,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CompanyMasterBiz().GetCompanyById(companyID);
+                return new CompanyMasterBiz(this.LoggedInUser).GetCompanyById(companyID);
             }
             catch (Exception)
             {
@@ -152,7 +159,7 @@ namespace PharmaBusiness
 
             try
             {
-                return new CompanyMasterBiz().AddCompany(company);
+                return new CompanyMasterBiz(this.LoggedInUser).AddCompany(company);
             }
             catch (Exception ex)
             {
@@ -165,7 +172,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CompanyMasterBiz().UpdateCompany(company);
+                return new CompanyMasterBiz(this.LoggedInUser).UpdateCompany(company);
             }
             catch (Exception)
             {
@@ -177,7 +184,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CompanyMasterBiz().DeleteCompany(companyId);
+                return new CompanyMasterBiz(this.LoggedInUser).DeleteCompany(companyId);
             }
             catch (Exception)
             {
@@ -193,7 +200,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new AccountLedgerMasterBiz().GetAccountLedgers();
+                return new AccountLedgerMasterBiz(this.LoggedInUser).GetAccountLedgers();
             }
             catch (Exception)
             {
@@ -205,7 +212,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new AccountLedgerMasterBiz().GetAccountLedgerById(accountLedgerID);
+                return new AccountLedgerMasterBiz(this.LoggedInUser).GetAccountLedgerById(accountLedgerID);
             }
             catch (Exception)
             {
@@ -218,7 +225,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new AccountLedgerMasterBiz().GetAccountLedgerByLedgerTypeIdAndSearch(ledgerTypeID, searchString);
+                return new AccountLedgerMasterBiz(this.LoggedInUser).GetAccountLedgerByLedgerTypeIdAndSearch(ledgerTypeID, searchString);
             }
             catch (Exception)
             {
@@ -233,7 +240,7 @@ namespace PharmaBusiness
 
             try
             {
-                return new AccountLedgerMasterBiz().AddAccountLedger(p);
+                return new AccountLedgerMasterBiz(this.LoggedInUser).AddAccountLedger(p);
             }
             catch (Exception ex)
             {
@@ -246,7 +253,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new AccountLedgerMasterBiz().UpdateAccountLedger(p);
+                return new AccountLedgerMasterBiz(this.LoggedInUser).UpdateAccountLedger(p);
             }            
             catch (Exception)
             {
@@ -258,7 +265,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new AccountLedgerMasterBiz().GetAccountLedgerBySystemName(systemName);
+                return new AccountLedgerMasterBiz(this.LoggedInUser).GetAccountLedgerBySystemName(systemName);
             }
             catch (Exception)
             {
@@ -324,7 +331,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new PersonalLedgerMasterBiz().GetPersonalLedgers();
+                return new PersonalLedgerMasterBiz(this.LoggedInUser).GetPersonalLedgers();
             }
             catch (Exception)
             {
@@ -336,7 +343,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new PersonalLedgerMasterBiz().AddPersonalLedger(p);
+                return new PersonalLedgerMasterBiz(this.LoggedInUser).AddPersonalLedger(p);
             }
             catch (Exception)
             {
@@ -348,7 +355,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new PersonalLedgerMasterBiz().UpdatePersonalLedger(p);
+                return new PersonalLedgerMasterBiz(this.LoggedInUser).UpdatePersonalLedger(p);
             }
             catch (Exception)
             {
@@ -366,7 +373,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new SupplierLedgerMasterBiz().GetSupplierLedgers();
+                return new SupplierLedgerMasterBiz(this.LoggedInUser).GetSupplierLedgers();
             }
             catch (Exception)
             {
@@ -379,7 +386,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new SupplierLedgerMasterBiz().AddSupplierLedger(p);
+                return new SupplierLedgerMasterBiz(this.LoggedInUser).AddSupplierLedger(p);
             }
             catch (Exception)
             {
@@ -392,7 +399,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new SupplierLedgerMasterBiz().UpdateSupplierLedger(p);
+                return new SupplierLedgerMasterBiz(this.LoggedInUser).UpdateSupplierLedger(p);
             }
             catch (Exception)
             {
@@ -409,7 +416,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new PersonRouteMasterBiz().GetPersonRoutes();
+                return new PersonRouteMasterBiz(this.LoggedInUser).GetPersonRoutes();
 
             }
             catch (Exception)
@@ -422,7 +429,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new PersonRouteMasterBiz().AddPersonRoute(p);
+                return new PersonRouteMasterBiz(this.LoggedInUser).AddPersonRoute(p);
             }
             catch (Exception)
             {
@@ -434,7 +441,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new PersonRouteMasterBiz().UpdatePersonRoute(p);
+                return new PersonRouteMasterBiz(this.LoggedInUser).UpdatePersonRoute(p);
             }
             catch (Exception)
             {
@@ -446,7 +453,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new PersonRouteMasterBiz().GetPersonRoutesByRecordTypeIdAndSearch(recordTypeID,searchString);
+                return new PersonRouteMasterBiz(this.LoggedInUser).GetPersonRoutesByRecordTypeIdAndSearch(recordTypeID,searchString);
             }
             catch (Exception)
             {
@@ -463,7 +470,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CustomerLedgerMasterBiz().GetCustomerLedgers();
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCustomerLedgers();
             }
             catch (Exception)
             {
@@ -475,7 +482,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CustomerLedgerMasterBiz().AddCustomerLedger(p);
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).AddCustomerLedger(p);
             }
             catch (Exception)
             {
@@ -487,7 +494,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CustomerLedgerMasterBiz().UpdateCustomerLedger(p);
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).UpdateCustomerLedger(p);
             }
             catch (Exception)
             {
@@ -497,6 +504,31 @@ namespace PharmaBusiness
 
         #endregion
 
+
+        #region User Master
+
+        public List<PharmaBusinessObjects.Master.UserMaster> GetUsers()
+        {
+            return new UserBiz(this.LoggedInUser).GetUsers();
+        }
+        public PharmaBusinessObjects.Master.UserMaster GetUserByUserName(string userName)
+        {
+            return new UserBiz(this.LoggedInUser).GetUserByUserName(userName);
+        }
+        public PharmaBusinessObjects.Master.UserMaster GetUserByUserId(int userid)
+        {
+            return new UserBiz(this.LoggedInUser).GetUserByUserId(userid);
+        }
+        public int AddUser(PharmaBusinessObjects.Master.UserMaster p)
+        {
+            return new UserBiz(this.LoggedInUser).AddUser(p);
+        }
+        public int UpdateUser(PharmaBusinessObjects.Master.UserMaster p)
+        {
+            return new UserBiz(this.LoggedInUser).UpdateUser(p);
+        }
+
+        #endregion
 
 
 

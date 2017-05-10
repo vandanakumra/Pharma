@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDao.cs" />
     <Compile Include="Common\CommonDao.cs" />
     <Compile Include="Entity\AccountLedgerMaster.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
@@ -57,6 +58,9 @@
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\AccountType.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\AuditHistory.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\CompanyMaster.cs">
@@ -104,6 +108,9 @@
     <Compile Include="Entity\SupplierLedger.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Users.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Master\AccountLedgerMasterDao.cs" />
     <Compile Include="Master\CompanyMasterDao.cs" />
     <Compile Include="Master\CustomerLedgerMasterDao.cs" />
@@ -111,6 +118,7 @@
     <Compile Include="Master\PersonalLedgerMasterDao.cs" />
     <Compile Include="Master\PersonRouteMasterDao.cs" />
     <Compile Include="Master\SupplierLedgerMasterDao.cs" />
+    <Compile Include="Master\UserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

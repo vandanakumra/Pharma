@@ -10,6 +10,7 @@ namespace PharmaUI
 {
     public static class ExtensionMethods
     {
+        public static PharmaBusinessObjects.Master.UserMaster LoggedInUser { get; set; }
         public static string FontFamily = "Segoe UI";
         public static int FontSize = 10;
 

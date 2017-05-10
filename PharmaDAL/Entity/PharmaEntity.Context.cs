@@ -28,6 +28,7 @@ namespace PharmaDAL.Entity
         public virtual DbSet<AccountLedgerMaster> AccountLedgerMaster { get; set; }
         public virtual DbSet<AccountLedgerType> AccountLedgerType { get; set; }
         public virtual DbSet<AccountType> AccountType { get; set; }
+        public virtual DbSet<AuditHistory> AuditHistory { get; set; }
         public virtual DbSet<CompanyMaster> CompanyMaster { get; set; }
         public virtual DbSet<CustomerLedger> CustomerLedger { get; set; }
         public virtual DbSet<CustomerType> CustomerType { get; set; }
@@ -38,5 +39,6 @@ namespace PharmaDAL.Entity
         public virtual DbSet<PersonRouteMaster> PersonRouteMaster { get; set; }
         public virtual DbSet<RecordType> RecordType { get; set; }
         public virtual DbSet<SupplierLedger> SupplierLedger { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

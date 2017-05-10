@@ -8,8 +8,12 @@ using PharmaDAL.Master;
 
 namespace PharmaBusiness.Master
 {
-    internal class ItemMasterBiz
+    internal class ItemMasterBiz : BaseBiz
     {
+        public ItemMasterBiz(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
         internal List<ItemMaster> GetAllItems()
         {
             return new ItemDaoMaster().GetAllItems();

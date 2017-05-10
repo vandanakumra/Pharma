@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace PharmaBusiness.Master
 {
-    internal class AccountLedgerMasterBiz
+    internal class AccountLedgerMasterBiz : BaseBiz
     {
+        public AccountLedgerMasterBiz(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
+
         internal List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgers()
         {
 

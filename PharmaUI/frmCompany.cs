@@ -19,7 +19,7 @@ namespace PharmaUI
         public frmCompany()
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         private void frmCompany_Load(object sender, EventArgs e)

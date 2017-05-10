@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationFacade.cs" />
+    <Compile Include="BaseBiz.cs" />
     <Compile Include="Common\CommonBiz.cs" />
     <Compile Include="Master\AccountLedgerMasterBiz.cs" />
     <Compile Include="Master\CompanyMasterBiz.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Master\PersonalLedgerMasterBiz.cs" />
     <Compile Include="Master\PersonRouteMasterBiz.cs" />
     <Compile Include="Master\SupplierLedgerMasterBiz.cs" />
+    <Compile Include="Master\UserBiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
