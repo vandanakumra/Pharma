@@ -55,6 +55,16 @@ namespace PharmaBusiness.Common
             return new CommonDao().GetRecordTypes();
         }
 
+        public List<PharmaBusinessObjects.Common.RecordType> GetRecordTypesWithAll()
+        {
+            var recordTypes = new CommonDao().GetRecordTypes() ?? new List<PharmaBusinessObjects.Common.RecordType>();
+
+
+            recordTypes.Insert(0, new PharmaBusinessObjects.Common.RecordType() { RecordTypeId = 0, RecordTypeName = "All" });
+
+            return recordTypes;
+        }
+
 
     }
 }

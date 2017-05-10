@@ -47,6 +47,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Common.InterestType> GetInterestTypes();
         List<PharmaBusinessObjects.Common.PersonLedgerType> GetPersonLedgerTypes();
         List<PharmaBusinessObjects.Common.RecordType> GetRecordTypes();
+        List<PharmaBusinessObjects.Common.RecordType> GetRecordTypesWithAll();
 
         #endregion
 
@@ -72,6 +73,8 @@ namespace PharmaBusinessObjects
         int AddPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p);
 
         int UpdatePersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p);
+
+        List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesByRecordTypeIdAndSearch(int recordTypeID, string searchString = null);
 
         #endregion
 
