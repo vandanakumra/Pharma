@@ -62,7 +62,7 @@ namespace PharmaUI
 
         private void supplierLedgerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmSupplierLedgerMaster form = new frmSupplierLedgerMaster();
+            frmSupplierLedger form = new frmSupplierLedger();
             ExtensionMethods.SetFormProperties(form, pnlMain);
             form.Show();
         }

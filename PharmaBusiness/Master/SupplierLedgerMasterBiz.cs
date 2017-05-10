@@ -9,9 +9,9 @@ namespace PharmaBusiness.Master
 {
     internal class SupplierLedgerMasterBiz
     {
-        internal List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers()
+        internal List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers(string searchText)
         {
-            return new SupplierLedgerMasterDao().GetSupplierLedgers();
+            return new SupplierLedgerMasterDao().GetSupplierLedgers(searchText);
         }
 
         internal int AddSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p)
