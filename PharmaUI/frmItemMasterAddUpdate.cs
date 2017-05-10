@@ -69,6 +69,7 @@ namespace PharmaUI
                 {
                     errorProviderItem.SetError(tbxItemName, Constants.Messages.RequiredField);
                     tbxItemName.SelectAll();
+                    tbxItemName.Focus();
                     return;
                 }
 
