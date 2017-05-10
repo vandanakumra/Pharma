@@ -23,7 +23,7 @@ namespace PharmaUI
         public frmPersonalLedgerMasterAddUpdate(bool isInEditMode=false)
         {
             this.isInEditMode = isInEditMode;
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             InitializeComponent();
             LoadCombo();
 

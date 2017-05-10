@@ -62,6 +62,7 @@
             this.dgvPersonalLedger.Location = new System.Drawing.Point(16, 121);
             this.dgvPersonalLedger.Name = "dgvPersonalLedger";
             this.dgvPersonalLedger.ReadOnly = true;
+            this.dgvPersonalLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonalLedger.Size = new System.Drawing.Size(609, 260);
             this.dgvPersonalLedger.TabIndex = 9;
             // 
