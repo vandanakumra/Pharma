@@ -10,11 +10,11 @@ namespace PharmaDAL.Master
     public class SupplierLedgerMasterDao
     {
 
-        public List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers()
+        public List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers(string searchText)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.SupplierLedger.Select(p => new PharmaBusinessObjects.Master.SupplierLedgerMaster()
+                return context.SupplierLedger.Where(p=>p.SupplierLedgerName.Contains(searchText)).Select(p => new PharmaBusinessObjects.Master.SupplierLedgerMaster()
                 {
                     SupplierLedgerId = p.SupplierLedgerId,
                     SupplierLedgerCode = p.SupplierLedgerCode,

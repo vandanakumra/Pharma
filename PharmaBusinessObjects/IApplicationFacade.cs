@@ -62,7 +62,7 @@ namespace PharmaBusinessObjects
 
         #region Supplier Ledger Master
 
-        List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers();
+        List<PharmaBusinessObjects.Master.SupplierLedgerMaster> GetSupplierLedgers(string searchText);
         int AddSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
 
         int UpdateSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);

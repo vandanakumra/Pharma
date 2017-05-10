@@ -384,11 +384,11 @@ namespace PharmaBusiness
 
         #region  Supplier Ledger Master
 
-        public List<SupplierLedgerMaster> GetSupplierLedgers()
+        public List<SupplierLedgerMaster> GetSupplierLedgers(string searchText)
         {
             try
             {
-                return new SupplierLedgerMasterBiz(this.LoggedInUser).GetSupplierLedgers();
+                return new SupplierLedgerMasterBiz(this.LoggedInUser).GetSupplierLedgers(searchText);
             }
             catch (Exception)
             {

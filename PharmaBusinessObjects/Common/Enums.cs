@@ -25,5 +25,11 @@ namespace PharmaBusinessObjects.Common
             Indirect,
             Direct
         };
+
+        public enum TaxRetail
+        {
+            Tax,
+            Retail
+        };
     }
 }
