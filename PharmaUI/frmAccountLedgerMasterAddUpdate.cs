@@ -24,13 +24,13 @@ namespace PharmaUI
         {
 
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         public frmAccountLedgerMasterAddUpdate(int accountLedgerId)
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.AccountLedgerId = accountLedgerId;
         }
 
@@ -40,16 +40,11 @@ namespace PharmaUI
             ExtensionMethods.FormLoad(this, (this.AccountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
 
             if (this.AccountLedgerId > 0)
-            {
-                //lblAccNo.Visible = true;
-                //txtAccountLedgerCode.Visible = true;
-
+            {                
                 FillFormForUpdate();
             }
             else
-            {
-                //lblAccNo.Visible = false;
-                //txtAccountLedgerCode.Visible = false;
+            {                
                 FillCombo();
             }
 

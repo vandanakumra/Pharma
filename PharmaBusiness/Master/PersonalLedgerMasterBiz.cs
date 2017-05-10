@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace PharmaBusiness.Master
 {
-    internal class PersonalLedgerMasterBiz
+    internal class PersonalLedgerMasterBiz : BaseBiz
     {
+        public PersonalLedgerMasterBiz(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
+    
         internal List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers()
         {
             return new PersonalLedgerMasterDao().GetPersonalLedgers();

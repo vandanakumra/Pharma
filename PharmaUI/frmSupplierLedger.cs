@@ -18,7 +18,7 @@ namespace PharmaUI
         public frmSupplierLedger()
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         private void frmSupplierLedger_Load(object sender, EventArgs e)

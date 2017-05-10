@@ -76,7 +76,7 @@ namespace PharmaUI
 
         private void personRouteMasterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmSupplierLedgerMaster form = new frmSupplierLedgerMaster();
+            frmPersonRouteMaster form = new frmPersonRouteMaster();
             ExtensionMethods.SetFormProperties(form, pnlMain);
             form.Show();
         }

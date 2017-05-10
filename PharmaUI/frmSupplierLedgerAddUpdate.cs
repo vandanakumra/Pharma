@@ -22,13 +22,13 @@ namespace PharmaUI
         public frmSupplierLedgerAddUpdate()
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         public frmSupplierLedgerAddUpdate(int supplierId)
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.SupplierId = supplierId;
             ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
         }

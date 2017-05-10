@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace PharmaBusiness.Master
 {
-    internal class CompanyMasterBiz
+    internal class CompanyMasterBiz : BaseBiz
     {
+        public CompanyMasterBiz(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
+
         internal List<CompanyMaster> GetCompanies(string searchText)
         {
             return new CompanyMasterDao().GetCompanies(searchText);

@@ -137,6 +137,12 @@
     <Compile Include="frmSupplierLedgerAddUpdate.Designer.cs">
       <DependentUpon>frmSupplierLedgerAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPersonRouteMasterAddUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPersonRouteMasterAddUpdate.Designer.cs">
+      <DependentUpon>frmPersonRouteMasterAddUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSupplierLedgerMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSupplierLedgerAddUpdate.resx">
       <DependentUpon>frmSupplierLedgerAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPersonRouteMaster.resx">
+      <DependentUpon>frmPersonRouteMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPersonRouteMasterAddUpdate.resx">
+      <DependentUpon>frmPersonRouteMasterAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSupplierLedgerMaster.resx">
       <DependentUpon>frmSupplierLedgerMaster.cs</DependentUpon>

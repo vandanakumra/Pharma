@@ -19,7 +19,7 @@ namespace PharmaUI
         public frmPersonalLedgerMaster()
         {
             InitializeComponent();
-            applicationFacade = new ApplicationFacade();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
 
@@ -64,7 +64,21 @@ namespace PharmaUI
 
         private void btnAddNewLedger_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var form = new frmPersonalLedgerMasterAddUpdate();
+                form.FormClosed += Form_FormClosed;
+                form.ShowDialog();
+            }
+            catch (Exception)
+            {
 
+            }
+        }
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FillGrid();
         }
     }
 }

@@ -47,6 +47,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Common.InterestType> GetInterestTypes();
         List<PharmaBusinessObjects.Common.PersonLedgerType> GetPersonLedgerTypes();
         List<PharmaBusinessObjects.Common.RecordType> GetRecordTypes();
+        List<PharmaBusinessObjects.Common.RecordType> GetRecordTypesWithAll();
 
         #endregion
 
@@ -73,6 +74,8 @@ namespace PharmaBusinessObjects
 
         int UpdatePersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p);
 
+        List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesByRecordTypeIdAndSearch(int recordTypeID, string searchString = null);
+
         #endregion
 
         #region Customer Ledger Master
@@ -82,6 +85,17 @@ namespace PharmaBusinessObjects
         int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
 
         #endregion
+
+        #region User Master
+
+        List<PharmaBusinessObjects.Master.UserMaster> GetUsers();
+        PharmaBusinessObjects.Master.UserMaster GetUserByUserName(string userName);
+        PharmaBusinessObjects.Master.UserMaster GetUserByUserId(int userid);
+        int AddUser(PharmaBusinessObjects.Master.UserMaster p);
+        int UpdateUser(PharmaBusinessObjects.Master.UserMaster p);
+
+        #endregion
+
     }
 
 }

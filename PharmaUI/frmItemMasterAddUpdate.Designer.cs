@@ -104,7 +104,6 @@
             this.cbxStatus = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.errorProviderItem = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderItem)).BeginInit();
@@ -698,7 +697,6 @@
             this.tbxItemName.Size = new System.Drawing.Size(142, 20);
             this.tbxItemName.TabIndex = 41;
             this.tbxItemName.Validating += new System.ComponentModel.CancelEventHandler(this.tbxItemName_Validating);
-            this.tbxItemName.Validated += new System.EventHandler(this.tbxItemName_Validated);
             // 
             // tbxConvRate
             // 
@@ -996,22 +994,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // panel1
-            // 
-            this.panel1.AccessibleName = "";
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
-            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(1078, 56);
-            this.panel1.TabIndex = 3;
-            this.panel1.Tag = "";
-            // 
             // errorProviderItem
             // 
             this.errorProviderItem.ContainerControl = this;
@@ -1022,7 +1004,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 566);
             this.ControlBox = false;
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -1110,7 +1091,6 @@
         private System.Windows.Forms.TextBox tbxMinimumStock;
         private System.Windows.Forms.ComboBox cbxComanyCode;
         private System.Windows.Forms.ComboBox cbxSaleType;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cbxHalfScheme;
         private System.Windows.Forms.ComboBox cbxQtrScheme;
         private System.Windows.Forms.ComboBox cbxFixedDiscount;
