@@ -15,6 +15,14 @@ namespace PharmaUI
         public static string FontFamily = "Segoe UI";
         public static int FontSize = 10;
 
+        public const string MatchEmailPattern =
+           @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+    + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+    + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+    + @"([a-zA-Z0-9]+[\w-]+\.)+[a-zA-Z]{1}[a-zA-Z0-9-]{1,23})$";
+
         public static List<Control> GetAllControls(Control container, List<Control> list)
         {
             foreach (Control c in container.Controls)
@@ -116,17 +124,10 @@ namespace PharmaUI
         }
 
         public static bool IsValidEmail(string emailaddress)
-        {
-            try
-            {
-                MailAddress m = new MailAddress(emailaddress);
-
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
+        {     
+            if (emailaddress != null) return System.Text.RegularExpressions.Regex.IsMatch(emailaddress, MatchEmailPattern);
+            else return false;
         }
+       
     }
 }
