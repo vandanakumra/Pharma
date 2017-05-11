@@ -104,7 +104,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel1.Controls.Add(this.lblItemCode, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbxRoute, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.cbxArea, 1, 3);
@@ -190,7 +190,7 @@
             this.lblItemCode.AutoSize = true;
             this.lblItemCode.Location = new System.Drawing.Point(3, 0);
             this.lblItemCode.Name = "lblItemCode";
-            this.lblItemCode.Size = new System.Drawing.Size(60, 24);
+            this.lblItemCode.Size = new System.Drawing.Size(59, 24);
             this.lblItemCode.TabIndex = 79;
             this.lblItemCode.Text = "Z.S.M";
             this.lblItemCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -199,7 +199,7 @@
             // 
             this.cbxRoute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRoute.FormattingEnabled = true;
-            this.cbxRoute.Location = new System.Drawing.Point(69, 123);
+            this.cbxRoute.Location = new System.Drawing.Point(68, 123);
             this.cbxRoute.Name = "cbxRoute";
             this.cbxRoute.Size = new System.Drawing.Size(142, 21);
             this.cbxRoute.TabIndex = 62;
@@ -208,7 +208,7 @@
             // 
             this.cbxArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxArea.FormattingEnabled = true;
-            this.cbxArea.Location = new System.Drawing.Point(69, 75);
+            this.cbxArea.Location = new System.Drawing.Point(68, 75);
             this.cbxArea.Name = "cbxArea";
             this.cbxArea.Size = new System.Drawing.Size(142, 21);
             this.cbxArea.TabIndex = 63;
@@ -217,7 +217,7 @@
             // 
             this.cbxSalesman.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSalesman.FormattingEnabled = true;
-            this.cbxSalesman.Location = new System.Drawing.Point(69, 99);
+            this.cbxSalesman.Location = new System.Drawing.Point(68, 99);
             this.cbxSalesman.Name = "cbxSalesman";
             this.cbxSalesman.Size = new System.Drawing.Size(142, 21);
             this.cbxSalesman.TabIndex = 64;
@@ -226,7 +226,7 @@
             // 
             this.cbxASM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxASM.FormattingEnabled = true;
-            this.cbxASM.Location = new System.Drawing.Point(69, 51);
+            this.cbxASM.Location = new System.Drawing.Point(68, 51);
             this.cbxASM.Name = "cbxASM";
             this.cbxASM.Size = new System.Drawing.Size(142, 21);
             this.cbxASM.TabIndex = 65;
@@ -235,7 +235,7 @@
             // 
             this.cbxRSM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRSM.FormattingEnabled = true;
-            this.cbxRSM.Location = new System.Drawing.Point(69, 27);
+            this.cbxRSM.Location = new System.Drawing.Point(68, 27);
             this.cbxRSM.Name = "cbxRSM";
             this.cbxRSM.Size = new System.Drawing.Size(142, 21);
             this.cbxRSM.TabIndex = 66;
@@ -244,14 +244,14 @@
             // 
             this.cbxZSM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxZSM.FormattingEnabled = true;
-            this.cbxZSM.Location = new System.Drawing.Point(69, 3);
+            this.cbxZSM.Location = new System.Drawing.Point(68, 3);
             this.cbxZSM.Name = "cbxZSM";
             this.cbxZSM.Size = new System.Drawing.Size(142, 21);
             this.cbxZSM.TabIndex = 67;
             // 
             // tbxTIN
             // 
-            this.tbxTIN.Location = new System.Drawing.Point(69, 171);
+            this.tbxTIN.Location = new System.Drawing.Point(68, 171);
             this.tbxTIN.Name = "tbxTIN";
             this.tbxTIN.Size = new System.Drawing.Size(142, 20);
             this.tbxTIN.TabIndex = 69;
@@ -259,7 +259,7 @@
             // 
             // tbxDL
             // 
-            this.tbxDL.Location = new System.Drawing.Point(69, 147);
+            this.tbxDL.Location = new System.Drawing.Point(68, 147);
             this.tbxDL.Name = "tbxDL";
             this.tbxDL.Size = new System.Drawing.Size(142, 20);
             this.tbxDL.TabIndex = 78;
@@ -273,7 +273,7 @@
             this.lblItemName.AutoSize = true;
             this.lblItemName.Location = new System.Drawing.Point(3, 24);
             this.lblItemName.Name = "lblItemName";
-            this.lblItemName.Size = new System.Drawing.Size(60, 24);
+            this.lblItemName.Size = new System.Drawing.Size(59, 24);
             this.lblItemName.TabIndex = 80;
             this.lblItemName.Text = "R.S.M.";
             this.lblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -286,7 +286,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 24);
+            this.label1.Size = new System.Drawing.Size(59, 24);
             this.label1.TabIndex = 81;
             this.label1.Text = "A.S.M";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -299,7 +299,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 24);
+            this.label2.Size = new System.Drawing.Size(59, 24);
             this.label2.TabIndex = 82;
             this.label2.Text = "Area";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -312,7 +312,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 96);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 24);
+            this.label3.Size = new System.Drawing.Size(59, 24);
             this.label3.TabIndex = 83;
             this.label3.Text = "Salesman";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -325,7 +325,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 120);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 24);
+            this.label4.Size = new System.Drawing.Size(59, 24);
             this.label4.TabIndex = 84;
             this.label4.Text = "Route";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -338,7 +338,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(3, 144);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 24);
+            this.label5.Size = new System.Drawing.Size(59, 24);
             this.label5.TabIndex = 85;
             this.label5.Text = "D.L.NO.";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -351,7 +351,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(3, 168);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 24);
+            this.label6.Size = new System.Drawing.Size(59, 24);
             this.label6.TabIndex = 86;
             this.label6.Text = "TIN NO.";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -360,14 +360,14 @@
             // 
             this.cbxFixedTax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFixedTax.FormattingEnabled = true;
-            this.cbxFixedTax.Location = new System.Drawing.Point(698, 3);
+            this.cbxFixedTax.Location = new System.Drawing.Point(695, 3);
             this.cbxFixedTax.Name = "cbxFixedTax";
             this.cbxFixedTax.Size = new System.Drawing.Size(127, 21);
             this.cbxFixedTax.TabIndex = 97;
             // 
             // tbxSC
             // 
-            this.tbxSC.Location = new System.Drawing.Point(698, 75);
+            this.tbxSC.Location = new System.Drawing.Point(695, 75);
             this.tbxSC.Name = "tbxSC";
             this.tbxSC.Size = new System.Drawing.Size(127, 20);
             this.tbxSC.TabIndex = 100;
@@ -375,7 +375,7 @@
             // 
             // tbxSaleBillFormat
             // 
-            this.tbxSaleBillFormat.Location = new System.Drawing.Point(698, 123);
+            this.tbxSaleBillFormat.Location = new System.Drawing.Point(695, 123);
             this.tbxSaleBillFormat.Name = "tbxSaleBillFormat";
             this.tbxSaleBillFormat.Size = new System.Drawing.Size(127, 20);
             this.tbxSaleBillFormat.TabIndex = 101;
@@ -385,14 +385,14 @@
             // 
             this.cbxChangeSCTAXWhileBill.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxChangeSCTAXWhileBill.FormattingEnabled = true;
-            this.cbxChangeSCTAXWhileBill.Location = new System.Drawing.Point(698, 99);
+            this.cbxChangeSCTAXWhileBill.Location = new System.Drawing.Point(695, 99);
             this.cbxChangeSCTAXWhileBill.Name = "cbxChangeSCTAXWhileBill";
             this.cbxChangeSCTAXWhileBill.Size = new System.Drawing.Size(127, 21);
             this.cbxChangeSCTAXWhileBill.TabIndex = 102;
             // 
             // tbxMaxOSAmount
             // 
-            this.tbxMaxOSAmount.Location = new System.Drawing.Point(698, 147);
+            this.tbxMaxOSAmount.Location = new System.Drawing.Point(695, 147);
             this.tbxMaxOSAmount.Name = "tbxMaxOSAmount";
             this.tbxMaxOSAmount.Size = new System.Drawing.Size(127, 20);
             this.tbxMaxOSAmount.TabIndex = 103;
@@ -400,7 +400,7 @@
             // 
             // tbxMaxBillAmmount
             // 
-            this.tbxMaxBillAmmount.Location = new System.Drawing.Point(698, 171);
+            this.tbxMaxBillAmmount.Location = new System.Drawing.Point(695, 171);
             this.tbxMaxBillAmmount.Name = "tbxMaxBillAmmount";
             this.tbxMaxBillAmmount.Size = new System.Drawing.Size(127, 20);
             this.tbxMaxBillAmmount.TabIndex = 104;
@@ -408,7 +408,7 @@
             // 
             // tbxMaxNumberOfOSBill
             // 
-            this.tbxMaxNumberOfOSBill.Location = new System.Drawing.Point(698, 195);
+            this.tbxMaxNumberOfOSBill.Location = new System.Drawing.Point(695, 195);
             this.tbxMaxNumberOfOSBill.Name = "tbxMaxNumberOfOSBill";
             this.tbxMaxNumberOfOSBill.Size = new System.Drawing.Size(127, 20);
             this.tbxMaxNumberOfOSBill.TabIndex = 105;
@@ -416,7 +416,7 @@
             // 
             // tbxMaxGracePeriod
             // 
-            this.tbxMaxGracePeriod.Location = new System.Drawing.Point(698, 219);
+            this.tbxMaxGracePeriod.Location = new System.Drawing.Point(695, 219);
             this.tbxMaxGracePeriod.Name = "tbxMaxGracePeriod";
             this.tbxMaxGracePeriod.Size = new System.Drawing.Size(127, 20);
             this.tbxMaxGracePeriod.TabIndex = 106;
@@ -426,7 +426,7 @@
             // 
             this.cbxFollowConditionStrictly.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFollowConditionStrictly.FormattingEnabled = true;
-            this.cbxFollowConditionStrictly.Location = new System.Drawing.Point(698, 243);
+            this.cbxFollowConditionStrictly.Location = new System.Drawing.Point(695, 243);
             this.cbxFollowConditionStrictly.Name = "cbxFollowConditionStrictly";
             this.cbxFollowConditionStrictly.Size = new System.Drawing.Size(127, 21);
             this.cbxFollowConditionStrictly.TabIndex = 107;
@@ -435,7 +435,7 @@
             // 
             this.cbxDiscount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxDiscount.FormattingEnabled = true;
-            this.cbxDiscount.Location = new System.Drawing.Point(940, 3);
+            this.cbxDiscount.Location = new System.Drawing.Point(937, 3);
             this.cbxDiscount.Name = "cbxDiscount";
             this.cbxDiscount.Size = new System.Drawing.Size(112, 21);
             this.cbxDiscount.TabIndex = 108;
@@ -448,14 +448,14 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(3, 192);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 24);
+            this.label7.Size = new System.Drawing.Size(59, 24);
             this.label7.TabIndex = 114;
             this.label7.Text = "C.S.T.NO.";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbxCST
             // 
-            this.tbxCST.Location = new System.Drawing.Point(69, 195);
+            this.tbxCST.Location = new System.Drawing.Point(68, 195);
             this.tbxCST.Name = "tbxCST";
             this.tbxCST.Size = new System.Drawing.Size(142, 20);
             this.tbxCST.TabIndex = 111;
@@ -469,14 +469,14 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(3, 216);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 24);
+            this.label8.Size = new System.Drawing.Size(59, 24);
             this.label8.TabIndex = 88;
             this.label8.Text = "Day";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbxDay
             // 
-            this.tbxDay.Location = new System.Drawing.Point(69, 219);
+            this.tbxDay.Location = new System.Drawing.Point(68, 219);
             this.tbxDay.Name = "tbxDay";
             this.tbxDay.Size = new System.Drawing.Size(142, 20);
             this.tbxDay.TabIndex = 71;
@@ -490,14 +490,14 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(3, 240);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(60, 27);
+            this.label9.Size = new System.Drawing.Size(59, 27);
             this.label9.TabIndex = 89;
             this.label9.Text = "Credit Limit";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbxCredtLimit
             // 
-            this.tbxCredtLimit.Location = new System.Drawing.Point(69, 243);
+            this.tbxCredtLimit.Location = new System.Drawing.Point(68, 243);
             this.tbxCredtLimit.Name = "tbxCredtLimit";
             this.tbxCredtLimit.Size = new System.Drawing.Size(142, 20);
             this.tbxCredtLimit.TabIndex = 72;
@@ -509,7 +509,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(247, 0);
+            this.label10.Location = new System.Drawing.Point(245, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(131, 24);
             this.label10.TabIndex = 90;
@@ -518,7 +518,7 @@
             // 
             // tbxBankName
             // 
-            this.tbxBankName.Location = new System.Drawing.Point(384, 3);
+            this.tbxBankName.Location = new System.Drawing.Point(382, 3);
             this.tbxBankName.Name = "tbxBankName";
             this.tbxBankName.Size = new System.Drawing.Size(142, 20);
             this.tbxBankName.TabIndex = 73;
@@ -530,7 +530,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(247, 24);
+            this.label11.Location = new System.Drawing.Point(245, 24);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(131, 24);
             this.label11.TabIndex = 95;
@@ -539,7 +539,7 @@
             // 
             // tbxBankArea
             // 
-            this.tbxBankArea.Location = new System.Drawing.Point(384, 27);
+            this.tbxBankArea.Location = new System.Drawing.Point(382, 27);
             this.tbxBankArea.Name = "tbxBankArea";
             this.tbxBankArea.Size = new System.Drawing.Size(142, 20);
             this.tbxBankArea.TabIndex = 74;
@@ -551,7 +551,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(247, 48);
+            this.label13.Location = new System.Drawing.Point(245, 48);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(131, 24);
             this.label13.TabIndex = 93;
@@ -560,7 +560,7 @@
             // 
             // tbxCloseDay
             // 
-            this.tbxCloseDay.Location = new System.Drawing.Point(384, 51);
+            this.tbxCloseDay.Location = new System.Drawing.Point(382, 51);
             this.tbxCloseDay.Name = "tbxCloseDay";
             this.tbxCloseDay.Size = new System.Drawing.Size(142, 20);
             this.tbxCloseDay.TabIndex = 75;
@@ -572,7 +572,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(247, 72);
+            this.label12.Location = new System.Drawing.Point(245, 72);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(131, 24);
             this.label12.TabIndex = 96;
@@ -585,7 +585,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(247, 96);
+            this.label14.Location = new System.Drawing.Point(245, 96);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(131, 24);
             this.label14.TabIndex = 94;
@@ -596,7 +596,7 @@
             // 
             this.cbxLessExcise.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxLessExcise.FormattingEnabled = true;
-            this.cbxLessExcise.Location = new System.Drawing.Point(384, 99);
+            this.cbxLessExcise.Location = new System.Drawing.Point(382, 99);
             this.cbxLessExcise.Name = "cbxLessExcise";
             this.cbxLessExcise.Size = new System.Drawing.Size(142, 21);
             this.cbxLessExcise.TabIndex = 116;
@@ -605,7 +605,7 @@
             // 
             this.cbxRateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRateType.FormattingEnabled = true;
-            this.cbxRateType.Location = new System.Drawing.Point(384, 123);
+            this.cbxRateType.Location = new System.Drawing.Point(382, 123);
             this.cbxRateType.Name = "cbxRateType";
             this.cbxRateType.Size = new System.Drawing.Size(142, 21);
             this.cbxRateType.TabIndex = 117;
@@ -616,7 +616,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(247, 120);
+            this.label15.Location = new System.Drawing.Point(245, 120);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(131, 24);
             this.label15.TabIndex = 118;
@@ -625,7 +625,7 @@
             // 
             // tbxTax
             // 
-            this.tbxTax.Location = new System.Drawing.Point(698, 27);
+            this.tbxTax.Location = new System.Drawing.Point(695, 27);
             this.tbxTax.Name = "tbxTax";
             this.tbxTax.Size = new System.Drawing.Size(127, 20);
             this.tbxTax.TabIndex = 109;
@@ -635,7 +635,7 @@
             // 
             this.cbxFixedSC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFixedSC.FormattingEnabled = true;
-            this.cbxFixedSC.Location = new System.Drawing.Point(698, 51);
+            this.cbxFixedSC.Location = new System.Drawing.Point(695, 51);
             this.cbxFixedSC.Name = "cbxFixedSC";
             this.cbxFixedSC.Size = new System.Drawing.Size(127, 21);
             this.cbxFixedSC.TabIndex = 98;
@@ -646,7 +646,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(546, 0);
+            this.label16.Location = new System.Drawing.Point(543, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(146, 24);
             this.label16.TabIndex = 119;
@@ -659,7 +659,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(546, 24);
+            this.label17.Location = new System.Drawing.Point(543, 24);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(146, 24);
             this.label17.TabIndex = 120;
@@ -672,7 +672,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(546, 48);
+            this.label18.Location = new System.Drawing.Point(543, 48);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(146, 24);
             this.label18.TabIndex = 121;
@@ -685,7 +685,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(546, 96);
+            this.label19.Location = new System.Drawing.Point(543, 96);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(146, 24);
             this.label19.TabIndex = 122;
@@ -698,7 +698,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(546, 72);
+            this.label20.Location = new System.Drawing.Point(543, 72);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(146, 24);
             this.label20.TabIndex = 123;
@@ -709,7 +709,7 @@
             // 
             this.cbxCustomerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCustomerType.FormattingEnabled = true;
-            this.cbxCustomerType.Location = new System.Drawing.Point(384, 75);
+            this.cbxCustomerType.Location = new System.Drawing.Point(382, 75);
             this.cbxCustomerType.Name = "cbxCustomerType";
             this.cbxCustomerType.Size = new System.Drawing.Size(142, 21);
             this.cbxCustomerType.TabIndex = 115;
@@ -720,7 +720,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(546, 120);
+            this.label21.Location = new System.Drawing.Point(543, 120);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(146, 24);
             this.label21.TabIndex = 124;
@@ -733,7 +733,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(546, 144);
+            this.label22.Location = new System.Drawing.Point(543, 144);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(146, 24);
             this.label22.TabIndex = 125;
@@ -746,7 +746,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(546, 168);
+            this.label23.Location = new System.Drawing.Point(543, 168);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(146, 24);
             this.label23.TabIndex = 126;
@@ -759,7 +759,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(546, 192);
+            this.label24.Location = new System.Drawing.Point(543, 192);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(146, 24);
             this.label24.TabIndex = 127;
@@ -772,7 +772,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(546, 216);
+            this.label25.Location = new System.Drawing.Point(543, 216);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(146, 24);
             this.label25.TabIndex = 128;
@@ -785,7 +785,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(546, 240);
+            this.label26.Location = new System.Drawing.Point(543, 240);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(146, 27);
             this.label26.TabIndex = 129;
@@ -798,7 +798,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(831, 24);
+            this.label27.Location = new System.Drawing.Point(828, 24);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(103, 24);
             this.label27.TabIndex = 130;
@@ -811,7 +811,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(831, 0);
+            this.label28.Location = new System.Drawing.Point(828, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(103, 24);
             this.label28.TabIndex = 131;
@@ -820,7 +820,7 @@
             // 
             // tbxLocalCentral
             // 
-            this.tbxLocalCentral.Location = new System.Drawing.Point(940, 27);
+            this.tbxLocalCentral.Location = new System.Drawing.Point(937, 27);
             this.tbxLocalCentral.Name = "tbxLocalCentral";
             this.tbxLocalCentral.Size = new System.Drawing.Size(112, 20);
             this.tbxLocalCentral.TabIndex = 110;
