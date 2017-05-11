@@ -190,6 +190,9 @@
     <EmbeddedResource Include="frmCustomerLedgerMaster.resx">
       <DependentUpon>frmCustomerLedgerMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomerLedgerMasterAddUpdate.resx">
+      <DependentUpon>frmCustomerLedgerMasterAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmItemMaster.resx">
       <DependentUpon>frmItemMaster.cs</DependentUpon>
     </EmbeddedResource>
