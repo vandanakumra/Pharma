@@ -151,6 +151,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ucSupplierCustomerInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucSupplierCustomerInfo.Designer.cs">
+      <DependentUpon>ucSupplierCustomerInfo.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmAccountLedgerMaster.resx">
       <DependentUpon>frmAccountLedgerMaster.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,6 +215,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucSupplierCustomerInfo.resx">
+      <DependentUpon>ucSupplierCustomerInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
