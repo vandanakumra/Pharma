@@ -21,9 +21,9 @@ namespace PharmaUI
         private bool isInEditMode { get; set; }
 
         public frmItemMasterAddUpdate(bool isInEditMode = false)
-        {
+        {         
+            InitializeComponent();           
             this.isInEditMode = isInEditMode;
-            InitializeComponent();
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
 
             LoadCombo();

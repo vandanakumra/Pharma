@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseBusinessObjects.cs" />
     <Compile Include="Common\AccountLedgerType.cs" />
     <Compile Include="Common\AccountType.cs" />
     <Compile Include="Common\Constants.cs" />

@@ -33,6 +33,10 @@ namespace PharmaDAL.Entity
         public int AreaId { get; set; }
         public string DLNo { get; set; }
         public string TINNo { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }
     }

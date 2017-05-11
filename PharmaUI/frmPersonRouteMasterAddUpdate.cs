@@ -22,14 +22,14 @@ namespace PharmaUI
 
         public frmPersonRouteMasterAddUpdate()
         {
-            InitializeComponent();
+            InitializeComponent();            
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.PersonRouteMaster = new PersonRouteMaster();
         }
 
         public frmPersonRouteMasterAddUpdate(PersonRouteMaster personRouteMaster)
         {
-            InitializeComponent();
+            InitializeComponent();           
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.PersonRouteMaster = personRouteMaster;
         }

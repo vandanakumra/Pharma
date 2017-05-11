@@ -149,6 +149,18 @@
     <Compile Include="frmSupplierLedgerMaster.Designer.cs">
       <DependentUpon>frmSupplierLedgerMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUserMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserMaster.Designer.cs">
+      <DependentUpon>frmUserMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserMasterAddUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserMasterAddUpdate.Designer.cs">
+      <DependentUpon>frmUserMasterAddUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAccountLedgerMaster.resx">
@@ -198,6 +210,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSupplierLedgerMaster.resx">
       <DependentUpon>frmSupplierLedgerMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserMaster.resx">
+      <DependentUpon>frmUserMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserMasterAddUpdate.resx">
+      <DependentUpon>frmUserMasterAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -19,6 +19,7 @@ namespace PharmaUI
         public frmAccountLedgerMaster()
         {           
             InitializeComponent();
+            ExtensionMethods.SetFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 

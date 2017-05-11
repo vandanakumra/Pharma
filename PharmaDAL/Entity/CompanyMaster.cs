@@ -22,5 +22,9 @@ namespace PharmaDAL.Entity
         public int OrderPreferenceRating { get; set; }
         public int BillingPreferenceRating { get; set; }
         public bool StockSummaryRequired { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }

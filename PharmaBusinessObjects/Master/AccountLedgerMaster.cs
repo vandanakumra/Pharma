@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmaBusinessObjects.Master
 {
-    public class AccountLedgerMaster
+    public class AccountLedgerMaster : BaseBusinessObjects
     {
         public int AccountLedgerID { get; set; }
         public string AccountLedgerCode { get; set; }

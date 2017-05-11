@@ -22,7 +22,7 @@ namespace PharmaUI
 
         public frmSupplierLedgerAddUpdate()
         {
-            InitializeComponent();
+            InitializeComponent();            
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 

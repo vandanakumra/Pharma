@@ -19,6 +19,7 @@ namespace PharmaUI
         public frmCompany()
         {
             InitializeComponent();
+            ExtensionMethods.SetFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
@@ -28,7 +29,7 @@ namespace PharmaUI
 
             LoadDataGrid();
 
-            dgvCompanyList.DoubleClick += DgvCompanyList_DoubleClick;
+            dgvCompanyList.CellDoubleClick += DgvCompanyList_DoubleClick;
             dgvCompanyList.KeyDown += DgvCompanyList_KeyDown; ;
             dgvCompanyList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
@@ -66,6 +67,7 @@ namespace PharmaUI
 
                     Int32.TryParse(Convert.ToString(row.Cells["CompanyId"].Value), out companyId);
                     frmCompanyAddUpdate form = new frmCompanyAddUpdate(companyId);
+                    form.FormClosed -= Form_FormClosed;
                     form.FormClosed += Form_FormClosed;
                     form.ShowDialog();
 
