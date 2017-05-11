@@ -112,14 +112,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(942, 120);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1055, 90);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Location = new System.Drawing.Point(3, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 0;
@@ -129,7 +129,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(237, 8);
+            this.label2.Location = new System.Drawing.Point(265, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 1;
@@ -139,7 +139,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(471, 8);
+            this.label3.Location = new System.Drawing.Point(527, 4);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 2;
@@ -149,7 +149,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(705, 8);
+            this.label4.Location = new System.Drawing.Point(789, 4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 3;
@@ -159,7 +159,7 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 38);
+            this.label5.Location = new System.Drawing.Point(3, 26);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 13);
             this.label5.TabIndex = 4;
@@ -169,7 +169,7 @@
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(237, 38);
+            this.label6.Location = new System.Drawing.Point(265, 26);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 5;
@@ -179,7 +179,7 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(471, 38);
+            this.label7.Location = new System.Drawing.Point(527, 26);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(24, 13);
             this.label7.TabIndex = 6;
@@ -189,7 +189,7 @@
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(705, 38);
+            this.label8.Location = new System.Drawing.Point(789, 26);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 13);
             this.label8.TabIndex = 7;
@@ -199,7 +199,7 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 68);
+            this.label9.Location = new System.Drawing.Point(3, 48);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 13);
             this.label9.TabIndex = 8;
@@ -209,7 +209,7 @@
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(237, 68);
+            this.label10.Location = new System.Drawing.Point(265, 48);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(55, 13);
             this.label10.TabIndex = 9;
@@ -219,7 +219,7 @@
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(471, 68);
+            this.label11.Location = new System.Drawing.Point(527, 48);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(73, 13);
             this.label11.TabIndex = 10;
@@ -229,7 +229,7 @@
             // 
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(705, 68);
+            this.label12.Location = new System.Drawing.Point(789, 48);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(37, 13);
             this.label12.TabIndex = 11;
@@ -239,7 +239,7 @@
             // 
             this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 98);
+            this.label13.Location = new System.Drawing.Point(3, 71);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 13);
             this.label13.TabIndex = 1;
@@ -249,7 +249,7 @@
             // 
             this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(237, 98);
+            this.label14.Location = new System.Drawing.Point(265, 71);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(64, 13);
             this.label14.TabIndex = 12;
@@ -259,7 +259,7 @@
             // 
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(471, 98);
+            this.label15.Location = new System.Drawing.Point(527, 71);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(57, 13);
             this.label15.TabIndex = 13;
@@ -268,122 +268,125 @@
             // txtCode
             // 
             this.txtCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtCode.Location = new System.Drawing.Point(120, 5);
+            this.txtCode.Location = new System.Drawing.Point(134, 3);
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(100, 20);
+            this.txtCode.Size = new System.Drawing.Size(125, 20);
             this.txtCode.TabIndex = 14;
             // 
             // txtName
             // 
             this.txtName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtName.Location = new System.Drawing.Point(354, 5);
+            this.txtName.Location = new System.Drawing.Point(396, 3);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 20);
+            this.txtName.Size = new System.Drawing.Size(125, 20);
             this.txtName.TabIndex = 15;
             // 
             // txtShortName
             // 
             this.txtShortName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtShortName.Location = new System.Drawing.Point(588, 5);
+            this.txtShortName.Location = new System.Drawing.Point(658, 3);
             this.txtShortName.Name = "txtShortName";
-            this.txtShortName.Size = new System.Drawing.Size(100, 20);
+            this.txtShortName.Size = new System.Drawing.Size(125, 20);
             this.txtShortName.TabIndex = 16;
             // 
             // txtAddress
             // 
             this.txtAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAddress.Location = new System.Drawing.Point(822, 5);
+            this.txtAddress.Location = new System.Drawing.Point(920, 3);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(100, 20);
+            this.txtAddress.Size = new System.Drawing.Size(125, 20);
             this.txtAddress.TabIndex = 16;
             // 
             // txtContactPerson
             // 
             this.txtContactPerson.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtContactPerson.Location = new System.Drawing.Point(120, 35);
+            this.txtContactPerson.Location = new System.Drawing.Point(134, 25);
             this.txtContactPerson.Name = "txtContactPerson";
-            this.txtContactPerson.Size = new System.Drawing.Size(100, 20);
+            this.txtContactPerson.Size = new System.Drawing.Size(125, 20);
             this.txtContactPerson.TabIndex = 17;
             // 
             // txtMobile
             // 
             this.txtMobile.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtMobile.Location = new System.Drawing.Point(354, 35);
+            this.txtMobile.Location = new System.Drawing.Point(396, 25);
             this.txtMobile.Name = "txtMobile";
-            this.txtMobile.Size = new System.Drawing.Size(100, 20);
+            this.txtMobile.Size = new System.Drawing.Size(125, 20);
             this.txtMobile.TabIndex = 16;
             // 
             // txtFax
             // 
             this.txtFax.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtFax.Location = new System.Drawing.Point(588, 35);
+            this.txtFax.Location = new System.Drawing.Point(658, 25);
             this.txtFax.Name = "txtFax";
-            this.txtFax.Size = new System.Drawing.Size(100, 20);
+            this.txtFax.Size = new System.Drawing.Size(125, 20);
             this.txtFax.TabIndex = 16;
             // 
             // txtPager
             // 
             this.txtPager.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtPager.Location = new System.Drawing.Point(822, 35);
+            this.txtPager.Location = new System.Drawing.Point(920, 25);
             this.txtPager.Name = "txtPager";
-            this.txtPager.Size = new System.Drawing.Size(100, 20);
+            this.txtPager.Size = new System.Drawing.Size(125, 20);
             this.txtPager.TabIndex = 16;
             // 
             // txtPhoneO
             // 
             this.txtPhoneO.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtPhoneO.Location = new System.Drawing.Point(120, 65);
+            this.txtPhoneO.Location = new System.Drawing.Point(134, 47);
             this.txtPhoneO.Name = "txtPhoneO";
-            this.txtPhoneO.Size = new System.Drawing.Size(100, 20);
+            this.txtPhoneO.Size = new System.Drawing.Size(125, 20);
             this.txtPhoneO.TabIndex = 16;
             // 
             // txtPhoneR
             // 
             this.txtPhoneR.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtPhoneR.Location = new System.Drawing.Point(354, 65);
+            this.txtPhoneR.Location = new System.Drawing.Point(396, 47);
             this.txtPhoneR.Name = "txtPhoneR";
-            this.txtPhoneR.Size = new System.Drawing.Size(100, 20);
+            this.txtPhoneR.Size = new System.Drawing.Size(125, 20);
             this.txtPhoneR.TabIndex = 16;
             // 
             // txtEmailAddress
             // 
             this.txtEmailAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtEmailAddress.Location = new System.Drawing.Point(588, 65);
+            this.txtEmailAddress.Location = new System.Drawing.Point(658, 47);
             this.txtEmailAddress.Name = "txtEmailAddress";
-            this.txtEmailAddress.Size = new System.Drawing.Size(100, 20);
+            this.txtEmailAddress.Size = new System.Drawing.Size(125, 20);
             this.txtEmailAddress.TabIndex = 16;
             // 
             // txtOpeningBal
             // 
             this.txtOpeningBal.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtOpeningBal.Location = new System.Drawing.Point(120, 95);
+            this.txtOpeningBal.Location = new System.Drawing.Point(134, 69);
             this.txtOpeningBal.Name = "txtOpeningBal";
-            this.txtOpeningBal.Size = new System.Drawing.Size(100, 20);
+            this.txtOpeningBal.Size = new System.Drawing.Size(125, 20);
             this.txtOpeningBal.TabIndex = 16;
             // 
             // cbxCreditDebit
             // 
+            this.cbxCreditDebit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCreditDebit.FormattingEnabled = true;
-            this.cbxCreditDebit.Location = new System.Drawing.Point(354, 93);
+            this.cbxCreditDebit.Location = new System.Drawing.Point(396, 69);
             this.cbxCreditDebit.Name = "cbxCreditDebit";
-            this.cbxCreditDebit.Size = new System.Drawing.Size(111, 21);
+            this.cbxCreditDebit.Size = new System.Drawing.Size(121, 21);
             this.cbxCreditDebit.TabIndex = 1;
             // 
             // cbxStatus
             // 
+            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxStatus.FormattingEnabled = true;
-            this.cbxStatus.Location = new System.Drawing.Point(822, 63);
+            this.cbxStatus.Location = new System.Drawing.Point(920, 47);
             this.cbxStatus.Name = "cbxStatus";
-            this.cbxStatus.Size = new System.Drawing.Size(111, 21);
+            this.cbxStatus.Size = new System.Drawing.Size(125, 21);
             this.cbxStatus.TabIndex = 18;
             // 
             // cbxTaxRetail
             // 
+            this.cbxTaxRetail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTaxRetail.FormattingEnabled = true;
-            this.cbxTaxRetail.Location = new System.Drawing.Point(588, 93);
+            this.cbxTaxRetail.Location = new System.Drawing.Point(658, 69);
             this.cbxTaxRetail.Name = "cbxTaxRetail";
-            this.cbxTaxRetail.Size = new System.Drawing.Size(111, 21);
+            this.cbxTaxRetail.Size = new System.Drawing.Size(125, 21);
             this.cbxTaxRetail.TabIndex = 2;
             // 
             // ucSupplierCustomerInfo
@@ -393,7 +396,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ucSupplierCustomerInfo";
-            this.Size = new System.Drawing.Size(942, 120);
+            this.Size = new System.Drawing.Size(1055, 120);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

@@ -12,8 +12,8 @@ namespace PharmaUI
     public static class ExtensionMethods
     {
         public static PharmaBusinessObjects.Master.UserMaster LoggedInUser { get; set; }
-        public static string FontFamily = "Segoe UI";
-        public static int FontSize = 10;
+        public static string FontFamily = "Microsoft Sans Serif";
+        public static int FontSize = 9;
 
         public const string MatchEmailPattern =
            @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"

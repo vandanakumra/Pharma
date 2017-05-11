@@ -16,5 +16,26 @@ namespace PharmaBusinessObjects.Common
             public const string InValidEmail = "Please enter valid EmailId";
 
         }
-    }
+
+        public static class RecordType
+        {
+            public const string ASM = "ASM";
+            public const string RSM = "RSM";
+            public const string ZSM = "ZSM";
+            public const string SALESMAN = "SALESMAN";
+            public const string AREA = "AREA";
+            public const string ROUTE = "ROUTE";
+        }
+
+        public static class AccountLedgerType
+        {
+            public const string IncomeLedger = "IncomeLedger";
+            public const string ExpenditureLedger = "ExpenditureLedger";
+            public const string TransactionBooks = "TransactionBooks";
+            public const string GeneralLedger = "GeneralLedger";
+            public const string PurchaseLedger = "PurchaseLedger";
+            public const string SaleLedger = "SaleLedger";
+            public const string ControlCodes = "ControlCodes";
+        }
+        }
 }

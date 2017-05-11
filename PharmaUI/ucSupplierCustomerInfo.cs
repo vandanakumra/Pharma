@@ -157,7 +157,7 @@ namespace PharmaUI
         {
             get
             {
-                return cbxCreditDebit.SelectedItem.ToString();
+                return cbxCreditDebit.SelectedItem == null ? "C" : cbxCreditDebit.SelectedItem.ToString();
             }
             set
             {
@@ -169,7 +169,7 @@ namespace PharmaUI
         {
             get
             {
-                return cbxTaxRetail.SelectedItem.ToString();
+                return cbxTaxRetail.SelectedItem == null ? "R" : cbxTaxRetail.SelectedItem.ToString();
             }
             set
             {
@@ -181,7 +181,7 @@ namespace PharmaUI
         {
             get
             {
-                return cbxStatus.SelectedValue.ToString();
+                return cbxStatus.SelectedValue == null ? "1" : cbxStatus.SelectedValue.ToString();
             }
             set
             {
