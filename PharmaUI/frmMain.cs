@@ -17,6 +17,7 @@ namespace PharmaUI
         public frmMain()
         {
             InitializeComponent();
+            ExtensionMethods.SetFormProperties(this);
         }
 
         private void ShowNewForm(object sender, EventArgs e)

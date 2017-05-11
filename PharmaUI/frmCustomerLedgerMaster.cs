@@ -15,6 +15,7 @@ namespace PharmaUI
         public frmCustomerLedgerMaster()
         {
             InitializeComponent();
+            ExtensionMethods.SetFormProperties(this);
         }
 
         private void frmCustomerLedgerMaster_Load(object sender, EventArgs e)

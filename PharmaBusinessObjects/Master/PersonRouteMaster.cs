@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmaBusinessObjects.Master
 {
-    public class PersonRouteMaster
+    public class PersonRouteMaster : BaseBusinessObjects
     {
         public int PersonRouteID { get; set; }
         public string PersonRouteCode { get; set; }

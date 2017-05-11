@@ -19,6 +19,10 @@
           <Property Name="DebitControlCodeID" Type="int" />
           <Property Name="CreditControlCodeID" Type="int" />
           <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="AccountLedgerType">
           <Key>
@@ -64,6 +68,10 @@
           <Property Name="OrderPreferenceRating" Type="int" Nullable="false" />
           <Property Name="BillingPreferenceRating" Type="int" Nullable="false" />
           <Property Name="StockSummaryRequired" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="CustomerLedger">
           <Key>
@@ -103,6 +111,10 @@
           <Property Name="IsLessExcise" Type="bit" Nullable="false" />
           <Property Name="CustomerTypeID" Type="int" Nullable="false" />
           <Property Name="InterestTypeID" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="CustomerType">
           <Key>
@@ -163,6 +175,10 @@
           <Property Name="MaximumStock" Type="int" />
           <Property Name="SaleTypeId" Type="int" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="PersonalLedger">
           <Key>
@@ -181,6 +197,10 @@
           <Property Name="ResidentPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
           <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="PersonLedgerType">
           <Key>
@@ -199,6 +219,10 @@
           <Property Name="RecordTypeId" Type="int" />
           <Property Name="PersonRouteName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="RecordType">
           <Key>
@@ -232,6 +256,10 @@
           <Property Name="AreaId" Type="int" Nullable="false" />
           <Property Name="DLNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TINNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -247,6 +275,7 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="IsSysAdmin" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
@@ -524,6 +553,10 @@
           <Property Name="DebitControlCodeID" Type="Int32" />
           <Property Name="CreditControlCodeID" Type="Int32" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AccountLedgerType" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerType" FromRole="AccountLedgerMaster" ToRole="AccountLedgerType" />
           <NavigationProperty Name="AccountType" Relationship="Self.FK_AccountLedgerMaster_AccountType" FromRole="AccountLedgerMaster" ToRole="AccountType" />
           <NavigationProperty Name="AccountLedgerMaster1" Relationship="Self.FK_AccountLedgerMaster_CreditControlCode" FromRole="AccountLedgerMaster" ToRole="AccountLedgerMaster1" />
@@ -578,6 +611,10 @@
           <Property Name="OrderPreferenceRating" Type="Int32" Nullable="false" />
           <Property Name="BillingPreferenceRating" Type="Int32" Nullable="false" />
           <Property Name="StockSummaryRequired" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="CustomerLedger">
           <Key>
@@ -617,6 +654,10 @@
           <Property Name="IsLessExcise" Type="Boolean" Nullable="false" />
           <Property Name="CustomerTypeID" Type="Int32" Nullable="false" />
           <Property Name="InterestTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="CustomerLedger" ToRole="PersonRouteMaster" />
           <NavigationProperty Name="CustomerType" Relationship="Self.FK_CustomerLedger_CustomerType" FromRole="CustomerLedger" ToRole="CustomerType" />
           <NavigationProperty Name="InterestType" Relationship="Self.FK_CustomerLedger_InterestType" FromRole="CustomerLedger" ToRole="InterestType" />
@@ -687,6 +728,10 @@
           <Property Name="MaximumStock" Type="Int32" />
           <Property Name="SaleTypeId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
         </EntityType>
         <EntityType Name="PersonalLedger">
@@ -706,6 +751,10 @@
           <Property Name="ResidentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PersonLedgerType">
           <Key>
@@ -724,6 +773,10 @@
           <Property Name="RecordTypeId" Type="Int32" />
           <Property Name="PersonRouteName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CustomerLedger" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="PersonRouteMaster" ToRole="CustomerLedger" />
           <NavigationProperty Name="CustomerLedger1" Relationship="Self.FK_CustomerLedger_SalesPersonMaster" FromRole="PersonRouteMaster" ToRole="CustomerLedger" />
           <NavigationProperty Name="CustomerLedger2" Relationship="Self.FK_CustomerLedger_SalesPersonMaster1" FromRole="PersonRouteMaster" ToRole="CustomerLedger" />
@@ -766,6 +819,10 @@
           <Property Name="AreaId" Type="Int32" Nullable="false" />
           <Property Name="DLNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_SupplierLedger_SalesPersonMaster" FromRole="SupplierLedger" ToRole="PersonRouteMaster" />
         </EntityType>
         <EntityType Name="Users">
@@ -782,6 +839,7 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsSysAdmin" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
@@ -1059,6 +1117,10 @@
                 <ScalarProperty Name="DebitControlCodeID" ColumnName="DebitControlCodeID" />
                 <ScalarProperty Name="CreditControlCodeID" ColumnName="CreditControlCodeID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1108,6 +1170,10 @@
                 <ScalarProperty Name="OrderPreferenceRating" ColumnName="OrderPreferenceRating" />
                 <ScalarProperty Name="BillingPreferenceRating" ColumnName="BillingPreferenceRating" />
                 <ScalarProperty Name="StockSummaryRequired" ColumnName="StockSummaryRequired" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1148,6 +1214,10 @@
                 <ScalarProperty Name="IsLessExcise" ColumnName="IsLessExcise" />
                 <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
                 <ScalarProperty Name="InterestTypeID" ColumnName="InterestTypeID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1211,6 +1281,10 @@
                 <ScalarProperty Name="MaximumStock" ColumnName="MaximumStock" />
                 <ScalarProperty Name="SaleTypeId" ColumnName="SaleTypeId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1230,6 +1304,10 @@
                 <ScalarProperty Name="ResidentPhone" ColumnName="ResidentPhone" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1250,6 +1328,10 @@
                 <ScalarProperty Name="RecordTypeId" ColumnName="RecordTypeId" />
                 <ScalarProperty Name="PersonRouteName" ColumnName="PersonRouteName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1285,6 +1367,10 @@
                 <ScalarProperty Name="AreaId" ColumnName="AreaId" />
                 <ScalarProperty Name="DLNo" ColumnName="DLNo" />
                 <ScalarProperty Name="TINNo" ColumnName="TINNo" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1301,6 +1387,7 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsSysAdmin" ColumnName="IsSysAdmin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

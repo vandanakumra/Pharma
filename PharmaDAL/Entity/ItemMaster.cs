@@ -51,6 +51,10 @@ namespace PharmaDAL.Entity
         public Nullable<int> MaximumStock { get; set; }
         public int SaleTypeId { get; set; }
         public bool Status { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
     }

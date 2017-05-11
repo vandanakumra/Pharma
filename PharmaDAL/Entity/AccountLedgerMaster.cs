@@ -32,6 +32,10 @@ namespace PharmaDAL.Entity
         public Nullable<int> DebitControlCodeID { get; set; }
         public Nullable<int> CreditControlCodeID { get; set; }
         public bool Status { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         public virtual AccountLedgerType AccountLedgerType { get; set; }
         public virtual AccountType AccountType { get; set; }

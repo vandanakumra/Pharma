@@ -91,23 +91,44 @@ namespace PharmaUI
             form.Controls.Add(panel1);
         }
 
-        public static void SetFormProperties(Form frm, Panel pnl)
+        public static void AddFormToPanel(Form frm, Panel pnl)
         {
             foreach (Form control in pnl.Controls)
             {
                 pnl.Controls.Remove(control);
             }
+           
+            pnl.Controls.Add(frm);
+        }
 
+        public static void SetFormProperties(Form frm)
+        {
+           
             frm.FormBorderStyle = FormBorderStyle.FixedSingle;
             frm.ControlBox = false;
             frm.Text = "";
             frm.TopLevel = false;
             frm.AutoScroll = true;
             frm.ShowIcon = false;
-            frm.Width = pnl.Width;
+            frm.Dock = DockStyle.Fill;
+           
             frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            pnl.Controls.Add(frm);
+           
         }
+
+        public static void SetChildFormProperties(Form frm)
+        {
+            frm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            frm.ControlBox = false;
+            frm.Text = "";           
+            frm.ShowIcon = false;
+            frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            frm.StartPosition = FormStartPosition.CenterScreen;
+
+        }
+
+
+
 
         public static int? SafeConversionInt(string inputVal)
         {

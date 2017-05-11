@@ -19,6 +19,7 @@ namespace PharmaUI
         public frmItemMaster()
         {
             InitializeComponent();
+            ExtensionMethods.SetFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 

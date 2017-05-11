@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmaBusinessObjects.Master
 {
-    public class UserMaster
+    public class UserMaster : BaseBusinessObjects
     {
         public int UserId { get; set; }
         public string Username { get; set; }
@@ -14,9 +14,6 @@ namespace PharmaBusinessObjects.Master
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Status { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime? ModifiedOn { get; set; }
+       
     }
 }

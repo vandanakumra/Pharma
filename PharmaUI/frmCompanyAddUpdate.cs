@@ -28,7 +28,7 @@ namespace PharmaUI
 
         public frmCompanyAddUpdate(int companyId)
         {
-            InitializeComponent();
+            InitializeComponent();           
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.CompanyId = companyId;
         }

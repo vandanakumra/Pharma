@@ -38,7 +38,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(138, 81);
+            this.txtSearch.Location = new System.Drawing.Point(138, 59);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(294, 23);
             this.txtSearch.TabIndex = 7;
@@ -48,7 +48,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 84);
+            this.label2.Location = new System.Drawing.Point(12, 62);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 20);
             this.label2.TabIndex = 6;
@@ -60,7 +60,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPersonalLedger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPersonalLedger.Location = new System.Drawing.Point(16, 121);
+            this.dgvPersonalLedger.Location = new System.Drawing.Point(16, 99);
             this.dgvPersonalLedger.Name = "dgvPersonalLedger";
             this.dgvPersonalLedger.ReadOnly = true;
             this.dgvPersonalLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -73,7 +73,7 @@
             this.btnAddNewLedger.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddNewLedger.Image = global::PharmaUI.Properties.Resources.AddItem;
             this.btnAddNewLedger.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewLedger.Location = new System.Drawing.Point(441, 73);
+            this.btnAddNewLedger.Location = new System.Drawing.Point(441, 51);
             this.btnAddNewLedger.Name = "btnAddNewLedger";
             this.btnAddNewLedger.Size = new System.Drawing.Size(184, 42);
             this.btnAddNewLedger.TabIndex = 8;

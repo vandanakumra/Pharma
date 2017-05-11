@@ -27,5 +27,9 @@ namespace PharmaDAL.Entity
         public string ResidentPhone { get; set; }
         public string EmailAddress { get; set; }
         public bool Status { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }

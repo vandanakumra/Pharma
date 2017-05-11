@@ -48,6 +48,10 @@ namespace PharmaDAL.Entity
         public bool IsLessExcise { get; set; }
         public int CustomerTypeID { get; set; }
         public int InterestTypeID { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }
         public virtual CustomerType CustomerType { get; set; }
