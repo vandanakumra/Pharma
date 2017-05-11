@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmCustomerLedgerMasterAddUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomerLedgerMasterAddUpdate.Designer.cs">
+      <DependentUpon>frmCustomerLedgerMasterAddUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAccountLedgerMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmCustomerLedgerMasterAddUpdate.resx">
+      <DependentUpon>frmCustomerLedgerMasterAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAccountLedgerMaster.resx">
       <DependentUpon>frmAccountLedgerMaster.cs</DependentUpon>
     </EmbeddedResource>

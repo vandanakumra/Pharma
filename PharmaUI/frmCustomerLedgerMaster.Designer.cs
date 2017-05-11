@@ -78,6 +78,7 @@
             this.btnAddNewLedger.Text = "Add New Supplier";
             this.btnAddNewLedger.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNewLedger.UseVisualStyleBackColor = true;
+            this.btnAddNewLedger.Click += new System.EventHandler(this.btnAddNewLedger_Click);
             // 
             // frmCustomerLedgerMaster
             // 

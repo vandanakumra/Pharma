@@ -26,5 +26,18 @@ namespace PharmaUI
             dgvCustomerLedger.AllowUserToDeleteRows = false;
             dgvCustomerLedger.ReadOnly = true;
         }
+
+        private void btnAddNewLedger_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var form = new frmCustomerLedgerMasterAddUpdate();
+                form.ShowDialog();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
     }
 }
