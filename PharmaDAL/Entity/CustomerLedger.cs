@@ -30,12 +30,12 @@ namespace PharmaDAL.Entity
         public string CreditDebit { get; set; }
         public string TaxRetail { get; set; }
         public bool Status { get; set; }
-        public int ZSMId { get; set; }
-        public int ASMId { get; set; }
-        public int RSMId { get; set; }
-        public int AreaId { get; set; }
-        public int SalesManId { get; set; }
-        public int RouteId { get; set; }
+        public Nullable<int> ZSMId { get; set; }
+        public Nullable<int> ASMId { get; set; }
+        public Nullable<int> RSMId { get; set; }
+        public Nullable<int> AreaId { get; set; }
+        public Nullable<int> SalesManId { get; set; }
+        public Nullable<int> RouteId { get; set; }
         public string DLNo { get; set; }
         public string TINNo { get; set; }
         public string CSTNo { get; set; }

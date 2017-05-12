@@ -16,22 +16,22 @@ namespace PharmaBusiness.Master
     
         internal List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers(string searchString)
         {
-            return new PersonalLedgerMasterDao().GetPersonalLedgers(searchString);
+            return new PersonalLedgerMasterDao(this.LoggedInUser).GetPersonalLedgers(searchString);
         }
 
         internal int AddPersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
-            return new PersonalLedgerMasterDao().AddPersonalLedger(p);
+            return new PersonalLedgerMasterDao(this.LoggedInUser).AddPersonalLedger(p);
         }
 
         internal int UpdatePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
-            return new PersonalLedgerMasterDao().UpdatePersonalLedger(p);
+            return new PersonalLedgerMasterDao(this.LoggedInUser).UpdatePersonalLedger(p);
         }
 
         internal int DeletePersonalLedger(PharmaBusinessObjects.Master.PersonalLedgerMaster p)
         {
-            return new PersonalLedgerMasterDao().DeletePersonalLedger(p);
+            return new PersonalLedgerMasterDao(this.LoggedInUser).DeletePersonalLedger(p);
         }
 
         

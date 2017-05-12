@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace PharmaDAL.Master
 {
-    public class PersonRouteMasterDao
+    public class PersonRouteMasterDao : BaseDao
     {
+        public PersonRouteMasterDao(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
         public List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutes()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -42,6 +46,8 @@ namespace PharmaDAL.Master
                     PersonRouteCode = personRouteCode,
                     PersonRouteName = p.PersonRouteName,
                     RecordTypeId = p.RecordTypeId,
+                    CreatedBy = this.LoggedInUser.LastName,
+                    CreatedOn = System.DateTime.Now,
                     Status = p.Status
                 };
 
@@ -60,8 +66,10 @@ namespace PharmaDAL.Master
 
                     if (personRouteMaster != null)
                     {
-                        personRouteMaster.PersonRouteCode = p.PersonRouteCode;
+                        //personRouteMaster.PersonRouteCode = p.PersonRouteCode;
                         personRouteMaster.PersonRouteName = p.PersonRouteName;
+                        personRouteMaster.ModifiedBy = this.LoggedInUser.Username;
+                        personRouteMaster.ModifiedOn = System.DateTime.Now;
                         personRouteMaster.Status = p.Status;
                     }
 

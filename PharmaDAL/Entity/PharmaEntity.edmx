@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -93,12 +93,12 @@
           <Property Name="CreditDebit" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="TaxRetail" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="ZSMId" Type="int" Nullable="false" />
-          <Property Name="ASMId" Type="int" Nullable="false" />
-          <Property Name="RSMId" Type="int" Nullable="false" />
-          <Property Name="AreaId" Type="int" Nullable="false" />
-          <Property Name="SalesManId" Type="int" Nullable="false" />
-          <Property Name="RouteId" Type="int" Nullable="false" />
+          <Property Name="ZSMId" Type="int" />
+          <Property Name="ASMId" Type="int" />
+          <Property Name="RSMId" Type="int" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="SalesManId" Type="int" />
+          <Property Name="RouteId" Type="int" />
           <Property Name="DLNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TINNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CSTNo" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -326,7 +326,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_CustomerLedger">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -362,7 +362,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -374,7 +374,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster1">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -386,7 +386,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster2">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -398,7 +398,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster3">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -410,7 +410,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster4">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -636,12 +636,12 @@
           <Property Name="CreditDebit" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="TaxRetail" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="ZSMId" Type="Int32" Nullable="false" />
-          <Property Name="ASMId" Type="Int32" Nullable="false" />
-          <Property Name="RSMId" Type="Int32" Nullable="false" />
-          <Property Name="AreaId" Type="Int32" Nullable="false" />
-          <Property Name="SalesManId" Type="Int32" Nullable="false" />
-          <Property Name="RouteId" Type="Int32" Nullable="false" />
+          <Property Name="ZSMId" Type="Int32" />
+          <Property Name="ASMId" Type="Int32" />
+          <Property Name="RSMId" Type="Int32" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="SalesManId" Type="Int32" />
+          <Property Name="RouteId" Type="Int32" />
           <Property Name="DLNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CSTNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
@@ -902,7 +902,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_CustomerLedger">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -938,7 +938,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -950,7 +950,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster1">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -962,7 +962,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster2">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -974,7 +974,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster3">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">
@@ -986,7 +986,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerLedger_SalesPersonMaster4">
-          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="1" />
+          <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonRouteMaster">

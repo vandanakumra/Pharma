@@ -8,8 +8,13 @@ using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaDAL.Master
 {
-    public class CompanyMasterDao
+    public class CompanyMasterDao : BaseDao
     {
+        public CompanyMasterDao(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
+
         public List<PharmaBusinessObjects.Master.CompanyMaster> GetCompanies(string searchText)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -71,7 +76,9 @@ namespace PharmaDAL.Master
                     IsDirect = company.IsDirect,
                     OrderPreferenceRating = company.OrderPreferenceRating,
                     BillingPreferenceRating = company.BillingPreferenceRating,
-                    CompanyName = company.CompanyName
+                    CompanyName = company.CompanyName,
+                    CreatedBy = this.LoggedInUser.Username,
+                    CreatedOn = System.DateTime.Now
                 };
 
                 context.CompanyMaster.Add(table);
@@ -93,6 +100,8 @@ namespace PharmaDAL.Master
                     companyMaster.OrderPreferenceRating = company.OrderPreferenceRating;
                     companyMaster.BillingPreferenceRating = company.BillingPreferenceRating;
                     companyMaster.CompanyName = company.CompanyName;
+                    companyMaster.ModifiedBy = this.LoggedInUser.Username;
+                    companyMaster.ModifiedOn = System.DateTime.Now;
                 }
 
                 return context.SaveChanges();
@@ -108,6 +117,8 @@ namespace PharmaDAL.Master
                 if (companyMaster != null)
                 {
                     companyMaster.Status = false;
+                    companyMaster.ModifiedBy = this.LoggedInUser.Username;
+                    companyMaster.ModifiedOn = System.DateTime.Now;
                 }
 
                 return context.SaveChanges();

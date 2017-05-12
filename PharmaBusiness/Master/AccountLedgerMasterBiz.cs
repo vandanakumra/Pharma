@@ -21,7 +21,7 @@ namespace PharmaBusiness.Master
 
             CommonDao commonDao = new CommonDao();
 
-            var accountLedgerMasterList = new AccountLedgerMasterDao().GetAccountLedgers();
+            var accountLedgerMasterList = new AccountLedgerMasterDao(this.LoggedInUser).GetAccountLedgers();
 
             var accountLedgerTypeList = commonDao.GetAccountLedgerTypes() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
             var AccountTypeList = new CommonBiz().GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
@@ -44,7 +44,7 @@ namespace PharmaBusiness.Master
         {
             CommonDao commonDao = new CommonDao();
 
-            PharmaBusinessObjects.Master.AccountLedgerMaster accountLedger =  new AccountLedgerMasterDao().GetAccountLedgerById(accountLedgerID);
+            PharmaBusinessObjects.Master.AccountLedgerMaster accountLedger =  new AccountLedgerMasterDao(this.LoggedInUser).GetAccountLedgerById(accountLedgerID);
             accountLedger.AccountLedgerTypeList = commonDao.GetAccountLedgerTypes() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
             accountLedger.AccountTypeList = new CommonBiz().GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
             accountLedger.CreditControlCodeList = commonDao.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeSystemName == "ControlCodes").ToList() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
@@ -56,19 +56,19 @@ namespace PharmaBusiness.Master
 
         internal int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p)
         {
-            return new AccountLedgerMasterDao().AddAccountLedger(p);
+            return new AccountLedgerMasterDao(this.LoggedInUser).AddAccountLedger(p);
         }
 
         internal int UpdateAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p)
         {
-            return new AccountLedgerMasterDao().UpdateAccountLedger(p);
+            return new AccountLedgerMasterDao(this.LoggedInUser).UpdateAccountLedger(p);
         }
 
         internal List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int ledgerTypeID, string searchString = null)
         {
             CommonDao commonDao = new CommonDao();
 
-            var accountLedgerMasterList = new AccountLedgerMasterDao().GetAccountLedgerByLedgerTypeIdAndSearch(ledgerTypeID,searchString);
+            var accountLedgerMasterList = new AccountLedgerMasterDao(this.LoggedInUser).GetAccountLedgerByLedgerTypeIdAndSearch(ledgerTypeID,searchString);
 
             var accountLedgerTypeList = commonDao.GetAccountLedgerTypes() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>();
             var AccountTypeList = new CommonBiz().GetAccountTypes() ?? new List<PharmaBusinessObjects.Common.AccountType>();
@@ -89,7 +89,7 @@ namespace PharmaBusiness.Master
         internal List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerBySystemName(string systemName)
         {
 
-            var accountLedgerMasterList = new AccountLedgerMasterDao().GetAccountLedgers().Where(p=>p.AccountLedgerTypeSystemName == systemName).ToList();          
+            var accountLedgerMasterList = new AccountLedgerMasterDao(this.LoggedInUser).GetAccountLedgers().Where(p=>p.AccountLedgerTypeSystemName == systemName).ToList();          
             return accountLedgerMasterList;
         }
     }

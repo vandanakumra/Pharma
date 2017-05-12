@@ -24,7 +24,7 @@ namespace PharmaUI
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
-            ExtensionMethods.FormLoad(this, "Customer Ledger Add");
+            ExtensionMethods.FormLoad(this, isInEditMode ? "Customer Ledger -Update" : "Customer Ledger - Add");
             this.isInEditMode = isInEditMode;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             
@@ -98,6 +98,10 @@ namespace PharmaUI
             ////Fill discount strictly options
             cbxDiscount.DataSource = Enum.GetValues(typeof(Enums.Choice));
             cbxDiscount.SelectedItem = Choice.No;
+    
+            ///Fill User Control Controls-----------
+            ///
+            
         }
 
         private void frmCustomerLedgerMasterAddUpdate_Load(object sender, EventArgs e)
@@ -116,6 +120,57 @@ namespace PharmaUI
             if (existingItem != null)
             {
 
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
+
+                //values from User Control
+                customerLedgerMaster.CustomerLedgerName = ucSupplierCustomerInfo.Name;
+                customerLedgerMaster.CustomerLedgerShortName = ucSupplierCustomerInfo.ShortName;
+                customerLedgerMaster.Address = ucSupplierCustomerInfo.Address;
+                customerLedgerMaster.ContactPerson = ucSupplierCustomerInfo.ContactPerson;
+                customerLedgerMaster.Mobile = ucSupplierCustomerInfo.Mobile;
+                customerLedgerMaster.Fax = ucSupplierCustomerInfo.Fax;
+                customerLedgerMaster.Pager = ucSupplierCustomerInfo.Pager;
+                customerLedgerMaster.OfficePhone = ucSupplierCustomerInfo.OfficePhone;
+                customerLedgerMaster.ResidentPhone = ucSupplierCustomerInfo.ResidentPhone;
+                customerLedgerMaster.EmailAddress = ucSupplierCustomerInfo.EmailAddress;
+                customerLedgerMaster.OpeningBal = ExtensionMethods.SafeConversionDecimal(ucSupplierCustomerInfo.OpeningBal);
+                customerLedgerMaster.CreditDebit = ucSupplierCustomerInfo.CreditDebit == Enums.TransType.C ? "C" : "D";
+                customerLedgerMaster.TaxRetail = ucSupplierCustomerInfo.TaxRetail == Enums.TaxRetail.T ? "T" : "R";
+                customerLedgerMaster.Status = ucSupplierCustomerInfo.Status == Enums.Status.Active ? true : false;
+
+                //values from User this form
+                customerLedgerMaster.ZSMId = (cbxZSM.SelectedItem as PersonRouteMaster).PersonRouteID;
+                customerLedgerMaster.RSMId = (cbxRSM.SelectedItem as PersonRouteMaster).PersonRouteID;
+                customerLedgerMaster.ASMId = (cbxASM.SelectedItem as PersonRouteMaster).PersonRouteID;
+                customerLedgerMaster.AreaId = (cbxArea.SelectedItem as PersonRouteMaster).PersonRouteID;
+                customerLedgerMaster.SalesManId = (cbxSalesman.SelectedItem as PersonRouteMaster).PersonRouteID;
+                customerLedgerMaster.RouteId = (cbxRoute.SelectedItem as PersonRouteMaster).PersonRouteID;
+
+                customerLedgerMaster.DLNo = tbxDL.Text;
+                customerLedgerMaster.TINNo = tbxTIN.Text;
+                customerLedgerMaster.CSTNo = tbxCST.Text;
+
+                customerLedgerMaster.Day = tbxDay.Text;
+                customerLedgerMaster.CreditLimit =ExtensionMethods.SafeConversionInt(tbxCredtLimit.Text)?? default(int);
+
+                customerLedgerMaster.BankName = tbxBankName.Text;
+                customerLedgerMaster.BankArea = tbxBankArea.Text;
+                customerLedgerMaster.CloseDay = tbxCloseDay.Text;
+
+                customerLedgerMaster.CustomerTypeID = (cbxCustomerType.SelectedItem as CustomerType).CustomerTypeId;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }

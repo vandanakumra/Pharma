@@ -104,7 +104,9 @@ namespace PharmaDAL.Master
                     OpeningBal = p.OpeningBal,
                     TaxRetail = p.TaxRetail,
                     TINNo = p.TINNo,
-                    Status = p.Status                   
+                    Status = p.Status           ,
+                    CreatedBy = this.LoggedInUser.Username,
+                    CreatedOn = System.DateTime.Now        
                 };
 
                 context.SupplierLedger.Add(table);
@@ -139,6 +141,8 @@ namespace PharmaDAL.Master
                         supplierLedgerMaster.TaxRetail = p.TaxRetail;
                         supplierLedgerMaster.TINNo = p.TINNo;
                         supplierLedgerMaster.Status = p.Status;
+                        supplierLedgerMaster.ModifiedBy = this.LoggedInUser.Username;
+                        supplierLedgerMaster.ModifiedOn = System.DateTime.Now;
                     }
 
                     return context.SaveChanges();
