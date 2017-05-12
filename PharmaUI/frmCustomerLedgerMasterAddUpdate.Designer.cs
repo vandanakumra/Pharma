@@ -860,6 +860,7 @@
             this.ucSupplierCustomerInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ucSupplierCustomerInfo.Code = "";
             this.ucSupplierCustomerInfo.ContactPerson = "";
+            this.ucSupplierCustomerInfo.CreditDebit = PharmaBusinessObjects.Common.Enums.TransType.C;
             this.ucSupplierCustomerInfo.EmailAddress = "";
             this.ucSupplierCustomerInfo.Fax = "";
             this.ucSupplierCustomerInfo.Location = new System.Drawing.Point(33, 78);
@@ -871,7 +872,9 @@
             this.ucSupplierCustomerInfo.ResidentPhone = "";
             this.ucSupplierCustomerInfo.ShortName = "";
             this.ucSupplierCustomerInfo.Size = new System.Drawing.Size(1055, 93);
+            this.ucSupplierCustomerInfo.Status = PharmaBusinessObjects.Common.Enums.Status.Active;
             this.ucSupplierCustomerInfo.TabIndex = 3;
+            this.ucSupplierCustomerInfo.TaxRetail = PharmaBusinessObjects.Common.Enums.TaxRetail.R;
             // 
             // frmCustomerLedgerMasterAddUpdate
             // 

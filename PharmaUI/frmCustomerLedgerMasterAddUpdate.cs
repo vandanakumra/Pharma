@@ -153,6 +153,20 @@ namespace PharmaUI
                 customerLedgerMaster.AreaId = (cbxArea.SelectedItem as PersonRouteMaster).PersonRouteID;
                 customerLedgerMaster.SalesManId = (cbxSalesman.SelectedItem as PersonRouteMaster).PersonRouteID;
                 customerLedgerMaster.RouteId = (cbxRoute.SelectedItem as PersonRouteMaster).PersonRouteID;
+
+                customerLedgerMaster.DLNo = tbxDL.Text;
+                customerLedgerMaster.TINNo = tbxTIN.Text;
+                customerLedgerMaster.CSTNo = tbxCST.Text;
+
+                customerLedgerMaster.Day = tbxDay.Text;
+                customerLedgerMaster.CreditLimit =ExtensionMethods.SafeConversionInt(tbxCredtLimit.Text)?? default(int);
+
+                customerLedgerMaster.BankName = tbxBankName.Text;
+                customerLedgerMaster.BankArea = tbxBankArea.Text;
+                customerLedgerMaster.CloseDay = tbxCloseDay.Text;
+
+                customerLedgerMaster.CustomerTypeID = (cbxCustomerType.SelectedItem as CustomerType).CustomerTypeId;
+
             }
             catch (Exception ex)
             {
