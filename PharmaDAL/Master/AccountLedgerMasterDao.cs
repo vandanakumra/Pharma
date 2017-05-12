@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace PharmaDAL.Master
 {
-    public class AccountLedgerMasterDao
+    public class AccountLedgerMasterDao : BaseDao
     {
+        public AccountLedgerMasterDao(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
+
         public List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgers()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -71,14 +76,16 @@ namespace PharmaDAL.Master
                 var accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
 
                 AccountLedgerMaster table = new AccountLedgerMaster() {
-                    
+
                     AccountLedgerName = p.AccountLedgerName,
                     AccountLedgerCode = accountLedgerCode,
-                    AccountLedgerTypeId = p.AccountLedgerTypeId,                   
-                    AccountTypeId = p.AccountTypeId,                      
+                    AccountLedgerTypeId = p.AccountLedgerTypeId,
+                    AccountTypeId = p.AccountTypeId,
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
-                    Status = p.Status
+                    Status = p.Status,
+                    CreatedBy = this.LoggedInUser.Username,
+                    CreatedOn = System.DateTime.Now
                 };
 
                 var accountLedger=  new Common.CommonDao().GetAccountLedgerTypes().Where(q => q.AccountLedgerTypeID == p.AccountLedgerTypeId).FirstOrDefault();
@@ -113,6 +120,8 @@ namespace PharmaDAL.Master
                         accountLedgerMaster.OpeningBalance = p.OpeningBalance;
                         accountLedgerMaster.CreditDebit = p.CreditDebit;
                         accountLedgerMaster.Status = p.Status;
+                        accountLedgerMaster.CreatedBy =this.LoggedInUser.Username;
+                        accountLedgerMaster.CreatedOn =System.DateTime.Now;
                     }
 
                     return context.SaveChanges();

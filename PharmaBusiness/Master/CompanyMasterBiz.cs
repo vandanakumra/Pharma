@@ -17,28 +17,28 @@ namespace PharmaBusiness.Master
 
         internal List<CompanyMaster> GetCompanies(string searchText)
         {
-            return new CompanyMasterDao().GetCompanies(searchText);
+            return new CompanyMasterDao(this.LoggedInUser).GetCompanies(searchText);
         }
 
         internal PharmaBusinessObjects.Master.CompanyMaster GetCompanyById(int companyId)
         {
-            PharmaBusinessObjects.Master.CompanyMaster company = new CompanyMasterDao().GetCompanyById(companyId);
+            PharmaBusinessObjects.Master.CompanyMaster company = new CompanyMasterDao(this.LoggedInUser).GetCompanyById(companyId);
             return company;
         }
 
         internal int AddCompany(PharmaBusinessObjects.Master.CompanyMaster company)
         {
-            return new CompanyMasterDao().AddCompany(company);
+            return new CompanyMasterDao(this.LoggedInUser).AddCompany(company);
         }
 
         internal int UpdateCompany(PharmaBusinessObjects.Master.CompanyMaster company)
         {
-            return new CompanyMasterDao().UpdateCompany(company);
+            return new CompanyMasterDao(this.LoggedInUser).UpdateCompany(company);
         }
 
         internal int DeleteCompany(int companyId)
         {
-            return new CompanyMasterDao().DeleteCompany(companyId);
+            return new CompanyMasterDao(this.LoggedInUser).DeleteCompany(companyId);
         }
     }
 }

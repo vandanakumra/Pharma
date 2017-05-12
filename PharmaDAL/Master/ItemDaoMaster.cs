@@ -7,8 +7,13 @@ using PharmaDAL.Entity;
 
 namespace PharmaDAL.Master
 {
-    public class ItemDaoMaster
+    public class ItemDaoMaster : BaseDao
     {
+        public ItemDaoMaster(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
+
         public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItems()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -66,6 +71,7 @@ namespace PharmaDAL.Master
                     int _result = 0;
                     int totalItemsFromSameCompany = TotalItemsFromSameCompany(newItem.CompanyCode);
                     totalItemsFromSameCompany++;
+
                     Entity.ItemMaster newItemMasterDB = new Entity.ItemMaster()
                     {
                         ItemCode = string.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
@@ -103,7 +109,9 @@ namespace PharmaDAL.Master
                         MinimumStock = newItem.MinimumStock,
                         MaximumStock = newItem.MaximumStock,
                         SaleTypeId = newItem.SaleTypeId,
-                        Status = newItem.Status
+                        Status = newItem.Status,
+                        CreatedBy = this.LoggedInUser.Username,
+                        CreatedOn = System.DateTime.Now
                     };
 
                     context.ItemMaster.Add(newItemMasterDB);
@@ -167,6 +175,8 @@ namespace PharmaDAL.Master
                     existingItemDB.MaximumStock = existingItem.MaximumStock;
                     existingItemDB.SaleTypeId = existingItem.SaleTypeId;
                     existingItemDB.Status = existingItem.Status;
+                    existingItemDB.ModifiedBy = this.LoggedInUser.Username;
+                    existingItemDB.ModifiedOn = System.DateTime.Now;
                 }
                 _result = context.SaveChanges();
                 _result = 1;
@@ -188,7 +198,11 @@ namespace PharmaDAL.Master
 
                 if (existingItemDB != null)
                 {
-                    context.ItemMaster.Remove((Entity.ItemMaster)existingItemDB);
+                    existingItemDB.Status = false;
+                    existingItemDB.Status = existingItem.Status;
+                    existingItemDB.ModifiedBy = this.LoggedInUser.Username;
+                    existingItemDB.ModifiedOn = System.DateTime.Now;
+                    //context.ItemMaster.Remove((Entity.ItemMaster)existingItemDB);
                 }
                 _result = context.SaveChanges();
 

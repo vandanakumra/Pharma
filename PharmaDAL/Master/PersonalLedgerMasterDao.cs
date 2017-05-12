@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace PharmaDAL.Master
 {
-    public class PersonalLedgerMasterDao
+    public class PersonalLedgerMasterDao : BaseDao
     {
+        public PersonalLedgerMasterDao(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
+
         public List<PharmaBusinessObjects.Master.PersonalLedgerMaster> GetPersonalLedgers(string searchString = "")
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -56,7 +61,9 @@ namespace PharmaDAL.Master
                     OfficePhone = p.OfficePhone,
                     ResidentPhone = p.ResidentPhone,
                     EmailAddress = p.EmailAddress,
-                    Status = p.Status
+                    Status = p.Status,
+                    CreatedBy = this.LoggedInUser.Username,
+                    CreatedOn = System.DateTime.Now
                 };                
 
                 context.PersonalLedger.Add(table);
@@ -86,6 +93,8 @@ namespace PharmaDAL.Master
                         personlLedgerMaster.ResidentPhone = p.ResidentPhone;
                         personlLedgerMaster.EmailAddress = p.EmailAddress;
                         personlLedgerMaster.Status = p.Status;
+                        personlLedgerMaster.ModifiedBy = this.LoggedInUser.Username;
+                        personlLedgerMaster.ModifiedOn = System.DateTime.Now;
                     }
 
                     return context.SaveChanges();
@@ -107,6 +116,8 @@ namespace PharmaDAL.Master
                 if (personalLedgerMaster != null)
                 {
                     personalLedgerMaster.Status = false;
+                    personalLedgerMaster.ModifiedBy = this.LoggedInUser.Username;
+                    personalLedgerMaster.ModifiedOn = System.DateTime.Now;
                 }
 
                 return context.SaveChanges();

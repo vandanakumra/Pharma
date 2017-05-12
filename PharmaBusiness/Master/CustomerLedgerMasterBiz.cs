@@ -16,17 +16,17 @@ namespace PharmaBusiness.Master
 
         internal List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers()
         {
-            return new CustomerLedgerMasterDao().GetCustomerLedgers();
+            return new CustomerLedgerMasterDao(this.LoggedInUser).GetCustomerLedgers();
         }
 
         internal int AddCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p)
         {
-            return new CustomerLedgerMasterDao().AddCustomerLedger(p);
+            return new CustomerLedgerMasterDao(this.LoggedInUser).AddCustomerLedger(p);
         }
 
         internal int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p)
         {
-            return new CustomerLedgerMasterDao().UpdateCustomerLedger(p);
+            return new CustomerLedgerMasterDao(this.LoggedInUser).UpdateCustomerLedger(p);
         }
 
     }

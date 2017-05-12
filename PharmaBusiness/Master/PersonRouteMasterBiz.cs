@@ -16,28 +16,28 @@ namespace PharmaBusiness.Master
 
         internal List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutes()
         {
-            return new PersonRouteMasterDao().GetPersonRoutes();
+            return new PersonRouteMasterDao(this.LoggedInUser).GetPersonRoutes();
         }
 
         internal int AddPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p)
         {
-            return new PersonRouteMasterDao().AddPersonRoute(p);
+            return new PersonRouteMasterDao(this.LoggedInUser).AddPersonRoute(p);
         }
         
         internal int UpdatePersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster p)
         {
-            return new PersonRouteMasterDao().UpdatePersonRoute(p);
+            return new PersonRouteMasterDao(this.LoggedInUser).UpdatePersonRoute(p);
         }
 
         internal List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesByRecordTypeIdAndSearch(int recordTypeID, string searchString = null)
         {
-            return new PersonRouteMasterDao().GetPersonRoutesByRecordTypeIdAndSearch(recordTypeID,searchString);
+            return new PersonRouteMasterDao(this.LoggedInUser).GetPersonRoutesByRecordTypeIdAndSearch(recordTypeID,searchString);
 
         }
 
         internal List<PharmaBusinessObjects.Master.PersonRouteMaster> GetPersonRoutesBySystemName(string systemName)
         {
-            var personRouteList = new PersonRouteMasterDao().GetPersonRoutes().Where(p => p.SystemName == systemName && p.Status).ToList();
+            var personRouteList = new PersonRouteMasterDao(this.LoggedInUser).GetPersonRoutes().Where(p => p.SystemName == systemName && p.Status).ToList();
             return personRouteList;
         }
 

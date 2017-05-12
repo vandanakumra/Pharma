@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace PharmaDAL.Master
 {
-    public class CustomerLedgerMasterDao
+    public class CustomerLedgerMasterDao : BaseDao
     {
+        public CustomerLedgerMasterDao(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        {
+
+        }
         public List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -105,8 +109,10 @@ namespace PharmaDAL.Master
                     RouteId = p.RouteId,                  
                     RSMId = p.RSMId,                   
                     SalesManId = p.SalesManId,                   
-                    ZSMId = p.ZSMId                    
-                    
+                    ZSMId = p.ZSMId,
+                    CreatedBy = this.LoggedInUser.Username,
+                    CreatedOn = System.DateTime.Now
+
                 };
 
                 context.CustomerLedger.Add(table);
@@ -156,6 +162,8 @@ namespace PharmaDAL.Master
                         customerLedgerMaster.RSMId = p.RSMId;
                         customerLedgerMaster.SalesManId = p.SalesManId;
                         customerLedgerMaster.ZSMId = p.ZSMId;
+                        customerLedgerMaster.ModifiedBy = this.LoggedInUser.Username;
+                        customerLedgerMaster.ModifiedOn = System.DateTime.Now;
                     }
 
                     return context.SaveChanges();

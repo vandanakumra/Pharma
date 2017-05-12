@@ -16,33 +16,33 @@ namespace PharmaBusiness.Master
         }
         internal List<ItemMaster> GetAllItems()
         {
-            return new ItemDaoMaster().GetAllItems();
+            return new ItemDaoMaster(this.LoggedInUser).GetAllItems();
         }
 
         internal List<ItemMaster> GetAllItemsBySearch(string searchString)
         {
-            return new ItemDaoMaster().GetAllItemsBySearch(searchString);
+            return new ItemDaoMaster(this.LoggedInUser).GetAllItemsBySearch(searchString);
         }
         
 
         internal bool AddNewItem(ItemMaster newItem)
         {
-            return new ItemDaoMaster().AddNewItem(newItem);
+            return new ItemDaoMaster(this.LoggedInUser).AddNewItem(newItem);
         }
 
         internal bool UpdateItem(ItemMaster existingItem)
         {
-            return new ItemDaoMaster().UpdateItem(existingItem);
+            return new ItemDaoMaster(this.LoggedInUser).UpdateItem(existingItem);
         }
 
         internal bool DeleteItem(ItemMaster existingItem)
         {
-            return new ItemDaoMaster().DeleteItem(existingItem);
+            return new ItemDaoMaster(this.LoggedInUser).DeleteItem(existingItem);
         }
 
         internal string GetNextItemCode(string companyCode)
         {
-            int totalItemsFromSameCompany =  new ItemDaoMaster().TotalItemsFromSameCompany(companyCode);
+            int totalItemsFromSameCompany =  new ItemDaoMaster(this.LoggedInUser).TotalItemsFromSameCompany(companyCode);
             totalItemsFromSameCompany++;
             string getNextItemCode=String.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0'));
             return getNextItemCode;
