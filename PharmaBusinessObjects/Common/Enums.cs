@@ -26,5 +26,16 @@ namespace PharmaBusinessObjects.Common
             Direct
         };
 
+        public enum TransType
+        {
+            C,
+            D
+        };
+
+        public enum TaxRetail
+        {
+            T,
+            R
+        };
     }
 }

@@ -93,7 +93,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.errorProviderCustomerLedger = new System.Windows.Forms.ErrorProvider(this.components);
-            this.ucSupplierCustomerInfo1 = new PharmaUI.ucSupplierCustomerInfo();
+            this.ucSupplierCustomerInfo = new PharmaUI.ucSupplierCustomerInfo();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderCustomerLedger)).BeginInit();
             this.SuspendLayout();
@@ -838,6 +838,7 @@
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -853,31 +854,31 @@
             // 
             this.errorProviderCustomerLedger.ContainerControl = this;
             // 
-            // ucSupplierCustomerInfo1
+            // ucSupplierCustomerInfo
             // 
-            this.ucSupplierCustomerInfo1.Address = "";
-            this.ucSupplierCustomerInfo1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ucSupplierCustomerInfo1.Code = "";
-            this.ucSupplierCustomerInfo1.ContactPerson = "";
-            this.ucSupplierCustomerInfo1.EmailAddress = "";
-            this.ucSupplierCustomerInfo1.Fax = "";
-            this.ucSupplierCustomerInfo1.Location = new System.Drawing.Point(33, 78);
-            this.ucSupplierCustomerInfo1.Mobile = "";
-            this.ucSupplierCustomerInfo1.Name = "ucSupplierCustomerInfo1";
-            this.ucSupplierCustomerInfo1.OfficePhone = "";
-            this.ucSupplierCustomerInfo1.OpeningBal = "";
-            this.ucSupplierCustomerInfo1.Pager = "";
-            this.ucSupplierCustomerInfo1.ResidentPhone = "";
-            this.ucSupplierCustomerInfo1.ShortName = "";
-            this.ucSupplierCustomerInfo1.Size = new System.Drawing.Size(1055, 93);
-            this.ucSupplierCustomerInfo1.TabIndex = 3;
+            this.ucSupplierCustomerInfo.Address = "";
+            this.ucSupplierCustomerInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ucSupplierCustomerInfo.Code = "";
+            this.ucSupplierCustomerInfo.ContactPerson = "";
+            this.ucSupplierCustomerInfo.EmailAddress = "";
+            this.ucSupplierCustomerInfo.Fax = "";
+            this.ucSupplierCustomerInfo.Location = new System.Drawing.Point(33, 78);
+            this.ucSupplierCustomerInfo.Mobile = "";
+            this.ucSupplierCustomerInfo.Name = "ucSupplierCustomerInfo";
+            this.ucSupplierCustomerInfo.OfficePhone = "";
+            this.ucSupplierCustomerInfo.OpeningBal = "";
+            this.ucSupplierCustomerInfo.Pager = "";
+            this.ucSupplierCustomerInfo.ResidentPhone = "";
+            this.ucSupplierCustomerInfo.ShortName = "";
+            this.ucSupplierCustomerInfo.Size = new System.Drawing.Size(1055, 93);
+            this.ucSupplierCustomerInfo.TabIndex = 3;
             // 
             // frmCustomerLedgerMasterAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1131, 502);
-            this.Controls.Add(this.ucSupplierCustomerInfo1);
+            this.Controls.Add(this.ucSupplierCustomerInfo);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -957,6 +958,6 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.ErrorProvider errorProviderCustomerLedger;
-        private ucSupplierCustomerInfo ucSupplierCustomerInfo1;
+        private ucSupplierCustomerInfo ucSupplierCustomerInfo;
     }
 }

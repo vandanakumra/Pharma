@@ -62,6 +62,19 @@ namespace PharmaUI
             }
         }
 
+        public static Decimal ? SafeConversionDecimal(string inputVal)
+        {
+            decimal outputVal;
+            if (!decimal.TryParse(inputVal, out outputVal))
+            {
+                return null;
+            }
+            else
+            {
+                return outputVal;
+            }
+        }
+
         internal static void FormLoad(Form form, string lblText)
         {
 

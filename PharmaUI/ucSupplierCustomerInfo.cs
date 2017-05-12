@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PharmaBusinessObjects.Common;
+using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI
 {
@@ -153,11 +155,11 @@ namespace PharmaUI
             }
         }
 
-        public string CreditDebit
+        public Enums.TransType CreditDebit
         {
             get
             {
-                return cbxCreditDebit.SelectedItem == null ? "C" : cbxCreditDebit.SelectedItem.ToString();
+                return cbxCreditDebit.SelectedItem == null ? Enums.TransType.C : (Enums.TransType)cbxCreditDebit.SelectedItem;
             }
             set
             {
@@ -165,11 +167,11 @@ namespace PharmaUI
             }
         }
 
-        public string TaxRetail
+        public Enums.TaxRetail TaxRetail
         {
             get
             {
-                return cbxTaxRetail.SelectedItem == null ? "R" : cbxTaxRetail.SelectedItem.ToString();
+                return cbxTaxRetail.SelectedItem == null ? Enums.TaxRetail.R : (Enums.TaxRetail)cbxTaxRetail.SelectedItem;
             }
             set
             {
@@ -177,11 +179,11 @@ namespace PharmaUI
             }
         }
 
-        public object Status
+        public Enums.Status Status
         {
             get
             {
-                return cbxStatus.SelectedValue == null ? "1" : cbxStatus.SelectedValue.ToString();
+                return cbxStatus.SelectedValue == null ? Enums.Status.Active : (Enums.Status)cbxStatus.SelectedValue;
             }
             set
             {
@@ -201,7 +203,23 @@ namespace PharmaUI
         public ucSupplierCustomerInfo()
         {
             InitializeComponent();
-            
+            FillCombo();
         }
+
+        private void FillCombo()
+        {
+            ////Fill Credit/Debit options
+            cbxCreditDebit.DataSource = Enum.GetValues(typeof(Enums.TransType));
+            cbxCreditDebit.SelectedItem = TransType.C;
+
+            ////Fill Credit/Debit options
+            cbxTaxRetail.DataSource = Enum.GetValues(typeof(Enums.TaxRetail));
+            cbxTaxRetail.SelectedItem = Enums.TaxRetail.R;
+
+            ////Fill Status options
+            cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
+            cbxStatus.SelectedItem = Enums.Status.Active;
+        }
+
     }
 }

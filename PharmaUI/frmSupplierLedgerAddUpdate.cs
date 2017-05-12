@@ -51,21 +51,21 @@ namespace PharmaUI
 
             if (supplier != null)
             {
-                this.ucSupplierCustomerInfo1.Code = supplier.SupplierLedgerCode;
-                this.ucSupplierCustomerInfo1.Name = supplier.SupplierLedgerName;
-                this.ucSupplierCustomerInfo1.ShortName = supplier.SupplierLedgerShortName;
-                this.ucSupplierCustomerInfo1.Address = supplier.Address;
-                this.ucSupplierCustomerInfo1.ContactPerson = supplier.ContactPerson;
-                this.ucSupplierCustomerInfo1.EmailAddress = supplier.EmailAddress;
-                this.ucSupplierCustomerInfo1.Fax = supplier.Fax;
-                this.ucSupplierCustomerInfo1.Mobile = supplier.Mobile;
-                this.ucSupplierCustomerInfo1.Pager = supplier.Pager;
-                this.ucSupplierCustomerInfo1.OfficePhone = supplier.OfficePhone;
-                this.ucSupplierCustomerInfo1.ResidentPhone = supplier.ResidentPhone;
-                this.ucSupplierCustomerInfo1.TaxRetail = supplier.TaxRetail;
-                this.ucSupplierCustomerInfo1.Status = supplier.Status ? Enums.Status.Active : Enums.Status.Inactive;
-                this.ucSupplierCustomerInfo1.CreditDebit = supplier.CreditDebit;
-                this.ucSupplierCustomerInfo1.OpeningBal = supplier.OpeningBal.ToString();
+                this.ucSupplierCustomerInfo.Code = supplier.SupplierLedgerCode;
+                this.ucSupplierCustomerInfo.Name = supplier.SupplierLedgerName;
+                this.ucSupplierCustomerInfo.ShortName = supplier.SupplierLedgerShortName;
+                this.ucSupplierCustomerInfo.Address = supplier.Address;
+                this.ucSupplierCustomerInfo.ContactPerson = supplier.ContactPerson;
+                this.ucSupplierCustomerInfo.EmailAddress = supplier.EmailAddress;
+                this.ucSupplierCustomerInfo.Fax = supplier.Fax;
+                this.ucSupplierCustomerInfo.Mobile = supplier.Mobile;
+                this.ucSupplierCustomerInfo.Pager = supplier.Pager;
+                this.ucSupplierCustomerInfo.OfficePhone = supplier.OfficePhone;
+                this.ucSupplierCustomerInfo.ResidentPhone = supplier.ResidentPhone;
+                this.ucSupplierCustomerInfo.TaxRetail = supplier.TaxRetail =="R" ? Enums.TaxRetail.R : Enums.TaxRetail.T;
+                this.ucSupplierCustomerInfo.Status = supplier.Status ? Enums.Status.Active : Enums.Status.Inactive;
+                this.ucSupplierCustomerInfo.CreditDebit = supplier.CreditDebit =="C" ? Enums.TransType.C : Enums.TransType.D;
+                this.ucSupplierCustomerInfo.OpeningBal = supplier.OpeningBal.ToString();
                 txtDLNo.Text = supplier.DLNo;
                 txtTin.Text = supplier.TINNo;
                 cbxArea.SelectedValue = supplier.AreaId;
@@ -77,14 +77,6 @@ namespace PharmaUI
 
         private void FillCombo()
         {
-            //Fill status options
-            this.ucSupplierCustomerInfo1.StatusDataSource = Enum.GetValues(typeof(Enums.Status));
-            this.ucSupplierCustomerInfo1.Status = Enums.Status.Active;
-
-            //Fill Tax/Retail option
-            this.ucSupplierCustomerInfo1.TaxRetail= "R";
-            this.ucSupplierCustomerInfo1.CreditDebit = "C";
-
             //Fill Purchase type option
             cbxPurchaseType.DataSource = applicationFacade.GetAccountLedgerBySystemName("PurchaseLedger");
             cbxPurchaseType.DisplayMember = "AccountLedgerName";
@@ -99,7 +91,7 @@ namespace PharmaUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo1.Name))
+            if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo.Name))
             {
                 throw new Exception("Supplier Name can not be blank");
             }
@@ -108,26 +100,26 @@ namespace PharmaUI
             decimal openingBal = 0.00M;
             
             SupplierLedgerMaster supplier = new SupplierLedgerMaster();
-            supplier.SupplierLedgerCode = this.ucSupplierCustomerInfo1.Code;
-            supplier.SupplierLedgerName = this.ucSupplierCustomerInfo1.Name;
-            supplier.SupplierLedgerShortName = this.ucSupplierCustomerInfo1.ShortName;
-            supplier.Address = this.ucSupplierCustomerInfo1.Address;
-            supplier.ContactPerson = this.ucSupplierCustomerInfo1.ContactPerson;
-            Enum.TryParse<Status>(this.ucSupplierCustomerInfo1.Status.ToString(), out status);
+            supplier.SupplierLedgerCode = this.ucSupplierCustomerInfo.Code;
+            supplier.SupplierLedgerName = this.ucSupplierCustomerInfo.Name;
+            supplier.SupplierLedgerShortName = this.ucSupplierCustomerInfo.ShortName;
+            supplier.Address = this.ucSupplierCustomerInfo.Address;
+            supplier.ContactPerson = this.ucSupplierCustomerInfo.ContactPerson;
+            Enum.TryParse<Status>(this.ucSupplierCustomerInfo.Status.ToString(), out status);
             supplier.Status = status == Status.Active;
-            supplier.CreditDebit = this.ucSupplierCustomerInfo1.CreditDebit;
+            supplier.CreditDebit = this.ucSupplierCustomerInfo.CreditDebit == Enums.TransType.C ? "C" : "D";
             Int32.TryParse(cbxArea.SelectedValue.ToString(), out areaId);
             supplier.AreaId = areaId;
             supplier.DLNo = txtDLNo.Text;
-            supplier.EmailAddress = this.ucSupplierCustomerInfo1.EmailAddress;
-            supplier.Fax = this.ucSupplierCustomerInfo1.Fax;
-            supplier.Mobile = this.ucSupplierCustomerInfo1.Mobile;
-            supplier.OfficePhone = this.ucSupplierCustomerInfo1.OfficePhone;
+            supplier.EmailAddress = this.ucSupplierCustomerInfo.EmailAddress;
+            supplier.Fax = this.ucSupplierCustomerInfo.Fax;
+            supplier.Mobile = this.ucSupplierCustomerInfo.Mobile;
+            supplier.OfficePhone = this.ucSupplierCustomerInfo.OfficePhone;
 
-            decimal.TryParse(this.ucSupplierCustomerInfo1.OpeningBal, out openingBal);
+            decimal.TryParse(this.ucSupplierCustomerInfo.OpeningBal, out openingBal);
             supplier.OpeningBal = openingBal;
-            supplier.Pager = this.ucSupplierCustomerInfo1.Pager;
-            supplier.ResidentPhone = this.ucSupplierCustomerInfo1.ResidentPhone;
+            supplier.Pager = this.ucSupplierCustomerInfo.Pager;
+            supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
             supplier.TINNo = txtTin.Text;
 
             int result = SupplierId > 0 ? applicationFacade.UpdateSupplierLedger(supplier) : applicationFacade.AddSupplierLedger(supplier);

@@ -39,7 +39,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucSupplierCustomerInfo1 = new PharmaUI.ucSupplierCustomerInfo();
+            this.ucSupplierCustomerInfo = new PharmaUI.ucSupplierCustomerInfo();
             this.SuspendLayout();
             // 
             // cbxArea
@@ -76,7 +76,7 @@
             this.label17.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(436, 392);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(97, 19);
+            this.label17.Size = new System.Drawing.Size(96, 19);
             this.label17.TabIndex = 63;
             this.label17.Text = "Purchase Type";
             // 
@@ -148,19 +148,31 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucSupplierCustomerInfo1
+            // ucSupplierCustomerInfo
             // 
-            this.ucSupplierCustomerInfo1.Location = new System.Drawing.Point(11, 39);
-            this.ucSupplierCustomerInfo1.Name = "ucSupplierCustomerInfo1";
-            this.ucSupplierCustomerInfo1.Size = new System.Drawing.Size(747, 345);
-            this.ucSupplierCustomerInfo1.TabIndex = 72;
+            this.ucSupplierCustomerInfo.Address = "";
+            this.ucSupplierCustomerInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ucSupplierCustomerInfo.Code = "";
+            this.ucSupplierCustomerInfo.ContactPerson = "";
+            this.ucSupplierCustomerInfo.EmailAddress = "";
+            this.ucSupplierCustomerInfo.Fax = "";
+            this.ucSupplierCustomerInfo.Location = new System.Drawing.Point(11, 39);
+            this.ucSupplierCustomerInfo.Mobile = "";
+            this.ucSupplierCustomerInfo.Name = "ucSupplierCustomerInfo";
+            this.ucSupplierCustomerInfo.OfficePhone = "";
+            this.ucSupplierCustomerInfo.OpeningBal = "";
+            this.ucSupplierCustomerInfo.Pager = "";
+            this.ucSupplierCustomerInfo.ResidentPhone = "";
+            this.ucSupplierCustomerInfo.ShortName = "";
+            this.ucSupplierCustomerInfo.Size = new System.Drawing.Size(747, 345);
+            this.ucSupplierCustomerInfo.TabIndex = 72;
             // 
             // frmSupplierLedgerAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 536);
-            this.Controls.Add(this.ucSupplierCustomerInfo1);
+            this.Controls.Add(this.ucSupplierCustomerInfo);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtDLNo);
@@ -192,6 +204,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucSupplierCustomerInfo ucSupplierCustomerInfo1;
+        private ucSupplierCustomerInfo ucSupplierCustomerInfo;
     }
 }
