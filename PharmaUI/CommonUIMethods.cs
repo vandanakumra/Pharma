@@ -13,6 +13,8 @@ namespace PharmaUI
     {
         public static PharmaBusinessObjects.Master.UserMaster LoggedInUser { get; set; }
         public static string FontFamily = "Microsoft Sans Serif";
+
+        
         public static int FontSize = 9;
 
         public const string MatchEmailPattern =
@@ -62,32 +64,64 @@ namespace PharmaUI
             }
         }
 
-        internal static void FormLoad(Form form, string lblText)
+        internal static void FormLoad(Form form, string lblText, bool isHeader = false)
         {
 
             List<Control> allControls = ExtensionMethods.GetAllControls(form);
-            allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
+            allControls.ForEach(k => { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize);  });
 
             Panel panel1 = new Panel();
             panel1.Location = new Point(0, 0);
             panel1.BackColor = Color.MidnightBlue;
             panel1.Width = form.Width;
             panel1.Height = 50;
+            panel1.Dock = DockStyle.Fill;
             panel1.Margin = new Padding(3, 3, 3, 3);
             panel1.Padding = new Padding(3, 3, 3, 3);
             panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel1.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
 
             Label lbl = new Label();
-            lbl.Width = panel1.Width;
+            lbl.Width = (int)(panel1.Width);
             lbl.Dock = DockStyle.Fill;
-            lbl.TextAlign = ContentAlignment.MiddleCenter;
+            lbl.TextAlign = isHeader? ContentAlignment.MiddleLeft : ContentAlignment.MiddleCenter;
             lbl.Top = 10;
             lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
             lbl.Text = lblText;
-            lbl.ForeColor = Color.White;
+            lbl.ForeColor = isHeader? Color.Red : Color.White;
             panel1.Controls.Add(lbl);
+            
+            form.Controls.Add(panel1);
+        }
 
+        internal static void HomeFormLoad(Form form, string lblText)
+        {
+
+            List<Control> allControls = ExtensionMethods.GetAllControls(form);
+            allControls.ForEach(k => { if (k.Name != "lblHmHeading" && k.GetType() != typeof(GroupBox)) { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); } });
+
+            Panel panel1 = new Panel();
+            panel1.Location = new Point(0, 0);
+            panel1.BackColor = Color.White;
+            panel1.Width = form.Width;
+            panel1.Height = 50;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Margin = new Padding(3, 3, 3, 3);
+            panel1.Padding = new Padding(3, 3, 3, 3);
+            panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel1.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
+
+            Label lbl = new Label();
+            lbl.Width = (int)(panel1.Width * 0.5);
+            lbl.Dock = DockStyle.Fill;
+            lbl.Anchor = AnchorStyles.Left;
+            lbl.TextAlign = ContentAlignment.MiddleLeft;
+            lbl.Top = 10;
+            lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
+            lbl.Text = lblText;
+            lbl.ForeColor = Color.MidnightBlue;
+            panel1.Controls.Add(lbl);
+            
             form.Controls.Add(panel1);
         }
 

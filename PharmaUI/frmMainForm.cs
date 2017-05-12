@@ -110,6 +110,11 @@ namespace PharmaUI
                 pnlLogin.Visible = false;
                 menuStrip1.Visible = true;
                 ExtensionMethods.LoggedInUser = loginUser;
+
+                frmDefault form = new frmDefault();
+                ExtensionMethods.AddFormToPanel(form, pnlMain);
+                form.Show();
+                
             }
 
         }
