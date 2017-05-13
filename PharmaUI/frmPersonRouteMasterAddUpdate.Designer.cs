@@ -46,7 +46,7 @@
             this.btnCancel.Location = new System.Drawing.Point(209, 227);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(83, 48);
-            this.btnCancel.TabIndex = 40;
+            this.btnCancel.TabIndex = 22;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -57,7 +57,7 @@
             this.btnSave.Location = new System.Drawing.Point(101, 227);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(83, 48);
-            this.btnSave.TabIndex = 39;
+            this.btnSave.TabIndex = 21;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -68,7 +68,7 @@
             this.tbPersonRouteName.Location = new System.Drawing.Point(189, 135);
             this.tbPersonRouteName.Name = "tbPersonRouteName";
             this.tbPersonRouteName.Size = new System.Drawing.Size(212, 23);
-            this.tbPersonRouteName.TabIndex = 32;
+            this.tbPersonRouteName.TabIndex = 3;
             // 
             // label3
             // 
@@ -82,12 +82,13 @@
             // 
             // txtPersonRouteCode
             // 
+            this.txtPersonRouteCode.Enabled = false;
             this.txtPersonRouteCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPersonRouteCode.Location = new System.Drawing.Point(189, 93);
             this.txtPersonRouteCode.Name = "txtPersonRouteCode";
             this.txtPersonRouteCode.ReadOnly = true;
             this.txtPersonRouteCode.Size = new System.Drawing.Size(212, 23);
-            this.txtPersonRouteCode.TabIndex = 30;
+            this.txtPersonRouteCode.TabIndex = 2;
             // 
             // lblAccNo
             // 
@@ -107,7 +108,7 @@
             this.cbPersonRouteType.Location = new System.Drawing.Point(189, 56);
             this.cbPersonRouteType.Name = "cbPersonRouteType";
             this.cbPersonRouteType.Size = new System.Drawing.Size(212, 24);
-            this.cbPersonRouteType.TabIndex = 28;
+            this.cbPersonRouteType.TabIndex = 1;
             // 
             // label1
             // 
@@ -126,7 +127,7 @@
             this.cbxStatus.Location = new System.Drawing.Point(189, 175);
             this.cbxStatus.Name = "cbxStatus";
             this.cbxStatus.Size = new System.Drawing.Size(212, 21);
-            this.cbxStatus.TabIndex = 41;
+            this.cbxStatus.TabIndex = 4;
             // 
             // label2
             // 

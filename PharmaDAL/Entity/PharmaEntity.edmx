@@ -73,6 +73,18 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="CustomerCompanyDiscountRef">
+          <Key>
+            <PropertyRef Name="CustCompDiscountRefID" />
+          </Key>
+          <Property Name="CustCompDiscountRefID" Type="int" Nullable="false" />
+          <Property Name="CustomerLedgerID" Type="int" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="Normal" Type="float" />
+          <Property Name="Breakage" Type="float" />
+          <Property Name="Expired" Type="float" />
+          <Property Name="IsLessEcise" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="CustomerLedger">
           <Key>
             <PropertyRef Name="CustomerLedgerId" />
@@ -149,7 +161,7 @@
         </EntityType>
         <EntityType Name="ItemMaster">
           <Key>
-            <PropertyRef Name="ItemCode" />
+            <PropertyRef Name="ItemID" />
           </Key>
           <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
@@ -476,6 +488,7 @@
           <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuditHistory" EntityType="Self.AuditHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerCompanyDiscountRef" EntityType="Self.CustomerCompanyDiscountRef" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InterestType" EntityType="Self.InterestType" Schema="dbo" store:Type="Tables" />
@@ -629,6 +642,18 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="CustomerCompanyDiscountRef">
+          <Key>
+            <PropertyRef Name="CustCompDiscountRefID" />
+          </Key>
+          <Property Name="CustCompDiscountRefID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerLedgerID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="Normal" Type="Double" />
+          <Property Name="Breakage" Type="Double" />
+          <Property Name="Expired" Type="Double" />
+          <Property Name="IsLessEcise" Type="Boolean" Nullable="false" />
+        </EntityType>
         <EntityType Name="CustomerLedger">
           <Key>
             <PropertyRef Name="CustomerLedgerId" />
@@ -715,7 +740,7 @@
         </EntityType>
         <EntityType Name="ItemMaster">
           <Key>
-            <PropertyRef Name="ItemCode" />
+            <PropertyRef Name="ItemID" />
           </Key>
           <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1053,6 +1078,7 @@
           <EntitySet Name="AccountType" EntityType="Self.AccountType" />
           <EntitySet Name="AuditHistory" EntityType="Self.AuditHistory" />
           <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" />
+          <EntitySet Name="CustomerCompanyDiscountRef" EntityType="Self.CustomerCompanyDiscountRef" />
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" />
           <EntitySet Name="InterestType" EntityType="Self.InterestType" />
@@ -1200,6 +1226,19 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerCompanyDiscountRef">
+            <EntityTypeMapping TypeName="PharmaDBModel.CustomerCompanyDiscountRef">
+              <MappingFragment StoreEntitySet="CustomerCompanyDiscountRef">
+                <ScalarProperty Name="CustCompDiscountRefID" ColumnName="CustCompDiscountRefID" />
+                <ScalarProperty Name="CustomerLedgerID" ColumnName="CustomerLedgerID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Normal" ColumnName="Normal" />
+                <ScalarProperty Name="Breakage" ColumnName="Breakage" />
+                <ScalarProperty Name="Expired" ColumnName="Expired" />
+                <ScalarProperty Name="IsLessEcise" ColumnName="IsLessEcise" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

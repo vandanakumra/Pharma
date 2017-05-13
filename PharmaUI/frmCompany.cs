@@ -108,10 +108,7 @@ namespace PharmaUI
             dgvCompanyList.Columns["CompanyCode"].HeaderText = "Company Code";
 
             dgvCompanyList.Columns["CompanyName"].Visible = true;
-            dgvCompanyList.Columns["CompanyName"].HeaderText = "Company Name";
-
-            dgvCompanyList.Columns["Status"].Visible = true;
-            dgvCompanyList.Columns["Status"].HeaderText = "Status";
+            dgvCompanyList.Columns["CompanyName"].HeaderText = "Company Name";            
 
             dgvCompanyList.Columns["DirectIndirect"].Visible = true;
             dgvCompanyList.Columns["DirectIndirect"].HeaderText = "Direct/Indirect";
@@ -124,7 +121,9 @@ namespace PharmaUI
 
             dgvCompanyList.Columns["StockSummaryRequirement"].Visible = true;
             dgvCompanyList.Columns["StockSummaryRequirement"].HeaderText = "Stock Summary Required";
-            //dgvAccountLedger.Columns["AccountLedgerCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       
+
+            dgvCompanyList.Columns["Status"].Visible = true;
+            dgvCompanyList.Columns["Status"].HeaderText = "Status";
 
 
 

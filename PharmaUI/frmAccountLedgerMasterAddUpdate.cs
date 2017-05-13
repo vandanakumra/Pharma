@@ -24,11 +24,13 @@ namespace PharmaUI
         {
             InitializeComponent();           
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            ExtensionMethods.SetChildFormProperties(this);
         }
 
         public frmAccountLedgerMasterAddUpdate(int accountLedgerId)
         {
-            InitializeComponent();          
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.AccountLedgerId = accountLedgerId;
         }
@@ -37,6 +39,7 @@ namespace PharmaUI
         private void frmAccountLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {                       
             ExtensionMethods.FormLoad(this, (this.AccountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
+            GotFocusEventRaised(this);
 
             if (this.AccountLedgerId > 0)
             {                
@@ -47,6 +50,41 @@ namespace PharmaUI
                 FillCombo();
             }
 
+        }
+
+
+
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
 
         private void FillFormForUpdate()

@@ -83,12 +83,13 @@
             // 
             // txtAccountLedgerCode
             // 
+            this.txtAccountLedgerCode.Enabled = false;
             this.txtAccountLedgerCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAccountLedgerCode.Location = new System.Drawing.Point(163, 102);
             this.txtAccountLedgerCode.Name = "txtAccountLedgerCode";
             this.txtAccountLedgerCode.ReadOnly = true;
             this.txtAccountLedgerCode.Size = new System.Drawing.Size(212, 23);
-            this.txtAccountLedgerCode.TabIndex = 3;
+            this.txtAccountLedgerCode.TabIndex = 2;
             // 
             // label3
             // 
@@ -106,7 +107,7 @@
             this.tbAccountName.Location = new System.Drawing.Point(163, 173);
             this.tbAccountName.Name = "tbAccountName";
             this.tbAccountName.Size = new System.Drawing.Size(212, 23);
-            this.tbAccountName.TabIndex = 5;
+            this.tbAccountName.TabIndex = 4;
             // 
             // label4
             // 
@@ -124,7 +125,7 @@
             this.tbOpeningBalance.Location = new System.Drawing.Point(163, 244);
             this.tbOpeningBalance.Name = "tbOpeningBalance";
             this.tbOpeningBalance.Size = new System.Drawing.Size(212, 23);
-            this.tbOpeningBalance.TabIndex = 7;
+            this.tbOpeningBalance.TabIndex = 6;
             this.tbOpeningBalance.Text = "0.00";
             this.tbOpeningBalance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbOpeningBalance_KeyPress);
             // 
@@ -138,8 +139,8 @@
             "D"});
             this.cbDebitCredit.Location = new System.Drawing.Point(381, 243);
             this.cbDebitCredit.Name = "cbDebitCredit";
-            this.cbDebitCredit.Size = new System.Drawing.Size(83, 24);
-            this.cbDebitCredit.TabIndex = 8;
+            this.cbDebitCredit.Size = new System.Drawing.Size(52, 24);
+            this.cbDebitCredit.TabIndex = 7;
             // 
             // cbAccountType
             // 
@@ -149,7 +150,7 @@
             this.cbAccountType.Location = new System.Drawing.Point(163, 134);
             this.cbAccountType.Name = "cbAccountType";
             this.cbAccountType.Size = new System.Drawing.Size(212, 24);
-            this.cbAccountType.TabIndex = 10;
+            this.cbAccountType.TabIndex = 3;
             // 
             // label5
             // 
@@ -169,7 +170,7 @@
             this.cbDebitControlCode.Location = new System.Drawing.Point(130, 29);
             this.cbDebitControlCode.Name = "cbDebitControlCode";
             this.cbDebitControlCode.Size = new System.Drawing.Size(212, 24);
-            this.cbDebitControlCode.TabIndex = 12;
+            this.cbDebitControlCode.TabIndex = 8;
             // 
             // label6
             // 
@@ -189,7 +190,7 @@
             this.cbCreditControlCode.Location = new System.Drawing.Point(130, 68);
             this.cbCreditControlCode.Name = "cbCreditControlCode";
             this.cbCreditControlCode.Size = new System.Drawing.Size(212, 24);
-            this.cbCreditControlCode.TabIndex = 14;
+            this.cbCreditControlCode.TabIndex = 9;
             // 
             // label7
             // 
@@ -221,7 +222,7 @@
             this.btnSave.Location = new System.Drawing.Point(129, 409);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(83, 48);
-            this.btnSave.TabIndex = 16;
+            this.btnSave.TabIndex = 21;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -232,7 +233,7 @@
             this.btnCancel.Location = new System.Drawing.Point(237, 409);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(83, 48);
-            this.btnCancel.TabIndex = 17;
+            this.btnCancel.TabIndex = 22;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -244,7 +245,7 @@
             this.cbxStatus.Location = new System.Drawing.Point(163, 211);
             this.cbxStatus.Name = "cbxStatus";
             this.cbxStatus.Size = new System.Drawing.Size(212, 21);
-            this.cbxStatus.TabIndex = 25;
+            this.cbxStatus.TabIndex = 5;
             // 
             // label2
             // 
@@ -260,7 +261,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 489);
+            this.ClientSize = new System.Drawing.Size(464, 485);
             this.ControlBox = false;
             this.Controls.Add(this.cbxStatus);
             this.Controls.Add(this.label2);

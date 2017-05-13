@@ -112,10 +112,42 @@ namespace PharmaUI
 
         private void frmCustomerLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {
-         
+            GotFocusEventRaised(this);
         }
 
-      
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
+        }
+
 
         public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
         {
@@ -129,7 +161,7 @@ namespace PharmaUI
                 ///Fill user control data
                 ///
                 ucSupplierCustomerInfo.Code = customerLedgerMaster.CustomerLedgerCode;
-                ucSupplierCustomerInfo.Name=customerLedgerMaster.CustomerLedgerName ;
+                ucSupplierCustomerInfo.CustomerSupplierName=customerLedgerMaster.CustomerLedgerName ;
                 ucSupplierCustomerInfo.ShortName=customerLedgerMaster.CustomerLedgerShortName ;
                 ucSupplierCustomerInfo.Address=customerLedgerMaster.Address ;
                 ucSupplierCustomerInfo.ContactPerson=customerLedgerMaster.ContactPerson ;
@@ -203,7 +235,7 @@ namespace PharmaUI
                 customerLedgerMaster.CustomerLedgerId = this.customerLedgerID;
 
                 //values from User Control
-                customerLedgerMaster.CustomerLedgerName = ucSupplierCustomerInfo.Name;
+                customerLedgerMaster.CustomerLedgerName = ucSupplierCustomerInfo.CustomerSupplierName;
                 customerLedgerMaster.CustomerLedgerShortName = ucSupplierCustomerInfo.ShortName;
                 customerLedgerMaster.Address = ucSupplierCustomerInfo.Address;
                 customerLedgerMaster.ContactPerson = ucSupplierCustomerInfo.ContactPerson;
@@ -290,7 +322,7 @@ namespace PharmaUI
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -298,6 +330,24 @@ namespace PharmaUI
         {
             errorProviderCustomerLedger.Clear();
             this.Close();
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmCustomerLedgerMasterAddUpdate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }

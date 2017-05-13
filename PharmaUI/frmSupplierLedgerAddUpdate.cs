@@ -22,27 +22,63 @@ namespace PharmaUI
 
         public frmSupplierLedgerAddUpdate()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         public frmSupplierLedgerAddUpdate(int supplierId)
         {
             InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.SupplierId = supplierId;
-            ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
+            
         }
 
         private void frmSupplierLedgerAddUpdate_Load(object sender, EventArgs e)
         {
+            ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
             FillCombo();
+            GotFocusEventRaised(this);
 
             if (this.SupplierId > 0)
             {
                 FillFormForUpdate();
             }
+        }
 
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
 
         private void FillFormForUpdate()
@@ -52,7 +88,7 @@ namespace PharmaUI
             if (supplier != null)
             {
                 this.ucSupplierCustomerInfo.Code = supplier.SupplierLedgerCode;
-                this.ucSupplierCustomerInfo.Name = supplier.SupplierLedgerName;
+                this.ucSupplierCustomerInfo.CustomerSupplierName = supplier.SupplierLedgerName;
                 this.ucSupplierCustomerInfo.ShortName = supplier.SupplierLedgerShortName;
                 this.ucSupplierCustomerInfo.Address = supplier.Address;
                 this.ucSupplierCustomerInfo.ContactPerson = supplier.ContactPerson;
@@ -86,22 +122,25 @@ namespace PharmaUI
             cbxArea.DataSource = applicationFacade.GetPersonRoutesBySystemName("AREA");
             cbxArea.DisplayMember = "PersonRouteName";
             cbxArea.ValueMember = "PersonRouteID";
+
+
             
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo.Name))
+            if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo.CustomerSupplierName))
             {
                 throw new Exception("Supplier Name can not be blank");
             }
+
             Status status;
             int areaId = 0;
             decimal openingBal = 0.00M;
             
             SupplierLedgerMaster supplier = new SupplierLedgerMaster();
             supplier.SupplierLedgerCode = this.ucSupplierCustomerInfo.Code;
-            supplier.SupplierLedgerName = this.ucSupplierCustomerInfo.Name;
+            supplier.SupplierLedgerName = this.ucSupplierCustomerInfo.CustomerSupplierName;
             supplier.SupplierLedgerShortName = this.ucSupplierCustomerInfo.ShortName;
             supplier.Address = this.ucSupplierCustomerInfo.Address;
             supplier.ContactPerson = this.ucSupplierCustomerInfo.ContactPerson;
@@ -121,6 +160,8 @@ namespace PharmaUI
             supplier.Pager = this.ucSupplierCustomerInfo.Pager;
             supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
             supplier.TINNo = txtTin.Text;
+            supplier.TaxRetail =this.ucSupplierCustomerInfo.TaxRetail  == TaxRetail.R ? "R" : "T";
+            supplier.SupplierLedgerId = SupplierId;
 
             int result = SupplierId > 0 ? applicationFacade.UpdateSupplierLedger(supplier) : applicationFacade.AddSupplierLedger(supplier);
 

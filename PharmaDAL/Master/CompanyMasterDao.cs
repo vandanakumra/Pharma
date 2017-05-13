@@ -25,12 +25,13 @@ namespace PharmaDAL.Master
                                                 CompanyName = p.CompanyName,
                                                 OrderPreferenceRating = p.OrderPreferenceRating,
                                                 BillingPreferenceRating = p.BillingPreferenceRating,
-                                                CompanyCode = p.CompanyCode,
-                                                Status = p.Status,
+                                                CompanyCode = p.CompanyCode,                                               
                                                 IsDirect = p.IsDirect,
-                                                StockSummaryRequired = p.StockSummaryRequired
-                    
-                                            }).ToList();
+                                                StockSummaryRequired = p.StockSummaryRequired,
+                                                Status = p.Status
+
+                }).ToList();
+
                 companyList.ForEach(p => {
                     p.DirectIndirect = p.IsDirect ? Enum.GetName(typeof(DI), 1) : Enum.GetName(typeof(DI), 0);
                     p.StockSummaryRequirement = p.StockSummaryRequired ? Enum.GetName(typeof(Choice), 1) : Enum.GetName(typeof(Choice), 0);
@@ -82,7 +83,11 @@ namespace PharmaDAL.Master
                 };
 
                 context.CompanyMaster.Add(table);
-                return context.SaveChanges();
+
+                if (context.SaveChanges() > 0)
+                    return table.CompanyId;
+                else
+                    return 0;
             }
         }
 

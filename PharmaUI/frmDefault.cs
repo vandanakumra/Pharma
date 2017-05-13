@@ -26,7 +26,7 @@ namespace PharmaUI
 
         private void frmDefault_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.HomeFormLoad(this, "Pharma Sol");
+            ExtensionMethods.HomeFormLoad(this, "List Of Hot Keys");
         }
 
     }
