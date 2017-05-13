@@ -43,6 +43,9 @@ namespace PharmaUI
 
                     if (result == DialogResult.Yes)
                     {
+                        frmCompanyAddUpdate form = new frmCompanyAddUpdate(cbxComanyCode.Text);
+                        form.FormClosing += Form_FormClosing;
+                        form.ShowDialog();
 
                     }
                     else
@@ -52,6 +55,24 @@ namespace PharmaUI
                     }
                 }
             }
+        }
+
+        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            int companyID = ((frmCompanyAddUpdate)sender).CompanyId;
+
+            cbxComanyCode.SelectedIndexChanged -= CbxComanyCode_SelectedIndexChanged;
+
+            //Fill the company list
+            cbxComanyCode.DataSource = applicationFacade.GetCompanies(String.Empty);
+            cbxComanyCode.DisplayMember = "CompanyName";
+            cbxComanyCode.ValueMember = "CompanyCode";
+
+            var comp = applicationFacade.GetCompanyById(companyID);
+
+            cbxComanyCode.SelectedValue = comp.CompanyCode;
+
+            cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
         }
 
         private void LoadCombo()
@@ -239,7 +260,6 @@ namespace PharmaUI
                     }
                 }
             }
-
         }
 
 

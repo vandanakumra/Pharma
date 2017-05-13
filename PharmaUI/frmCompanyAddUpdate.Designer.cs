@@ -48,6 +48,7 @@
             // 
             // txtCompanyCode
             // 
+            this.txtCompanyCode.Enabled = false;
             this.txtCompanyCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.txtCompanyCode.Location = new System.Drawing.Point(218, 78);
             this.txtCompanyCode.Name = "txtCompanyCode";
@@ -206,7 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 392);
+            this.ClientSize = new System.Drawing.Size(466, 388);
             this.ControlBox = false;
             this.Controls.Add(this.cbxSSRequired);
             this.Controls.Add(this.cbxDI);

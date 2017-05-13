@@ -57,7 +57,17 @@ namespace PharmaUI
                 }
                 else
                 {
-                    if (c is TextBox || c is ComboBox)
+                    if (c is TextBox)
+                    {
+                        TextBox tb = (TextBox)c;
+
+                        if (!(tb.Enabled == false || tb.ReadOnly == true))
+                        {
+                            c.BackColor = Color.White;
+                        }
+                    }
+
+                    else if(c is ComboBox)
                     {
                         if (c.Enabled == true)
                         {
@@ -143,9 +153,31 @@ namespace PharmaUI
             List<Control> allControls = ExtensionMethods.GetAllControls(form);
             allControls.ForEach(k => { if (k.Name != "lblHmHeading" && k.GetType() != typeof(GroupBox)) { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); } });
 
+            //Panel panel1 = new Panel();
+            //panel1.Location = new Point(0, 0);
+            //panel1.BackColor = Color.White;
+            //panel1.Width = form.Width;
+            //panel1.Height = 50;
+            //panel1.Dock = DockStyle.Fill;
+            //panel1.Margin = new Padding(3, 3, 3, 3);
+            //panel1.Padding = new Padding(3, 3, 3, 3);
+            //panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            //panel1.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
+
+            //Label lbl = new Label();
+            //lbl.Width = (int)(panel1.Width * 0.5);
+            //lbl.Dock = DockStyle.Fill;
+            //lbl.Anchor = AnchorStyles.Left;
+            //lbl.TextAlign = ContentAlignment.MiddleLeft;
+            //lbl.Top = 10;
+            //lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
+            //lbl.Text = lblText;
+            //lbl.ForeColor = Color.MidnightBlue;
+            //panel1.Controls.Add(lbl);
+
             Panel panel1 = new Panel();
             panel1.Location = new Point(0, 0);
-            panel1.BackColor = Color.White;
+            panel1.BackColor = Color.MidnightBlue;
             panel1.Width = form.Width;
             panel1.Height = 50;
             panel1.Dock = DockStyle.Fill;
@@ -155,16 +187,15 @@ namespace PharmaUI
             panel1.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
 
             Label lbl = new Label();
-            lbl.Width = (int)(panel1.Width * 0.5);
+            lbl.Width = (int)(panel1.Width);
             lbl.Dock = DockStyle.Fill;
-            lbl.Anchor = AnchorStyles.Left;
-            lbl.TextAlign = ContentAlignment.MiddleLeft;
+            lbl.TextAlign = ContentAlignment.MiddleCenter;
             lbl.Top = 10;
             lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
             lbl.Text = lblText;
-            lbl.ForeColor = Color.MidnightBlue;
+            lbl.ForeColor = Color.White;
             panel1.Controls.Add(lbl);
-            
+
             form.Controls.Add(panel1);
         }
 

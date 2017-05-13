@@ -18,7 +18,8 @@ namespace PharmaUI
     public partial class frmCompanyAddUpdate : Form
     {
         IApplicationFacade applicationFacade;
-        private int CompanyId { get; set; }
+        public int CompanyId { get; set; }
+        private string CompanyNameNew { get; set; }
 
         public frmCompanyAddUpdate()
         {
@@ -33,9 +34,18 @@ namespace PharmaUI
             this.CompanyId = companyId;
         }
 
+        public frmCompanyAddUpdate(string companyName)
+        {
+            InitializeComponent();
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            this.CompanyNameNew = companyName;
+        }
+
         private void frmCompanyAddUpdate_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, (this.CompanyId > 0) ? "Company Master - Update" : "Company Master - Add");
+
+            GotFocusEventRaised(this);
 
             FillCombo();
 
@@ -43,7 +53,44 @@ namespace PharmaUI
             {
                 FillFormForUpdate();
             }
+
+            if(!string.IsNullOrEmpty(this.CompanyNameNew))
+            {
+                txtCompanyName.Text = this.CompanyNameNew;
+            }
             
+        }
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
 
         private void FillFormForUpdate()
@@ -107,6 +154,7 @@ namespace PharmaUI
             //Close this form if operation is successful
             if (result > 0)
             {
+                this.CompanyId = result;
                 this.Close();
             }
         }
