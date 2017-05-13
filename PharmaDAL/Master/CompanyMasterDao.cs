@@ -82,7 +82,11 @@ namespace PharmaDAL.Master
                 };
 
                 context.CompanyMaster.Add(table);
-                return context.SaveChanges();
+
+                if (context.SaveChanges() > 0)
+                    return table.CompanyId;
+                else
+                    return 0;
             }
         }
 

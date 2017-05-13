@@ -138,5 +138,13 @@ namespace PharmaUI
         {
             LoadDataGrid();
         }
+
+        private void btnAddNewCompany_Click(object sender, EventArgs e)
+        {
+            frmItemMasterAddUpdated form = new frmItemMasterAddUpdated(false);
+            ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+            form.FormClosed += Form_FormClosed;
+            form.Show();
+        }
     }
 }

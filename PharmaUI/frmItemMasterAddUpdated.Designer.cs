@@ -965,7 +965,7 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // frmItemMasterAddUpdatedNew
+            // frmItemMasterAddUpdated
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -976,7 +976,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
-            this.Name = "frmItemMasterAddUpdatedNew";
+            this.Name = "frmItemMasterAddUpdated";
             this.Text = "frmItemMasterAddUpdatedNew";
             this.Load += new System.EventHandler(this.frmItemMasterAddUpdatedNew_Load);
             this.panel1.ResumeLayout(false);
