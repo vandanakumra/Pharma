@@ -29,5 +29,11 @@ namespace PharmaBusiness.Master
             return new CustomerLedgerMasterDao(this.LoggedInUser).UpdateCustomerLedger(p);
         }
 
+        internal List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountList(int customerLedgerID)
+        {
+            return new CustomerLedgerMasterDao(this.LoggedInUser).GetCompleteCompanyDiscountList(customerLedgerID);
+        }
+        
+
     }
 }

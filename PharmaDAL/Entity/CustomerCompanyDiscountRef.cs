@@ -21,5 +21,8 @@ namespace PharmaDAL.Entity
         public Nullable<double> Breakage { get; set; }
         public Nullable<double> Expired { get; set; }
         public bool IsLessEcise { get; set; }
+    
+        public virtual CompanyMaster CompanyMaster { get; set; }
+        public virtual CustomerLedger CustomerLedger { get; set; }
     }
 }

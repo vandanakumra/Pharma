@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Entity;
+﻿using PharmaBusinessObjects.Master;
+using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace PharmaDAL.Master
         {
 
         }
+
         public List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
@@ -145,6 +147,27 @@ namespace PharmaDAL.Master
                     };
 
                     context.CustomerLedger.Add(table);
+                    context.SaveChanges();
+
+                    ///Add Customer Company discount data
+                    ///
+                    var previousMappings= context.CustomerCompanyDiscountRef.Where(x => x.CustomerLedgerID == p.CustomerLedgerId).ToList();
+                    context.CustomerCompanyDiscountRef.RemoveRange(previousMappings);
+
+                    List<Entity.CustomerCompanyDiscountRef> mappingList = new List<CustomerCompanyDiscountRef>();
+                    foreach (var newEntry in p.CustomerCopanyDiscountList)
+                    {
+                        mappingList.Add( new Entity.CustomerCompanyDiscountRef()
+                        {
+                            CustomerLedgerID = table.CustomerLedgerId,
+                            CompanyID = newEntry.CompanyID,
+                            Normal = newEntry.Normal,
+                            Breakage = newEntry.Breakage,
+                            Expired = newEntry.Expired,
+                            IsLessEcise = newEntry.IsLessEcise
+                        });                       
+                    }
+                    context.CustomerCompanyDiscountRef.AddRange(mappingList);
                     return context.SaveChanges();
                 }
             }
@@ -212,6 +235,27 @@ namespace PharmaDAL.Master
                         customerLedgerMaster.CentralLocal = p.CentralLocal;
                         customerLedgerMaster.ModifiedBy = this.LoggedInUser.Username;
                         customerLedgerMaster.ModifiedOn = System.DateTime.Now;
+
+
+                        ///Add Customer Company discount data
+                        ///
+                        var previousMappings = context.CustomerCompanyDiscountRef.Where(x => x.CustomerLedgerID == p.CustomerLedgerId).ToList();
+                        context.CustomerCompanyDiscountRef.RemoveRange(previousMappings);
+
+                        List<Entity.CustomerCompanyDiscountRef> mappingList = new List<CustomerCompanyDiscountRef>();
+                        foreach (var newEntry in p.CustomerCopanyDiscountList)
+                        {
+                            mappingList.Add(new Entity.CustomerCompanyDiscountRef()
+                            {
+                                CustomerLedgerID = p.CustomerLedgerId,
+                                CompanyID = newEntry.CompanyID,
+                                Normal = newEntry.Normal,
+                                Breakage = newEntry.Breakage,
+                                Expired = newEntry.Expired,
+                                IsLessEcise = newEntry.IsLessEcise
+                            });
+                        }
+                        context.CustomerCompanyDiscountRef.AddRange(mappingList);
                     }
 
                     return context.SaveChanges();
@@ -223,5 +267,70 @@ namespace PharmaDAL.Master
             }
 
         }
+
+        public List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetExistigCompanyDiscountMappingByCustomerID(int customerLedgerID)
+        {          
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> existingDiscountMapping = new List<PharmaBusinessObjects.Master.CustomerCopanyDiscount>();
+
+                    existingDiscountMapping= context.CustomerCompanyDiscountRef.Where(q => q.CustomerLedgerID == customerLedgerID && q.CompanyMaster.Status)
+                                                      .Select(x=>new PharmaBusinessObjects.Master.CustomerCopanyDiscount()
+                                                      {
+                                                          CompanyID=x.CompanyMaster.CompanyId,
+                                                          CompanyName=x.CompanyMaster.CompanyName,
+                                                          Normal=x.Normal,
+                                                          Breakage=x.Breakage,
+                                                          Expired=x.Expired,
+                                                          IsLessEcise=x.IsLessEcise
+
+                                                      }).ToList();
+
+                    return existingDiscountMapping;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+
+        public List<CustomerCopanyDiscount> GetCompleteCompanyDiscountList(int customerLedgerID)
+        {
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    List<CustomerCopanyDiscount> mappedDiscount = GetExistigCompanyDiscountMappingByCustomerID(customerLedgerID);
+                    List<CustomerCopanyDiscount> notMppedDiscount = context.CompanyMaster.Where(q => q.Status)
+                                                      .Select(x => new CustomerCopanyDiscount()
+                                                      {
+                                                          CompanyID = x.CompanyId,
+                                                          CompanyName=x.CompanyName
+
+                                                      }).ToList();
+
+                    List<CustomerCopanyDiscount> tbd = new List<CustomerCopanyDiscount>();
+                    foreach (var item in notMppedDiscount)
+                    {
+                        if (mappedDiscount.Any(e => e.CompanyID == item.CompanyID))
+                            tbd.Add(item);
+                    }
+
+                      notMppedDiscount= notMppedDiscount.Except(tbd).ToList();
+                     mappedDiscount.AddRange(notMppedDiscount);
+                    return mappedDiscount.OrderBy(x=>x.CompanyName).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+
     }
 }

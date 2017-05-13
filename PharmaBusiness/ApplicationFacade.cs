@@ -544,6 +544,20 @@ namespace PharmaBusiness
             }
         }
 
+
+        public List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountList(int customerLedgerID)
+        {
+            try
+            {
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCompleteCompanyDiscountList(customerLedgerID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+
         #endregion
 
 

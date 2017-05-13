@@ -46,6 +46,7 @@ namespace PharmaUI
                 ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.CurrentRow.DataBoundItem;
                 form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
+                form.LoadCustomerCompanyDiscountGrid();
                 form.FormClosed += Form_FormClosed;
                 form.Show();
             }
