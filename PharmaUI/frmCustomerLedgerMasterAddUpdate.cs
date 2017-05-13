@@ -19,11 +19,12 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         private bool isInEditMode { get; set; }
+        private int customerLedgerID { get; set; }
 
         public frmCustomerLedgerMasterAddUpdate(bool isInEditMode = false)
         {
             InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
+            ExtensionMethods.SetFormProperties(this);
             ExtensionMethods.FormLoad(this, isInEditMode ? "Customer Ledger -Update" : "Customer Ledger - Add");
             this.isInEditMode = isInEditMode;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
@@ -96,9 +97,14 @@ namespace PharmaUI
             cbxFollowConditionStrictly.SelectedItem = Choice.No;
 
             ////Fill discount strictly options
-            cbxDiscount.DataSource = Enum.GetValues(typeof(Enums.Choice));
-            cbxDiscount.SelectedItem = Choice.No;
-    
+            cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxLocaLCentral.SelectedItem = Choice.No;
+
+            ///Fill Local/Central options
+            ///
+            cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.LocalCentral));
+            cbxLocaLCentral.SelectedItem = LocalCentral.L;
+
             ///Fill User Control Controls-----------
             ///
             
@@ -109,17 +115,80 @@ namespace PharmaUI
          
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            errorProviderCustomerLedger.Clear();
-            this.Close();
-        }
+      
 
-        public void frmItemMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster existingItem)
+        public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
         {
-            if (existingItem != null)
+            if (customerLedgerMaster != null)
             {
 
+                ///Set CustomerId
+                ///
+                this.customerLedgerID = customerLedgerMaster.CustomerLedgerId;
+
+                ///Fill user control data
+                ///
+                ucSupplierCustomerInfo.Code = customerLedgerMaster.CustomerLedgerCode;
+                ucSupplierCustomerInfo.Name=customerLedgerMaster.CustomerLedgerName ;
+                ucSupplierCustomerInfo.ShortName=customerLedgerMaster.CustomerLedgerShortName ;
+                ucSupplierCustomerInfo.Address=customerLedgerMaster.Address ;
+                ucSupplierCustomerInfo.ContactPerson=customerLedgerMaster.ContactPerson ;
+                ucSupplierCustomerInfo.Mobile=customerLedgerMaster.Mobile;
+                ucSupplierCustomerInfo.Fax=customerLedgerMaster.Fax ;
+                ucSupplierCustomerInfo.Pager=customerLedgerMaster.Pager ;
+                ucSupplierCustomerInfo.OfficePhone=customerLedgerMaster.OfficePhone ;
+                ucSupplierCustomerInfo.ResidentPhone=customerLedgerMaster.ResidentPhone ;
+                ucSupplierCustomerInfo.EmailAddress= customerLedgerMaster.EmailAddress ;
+                ucSupplierCustomerInfo.OpeningBal =Convert.ToString(customerLedgerMaster.OpeningBal);
+                ucSupplierCustomerInfo.CreditDebit= customerLedgerMaster.CreditDebit == "C" ? Enums.TransType.C : Enums.TransType.D;
+                ucSupplierCustomerInfo.TaxRetail = customerLedgerMaster.TaxRetail == "T" ? Enums.TaxRetail.T : Enums.TaxRetail.R;
+                ucSupplierCustomerInfo.Status = customerLedgerMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
+
+                ///Fill this form data
+                ///
+                if(customerLedgerMaster.ZSMId!=null)
+                    cbxZSM.SelectedValue = customerLedgerMaster.ZSMId;
+
+                if (customerLedgerMaster.RSMId != null)
+                    cbxRSM.SelectedValue = customerLedgerMaster.RSMId;
+
+                if (customerLedgerMaster.ASMId != null)
+                    cbxASM.SelectedValue = customerLedgerMaster.ASMId;
+
+                if (customerLedgerMaster.SalesManId != null)
+                    cbxSalesman.SelectedValue = customerLedgerMaster.SalesManId;
+
+                if (customerLedgerMaster.AreaId != null)
+                    cbxArea.SelectedValue = customerLedgerMaster.AreaId;
+
+                if (customerLedgerMaster.RouteId != null)
+                    cbxRoute.SelectedValue = customerLedgerMaster.RouteId;
+
+                tbxDL.Text= customerLedgerMaster.DLNo;
+                tbxTIN.Text=customerLedgerMaster.TINNo;
+                tbxCST.Text=customerLedgerMaster.CSTNo;
+                tbxDay.Text=customerLedgerMaster.Day;
+                tbxCredtLimit.Text=Convert.ToString(customerLedgerMaster.CreditLimit);
+                tbxBankName.Text= customerLedgerMaster.BankName ;
+                tbxBankArea.Text=customerLedgerMaster.BankArea;
+                tbxCloseDay.Text=customerLedgerMaster.CloseDay;
+                cbxCustomerType.SelectedValue =customerLedgerMaster.CustomerTypeID;
+                cbxLessExcise.SelectedItem = customerLedgerMaster.IsLessExcise ? Choice.Yes : Choice.No;
+                cbxRateType.SelectedValue = customerLedgerMaster.InterestTypeID;
+                cbxFixedTax.SelectedItem=customerLedgerMaster.IsFixedTax ? Choice.Yes : Choice.No;
+                cbxFixedTax.SelectedItem = customerLedgerMaster.IsFixedTax ? Choice.Yes : Choice.No;
+                tbxTax.Text = Convert.ToString(customerLedgerMaster.Tax);
+                cbxFixedSC.SelectedItem = customerLedgerMaster.IsFixedSC ? Choice.Yes : Choice.No;
+                tbxSC.Text = Convert.ToString(customerLedgerMaster.SC);
+                cbxChangeSCTAXWhileBill.SelectedItem = customerLedgerMaster.IsChangeSCWhileBill ? Choice.Yes : Choice.No;
+                tbxSaleBillFormat.Text= customerLedgerMaster.SaleBillFormat;
+                tbxMaxOSAmount.Text = Convert.ToString(customerLedgerMaster.MaxOSAmount);
+                tbxMaxBillAmmount.Text = Convert.ToString(customerLedgerMaster.MaxBillAmount);
+                tbxMaxNumberOfOSBill.Text = Convert.ToString(customerLedgerMaster.MaxNumOfOSBill);
+                tbxMaxGracePeriod.Text = Convert.ToString(customerLedgerMaster.MaxGracePeriod);
+                cbxFollowConditionStrictly.SelectedItem = customerLedgerMaster.IsFollowConditionStrictly ? Choice.Yes : Choice.No;
+                tbxDiscount.Text = Convert.ToString(customerLedgerMaster.Discount);
+                cbxLocaLCentral.SelectedItem = customerLedgerMaster.CentralLocal == "L" ? LocalCentral.L : LocalCentral.C;
             }
         }
 
@@ -127,8 +196,11 @@ namespace PharmaUI
         {
             try
             {
-                
+                Choice choice;
+                LocalCentral localCentral;
                 CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
+
+                customerLedgerMaster.CustomerLedgerId = this.customerLedgerID;
 
                 //values from User Control
                 customerLedgerMaster.CustomerLedgerName = ucSupplierCustomerInfo.Name;
@@ -147,31 +219,85 @@ namespace PharmaUI
                 customerLedgerMaster.Status = ucSupplierCustomerInfo.Status == Enums.Status.Active ? true : false;
 
                 //values from User this form
-                customerLedgerMaster.ZSMId = (cbxZSM.SelectedItem as PersonRouteMaster).PersonRouteID;
-                customerLedgerMaster.RSMId = (cbxRSM.SelectedItem as PersonRouteMaster).PersonRouteID;
-                customerLedgerMaster.ASMId = (cbxASM.SelectedItem as PersonRouteMaster).PersonRouteID;
-                customerLedgerMaster.AreaId = (cbxArea.SelectedItem as PersonRouteMaster).PersonRouteID;
-                customerLedgerMaster.SalesManId = (cbxSalesman.SelectedItem as PersonRouteMaster).PersonRouteID;
-                customerLedgerMaster.RouteId = (cbxRoute.SelectedItem as PersonRouteMaster).PersonRouteID;
-
+                customerLedgerMaster.ZSMId = cbxZSM.SelectedItem != null ? (int?) (cbxZSM.SelectedItem as PersonRouteMaster).PersonRouteID : null;
+                customerLedgerMaster.RSMId = cbxRSM.SelectedItem != null ? (int?) (cbxRSM.SelectedItem as PersonRouteMaster).PersonRouteID : null;
+                customerLedgerMaster.ASMId = cbxASM.SelectedItem != null ? (int?) (cbxASM.SelectedItem as PersonRouteMaster).PersonRouteID : null;
+                customerLedgerMaster.AreaId = cbxArea.SelectedItem != null ? (int?)(cbxArea.SelectedItem as PersonRouteMaster).PersonRouteID : null;
+                customerLedgerMaster.SalesManId = cbxSalesman.SelectedItem != null ? (int?)(cbxSalesman.SelectedItem as PersonRouteMaster).PersonRouteID : null;
+                customerLedgerMaster.RouteId = cbxRoute.SelectedItem != null ? (int?)(cbxRoute.SelectedItem as PersonRouteMaster).PersonRouteID : null;
                 customerLedgerMaster.DLNo = tbxDL.Text;
                 customerLedgerMaster.TINNo = tbxTIN.Text;
                 customerLedgerMaster.CSTNo = tbxCST.Text;
-
                 customerLedgerMaster.Day = tbxDay.Text;
                 customerLedgerMaster.CreditLimit =ExtensionMethods.SafeConversionInt(tbxCredtLimit.Text)?? default(int);
-
                 customerLedgerMaster.BankName = tbxBankName.Text;
                 customerLedgerMaster.BankArea = tbxBankArea.Text;
                 customerLedgerMaster.CloseDay = tbxCloseDay.Text;
-
                 customerLedgerMaster.CustomerTypeID = (cbxCustomerType.SelectedItem as CustomerType).CustomerTypeId;
+
+                Enum.TryParse<Choice>(cbxLessExcise.SelectedValue.ToString(), out choice);
+                customerLedgerMaster.IsLessExcise = choice == Choice.Yes ;
+
+                customerLedgerMaster.InterestTypeID = (cbxRateType.SelectedItem as InterestType).InterestTypeId;
+
+                Enum.TryParse<Choice>(cbxFixedTax.SelectedValue.ToString(), out choice);
+                customerLedgerMaster.IsFixedTax = choice == Choice.Yes;
+
+                customerLedgerMaster.Tax = ExtensionMethods.SafeConversionDouble(tbxTax.Text);
+
+                Enum.TryParse<Choice>(cbxFixedSC.SelectedValue.ToString(), out choice);
+                customerLedgerMaster.IsFixedSC = choice == Choice.Yes;
+
+                customerLedgerMaster.SC = ExtensionMethods.SafeConversionDouble(tbxSC.Text);
+
+                Enum.TryParse<Choice>(cbxChangeSCTAXWhileBill.SelectedValue.ToString(), out choice);
+                customerLedgerMaster.IsChangeSCWhileBill = choice == Choice.Yes;
+
+                customerLedgerMaster.SaleBillFormat = tbxSaleBillFormat.Text;
+
+                customerLedgerMaster.MaxOSAmount = ExtensionMethods.SafeConversionDouble(tbxMaxOSAmount.Text);
+                customerLedgerMaster.MaxBillAmount = ExtensionMethods.SafeConversionDouble(tbxMaxBillAmmount.Text);
+                customerLedgerMaster.MaxNumOfOSBill = ExtensionMethods.SafeConversionInt(tbxMaxNumberOfOSBill.Text);
+                customerLedgerMaster.MaxGracePeriod = ExtensionMethods.SafeConversionInt(tbxMaxGracePeriod.Text);
+
+                Enum.TryParse<Choice>(cbxFollowConditionStrictly.SelectedValue.ToString(), out choice);
+                customerLedgerMaster.IsFollowConditionStrictly = choice == Choice.Yes;
+
+                customerLedgerMaster.Discount = ExtensionMethods.SafeConversionDouble(tbxDiscount.Text);
+
+                Enum.TryParse<LocalCentral>(cbxLocaLCentral.SelectedValue.ToString(), out localCentral);
+                customerLedgerMaster.CentralLocal = localCentral == LocalCentral.L ? "L" : "C";
+
+                int _result = 0;
+                if (isInEditMode)
+                {
+                    _result= applicationFacade.UpdateCustomerLedger(customerLedgerMaster);
+                }
+                else
+                {
+                    _result= applicationFacade.AddCustomerLedger(customerLedgerMaster);
+                }
+
+                if (_result > 0)
+                {
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(Constants.Messages.ErrorOccured);
+                }
 
             }
             catch (Exception ex)
             {
                 throw;
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            errorProviderCustomerLedger.Clear();
+            this.Close();
         }
     }
 }

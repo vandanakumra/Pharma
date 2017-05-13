@@ -101,17 +101,17 @@
     <Compile Include="frmItemMaster.Designer.cs">
       <DependentUpon>frmItemMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmItemMasterAddUpdated.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmItemMasterAddUpdated.Designer.cs">
+      <DependentUpon>frmItemMasterAddUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmItemMasterAddUpdate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmItemMasterAddUpdate.Designer.cs">
-      <DependentUpon>frmItemMasterAddUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMainForm.cs">
       <SubType>Form</SubType>
@@ -205,11 +205,11 @@
     <EmbeddedResource Include="frmItemMaster.resx">
       <DependentUpon>frmItemMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmItemMasterAddUpdated.resx">
+      <DependentUpon>frmItemMasterAddUpdated.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmItemMasterAddUpdate.resx">
-      <DependentUpon>frmItemMasterAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainForm.resx">
       <DependentUpon>frmMainForm.cs</DependentUpon>
@@ -266,7 +266,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PharmaBusinessObjects\PharmaBusinessObjects.csproj">

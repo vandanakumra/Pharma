@@ -59,11 +59,14 @@ namespace PharmaUI
         {
             if (e.RowIndex != -1)
             {
-                frmItemMasterAddUpdate form = new frmItemMasterAddUpdate(true);
+                
                 ItemMaster existingItem = (ItemMaster)dgvItemList.CurrentRow.DataBoundItem;
+
+                frmItemMasterAddUpdated form = new frmItemMasterAddUpdated(true);
+                ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 form.frmItemMasterAddUpdate_Fill_UsingExistingItem(existingItem);
                 form.FormClosed += Form_FormClosed;
-                form.ShowDialog();
+                form.Show();
             }
         }
 
@@ -73,9 +76,10 @@ namespace PharmaUI
         {
             try
             {
-                var form = new frmItemMasterAddUpdate();
+                frmItemMasterAddUpdated form = new frmItemMasterAddUpdated();
+                ExtensionMethods.AddChildFormToPanel(this,form, ExtensionMethods.MainPanel);
                 form.FormClosed += Form_FormClosed;
-                form.ShowDialog();
+                form.Show();
             }
             catch (Exception)
             {
@@ -85,6 +89,7 @@ namespace PharmaUI
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
             LoadDataGrid();
         }
 

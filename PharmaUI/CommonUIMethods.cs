@@ -16,14 +16,14 @@ namespace PharmaUI
 
         
         public static int FontSize = 9;
+        public static Panel MainPanel;
 
-        public const string MatchEmailPattern =
-           @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
-    + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
-				[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
-    + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
-				[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-    + @"([a-zA-Z0-9]+[\w-]+\.)+[a-zA-Z]{1}[a-zA-Z0-9-]{1,23})$";
+        public const string MatchEmailPattern = @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+                                                + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				                                            [0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+                                                + @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
+				                                            [0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                                                + @"([a-zA-Z0-9]+[\w-]+\.)+[a-zA-Z]{1}[a-zA-Z0-9-]{1,23})$";
 
         public static List<Control> GetAllControls(Control container, List<Control> list)
         {
@@ -39,9 +39,39 @@ namespace PharmaUI
             return list;
         }
 
+        
+
         public static List<Control> GetAllControls(Control container)
         {
             return GetAllControls(container, new List<Control>());
+        }
+
+
+        public static void DisableAllTextBoxAndComboBox(Control frm, Control ctrlToEnable = null)
+        {
+            foreach (Control c in frm.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    DisableAllTextBoxAndComboBox(c);
+                }
+                else
+                {
+                    if (c is TextBox || c is ComboBox)
+                    {
+                        if (c.Enabled == true)
+                        {
+                            c.BackColor = Color.White;
+                        }
+                    }
+                }
+            }
+
+            if (ctrlToEnable != null)
+            {
+                ctrlToEnable.BackColor = Color.LightPink;
+               
+            }
         }
 
         public static T GetAttributeFrom<T>(this object instance, string propertyName) where T : Attribute
@@ -148,6 +178,19 @@ namespace PharmaUI
             pnl.Controls.Add(frm);
         }
 
+        public static void AddChildFormToPanel(Control parentForm, Control childFrm, Panel pnl)
+        {
+            pnl.Controls[parentForm.Name].Visible = false;
+
+            pnl.Controls.Add(childFrm);
+        }
+
+        public static void RemoveChildFormToPanel(Control parentForm, Control childFrm, Panel pnl)
+        {
+            pnl.Controls.Remove(childFrm);
+            pnl.Controls[parentForm.Name].Visible = true;
+        }
+
         public static void SetFormProperties(Form frm)
         {
            
@@ -158,24 +201,22 @@ namespace PharmaUI
             frm.AutoScroll = true;
             frm.ShowIcon = false;
             frm.Dock = DockStyle.Fill;
-           
-            frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            frm.AutoSize = false;
+            frm.AutoSizeMode = AutoSizeMode.GrowOnly;
+            
            
         }
 
-        public static void SetChildFormProperties(Form frm)
-        {
-            frm.FormBorderStyle = FormBorderStyle.FixedSingle;
-            frm.ControlBox = false;
-            frm.Text = "";           
-            frm.ShowIcon = false;
-            frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            frm.StartPosition = FormStartPosition.CenterScreen;
+        //public static void SetChildFormProperties(Form frm)
+        //{
+        //    frm.FormBorderStyle = FormBorderStyle.FixedSingle;
+        //    frm.ControlBox = false;
+        //    frm.Text = "";           
+        //    frm.ShowIcon = false;
+        //    frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        //    frm.StartPosition = FormStartPosition.CenterScreen;
 
-        }
-
-
-
+        //}
 
         public static int? SafeConversionInt(string inputVal)
         {

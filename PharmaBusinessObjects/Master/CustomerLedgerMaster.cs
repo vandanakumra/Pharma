@@ -51,5 +51,18 @@ namespace PharmaBusinessObjects.Master
         public string CustomerTypeName { get; set; }
         public int InterestTypeID { get; set; }
         public string InterestTypeName { get; set; }
+        public bool IsFixedTax { get; set; }
+        public double ?  Tax { get; set; }
+        public bool IsFixedSC { get; set; }
+        public double ?  SC { get; set; }
+        public bool IsChangeSCWhileBill { get; set; }
+        public string SaleBillFormat { get; set; }
+        public double ?  MaxOSAmount { get; set; }
+        public int ?  MaxNumOfOSBill { get; set; }
+        public double ?  MaxBillAmount { get; set; }
+        public int ?  MaxGracePeriod { get; set; }
+        public bool IsFollowConditionStrictly { get; set; }
+        public double ?  Discount { get; set; }
+        public string CentralLocal { get; set; }
     }
 }
