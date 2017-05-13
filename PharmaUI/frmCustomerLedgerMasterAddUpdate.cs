@@ -299,5 +299,15 @@ namespace PharmaUI
             errorProviderCustomerLedger.Clear();
             this.Close();
         }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
