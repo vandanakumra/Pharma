@@ -39,7 +39,6 @@ namespace PharmaUI
 
         private void frmSupplierLedgerAddUpdate_Load(object sender, EventArgs e)
         {
-
             ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
             FillCombo();
             GotFocusEventRaised(this);
@@ -123,6 +122,8 @@ namespace PharmaUI
             cbxArea.DataSource = applicationFacade.GetPersonRoutesBySystemName("AREA");
             cbxArea.DisplayMember = "PersonRouteName";
             cbxArea.ValueMember = "PersonRouteID";
+
+
             
         }
 
@@ -132,6 +133,7 @@ namespace PharmaUI
             {
                 throw new Exception("Supplier Name can not be blank");
             }
+
             Status status;
             int areaId = 0;
             decimal openingBal = 0.00M;
@@ -158,6 +160,8 @@ namespace PharmaUI
             supplier.Pager = this.ucSupplierCustomerInfo.Pager;
             supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
             supplier.TINNo = txtTin.Text;
+            supplier.TaxRetail =this.ucSupplierCustomerInfo.TaxRetail  == TaxRetail.R ? "R" : "T";
+            supplier.SupplierLedgerId = SupplierId;
 
             int result = SupplierId > 0 ? applicationFacade.UpdateSupplierLedger(supplier) : applicationFacade.AddSupplierLedger(supplier);
 

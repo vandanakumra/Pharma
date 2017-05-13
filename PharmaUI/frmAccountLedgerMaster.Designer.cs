@@ -92,6 +92,7 @@
             // btnAddNewLedger
             // 
             this.btnAddNewLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddNewLedger.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAddNewLedger.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddNewLedger.Image = global::PharmaUI.Properties.Resources.AddItem;
             this.btnAddNewLedger.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

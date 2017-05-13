@@ -23,7 +23,7 @@ namespace PharmaUI
 
         public frmCompanyAddUpdate()
         {
-            InitializeComponent();
+            InitializeComponent();            
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
@@ -57,11 +57,11 @@ namespace PharmaUI
                 FillFormForUpdate();
             }
 
-            if(!string.IsNullOrEmpty(this.CompanyNameNew))
+            if (!string.IsNullOrEmpty(this.CompanyNameNew))
             {
                 txtCompanyName.Text = this.CompanyNameNew;
             }
-            
+
         }
 
         public void GotFocusEventRaised(Control control)
@@ -100,7 +100,7 @@ namespace PharmaUI
         {
             CompanyMaster company = applicationFacade.GetCompanyById(this.CompanyId);
 
-            if(company != null)
+            if (company != null)
             {
                 txtCompanyCode.Text = company.CompanyCode;
                 txtCompanyName.Text = company.CompanyName;
@@ -127,7 +127,7 @@ namespace PharmaUI
             cbxDI.DataSource = Enum.GetValues(typeof(Enums.DI));
             cbxDI.SelectedItem = Enums.DI.Direct;
         }
-      
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -178,5 +178,7 @@ namespace PharmaUI
             if (!(Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back)))
                 e.Handled = true;
         }
+
+
     }
 }

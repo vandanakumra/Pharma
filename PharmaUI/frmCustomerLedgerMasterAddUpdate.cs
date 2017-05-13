@@ -322,7 +322,7 @@ namespace PharmaUI
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -340,6 +340,14 @@ namespace PharmaUI
         private void groupBox3_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmCustomerLedgerMasterAddUpdate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }
