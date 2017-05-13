@@ -52,7 +52,7 @@ namespace PharmaUI
             if (supplier != null)
             {
                 this.ucSupplierCustomerInfo.Code = supplier.SupplierLedgerCode;
-                this.ucSupplierCustomerInfo.Name = supplier.SupplierLedgerName;
+                this.ucSupplierCustomerInfo.CustomerSupplierName = supplier.SupplierLedgerName;
                 this.ucSupplierCustomerInfo.ShortName = supplier.SupplierLedgerShortName;
                 this.ucSupplierCustomerInfo.Address = supplier.Address;
                 this.ucSupplierCustomerInfo.ContactPerson = supplier.ContactPerson;
@@ -91,7 +91,7 @@ namespace PharmaUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo.Name))
+            if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo.CustomerSupplierName))
             {
                 throw new Exception("Supplier Name can not be blank");
             }
@@ -101,7 +101,7 @@ namespace PharmaUI
             
             SupplierLedgerMaster supplier = new SupplierLedgerMaster();
             supplier.SupplierLedgerCode = this.ucSupplierCustomerInfo.Code;
-            supplier.SupplierLedgerName = this.ucSupplierCustomerInfo.Name;
+            supplier.SupplierLedgerName = this.ucSupplierCustomerInfo.CustomerSupplierName;
             supplier.SupplierLedgerShortName = this.ucSupplierCustomerInfo.ShortName;
             supplier.Address = this.ucSupplierCustomerInfo.Address;
             supplier.ContactPerson = this.ucSupplierCustomerInfo.ContactPerson;

@@ -158,7 +158,7 @@
             this.ucSupplierCustomerInfo.Fax = "";
             this.ucSupplierCustomerInfo.Location = new System.Drawing.Point(11, 39);
             this.ucSupplierCustomerInfo.Mobile = "";
-            this.ucSupplierCustomerInfo.Name = "ucSupplierCustomerInfo";
+            this.ucSupplierCustomerInfo.CustomerSupplierName = "ucSupplierCustomerInfo";
             this.ucSupplierCustomerInfo.OfficePhone = "";
             this.ucSupplierCustomerInfo.OpeningBal = "";
             this.ucSupplierCustomerInfo.Pager = "";

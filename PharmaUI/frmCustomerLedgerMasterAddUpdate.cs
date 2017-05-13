@@ -129,7 +129,7 @@ namespace PharmaUI
                 ///Fill user control data
                 ///
                 ucSupplierCustomerInfo.Code = customerLedgerMaster.CustomerLedgerCode;
-                ucSupplierCustomerInfo.Name=customerLedgerMaster.CustomerLedgerName ;
+                ucSupplierCustomerInfo.CustomerSupplierName=customerLedgerMaster.CustomerLedgerName ;
                 ucSupplierCustomerInfo.ShortName=customerLedgerMaster.CustomerLedgerShortName ;
                 ucSupplierCustomerInfo.Address=customerLedgerMaster.Address ;
                 ucSupplierCustomerInfo.ContactPerson=customerLedgerMaster.ContactPerson ;
@@ -203,7 +203,7 @@ namespace PharmaUI
                 customerLedgerMaster.CustomerLedgerId = this.customerLedgerID;
 
                 //values from User Control
-                customerLedgerMaster.CustomerLedgerName = ucSupplierCustomerInfo.Name;
+                customerLedgerMaster.CustomerLedgerName = ucSupplierCustomerInfo.CustomerSupplierName;
                 customerLedgerMaster.CustomerLedgerShortName = ucSupplierCustomerInfo.ShortName;
                 customerLedgerMaster.Address = ucSupplierCustomerInfo.Address;
                 customerLedgerMaster.ContactPerson = ucSupplierCustomerInfo.ContactPerson;

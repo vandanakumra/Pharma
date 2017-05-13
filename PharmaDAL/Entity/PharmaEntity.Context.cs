@@ -30,6 +30,7 @@ namespace PharmaDAL.Entity
         public virtual DbSet<AccountType> AccountType { get; set; }
         public virtual DbSet<AuditHistory> AuditHistory { get; set; }
         public virtual DbSet<CompanyMaster> CompanyMaster { get; set; }
+        public virtual DbSet<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }
         public virtual DbSet<CustomerLedger> CustomerLedger { get; set; }
         public virtual DbSet<CustomerType> CustomerType { get; set; }
         public virtual DbSet<InterestType> InterestType { get; set; }

@@ -46,7 +46,7 @@ namespace PharmaUI
                 CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.CurrentRow.DataBoundItem;
                 form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
                 form.FormClosed += Form_FormClosed;
-                form.ShowDialog();
+                form.Show();
             }
         }
 
@@ -110,12 +110,15 @@ namespace PharmaUI
             try
             {
                 var form = new frmCustomerLedgerMasterAddUpdate();
-                form.ShowDialog();
+                ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+                form.FormClosed += Form_FormClosed;
+                form.Show();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
         }
+
     }
 }

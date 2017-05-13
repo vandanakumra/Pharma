@@ -169,7 +169,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label28, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbxDiscount, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbxLocaLCentral, 7, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(33, 174);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(33, 210);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 11;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090908F));
@@ -183,7 +183,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090908F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090908F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090908F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1055, 267);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1055, 275);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblItemCode
@@ -485,7 +485,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(3, 240);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(125, 27);
+            this.label9.Size = new System.Drawing.Size(125, 35);
             this.label9.TabIndex = 89;
             this.label9.Text = "Credit Limit";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -782,7 +782,7 @@
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(527, 240);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(125, 27);
+            this.label26.Size = new System.Drawing.Size(125, 35);
             this.label26.TabIndex = 129;
             this.label26.Text = "Follow condtion strictly";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -832,7 +832,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(499, 459);
+            this.btnSave.Location = new System.Drawing.Point(496, 491);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 1;
@@ -842,7 +842,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(580, 459);
+            this.btnCancel.Location = new System.Drawing.Point(577, 491);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 30);
             this.btnCancel.TabIndex = 2;
@@ -861,6 +861,7 @@
             this.ucSupplierCustomerInfo.Code = "";
             this.ucSupplierCustomerInfo.ContactPerson = "";
             this.ucSupplierCustomerInfo.CreditDebit = PharmaBusinessObjects.Common.Enums.TransType.C;
+            this.ucSupplierCustomerInfo.CustomerSupplierName = "ucSupplierCustomerInfo";
             this.ucSupplierCustomerInfo.EmailAddress = "";
             this.ucSupplierCustomerInfo.Fax = "";
             this.ucSupplierCustomerInfo.Location = new System.Drawing.Point(33, 78);
@@ -871,7 +872,7 @@
             this.ucSupplierCustomerInfo.Pager = "";
             this.ucSupplierCustomerInfo.ResidentPhone = "";
             this.ucSupplierCustomerInfo.ShortName = "";
-            this.ucSupplierCustomerInfo.Size = new System.Drawing.Size(1055, 93);
+            this.ucSupplierCustomerInfo.Size = new System.Drawing.Size(1055, 126);
             this.ucSupplierCustomerInfo.Status = PharmaBusinessObjects.Common.Enums.Status.Active;
             this.ucSupplierCustomerInfo.TabIndex = 3;
             this.ucSupplierCustomerInfo.TaxRetail = PharmaBusinessObjects.Common.Enums.TaxRetail.R;
@@ -880,7 +881,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1131, 502);
+            this.ClientSize = new System.Drawing.Size(1131, 533);
             this.Controls.Add(this.ucSupplierCustomerInfo);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
