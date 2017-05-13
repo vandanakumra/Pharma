@@ -69,7 +69,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(80, 12);
+            this.txtSearch.Location = new System.Drawing.Point(88, 12);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(296, 23);
             this.txtSearch.TabIndex = 2;
@@ -79,7 +79,7 @@
             // 
             this.lblSearchItem.AutoSize = true;
             this.lblSearchItem.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchItem.Location = new System.Drawing.Point(-4, 13);
+            this.lblSearchItem.Location = new System.Drawing.Point(4, 13);
             this.lblSearchItem.Name = "lblSearchItem";
             this.lblSearchItem.Size = new System.Drawing.Size(78, 19);
             this.lblSearchItem.TabIndex = 1;

@@ -57,7 +57,10 @@ namespace PharmaUI
                 {
                     if (c is TextBox || c is ComboBox)
                     {
-                        c.BackColor = Color.LightGray;
+                        if (c.Enabled == true)
+                        {
+                            c.BackColor = Color.White;
+                        }
                     }
                 }
             }

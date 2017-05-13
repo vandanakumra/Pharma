@@ -60,9 +60,9 @@ namespace PharmaUI
             if (e.RowIndex != -1)
             {
                 
-                ItemMaster existingItem = (ItemMaster)dgvItemList.CurrentRow.DataBoundItem;               
+                ItemMaster existingItem = (ItemMaster)dgvItemList.CurrentRow.DataBoundItem;
 
-                frmItemMasterAddUpdate form = new frmItemMasterAddUpdate(true);
+                frmItemMasterAddUpdated form = new frmItemMasterAddUpdated(true);
                 ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 form.frmItemMasterAddUpdate_Fill_UsingExistingItem(existingItem);
                 form.FormClosed += Form_FormClosed;
@@ -76,7 +76,7 @@ namespace PharmaUI
         {
             try
             {
-                frmItemMasterAddUpdatedNew form = new frmItemMasterAddUpdatedNew();
+                frmItemMasterAddUpdated form = new frmItemMasterAddUpdated();
                 ExtensionMethods.AddChildFormToPanel(this,form, ExtensionMethods.MainPanel);
                 form.FormClosed += Form_FormClosed;
                 form.Show();

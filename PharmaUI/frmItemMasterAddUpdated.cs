@@ -1,4 +1,8 @@
-﻿using System;
+﻿using PharmaBusiness;
+using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
+using PharmaBusinessObjects.Master;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,29 +11,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PharmaBusiness;
-using PharmaBusinessObjects.Master;
-using PharmaBusinessObjects;
-using PharmaBusinessObjects.Common;
 using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI
 {
-    public partial class frmItemMasterAddUpdate : Form
+    public partial class frmItemMasterAddUpdated : Form
     {
         IApplicationFacade applicationFacade;
-        private bool isInEditMode { get; set; }
+        private bool isInEditMode;
 
-        public frmItemMasterAddUpdate(bool isInEditMode = false)
-        {         
-            InitializeComponent();           
+
+        public frmItemMasterAddUpdated(bool isInEditMode = false)
+        {
+            InitializeComponent();
             this.isInEditMode = isInEditMode;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             ExtensionMethods.SetFormProperties(this);
             ExtensionMethods.DisableAllTextBoxAndComboBox(this);
             cbxComanyCode.KeyDown += CbxComanyCode_KeyDown;
             LoadCombo();
-            
         }
 
         private void CbxComanyCode_KeyDown(object sender, KeyEventArgs e)
@@ -53,11 +53,6 @@ namespace PharmaUI
                 }
             }
         }
-
-        //private void Tbx_GotFocus(object sender, EventArgs e)
-        //{
-        //    ExtensionMethods.DisableAllTextBoxAndComboBox(this,(Control)sender);
-        //}
 
         private void LoadCombo()
         {
@@ -172,17 +167,26 @@ namespace PharmaUI
 
         }
 
-        private void frmItemMasterAddUpdate_Load(object sender, EventArgs e)
+
+        private void frmItemMasterAddUpdatedNew_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, isInEditMode ? "Item Master - Update" : "Item Master - Add");
-            GotFocusEventRaised(this);
-
-            cbxComanyCode.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cbxComanyCode.AutoCompleteMode = AutoCompleteMode.Suggest;
-            cbxComanyCode.Enabled = true;
-            cbxComanyCode.Focus();
-           
+            GotFocusEventRaised(this);           
             
+            if (!isInEditMode)
+            {
+                cbxComanyCode.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cbxComanyCode.AutoCompleteMode = AutoCompleteMode.Suggest;
+                cbxComanyCode.Enabled = true;
+            }
+            else
+            {
+                cbxComanyCode.Enabled = false;
+            }
+
+            tbxItemName.Focus();
+
+
             //Event to allow only decimal entry
             {
                 tbxConvRate.KeyPress += TbxAllowDecimal_KeyPress;
@@ -209,7 +213,7 @@ namespace PharmaUI
                 tbxQtyPerCase.KeyPress += TbxAllowDecimal_KeyPress;
                 tbxMinimumStock.KeyPress += TbxAllowDecimal_KeyPress;
                 tbxMaximumStock.KeyPress += TbxAllowDecimal_KeyPress;
-            }          
+            }
         }
 
         public void GotFocusEventRaised(Control control)
@@ -241,7 +245,7 @@ namespace PharmaUI
 
         private void C_GotFocus(object sender, EventArgs e)
         {
-            ExtensionMethods.DisableAllTextBoxAndComboBox(this,(Control)sender);
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
         }
 
@@ -369,6 +373,6 @@ namespace PharmaUI
         }
 
        
-      
+        
     }
 }
