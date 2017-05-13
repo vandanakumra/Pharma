@@ -59,15 +59,49 @@ namespace PharmaUI
         {
             dgvCustomerLedger.DataSource = applicationFacade.GetCustomerLedgers();
 
-            //for (int i = 0; i < dgvCustomerLedger.Columns.Count; i++)
-            //{
-            //    dgvCustomerLedger.Columns[i].Visible = false;
-            //}
+            for (int i = 0; i < dgvCustomerLedger.Columns.Count; i++)
+            {
+                dgvCustomerLedger.Columns[i].Visible = false;
+            }
 
             dgvCustomerLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCustomerLedger.AllowUserToAddRows = false;
             dgvCustomerLedger.AllowUserToDeleteRows = false;
             dgvCustomerLedger.ReadOnly = true;
+
+
+            dgvCustomerLedger.Columns["CustomerLedgerCode"].Visible = true;
+            dgvCustomerLedger.Columns["CustomerLedgerCode"].HeaderText = "Ledger Code";
+
+            dgvCustomerLedger.Columns["CustomerLedgerName"].Visible = true;
+            dgvCustomerLedger.Columns["CustomerLedgerName"].HeaderText = "Ledger Name";
+
+            dgvCustomerLedger.Columns["CustomerLedgerShortName"].Visible = true;
+            dgvCustomerLedger.Columns["CustomerLedgerShortName"].HeaderText = "Ledger ShortName";
+
+            dgvCustomerLedger.Columns["Address"].Visible = true;
+            dgvCustomerLedger.Columns["Address"].HeaderText = "Address";
+
+            dgvCustomerLedger.Columns["Mobile"].Visible = true;
+            dgvCustomerLedger.Columns["Mobile"].HeaderText = "Mobile";
+
+            dgvCustomerLedger.Columns["EmailAddress"].Visible = true;
+            dgvCustomerLedger.Columns["EmailAddress"].HeaderText = "Email Address";
+
+            dgvCustomerLedger.Columns["OpeningBal"].Visible = true;
+            dgvCustomerLedger.Columns["OpeningBal"].HeaderText = "Opening Bal";
+
+            dgvCustomerLedger.Columns["CreditDebit"].Visible = true;
+            dgvCustomerLedger.Columns["CreditDebit"].HeaderText = "CreditDebit";
+
+            dgvCustomerLedger.Columns["BankName"].Visible = true;
+            dgvCustomerLedger.Columns["BankName"].HeaderText = "Bank Name";
+
+            dgvCustomerLedger.Columns["Status"].Visible = true;
+            dgvCustomerLedger.Columns["Status"].HeaderText = "Status";
+
+            //Change order
+            dgvCustomerLedger.Columns["Status"].DisplayIndex = dgvCustomerLedger.ColumnCount-1;
 
         }
 

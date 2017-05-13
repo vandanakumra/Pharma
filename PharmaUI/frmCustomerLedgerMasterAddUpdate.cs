@@ -19,6 +19,7 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         private bool isInEditMode { get; set; }
+        private int customerLedgerID { get; set; }
 
         public frmCustomerLedgerMasterAddUpdate(bool isInEditMode = false)
         {
@@ -120,9 +121,14 @@ namespace PharmaUI
         {
             if (customerLedgerMaster != null)
             {
+
+                ///Set CustomerId
+                ///
+                this.customerLedgerID = customerLedgerMaster.CustomerLedgerId;
+
                 ///Fill user control data
                 ///
-
+                ucSupplierCustomerInfo.Code = customerLedgerMaster.CustomerLedgerCode;
                 ucSupplierCustomerInfo.Name=customerLedgerMaster.CustomerLedgerName ;
                 ucSupplierCustomerInfo.ShortName=customerLedgerMaster.CustomerLedgerShortName ;
                 ucSupplierCustomerInfo.Address=customerLedgerMaster.Address ;
@@ -140,12 +146,24 @@ namespace PharmaUI
 
                 ///Fill this form data
                 ///
-                cbxZSM.SelectedValue = customerLedgerMaster.ZSMId;
-                cbxRSM.SelectedValue = customerLedgerMaster.RSMId;
-                cbxASM.SelectedValue = customerLedgerMaster.ASMId;
-                cbxSalesman.SelectedValue = customerLedgerMaster.SalesManId;
-                cbxArea.SelectedValue = customerLedgerMaster.AreaId;
-                cbxRoute.SelectedValue = customerLedgerMaster.RouteId;
+                if(customerLedgerMaster.ZSMId!=null)
+                    cbxZSM.SelectedValue = customerLedgerMaster.ZSMId;
+
+                if (customerLedgerMaster.RSMId != null)
+                    cbxRSM.SelectedValue = customerLedgerMaster.RSMId;
+
+                if (customerLedgerMaster.ASMId != null)
+                    cbxASM.SelectedValue = customerLedgerMaster.ASMId;
+
+                if (customerLedgerMaster.SalesManId != null)
+                    cbxSalesman.SelectedValue = customerLedgerMaster.SalesManId;
+
+                if (customerLedgerMaster.AreaId != null)
+                    cbxArea.SelectedValue = customerLedgerMaster.AreaId;
+
+                if (customerLedgerMaster.RouteId != null)
+                    cbxRoute.SelectedValue = customerLedgerMaster.RouteId;
+
                 tbxDL.Text= customerLedgerMaster.DLNo;
                 tbxTIN.Text=customerLedgerMaster.TINNo;
                 tbxCST.Text=customerLedgerMaster.CSTNo;
@@ -156,7 +174,7 @@ namespace PharmaUI
                 tbxCloseDay.Text=customerLedgerMaster.CloseDay;
                 cbxCustomerType.SelectedValue =customerLedgerMaster.CustomerTypeID;
                 cbxLessExcise.SelectedItem = customerLedgerMaster.IsLessExcise ? Choice.Yes : Choice.No;
-                cbxRateType.SelectedValue = customerLedgerMaster.RateTypeID;
+                cbxRateType.SelectedValue = customerLedgerMaster.InterestTypeID;
                 cbxFixedTax.SelectedItem=customerLedgerMaster.IsFixedTax ? Choice.Yes : Choice.No;
                 cbxFixedTax.SelectedItem = customerLedgerMaster.IsFixedTax ? Choice.Yes : Choice.No;
                 tbxTax.Text = Convert.ToString(customerLedgerMaster.Tax);
@@ -181,6 +199,8 @@ namespace PharmaUI
                 Choice choice;
                 LocalCentral localCentral;
                 CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
+
+                customerLedgerMaster.CustomerLedgerId = this.customerLedgerID;
 
                 //values from User Control
                 customerLedgerMaster.CustomerLedgerName = ucSupplierCustomerInfo.Name;
@@ -218,7 +238,7 @@ namespace PharmaUI
                 Enum.TryParse<Choice>(cbxLessExcise.SelectedValue.ToString(), out choice);
                 customerLedgerMaster.IsLessExcise = choice == Choice.Yes ;
 
-                customerLedgerMaster.RateTypeID = (cbxRateType.SelectedItem as InterestType).InterestTypeId;
+                customerLedgerMaster.InterestTypeID = (cbxRateType.SelectedItem as InterestType).InterestTypeId;
 
                 Enum.TryParse<Choice>(cbxFixedTax.SelectedValue.ToString(), out choice);
                 customerLedgerMaster.IsFixedTax = choice == Choice.Yes;
