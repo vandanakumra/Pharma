@@ -54,7 +54,7 @@
             this.txtCompanyCode.Name = "txtCompanyCode";
             this.txtCompanyCode.ReadOnly = true;
             this.txtCompanyCode.Size = new System.Drawing.Size(212, 23);
-            this.txtCompanyCode.TabIndex = 21;
+            this.txtCompanyCode.TabIndex = 1;
             // 
             // label3
             // 
@@ -72,7 +72,7 @@
             this.txtCompanyName.Location = new System.Drawing.Point(218, 107);
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.Size = new System.Drawing.Size(212, 23);
-            this.txtCompanyName.TabIndex = 11;
+            this.txtCompanyName.TabIndex = 2;
             // 
             // label1
             // 
@@ -110,7 +110,7 @@
             this.txtOrderPrefRating.Location = new System.Drawing.Point(218, 196);
             this.txtOrderPrefRating.Name = "txtOrderPrefRating";
             this.txtOrderPrefRating.Size = new System.Drawing.Size(212, 23);
-            this.txtOrderPrefRating.TabIndex = 14;
+            this.txtOrderPrefRating.TabIndex = 5;
             this.txtOrderPrefRating.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOrderPrefRating_KeyPress);
             // 
             // label5
@@ -130,7 +130,7 @@
             this.txtBillingPrefRating.Location = new System.Drawing.Point(218, 225);
             this.txtBillingPrefRating.Name = "txtBillingPrefRating";
             this.txtBillingPrefRating.Size = new System.Drawing.Size(212, 23);
-            this.txtBillingPrefRating.TabIndex = 15;
+            this.txtBillingPrefRating.TabIndex = 6;
             this.txtBillingPrefRating.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBillingPrefRating_KeyPress);
             // 
             // label6
@@ -160,7 +160,7 @@
             this.btnCancel.Location = new System.Drawing.Point(211, 300);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(83, 48);
-            this.btnCancel.TabIndex = 18;
+            this.btnCancel.TabIndex = 22;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -171,7 +171,7 @@
             this.btnSave.Location = new System.Drawing.Point(103, 300);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(83, 48);
-            this.btnSave.TabIndex = 17;
+            this.btnSave.TabIndex = 21;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -183,7 +183,7 @@
             this.cbxStatus.Location = new System.Drawing.Point(218, 138);
             this.cbxStatus.Name = "cbxStatus";
             this.cbxStatus.Size = new System.Drawing.Size(121, 21);
-            this.cbxStatus.TabIndex = 12;
+            this.cbxStatus.TabIndex = 3;
             // 
             // cbxDI
             // 
@@ -192,7 +192,7 @@
             this.cbxDI.Location = new System.Drawing.Point(218, 169);
             this.cbxDI.Name = "cbxDI";
             this.cbxDI.Size = new System.Drawing.Size(121, 21);
-            this.cbxDI.TabIndex = 13;
+            this.cbxDI.TabIndex = 4;
             // 
             // cbxSSRequired
             // 
@@ -201,13 +201,13 @@
             this.cbxSSRequired.Location = new System.Drawing.Point(218, 254);
             this.cbxSSRequired.Name = "cbxSSRequired";
             this.cbxSSRequired.Size = new System.Drawing.Size(121, 21);
-            this.cbxSSRequired.TabIndex = 16;
+            this.cbxSSRequired.TabIndex = 7;
             // 
             // frmCompanyAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 388);
+            this.ClientSize = new System.Drawing.Size(462, 384);
             this.ControlBox = false;
             this.Controls.Add(this.cbxSSRequired);
             this.Controls.Add(this.cbxDI);

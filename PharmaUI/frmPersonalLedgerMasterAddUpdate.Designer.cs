@@ -62,8 +62,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel1.Controls.Add(this.lblMobile, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.tbxEmailAddress, 1, 9);
             this.tableLayoutPanel1.Controls.Add(this.tbxResidentPhone, 1, 8);
@@ -86,7 +86,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tbxPersonalLedgerName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.lblContactPerson, 0, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(93, 54);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(18, 67);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 11;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -100,220 +100,189 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(504, 394);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(418, 299);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblMobile
             // 
-            this.lblMobile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMobile.AutoSize = true;
-            this.lblMobile.Location = new System.Drawing.Point(3, 144);
+            this.lblMobile.Location = new System.Drawing.Point(3, 107);
+            this.lblMobile.Margin = new System.Windows.Forms.Padding(3);
             this.lblMobile.Name = "lblMobile";
-            this.lblMobile.Size = new System.Drawing.Size(145, 36);
+            this.lblMobile.Size = new System.Drawing.Size(38, 13);
             this.lblMobile.TabIndex = 5;
             this.lblMobile.Text = "Mobile";
-            this.lblMobile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbxEmailAddress
             // 
             this.tbxEmailAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxEmailAddress.Location = new System.Drawing.Point(154, 327);
+            this.tbxEmailAddress.Location = new System.Drawing.Point(153, 237);
             this.tbxEmailAddress.Name = "tbxEmailAddress";
             this.tbxEmailAddress.Size = new System.Drawing.Size(255, 23);
-            this.tbxEmailAddress.TabIndex = 24;
+            this.tbxEmailAddress.TabIndex = 10;
             this.tbxEmailAddress.Validating += new System.ComponentModel.CancelEventHandler(this.tbxEmailAddress_Vaidating);
             // 
             // tbxResidentPhone
             // 
             this.tbxResidentPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxResidentPhone.Location = new System.Drawing.Point(154, 291);
+            this.tbxResidentPhone.Location = new System.Drawing.Point(153, 211);
             this.tbxResidentPhone.Name = "tbxResidentPhone";
             this.tbxResidentPhone.Size = new System.Drawing.Size(255, 23);
-            this.tbxResidentPhone.TabIndex = 23;
+            this.tbxResidentPhone.TabIndex = 9;
             // 
             // tbxOfficePhone
             // 
             this.tbxOfficePhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxOfficePhone.Location = new System.Drawing.Point(154, 255);
+            this.tbxOfficePhone.Location = new System.Drawing.Point(153, 185);
             this.tbxOfficePhone.Name = "tbxOfficePhone";
             this.tbxOfficePhone.Size = new System.Drawing.Size(255, 23);
-            this.tbxOfficePhone.TabIndex = 22;
+            this.tbxOfficePhone.TabIndex = 8;
             // 
             // tbxFax
             // 
             this.tbxFax.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxFax.Location = new System.Drawing.Point(154, 219);
+            this.tbxFax.Location = new System.Drawing.Point(153, 159);
             this.tbxFax.Name = "tbxFax";
             this.tbxFax.Size = new System.Drawing.Size(255, 23);
-            this.tbxFax.TabIndex = 21;
+            this.tbxFax.TabIndex = 7;
             // 
             // tbxPager
             // 
             this.tbxPager.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxPager.Location = new System.Drawing.Point(154, 183);
+            this.tbxPager.Location = new System.Drawing.Point(153, 133);
             this.tbxPager.Name = "tbxPager";
             this.tbxPager.Size = new System.Drawing.Size(255, 23);
-            this.tbxPager.TabIndex = 20;
+            this.tbxPager.TabIndex = 6;
             // 
             // tbxMobile
             // 
             this.tbxMobile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxMobile.Location = new System.Drawing.Point(154, 147);
+            this.tbxMobile.Location = new System.Drawing.Point(153, 107);
             this.tbxMobile.Name = "tbxMobile";
             this.tbxMobile.Size = new System.Drawing.Size(255, 23);
-            this.tbxMobile.TabIndex = 19;
+            this.tbxMobile.TabIndex = 5;
             // 
             // tbxContactPerson
             // 
             this.tbxContactPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxContactPerson.Location = new System.Drawing.Point(154, 111);
+            this.tbxContactPerson.Location = new System.Drawing.Point(153, 81);
             this.tbxContactPerson.Name = "tbxContactPerson";
             this.tbxContactPerson.Size = new System.Drawing.Size(255, 23);
-            this.tbxContactPerson.TabIndex = 18;
+            this.tbxContactPerson.TabIndex = 4;
             // 
             // tbxAddress
             // 
             this.tbxAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxAddress.Location = new System.Drawing.Point(154, 75);
+            this.tbxAddress.Location = new System.Drawing.Point(153, 55);
             this.tbxAddress.Name = "tbxAddress";
             this.tbxAddress.Size = new System.Drawing.Size(255, 23);
-            this.tbxAddress.TabIndex = 17;
+            this.tbxAddress.TabIndex = 3;
             // 
             // tbxPersonalLedgerShortName
             // 
             this.tbxPersonalLedgerShortName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxPersonalLedgerShortName.Location = new System.Drawing.Point(154, 39);
+            this.tbxPersonalLedgerShortName.Location = new System.Drawing.Point(153, 29);
             this.tbxPersonalLedgerShortName.Name = "tbxPersonalLedgerShortName";
             this.tbxPersonalLedgerShortName.Size = new System.Drawing.Size(255, 23);
-            this.tbxPersonalLedgerShortName.TabIndex = 16;
+            this.tbxPersonalLedgerShortName.TabIndex = 2;
             // 
             // lblStatus
             // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(3, 360);
+            this.lblStatus.Location = new System.Drawing.Point(3, 263);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(3);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(145, 34);
+            this.lblStatus.Size = new System.Drawing.Size(37, 13);
             this.lblStatus.TabIndex = 11;
             this.lblStatus.Text = "Status";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblPersonalLedgerName
             // 
-            this.lblPersonalLedgerName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPersonalLedgerName.AutoSize = true;
-            this.lblPersonalLedgerName.Location = new System.Drawing.Point(3, 0);
+            this.lblPersonalLedgerName.Location = new System.Drawing.Point(3, 3);
+            this.lblPersonalLedgerName.Margin = new System.Windows.Forms.Padding(3);
             this.lblPersonalLedgerName.Name = "lblPersonalLedgerName";
-            this.lblPersonalLedgerName.Size = new System.Drawing.Size(145, 36);
+            this.lblPersonalLedgerName.Size = new System.Drawing.Size(35, 13);
             this.lblPersonalLedgerName.TabIndex = 1;
             this.lblPersonalLedgerName.Text = "Name";
-            this.lblPersonalLedgerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblEmailAddress
             // 
-            this.lblEmailAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEmailAddress.AutoSize = true;
-            this.lblEmailAddress.Location = new System.Drawing.Point(3, 324);
+            this.lblEmailAddress.Location = new System.Drawing.Point(3, 237);
+            this.lblEmailAddress.Margin = new System.Windows.Forms.Padding(3);
             this.lblEmailAddress.Name = "lblEmailAddress";
-            this.lblEmailAddress.Size = new System.Drawing.Size(145, 36);
+            this.lblEmailAddress.Size = new System.Drawing.Size(73, 13);
             this.lblEmailAddress.TabIndex = 10;
             this.lblEmailAddress.Text = "Email Address";
-            this.lblEmailAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblResidentPhone
             // 
-            this.lblResidentPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblResidentPhone.AutoSize = true;
-            this.lblResidentPhone.Location = new System.Drawing.Point(3, 288);
+            this.lblResidentPhone.Location = new System.Drawing.Point(3, 211);
+            this.lblResidentPhone.Margin = new System.Windows.Forms.Padding(3);
             this.lblResidentPhone.Name = "lblResidentPhone";
-            this.lblResidentPhone.Size = new System.Drawing.Size(145, 36);
+            this.lblResidentPhone.Size = new System.Drawing.Size(83, 13);
             this.lblResidentPhone.TabIndex = 9;
             this.lblResidentPhone.Text = "Resident Phone";
-            this.lblResidentPhone.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblOfficePhone
             // 
-            this.lblOfficePhone.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOfficePhone.AutoSize = true;
-            this.lblOfficePhone.Location = new System.Drawing.Point(3, 252);
+            this.lblOfficePhone.Location = new System.Drawing.Point(3, 185);
+            this.lblOfficePhone.Margin = new System.Windows.Forms.Padding(3);
             this.lblOfficePhone.Name = "lblOfficePhone";
-            this.lblOfficePhone.Size = new System.Drawing.Size(145, 36);
+            this.lblOfficePhone.Size = new System.Drawing.Size(69, 13);
             this.lblOfficePhone.TabIndex = 8;
             this.lblOfficePhone.Text = "Office Phone";
-            this.lblOfficePhone.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblFax
             // 
-            this.lblFax.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFax.AutoSize = true;
-            this.lblFax.Location = new System.Drawing.Point(3, 216);
+            this.lblFax.Location = new System.Drawing.Point(3, 159);
+            this.lblFax.Margin = new System.Windows.Forms.Padding(3);
             this.lblFax.Name = "lblFax";
-            this.lblFax.Size = new System.Drawing.Size(145, 36);
+            this.lblFax.Size = new System.Drawing.Size(24, 13);
             this.lblFax.TabIndex = 7;
             this.lblFax.Text = "Fax";
-            this.lblFax.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblPager
             // 
-            this.lblPager.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPager.AutoSize = true;
-            this.lblPager.Location = new System.Drawing.Point(3, 180);
+            this.lblPager.Location = new System.Drawing.Point(3, 133);
+            this.lblPager.Margin = new System.Windows.Forms.Padding(3);
             this.lblPager.Name = "lblPager";
-            this.lblPager.Size = new System.Drawing.Size(145, 36);
+            this.lblPager.Size = new System.Drawing.Size(35, 13);
             this.lblPager.TabIndex = 6;
             this.lblPager.Text = "Pager";
-            this.lblPager.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblAddress
             // 
-            this.lblAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(3, 72);
+            this.lblAddress.Location = new System.Drawing.Point(3, 55);
+            this.lblAddress.Margin = new System.Windows.Forms.Padding(3);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(145, 36);
+            this.lblAddress.Size = new System.Drawing.Size(45, 13);
             this.lblAddress.TabIndex = 3;
             this.lblAddress.Text = "Address";
-            this.lblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblPersonalLedgerShortName
             // 
-            this.lblPersonalLedgerShortName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPersonalLedgerShortName.AutoSize = true;
-            this.lblPersonalLedgerShortName.Location = new System.Drawing.Point(3, 36);
+            this.lblPersonalLedgerShortName.Location = new System.Drawing.Point(3, 29);
+            this.lblPersonalLedgerShortName.Margin = new System.Windows.Forms.Padding(3);
             this.lblPersonalLedgerShortName.Name = "lblPersonalLedgerShortName";
-            this.lblPersonalLedgerShortName.Size = new System.Drawing.Size(145, 36);
+            this.lblPersonalLedgerShortName.Size = new System.Drawing.Size(63, 13);
             this.lblPersonalLedgerShortName.TabIndex = 2;
             this.lblPersonalLedgerShortName.Text = "Short Name";
-            this.lblPersonalLedgerShortName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbxPersonalLedgerName
             // 
             this.tbxPersonalLedgerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxPersonalLedgerName.Location = new System.Drawing.Point(154, 3);
+            this.tbxPersonalLedgerName.Location = new System.Drawing.Point(153, 3);
             this.tbxPersonalLedgerName.Name = "tbxPersonalLedgerName";
             this.tbxPersonalLedgerName.Size = new System.Drawing.Size(255, 23);
-            this.tbxPersonalLedgerName.TabIndex = 15;
+            this.tbxPersonalLedgerName.TabIndex = 1;
             this.tbxPersonalLedgerName.Validating += new System.ComponentModel.CancelEventHandler(this.tbxLedgerName_Validating);
             // 
             // cbxStatus
@@ -321,40 +290,37 @@
             this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxStatus.FormattingEnabled = true;
-            this.cbxStatus.Location = new System.Drawing.Point(154, 363);
+            this.cbxStatus.Location = new System.Drawing.Point(153, 263);
             this.cbxStatus.Name = "cbxStatus";
             this.cbxStatus.Size = new System.Drawing.Size(127, 24);
-            this.cbxStatus.TabIndex = 25;
+            this.cbxStatus.TabIndex = 11;
             // 
             // lblContactPerson
             // 
-            this.lblContactPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblContactPerson.AutoSize = true;
-            this.lblContactPerson.Location = new System.Drawing.Point(3, 108);
+            this.lblContactPerson.Location = new System.Drawing.Point(3, 81);
+            this.lblContactPerson.Margin = new System.Windows.Forms.Padding(3);
             this.lblContactPerson.Name = "lblContactPerson";
-            this.lblContactPerson.Size = new System.Drawing.Size(145, 36);
+            this.lblContactPerson.Size = new System.Drawing.Size(80, 13);
             this.lblContactPerson.TabIndex = 4;
             this.lblContactPerson.Text = "Contact Person";
-            this.lblContactPerson.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(247, 468);
+            this.btnSave.Location = new System.Drawing.Point(148, 401);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 30);
-            this.btnSave.TabIndex = 30;
+            this.btnSave.Size = new System.Drawing.Size(75, 45);
+            this.btnSave.TabIndex = 21;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(340, 468);
+            this.btnCancel.Location = new System.Drawing.Point(241, 401);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 30);
-            this.btnCancel.TabIndex = 31;
+            this.btnCancel.Size = new System.Drawing.Size(75, 45);
+            this.btnCancel.TabIndex = 22;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -368,7 +334,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(695, 503);
+            this.ClientSize = new System.Drawing.Size(457, 458);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);

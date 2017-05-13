@@ -244,6 +244,7 @@ namespace PharmaUI
             frm.ControlBox = false;
             frm.Text = "";
             frm.ShowIcon = false;
+            frm.TopLevel = true;
             frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             frm.StartPosition = FormStartPosition.CenterScreen;
 

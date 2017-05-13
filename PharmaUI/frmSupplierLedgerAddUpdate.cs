@@ -31,6 +31,7 @@ namespace PharmaUI
         public frmSupplierLedgerAddUpdate(int supplierId)
         {
             InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.SupplierId = supplierId;
             
