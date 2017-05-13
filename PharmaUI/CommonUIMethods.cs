@@ -238,16 +238,16 @@ namespace PharmaUI
            
         }
 
-        //public static void SetChildFormProperties(Form frm)
-        //{
-        //    frm.FormBorderStyle = FormBorderStyle.FixedSingle;
-        //    frm.ControlBox = false;
-        //    frm.Text = "";           
-        //    frm.ShowIcon = false;
-        //    frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        //    frm.StartPosition = FormStartPosition.CenterScreen;
+        public static void SetChildFormProperties(Form frm)
+        {
+            frm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            frm.ControlBox = false;
+            frm.Text = "";
+            frm.ShowIcon = false;
+            frm.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            frm.StartPosition = FormStartPosition.CenterScreen;
 
-        //}
+        }
 
         public static int? SafeConversionInt(string inputVal)
         {

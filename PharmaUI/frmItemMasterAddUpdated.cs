@@ -207,7 +207,6 @@ namespace PharmaUI
 
             tbxItemName.Focus();
 
-
             //Event to allow only decimal entry
             {
                 tbxConvRate.KeyPress += TbxAllowDecimal_KeyPress;

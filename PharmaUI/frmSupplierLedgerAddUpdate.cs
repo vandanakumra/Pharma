@@ -22,7 +22,9 @@ namespace PharmaUI
 
         public frmSupplierLedgerAddUpdate()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
@@ -31,18 +33,52 @@ namespace PharmaUI
             InitializeComponent();
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.SupplierId = supplierId;
-            ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
+            
         }
 
         private void frmSupplierLedgerAddUpdate_Load(object sender, EventArgs e)
         {
+
+            ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
             FillCombo();
+            GotFocusEventRaised(this);
 
             if (this.SupplierId > 0)
             {
                 FillFormForUpdate();
             }
+        }
 
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
 
         private void FillFormForUpdate()
