@@ -25,9 +25,39 @@ namespace PharmaUI
             InitializeComponent();           
             this.isInEditMode = isInEditMode;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-
+            ExtensionMethods.SetFormProperties(this);
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this);
+            cbxComanyCode.KeyDown += CbxComanyCode_KeyDown;
             LoadCombo();
+            
         }
+
+        private void CbxComanyCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                int index = cbxComanyCode.FindString(cbxComanyCode.Text);
+                if (index < 0)
+                {
+                    DialogResult result = MessageBox.Show("Comany does not exist. Do you want to add new company ?", Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+
+                    }
+                    else
+                    {
+                        cbxComanyCode.SelectedIndex = 0;
+                        return;
+                    }
+                }
+            }
+        }
+
+        //private void Tbx_GotFocus(object sender, EventArgs e)
+        //{
+        //    ExtensionMethods.DisableAllTextBoxAndComboBox(this,(Control)sender);
+        //}
 
         private void LoadCombo()
         {
@@ -145,6 +175,14 @@ namespace PharmaUI
         private void frmItemMasterAddUpdate_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, isInEditMode ? "Item Master - Update" : "Item Master - Add");
+            GotFocusEventRaised(this);
+
+            cbxComanyCode.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxComanyCode.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cbxComanyCode.Enabled = true;
+            cbxComanyCode.Focus();
+           
+            
             //Event to allow only decimal entry
             {
                 tbxConvRate.KeyPress += TbxAllowDecimal_KeyPress;
@@ -174,7 +212,38 @@ namespace PharmaUI
             }          
         }
 
-       
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+
+        }
+
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this,(Control)sender);
+            return;
+        }
 
         private void CbxFixedDiscount_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -203,6 +272,24 @@ namespace PharmaUI
             //{
             //    tbxItemCode.Text = applicationFacade.GetNextItemCode(Convert.ToString(selectedCompany.CompanyCode));
             //}
+
+            //int index = cbxComanyCode.FindString(cbxComanyCode.Text);
+            //if (index < 0)
+            //{
+            //    DialogResult result = MessageBox.Show("Comany does not exist. Do you want to add new company ?", Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            //    if (result == DialogResult.Yes)
+            //    {
+
+            //    }
+            //    else
+            //    {
+            //        cbxComanyCode.SelectedIndex = 1;
+            //        return;
+            //    }
+            //}
+
+            //ExtensionMethods.DisableAllTextBoxAndComboBox(cbxComanyCode, tbxItemCode);
 
         }
 

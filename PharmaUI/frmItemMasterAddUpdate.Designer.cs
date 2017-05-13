@@ -684,6 +684,7 @@
             // 
             // tbxItemCode
             // 
+            this.tbxItemCode.Enabled = false;
             this.tbxItemCode.Location = new System.Drawing.Point(136, 28);
             this.tbxItemCode.Name = "tbxItemCode";
             this.tbxItemCode.ReadOnly = true;
@@ -922,7 +923,6 @@
             // 
             // cbxComanyCode
             // 
-            this.cbxComanyCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxComanyCode.FormattingEnabled = true;
             this.cbxComanyCode.Location = new System.Drawing.Point(136, 3);
             this.cbxComanyCode.Name = "cbxComanyCode";

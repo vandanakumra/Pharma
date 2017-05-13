@@ -20,6 +20,7 @@ namespace PharmaUI
         {
             InitializeComponent();
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            ExtensionMethods.MainPanel = pnlMain;
         }
 
         private void frmMainForm_Load(object sender, EventArgs e)

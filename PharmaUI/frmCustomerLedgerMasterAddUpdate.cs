@@ -23,7 +23,7 @@ namespace PharmaUI
         public frmCustomerLedgerMasterAddUpdate(bool isInEditMode = false)
         {
             InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
+            ExtensionMethods.SetFormProperties(this);
             ExtensionMethods.FormLoad(this, isInEditMode ? "Customer Ledger -Update" : "Customer Ledger - Add");
             this.isInEditMode = isInEditMode;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);

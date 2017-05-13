@@ -15,7 +15,7 @@ namespace PharmaUI
         public frmUserMasterAddUpdate()
         {
             InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
+            ExtensionMethods.SetFormProperties(this);
         }
 
         private void frmUserMasterAddUpdate_Load(object sender, EventArgs e)
