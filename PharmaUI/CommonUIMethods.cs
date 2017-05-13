@@ -97,11 +97,11 @@ namespace PharmaUI
             Label lbl = new Label();
             lbl.Width = (int)(panel1.Width);
             lbl.Dock = DockStyle.Fill;
-            lbl.TextAlign = isHeader? ContentAlignment.MiddleLeft : ContentAlignment.MiddleCenter;
+            lbl.TextAlign = ContentAlignment.MiddleCenter;
             lbl.Top = 10;
             lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
             lbl.Text = lblText;
-            lbl.ForeColor = isHeader? Color.Red : Color.White;
+            lbl.ForeColor =  Color.White;
             panel1.Controls.Add(lbl);
             
             form.Controls.Add(panel1);

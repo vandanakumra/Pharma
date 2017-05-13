@@ -30,46 +30,48 @@
         {
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearchItem = new System.Windows.Forms.Label();
-            this.btnAddItem = new System.Windows.Forms.Button();
-            this.splitContainerItemMaster = new System.Windows.Forms.SplitContainer();
             this.dgvItemList = new System.Windows.Forms.DataGridView();
-            this.panelItemInfo = new System.Windows.Forms.Panel();
-            this.gbItemDetail = new System.Windows.Forms.GroupBox();
-            this.tableItemInfo = new System.Windows.Forms.TableLayoutPanel();
-            this.lblMaxQtyVal = new System.Windows.Forms.Label();
-            this.lblMRPVal = new System.Windows.Forms.Label();
-            this.lblUPCVal = new System.Windows.Forms.Label();
-            this.lblPurchaseRateVal = new System.Windows.Forms.Label();
-            this.lblTaxOnSaleVal = new System.Windows.Forms.Label();
-            this.lblPackingVal = new System.Windows.Forms.Label();
-            this.lblSpecialRateVal = new System.Windows.Forms.Label();
-            this.lblComanyCodeVal = new System.Windows.Forms.Label();
-            this.lblSaleRateVal = new System.Windows.Forms.Label();
-            this.lblItemNameVal = new System.Windows.Forms.Label();
-            this.lblComanyCode = new System.Windows.Forms.Label();
-            this.lblPacking = new System.Windows.Forms.Label();
-            this.lblPurchaseRate = new System.Windows.Forms.Label();
-            this.lblMRP = new System.Windows.Forms.Label();
-            this.lblSaleRate = new System.Windows.Forms.Label();
-            this.lblSpecialRate = new System.Windows.Forms.Label();
-            this.lblTaxOnSale = new System.Windows.Forms.Label();
-            this.lblUPC = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblItemName = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerItemMaster)).BeginInit();
-            this.splitContainerItemMaster.Panel1.SuspendLayout();
-            this.splitContainerItemMaster.Panel2.SuspendLayout();
-            this.splitContainerItemMaster.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblHmHeading = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).BeginInit();
-            this.panelItemInfo.SuspendLayout();
-            this.gbItemDetail.SuspendLayout();
-            this.tableItemInfo.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSearch
             // 
+            this.txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(80, 12);
+            this.txtSearch.Location = new System.Drawing.Point(87, 5);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(296, 23);
             this.txtSearch.TabIndex = 2;
@@ -77,382 +79,352 @@
             // 
             // lblSearchItem
             // 
+            this.lblSearchItem.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblSearchItem.AutoSize = true;
             this.lblSearchItem.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchItem.Location = new System.Drawing.Point(-4, 13);
+            this.lblSearchItem.Location = new System.Drawing.Point(3, 7);
             this.lblSearchItem.Name = "lblSearchItem";
             this.lblSearchItem.Size = new System.Drawing.Size(78, 19);
             this.lblSearchItem.TabIndex = 1;
             this.lblSearchItem.Text = "Search Item";
             // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddItem.Image = global::PharmaUI.Properties.Resources.AddItem;
-            this.btnAddItem.Location = new System.Drawing.Point(909, 0);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(154, 35);
-            this.btnAddItem.TabIndex = 3;
-            this.btnAddItem.Text = "Add Item";
-            this.btnAddItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
-            // 
-            // splitContainerItemMaster
-            // 
-            this.splitContainerItemMaster.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainerItemMaster.Location = new System.Drawing.Point(15, 64);
-            this.splitContainerItemMaster.Name = "splitContainerItemMaster";
-            this.splitContainerItemMaster.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainerItemMaster.Panel1
-            // 
-            this.splitContainerItemMaster.Panel1.Controls.Add(this.dgvItemList);
-            this.splitContainerItemMaster.Panel1.Controls.Add(this.lblSearchItem);
-            this.splitContainerItemMaster.Panel1.Controls.Add(this.btnAddItem);
-            this.splitContainerItemMaster.Panel1.Controls.Add(this.txtSearch);
-            this.splitContainerItemMaster.Panel1MinSize = 250;
-            // 
-            // splitContainerItemMaster.Panel2
-            // 
-            this.splitContainerItemMaster.Panel2.Controls.Add(this.panelItemInfo);
-            this.splitContainerItemMaster.Size = new System.Drawing.Size(1062, 413);
-            this.splitContainerItemMaster.SplitterDistance = 250;
-            this.splitContainerItemMaster.TabIndex = 4;
-            // 
             // dgvItemList
             // 
-            this.dgvItemList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItemList.Location = new System.Drawing.Point(3, 41);
+            this.dgvItemList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItemList.Location = new System.Drawing.Point(3, 43);
             this.dgvItemList.Name = "dgvItemList";
             this.dgvItemList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItemList.Size = new System.Drawing.Size(1056, 206);
+            this.dgvItemList.Size = new System.Drawing.Size(636, 145);
             this.dgvItemList.TabIndex = 4;
             // 
-            // panelItemInfo
+            // tableLayoutPanel1
             // 
-            this.panelItemInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1091, 479);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.lblHmHeading, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 0, 2);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(221, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(648, 473);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // lblHmHeading
+            // 
+            this.lblHmHeading.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblHmHeading.AutoSize = true;
+            this.lblHmHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHmHeading.ForeColor = System.Drawing.Color.MediumBlue;
+            this.lblHmHeading.Location = new System.Drawing.Point(263, 2);
+            this.lblHmHeading.Name = "lblHmHeading";
+            this.lblHmHeading.Size = new System.Drawing.Size(122, 16);
+            this.lblHmHeading.TabIndex = 6;
+            this.lblHmHeading.Text = "-:  Item Master  :-";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelItemInfo.Controls.Add(this.gbItemDetail);
-            this.panelItemInfo.Location = new System.Drawing.Point(0, -1);
-            this.panelItemInfo.Name = "panelItemInfo";
-            this.panelItemInfo.Size = new System.Drawing.Size(1060, 162);
-            this.panelItemInfo.TabIndex = 0;
+            this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.dgvItemList, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 23);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(642, 191);
+            this.tableLayoutPanel3.TabIndex = 7;
             // 
-            // gbItemDetail
+            // tableLayoutPanel4
             // 
-            this.gbItemDetail.Controls.Add(this.tableItemInfo);
-            this.gbItemDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbItemDetail.Location = new System.Drawing.Point(3, 3);
-            this.gbItemDetail.Name = "gbItemDetail";
-            this.gbItemDetail.Size = new System.Drawing.Size(591, 152);
-            this.gbItemDetail.TabIndex = 3;
-            this.gbItemDetail.TabStop = false;
-            this.gbItemDetail.Text = "Selected Item Detail";
-            // 
-            // tableItemInfo
-            // 
-            this.tableItemInfo.ColumnCount = 4;
-            this.tableItemInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableItemInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableItemInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableItemInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableItemInfo.Controls.Add(this.lblMaxQtyVal, 3, 4);
-            this.tableItemInfo.Controls.Add(this.lblMRPVal, 1, 4);
-            this.tableItemInfo.Controls.Add(this.lblUPCVal, 3, 3);
-            this.tableItemInfo.Controls.Add(this.lblPurchaseRateVal, 1, 3);
-            this.tableItemInfo.Controls.Add(this.lblTaxOnSaleVal, 3, 2);
-            this.tableItemInfo.Controls.Add(this.lblPackingVal, 1, 2);
-            this.tableItemInfo.Controls.Add(this.lblSpecialRateVal, 3, 1);
-            this.tableItemInfo.Controls.Add(this.lblComanyCodeVal, 1, 1);
-            this.tableItemInfo.Controls.Add(this.lblSaleRateVal, 3, 0);
-            this.tableItemInfo.Controls.Add(this.lblItemNameVal, 1, 0);
-            this.tableItemInfo.Controls.Add(this.lblComanyCode, 0, 1);
-            this.tableItemInfo.Controls.Add(this.lblPacking, 0, 2);
-            this.tableItemInfo.Controls.Add(this.lblPurchaseRate, 0, 3);
-            this.tableItemInfo.Controls.Add(this.lblMRP, 0, 4);
-            this.tableItemInfo.Controls.Add(this.lblSaleRate, 2, 0);
-            this.tableItemInfo.Controls.Add(this.lblSpecialRate, 2, 1);
-            this.tableItemInfo.Controls.Add(this.lblTaxOnSale, 2, 2);
-            this.tableItemInfo.Controls.Add(this.lblUPC, 2, 3);
-            this.tableItemInfo.Controls.Add(this.label9, 2, 4);
-            this.tableItemInfo.Controls.Add(this.lblItemName, 0, 0);
-            this.tableItemInfo.Location = new System.Drawing.Point(6, 23);
-            this.tableItemInfo.Name = "tableItemInfo";
-            this.tableItemInfo.RowCount = 5;
-            this.tableItemInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableItemInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableItemInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableItemInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableItemInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableItemInfo.Size = new System.Drawing.Size(457, 123);
-            this.tableItemInfo.TabIndex = 0;
-            // 
-            // lblMaxQtyVal
-            // 
-            this.lblMaxQtyVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMaxQtyVal.AutoSize = true;
-            this.lblMaxQtyVal.Location = new System.Drawing.Point(368, 96);
-            this.lblMaxQtyVal.Name = "lblMaxQtyVal";
-            this.lblMaxQtyVal.Size = new System.Drawing.Size(86, 27);
-            this.lblMaxQtyVal.TabIndex = 21;
-            this.lblMaxQtyVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.txtSearch, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.lblSearchItem, 0, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(636, 34);
+            this.tableLayoutPanel4.TabIndex = 3;
             // 
-            // lblMRPVal
+            // tableLayoutPanel5
             // 
-            this.lblMRPVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMRPVal.AutoSize = true;
-            this.lblMRPVal.Location = new System.Drawing.Point(140, 96);
-            this.lblMRPVal.Name = "lblMRPVal";
-            this.lblMRPVal.Size = new System.Drawing.Size(85, 27);
-            this.lblMRPVal.TabIndex = 20;
-            this.lblMRPVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel5.Controls.Add(this.groupBox1, 0, 0);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 294);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(642, 176);
+            this.tableLayoutPanel5.TabIndex = 8;
             // 
-            // lblUPCVal
+            // groupBox1
             // 
-            this.lblUPCVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUPCVal.AutoSize = true;
-            this.lblUPCVal.Location = new System.Drawing.Point(368, 72);
-            this.lblUPCVal.Name = "lblUPCVal";
-            this.lblUPCVal.Size = new System.Drawing.Size(86, 24);
-            this.lblUPCVal.TabIndex = 19;
-            this.lblUPCVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.groupBox1.Controls.Add(this.tableLayoutPanel6);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(207, 170);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Sale Details";
             // 
-            // lblPurchaseRateVal
+            // tableLayoutPanel6
             // 
-            this.lblPurchaseRateVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPurchaseRateVal.AutoSize = true;
-            this.lblPurchaseRateVal.Location = new System.Drawing.Point(140, 72);
-            this.lblPurchaseRateVal.Name = "lblPurchaseRateVal";
-            this.lblPurchaseRateVal.Size = new System.Drawing.Size(85, 24);
-            this.lblPurchaseRateVal.TabIndex = 18;
-            this.lblPurchaseRateVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tableLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel6.Controls.Add(this.label25, 0, 7);
+            this.tableLayoutPanel6.Controls.Add(this.label24, 0, 7);
+            this.tableLayoutPanel6.Controls.Add(this.label23, 0, 7);
+            this.tableLayoutPanel6.Controls.Add(this.label22, 0, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label21, 0, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label20, 0, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label19, 0, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label18, 0, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label17, 0, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label16, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label15, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label14, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label5, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label4, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label3, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label2, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 8;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(201, 151);
+            this.tableLayoutPanel6.TabIndex = 0;
             // 
-            // lblTaxOnSaleVal
+            // label1
             // 
-            this.lblTaxOnSaleVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTaxOnSaleVal.AutoSize = true;
-            this.lblTaxOnSaleVal.Location = new System.Drawing.Point(368, 48);
-            this.lblTaxOnSaleVal.Name = "lblTaxOnSaleVal";
-            this.lblTaxOnSaleVal.Size = new System.Drawing.Size(86, 24);
-            this.lblTaxOnSaleVal.TabIndex = 17;
-            this.lblTaxOnSaleVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "S. Rate";
             // 
-            // lblPackingVal
+            // label2
             // 
-            this.lblPackingVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPackingVal.AutoSize = true;
-            this.lblPackingVal.Location = new System.Drawing.Point(140, 48);
-            this.lblPackingVal.Name = "lblPackingVal";
-            this.lblPackingVal.Size = new System.Drawing.Size(85, 24);
-            this.lblPackingVal.TabIndex = 16;
-            this.lblPackingVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(103, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "label2";
             // 
-            // lblSpecialRateVal
+            // label3
             // 
-            this.lblSpecialRateVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSpecialRateVal.AutoSize = true;
-            this.lblSpecialRateVal.Location = new System.Drawing.Point(368, 24);
-            this.lblSpecialRateVal.Name = "lblSpecialRateVal";
-            this.lblSpecialRateVal.Size = new System.Drawing.Size(86, 24);
-            this.lblSpecialRateVal.TabIndex = 15;
-            this.lblSpecialRateVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(163, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "label3";
             // 
-            // lblComanyCodeVal
+            // label4
             // 
-            this.lblComanyCodeVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblComanyCodeVal.AutoSize = true;
-            this.lblComanyCodeVal.Location = new System.Drawing.Point(140, 24);
-            this.lblComanyCodeVal.Name = "lblComanyCodeVal";
-            this.lblComanyCodeVal.Size = new System.Drawing.Size(85, 24);
-            this.lblComanyCodeVal.TabIndex = 14;
-            this.lblComanyCodeVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(163, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 12);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "label4";
             // 
-            // lblSaleRateVal
+            // label5
             // 
-            this.lblSaleRateVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSaleRateVal.AutoSize = true;
-            this.lblSaleRateVal.Location = new System.Drawing.Point(368, 0);
-            this.lblSaleRateVal.Name = "lblSaleRateVal";
-            this.lblSaleRateVal.Size = new System.Drawing.Size(86, 24);
-            this.lblSaleRateVal.TabIndex = 13;
-            this.lblSaleRateVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(103, 12);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 12);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "label5";
             // 
-            // lblItemNameVal
+            // label6
             // 
-            this.lblItemNameVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblItemNameVal.AutoSize = true;
-            this.lblItemNameVal.Location = new System.Drawing.Point(140, 0);
-            this.lblItemNameVal.Name = "lblItemNameVal";
-            this.lblItemNameVal.Size = new System.Drawing.Size(85, 24);
-            this.lblItemNameVal.TabIndex = 12;
-            this.lblItemNameVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 12);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "F.T. Rate";
             // 
-            // lblComanyCode
+            // label14
             // 
-            this.lblComanyCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblComanyCode.AutoSize = true;
-            this.lblComanyCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComanyCode.Location = new System.Drawing.Point(3, 24);
-            this.lblComanyCode.Name = "lblComanyCode";
-            this.lblComanyCode.Size = new System.Drawing.Size(131, 24);
-            this.lblComanyCode.TabIndex = 3;
-            this.lblComanyCode.Text = "Comany Code";
-            this.lblComanyCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(163, 48);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(35, 12);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "label14";
             // 
-            // lblPacking
+            // label15
             // 
-            this.lblPacking.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPacking.AutoSize = true;
-            this.lblPacking.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPacking.Location = new System.Drawing.Point(3, 48);
-            this.lblPacking.Name = "lblPacking";
-            this.lblPacking.Size = new System.Drawing.Size(131, 24);
-            this.lblPacking.TabIndex = 4;
-            this.lblPacking.Text = "Packing";
-            this.lblPacking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(103, 48);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 12);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "label15";
             // 
-            // lblPurchaseRate
+            // label16
             // 
-            this.lblPurchaseRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPurchaseRate.AutoSize = true;
-            this.lblPurchaseRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPurchaseRate.Location = new System.Drawing.Point(3, 72);
-            this.lblPurchaseRate.Name = "lblPurchaseRate";
-            this.lblPurchaseRate.Size = new System.Drawing.Size(131, 24);
-            this.lblPurchaseRate.TabIndex = 5;
-            this.lblPurchaseRate.Text = "Purchase Rate";
-            this.lblPurchaseRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 48);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(57, 12);
+            this.label16.TabIndex = 14;
+            this.label16.Text = "W.S. Rate";
             // 
-            // lblMRP
+            // label17
             // 
-            this.lblMRP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMRP.AutoSize = true;
-            this.lblMRP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMRP.Location = new System.Drawing.Point(3, 96);
-            this.lblMRP.Name = "lblMRP";
-            this.lblMRP.Size = new System.Drawing.Size(131, 27);
-            this.lblMRP.TabIndex = 6;
-            this.lblMRP.Text = "MRP";
-            this.lblMRP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(163, 60);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(35, 12);
+            this.label17.TabIndex = 15;
+            this.label17.Text = "label17";
             // 
-            // lblSaleRate
+            // label18
             // 
-            this.lblSaleRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSaleRate.AutoSize = true;
-            this.lblSaleRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSaleRate.Location = new System.Drawing.Point(231, 0);
-            this.lblSaleRate.Name = "lblSaleRate";
-            this.lblSaleRate.Size = new System.Drawing.Size(131, 24);
-            this.lblSaleRate.TabIndex = 7;
-            this.lblSaleRate.Text = "Sale Rate";
-            this.lblSaleRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label18.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(103, 60);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(41, 12);
+            this.label18.TabIndex = 16;
+            this.label18.Text = "label18";
             // 
-            // lblSpecialRate
+            // label19
             // 
-            this.lblSpecialRate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSpecialRate.AutoSize = true;
-            this.lblSpecialRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSpecialRate.Location = new System.Drawing.Point(231, 24);
-            this.lblSpecialRate.Name = "lblSpecialRate";
-            this.lblSpecialRate.Size = new System.Drawing.Size(131, 24);
-            this.lblSpecialRate.TabIndex = 8;
-            this.lblSpecialRate.Text = "Special Rate";
-            this.lblSpecialRate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(3, 60);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(52, 12);
+            this.label19.TabIndex = 17;
+            this.label19.Text = "F.T. Rate";
             // 
-            // lblTaxOnSale
+            // label20
             // 
-            this.lblTaxOnSale.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTaxOnSale.AutoSize = true;
-            this.lblTaxOnSale.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaxOnSale.Location = new System.Drawing.Point(231, 48);
-            this.lblTaxOnSale.Name = "lblTaxOnSale";
-            this.lblTaxOnSale.Size = new System.Drawing.Size(131, 24);
-            this.lblTaxOnSale.TabIndex = 9;
-            this.lblTaxOnSale.Text = "Tax On Sale";
-            this.lblTaxOnSale.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label20.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(163, 72);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(35, 12);
+            this.label20.TabIndex = 18;
+            this.label20.Text = "label20";
             // 
-            // lblUPC
+            // label21
             // 
-            this.lblUPC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUPC.AutoSize = true;
-            this.lblUPC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUPC.Location = new System.Drawing.Point(231, 72);
-            this.lblUPC.Name = "lblUPC";
-            this.lblUPC.Size = new System.Drawing.Size(131, 24);
-            this.lblUPC.TabIndex = 10;
-            this.lblUPC.Text = "UPC";
-            this.lblUPC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label21.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(103, 72);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(41, 12);
+            this.label21.TabIndex = 19;
+            this.label21.Text = "label21";
             // 
-            // label9
+            // label22
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(231, 96);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(131, 27);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Max Quantity";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(3, 72);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(56, 12);
+            this.label22.TabIndex = 20;
+            this.label22.Text = "SPL. Rate";
             // 
-            // lblItemName
+            // label23
             // 
-            this.lblItemName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblItemName.AutoSize = true;
-            this.lblItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblItemName.Location = new System.Drawing.Point(3, 0);
-            this.lblItemName.Name = "lblItemName";
-            this.lblItemName.Size = new System.Drawing.Size(131, 24);
-            this.lblItemName.TabIndex = 2;
-            this.lblItemName.Text = "Item Name";
-            this.lblItemName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label23.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(163, 104);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(35, 26);
+            this.label23.TabIndex = 21;
+            this.label23.Text = "label23";
+            // 
+            // label24
+            // 
+            this.label24.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(103, 111);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(41, 13);
+            this.label24.TabIndex = 22;
+            this.label24.Text = "label24";
+            // 
+            // label25
+            // 
+            this.label25.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(3, 111);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(52, 13);
+            this.label25.TabIndex = 23;
+            this.label25.Text = "F.T. Rate";
             // 
             // frmItemMaster
             // 
@@ -460,21 +432,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1091, 479);
             this.ControlBox = false;
-            this.Controls.Add(this.splitContainerItemMaster);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmItemMaster";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmItemMaster_Load);
-            this.splitContainerItemMaster.Panel1.ResumeLayout(false);
-            this.splitContainerItemMaster.Panel1.PerformLayout();
-            this.splitContainerItemMaster.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerItemMaster)).EndInit();
-            this.splitContainerItemMaster.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).EndInit();
-            this.panelItemInfo.ResumeLayout(false);
-            this.gbItemDetail.ResumeLayout(false);
-            this.tableItemInfo.ResumeLayout(false);
-            this.tableItemInfo.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -482,31 +455,32 @@
         #endregion
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearchItem;
-        private System.Windows.Forms.Button btnAddItem;
-        private System.Windows.Forms.SplitContainer splitContainerItemMaster;
         private System.Windows.Forms.DataGridView dgvItemList;
-        private System.Windows.Forms.Panel panelItemInfo;
-        private System.Windows.Forms.GroupBox gbItemDetail;
-        private System.Windows.Forms.TableLayoutPanel tableItemInfo;
-        private System.Windows.Forms.Label lblMaxQtyVal;
-        private System.Windows.Forms.Label lblMRPVal;
-        private System.Windows.Forms.Label lblUPCVal;
-        private System.Windows.Forms.Label lblPurchaseRateVal;
-        private System.Windows.Forms.Label lblTaxOnSaleVal;
-        private System.Windows.Forms.Label lblPackingVal;
-        private System.Windows.Forms.Label lblSpecialRateVal;
-        private System.Windows.Forms.Label lblComanyCodeVal;
-        private System.Windows.Forms.Label lblSaleRateVal;
-        private System.Windows.Forms.Label lblItemNameVal;
-        private System.Windows.Forms.Label lblComanyCode;
-        private System.Windows.Forms.Label lblPacking;
-        private System.Windows.Forms.Label lblPurchaseRate;
-        private System.Windows.Forms.Label lblMRP;
-        private System.Windows.Forms.Label lblSaleRate;
-        private System.Windows.Forms.Label lblSpecialRate;
-        private System.Windows.Forms.Label lblTaxOnSale;
-        private System.Windows.Forms.Label lblUPC;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lblItemName;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label lblHmHeading;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

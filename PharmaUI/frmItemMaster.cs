@@ -42,16 +42,16 @@ namespace PharmaUI
             {
                 ItemMaster selectedItem = (ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;
                 //Display selected Item data
-                lblItemNameVal.Text = selectedItem.ItemName;
-                lblComanyCodeVal.Text = selectedItem.CompanyCode;
-                lblPackingVal.Text = selectedItem.Packing;
-                lblPurchaseRateVal.Text = Convert.ToString(selectedItem.PurchaseRate);
-                lblMRPVal.Text = Convert.ToString(selectedItem.MRP);
-                lblSaleRateVal.Text = Convert.ToString(selectedItem.SaleRate);
-                lblSpecialRateVal.Text = Convert.ToString(selectedItem.SpecialRate);
-                lblTaxOnSaleVal.Text = Convert.ToString(selectedItem.TaxOnSale);
-                lblUPCVal.Text = selectedItem.UPC;
-                lblMaxQtyVal.Text = Convert.ToString(selectedItem.MaximumQty);
+                //lblItemNameVal.Text = selectedItem.ItemName;
+                //lblComanyCodeVal.Text = selectedItem.CompanyCode;
+                //lblPackingVal.Text = selectedItem.Packing;
+                //lblPurchaseRateVal.Text = Convert.ToString(selectedItem.PurchaseRate);
+                //lblMRPVal.Text = Convert.ToString(selectedItem.MRP);
+                //lblSaleRateVal.Text = Convert.ToString(selectedItem.SaleRate);
+                //lblSpecialRateVal.Text = Convert.ToString(selectedItem.SpecialRate);
+                //lblTaxOnSaleVal.Text = Convert.ToString(selectedItem.TaxOnSale);
+                //lblUPCVal.Text = selectedItem.UPC;
+                //lblMaxQtyVal.Text = Convert.ToString(selectedItem.MaximumQty);
             }
         }
 
