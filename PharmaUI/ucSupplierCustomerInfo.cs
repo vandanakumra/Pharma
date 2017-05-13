@@ -23,15 +23,15 @@ namespace PharmaUI
             }
         }
 
-        public string Name
+        public string CustomerSupplierName
         {
             get
             {
-                return txtName.Text;
+                return txtCustSupplierName.Text;
             }
             set
             {
-                txtName.Text = value;
+                txtCustSupplierName.Text = value;
             }
         }
 
@@ -203,7 +203,9 @@ namespace PharmaUI
         public ucSupplierCustomerInfo()
         {
             InitializeComponent();
+            CustomerSupplierName = String.Empty;
             FillCombo();
+
         }
 
         private void FillCombo()
