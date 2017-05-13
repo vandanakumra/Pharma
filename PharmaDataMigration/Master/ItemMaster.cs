@@ -22,7 +22,7 @@ namespace PharmaDataMigration.Master
             companyCodeCounts = new List<CompanyCodeCounts>();
         }        
 
-        public bool InsertItemMasterData()
+        public int InsertItemMasterData()
         {
             try
             {
@@ -103,10 +103,7 @@ namespace PharmaDataMigration.Master
                     context.ItemMaster.AddRange(listItemMaster);
                     _result = context.SaveChanges();
 
-                    if (_result > 0)
-                        return true;
-                    else
-                        return false;
+                    return _result;
                 }
             }
             catch (Exception ex)

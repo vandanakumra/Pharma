@@ -9,6 +9,6 @@ namespace PharmaDataMigration.Master
     public class Common
     {
         public static PharmaBusinessObjects.Master.UserMaster LoggedInUser;
-        public static string DataDirectory = @"F:\PHARMA\DATA\";
+        public static string DataDirectory;// = @"F:\PHARMA\DATA\";
     }
 }
