@@ -45,7 +45,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -59,6 +58,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.txtCustSupplierName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.gbCustomerSupplierInfo = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbCustomerSupplierInfo.SuspendLayout();
@@ -142,7 +142,7 @@
             this.cbxCreditDebit.FormattingEnabled = true;
             this.cbxCreditDebit.Location = new System.Drawing.Point(418, 103);
             this.cbxCreditDebit.Name = "cbxCreditDebit";
-            this.cbxCreditDebit.Size = new System.Drawing.Size(121, 21);
+            this.cbxCreditDebit.Size = new System.Drawing.Size(125, 21);
             this.cbxCreditDebit.TabIndex = 1;
             // 
             // txtOpeningBal
@@ -244,16 +244,6 @@
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Code";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(553, 13);
-            this.label3.Margin = new System.Windows.Forms.Padding(3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Short Name";
             // 
             // label4
             // 
@@ -377,8 +367,18 @@
             // 
             this.txtCustSupplierName.Location = new System.Drawing.Point(418, 13);
             this.txtCustSupplierName.Name = "txtCustSupplierName";
-            this.txtCustSupplierName.Size = new System.Drawing.Size(123, 20);
+            this.txtCustSupplierName.Size = new System.Drawing.Size(125, 20);
             this.txtCustSupplierName.TabIndex = 19;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(553, 13);
+            this.label3.Margin = new System.Windows.Forms.Padding(3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Short Name";
             // 
             // gbCustomerSupplierInfo
             // 
