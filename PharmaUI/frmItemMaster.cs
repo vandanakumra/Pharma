@@ -146,5 +146,10 @@ namespace PharmaUI
             form.FormClosed += Form_FormClosed;
             form.Show();
         }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

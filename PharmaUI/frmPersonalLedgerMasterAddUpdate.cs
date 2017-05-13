@@ -24,6 +24,7 @@ namespace PharmaUI
         public frmPersonalLedgerMasterAddUpdate(bool isInEditMode=false)
         {
             InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);           
             this.isInEditMode = isInEditMode;            
             LoadCombo();
@@ -40,7 +41,39 @@ namespace PharmaUI
         private void frmPersonalLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, isInEditMode ? "Personal Diary - Update" : "Personal Diary - Add");
-           
+            GotFocusEventRaised(this);
+        }
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
 
 

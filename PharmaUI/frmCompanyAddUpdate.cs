@@ -24,12 +24,14 @@ namespace PharmaUI
         public frmCompanyAddUpdate()
         {
             InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         public frmCompanyAddUpdate(int companyId)
         {
-            InitializeComponent();           
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.CompanyId = companyId;
         }
@@ -37,6 +39,7 @@ namespace PharmaUI
         public frmCompanyAddUpdate(string companyName)
         {
             InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.CompanyNameNew = companyName;
         }
