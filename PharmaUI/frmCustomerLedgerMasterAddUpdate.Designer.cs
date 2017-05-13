@@ -55,7 +55,6 @@
             this.tbxMaxNumberOfOSBill = new System.Windows.Forms.TextBox();
             this.tbxMaxGracePeriod = new System.Windows.Forms.TextBox();
             this.cbxFollowConditionStrictly = new System.Windows.Forms.ComboBox();
-            this.cbxDiscount = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbxCST = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -89,7 +88,8 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.tbxLocalCentral = new System.Windows.Forms.TextBox();
+            this.tbxDiscount = new System.Windows.Forms.TextBox();
+            this.cbxLocaLCentral = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.errorProviderCustomerLedger = new System.Windows.Forms.ErrorProvider(this.components);
@@ -134,7 +134,6 @@
             this.tableLayoutPanel1.Controls.Add(this.tbxMaxNumberOfOSBill, 5, 8);
             this.tableLayoutPanel1.Controls.Add(this.tbxMaxGracePeriod, 5, 9);
             this.tableLayoutPanel1.Controls.Add(this.cbxFollowConditionStrictly, 5, 10);
-            this.tableLayoutPanel1.Controls.Add(this.cbxDiscount, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.tbxCST, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 9);
@@ -168,7 +167,8 @@
             this.tableLayoutPanel1.Controls.Add(this.label26, 4, 10);
             this.tableLayoutPanel1.Controls.Add(this.label27, 6, 1);
             this.tableLayoutPanel1.Controls.Add(this.label28, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbxLocalCentral, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbxDiscount, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbxLocaLCentral, 7, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(33, 174);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 11;
@@ -434,15 +434,6 @@
             this.cbxFollowConditionStrictly.Name = "cbxFollowConditionStrictly";
             this.cbxFollowConditionStrictly.Size = new System.Drawing.Size(125, 21);
             this.cbxFollowConditionStrictly.TabIndex = 107;
-            // 
-            // cbxDiscount
-            // 
-            this.cbxDiscount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxDiscount.FormattingEnabled = true;
-            this.cbxDiscount.Location = new System.Drawing.Point(920, 3);
-            this.cbxDiscount.Name = "cbxDiscount";
-            this.cbxDiscount.Size = new System.Drawing.Size(112, 21);
-            this.cbxDiscount.TabIndex = 108;
             // 
             // label7
             // 
@@ -822,13 +813,22 @@
             this.label28.Text = "Discount";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tbxLocalCentral
+            // tbxDiscount
             // 
-            this.tbxLocalCentral.Location = new System.Drawing.Point(920, 27);
-            this.tbxLocalCentral.Name = "tbxLocalCentral";
-            this.tbxLocalCentral.Size = new System.Drawing.Size(112, 20);
-            this.tbxLocalCentral.TabIndex = 110;
-            this.tbxLocalCentral.Text = "0";
+            this.tbxDiscount.Location = new System.Drawing.Point(920, 3);
+            this.tbxDiscount.Name = "tbxDiscount";
+            this.tbxDiscount.Size = new System.Drawing.Size(124, 20);
+            this.tbxDiscount.TabIndex = 110;
+            this.tbxDiscount.Text = "0";
+            // 
+            // cbxLocaLCentral
+            // 
+            this.cbxLocaLCentral.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxLocaLCentral.FormattingEnabled = true;
+            this.cbxLocaLCentral.Location = new System.Drawing.Point(920, 27);
+            this.cbxLocaLCentral.Name = "cbxLocaLCentral";
+            this.cbxLocaLCentral.Size = new System.Drawing.Size(124, 21);
+            this.cbxLocaLCentral.TabIndex = 108;
             // 
             // btnSave
             // 
@@ -937,9 +937,9 @@
         private System.Windows.Forms.TextBox tbxMaxNumberOfOSBill;
         private System.Windows.Forms.TextBox tbxMaxGracePeriod;
         private System.Windows.Forms.ComboBox cbxFollowConditionStrictly;
-        private System.Windows.Forms.ComboBox cbxDiscount;
+        private System.Windows.Forms.ComboBox cbxLocaLCentral;
         private System.Windows.Forms.TextBox tbxTax;
-        private System.Windows.Forms.TextBox tbxLocalCentral;
+        private System.Windows.Forms.TextBox tbxDiscount;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbxCustomerType;
         private System.Windows.Forms.ComboBox cbxLessExcise;

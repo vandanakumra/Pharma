@@ -23,7 +23,7 @@ namespace PharmaDAL.Master
                     PersonRouteCode = p.PersonRouteCode,
                     PersonRouteName = p.PersonRouteName,
                     RecordTypeId = p.RecordTypeId,
-                    RecordTypeNme = p.RecordType.RecordType1,                   
+                    RecordTypeNme = p.RecordType.RecordType1,
                     Status = p.Status,
                     SystemName = p.RecordType.SystemName
                 }).ToList();
@@ -34,25 +34,32 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                var maxPersonRouteMasterID = context.PersonRouteMaster.Where(q=>q.RecordTypeId == p.RecordTypeId).Count() + 1;
-
-                var systemName = context.RecordType.Where(q => q.RecordTypeId == p.RecordTypeId).FirstOrDefault().SystemName;
-
-                var personRouteCode = systemName + maxPersonRouteMasterID.ToString().PadLeft(3, '0');
-
-                Entity.PersonRouteMaster table = new Entity.PersonRouteMaster()
+                try
                 {
-                    PersonRouteID = p.PersonRouteID,
-                    PersonRouteCode = personRouteCode,
-                    PersonRouteName = p.PersonRouteName,
-                    RecordTypeId = p.RecordTypeId,
-                    CreatedBy = this.LoggedInUser.LastName,
-                    CreatedOn = System.DateTime.Now,
-                    Status = p.Status
-                };
+                    var maxPersonRouteMasterID = context.PersonRouteMaster.Where(q => q.RecordTypeId == p.RecordTypeId).Count() + 1;
 
-                context.PersonRouteMaster.Add(table);
-                return context.SaveChanges();
+                    var systemName = context.RecordType.Where(q => q.RecordTypeId == p.RecordTypeId).FirstOrDefault().SystemName;
+
+                    var personRouteCode = systemName + maxPersonRouteMasterID.ToString().PadLeft(3, '0');
+
+                    Entity.PersonRouteMaster table = new Entity.PersonRouteMaster()
+                    {
+                        PersonRouteID = p.PersonRouteID,
+                        PersonRouteCode = personRouteCode,
+                        PersonRouteName = p.PersonRouteName,
+                        RecordTypeId = p.RecordTypeId,
+                        CreatedBy = this.LoggedInUser.LastName,
+                        CreatedOn = System.DateTime.Now,
+                        Status = p.Status
+                    };
+
+                    context.PersonRouteMaster.Add(table);
+                    return context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    throw ex;
+                }
             }
         }
 
@@ -88,18 +95,18 @@ namespace PharmaDAL.Master
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 var personRoutes = (from p in context.PersonRouteMaster
-                                      where (recordTypeID == 0 || p.RecordTypeId == recordTypeID)
-                                      && (string.IsNullOrEmpty(searchString) || p.PersonRouteName.Contains(searchString))
-                                      select new PharmaBusinessObjects.Master.PersonRouteMaster()
-                                      {
-                                          PersonRouteID = p.PersonRouteID,
-                                          PersonRouteCode = p.PersonRouteCode,
-                                          PersonRouteName = p.PersonRouteName,
-                                          RecordTypeId = p.RecordTypeId,
-                                          RecordTypeNme = p.RecordType.RecordType1,
-                                          Status = p.Status,
-                                          SystemName = p.RecordType.SystemName
-                                      }).ToList();
+                                    where (recordTypeID == 0 || p.RecordTypeId == recordTypeID)
+                                    && (string.IsNullOrEmpty(searchString) || p.PersonRouteName.Contains(searchString))
+                                    select new PharmaBusinessObjects.Master.PersonRouteMaster()
+                                    {
+                                        PersonRouteID = p.PersonRouteID,
+                                        PersonRouteCode = p.PersonRouteCode,
+                                        PersonRouteName = p.PersonRouteName,
+                                        RecordTypeId = p.RecordTypeId,
+                                        RecordTypeNme = p.RecordType.RecordType1,
+                                        Status = p.Status,
+                                        SystemName = p.RecordType.SystemName
+                                    }).ToList();
 
                 return personRoutes;
 

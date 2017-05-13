@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaDAL", "PharmaDAL\Phar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaUI", "PharmaUI\PharmaUI.csproj", "{8CB123FF-8D25-4D28-AFE5-D1F7EA1B4A4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaDataMigration", "PharmaDataMigration\PharmaDataMigration.csproj", "{55CBC662-7216-411A-91DC-DF24C440DF08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8CB123FF-8D25-4D28-AFE5-D1F7EA1B4A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CB123FF-8D25-4D28-AFE5-D1F7EA1B4A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CB123FF-8D25-4D28-AFE5-D1F7EA1B4A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55CBC662-7216-411A-91DC-DF24C440DF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55CBC662-7216-411A-91DC-DF24C440DF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55CBC662-7216-411A-91DC-DF24C440DF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55CBC662-7216-411A-91DC-DF24C440DF08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

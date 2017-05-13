@@ -37,5 +37,11 @@ namespace PharmaBusinessObjects.Common
             T,
             R
         };
+
+        public enum LocalCentral
+        {
+            L,
+            C
+        };
     }
 }

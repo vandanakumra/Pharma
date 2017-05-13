@@ -52,6 +52,19 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public bool IsFixedTax { get; set; }
+        public Nullable<double> Tax { get; set; }
+        public bool IsFixedSC { get; set; }
+        public Nullable<double> SC { get; set; }
+        public bool IsChangeSCWhileBill { get; set; }
+        public string SaleBillFormat { get; set; }
+        public Nullable<double> MaxOSAmount { get; set; }
+        public Nullable<int> MaxNumOfOSBill { get; set; }
+        public Nullable<double> MaxBillAmount { get; set; }
+        public Nullable<int> MaxGracePeriod { get; set; }
+        public bool IsFollowConditionStrictly { get; set; }
+        public Nullable<double> Discount { get; set; }
+        public string CentralLocal { get; set; }
     
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }
         public virtual CustomerType CustomerType { get; set; }

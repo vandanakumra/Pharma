@@ -61,7 +61,20 @@ namespace PharmaDAL.Master
                     SalesManId = p.SalesManId,
                     SalesmanName = "",
                     ZSMId = p.ZSMId,
-                    ZSMName = ""
+                    ZSMName = "",
+                    IsFixedTax = p.IsFixedTax,
+                    Tax = p.Tax,
+                    IsFixedSC = p.IsFixedSC,
+                    SC = p.SC,
+                    IsChangeSCWhileBill = p.IsChangeSCWhileBill,
+                    SaleBillFormat = p.SaleBillFormat,
+                    MaxOSAmount = p.MaxOSAmount,
+                    MaxNumOfOSBill = p.MaxNumOfOSBill,
+                    MaxBillAmount = p.MaxBillAmount,
+                    MaxGracePeriod = p.MaxGracePeriod,
+                    IsFollowConditionStrictly = p.IsFollowConditionStrictly,
+                    Discount = p.Discount,
+                    CentralLocal = p.CentralLocal,
                 }).ToList();
             }
 
@@ -69,55 +82,77 @@ namespace PharmaDAL.Master
 
         public int AddCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p)
         {
-            using (PharmaDBEntities context = new PharmaDBEntities())
+
+            try
             {
-                var maxCustmerLedgerID = context.CustomerLedger.Count() + 1;
-
-                var customerLedgerCode = "C" + maxCustmerLedgerID.ToString().PadLeft(6, '0');
-
-                Entity.CustomerLedger table = new Entity.CustomerLedger()
+                using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    CustomerLedgerCode = customerLedgerCode,
-                    CustomerLedgerName = p.CustomerLedgerName,
-                    CustomerLedgerShortName = p.CustomerLedgerShortName,
-                    Address = p.Address,
-                    ContactPerson = p.ContactPerson,
-                    Mobile = p.Mobile,
-                    Pager = p.Pager,
-                    Fax = p.Fax,
-                    OfficePhone = p.OfficePhone,
-                    ResidentPhone = p.ResidentPhone,
-                    EmailAddress = p.EmailAddress,
-                    AreaId = p.AreaId,
-                    CreditDebit = p.CreditDebit,
-                    DLNo = p.DLNo,
-                    OpeningBal = p.OpeningBal,
-                    TaxRetail = p.TaxRetail,
-                    TINNo = p.TINNo,
-                    Status = p.Status,
-                    ASMId = p.ASMId,                   
-                    BankArea = p.BankArea,
-                    BankName = p.BankName,
-                    CloseDay = p.CloseDay,
-                    CreditLimit = p.CreditLimit,
-                    CSTNo = p.CSTNo,
-                    CustomerTypeID = p.CustomerTypeID,                   
-                    Day = p.Day,
-                    InterestTypeID = p.InterestTypeID,                   
-                    IsLessExcise = p.IsLessExcise,
-                    RateTypeID = p.RateTypeID,                   
-                    RouteId = p.RouteId,                  
-                    RSMId = p.RSMId,                   
-                    SalesManId = p.SalesManId,                   
-                    ZSMId = p.ZSMId,
-                    CreatedBy = this.LoggedInUser.Username,
-                    CreatedOn = System.DateTime.Now
+                    var maxCustmerLedgerID = context.CustomerLedger.Count() + 1;
 
-                };
+                    var customerLedgerCode = "C" + maxCustmerLedgerID.ToString().PadLeft(6, '0');
 
-                context.CustomerLedger.Add(table);
-                return context.SaveChanges();
+                    Entity.CustomerLedger table = new Entity.CustomerLedger()
+                    {
+                        CustomerLedgerCode = customerLedgerCode,
+                        CustomerLedgerName = p.CustomerLedgerName,
+                        CustomerLedgerShortName = p.CustomerLedgerShortName,
+                        Address = p.Address,
+                        ContactPerson = p.ContactPerson,
+                        Mobile = p.Mobile,
+                        Pager = p.Pager,
+                        Fax = p.Fax,
+                        OfficePhone = p.OfficePhone,
+                        ResidentPhone = p.ResidentPhone,
+                        EmailAddress = p.EmailAddress,
+                        AreaId = p.AreaId,
+                        CreditDebit = p.CreditDebit,
+                        DLNo = p.DLNo,
+                        OpeningBal = p.OpeningBal,
+                        TaxRetail = p.TaxRetail,
+                        TINNo = p.TINNo,
+                        Status = p.Status,
+                        ASMId = p.ASMId,
+                        BankArea = p.BankArea,
+                        BankName = p.BankName,
+                        CloseDay = p.CloseDay,
+                        CreditLimit = p.CreditLimit,
+                        CSTNo = p.CSTNo,
+                        CustomerTypeID = p.CustomerTypeID,
+                        Day = p.Day,
+                        InterestTypeID = p.InterestTypeID,
+                        IsLessExcise = p.IsLessExcise,
+                        RateTypeID = p.RateTypeID,
+                        RouteId = p.RouteId,
+                        RSMId = p.RSMId,
+                        SalesManId = p.SalesManId,
+                        ZSMId = p.ZSMId,
+                        IsFixedTax = p.IsFixedTax,
+                        Tax = p.Tax,
+                        IsFixedSC = p.IsFixedSC,
+                        SC = p.SC,
+                        IsChangeSCWhileBill = p.IsChangeSCWhileBill,
+                        SaleBillFormat = p.SaleBillFormat,
+                        MaxOSAmount = p.MaxOSAmount,
+                        MaxNumOfOSBill = p.MaxNumOfOSBill,
+                        MaxBillAmount = p.MaxBillAmount,
+                        MaxGracePeriod = p.MaxGracePeriod,
+                        IsFollowConditionStrictly = p.IsFollowConditionStrictly,
+                        Discount = p.Discount,
+                        CentralLocal = p.CentralLocal,
+                        CreatedBy = this.LoggedInUser.Username,
+                        CreatedOn = System.DateTime.Now
+
+                    };
+
+                    context.CustomerLedger.Add(table);
+                    return context.SaveChanges();
+                }
             }
+            catch (Exception ex)
+            {
+                return 0;
+
+            }          
         }
 
         public int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p)
@@ -162,6 +197,19 @@ namespace PharmaDAL.Master
                         customerLedgerMaster.RSMId = p.RSMId;
                         customerLedgerMaster.SalesManId = p.SalesManId;
                         customerLedgerMaster.ZSMId = p.ZSMId;
+                        customerLedgerMaster.IsFixedTax = p.IsFixedTax;
+                        customerLedgerMaster.Tax = p.Tax;
+                        customerLedgerMaster.IsFixedSC = p.IsFixedSC;
+                        customerLedgerMaster.SC = p.SC;
+                        customerLedgerMaster.IsChangeSCWhileBill = p.IsChangeSCWhileBill;
+                        customerLedgerMaster.SaleBillFormat = p.SaleBillFormat;
+                        customerLedgerMaster.MaxOSAmount = p.MaxOSAmount;
+                        customerLedgerMaster.MaxNumOfOSBill = p.MaxNumOfOSBill;
+                        customerLedgerMaster.MaxBillAmount = p.MaxBillAmount;
+                        customerLedgerMaster.MaxGracePeriod = p.MaxGracePeriod;
+                        customerLedgerMaster.IsFollowConditionStrictly = p.IsFollowConditionStrictly;
+                        customerLedgerMaster.Discount = p.Discount;
+                        customerLedgerMaster.CentralLocal = p.CentralLocal;
                         customerLedgerMaster.ModifiedBy = this.LoggedInUser.Username;
                         customerLedgerMaster.ModifiedOn = System.DateTime.Now;
                     }

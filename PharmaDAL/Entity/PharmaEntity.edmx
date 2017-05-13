@@ -115,6 +115,19 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="IsFixedTax" Type="bit" Nullable="false" />
+          <Property Name="Tax" Type="float" />
+          <Property Name="IsFixedSC" Type="bit" Nullable="false" />
+          <Property Name="SC" Type="float" />
+          <Property Name="IsChangeSCWhileBill" Type="bit" Nullable="false" />
+          <Property Name="SaleBillFormat" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaxOSAmount" Type="float" />
+          <Property Name="MaxNumOfOSBill" Type="int" />
+          <Property Name="MaxBillAmount" Type="float" />
+          <Property Name="MaxGracePeriod" Type="int" />
+          <Property Name="IsFollowConditionStrictly" Type="bit" Nullable="false" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="CentralLocal" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerType">
           <Key>
@@ -658,6 +671,19 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsFixedTax" Type="Boolean" Nullable="false" />
+          <Property Name="Tax" Type="Double" />
+          <Property Name="IsFixedSC" Type="Boolean" Nullable="false" />
+          <Property Name="SC" Type="Double" />
+          <Property Name="IsChangeSCWhileBill" Type="Boolean" Nullable="false" />
+          <Property Name="SaleBillFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaxOSAmount" Type="Double" />
+          <Property Name="MaxNumOfOSBill" Type="Int32" />
+          <Property Name="MaxBillAmount" Type="Double" />
+          <Property Name="MaxGracePeriod" Type="Int32" />
+          <Property Name="IsFollowConditionStrictly" Type="Boolean" Nullable="false" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="CentralLocal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="CustomerLedger" ToRole="PersonRouteMaster" />
           <NavigationProperty Name="CustomerType" Relationship="Self.FK_CustomerLedger_CustomerType" FromRole="CustomerLedger" ToRole="CustomerType" />
           <NavigationProperty Name="InterestType" Relationship="Self.FK_CustomerLedger_InterestType" FromRole="CustomerLedger" ToRole="InterestType" />
@@ -1218,6 +1244,19 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsFixedTax" ColumnName="IsFixedTax" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="IsFixedSC" ColumnName="IsFixedSC" />
+                <ScalarProperty Name="SC" ColumnName="SC" />
+                <ScalarProperty Name="IsChangeSCWhileBill" ColumnName="IsChangeSCWhileBill" />
+                <ScalarProperty Name="SaleBillFormat" ColumnName="SaleBillFormat" />
+                <ScalarProperty Name="MaxOSAmount" ColumnName="MaxOSAmount" />
+                <ScalarProperty Name="MaxNumOfOSBill" ColumnName="MaxNumOfOSBill" />
+                <ScalarProperty Name="MaxBillAmount" ColumnName="MaxBillAmount" />
+                <ScalarProperty Name="MaxGracePeriod" ColumnName="MaxGracePeriod" />
+                <ScalarProperty Name="IsFollowConditionStrictly" ColumnName="IsFollowConditionStrictly" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="CentralLocal" ColumnName="CentralLocal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
