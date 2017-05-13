@@ -66,6 +66,9 @@
     <Compile Include="Entity\CompanyMaster.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\CustomerCompanyDiscountRef.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\CustomerLedger.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
@@ -141,7 +144,6 @@
       <Name>PharmaBusinessObjects</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Entity\PharmaEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

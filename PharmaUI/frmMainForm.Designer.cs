@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterMaintenanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accoutMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,12 +43,12 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlLogin = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbUserName = new System.Windows.Forms.TextBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.tbUserName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pnlLogin.SuspendLayout();
             this.SuspendLayout();
@@ -55,12 +56,21 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.masterMaintenanceToolStripMenuItem});
+            this.homeToolStripMenuItem,
+            this.masterMaintenanceToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(756, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // homeToolStripMenuItem
+            // 
+            this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.homeToolStripMenuItem.Text = "Home";
+            this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
             // masterMaintenanceToolStripMenuItem
             // 
@@ -69,8 +79,7 @@
             this.companyMasterToolStripMenuItem,
             this.itemMasterToolStripMenuItem,
             this.personRouteMasterToolStripMenuItem,
-            this.userMasterToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.userMasterToolStripMenuItem});
             this.masterMaintenanceToolStripMenuItem.Name = "masterMaintenanceToolStripMenuItem";
             this.masterMaintenanceToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
             this.masterMaintenanceToolStripMenuItem.Text = "Master Maintenance";
@@ -83,69 +92,78 @@
             this.customerLedgerToolStripMenuItem,
             this.supplierLedgerToolStripMenuItem});
             this.accoutMasterToolStripMenuItem.Name = "accoutMasterToolStripMenuItem";
-            this.accoutMasterToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.accoutMasterToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.accoutMasterToolStripMenuItem.Text = "Accout Master";
             // 
             // accountLedgerToolStripMenuItem
             // 
             this.accountLedgerToolStripMenuItem.Name = "accountLedgerToolStripMenuItem";
-            this.accountLedgerToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.accountLedgerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.accountLedgerToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.accountLedgerToolStripMenuItem.Text = "Account Ledger";
             this.accountLedgerToolStripMenuItem.Click += new System.EventHandler(this.accountLedgerToolStripMenuItem_Click);
             // 
             // personalDiaryToolStripMenuItem
             // 
             this.personalDiaryToolStripMenuItem.Name = "personalDiaryToolStripMenuItem";
-            this.personalDiaryToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.personalDiaryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.personalDiaryToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.personalDiaryToolStripMenuItem.Text = "Personal Diary";
             this.personalDiaryToolStripMenuItem.Click += new System.EventHandler(this.personalDiaryToolStripMenuItem_Click);
             // 
             // customerLedgerToolStripMenuItem
             // 
             this.customerLedgerToolStripMenuItem.Name = "customerLedgerToolStripMenuItem";
-            this.customerLedgerToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.customerLedgerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
+            this.customerLedgerToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.customerLedgerToolStripMenuItem.Text = "Customer Ledger";
             this.customerLedgerToolStripMenuItem.Click += new System.EventHandler(this.customerLedgerToolStripMenuItem_Click);
             // 
             // supplierLedgerToolStripMenuItem
             // 
             this.supplierLedgerToolStripMenuItem.Name = "supplierLedgerToolStripMenuItem";
-            this.supplierLedgerToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.supplierLedgerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.supplierLedgerToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.supplierLedgerToolStripMenuItem.Text = "Supplier Ledger";
             this.supplierLedgerToolStripMenuItem.Click += new System.EventHandler(this.supplierLedgerToolStripMenuItem_Click);
             // 
             // companyMasterToolStripMenuItem
             // 
             this.companyMasterToolStripMenuItem.Name = "companyMasterToolStripMenuItem";
-            this.companyMasterToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.companyMasterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.companyMasterToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.companyMasterToolStripMenuItem.Text = "Company Master";
             this.companyMasterToolStripMenuItem.Click += new System.EventHandler(this.companyMasterToolStripMenuItem_Click);
             // 
             // itemMasterToolStripMenuItem
             // 
             this.itemMasterToolStripMenuItem.Name = "itemMasterToolStripMenuItem";
-            this.itemMasterToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.itemMasterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.itemMasterToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.itemMasterToolStripMenuItem.Text = "Item Master";
             this.itemMasterToolStripMenuItem.Click += new System.EventHandler(this.itemMasterToolStripMenuItem_Click);
             // 
             // personRouteMasterToolStripMenuItem
             // 
             this.personRouteMasterToolStripMenuItem.Name = "personRouteMasterToolStripMenuItem";
-            this.personRouteMasterToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.personRouteMasterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.P)));
+            this.personRouteMasterToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.personRouteMasterToolStripMenuItem.Text = "Person Route Master";
             this.personRouteMasterToolStripMenuItem.Click += new System.EventHandler(this.personRouteMasterToolStripMenuItem_Click);
             // 
             // userMasterToolStripMenuItem
             // 
             this.userMasterToolStripMenuItem.Name = "userMasterToolStripMenuItem";
-            this.userMasterToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.userMasterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.userMasterToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.userMasterToolStripMenuItem.Text = "User Master";
             this.userMasterToolStripMenuItem.Click += new System.EventHandler(this.userMasterToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -171,38 +189,15 @@
             this.pnlLogin.TabIndex = 2;
             this.pnlLogin.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // label1
+            // btnCancel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "User Name";
-            // 
-            // tbUserName
-            // 
-            this.tbUserName.Location = new System.Drawing.Point(145, 46);
-            this.tbUserName.Name = "tbUserName";
-            this.tbUserName.Size = new System.Drawing.Size(211, 20);
-            this.tbUserName.TabIndex = 1;
-            // 
-            // tbPassword
-            // 
-            this.tbPassword.Location = new System.Drawing.Point(145, 79);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(211, 20);
-            this.tbPassword.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(55, 82);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Password";
+            this.btnCancel.Location = new System.Drawing.Point(263, 130);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(93, 35);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnLogin
             // 
@@ -214,15 +209,40 @@
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // btnCancel
+            // tbPassword
             // 
-            this.btnCancel.Location = new System.Drawing.Point(263, 130);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(93, 35);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.tbPassword.Location = new System.Drawing.Point(145, 79);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.Size = new System.Drawing.Size(211, 20);
+            this.tbPassword.TabIndex = 3;
+            this.tbPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbPassword_KeyDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(55, 82);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Password";
+            // 
+            // tbUserName
+            // 
+            this.tbUserName.Location = new System.Drawing.Point(145, 46);
+            this.tbUserName.Name = "tbUserName";
+            this.tbUserName.Size = new System.Drawing.Size(211, 20);
+            this.tbUserName.TabIndex = 1;
+            this.tbUserName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbUserName_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(55, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "User Name";
             // 
             // frmMainForm
             // 
@@ -260,7 +280,6 @@
         private System.Windows.Forms.ToolStripMenuItem companyMasterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemMasterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem personRouteMasterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.ToolStripMenuItem userMasterToolStripMenuItem;
         private System.Windows.Forms.Panel pnlLogin;
@@ -270,5 +289,7 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
     }
 }

@@ -20,6 +20,7 @@ namespace PharmaUI
         {
             InitializeComponent();
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            ExtensionMethods.MainPanel = pnlMain;
         }
 
         private void frmMainForm_Load(object sender, EventArgs e)
@@ -103,13 +104,23 @@ namespace PharmaUI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            Login();
+        }
+
+        private void Login()
+        {
             PharmaBusinessObjects.Master.UserMaster loginUser = applicationFacade.GetUserByUserName(tbUserName.Text);
 
-            if(loginUser != null)
+            if (loginUser != null)
             {
                 pnlLogin.Visible = false;
                 menuStrip1.Visible = true;
                 ExtensionMethods.LoggedInUser = loginUser;
+
+                frmDefault form = new frmDefault();
+                ExtensionMethods.AddFormToPanel(form, pnlMain);
+                form.Show();
+
             }
 
         }
@@ -122,6 +133,29 @@ namespace PharmaUI
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDefault form = new frmDefault();
+            ExtensionMethods.AddFormToPanel(form, pnlMain);
+            form.Show();
+        }
+
+        private void tbUserName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Login();
+            }
+        }
+
+        private void tbPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Login();
+            }
         }
     }
 }

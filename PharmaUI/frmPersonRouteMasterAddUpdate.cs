@@ -22,14 +22,16 @@ namespace PharmaUI
 
         public frmPersonRouteMasterAddUpdate()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.PersonRouteMaster = new PersonRouteMaster();
         }
 
         public frmPersonRouteMasterAddUpdate(PersonRouteMaster personRouteMaster)
         {
-            InitializeComponent();           
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.PersonRouteMaster = personRouteMaster;
         }
@@ -38,6 +40,7 @@ namespace PharmaUI
         private void frmPersonRouteMasterAddUpdate_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, "Person Route Master  - Add");
+            GotFocusEventRaised(this);
 
             ExtensionMethods.FormLoad(this, (this.PersonRouteMaster.PersonRouteID > 0) ? "Person Route Master - Update" : "Person Route Master - Add");
 
@@ -50,6 +53,37 @@ namespace PharmaUI
                 FillCombo();
                 cbxStatus.SelectedItem = Enums.Status.Active;
             }
+        }
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
 
         private void FillCombo()

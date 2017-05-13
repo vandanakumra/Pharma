@@ -2,6 +2,7 @@
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,36 +82,45 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                var maxSupplierLedgerID = context.SupplierLedger.Count() + 1;
-
-                var supplierLedgerCode = "S" + maxSupplierLedgerID.ToString().PadLeft(6, '0');
-
-                Entity.SupplierLedger table = new Entity.SupplierLedger()
+                try
                 {
-                    SupplierLedgerCode = supplierLedgerCode,
-                    SupplierLedgerName = p.SupplierLedgerName,
-                    SupplierLedgerShortName = p.SupplierLedgerShortName,
-                    Address = p.Address,
-                    ContactPerson = p.ContactPerson,
-                    Mobile = p.Mobile,
-                    Pager = p.Pager,
-                    Fax = p.Fax,
-                    OfficePhone = p.OfficePhone,
-                    ResidentPhone = p.ResidentPhone,
-                    EmailAddress = p.EmailAddress,                   
-                    AreaId = p.AreaId,
-                    CreditDebit = p.CreditDebit,
-                    DLNo = p.DLNo,
-                    OpeningBal = p.OpeningBal,
-                    TaxRetail = p.TaxRetail,
-                    TINNo = p.TINNo,
-                    Status = p.Status           ,
-                    CreatedBy = this.LoggedInUser.Username,
-                    CreatedOn = System.DateTime.Now        
-                };
 
-                context.SupplierLedger.Add(table);
-                return context.SaveChanges();
+
+                    var maxSupplierLedgerID = context.SupplierLedger.Count() + 1;
+
+                    var supplierLedgerCode = "S" + maxSupplierLedgerID.ToString().PadLeft(6, '0');
+
+                    Entity.SupplierLedger table = new Entity.SupplierLedger()
+                    {
+                        SupplierLedgerCode = supplierLedgerCode,
+                        SupplierLedgerName = p.SupplierLedgerName,
+                        SupplierLedgerShortName = p.SupplierLedgerShortName,
+                        Address = p.Address,
+                        ContactPerson = p.ContactPerson,
+                        Mobile = p.Mobile,
+                        Pager = p.Pager,
+                        Fax = p.Fax,
+                        OfficePhone = p.OfficePhone,
+                        ResidentPhone = p.ResidentPhone,
+                        EmailAddress = p.EmailAddress,
+                        AreaId = p.AreaId,
+                        CreditDebit = p.CreditDebit,
+                        DLNo = p.DLNo,
+                        OpeningBal = p.OpeningBal,
+                        TaxRetail = p.TaxRetail,
+                        TINNo = p.TINNo,
+                        Status = p.Status,
+                        CreatedBy = this.LoggedInUser.Username,
+                        CreatedOn = System.DateTime.Now
+                    };
+
+                    context.SupplierLedger.Add(table);
+                    return context.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    throw ex;
+                }
             }
         }
 

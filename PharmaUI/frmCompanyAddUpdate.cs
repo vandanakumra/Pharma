@@ -18,24 +18,37 @@ namespace PharmaUI
     public partial class frmCompanyAddUpdate : Form
     {
         IApplicationFacade applicationFacade;
-        private int CompanyId { get; set; }
+        public int CompanyId { get; set; }
+        private string CompanyNameNew { get; set; }
 
         public frmCompanyAddUpdate()
         {
-            InitializeComponent();
+            InitializeComponent();            
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
         public frmCompanyAddUpdate(int companyId)
         {
-            InitializeComponent();           
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.CompanyId = companyId;
+        }
+
+        public frmCompanyAddUpdate(string companyName)
+        {
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            this.CompanyNameNew = companyName;
         }
 
         private void frmCompanyAddUpdate_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, (this.CompanyId > 0) ? "Company Master - Update" : "Company Master - Add");
+
+            GotFocusEventRaised(this);
 
             FillCombo();
 
@@ -43,14 +56,51 @@ namespace PharmaUI
             {
                 FillFormForUpdate();
             }
-            
+
+            if (!string.IsNullOrEmpty(this.CompanyNameNew))
+            {
+                txtCompanyName.Text = this.CompanyNameNew;
+            }
+
+        }
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
 
         private void FillFormForUpdate()
         {
             CompanyMaster company = applicationFacade.GetCompanyById(this.CompanyId);
 
-            if(company != null)
+            if (company != null)
             {
                 txtCompanyCode.Text = company.CompanyCode;
                 txtCompanyName.Text = company.CompanyName;
@@ -77,7 +127,7 @@ namespace PharmaUI
             cbxDI.DataSource = Enum.GetValues(typeof(Enums.DI));
             cbxDI.SelectedItem = Enums.DI.Direct;
         }
-      
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -107,6 +157,7 @@ namespace PharmaUI
             //Close this form if operation is successful
             if (result > 0)
             {
+                this.CompanyId = result;
                 this.Close();
             }
         }
@@ -127,5 +178,7 @@ namespace PharmaUI
             if (!(Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back)))
                 e.Handled = true;
         }
+
+
     }
 }

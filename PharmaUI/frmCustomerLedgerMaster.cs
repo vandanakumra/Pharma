@@ -43,15 +43,17 @@ namespace PharmaUI
             if (e.RowIndex != -1)
             {
                 frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(true);
+                ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.CurrentRow.DataBoundItem;
                 form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
                 form.FormClosed += Form_FormClosed;
-                form.ShowDialog();
+                form.Show();
             }
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ExtensionMethods.RemoveChildFormToPanel(this, (frmCustomerLedgerMasterAddUpdate)sender, ExtensionMethods.MainPanel);
             LoadDataGrid();
         }
 
@@ -110,12 +112,15 @@ namespace PharmaUI
             try
             {
                 var form = new frmCustomerLedgerMasterAddUpdate();
-                form.ShowDialog();
+                ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+                form.FormClosed += Form_FormClosed;
+                form.Show();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
         }
+
     }
 }

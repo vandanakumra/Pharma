@@ -26,7 +26,7 @@ namespace PharmaUI
         {
             ExtensionMethods.FormLoad(this, "Ledger Master");
             LoadDataGrid();
-            dgvSupplier.DoubleClick += dgvSupplier_DoubleClick;
+            dgvSupplier.CellDoubleClick += dgvSupplier_DoubleClick;
             dgvSupplier.KeyDown += dgvSupplier_KeyDown; ;
             dgvSupplier.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
@@ -52,22 +52,17 @@ namespace PharmaUI
         }
 
 
-        private void dgvSupplier_DoubleClick(object sender, EventArgs e)
+        private void dgvSupplier_DoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvSupplier.SelectedRows.Count > 0)
+            if (e.RowIndex != -1)
             {
-                DataGridViewRow row = dgvSupplier.SelectedRows[0];
+                PharmaBusinessObjects.Master.SupplierLedgerMaster model = (PharmaBusinessObjects.Master.SupplierLedgerMaster)dgvSupplier.Rows[e.RowIndex].DataBoundItem;
+                               
+                frmSupplierLedgerAddUpdate form = new frmSupplierLedgerAddUpdate(model.SupplierLedgerId);
+                form.FormClosed += Form_FormClosed;
+                form.ShowDialog();
 
-                if (row != null)
-                {
-                    int companyId = 0;
 
-                    Int32.TryParse(Convert.ToString(row.Cells["SupplierId"].Value), out companyId);
-                    frmCompanyAddUpdate form = new frmCompanyAddUpdate(companyId);
-                    form.FormClosed += Form_FormClosed;
-                    form.ShowDialog();
-
-                }
             }
         }
 
