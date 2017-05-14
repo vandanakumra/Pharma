@@ -14,9 +14,9 @@ namespace PharmaBusiness.Master
 
         }
 
-        internal List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers()
+        internal List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers(string searchString = null)
         {
-            return new CustomerLedgerMasterDao(this.LoggedInUser).GetCustomerLedgers();
+            return new CustomerLedgerMasterDao(this.LoggedInUser).GetCustomerLedgers(searchString);
         }
 
         internal int AddCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p)

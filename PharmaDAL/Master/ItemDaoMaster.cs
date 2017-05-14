@@ -224,7 +224,7 @@ namespace PharmaDAL.Master
         }
 
 
-        public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null)
+        public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null, string searchBy = "Name")
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
