@@ -293,7 +293,6 @@
             this.tbxBankName.Name = "tbxBankName";
             this.tbxBankName.Size = new System.Drawing.Size(79, 20);
             this.tbxBankName.TabIndex = 201;
-            this.tbxBankName.Text = "0";
             // 
             // tbxBankArea
             // 
@@ -301,7 +300,6 @@
             this.tbxBankArea.Name = "tbxBankArea";
             this.tbxBankArea.Size = new System.Drawing.Size(79, 20);
             this.tbxBankArea.TabIndex = 203;
-            this.tbxBankArea.Text = "0";
             // 
             // tbxDay
             // 
@@ -309,7 +307,6 @@
             this.tbxDay.Name = "tbxDay";
             this.tbxDay.Size = new System.Drawing.Size(79, 20);
             this.tbxDay.TabIndex = 205;
-            this.tbxDay.Text = "0";
             // 
             // tbxCloseDay
             // 
@@ -317,7 +314,6 @@
             this.tbxCloseDay.Name = "tbxCloseDay";
             this.tbxCloseDay.Size = new System.Drawing.Size(81, 20);
             this.tbxCloseDay.TabIndex = 201;
-            this.tbxCloseDay.Text = "0";
             // 
             // gbCustomerBillingDetails
             // 
@@ -442,7 +438,6 @@
             this.tbxSaleBillFormat.Name = "tbxSaleBillFormat";
             this.tbxSaleBillFormat.Size = new System.Drawing.Size(125, 20);
             this.tbxSaleBillFormat.TabIndex = 404;
-            this.tbxSaleBillFormat.Text = "0";
             // 
             // label16
             // 
@@ -462,6 +457,7 @@
             this.cbxFixedTax.Name = "cbxFixedTax";
             this.cbxFixedTax.Size = new System.Drawing.Size(125, 21);
             this.cbxFixedTax.TabIndex = 405;
+            this.cbxFixedTax.SelectedIndexChanged += new System.EventHandler(this.cbxFixedTax_SelectedIndexChanged);
             // 
             // tbxTax
             // 
@@ -489,6 +485,7 @@
             this.cbxFixedSC.Name = "cbxFixedSC";
             this.cbxFixedSC.Size = new System.Drawing.Size(125, 21);
             this.cbxFixedSC.TabIndex = 407;
+            this.cbxFixedSC.SelectedIndexChanged += new System.EventHandler(this.cbxFixedSC_SelectedIndexChanged);
             // 
             // tbxSC
             // 
@@ -732,7 +729,6 @@
             this.tbxDL.Name = "tbxDL";
             this.tbxDL.Size = new System.Drawing.Size(121, 20);
             this.tbxDL.TabIndex = 601;
-            this.tbxDL.Text = "0";
             // 
             // label5
             // 
@@ -760,7 +756,6 @@
             this.tbxTIN.Name = "tbxTIN";
             this.tbxTIN.Size = new System.Drawing.Size(124, 20);
             this.tbxTIN.TabIndex = 602;
-            this.tbxTIN.Text = "0";
             // 
             // label7
             // 
@@ -778,7 +773,6 @@
             this.tbxCST.Name = "tbxCST";
             this.tbxCST.Size = new System.Drawing.Size(121, 20);
             this.tbxCST.TabIndex = 603;
-            this.tbxCST.Text = "0";
             // 
             // tableLayoutPanel4
             // 

@@ -405,5 +405,40 @@ namespace PharmaUI
                 this.Close();
             }
         }
+
+        private void cbxFixedTax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxFixedTax.SelectedItem == null) return;
+
+            Choice choice;
+            Enum.TryParse<Choice>(cbxFixedTax.SelectedItem.ToString(), out choice);
+
+            if (choice == Choice.Yes)
+            {
+                tbxTax.Enabled = true;
+            }
+            else
+            {
+                tbxTax.Enabled = false;
+            }
+        }
+
+        private void cbxFixedSC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxFixedSC.SelectedItem == null) return;
+
+            Choice choice;
+            Enum.TryParse<Choice>(cbxFixedSC.SelectedItem.ToString(), out choice);
+
+            if (choice == Choice.Yes)
+            {
+                tbxSC.Enabled = true;
+            }
+            else
+            {
+                tbxSC.Enabled = false;
+            }
+
+        }
     }
 }
