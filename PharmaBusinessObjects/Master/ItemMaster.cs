@@ -46,6 +46,5 @@ namespace PharmaBusinessObjects.Master
         public int ? MaximumStock { get; set; }
         public int SaleTypeId { get; set; }
         public bool Status { get; set; }
-        public int Quantity { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace PharmaBusinessObjects
         bool UpdateItem(ItemMaster existingItem);
         bool DeleteItem(ItemMaster existingItem);
         string GetNextItemCode(string companyCode);
-        List<ItemMaster> GetAllItemsBySearch(string searchString);
+        List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy);
         #endregion
 
         #region Company Master

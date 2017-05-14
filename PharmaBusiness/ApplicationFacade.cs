@@ -109,11 +109,11 @@ namespace PharmaBusiness
              /// Fetch all the active items by Search
              /// </summary>
              /// <returns>List of items</returns>
-        public List<ItemMaster> GetAllItemsBySearch(string searchString)
+        public List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
         {
             try
             {
-                return new ItemMasterBiz(this.LoggedInUser).GetAllItemsBySearch(searchString);
+                return new ItemMasterBiz(this.LoggedInUser).GetAllItemsBySearch(searchString, searchBy);
             }
             catch (Exception)
             {
