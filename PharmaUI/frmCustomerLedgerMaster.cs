@@ -46,6 +46,7 @@ namespace PharmaUI
                 ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.CurrentRow.DataBoundItem;
                 form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
+                form.LoadCustomerCompanyDiscountGrid();
                 form.FormClosed += Form_FormClosed;
                 form.Show();
             }
@@ -59,7 +60,7 @@ namespace PharmaUI
 
         private void LoadDataGrid()
         {
-            dgvCustomerLedger.DataSource = applicationFacade.GetCustomerLedgers();
+            dgvCustomerLedger.DataSource = applicationFacade.GetCustomerLedgers(txtSearch.Text);
 
             for (int i = 0; i < dgvCustomerLedger.Columns.Count; i++)
             {
@@ -120,6 +121,11 @@ namespace PharmaUI
             {
 
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadDataGrid();
         }
 
     }

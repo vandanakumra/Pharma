@@ -52,6 +52,7 @@
     <Compile Include="IApplicationFacade.cs" />
     <Compile Include="Master\AccountLedgerMaster.cs" />
     <Compile Include="Master\CompanyMaster.cs" />
+    <Compile Include="Master\CustomerCopanyDiscount.cs" />
     <Compile Include="Master\CustomerLedgerMaster.cs" />
     <Compile Include="Master\ItemMaster.cs" />
     <Compile Include="Master\PersonalLedgerMaster.cs" />

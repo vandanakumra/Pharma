@@ -508,11 +508,11 @@ namespace PharmaBusiness
 
         #region Customer Ledger Master
 
-        public List<CustomerLedgerMaster> GetCustomerLedgers()
+        public List<CustomerLedgerMaster> GetCustomerLedgers(string searchString = null)
         {
             try
             {
-                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCustomerLedgers();
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCustomerLedgers(searchString);
             }
             catch (Exception)
             {
@@ -543,6 +543,20 @@ namespace PharmaBusiness
                 throw;
             }
         }
+
+
+        public List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountList(int customerLedgerID)
+        {
+            try
+            {
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCompleteCompanyDiscountList(customerLedgerID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
 
         #endregion
 

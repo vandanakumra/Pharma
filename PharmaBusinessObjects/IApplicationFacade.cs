@@ -84,9 +84,10 @@ namespace PharmaBusinessObjects
 
         #region Customer Ledger Master
 
-        List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers();
+        List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers(string searchString = null);
         int AddCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
         int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
+        List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountList(int customerLedgerID);
 
         #endregion
 

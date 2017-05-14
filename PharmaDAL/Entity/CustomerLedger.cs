@@ -14,6 +14,12 @@ namespace PharmaDAL.Entity
     
     public partial class CustomerLedger
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CustomerLedger()
+        {
+            this.CustomerCompanyDiscountRef = new HashSet<CustomerCompanyDiscountRef>();
+        }
+    
         public int CustomerLedgerId { get; set; }
         public string CustomerLedgerCode { get; set; }
         public string CustomerLedgerName { get; set; }
@@ -66,6 +72,8 @@ namespace PharmaDAL.Entity
         public Nullable<double> Discount { get; set; }
         public string CentralLocal { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }
         public virtual CustomerType CustomerType { get; set; }
         public virtual InterestType InterestType { get; set; }
