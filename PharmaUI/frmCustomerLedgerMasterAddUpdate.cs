@@ -31,6 +31,15 @@ namespace PharmaUI
             this.customerLedgerID = 0;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
 
+            {
+                cbxZSM.KeyDown += cbxPersonRouteType_KeyDown;
+                cbxRSM.KeyDown += cbxPersonRouteType_KeyDown;
+                cbxASM.KeyDown += cbxPersonRouteType_KeyDown;
+                cbxSalesman.KeyDown += cbxPersonRouteType_KeyDown;
+                cbxArea.KeyDown += cbxPersonRouteType_KeyDown;
+                cbxRoute.KeyDown += cbxPersonRouteType_KeyDown;
+            }
+
             LoadCombo();
 
             if(!isInEditMode)
@@ -440,5 +449,80 @@ namespace PharmaUI
             }
 
         }
+
+        private void cbxPersonRouteType_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ComboBox activePersonRouteType =new ComboBox();
+                string activePersonRouteTypeString = String.Empty;
+
+                switch ((sender as ComboBox).Name)
+                {
+                    case "cbxZSM":
+                        {
+                            activePersonRouteType = cbxZSM;
+                            activePersonRouteTypeString = Constants.RecordType.ZSM;
+                        }
+                        break;
+
+                    case "cbxRSM":
+                        {
+                            activePersonRouteType = cbxRSM;
+                            activePersonRouteTypeString = Constants.RecordType.RSM;
+                        }
+                        break;
+
+                    case "cbxASM":
+                        {
+                            activePersonRouteType = cbxASM;
+                            activePersonRouteTypeString = Constants.RecordType.ASM;
+                        }
+                        break;
+                }
+
+
+                int index = activePersonRouteType.FindString(activePersonRouteType.Text);
+                if (index < 0)
+                {
+                    DialogResult result = MessageBox.Show("ZSM does not exist. Do you want to add new ZSM ?", Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(activePersonRouteTypeString);
+                        form.FormClosing += Form_FormClosing;
+                        form.ShowDialog();
+
+                    }
+                    else
+                    {
+                        cbxZSM.SelectedIndex = 0;
+                        return;
+                    }
+                }
+            }
+        }
+        
+
+
+
+        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           // int companyID = ((frmCompanyAddUpdate)sender).CompanyId;
+
+            //cbxZSM.SelectedIndexChanged -= CbxComanyCode_SelectedIndexChanged;
+
+            ////Fill the company list
+            //cbxComanyCode.DataSource = applicationFacade.GetCompanies(String.Empty);
+            //cbxComanyCode.DisplayMember = "CompanyName";
+            //cbxComanyCode.ValueMember = "CompanyCode";
+
+            //var comp = applicationFacade.GetCompanyById(companyID);
+
+            //cbxComanyCode.SelectedValue = comp.CompanyCode;
+
+            //cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
+        }
+
     }
 }

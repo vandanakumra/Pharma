@@ -636,7 +636,6 @@
             // 
             // cbxZSM
             // 
-            this.cbxZSM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxZSM.FormattingEnabled = true;
             this.cbxZSM.Location = new System.Drawing.Point(80, 13);
             this.cbxZSM.Name = "cbxZSM";
@@ -645,7 +644,6 @@
             // 
             // cbxRSM
             // 
-            this.cbxRSM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRSM.FormattingEnabled = true;
             this.cbxRSM.Location = new System.Drawing.Point(80, 35);
             this.cbxRSM.Name = "cbxRSM";
@@ -654,7 +652,6 @@
             // 
             // cbxASM
             // 
-            this.cbxASM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxASM.FormattingEnabled = true;
             this.cbxASM.Location = new System.Drawing.Point(80, 57);
             this.cbxASM.Name = "cbxASM";
@@ -663,7 +660,6 @@
             // 
             // cbxSalesman
             // 
-            this.cbxSalesman.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSalesman.FormattingEnabled = true;
             this.cbxSalesman.Location = new System.Drawing.Point(80, 79);
             this.cbxSalesman.Name = "cbxSalesman";
@@ -672,7 +668,6 @@
             // 
             // cbxArea
             // 
-            this.cbxArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxArea.FormattingEnabled = true;
             this.cbxArea.Location = new System.Drawing.Point(80, 101);
             this.cbxArea.Name = "cbxArea";
@@ -681,7 +676,6 @@
             // 
             // cbxRoute
             // 
-            this.cbxRoute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRoute.FormattingEnabled = true;
             this.cbxRoute.Location = new System.Drawing.Point(80, 123);
             this.cbxRoute.Name = "cbxRoute";
