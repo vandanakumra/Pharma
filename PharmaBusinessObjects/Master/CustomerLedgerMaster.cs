@@ -64,5 +64,7 @@ namespace PharmaBusinessObjects.Master
         public bool IsFollowConditionStrictly { get; set; }
         public double ?  Discount { get; set; }
         public string CentralLocal { get; set; }
+
+        public List<CustomerCopanyDiscount> CustomerCopanyDiscountList { get; set; }
     }
 }

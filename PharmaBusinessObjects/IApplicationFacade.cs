@@ -17,7 +17,7 @@ namespace PharmaBusinessObjects
         bool UpdateItem(ItemMaster existingItem);
         bool DeleteItem(ItemMaster existingItem);
         string GetNextItemCode(string companyCode);
-        List<ItemMaster> GetAllItemsBySearch(string searchString);
+        List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy);
         #endregion
 
         #region Company Master
@@ -84,9 +84,10 @@ namespace PharmaBusinessObjects
 
         #region Customer Ledger Master
 
-        List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers();
+        List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers(string searchString = null);
         int AddCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
         int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
+        List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountList(int customerLedgerID);
 
         #endregion
 

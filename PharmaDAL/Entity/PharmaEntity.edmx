@@ -77,7 +77,7 @@
           <Key>
             <PropertyRef Name="CustCompDiscountRefID" />
           </Key>
-          <Property Name="CustCompDiscountRefID" Type="int" Nullable="false" />
+          <Property Name="CustCompDiscountRefID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerLedgerID" Type="int" Nullable="false" />
           <Property Name="CompanyID" Type="int" Nullable="false" />
           <Property Name="Normal" Type="float" />
@@ -350,6 +350,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CustomerCompanyDiscountRef_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+          <End Role="CustomerCompanyDiscountRef" Type="Self.CustomerCompanyDiscountRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CustomerCompanyDiscountRef">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerCompanyDiscountRef_CustomerLedger">
+          <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="1" />
+          <End Role="CustomerCompanyDiscountRef" Type="Self.CustomerCompanyDiscountRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerLedger">
+              <PropertyRef Name="CustomerLedgerId" />
+            </Principal>
+            <Dependent Role="CustomerCompanyDiscountRef">
+              <PropertyRef Name="CustomerLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerLedger_CustomerLedger">
           <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
@@ -515,6 +539,14 @@
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="AccountLedgerMaster1" EntitySet="AccountLedgerMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_CustomerCompanyDiscountRef_CompanyMaster" Association="Self.FK_CustomerCompanyDiscountRef_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerCompanyDiscountRef_CustomerLedger" Association="Self.FK_CustomerCompanyDiscountRef_CustomerLedger">
+            <End Role="CustomerLedger" EntitySet="CustomerLedger" />
+            <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
             <End Role="CustomerLedger" EntitySet="CustomerLedger" />
@@ -641,18 +673,21 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_CompanyMaster" FromRole="CompanyMaster" ToRole="CustomerCompanyDiscountRef" />
         </EntityType>
         <EntityType Name="CustomerCompanyDiscountRef">
           <Key>
             <PropertyRef Name="CustCompDiscountRefID" />
           </Key>
-          <Property Name="CustCompDiscountRefID" Type="Int32" Nullable="false" />
+          <Property Name="CustCompDiscountRefID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerLedgerID" Type="Int32" Nullable="false" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
           <Property Name="Normal" Type="Double" />
           <Property Name="Breakage" Type="Double" />
           <Property Name="Expired" Type="Double" />
           <Property Name="IsLessEcise" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_CustomerCompanyDiscountRef_CompanyMaster" FromRole="CustomerCompanyDiscountRef" ToRole="CompanyMaster" />
+          <NavigationProperty Name="CustomerLedger" Relationship="Self.FK_CustomerCompanyDiscountRef_CustomerLedger" FromRole="CustomerCompanyDiscountRef" ToRole="CustomerLedger" />
         </EntityType>
         <EntityType Name="CustomerLedger">
           <Key>
@@ -709,6 +744,7 @@
           <Property Name="IsFollowConditionStrictly" Type="Boolean" Nullable="false" />
           <Property Name="Discount" Type="Double" />
           <Property Name="CentralLocal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_CustomerLedger" FromRole="CustomerLedger" ToRole="CustomerCompanyDiscountRef" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="CustomerLedger" ToRole="PersonRouteMaster" />
           <NavigationProperty Name="CustomerType" Relationship="Self.FK_CustomerLedger_CustomerType" FromRole="CustomerLedger" ToRole="CustomerType" />
           <NavigationProperty Name="InterestType" Relationship="Self.FK_CustomerLedger_InterestType" FromRole="CustomerLedger" ToRole="InterestType" />
@@ -952,6 +988,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CustomerCompanyDiscountRef_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+          <End Role="CustomerCompanyDiscountRef" Type="Self.CustomerCompanyDiscountRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CustomerCompanyDiscountRef">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerCompanyDiscountRef_CustomerLedger">
+          <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="1" />
+          <End Role="CustomerCompanyDiscountRef" Type="Self.CustomerCompanyDiscountRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerLedger">
+              <PropertyRef Name="CustomerLedgerId" />
+            </Principal>
+            <Dependent Role="CustomerCompanyDiscountRef">
+              <PropertyRef Name="CustomerLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerLedger_CustomerLedger">
           <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="0..1" />
           <End Role="CustomerLedger" Type="Self.CustomerLedger" Multiplicity="*" />
@@ -1108,6 +1168,14 @@
           <AssociationSet Name="FK_ItemMaster_AccountLedgerMaster" Association="Self.FK_ItemMaster_AccountLedgerMaster">
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerCompanyDiscountRef_CompanyMaster" Association="Self.FK_CustomerCompanyDiscountRef_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerCompanyDiscountRef_CustomerLedger" Association="Self.FK_CustomerCompanyDiscountRef_CustomerLedger">
+            <End Role="CustomerLedger" EntitySet="CustomerLedger" />
+            <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />

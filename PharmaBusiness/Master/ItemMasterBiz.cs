@@ -19,9 +19,9 @@ namespace PharmaBusiness.Master
             return new ItemDaoMaster(this.LoggedInUser).GetAllItems();
         }
 
-        internal List<ItemMaster> GetAllItemsBySearch(string searchString)
+        internal List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
         {
-            return new ItemDaoMaster(this.LoggedInUser).GetAllItemsBySearch(searchString);
+            return new ItemDaoMaster(this.LoggedInUser).GetAllItemsBySearch(searchString, searchBy);
         }
         
 

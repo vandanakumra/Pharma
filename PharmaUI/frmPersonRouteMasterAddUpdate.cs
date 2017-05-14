@@ -20,12 +20,22 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         private PersonRouteMaster PersonRouteMaster { get; set; }
 
-        public frmPersonRouteMasterAddUpdate()
+        public frmPersonRouteMasterAddUpdate(string recordType = "")
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.PersonRouteMaster = new PersonRouteMaster();
+            SetUIForRecordType(recordType);
+        }
+
+        private void SetUIForRecordType(string recordType)
+        {
+            if (!String.IsNullOrWhiteSpace(recordType))
+            {
+                cbPersonRouteType.Text = recordType;
+                cbPersonRouteType.Enabled = false;
+            }
         }
 
         public frmPersonRouteMasterAddUpdate(PersonRouteMaster personRouteMaster)
@@ -39,7 +49,7 @@ namespace PharmaUI
 
         private void frmPersonRouteMasterAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "Person Route Master  - Add");
+            //ExtensionMethods.FormLoad(this, "Person Route Master  - Add");
             GotFocusEventRaised(this);
 
             ExtensionMethods.FormLoad(this, (this.PersonRouteMaster.PersonRouteID > 0) ? "Person Route Master - Update" : "Person Route Master - Add");

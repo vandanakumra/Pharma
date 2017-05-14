@@ -25,6 +25,7 @@ namespace PharmaBusinessObjects.Common
             public const string SALESMAN = "SALESMAN";
             public const string AREA = "AREA";
             public const string ROUTE = "ROUTE";
+            public const string NONE = "NONE";
         }
 
         public static class AccountLedgerType
