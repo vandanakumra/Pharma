@@ -15,6 +15,7 @@ namespace PharmaBusinessObjects.Common
             public const string Confirmation = "Confirmation";
             public const string InValidEmail = "Please enter valid EmailId";
             public const string ErrorOccured = "Something went wrong";
+            public const string PersonRouteCreate = "{0} does not exist. Do you want to add new {0} ?";
         }
 
         public static class RecordType
@@ -26,6 +27,14 @@ namespace PharmaBusinessObjects.Common
             public const string AREA = "AREA";
             public const string ROUTE = "ROUTE";
             public const string NONE = "NONE";
+
+            public const string ASMDISPLAYNAME = "A.S.M";
+            public const string RSMDISPLAYNAME = "R.S.M";
+            public const string ZSMDISPLAYNAME = "Z.S.M";
+            public const string SALESMANDISPLAYNAME = "Sales Man";
+            public const string AREADISPLAYNAME = "Area";
+            public const string ROUTEDISPLAYNAME = "Route";
+            public const string NONEDISPLAYNAME = "NONE";
         }
 
         public static class AccountLedgerType

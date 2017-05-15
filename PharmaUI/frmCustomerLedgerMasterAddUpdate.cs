@@ -462,21 +462,39 @@ namespace PharmaUI
                     case "cbxZSM":
                         {
                             activePersonRouteType = cbxZSM;
-                            activePersonRouteTypeString = Constants.RecordType.ZSM;
+                            activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
                         }
                         break;
 
                     case "cbxRSM":
                         {
                             activePersonRouteType = cbxRSM;
-                            activePersonRouteTypeString = Constants.RecordType.RSM;
+                            activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
                         }
                         break;
 
                     case "cbxASM":
                         {
                             activePersonRouteType = cbxASM;
-                            activePersonRouteTypeString = Constants.RecordType.ASM;
+                            activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
+                        }
+                        break;
+                    case "cbxSalesman":
+                        {
+                            activePersonRouteType = cbxSalesman;
+                            activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
+                        }
+                        break;
+                    case "cbxArea":
+                        {
+                            activePersonRouteType = cbxArea;
+                            activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
+                        }
+                        break;
+                    case "cbxRoute":
+                        {
+                            activePersonRouteType = cbxRoute;
+                            activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
                         }
                         break;
                 }
@@ -485,18 +503,22 @@ namespace PharmaUI
                 int index = activePersonRouteType.FindString(activePersonRouteType.Text);
                 if (index < 0)
                 {
-                    DialogResult result = MessageBox.Show("ZSM does not exist. Do you want to add new ZSM ?", Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult result = MessageBox.Show(String.Format(Constants.Messages.PersonRouteCreate,activePersonRouteTypeString), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (result == DialogResult.Yes)
                     {
-                        frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(activePersonRouteTypeString);
+                        PersonRouteMaster newPersonRouteMaster = new PersonRouteMaster()
+                        {
+                            RecordTypeNme=activePersonRouteTypeString,
+                            PersonRouteName= activePersonRouteType.Text
+                        };
+                        frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(newPersonRouteMaster);
                         form.FormClosing += Form_FormClosing;
-                        form.ShowDialog();
-
+                        form.ShowDialog();             
                     }
                     else
                     {
-                        cbxZSM.SelectedIndex = 0;
+                        activePersonRouteType.SelectedIndex = 0;
                         return;
                     }
                 }
@@ -508,20 +530,7 @@ namespace PharmaUI
 
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
-           // int companyID = ((frmCompanyAddUpdate)sender).CompanyId;
-
-            //cbxZSM.SelectedIndexChanged -= CbxComanyCode_SelectedIndexChanged;
-
-            ////Fill the company list
-            //cbxComanyCode.DataSource = applicationFacade.GetCompanies(String.Empty);
-            //cbxComanyCode.DisplayMember = "CompanyName";
-            //cbxComanyCode.ValueMember = "CompanyCode";
-
-            //var comp = applicationFacade.GetCompanyById(companyID);
-
-            //cbxComanyCode.SelectedValue = comp.CompanyCode;
-
-            //cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
+            
         }
 
     }
