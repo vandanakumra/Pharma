@@ -54,32 +54,32 @@ namespace PharmaUI
             ////Fill ZSM options
             cbxZSM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ZSM);
             cbxZSM.DisplayMember = "PersonRouteName";
-            cbxZSM.ValueMember = "PersonRouteCode";
+            cbxZSM.ValueMember = "PersonRouteID";
 
             ////Fill RSM options
             cbxRSM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.RSM);
             cbxRSM.DisplayMember = "PersonRouteName";
-            cbxRSM.ValueMember = "PersonRouteCode";
+            cbxRSM.ValueMember = "PersonRouteID";
 
             ////Fill ASM options
             cbxASM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ASM);
             cbxASM.DisplayMember = "PersonRouteName";
-            cbxASM.ValueMember = "PersonRouteCode";
+            cbxASM.ValueMember = "PersonRouteID";
 
             ////Fill Area options
             cbxArea.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.AREA);
             cbxArea.DisplayMember = "PersonRouteName";
-            cbxArea.ValueMember = "PersonRouteCode";
+            cbxArea.ValueMember = "PersonRouteID";
 
             ////Fill Salesman options
             cbxSalesman.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.SALESMAN);
             cbxSalesman.DisplayMember = "PersonRouteName";
-            cbxSalesman.ValueMember = "PersonRouteCode";
+            cbxSalesman.ValueMember = "PersonRouteID";
 
             ////Fill Route options
             cbxRoute.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ROUTE);
             cbxRoute.DisplayMember = "PersonRouteName";
-            cbxRoute.ValueMember = "PersonRouteCode";
+            cbxRoute.ValueMember = "PersonRouteID";
 
             ////Fill Costumer Type options
             cbxCustomerType.DataSource = applicationFacade.GetCustomerTypes();
@@ -149,6 +149,7 @@ namespace PharmaUI
             dgvCompanyDiscount.Columns["Expired"].Visible = true;
             dgvCompanyDiscount.Columns["Expired"].HeaderText = "Expired";
 
+           
             dgvCompanyDiscount.Columns["IsLessEcise"].Visible = true;
             dgvCompanyDiscount.Columns["IsLessEcise"].HeaderText = "LessEcise";
 
@@ -280,6 +281,12 @@ namespace PharmaUI
                 LocalCentral localCentral;
                 CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
 
+                if (String.IsNullOrWhiteSpace(ucSupplierCustomerInfo.CustomerSupplierName))
+                {
+                    MessageBox.Show("Customer Name "+ Constants.Messages.RequiredField);
+                    return;
+                }
+
                 customerLedgerMaster.CustomerLedgerId = this.customerLedgerID;
 
                 //values from User Control
@@ -397,16 +404,7 @@ namespace PharmaUI
             this.Close();
         }
 
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void frmCustomerLedgerMasterAddUpdate_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -513,6 +511,7 @@ namespace PharmaUI
                             PersonRouteName= activePersonRouteType.Text
                         };
                         frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(newPersonRouteMaster);
+                        form.Tag = (sender as ComboBox).Name;
                         form.FormClosing += Form_FormClosing;
                         form.ShowDialog();             
                     }
@@ -525,13 +524,113 @@ namespace PharmaUI
             }
         }
         
-
-
-
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+            int personRouteID = ((frmPersonRouteMasterAddUpdate)sender).PersonRouteID;
+
+            switch ((sender as frmPersonRouteMasterAddUpdate).Tag)
+            {
+                case "cbxZSM":
+                    {
+                        ////Fill ZSM options
+                        cbxZSM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ZSM);
+                        cbxZSM.DisplayMember = "PersonRouteName";
+                        cbxZSM.ValueMember = "PersonRouteID";
+                        ///set newly added item
+                        ///
+                        cbxZSM.SelectedValue = personRouteID;
+                    }
+                    break;
+
+                case "cbxRSM":
+                    {
+                        ////Fill RSM options
+                        cbxRSM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.RSM);
+                        cbxRSM.DisplayMember = "PersonRouteName";
+                        cbxRSM.ValueMember = "PersonRouteID";
+                        ///set newly added item
+                        ///
+                        cbxRSM.SelectedValue = personRouteID;
+                    }
+                    break;
+
+                case "cbxASM":
+                    {
+                        ////Fill ASM options
+                        cbxASM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ASM);
+                        cbxASM.DisplayMember = "PersonRouteName";
+                        cbxASM.ValueMember = "PersonRouteID";
+                        ///set newly added item
+                        ///
+                        cbxASM.SelectedValue = personRouteID;
+
+                    }
+                    break;
+                case "cbxSalesman":
+                    {
+                        ////Fill Salesman options
+                        cbxSalesman.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.SALESMAN);
+                        cbxSalesman.DisplayMember = "PersonRouteName";
+                        cbxSalesman.ValueMember = "PersonRouteID";
+                        ///set newly added item
+                        ///
+                        cbxSalesman.SelectedValue = personRouteID;
+                    }
+                    break;
+                case "cbxArea":
+                    {
+                        ////Fill Area options
+                        cbxArea.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.AREA);
+                        cbxArea.DisplayMember = "PersonRouteName";
+                        cbxArea.ValueMember = "PersonRouteID";
+                        ///set newly added item
+                        ///
+                        cbxArea.SelectedValue = personRouteID;
+                    }
+                    break;
+                case "cbxRoute":
+                    {
+                        ////Fill Route options
+                        cbxRoute.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ROUTE);
+                        cbxRoute.DisplayMember = "PersonRouteName";
+                        cbxRoute.ValueMember = "PersonRouteID";
+                        ///set newly added item
+                        ///
+                        cbxRoute.SelectedValue = personRouteID;
+                    }
+                    break;
+            }
+
         }
 
+        private void dgvCompanyDiscount_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            string columnName = dgvCompanyDiscount.Columns[e.ColumnIndex].Name;
+
+            if (columnName.Equals("CompanyName") || columnName.Equals("IsLessEcise")) return;
+
+            if (!string.IsNullOrEmpty(Convert.ToString(e.FormattedValue)) && ExtensionMethods.SafeConversionDouble(Convert.ToString(e.FormattedValue)) == null)
+            {
+                dgvCompanyDiscount.Rows[e.RowIndex].ErrorText = "Enter Valid value";
+                e.Cancel = true;
+            }
+            else
+            {
+                dgvCompanyDiscount.Rows[e.RowIndex].ErrorText = String.Empty;
+            }
+        }
+
+        private void dgvCompanyDiscount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            //{
+            //    e.Handled = true;
+            //}
+            //// only allow one decimal point
+            //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            //{
+            //    e.Handled = true;
+            //}
+        }
     }
 }

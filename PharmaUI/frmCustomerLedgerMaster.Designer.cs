@@ -76,7 +76,7 @@
             this.btnAddNewLedger.Name = "btnAddNewLedger";
             this.btnAddNewLedger.Size = new System.Drawing.Size(184, 42);
             this.btnAddNewLedger.TabIndex = 16;
-            this.btnAddNewLedger.Text = "Add New Supplier";
+            this.btnAddNewLedger.Text = "Add New Customer";
             this.btnAddNewLedger.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddNewLedger.UseVisualStyleBackColor = true;
             this.btnAddNewLedger.Click += new System.EventHandler(this.btnAddNewLedger_Click);
