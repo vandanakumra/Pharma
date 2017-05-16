@@ -81,6 +81,9 @@
     <Compile Include="Entity\ItemMaster.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Menu.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\PersonalLedger.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>

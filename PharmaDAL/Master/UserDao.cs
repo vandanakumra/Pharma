@@ -123,6 +123,26 @@ namespace PharmaDAL.Master
 
         }
 
+        public List<PharmaBusinessObjects.Master.Role> GetRoles(string searchText)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                try
+                {
+                    return context.Roles.Where(p => p.RoleName.ToLower() == searchText).Select(p => new PharmaBusinessObjects.Master.Role() {
+                        RoleId = p.RoleId,
+                        RoleName = p.RoleName,
+                        Status = p.Status
+                    }).ToList();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    throw ex;
+                }
+            }
+
+        }
+
 
 
     }

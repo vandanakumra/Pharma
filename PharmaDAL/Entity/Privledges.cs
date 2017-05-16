@@ -18,6 +18,7 @@ namespace PharmaDAL.Entity
         public Privledges()
         {
             this.RolePrivledges = new HashSet<RolePrivledges>();
+            this.Menu = new HashSet<Menu>();
         }
     
         public int PrivledgeId { get; set; }
@@ -26,5 +27,7 @@ namespace PharmaDAL.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RolePrivledges> RolePrivledges { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Menu> Menu { get; set; }
     }
 }

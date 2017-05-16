@@ -44,5 +44,6 @@ namespace PharmaDAL.Entity
         public virtual DbSet<Privledges> Privledges { get; set; }
         public virtual DbSet<RolePrivledges> RolePrivledges { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
     }
 }

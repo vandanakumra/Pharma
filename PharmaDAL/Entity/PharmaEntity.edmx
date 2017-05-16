@@ -93,7 +93,7 @@
           <Property Name="CustomerLedgerCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CustomerLedgerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CustomerLedgerShortName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
           <Property Name="Pager" Type="nvarchar" MaxLength="50" />
@@ -205,6 +205,16 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="MenuKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrivledgeId" Type="int" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="PersonalLedger">
           <Key>
             <PropertyRef Name="PersonalLedgerId" />
@@ -290,7 +300,7 @@
           <Property Name="SupplierLedgerCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="SupplierLedgerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SupplierLedgerShortName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
           <Property Name="Pager" Type="nvarchar" MaxLength="50" />
@@ -495,6 +505,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Menu_Privledges">
+          <End Role="Privledges" Type="Self.Privledges" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Privledges">
+              <PropertyRef Name="PrivledgeId" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="PrivledgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PersonRouteMaster_RecordType">
           <End Role="RecordType" Type="Self.RecordType" Multiplicity="0..1" />
           <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="*" />
@@ -558,6 +580,7 @@
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InterestType" EntityType="Self.InterestType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonalLedger" EntityType="Self.PersonalLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonLedgerType" EntityType="Self.PersonLedgerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" Schema="dbo" store:Type="Tables" />
@@ -622,6 +645,10 @@
           <AssociationSet Name="FK_ItemMaster_AccountLedgerMaster" Association="Self.FK_ItemMaster_AccountLedgerMaster">
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Privledges" Association="Self.FK_Menu_Privledges">
+            <End Role="Privledges" EntitySet="Privledges" />
+            <End Role="Menu" EntitySet="Menu" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonRouteMaster_RecordType" Association="Self.FK_PersonRouteMaster_RecordType">
             <End Role="RecordType" EntitySet="RecordType" />
@@ -744,7 +771,7 @@
           <Property Name="CustomerLedgerCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustomerLedgerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustomerLedgerShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Pager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -938,7 +965,7 @@
           <Property Name="SupplierLedgerCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SupplierLedgerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SupplierLedgerShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Pager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1281,6 +1308,11 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Menu" EntityType="PharmaDBModel.Menu" />
+          <AssociationSet Name="FK_Menu_Privledges" Association="PharmaDBModel.FK_Menu_Privledges">
+            <End Role="Privledges" EntitySet="Privledges" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Privledges">
           <Key>
@@ -1290,6 +1322,7 @@
           <Property Name="PriviledgeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="RolePrivledges" Relationship="PharmaDBModel.FK_RolePrivledges_Privledges" FromRole="Privledges" ToRole="RolePrivledges" />
+          <NavigationProperty Name="Menu" Relationship="PharmaDBModel.FK_Menu_Privledges" FromRole="Privledges" ToRole="Menu" />
         </EntityType>
         <EntityType Name="RolePrivledges">
           <Key>
@@ -1348,6 +1381,29 @@
             </Principal>
             <Dependent Role="Users">
               <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="MenuKey" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrivledgeId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Privledges" Relationship="PharmaDBModel.FK_Menu_Privledges" FromRole="Menu" ToRole="Privledges" />
+        </EntityType>
+        <Association Name="FK_Menu_Privledges">
+          <End Type="PharmaDBModel.Privledges" Role="Privledges" Multiplicity="0..1" />
+          <End Type="PharmaDBModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Privledges">
+              <PropertyRef Name="PrivledgeId" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="PrivledgeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1695,6 +1751,17 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="PharmaDBModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PrivledgeId" ColumnName="PrivledgeId" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="MenuKey" ColumnName="MenuKey" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

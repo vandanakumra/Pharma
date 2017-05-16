@@ -44,6 +44,8 @@
         <AssociationConnector Association="PharmaDBModel.FK_RolePrivledges_Privledges" />
         <AssociationConnector Association="PharmaDBModel.FK_RolePrivledges_Roles" />
         <AssociationConnector Association="PharmaDBModel.FK__Users__RoleID__5C37ACAD" />
+        <EntityTypeShape EntityType="PharmaDBModel.Menu" Width="1.5" PointX="13.75" PointY="19.75" />
+        <AssociationConnector Association="PharmaDBModel.FK_Menu_Privledges" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
