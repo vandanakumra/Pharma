@@ -563,9 +563,8 @@ namespace PharmaBusiness
 
         #region User Master
 
-        public List<PharmaBusinessObjects.Master.UserMaster> GetUsers()
-        {
-            return new UserBiz(this.LoggedInUser).GetUsers();
+        public List<PharmaBusinessObjects.Master.UserMaster> GetUsers(string searchText)        {
+            return new UserBiz(this.LoggedInUser).GetUsers(searchText);
         }
         public PharmaBusinessObjects.Master.UserMaster GetUserByUserName(string userName)
         {

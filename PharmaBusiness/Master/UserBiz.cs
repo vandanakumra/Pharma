@@ -13,9 +13,9 @@ namespace PharmaBusiness.Master
 
         }
 
-        internal List<PharmaBusinessObjects.Master.UserMaster> GetUsers()
+        internal List<PharmaBusinessObjects.Master.UserMaster> GetUsers(string searchText)
         {
-            return new PharmaDAL.Master.UserDao(this.LoggedInUser).GetUsers();
+            return new PharmaDAL.Master.UserDao(this.LoggedInUser).GetUsers(searchText);
         }
 
         internal PharmaBusinessObjects.Master.UserMaster GetUserByUserName(string userName)

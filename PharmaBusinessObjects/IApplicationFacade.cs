@@ -93,7 +93,7 @@ namespace PharmaBusinessObjects
 
         #region User Master
 
-        List<PharmaBusinessObjects.Master.UserMaster> GetUsers();
+        List<PharmaBusinessObjects.Master.UserMaster> GetUsers(string searchText);
         PharmaBusinessObjects.Master.UserMaster GetUserByUserName(string userName);
         PharmaBusinessObjects.Master.UserMaster GetUserByUserId(int userid);
         int AddUser(PharmaBusinessObjects.Master.UserMaster p);
