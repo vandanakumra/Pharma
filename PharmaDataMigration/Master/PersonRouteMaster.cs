@@ -44,7 +44,7 @@ namespace PharmaDataMigration.Master
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -93,7 +93,7 @@ namespace PharmaDataMigration.Master
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -142,7 +142,7 @@ namespace PharmaDataMigration.Master
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -191,7 +191,7 @@ namespace PharmaDataMigration.Master
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -240,7 +240,7 @@ namespace PharmaDataMigration.Master
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -289,7 +289,7 @@ namespace PharmaDataMigration.Master
                                 PersonRouteName = Convert.ToString(dr["ACName"]).TrimEnd(),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 

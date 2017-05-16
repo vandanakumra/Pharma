@@ -38,27 +38,32 @@ namespace PharmaDataMigration.Master
                     {
                         foreach (DataRow dr in dtItemMaster.Rows)
                         {
-                            
-                            int totalItemsFromSameCompany = companyCodeCounts.Where(p => p.CompanyCode == Convert.ToString(dr["CompCD"])).Select(p => p.CompanyCodeCount).FirstOrDefault();
+                            string originalItemCompanyCode = Convert.ToString(dr["CompCD"]).TrimEnd();
+                            string companyCode = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == originalItemCompanyCode).FirstOrDefault().MappedCompanyCode;
+                            int totalItemsFromSameCompany = companyCodeCounts.Where(p => p.CompanyCode == companyCode).Select(p => p.CompanyCodeCount).FirstOrDefault();
                             totalItemsFromSameCompany++;
 
                             if (totalItemsFromSameCompany > 1)
                             {
-                                foreach (var item in companyCodeCounts.Where(p => p.CompanyCode == Convert.ToString(dr["CompCD"])))
+                                foreach (var item in companyCodeCounts.Where(p => p.CompanyCode == companyCode))
                                 {
                                     item.CompanyCodeCount = totalItemsFromSameCompany;
                                 }
                             }
                             else
                             {
-                                companyCodeCounts.Add(new CompanyCodeCounts() { CompanyCode = Convert.ToString(dr["CompCD"]), CompanyCodeCount = totalItemsFromSameCompany });
+                                companyCodeCounts.Add(new CompanyCodeCounts() { CompanyCode = companyCode, CompanyCodeCount = totalItemsFromSameCompany });
                             }
                             
+                            string itemCode = string.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0'));
+                            string originalItemCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                            Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = originalItemCode, MappedItemCode = itemCode });
+
                             PharmaDAL.Entity.ItemMaster newItemMaster = new PharmaDAL.Entity.ItemMaster()
                             {
-                                ItemCode = string.Concat(Convert.ToString(dr["CompCD"]), totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
-                                ItemName = Convert.ToString(dr["ACName"]),
-                                CompanyCode = Convert.ToString(dr["CompCD"]),
+                                ItemCode = itemCode,
+                                ItemName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                CompanyCode = companyCode,
                                 ConversionRate = Convert.ToDouble(dr["ConvRate"]),
                                 ShortName = Convert.ToString(dr["ALT_Name"]),
                                 Packing = Convert.ToString(dr["Size"]),
@@ -91,7 +96,9 @@ namespace PharmaDataMigration.Master
                                 MinimumStock = Convert.ToInt32(dr["min"]),
                                 MaximumStock = Convert.ToInt32(dr["max"]),
                                 SaleTypeId = 1, //Convert.ToInt32(dr["SType"]),
-                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
+                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
+                                CreatedBy = "admin",
+                                CreatedOn = DateTime.Now
                             };
 
                             listItemMaster.Add(newItemMaster);

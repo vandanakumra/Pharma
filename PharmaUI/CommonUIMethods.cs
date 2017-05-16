@@ -191,14 +191,17 @@ namespace PharmaUI
         public static void AddChildFormToPanel(Control parentForm, Control childFrm, Panel pnl)
         {
             pnl.Controls[parentForm.Name].Visible = false;
-
             pnl.Controls.Add(childFrm);
         }
 
         public static void RemoveChildFormToPanel(Control parentForm, Control childFrm, Panel pnl)
         {
             pnl.Controls.Remove(childFrm);
-            pnl.Controls[parentForm.Name].Visible = true;
+
+            if (parentForm != null)
+            {
+                pnl.Controls[parentForm.Name].Visible = true;
+            }
         }
 
         public static void SetFormProperties(Form frm)

@@ -19,6 +19,7 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         private PersonRouteMaster PersonRouteMaster { get; set; }
+        public int PersonRouteID { get; set; }
 
         public frmPersonRouteMasterAddUpdate()
         {
@@ -30,7 +31,7 @@ namespace PharmaUI
 
         private void SetUIForSpecificRecordType()
         {
-            if (this.PersonRouteMaster!=null)
+            if (this.PersonRouteMaster!=null && !String.IsNullOrWhiteSpace(this.PersonRouteMaster.RecordTypeNme))
             {
                 tbPersonRouteName.Text = this.PersonRouteMaster.PersonRouteName;
                 cbPersonRouteType.SelectedIndex= cbPersonRouteType.FindString(this.PersonRouteMaster.RecordTypeNme);
@@ -139,7 +140,7 @@ namespace PharmaUI
 
             if (result > 0)
             {
-                this.Close();
+                this.PersonRouteID = result;
             }
 
             this.Close();

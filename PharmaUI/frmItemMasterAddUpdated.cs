@@ -68,9 +68,15 @@ namespace PharmaUI
             cbxComanyCode.DisplayMember = "CompanyName";
             cbxComanyCode.ValueMember = "CompanyCode";
 
-            var comp = applicationFacade.GetCompanyById(companyID);
-
-            cbxComanyCode.SelectedValue = comp.CompanyCode;
+            if (companyID > 0)
+            {
+                var comp = applicationFacade.GetCompanyById(companyID);
+                cbxComanyCode.SelectedValue = comp.CompanyCode;
+            }
+            else
+            {
+                cbxComanyCode.SelectedIndex = 0;
+            }
 
             cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
         }

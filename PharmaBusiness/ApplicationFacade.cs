@@ -105,10 +105,10 @@ namespace PharmaBusiness
             }
         }
 
-             /// <summary>
-             /// Fetch all the active items by Search
-             /// </summary>
-             /// <returns>List of items</returns>
+        /// <summary>
+        /// Fetch all the active items by Search
+        /// </summary>
+        /// <returns>List of items</returns>
         public List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
         {
             try
@@ -254,14 +254,14 @@ namespace PharmaBusiness
             try
             {
                 return new AccountLedgerMasterBiz(this.LoggedInUser).UpdateAccountLedger(p);
-            }            
+            }
             catch (Exception)
             {
                 throw;
             }
         }
 
-       public  List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerBySystemName(string systemName)
+        public List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerBySystemName(string systemName)
         {
             try
             {
@@ -378,7 +378,7 @@ namespace PharmaBusiness
             }
 
         }
-        
+
 
         #endregion
 
@@ -482,7 +482,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new PersonRouteMasterBiz(this.LoggedInUser).GetPersonRoutesByRecordTypeIdAndSearch(recordTypeID,searchString);
+                return new PersonRouteMasterBiz(this.LoggedInUser).GetPersonRoutesByRecordTypeIdAndSearch(recordTypeID, searchString);
             }
             catch (Exception)
             {
@@ -556,7 +556,20 @@ namespace PharmaBusiness
                 throw;
             }
         }
-        
+
+
+
+        public int DeleteCustomerLedger(int customerLedgerID)
+        {
+            try
+            {
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).DeleteCustomerLedger(customerLedgerID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 

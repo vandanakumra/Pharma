@@ -34,6 +34,9 @@ namespace PharmaBusiness.Master
             return new CustomerLedgerMasterDao(this.LoggedInUser).GetCompleteCompanyDiscountList(customerLedgerID);
         }
         
-
+        internal int DeleteCustomerLedger(int customerLedgerID)
+        {
+            return new CustomerLedgerMasterDao(this.LoggedInUser).DeleteCustomerLedger(customerLedgerID);
+        }
     }
 }
