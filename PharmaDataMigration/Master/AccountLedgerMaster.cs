@@ -38,7 +38,8 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtControlCodesMaster.Rows)
                         {
                             maxAccountLedgerID++;
-                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == Convert.ToString(dr["Actyp"]).TrimEnd()).FirstOrDefault().AccountTypeID;
+                            string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                             string accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
                             string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
                             Common.controlCodeMap.Add(new ControlCodeMap() { OriginalControlCode = originalAccountLedgerCode, MappedControlCode = accountLedgerCode });
@@ -95,11 +96,16 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtIncomeLedgerMaster.Rows)
                         {
                             maxAccountLedgerID++;
-                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == Convert.ToString(dr["Actyp"]).TrimEnd()).FirstOrDefault().AccountTypeID;
+                            string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                             string accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
                             string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cac"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
-                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cad"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
+                            string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                            string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
+                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
+                            string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                            string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
+                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                             Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
                             PharmaDAL.Entity.AccountLedgerMaster newIncomeLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
@@ -154,11 +160,16 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtExpenditureLedgerMaster.Rows)
                         {
                             maxAccountLedgerID++;
-                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == Convert.ToString(dr["Actyp"]).TrimEnd()).FirstOrDefault().AccountTypeID;
+                            string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                             string accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
                             string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cac"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
-                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cad"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
+                            string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                            string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
+                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
+                            string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                            string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
+                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                             Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
                             PharmaDAL.Entity.AccountLedgerMaster newExpenditureLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
@@ -213,11 +224,16 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtTransactionLedgerMaster.Rows)
                         {
                             maxAccountLedgerID++;
-                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == Convert.ToString(dr["Actyp"]).TrimEnd()).FirstOrDefault().AccountTypeID;
+                            string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                             string accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
                             string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cac"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
-                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cad"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
+                            string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                            string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
+                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
+                            string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                            string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
+                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                             Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
                             PharmaDAL.Entity.AccountLedgerMaster newTransactionLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
@@ -272,11 +288,16 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtGeneralLedgerMaster.Rows)
                         {
                             maxAccountLedgerID++;
-                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == Convert.ToString(dr["Actyp"]).TrimEnd()).FirstOrDefault().AccountTypeID;
+                            string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                             string accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
                             string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cac"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
-                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cad"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
+                            string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                            string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
+                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
+                            string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                            string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
+                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                             Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
                             PharmaDAL.Entity.AccountLedgerMaster newGeneralLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
@@ -331,11 +352,16 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtPurchaseLedgerMaster.Rows)
                         {
                             maxAccountLedgerID++;
-                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == Convert.ToString(dr["Actyp"]).TrimEnd()).FirstOrDefault().AccountTypeID;
+                            string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                             string accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
                             string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cac"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
-                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cad"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
+                            string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                            string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
+                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
+                            string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                            string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
+                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                             Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
                             PharmaDAL.Entity.AccountLedgerMaster newPurchaseLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
@@ -390,11 +416,16 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtSaleLedgerMaster.Rows)
                         {
                             maxAccountLedgerID++;
-                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == Convert.ToString(dr["Actyp"]).TrimEnd()).FirstOrDefault().AccountTypeID;
+                            string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                            int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                             string accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
                             string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cac"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
-                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == (Common.companyCodeMap.Where(q => q.OriginalCompanyCode == Convert.ToString(dr["Cad"]).TrimEnd()).FirstOrDefault().MappedCompanyCode)).FirstOrDefault().AccountLedgerID;
+                            string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                            string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
+                            int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
+                            string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                            string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
+                            int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                             Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
                             PharmaDAL.Entity.AccountLedgerMaster newSaleLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()

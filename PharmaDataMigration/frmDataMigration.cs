@@ -30,7 +30,7 @@ namespace PharmaDataMigration
             if (result == DialogResult.OK)
             {
                 txtDataDirectory.Text = fbdDataDirectory.SelectedPath;
-                Common.DataDirectory = txtDataDirectory.Text;
+                //Common.DataDirectory = txtDataDirectory.Text;
             }
         }
 
@@ -55,9 +55,11 @@ namespace PharmaDataMigration
             PersonRouteMaster personRouteMaster = new PersonRouteMaster();
             PersonalLedgerMaster personalLedgerMaster = new PersonalLedgerMaster();
             AccountLedgerMaster accountLedgerMaster = new AccountLedgerMaster();
-            int result = 0;
+            int result;
 
             grdDataMigration.Rows.Add("Company Master", "Processing", 0);
+            result = 0;
+
             result = companyMaster.InsertCompanyMasterData();
 
             grdDataMigration.Rows[0].Cells[1].Value = "Completed";
