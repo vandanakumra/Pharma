@@ -36,6 +36,15 @@ namespace PharmaDataMigration
 
         private void btnStartMigration_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(txtDataDirectory.Text))
+            {
+                return;
+            }
+            else
+            {
+                Common.DataDirectory = txtDataDirectory.Text;
+            }
+
             StartMigration();
         }
 

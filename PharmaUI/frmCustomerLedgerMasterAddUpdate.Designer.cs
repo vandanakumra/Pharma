@@ -188,6 +188,8 @@
             this.dgvCompanyDiscount.Name = "dgvCompanyDiscount";
             this.dgvCompanyDiscount.Size = new System.Drawing.Size(465, 282);
             this.dgvCompanyDiscount.TabIndex = 700;
+            this.dgvCompanyDiscount.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvCompanyDiscount_CellValidating);
+            this.dgvCompanyDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvCompanyDiscount_KeyPress);
             // 
             // gbBankDetails
             // 
@@ -692,7 +694,6 @@
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Other Details";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // tableLayoutPanel5
             // 
@@ -822,7 +823,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(244, 148);
             this.tableLayoutPanel3.TabIndex = 1;
-            this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
             // tbxMaxOSAmount
             // 

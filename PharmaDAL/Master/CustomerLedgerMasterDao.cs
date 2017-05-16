@@ -318,5 +318,22 @@ namespace PharmaDAL.Master
             }
         }
 
+        public int DeleteCustomerLedger(int customerLedgerID)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                var customerLedgerMaster = context.CustomerLedger.FirstOrDefault(p => p.CustomerLedgerId == customerLedgerID);
+
+                if (customerLedgerMaster != null)
+                {
+                    customerLedgerMaster.Status = false;
+                    customerLedgerMaster.ModifiedBy = this.LoggedInUser.Username;
+                    customerLedgerMaster.ModifiedOn = System.DateTime.Now;
+                }
+
+                return context.SaveChanges();
+            }
+        }
+
     }
 }
