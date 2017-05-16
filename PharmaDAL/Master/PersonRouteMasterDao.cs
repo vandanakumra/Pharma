@@ -54,7 +54,12 @@ namespace PharmaDAL.Master
                     };
 
                     context.PersonRouteMaster.Add(table);
-                    return context.SaveChanges();
+
+                    if (context.SaveChanges() > 0)
+                        return table.PersonRouteID;
+                    else
+                        return 0;
+
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {

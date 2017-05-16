@@ -19,21 +19,22 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         private PersonRouteMaster PersonRouteMaster { get; set; }
+        public int PersonRouteID { get; set; }
 
-        public frmPersonRouteMasterAddUpdate(string recordType = "")
+        public frmPersonRouteMasterAddUpdate()
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.PersonRouteMaster = new PersonRouteMaster();
-            SetUIForRecordType(recordType);
         }
 
-        private void SetUIForRecordType(string recordType)
+        private void SetUIForSpecificRecordType()
         {
-            if (!String.IsNullOrWhiteSpace(recordType))
+            if (this.PersonRouteMaster!=null && !String.IsNullOrWhiteSpace(this.PersonRouteMaster.RecordTypeNme))
             {
-                cbPersonRouteType.Text = recordType;
+                tbPersonRouteName.Text = this.PersonRouteMaster.PersonRouteName;
+                cbPersonRouteType.SelectedIndex= cbPersonRouteType.FindString(this.PersonRouteMaster.RecordTypeNme);
                 cbPersonRouteType.Enabled = false;
             }
         }
@@ -62,6 +63,10 @@ namespace PharmaUI
             {
                 FillCombo();
                 cbxStatus.SelectedItem = Enums.Status.Active;
+                if (this.PersonRouteMaster!=null)
+                {
+                    SetUIForSpecificRecordType();
+                }
             }
         }
 
@@ -135,7 +140,7 @@ namespace PharmaUI
 
             if (result > 0)
             {
-                this.Close();
+                this.PersonRouteID = result;
             }
 
             this.Close();
