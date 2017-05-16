@@ -97,9 +97,6 @@ namespace PharmaUI
             dgvCustomerLedger.Columns["CreditDebit"].Visible = true;
             dgvCustomerLedger.Columns["CreditDebit"].HeaderText = "CreditDebit";
 
-            dgvCustomerLedger.Columns["BankName"].Visible = true;
-            dgvCustomerLedger.Columns["BankName"].HeaderText = "Bank Name";
-
             dgvCustomerLedger.Columns["Status"].Visible = true;
             dgvCustomerLedger.Columns["Status"].HeaderText = "Status";
 

@@ -47,7 +47,6 @@ namespace PharmaUI
 
         }
 
-
         private void LoadCombo()
         {
 
@@ -56,25 +55,40 @@ namespace PharmaUI
             cbxZSM.DisplayMember = "PersonRouteName";
             cbxZSM.ValueMember = "PersonRouteID";
 
+            cbxZSM.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxZSM.AutoCompleteMode = AutoCompleteMode.Suggest;
+
             ////Fill RSM options
             cbxRSM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.RSM);
             cbxRSM.DisplayMember = "PersonRouteName";
             cbxRSM.ValueMember = "PersonRouteID";
+
+            cbxRSM.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxRSM.AutoCompleteMode = AutoCompleteMode.Suggest;
 
             ////Fill ASM options
             cbxASM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ASM);
             cbxASM.DisplayMember = "PersonRouteName";
             cbxASM.ValueMember = "PersonRouteID";
 
+            cbxASM.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxASM.AutoCompleteMode = AutoCompleteMode.Suggest;
+
             ////Fill Area options
             cbxArea.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.AREA);
             cbxArea.DisplayMember = "PersonRouteName";
             cbxArea.ValueMember = "PersonRouteID";
 
+            cbxArea.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxArea.AutoCompleteMode = AutoCompleteMode.Suggest;
+
             ////Fill Salesman options
             cbxSalesman.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.SALESMAN);
             cbxSalesman.DisplayMember = "PersonRouteName";
             cbxSalesman.ValueMember = "PersonRouteID";
+
+            cbxSalesman.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxSalesman.AutoCompleteMode = AutoCompleteMode.Suggest;
 
             ////Fill Route options
             cbxRoute.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ROUTE);
@@ -86,6 +100,9 @@ namespace PharmaUI
             cbxCustomerType.DisplayMember = "CustomerTypeName";
             cbxCustomerType.ValueMember = "CustomerTypeId";
 
+            cbxCustomerType.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxCustomerType.AutoCompleteMode = AutoCompleteMode.Suggest;
+
             ////Fill Rate Type options
             cbxRateType.DataSource = applicationFacade.GetInterestTypes();
             cbxRateType.DisplayMember = "InterestTypeName";
@@ -95,17 +112,6 @@ namespace PharmaUI
             cbxLessExcise.DataSource = Enum.GetValues(typeof(Enums.Choice));
             cbxLessExcise.SelectedItem = Choice.No;
 
-            ////Fill Fixed Tax  options
-            cbxFixedTax.DataSource = Enum.GetValues(typeof(Enums.Choice));
-            cbxFixedTax.SelectedItem = Choice.No;
-
-            ////Fill Fixed SC options
-            cbxFixedSC.DataSource = Enum.GetValues(typeof(Enums.Choice));
-            cbxFixedSC.SelectedItem = Choice.No;
-
-            ////Fill Change SC/Tax while billing options
-            cbxChangeSCTAXWhileBill.DataSource = Enum.GetValues(typeof(Enums.Choice));
-            cbxChangeSCTAXWhileBill.SelectedItem = Choice.No;
 
             ////Fill Follow condition strictly options
             cbxFollowConditionStrictly.DataSource = Enum.GetValues(typeof(Enums.Choice));
@@ -164,7 +170,6 @@ namespace PharmaUI
             GotFocusEventRaised(this);
         }
 
-
         public void GotFocusEventRaised(Control control)
         {
             foreach (Control c in control.Controls)
@@ -190,13 +195,11 @@ namespace PharmaUI
             }
         }
 
-
         private void C_GotFocus(object sender, EventArgs e)
         {
             ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
         }
-
 
         public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
         {
@@ -215,8 +218,6 @@ namespace PharmaUI
                 ucSupplierCustomerInfo.Address = customerLedgerMaster.Address;
                 ucSupplierCustomerInfo.ContactPerson = customerLedgerMaster.ContactPerson;
                 ucSupplierCustomerInfo.Mobile = customerLedgerMaster.Mobile;
-                ucSupplierCustomerInfo.Fax = customerLedgerMaster.Fax;
-                ucSupplierCustomerInfo.Pager = customerLedgerMaster.Pager;
                 ucSupplierCustomerInfo.OfficePhone = customerLedgerMaster.OfficePhone;
                 ucSupplierCustomerInfo.ResidentPhone = customerLedgerMaster.ResidentPhone;
                 ucSupplierCustomerInfo.EmailAddress = customerLedgerMaster.EmailAddress;
@@ -246,22 +247,16 @@ namespace PharmaUI
                     cbxRoute.SelectedValue = customerLedgerMaster.RouteId;
 
                 tbxDL.Text = customerLedgerMaster.DLNo;
-                tbxTIN.Text = customerLedgerMaster.TINNo;
-                tbxCST.Text = customerLedgerMaster.CSTNo;
-                tbxDay.Text = customerLedgerMaster.Day;
+                tbxGST.Text = customerLedgerMaster.GSTNo;
+                tbxCIN.Text = customerLedgerMaster.CINNo;
+                tbxLIN.Text = customerLedgerMaster.LINNo;
+                tbxServiceTax.Text = customerLedgerMaster.ServiceTaxNo;
+                tbxPAN.Text = customerLedgerMaster.PANNo;
+
                 tbxCredtLimit.Text = Convert.ToString(customerLedgerMaster.CreditLimit);
-                tbxBankName.Text = customerLedgerMaster.BankName;
-                tbxBankArea.Text = customerLedgerMaster.BankArea;
-                tbxCloseDay.Text = customerLedgerMaster.CloseDay;
                 cbxCustomerType.SelectedValue = customerLedgerMaster.CustomerTypeID;
                 cbxLessExcise.SelectedItem = customerLedgerMaster.IsLessExcise ? Choice.Yes : Choice.No;
                 cbxRateType.SelectedValue = customerLedgerMaster.InterestTypeID;
-                cbxFixedTax.SelectedItem = customerLedgerMaster.IsFixedTax ? Choice.Yes : Choice.No;
-                cbxFixedTax.SelectedItem = customerLedgerMaster.IsFixedTax ? Choice.Yes : Choice.No;
-                tbxTax.Text = Convert.ToString(customerLedgerMaster.Tax);
-                cbxFixedSC.SelectedItem = customerLedgerMaster.IsFixedSC ? Choice.Yes : Choice.No;
-                tbxSC.Text = Convert.ToString(customerLedgerMaster.SC);
-                cbxChangeSCTAXWhileBill.SelectedItem = customerLedgerMaster.IsChangeSCWhileBill ? Choice.Yes : Choice.No;
                 tbxSaleBillFormat.Text = customerLedgerMaster.SaleBillFormat;
                 tbxMaxOSAmount.Text = Convert.ToString(customerLedgerMaster.MaxOSAmount);
                 tbxMaxBillAmmount.Text = Convert.ToString(customerLedgerMaster.MaxBillAmount);
@@ -295,8 +290,6 @@ namespace PharmaUI
                 customerLedgerMaster.Address = ucSupplierCustomerInfo.Address;
                 customerLedgerMaster.ContactPerson = ucSupplierCustomerInfo.ContactPerson;
                 customerLedgerMaster.Mobile = ucSupplierCustomerInfo.Mobile;
-                customerLedgerMaster.Fax = ucSupplierCustomerInfo.Fax;
-                customerLedgerMaster.Pager = ucSupplierCustomerInfo.Pager;
                 customerLedgerMaster.OfficePhone = ucSupplierCustomerInfo.OfficePhone;
                 customerLedgerMaster.ResidentPhone = ucSupplierCustomerInfo.ResidentPhone;
                 customerLedgerMaster.EmailAddress = ucSupplierCustomerInfo.EmailAddress;
@@ -313,32 +306,18 @@ namespace PharmaUI
                 customerLedgerMaster.SalesManId = cbxSalesman.SelectedItem != null ? (int?)(cbxSalesman.SelectedItem as PersonRouteMaster).PersonRouteID : null;
                 customerLedgerMaster.RouteId = cbxRoute.SelectedItem != null ? (int?)(cbxRoute.SelectedItem as PersonRouteMaster).PersonRouteID : null;
                 customerLedgerMaster.DLNo = tbxDL.Text;
-                customerLedgerMaster.TINNo = tbxTIN.Text;
-                customerLedgerMaster.CSTNo = tbxCST.Text;
-                customerLedgerMaster.Day = tbxDay.Text;
+                customerLedgerMaster.GSTNo = tbxGST.Text;
+                customerLedgerMaster.CINNo = tbxCIN.Text;
+                customerLedgerMaster.LINNo = tbxLIN.Text;
+                customerLedgerMaster.ServiceTaxNo = tbxServiceTax.Text;
+                customerLedgerMaster.PANNo = tbxPAN.Text;
                 customerLedgerMaster.CreditLimit = ExtensionMethods.SafeConversionInt(tbxCredtLimit.Text) ?? default(int);
-                customerLedgerMaster.BankName = tbxBankName.Text;
-                customerLedgerMaster.BankArea = tbxBankArea.Text;
-                customerLedgerMaster.CloseDay = tbxCloseDay.Text;
                 customerLedgerMaster.CustomerTypeID = (cbxCustomerType.SelectedItem as CustomerType).CustomerTypeId;
 
                 Enum.TryParse<Choice>(cbxLessExcise.SelectedValue.ToString(), out choice);
                 customerLedgerMaster.IsLessExcise = choice == Choice.Yes;
 
                 customerLedgerMaster.InterestTypeID = (cbxRateType.SelectedItem as InterestType).InterestTypeId;
-
-                Enum.TryParse<Choice>(cbxFixedTax.SelectedValue.ToString(), out choice);
-                customerLedgerMaster.IsFixedTax = choice == Choice.Yes;
-
-                customerLedgerMaster.Tax = ExtensionMethods.SafeConversionDouble(tbxTax.Text);
-
-                Enum.TryParse<Choice>(cbxFixedSC.SelectedValue.ToString(), out choice);
-                customerLedgerMaster.IsFixedSC = choice == Choice.Yes;
-
-                customerLedgerMaster.SC = ExtensionMethods.SafeConversionDouble(tbxSC.Text);
-
-                Enum.TryParse<Choice>(cbxChangeSCTAXWhileBill.SelectedValue.ToString(), out choice);
-                customerLedgerMaster.IsChangeSCWhileBill = choice == Choice.Yes;
 
                 customerLedgerMaster.SaleBillFormat = tbxSaleBillFormat.Text;
 
@@ -403,7 +382,6 @@ namespace PharmaUI
             errorProviderCustomerLedger.Clear();
             this.Close();
         }
-
       
         private void frmCustomerLedgerMasterAddUpdate_KeyDown(object sender, KeyEventArgs e)
         {
@@ -411,41 +389,6 @@ namespace PharmaUI
             {
                 this.Close();
             }
-        }
-
-        private void cbxFixedTax_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbxFixedTax.SelectedItem == null) return;
-
-            Choice choice;
-            Enum.TryParse<Choice>(cbxFixedTax.SelectedItem.ToString(), out choice);
-
-            if (choice == Choice.Yes)
-            {
-                tbxTax.Enabled = true;
-            }
-            else
-            {
-                tbxTax.Enabled = false;
-            }
-        }
-
-        private void cbxFixedSC_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbxFixedSC.SelectedItem == null) return;
-
-            Choice choice;
-            Enum.TryParse<Choice>(cbxFixedSC.SelectedItem.ToString(), out choice);
-
-            if (choice == Choice.Yes)
-            {
-                tbxSC.Enabled = true;
-            }
-            else
-            {
-                tbxSC.Enabled = false;
-            }
-
         }
 
         private void cbxPersonRouteType_KeyDown(object sender, KeyEventArgs e)
@@ -602,35 +545,33 @@ namespace PharmaUI
             }
 
         }
-
-        private void dgvCompanyDiscount_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+  
+        private void dgvCompanyDiscount_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            string columnName = dgvCompanyDiscount.Columns[e.ColumnIndex].Name;
+            string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
 
             if (columnName.Equals("CompanyName") || columnName.Equals("IsLessEcise")) return;
 
-            if (!string.IsNullOrEmpty(Convert.ToString(e.FormattedValue)) && ExtensionMethods.SafeConversionDouble(Convert.ToString(e.FormattedValue)) == null)
+            e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
+            TextBox tb = e.Control as TextBox;
+            if (tb != null)
             {
-                dgvCompanyDiscount.Rows[e.RowIndex].ErrorText = "Enter Valid value";
-                e.Cancel = true;
-            }
-            else
-            {
-                dgvCompanyDiscount.Rows[e.RowIndex].ErrorText = String.Empty;
+                tb.KeyPress += new KeyPressEventHandler(Column_KeyPress);
             }
         }
 
-        private void dgvCompanyDiscount_KeyPress(object sender, KeyPressEventArgs e)
+        private void Column_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            //{
-            //    e.Handled = true;
-            //}
-            //// only allow one decimal point
-            //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            //{
-            //    e.Handled = true;
-            //}
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
+    
     }
 }

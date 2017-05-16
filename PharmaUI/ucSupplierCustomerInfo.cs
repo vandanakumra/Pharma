@@ -83,30 +83,6 @@ namespace PharmaUI
             }
         }
 
-        public string Fax
-        {
-            get
-            {
-                return txtFax.Text;
-            }
-            set
-            {
-                txtFax.Text = value;
-            }
-        }
-
-        public string Pager
-        {
-            get
-            {
-                return txtPager.Text;
-            }
-            set
-            {
-                txtPager.Text = value;
-            }
-        }
-
         public string EmailAddress
         {
             get
@@ -206,6 +182,7 @@ namespace PharmaUI
             CustomerSupplierName = String.Empty;
             FillCombo();
 
+            txtCustSupplierName.Focus();
         }
 
         private void FillCombo()

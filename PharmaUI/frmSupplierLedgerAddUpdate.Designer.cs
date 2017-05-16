@@ -190,13 +190,11 @@
             this.ucSupplierCustomerInfo.CreditDebit = PharmaBusinessObjects.Common.Enums.TransType.C;
             this.ucSupplierCustomerInfo.CustomerSupplierName = "";
             this.ucSupplierCustomerInfo.EmailAddress = "";
-            this.ucSupplierCustomerInfo.Fax = "";
             this.ucSupplierCustomerInfo.Location = new System.Drawing.Point(11, 61);
             this.ucSupplierCustomerInfo.Mobile = "";
             this.ucSupplierCustomerInfo.Name = "ucSupplierCustomerInfo";
             this.ucSupplierCustomerInfo.OfficePhone = "";
             this.ucSupplierCustomerInfo.OpeningBal = "";
-            this.ucSupplierCustomerInfo.Pager = "";
             this.ucSupplierCustomerInfo.ResidentPhone = "";
             this.ucSupplierCustomerInfo.ShortName = "";
             this.ucSupplierCustomerInfo.Size = new System.Drawing.Size(747, 130);
