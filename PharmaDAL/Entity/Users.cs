@@ -25,5 +25,8 @@ namespace PharmaDAL.Entity
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public bool IsSysAdmin { get; set; }
+        public Nullable<int> RoleID { get; set; }
+    
+        public virtual Roles Roles { get; set; }
     }
 }
