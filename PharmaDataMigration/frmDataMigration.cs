@@ -13,6 +13,12 @@ namespace PharmaDataMigration
             Common.LoggedInUser = new PharmaBusinessObjects.Master.UserMaster(){ Username = "admin" };
             Common.companyCodeMap = new List<CompanyCodeMap>();
             Common.itemCodeMap = new List<ItemCodeMap>();
+            Common.asmCodeMap = new List<ASMCodeMap>();
+            Common.rsmCodeMap = new List<RSMCodeMap>();
+            Common.zsmCodeMap = new List<ZSMCodeMap>();
+            Common.salesmanCodeMap = new List<SalesManCodeMap>();
+            Common.routeCodeMap = new List<RouteCodeMap>();
+            Common.areaCodeMap = new List<AreaCodeMap>();
             Common.personalLedgerCodeMap = new List<PersonalLedgerCodeMap>();
             Common.controlCodeMap = new List<ControlCodeMap>();
             Common.accountLedgerCodeMap = new List<AccountLedgerCodeMap>();
