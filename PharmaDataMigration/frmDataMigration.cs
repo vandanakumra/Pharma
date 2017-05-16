@@ -13,6 +13,9 @@ namespace PharmaDataMigration
             Common.LoggedInUser = new PharmaBusinessObjects.Master.UserMaster(){ Username = "admin" };
             Common.companyCodeMap = new List<CompanyCodeMap>();
             Common.itemCodeMap = new List<ItemCodeMap>();
+            Common.personalLedgerCodeMap = new List<PersonalLedgerCodeMap>();
+            Common.controlCodeMap = new List<ControlCodeMap>();
+            Common.accountLedgerCodeMap = new List<AccountLedgerCodeMap>();
         }
 
         private void frmDataMigration_Load(object sender, EventArgs e)
@@ -38,11 +41,11 @@ namespace PharmaDataMigration
 
         private void StartMigration()
         {
-            //List<DataMigrationResult> dmResult = new List<DataMigrationResult>();
-            //dmResult.Add(new DataMigrationResult { TableName = "", Status = "", NumberOfRecords = 0 });
             CompanyMaster companyMaster = new CompanyMaster();
             ItemMaster itemMaster = new ItemMaster();
             PersonRouteMaster personRouteMaster = new PersonRouteMaster();
+            PersonalLedgerMaster personalLedgerMaster = new PersonalLedgerMaster();
+            AccountLedgerMaster accountLedgerMaster = new AccountLedgerMaster();
             int result = 0;
 
             grdDataMigration.Rows.Add("Company Master", "Processing", 0);
@@ -86,7 +89,7 @@ namespace PharmaDataMigration
             grdDataMigration.Rows.Add("Sales Man", "Processing", 0);
             result = 0;
 
-            //result = personRouteMaster.InsertSalesManData();
+            result = personRouteMaster.InsertSalesManData();
 
             grdDataMigration.Rows[5].Cells[1].Value = "Completed";
             grdDataMigration.Rows[5].Cells[2].Value = result;
@@ -106,6 +109,70 @@ namespace PharmaDataMigration
 
             grdDataMigration.Rows[7].Cells[1].Value = "Completed";
             grdDataMigration.Rows[7].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Personal Details", "Processing", 0);
+            result = 0;
+
+            result = personalLedgerMaster.InsertPersonalLedgerMasterData();
+
+            grdDataMigration.Rows[8].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[8].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Control Codes", "Processing", 0);
+            result = 0;
+
+            result = accountLedgerMaster.InsertControlCodesData();
+
+            grdDataMigration.Rows[9].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[9].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Income Ledger", "Processing", 0);
+            result = 0;
+
+            result = accountLedgerMaster.InsertIncomeLedgerData();
+
+            grdDataMigration.Rows[10].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[10].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Expenditure Ledger", "Processing", 0);
+            result = 0;
+
+            result = accountLedgerMaster.InsertExpenditureLedgerData();
+
+            grdDataMigration.Rows[11].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[11].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Transaction Books", "Processing", 0);
+            result = 0;
+
+            result = accountLedgerMaster.InsertTransactionLedgerData();
+
+            grdDataMigration.Rows[12].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[12].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("General Ledger", "Processing", 0);
+            result = 0;
+
+            result = accountLedgerMaster.InsertGeneralLedgerData();
+
+            grdDataMigration.Rows[13].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[13].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Purchase Ledger", "Processing", 0);
+            result = 0;
+
+            result = accountLedgerMaster.InsertPurchaseLedgerData();
+
+            grdDataMigration.Rows[14].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[14].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Sale Ledger", "Processing", 0);
+            result = 0;
+
+            result = accountLedgerMaster.InsertSaleLedgerData();
+
+            grdDataMigration.Rows[15].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[15].Cells[2].Value = result;
         }
     }
 }

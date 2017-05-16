@@ -41,7 +41,8 @@ namespace PharmaDataMigration.Master
                             maxCompanyCode++;
 
                             string companyCode = maxCompanyCode.ToString().PadLeft(3, '0');
-                            Common.companyCodeMap.Add(new CompanyCodeMap() { OriginalCompanyCode = Convert.ToString(dr["ACNO"]).TrimEnd(), MappedCompanyCode = companyCode });
+                            string originalCompanyCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                            Common.companyCodeMap.Add(new CompanyCodeMap() { OriginalCompanyCode = originalCompanyCode, MappedCompanyCode = companyCode });
 
                             PharmaDAL.Entity.CompanyMaster newCompanyMaster = new PharmaDAL.Entity.CompanyMaster()
                             {
@@ -53,7 +54,7 @@ namespace PharmaDataMigration.Master
                                 BillingPreferenceRating = Convert.ToInt32(dr["DISQTY"]),
                                 CompanyName = Convert.ToString(dr["ACNAME"]).TrimEnd(),
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now
+                                CreatedOn = DateTime.Now
                             };
 
                             listCompanyMaster.Add(newCompanyMaster);
