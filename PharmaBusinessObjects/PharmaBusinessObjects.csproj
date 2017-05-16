@@ -75,6 +75,7 @@
     <Compile Include="Master\ItemMaster.cs" />
     <Compile Include="Master\PersonalLedgerMaster.cs" />
     <Compile Include="Master\PersonRouteMaster.cs" />
+    <Compile Include="Master\Role.cs" />
     <Compile Include="Master\SupplierLedgerMaster.cs" />
     <Compile Include="Master\UserMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

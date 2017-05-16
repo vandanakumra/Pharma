@@ -56,7 +56,8 @@ namespace PharmaDataMigration.Master
                             }
                             
                             string itemCode = string.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0'));
-                            Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = Convert.ToString(dr["ACNO"]).TrimEnd(), MappedItemCode = itemCode });
+                            string originalItemCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                            Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = originalItemCode, MappedItemCode = itemCode });
 
                             PharmaDAL.Entity.ItemMaster newItemMaster = new PharmaDAL.Entity.ItemMaster()
                             {
@@ -95,7 +96,9 @@ namespace PharmaDataMigration.Master
                                 MinimumStock = Convert.ToInt32(dr["min"]),
                                 MaximumStock = Convert.ToInt32(dr["max"]),
                                 SaleTypeId = 1, //Convert.ToInt32(dr["SType"]),
-                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
+                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
+                                CreatedBy = "admin",
+                                CreatedOn = DateTime.Now
                             };
 
                             listItemMaster.Add(newItemMaster);
