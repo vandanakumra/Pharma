@@ -32,9 +32,9 @@
             this.lblSelectedCompanyName = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvCustomerItemDiscount = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerItemDiscount)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -70,7 +70,7 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dgvCustomerItemDiscount, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 59);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -78,14 +78,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(629, 332);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // dataGridView1
+            // dgvCustomerItemDiscount
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(623, 326);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvCustomerItemDiscount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomerItemDiscount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCustomerItemDiscount.Location = new System.Drawing.Point(3, 3);
+            this.dgvCustomerItemDiscount.Name = "dgvCustomerItemDiscount";
+            this.dgvCustomerItemDiscount.Size = new System.Drawing.Size(623, 326);
+            this.dgvCustomerItemDiscount.TabIndex = 0;
             // 
             // frmCustomerItemDiscountMaster
             // 
@@ -97,10 +97,11 @@
             this.Controls.Add(this.lblSelectedCompanyName);
             this.Controls.Add(this.label1);
             this.Name = "frmCustomerItemDiscountMaster";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCustomerItemDiscountMaster";
             this.Load += new System.EventHandler(this.frmCustomerItemDiscountMaster_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerItemDiscount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,6 +113,6 @@
         private System.Windows.Forms.Label lblSelectedCompanyName;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvCustomerItemDiscount;
     }
 }

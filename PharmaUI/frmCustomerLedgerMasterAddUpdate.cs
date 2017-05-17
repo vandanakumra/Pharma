@@ -535,7 +535,7 @@ namespace PharmaUI
 
 
                 int index = activePersonRouteType.FindString(activePersonRouteType.Text);
-                if (index < 0)
+                if (index < 0 && activePersonRouteTypeString != String.Empty)
                 {
                     PersonRouteMaster newPersonRouteMaster = new PersonRouteMaster()
                     {
@@ -549,6 +549,14 @@ namespace PharmaUI
                 }
 
                 activePersonRouteTypeMessageLbl.Text = String.Empty;
+            }
+            else if(keyData == (Keys.F3))
+            {
+                if (dgvCompanyDiscount.SelectedCells.Count > 0 )
+                {
+                    frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(0);
+                    form.Show();
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
