@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -80,6 +80,7 @@
           <Property Name="CustCompDiscountRefID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerLedgerID" Type="int" Nullable="false" />
           <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" />
           <Property Name="Normal" Type="float" />
           <Property Name="Breakage" Type="float" />
           <Property Name="Expired" Type="float" />
@@ -93,11 +94,9 @@
           <Property Name="CustomerLedgerCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CustomerLedgerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CustomerLedgerShortName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
-          <Property Name="Pager" Type="nvarchar" MaxLength="50" />
-          <Property Name="Fax" Type="nvarchar" MaxLength="50" />
           <Property Name="OfficePhone" Type="nvarchar" MaxLength="50" />
           <Property Name="ResidentPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
@@ -112,34 +111,28 @@
           <Property Name="SalesManId" Type="int" />
           <Property Name="RouteId" Type="int" />
           <Property Name="DLNo" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TINNo" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="CSTNo" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Day" Type="nchar" MaxLength="10" />
+          <Property Name="GSTNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CINNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LINNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="ServiceTaxNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PANNo" Type="nvarchar" MaxLength="20" />
           <Property Name="CreditLimit" Type="int" Nullable="false" />
-          <Property Name="BankName" Type="nvarchar" MaxLength="100" />
-          <Property Name="BankArea" Type="nvarchar" MaxLength="100" />
-          <Property Name="CloseDay" Type="nchar" MaxLength="10" />
           <Property Name="RateTypeID" Type="int" />
           <Property Name="IsLessExcise" Type="bit" Nullable="false" />
           <Property Name="CustomerTypeID" Type="int" Nullable="false" />
           <Property Name="InterestTypeID" Type="int" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="ModifiedOn" Type="datetime" />
-          <Property Name="IsFixedTax" Type="bit" Nullable="false" />
-          <Property Name="Tax" Type="float" />
-          <Property Name="IsFixedSC" Type="bit" Nullable="false" />
-          <Property Name="SC" Type="float" />
-          <Property Name="IsChangeSCWhileBill" Type="bit" Nullable="false" />
-          <Property Name="SaleBillFormat" Type="nvarchar" MaxLength="50" />
           <Property Name="MaxOSAmount" Type="float" />
           <Property Name="MaxNumOfOSBill" Type="int" />
           <Property Name="MaxBillAmount" Type="float" />
           <Property Name="MaxGracePeriod" Type="int" />
+          <Property Name="SaleBillFormat" Type="nvarchar" MaxLength="10" />
           <Property Name="IsFollowConditionStrictly" Type="bit" Nullable="false" />
           <Property Name="Discount" Type="float" />
           <Property Name="CentralLocal" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="CustomerType">
           <Key>
@@ -205,6 +198,16 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="MenuKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrivledgeId" Type="int" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="PersonalLedger">
           <Key>
             <PropertyRef Name="PersonalLedgerId" />
@@ -213,7 +216,7 @@
           <Property Name="PersonalLedgerCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="PersonalLedgerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PersonalLedgerShortName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
           <Property Name="Pager" Type="nvarchar" MaxLength="50" />
@@ -249,6 +252,14 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="Privledges">
+          <Key>
+            <PropertyRef Name="PrivledgeId" />
+          </Key>
+          <Property Name="PrivledgeId" Type="int" Nullable="false" />
+          <Property Name="PriviledgeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="RecordType">
           <Key>
             <PropertyRef Name="RecordTypeId" />
@@ -256,6 +267,22 @@
           <Property Name="RecordTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RecordType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SystemName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolePrivledges">
+          <Key>
+            <PropertyRef Name="RolePrivledgeID" />
+          </Key>
+          <Property Name="RolePrivledgeID" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="PrivledgeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SupplierLedger">
@@ -266,7 +293,7 @@
           <Property Name="SupplierLedgerCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="SupplierLedgerName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SupplierLedgerShortName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
           <Property Name="Pager" Type="nvarchar" MaxLength="50" />
@@ -301,7 +328,20 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="IsSysAdmin" Type="bit" Nullable="false" />
+          <Property Name="RoleID" Type="int" />
         </EntityType>
+        <Association Name="FK__Users__RoleID__5BE2A6F2">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
           <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="*" />
@@ -371,6 +411,18 @@
             </Principal>
             <Dependent Role="CustomerCompanyDiscountRef">
               <PropertyRef Name="CustomerLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerCompanyDiscountRef_ItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="CustomerCompanyDiscountRef" Type="Self.CustomerCompanyDiscountRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="CustomerCompanyDiscountRef">
+              <PropertyRef Name="ItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -482,6 +534,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Menu_Privledges">
+          <End Role="Privledges" Type="Self.Privledges" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Privledges">
+              <PropertyRef Name="PrivledgeId" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="PrivledgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PersonRouteMaster_RecordType">
           <End Role="RecordType" Type="Self.RecordType" Multiplicity="0..1" />
           <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="*" />
@@ -491,6 +555,34 @@
             </Principal>
             <Dependent Role="PersonRouteMaster">
               <PropertyRef Name="RecordTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePrivledges_Privledges">
+          <End Role="Privledges" Type="Self.Privledges" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RolePrivledges" Type="Self.RolePrivledges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Privledges">
+              <PropertyRef Name="PrivledgeId" />
+            </Principal>
+            <Dependent Role="RolePrivledges">
+              <PropertyRef Name="PrivledgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePrivledges_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RolePrivledges" Type="Self.RolePrivledges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RolePrivledges">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -517,12 +609,20 @@
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InterestType" EntityType="Self.InterestType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonalLedger" EntityType="Self.PersonalLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonLedgerType" EntityType="Self.PersonLedgerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Privledges" EntityType="Self.Privledges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolePrivledges" EntityType="Self.RolePrivledges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Users__RoleID__5BE2A6F2" Association="Self.FK__Users__RoleID__5BE2A6F2">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerType" Association="Self.FK_AccountLedgerMaster_AccountLedgerType">
             <End Role="AccountLedgerType" EntitySet="AccountLedgerType" />
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
@@ -545,6 +645,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_CustomerCompanyDiscountRef_CustomerLedger" Association="Self.FK_CustomerCompanyDiscountRef_CustomerLedger">
             <End Role="CustomerLedger" EntitySet="CustomerLedger" />
+            <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerCompanyDiscountRef_ItemMaster" Association="Self.FK_CustomerCompanyDiscountRef_ItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
             <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
@@ -583,16 +687,29 @@
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_Menu_Privledges" Association="Self.FK_Menu_Privledges">
+            <End Role="Privledges" EntitySet="Privledges" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
           <AssociationSet Name="FK_PersonRouteMaster_RecordType" Association="Self.FK_PersonRouteMaster_RecordType">
             <End Role="RecordType" EntitySet="RecordType" />
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePrivledges_Privledges" Association="Self.FK_RolePrivledges_Privledges">
+            <End Role="Privledges" EntitySet="Privledges" />
+            <End Role="RolePrivledges" EntitySet="RolePrivledges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePrivledges_Roles" Association="Self.FK_RolePrivledges_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolePrivledges" EntitySet="RolePrivledges" />
           </AssociationSet>
           <AssociationSet Name="FK_SupplierLedger_SalesPersonMaster" Association="Self.FK_SupplierLedger_SalesPersonMaster">
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
             <End Role="SupplierLedger" EntitySet="SupplierLedger" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -681,12 +798,14 @@
           <Property Name="CustCompDiscountRefID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerLedgerID" Type="Int32" Nullable="false" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" />
           <Property Name="Normal" Type="Double" />
           <Property Name="Breakage" Type="Double" />
           <Property Name="Expired" Type="Double" />
           <Property Name="IsLessEcise" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_CustomerCompanyDiscountRef_CompanyMaster" FromRole="CustomerCompanyDiscountRef" ToRole="CompanyMaster" />
           <NavigationProperty Name="CustomerLedger" Relationship="Self.FK_CustomerCompanyDiscountRef_CustomerLedger" FromRole="CustomerCompanyDiscountRef" ToRole="CustomerLedger" />
+          <NavigationProperty Name="ItemMaster" Relationship="Self.FK_CustomerCompanyDiscountRef_ItemMaster" FromRole="CustomerCompanyDiscountRef" ToRole="ItemMaster" />
         </EntityType>
         <EntityType Name="CustomerLedger">
           <Key>
@@ -696,11 +815,9 @@
           <Property Name="CustomerLedgerCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustomerLedgerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustomerLedgerShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Pager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OfficePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ResidentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -715,34 +832,28 @@
           <Property Name="SalesManId" Type="Int32" />
           <Property Name="RouteId" Type="Int32" />
           <Property Name="DLNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CSTNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Day" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GSTNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LINNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceTaxNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PANNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreditLimit" Type="Int32" Nullable="false" />
-          <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="BankArea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CloseDay" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="RateTypeID" Type="Int32" />
           <Property Name="IsLessExcise" Type="Boolean" Nullable="false" />
           <Property Name="CustomerTypeID" Type="Int32" Nullable="false" />
           <Property Name="InterestTypeID" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <Property Name="IsFixedTax" Type="Boolean" Nullable="false" />
-          <Property Name="Tax" Type="Double" />
-          <Property Name="IsFixedSC" Type="Boolean" Nullable="false" />
-          <Property Name="SC" Type="Double" />
-          <Property Name="IsChangeSCWhileBill" Type="Boolean" Nullable="false" />
-          <Property Name="SaleBillFormat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MaxOSAmount" Type="Double" />
           <Property Name="MaxNumOfOSBill" Type="Int32" />
           <Property Name="MaxBillAmount" Type="Double" />
           <Property Name="MaxGracePeriod" Type="Int32" />
+          <Property Name="SaleBillFormat" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IsFollowConditionStrictly" Type="Boolean" Nullable="false" />
           <Property Name="Discount" Type="Double" />
           <Property Name="CentralLocal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_CustomerLedger" FromRole="CustomerLedger" ToRole="CustomerCompanyDiscountRef" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="CustomerLedger" ToRole="PersonRouteMaster" />
           <NavigationProperty Name="CustomerType" Relationship="Self.FK_CustomerLedger_CustomerType" FromRole="CustomerLedger" ToRole="CustomerType" />
@@ -819,6 +930,18 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
+          <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_ItemMaster" FromRole="ItemMaster" ToRole="CustomerCompanyDiscountRef" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="MenuKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrivledgeId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Privledges" Relationship="Self.FK_Menu_Privledges" FromRole="Menu" ToRole="Privledges" />
         </EntityType>
         <EntityType Name="PersonalLedger">
           <Key>
@@ -828,7 +951,7 @@
           <Property Name="PersonalLedgerCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PersonalLedgerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PersonalLedgerShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Pager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -872,6 +995,16 @@
           <NavigationProperty Name="RecordType" Relationship="Self.FK_PersonRouteMaster_RecordType" FromRole="PersonRouteMaster" ToRole="RecordType" />
           <NavigationProperty Name="SupplierLedger" Relationship="Self.FK_SupplierLedger_SalesPersonMaster" FromRole="PersonRouteMaster" ToRole="SupplierLedger" />
         </EntityType>
+        <EntityType Name="Privledges">
+          <Key>
+            <PropertyRef Name="PrivledgeId" />
+          </Key>
+          <Property Name="PrivledgeId" Type="Int32" Nullable="false" />
+          <Property Name="PriviledgeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Menu_Privledges" FromRole="Privledges" ToRole="Menu" />
+          <NavigationProperty Name="RolePrivledges" Relationship="Self.FK_RolePrivledges_Privledges" FromRole="Privledges" ToRole="RolePrivledges" />
+        </EntityType>
         <EntityType Name="RecordType">
           <Key>
             <PropertyRef Name="RecordTypeId" />
@@ -882,6 +1015,26 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_PersonRouteMaster_RecordType" FromRole="RecordType" ToRole="PersonRouteMaster" />
         </EntityType>
+        <EntityType Name="RolePrivledges">
+          <Key>
+            <PropertyRef Name="RolePrivledgeID" />
+          </Key>
+          <Property Name="RolePrivledgeID" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="PrivledgeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Privledges" Relationship="Self.FK_RolePrivledges_Privledges" FromRole="RolePrivledges" ToRole="Privledges" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_RolePrivledges_Roles" FromRole="RolePrivledges" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RolePrivledges" Relationship="Self.FK_RolePrivledges_Roles" FromRole="Roles" ToRole="RolePrivledges" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__5BE2A6F2" FromRole="Roles" ToRole="Users" />
+        </EntityType>
         <EntityType Name="SupplierLedger">
           <Key>
             <PropertyRef Name="SupplierLedgerId" />
@@ -890,7 +1043,7 @@
           <Property Name="SupplierLedgerCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SupplierLedgerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SupplierLedgerShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Pager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -926,6 +1079,8 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="IsSysAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleID__5BE2A6F2" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
@@ -1008,6 +1163,18 @@
             </Principal>
             <Dependent Role="CustomerCompanyDiscountRef">
               <PropertyRef Name="CustomerLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerCompanyDiscountRef_ItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="CustomerCompanyDiscountRef" Type="Self.CustomerCompanyDiscountRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="CustomerCompanyDiscountRef">
+              <PropertyRef Name="ItemID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1107,6 +1274,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Menu_Privledges">
+          <End Role="Privledges" Type="Self.Privledges" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Privledges">
+              <PropertyRef Name="PrivledgeId" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="PrivledgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PersonRouteMaster_RecordType">
           <End Role="RecordType" Type="Self.RecordType" Multiplicity="0..1" />
           <End Role="PersonRouteMaster" Type="Self.PersonRouteMaster" Multiplicity="*" />
@@ -1131,6 +1310,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RolePrivledges_Privledges">
+          <End Role="Privledges" Type="Self.Privledges" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RolePrivledges" Type="Self.RolePrivledges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Privledges">
+              <PropertyRef Name="PrivledgeId" />
+            </Principal>
+            <Dependent Role="RolePrivledges">
+              <PropertyRef Name="PrivledgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePrivledges_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RolePrivledges" Type="Self.RolePrivledges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RolePrivledges">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__5BE2A6F2">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PharmaDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccountLedgerMaster" EntityType="Self.AccountLedgerMaster" />
           <EntitySet Name="AccountLedgerType" EntityType="Self.AccountLedgerType" />
@@ -1142,10 +1361,14 @@
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" />
           <EntitySet Name="InterestType" EntityType="Self.InterestType" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
           <EntitySet Name="PersonalLedger" EntityType="Self.PersonalLedger" />
           <EntitySet Name="PersonLedgerType" EntityType="Self.PersonLedgerType" />
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" />
+          <EntitySet Name="Privledges" EntityType="Self.Privledges" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" />
+          <EntitySet Name="RolePrivledges" EntityType="Self.RolePrivledges" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerType" Association="Self.FK_AccountLedgerMaster_AccountLedgerType">
@@ -1174,6 +1397,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_CustomerCompanyDiscountRef_CustomerLedger" Association="Self.FK_CustomerCompanyDiscountRef_CustomerLedger">
             <End Role="CustomerLedger" EntitySet="CustomerLedger" />
+            <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerCompanyDiscountRef_ItemMaster" Association="Self.FK_CustomerCompanyDiscountRef_ItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
             <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
@@ -1208,6 +1435,10 @@
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
             <End Role="CustomerLedger" EntitySet="CustomerLedger" />
           </AssociationSet>
+          <AssociationSet Name="FK_Menu_Privledges" Association="Self.FK_Menu_Privledges">
+            <End Role="Privledges" EntitySet="Privledges" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
           <AssociationSet Name="FK_PersonRouteMaster_RecordType" Association="Self.FK_PersonRouteMaster_RecordType">
             <End Role="RecordType" EntitySet="RecordType" />
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
@@ -1215,6 +1446,18 @@
           <AssociationSet Name="FK_SupplierLedger_SalesPersonMaster" Association="Self.FK_SupplierLedger_SalesPersonMaster">
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
             <End Role="SupplierLedger" EntitySet="SupplierLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePrivledges_Privledges" Association="Self.FK_RolePrivledges_Privledges">
+            <End Role="Privledges" EntitySet="Privledges" />
+            <End Role="RolePrivledges" EntitySet="RolePrivledges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolePrivledges_Roles" Association="Self.FK_RolePrivledges_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolePrivledges" EntitySet="RolePrivledges" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__5BE2A6F2" Association="Self.FK__Users__RoleID__5BE2A6F2">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1302,6 +1545,7 @@
                 <ScalarProperty Name="CustCompDiscountRefID" ColumnName="CustCompDiscountRefID" />
                 <ScalarProperty Name="CustomerLedgerID" ColumnName="CustomerLedgerID" />
                 <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="Normal" ColumnName="Normal" />
                 <ScalarProperty Name="Breakage" ColumnName="Breakage" />
                 <ScalarProperty Name="Expired" ColumnName="Expired" />
@@ -1319,8 +1563,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Pager" ColumnName="Pager" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
                 <ScalarProperty Name="ResidentPhone" ColumnName="ResidentPhone" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
@@ -1335,34 +1577,28 @@
                 <ScalarProperty Name="SalesManId" ColumnName="SalesManId" />
                 <ScalarProperty Name="RouteId" ColumnName="RouteId" />
                 <ScalarProperty Name="DLNo" ColumnName="DLNo" />
-                <ScalarProperty Name="TINNo" ColumnName="TINNo" />
-                <ScalarProperty Name="CSTNo" ColumnName="CSTNo" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="GSTNo" ColumnName="GSTNo" />
+                <ScalarProperty Name="CINNo" ColumnName="CINNo" />
+                <ScalarProperty Name="LINNo" ColumnName="LINNo" />
+                <ScalarProperty Name="ServiceTaxNo" ColumnName="ServiceTaxNo" />
+                <ScalarProperty Name="PANNo" ColumnName="PANNo" />
                 <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
-                <ScalarProperty Name="BankName" ColumnName="BankName" />
-                <ScalarProperty Name="BankArea" ColumnName="BankArea" />
-                <ScalarProperty Name="CloseDay" ColumnName="CloseDay" />
                 <ScalarProperty Name="RateTypeID" ColumnName="RateTypeID" />
                 <ScalarProperty Name="IsLessExcise" ColumnName="IsLessExcise" />
                 <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
                 <ScalarProperty Name="InterestTypeID" ColumnName="InterestTypeID" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="IsFixedTax" ColumnName="IsFixedTax" />
-                <ScalarProperty Name="Tax" ColumnName="Tax" />
-                <ScalarProperty Name="IsFixedSC" ColumnName="IsFixedSC" />
-                <ScalarProperty Name="SC" ColumnName="SC" />
-                <ScalarProperty Name="IsChangeSCWhileBill" ColumnName="IsChangeSCWhileBill" />
-                <ScalarProperty Name="SaleBillFormat" ColumnName="SaleBillFormat" />
                 <ScalarProperty Name="MaxOSAmount" ColumnName="MaxOSAmount" />
                 <ScalarProperty Name="MaxNumOfOSBill" ColumnName="MaxNumOfOSBill" />
                 <ScalarProperty Name="MaxBillAmount" ColumnName="MaxBillAmount" />
                 <ScalarProperty Name="MaxGracePeriod" ColumnName="MaxGracePeriod" />
+                <ScalarProperty Name="SaleBillFormat" ColumnName="SaleBillFormat" />
                 <ScalarProperty Name="IsFollowConditionStrictly" ColumnName="IsFollowConditionStrictly" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="CentralLocal" ColumnName="CentralLocal" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1433,6 +1669,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="PharmaDBModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="MenuKey" ColumnName="MenuKey" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="PrivledgeId" ColumnName="PrivledgeId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PersonalLedger">
             <EntityTypeMapping TypeName="PharmaDBModel.PersonalLedger">
               <MappingFragment StoreEntitySet="PersonalLedger">
@@ -1480,12 +1727,39 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Privledges">
+            <EntityTypeMapping TypeName="PharmaDBModel.Privledges">
+              <MappingFragment StoreEntitySet="Privledges">
+                <ScalarProperty Name="PrivledgeId" ColumnName="PrivledgeId" />
+                <ScalarProperty Name="PriviledgeName" ColumnName="PriviledgeName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RecordType">
             <EntityTypeMapping TypeName="PharmaDBModel.RecordType">
               <MappingFragment StoreEntitySet="RecordType">
                 <ScalarProperty Name="RecordTypeId" ColumnName="RecordTypeId" />
                 <ScalarProperty Name="RecordType1" ColumnName="RecordType" />
                 <ScalarProperty Name="SystemName" ColumnName="SystemName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolePrivledges">
+            <EntityTypeMapping TypeName="PharmaDBModel.RolePrivledges">
+              <MappingFragment StoreEntitySet="RolePrivledges">
+                <ScalarProperty Name="RolePrivledgeID" ColumnName="RolePrivledgeID" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="PrivledgeId" ColumnName="PrivledgeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PharmaDBModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1533,6 +1807,7 @@
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="IsSysAdmin" ColumnName="IsSysAdmin" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

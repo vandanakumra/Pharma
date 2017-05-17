@@ -14,6 +14,12 @@ namespace PharmaDAL.Entity
     
     public partial class ItemMaster
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ItemMaster()
+        {
+            this.CustomerCompanyDiscountRef = new HashSet<CustomerCompanyDiscountRef>();
+        }
+    
         public int ItemID { get; set; }
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
@@ -57,5 +63,7 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }
     }
 }

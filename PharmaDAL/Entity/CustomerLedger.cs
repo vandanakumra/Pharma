@@ -27,8 +27,6 @@ namespace PharmaDAL.Entity
         public string Address { get; set; }
         public string ContactPerson { get; set; }
         public string Mobile { get; set; }
-        public string Pager { get; set; }
-        public string Fax { get; set; }
         public string OfficePhone { get; set; }
         public string ResidentPhone { get; set; }
         public string EmailAddress { get; set; }
@@ -43,34 +41,28 @@ namespace PharmaDAL.Entity
         public Nullable<int> SalesManId { get; set; }
         public Nullable<int> RouteId { get; set; }
         public string DLNo { get; set; }
-        public string TINNo { get; set; }
-        public string CSTNo { get; set; }
-        public string Day { get; set; }
+        public string GSTNo { get; set; }
+        public string CINNo { get; set; }
+        public string LINNo { get; set; }
+        public string ServiceTaxNo { get; set; }
+        public string PANNo { get; set; }
         public int CreditLimit { get; set; }
-        public string BankName { get; set; }
-        public string BankArea { get; set; }
-        public string CloseDay { get; set; }
         public Nullable<int> RateTypeID { get; set; }
         public bool IsLessExcise { get; set; }
         public int CustomerTypeID { get; set; }
         public int InterestTypeID { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedOn { get; set; }
-        public bool IsFixedTax { get; set; }
-        public Nullable<double> Tax { get; set; }
-        public bool IsFixedSC { get; set; }
-        public Nullable<double> SC { get; set; }
-        public bool IsChangeSCWhileBill { get; set; }
-        public string SaleBillFormat { get; set; }
         public Nullable<double> MaxOSAmount { get; set; }
         public Nullable<int> MaxNumOfOSBill { get; set; }
         public Nullable<double> MaxBillAmount { get; set; }
         public Nullable<int> MaxGracePeriod { get; set; }
+        public string SaleBillFormat { get; set; }
         public bool IsFollowConditionStrictly { get; set; }
         public Nullable<double> Discount { get; set; }
         public string CentralLocal { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }

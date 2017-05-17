@@ -31,20 +31,23 @@ namespace PharmaDataMigration.Master
                     var systemName = PharmaBusinessObjects.Common.Constants.RecordType.ASM;
                     int recordTypeID = context.RecordType.Where(q => q.SystemName == systemName).FirstOrDefault().RecordTypeId;
                     var maxASMID = context.PersonRouteMaster.Where(q => q.RecordTypeId == recordTypeID).Count();
-
+                    
                     if (dtASMMaster != null && dtASMMaster.Rows.Count > 0)
                     {
                         foreach (DataRow dr in dtASMMaster.Rows)
                         {
                             maxASMID++;
+                            string originalPersonRouteCode = Convert.ToString(dr["ACNO"]);
+                            string mappedPersonRouteCode = systemName + maxASMID.ToString().PadLeft(3, '0');
+                            Common.asmCodeMap.Add(new ASMCodeMap() { OriginalASMCode = originalPersonRouteCode, MappedASMCode = mappedPersonRouteCode });
 
                             PharmaDAL.Entity.PersonRouteMaster newASMMaster = new PharmaDAL.Entity.PersonRouteMaster()
                             {
-                                PersonRouteCode = systemName + maxASMID.ToString().PadLeft(3, '0'), //Convert.ToString(dr["ACNO"]),
+                                PersonRouteCode = mappedPersonRouteCode,
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -86,14 +89,17 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtRSMMaster.Rows)
                         {
                             maxRSMID++;
+                            string originalPersonRouteCode = Convert.ToString(dr["ACNO"]);
+                            string mappedPersonRouteCode = systemName + maxRSMID.ToString().PadLeft(3, '0');
+                            Common.rsmCodeMap.Add(new RSMCodeMap() { OriginalRSMCode = originalPersonRouteCode, MappedRSMCode = mappedPersonRouteCode });
 
                             PharmaDAL.Entity.PersonRouteMaster newRSMMaster = new PharmaDAL.Entity.PersonRouteMaster()
                             {
-                                PersonRouteCode = systemName + maxRSMID.ToString().PadLeft(3, '0'), //Convert.ToString(dr["ACNO"]),
+                                PersonRouteCode = mappedPersonRouteCode,
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -135,14 +141,17 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtZSMMaster.Rows)
                         {
                             maxZSMID++;
+                            string originalPersonRouteCode = Convert.ToString(dr["ACNO"]);
+                            string mappedPersonRouteCode = systemName + maxZSMID.ToString().PadLeft(3, '0');
+                            Common.zsmCodeMap.Add(new ZSMCodeMap() { OriginalZSMCode = originalPersonRouteCode, MappedZSMCode = mappedPersonRouteCode });
 
                             PharmaDAL.Entity.PersonRouteMaster newZSMMaster = new PharmaDAL.Entity.PersonRouteMaster()
                             {
-                                PersonRouteCode = systemName + maxZSMID.ToString().PadLeft(3, '0'), //Convert.ToString(dr["ACNO"]),
+                                PersonRouteCode = mappedPersonRouteCode,
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -184,14 +193,17 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtAreaMaster.Rows)
                         {
                             maxAreaID++;
+                            string originalPersonRouteCode = Convert.ToString(dr["ACNO"]);
+                            string mappedPersonRouteCode = systemName + maxAreaID.ToString().PadLeft(3, '0');
+                            Common.areaCodeMap.Add(new AreaCodeMap() { OriginalAreaCode = originalPersonRouteCode, MappedAreaCode = mappedPersonRouteCode });
 
                             PharmaDAL.Entity.PersonRouteMaster newAreaMaster = new PharmaDAL.Entity.PersonRouteMaster()
                             {
-                                PersonRouteCode = systemName + maxAreaID.ToString().PadLeft(3, '0'), //Convert.ToString(dr["ACNO"]),
+                                PersonRouteCode = mappedPersonRouteCode,
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -233,14 +245,17 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtRouteMaster.Rows)
                         {
                             maxRouteID++;
+                            string originalPersonRouteCode = Convert.ToString(dr["ACNO"]);
+                            string mappedPersonRouteCode = systemName + maxRouteID.ToString().PadLeft(3, '0');
+                            Common.routeCodeMap.Add(new RouteCodeMap() { OriginalRouteCode = originalPersonRouteCode, MappedRouteCode = mappedPersonRouteCode });
 
                             PharmaDAL.Entity.PersonRouteMaster newRouteMaster = new PharmaDAL.Entity.PersonRouteMaster()
                             {
-                                PersonRouteCode = systemName + maxRouteID.ToString().PadLeft(3, '0'), //Convert.ToString(dr["ACNO"]),
+                                PersonRouteCode = mappedPersonRouteCode,
                                 PersonRouteName = Convert.ToString(dr["ACName"]),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 
@@ -282,14 +297,17 @@ namespace PharmaDataMigration.Master
                         foreach (DataRow dr in dtSalesManMaster.Rows)
                         {
                             maxSalesManID++;
+                            string originalPersonRouteCode = Convert.ToString(dr["ACNO"]);
+                            string mappedPersonRouteCode = systemName + maxSalesManID.ToString().PadLeft(3, '0');
+                            Common.salesmanCodeMap.Add(new SalesManCodeMap() { OriginalSalesManCode = originalPersonRouteCode, MappedSalesManCode = mappedPersonRouteCode });
 
                             PharmaDAL.Entity.PersonRouteMaster newSalesManMaster = new PharmaDAL.Entity.PersonRouteMaster()
                             {
-                                PersonRouteCode = systemName + maxSalesManID.ToString().PadLeft(3, '0'), //Convert.ToString(dr["ACNO"]),
+                                PersonRouteCode = mappedPersonRouteCode,
                                 PersonRouteName = Convert.ToString(dr["ACName"]).TrimEnd(),
                                 RecordTypeId = recordTypeID,
                                 CreatedBy = "admin",
-                                CreatedOn = System.DateTime.Now,
+                                CreatedOn = DateTime.Now,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
                             };
 

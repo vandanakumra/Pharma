@@ -14,11 +14,11 @@ namespace PharmaDAL.Master
 
         }
 
-        public List<PharmaBusinessObjects.Master.UserMaster> GetUsers()
+        public List<PharmaBusinessObjects.Master.UserMaster> GetUsers(string searchText)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.Users.Select(p => new PharmaBusinessObjects.Master.UserMaster()
+                return context.Users.Where(p=>p.Username.ToLower().Contains(searchText) || p.FirstName.ToLower().Contains(searchText) || p.LastName.ToLower().Contains(searchText)).Select(p => new PharmaBusinessObjects.Master.UserMaster()
                 {
                     UserId = p.UserId,
                     Username = p.Username,
@@ -114,6 +114,26 @@ namespace PharmaDAL.Master
                     }
 
                     return context.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    throw ex;
+                }
+            }
+
+        }
+
+        public List<PharmaBusinessObjects.Master.Role> GetRoles(string searchText)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                try
+                {
+                    return context.Roles.Where(p => p.RoleName.ToLower() == searchText).Select(p => new PharmaBusinessObjects.Master.Role() {
+                        RoleId = p.RoleId,
+                        RoleName = p.RoleName,
+                        Status = p.Status
+                    }).ToList();
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {

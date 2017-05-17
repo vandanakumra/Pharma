@@ -81,8 +81,10 @@
     </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="DataMigrationResult.cs" />
+    <Compile Include="Master\AccountLedgerMaster.cs" />
     <Compile Include="Master\CompanyMaster.cs" />
     <Compile Include="Master\ItemMaster.cs" />
+    <Compile Include="Master\PersonalLedgerMaster.cs" />
     <Compile Include="Master\PersonRouteMaster.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
