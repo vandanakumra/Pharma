@@ -569,7 +569,15 @@ namespace PharmaUI
                         cbxZSM.ValueMember = "PersonRouteID";
                         ///set newly added item
                         ///
-                        cbxZSM.SelectedValue = personRouteID;
+                        if (personRouteID == 0 && cbxZSM.Items.Count >0 )
+                        {
+                            cbxZSM.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cbxZSM.SelectedValue = personRouteID ;
+                        }
+                        
                     }
                     break;
 
@@ -581,7 +589,17 @@ namespace PharmaUI
                         cbxRSM.ValueMember = "PersonRouteID";
                         ///set newly added item
                         ///
-                        cbxRSM.SelectedValue = personRouteID;
+
+                        if (personRouteID == 0 && cbxRSM.Items.Count > 0)
+                        {
+                            cbxRSM.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cbxRSM.SelectedValue = personRouteID;
+                        }
+
+                        
                     }
                     break;
 
@@ -593,7 +611,15 @@ namespace PharmaUI
                         cbxASM.ValueMember = "PersonRouteID";
                         ///set newly added item
                         ///
-                        cbxASM.SelectedValue = personRouteID;
+                        if (personRouteID == 0 && cbxASM.Items.Count > 0)
+                        {
+                            cbxASM.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cbxASM.SelectedValue = personRouteID;
+                        }
+                        
 
                     }
                     break;
@@ -605,7 +631,15 @@ namespace PharmaUI
                         cbxSalesman.ValueMember = "PersonRouteID";
                         ///set newly added item
                         ///
-                        cbxSalesman.SelectedValue = personRouteID;
+                        if (personRouteID == 0 && cbxSalesman.Items.Count > 0)
+                        {
+                            cbxSalesman.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cbxSalesman.SelectedValue = personRouteID;
+                        }
+                        
                     }
                     break;
                 case "cbxArea":
@@ -616,7 +650,15 @@ namespace PharmaUI
                         cbxArea.ValueMember = "PersonRouteID";
                         ///set newly added item
                         ///
-                        cbxArea.SelectedValue = personRouteID;
+                        if (personRouteID == 0 && cbxArea.Items.Count > 0)
+                        {
+                            cbxArea.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cbxArea.SelectedValue = personRouteID;
+                        }
+                        
                     }
                     break;
                 case "cbxRoute":
@@ -627,7 +669,14 @@ namespace PharmaUI
                         cbxRoute.ValueMember = "PersonRouteID";
                         ///set newly added item
                         ///
-                        cbxRoute.SelectedValue = personRouteID;
+                        if (personRouteID == 0 && cbxRoute.Items.Count > 0)
+                        {
+                            cbxRoute.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            cbxRoute.SelectedValue = personRouteID;
+                        }
                     }
                     break;
             }
