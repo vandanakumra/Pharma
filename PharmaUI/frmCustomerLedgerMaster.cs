@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Master;
 using System;
 using System.Collections.Generic;
@@ -105,12 +106,26 @@ namespace PharmaUI
 
         }
 
-        private void btnAddNewLedger_Click(object sender, EventArgs e)
+
+        //Search Functionality
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadDataGrid();
+        }
+
+
+        //ADD/UPDATE/DELETE Functionality
+
+        private void btnAddNew_Click(object sender, EventArgs e)
         {
             try
             {
                 var form = new frmCustomerLedgerMasterAddUpdate();
+
                 ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+                form.WindowState = FormWindowState.Maximized;
+
                 form.FormClosed += Form_FormClosed;
                 form.Show();
             }
@@ -120,10 +135,120 @@ namespace PharmaUI
             }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            LoadDataGrid();
+            try
+            {
+
+                if (dgvCustomerLedger.SelectedRows.Count == 0)
+                    MessageBox.Show("Please select atleast one row to edit");
+
+                if (dgvCustomerLedger.SelectedRows[0] != null)
+                {
+                    frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(true);
+
+                    ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+                    form.WindowState = FormWindowState.Maximized;
+
+                    CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.SelectedRows[0].DataBoundItem;
+                    form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
+                    form.LoadCustomerCompanyDiscountGrid();
+
+                    form.FormClosed += Form_FormClosed;
+                    form.Show();
+                }
+               
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult result = MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    if (dgvCustomerLedger.SelectedRows.Count == 0)
+                        MessageBox.Show("Please select atleast one row to delete");
+
+                    if (dgvCustomerLedger.SelectedRows[0] != null)
+                    {
+                        CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.SelectedRows[0].DataBoundItem;
+                        deleteCustomerLedger(existingItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+                OpenCustomerLedgerddUpdateForm(false);
+                return true;
+            }
+            else if (keyData == Keys.F3)
+            {
+                if (dgvCustomerLedger.SelectedRows.Count == 0)
+                    MessageBox.Show("Please select atleast one row to edit");
+
+                OpenCustomerLedgerddUpdateForm(true);
+                return true;
+            }
+            else if(keyData == Keys.Delete)
+            {
+                DialogResult result = MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+
+                    if (dgvCustomerLedger.SelectedRows.Count == 0)
+                        MessageBox.Show("Please select atleast one row to delete");
+
+                    CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.SelectedRows[0].DataBoundItem;
+                    deleteCustomerLedger(existingItem);
+
+                }
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void OpenCustomerLedgerddUpdateForm(bool isEdit)
+        {
+            frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(isEdit);
+            ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+            form.WindowState = FormWindowState.Maximized;
+
+
+            if (isEdit && dgvCustomerLedger.SelectedRows[0] != null)
+            {
+                CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.SelectedRows[0].DataBoundItem;
+                form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
+                form.LoadCustomerCompanyDiscountGrid();
+            }
+            form.FormClosed += Form_FormClosed;
+            form.Show();
+        }
+
+        private void deleteCustomerLedger(CustomerLedgerMaster customerLedger )
+        {
+            if (customerLedger != null)
+            {
+                applicationFacade.DeleteCustomerLedger(customerLedger.CustomerLedgerId);
+                LoadDataGrid();
+            }
+        }
     }
 }

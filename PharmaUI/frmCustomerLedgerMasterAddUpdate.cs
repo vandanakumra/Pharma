@@ -396,6 +396,7 @@ namespace PharmaUI
             if (e.KeyCode == Keys.Enter)
             {
                 ComboBox activePersonRouteType =new ComboBox();
+                Label activePersonRouteTypeMessageLbl = new Label();
                 string activePersonRouteTypeString = String.Empty;
 
                 switch ((sender as ComboBox).Name)
@@ -403,6 +404,7 @@ namespace PharmaUI
                     case "cbxZSM":
                         {
                             activePersonRouteType = cbxZSM;
+                            activePersonRouteTypeMessageLbl = lblZSMsg;
                             activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
                         }
                         break;
@@ -410,6 +412,7 @@ namespace PharmaUI
                     case "cbxRSM":
                         {
                             activePersonRouteType = cbxRSM;
+                            activePersonRouteTypeMessageLbl = lblRSMMsg;
                             activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
                         }
                         break;
@@ -417,24 +420,28 @@ namespace PharmaUI
                     case "cbxASM":
                         {
                             activePersonRouteType = cbxASM;
+                            activePersonRouteTypeMessageLbl = lblASMMsg;
                             activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
                         }
                         break;
                     case "cbxSalesman":
                         {
                             activePersonRouteType = cbxSalesman;
+                            activePersonRouteTypeMessageLbl = lblSalesmanMsg;
                             activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
                         }
                         break;
                     case "cbxArea":
                         {
                             activePersonRouteType = cbxArea;
+                            activePersonRouteTypeMessageLbl = lblAreaMsg;
                             activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
                         }
                         break;
                     case "cbxRoute":
                         {
                             activePersonRouteType = cbxRoute;
+                            activePersonRouteTypeMessageLbl = lblRouteMsg;
                             activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
                         }
                         break;
@@ -444,29 +451,110 @@ namespace PharmaUI
                 int index = activePersonRouteType.FindString(activePersonRouteType.Text);
                 if (index < 0)
                 {
-                    DialogResult result = MessageBox.Show(String.Format(Constants.Messages.PersonRouteCreate,activePersonRouteTypeString), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                    if (result == DialogResult.Yes)
-                    {
-                        PersonRouteMaster newPersonRouteMaster = new PersonRouteMaster()
-                        {
-                            RecordTypeNme=activePersonRouteTypeString,
-                            PersonRouteName= activePersonRouteType.Text
-                        };
-                        frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(newPersonRouteMaster);
-                        form.Tag = (sender as ComboBox).Name;
-                        form.FormClosing += Form_FormClosing;
-                        form.ShowDialog();             
-                    }
-                    else
-                    {
-                        activePersonRouteType.SelectedIndex = 0;
-                        return;
-                    }
+                    activePersonRouteTypeMessageLbl.Text=Constants.Messages.NotFound;
+
+                    // DialogResult result = MessageBox.Show(String.Format(Constants.Messages.PersonRouteCreate,activePersonRouteTypeString), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    //if (result == DialogResult.Yes)
+                    //{
+                    //    PersonRouteMaster newPersonRouteMaster = new PersonRouteMaster()
+                    //    {
+                    //        RecordTypeNme=activePersonRouteTypeString,
+                    //        PersonRouteName= activePersonRouteType.Text
+                    //    };
+                    //    frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(newPersonRouteMaster);
+                    //    form.Tag = (sender as ComboBox).Name;
+                    //    form.FormClosing += Form_FormClosing;
+                    //    form.ShowDialog();             
+                    //}
+                    //else
+                    //{
+                    //    activePersonRouteType.SelectedIndex = 0;
+                    //    return;
+                    //}
                 }
             }
         }
-        
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+                ComboBox activePersonRouteType = new ComboBox();
+                Label activePersonRouteTypeMessageLbl = new Label();
+                string activePersonRouteTypeString = String.Empty;
+
+                switch ((this.ActiveControl).Name)
+                {
+                    case "cbxZSM":
+                        {
+                            activePersonRouteType = cbxZSM;
+                            activePersonRouteTypeMessageLbl = lblZSMsg;
+                            activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
+                        }
+                        break;
+
+                    case "cbxRSM":
+                        {
+                            activePersonRouteType = cbxRSM;
+                            activePersonRouteTypeMessageLbl = lblRSMMsg;
+                            activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
+                        }
+                        break;
+
+                    case "cbxASM":
+                        {
+                            activePersonRouteType = cbxASM;
+                            activePersonRouteTypeMessageLbl = lblASMMsg;
+                            activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
+                        }
+                        break;
+                    case "cbxSalesman":
+                        {
+                            activePersonRouteType = cbxSalesman;
+                            activePersonRouteTypeMessageLbl = lblSalesmanMsg;
+                            activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
+                        }
+                        break;
+                    case "cbxArea":
+                        {
+                            activePersonRouteType = cbxArea;
+                            activePersonRouteTypeMessageLbl = lblAreaMsg;
+                            activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
+                        }
+                        break;
+                    case "cbxRoute":
+                        {
+                            activePersonRouteType = cbxRoute;
+                            activePersonRouteTypeMessageLbl = lblRouteMsg;
+                            activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
+                        }
+                        break;
+                }
+
+
+                int index = activePersonRouteType.FindString(activePersonRouteType.Text);
+                if (index < 0)
+                {
+                    PersonRouteMaster newPersonRouteMaster = new PersonRouteMaster()
+                    {
+                        RecordTypeNme = activePersonRouteTypeString,
+                        PersonRouteName = activePersonRouteType.Text
+                    };
+                    frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(newPersonRouteMaster);
+                    form.Tag = (this.ActiveControl).Name;
+                    form.FormClosing += Form_FormClosing;
+                    form.ShowDialog();
+                }
+
+                activePersonRouteTypeMessageLbl.Text = String.Empty;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+      
+
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
             int personRouteID = ((frmPersonRouteMasterAddUpdate)sender).PersonRouteID;
