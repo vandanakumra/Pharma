@@ -19,28 +19,14 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         public int CompanyId { get; set; }
-        private string CompanyNameNew { get; set; }
+        private string CompanyNameNew { get; set; }       
 
-        public frmCompanyAddUpdate()
-        {
-            InitializeComponent();            
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-        }
-
-        public frmCompanyAddUpdate(int companyId)
+        public frmCompanyAddUpdate(int companyId,string companyName)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.CompanyId = companyId;
-        }
-
-        public frmCompanyAddUpdate(string companyName)
-        {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.CompanyNameNew = companyName;
         }
 
@@ -49,8 +35,7 @@ namespace PharmaUI
             ExtensionMethods.FormLoad(this, (this.CompanyId > 0) ? "Company Master - Update" : "Company Master - Add");
 
             GotFocusEventRaised(this);
-
-            KeyDownEvents(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
 
             FillCombo();
 
@@ -58,36 +43,12 @@ namespace PharmaUI
             {
                 FillFormForUpdate();
             }
-
-            if (!string.IsNullOrEmpty(this.CompanyNameNew))
+            else
             {
                 txtCompanyName.Text = this.CompanyNameNew;
             }
-
         }
-
-        private void KeyDownEvents(Control control)
-        {
-            foreach (Control c in control.Controls)
-            {
-                if (c.Controls.Count > 0)
-                {
-                    KeyDownEvents(c);
-                }
-                else
-                {
-                    c.KeyDown += C_KeyDown;
-                }
-            }
-        }
-
-        private void C_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                SendKeys.Send("{TAB}");
-            }
-        }
+     
 
         public void GotFocusEventRaised(Control control)
         {

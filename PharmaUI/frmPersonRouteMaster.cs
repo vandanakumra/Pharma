@@ -102,12 +102,28 @@ namespace PharmaUI
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
             LoadDataGrid(0);
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadDataGrid((int)cbPersonRouteType.SelectedValue);
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

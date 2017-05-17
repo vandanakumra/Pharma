@@ -64,28 +64,31 @@ namespace PharmaUI
                 if (row != null)
                 {
                     int companyId = 0;
-
                     Int32.TryParse(Convert.ToString(row.Cells["CompanyId"].Value), out companyId);
-                    frmCompanyAddUpdate form = new frmCompanyAddUpdate(companyId);
-                    form.FormClosed -= Form_FormClosed;
-                    form.FormClosed += Form_FormClosed;
-                    form.ShowDialog();
+                    OpenAddEdit(companyId);
 
                 }
             }
         }
 
+        private void OpenAddEdit(int companyId)
+        {            
+            frmCompanyAddUpdate form = new frmCompanyAddUpdate(companyId,txtSearch.Text);
+            form.FormClosed -= Form_FormClosed;
+            form.FormClosed += Form_FormClosed;
+            form.ShowDialog();
+        }
+
         
         private void btnAddNewCompany_Click(object sender, EventArgs e)
         {
-            frmCompanyAddUpdate form = new frmCompanyAddUpdate();
-            form.FormClosed += Form_FormClosed;
-            form.ShowDialog();
+            OpenAddEdit(0);
 
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
             LoadDataGrid();
         }
 
@@ -132,6 +135,49 @@ namespace PharmaUI
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadDataGrid();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            OpenAddEdit(0);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditCompany();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+                OpenAddEdit(0);
+                return true;
+            }
+            else if (keyData == Keys.F3)
+            {
+                EditCompany();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void EditCompany()
+        {
+            if (dgvCompanyList.SelectedRows.Count == 0)
+                MessageBox.Show("Please select atleast one row to edit");
+
+            PharmaBusinessObjects.Master.CompanyMaster model = (PharmaBusinessObjects.Master.CompanyMaster)dgvCompanyList.SelectedRows[0].DataBoundItem;
+
+            
+
+            OpenAddEdit(model.CompanyId);
         }
     }
 }

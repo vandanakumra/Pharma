@@ -41,9 +41,9 @@ namespace PharmaUI
             {
                 if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    PersonalLedgerMaster itemToBeRemoved = (PersonalLedgerMaster)dgvPersonalLedger.SelectedRows[0].DataBoundItem;
-                    applicationFacade.DeletePersonalLedger(itemToBeRemoved);
-                    FillGrid();
+                    //PersonalLedgerMaster itemToBeRemoved = (PersonalLedgerMaster)dgvPersonalLedger.SelectedRows[0].DataBoundItem;
+                    //applicationFacade.DeletePersonalLedger(itemToBeRemoved);
+                    //FillGrid();
                 }
             }
         }
@@ -80,22 +80,25 @@ namespace PharmaUI
                      
         }
 
-        private void btnAddNewLedger_Click(object sender, EventArgs e)
+      
+        void OpenAddEdit(int personLedgerId)
         {
-            try
-            {
-                var form = new frmPersonalLedgerMasterAddUpdate();
-                form.FormClosed += Form_FormClosed;
-                form.ShowDialog();
-            }
-            catch (Exception)
-            {
+            var form = new frmPersonalLedgerMasterAddUpdate(personLedgerId,txtSearch.Text);
+            form.FormClosed -= Form_FormClosed;
+            form.FormClosed += Form_FormClosed;
 
+            if (personLedgerId > 0 && dgvPersonalLedger.SelectedRows[0] != null)
+            {
+                PersonalLedgerMaster existingItem = (PersonalLedgerMaster)dgvPersonalLedger.SelectedRows[0].DataBoundItem;
+                form.frmPersonalLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
             }
+
+            form.ShowDialog();
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
             FillGrid();
         }
 
@@ -105,17 +108,57 @@ namespace PharmaUI
         {
             if (e.RowIndex != -1)
             {
-                frmPersonalLedgerMasterAddUpdate form = new frmPersonalLedgerMasterAddUpdate(true);
-                PersonalLedgerMaster existingItem = (PersonalLedgerMaster)dgvPersonalLedger.CurrentRow.DataBoundItem;
-                form.frmPersonalLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
-                form.FormClosed += Form_FormClosed;
-                form.ShowDialog();
+                EditPersonLedger();
             }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             FillGrid();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            OpenAddEdit(0);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditPersonLedger();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+                OpenAddEdit(0);
+                return true;
+            }
+            else if (keyData == Keys.F3)
+            {
+                EditPersonLedger();
+
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        void EditPersonLedger()
+        {
+            if (dgvPersonalLedger.SelectedRows.Count == 0)
+                MessageBox.Show("Please select atleast one row to edit");
+
+            PharmaBusinessObjects.Master.PersonalLedgerMaster model = (PharmaBusinessObjects.Master.PersonalLedgerMaster)dgvPersonalLedger.SelectedRows[0].DataBoundItem;
+
+            OpenAddEdit(model.PersonalLedgerId);
         }
     }
 }
