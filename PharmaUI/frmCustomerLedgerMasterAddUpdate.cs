@@ -528,7 +528,7 @@ namespace PharmaUI
         {
             int personRouteID = ((frmPersonRouteMasterAddUpdate)sender).PersonRouteID;
 
-            switch ((sender as frmPersonRouteMasterAddUpdate).Tag)
+            switch ((sender as frmPersonRouteMasterAddUpdate).Tag.ToString())
             {
                 case "cbxZSM":
                     {
