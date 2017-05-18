@@ -100,6 +100,16 @@ namespace PharmaBusinessObjects
         PharmaBusinessObjects.Master.UserMaster GetUserByUserId(int userid);
         int AddUser(PharmaBusinessObjects.Master.UserMaster p);
         int UpdateUser(PharmaBusinessObjects.Master.UserMaster p);
+        List<PharmaBusinessObjects.Master.Role> GetRoles(string searchText);
+        List<PharmaBusinessObjects.Master.Role> GetActiveRoles();
+        PharmaBusinessObjects.Master.Role GetRoleById(int userid);
+        bool AddRole(PharmaBusinessObjects.Master.Role p);
+        bool UpdateRole(PharmaBusinessObjects.Master.Role p);
+        List<PharmaBusinessObjects.Master.Privledge> GetPrivledges(string searchText);
+        List<PharmaBusinessObjects.Master.Privledge> GetActivePrivledges();
+        PharmaBusinessObjects.Master.Privledge GetPrivledgeById(int userid);
+        bool AddPrivledge(PharmaBusinessObjects.Master.Privledge p);
+        bool UpdatePrivledge(PharmaBusinessObjects.Master.Privledge p);
 
         #endregion
 

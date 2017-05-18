@@ -40,6 +40,7 @@ namespace PharmaDataMigration.Master
                         {
                             string originalItemCompanyCode = Convert.ToString(dr["CompCD"]).TrimEnd();
                             string companyCode = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == originalItemCompanyCode).FirstOrDefault().MappedCompanyCode;
+                            int companyID = context.CompanyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
                             int totalItemsFromSameCompany = companyCodeCounts.Where(p => p.CompanyCode == companyCode).Select(p => p.CompanyCodeCount).FirstOrDefault();
                             totalItemsFromSameCompany++;
 
@@ -63,11 +64,10 @@ namespace PharmaDataMigration.Master
                             {
                                 ItemCode = itemCode,
                                 ItemName = Convert.ToString(dr["ACName"]).TrimEnd(),
-                                //Need to update as CompanyID
-                                //CompanyCode = companyCode,
+                                CompanyID = companyID,
                                 ConversionRate = Convert.ToDouble(dr["ConvRate"]),
-                                ShortName = Convert.ToString(dr["ALT_Name"]),
-                                Packing = Convert.ToString(dr["Size"]),
+                                ShortName = Convert.ToString(dr["ALT_Name"]).TrimEnd(),
+                                Packing = Convert.ToString(dr["Size"]).TrimEnd(),
                                 PurchaseRate = Convert.ToDouble(dr["PRate"]),
                                 MRP = Convert.ToDouble(dr["MRP"]),
                                 SaleRate = Convert.ToDouble(dr["SRate"]),
@@ -79,7 +79,7 @@ namespace PharmaDataMigration.Master
                                 Scheme1 = Convert.ToDouble(dr["Scheme1"]),
                                 Scheme2 = Convert.ToDouble(dr["Scheme2"]),
                                 PurchaseExcise = Convert.ToDouble(dr["ExciseP"]),
-                                UPC = Convert.ToString(dr["UPC"]),
+                                UPC = Convert.ToString(dr["UPC"]).TrimEnd(),
                                 IsHalfScheme = Convert.ToChar(dr["half"]) == 'Y' ? true : false,
                                 IsQTRScheme = Convert.ToChar(dr["qtr"]) == 'Y' ? true : false,
                                 SpecialDiscount = Convert.ToDouble(dr["SPLDIS"]),
@@ -93,7 +93,7 @@ namespace PharmaDataMigration.Master
                                 DiscountRecieved = Convert.ToDouble(dr["PDIS"]),
                                 SpecialDiscountRecieved = Convert.ToDouble(dr["PSPLDIS"]),
                                 QtyPerCase = Convert.ToDouble(dr["Case_Qty"]),
-                                Location = Convert.ToString(dr["location"]),
+                                Location = Convert.ToString(dr["location"]).TrimEnd(),
                                 MinimumStock = Convert.ToInt32(dr["min"]),
                                 MaximumStock = Convert.ToInt32(dr["max"]),
                                 SaleTypeId = 1, //Convert.ToInt32(dr["SType"]),

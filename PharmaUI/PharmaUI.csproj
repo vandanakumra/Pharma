@@ -163,6 +163,18 @@
     <Compile Include="frmPersonRouteMaster.Designer.cs">
       <DependentUpon>frmPersonRouteMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPrivledgeAddUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrivledgeAddUpdate.Designer.cs">
+      <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRoleAddUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRoleAddUpdate.Designer.cs">
+      <DependentUpon>frmRoleAddUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSupplierLedger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +254,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPersonalLedgerMasterAddUpdate.resx">
       <DependentUpon>frmPersonalLedgerMasterAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrivledgeAddUpdate.resx">
+      <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRoleAddUpdate.resx">
+      <DependentUpon>frmRoleAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSupplierLedger.resx">
       <DependentUpon>frmSupplierLedger.cs</DependentUpon>

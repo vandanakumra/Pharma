@@ -14,6 +14,9 @@ namespace PharmaBusinessObjects.Master
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Status { get; set; }
-       
+       public bool IsSystemAdmin { get; set; }
+        public int RoleID { get; set; }
+        public string RoleName { get; set; }
+        public List<Privledge> Privledges { get; set; }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PharmaDataMigration
 {
@@ -21,6 +17,7 @@ namespace PharmaDataMigration
         public static List<PersonalLedgerCodeMap> personalLedgerCodeMap;
         public static List<ControlCodeMap> controlCodeMap;
         public static List<AccountLedgerCodeMap> accountLedgerCodeMap;
+        public static List<SupplierLedgerCodeMap> supplierLedgerCodeMap;
     }
 
     public class CompanyCodeMap
@@ -88,5 +85,11 @@ namespace PharmaDataMigration
         public string OriginalAccountLedgerCode { get; set; }
         public string MappedAccountLedgerCode { get; set; }
         public int AccountLedgerTypeID { get; set; }
+    }
+
+    public class SupplierLedgerCodeMap
+    {
+        public string OriginalSupplierLedgerCode { get; set; }
+        public string MappedSupplierLedgerCode { get; set; }
     }
 }

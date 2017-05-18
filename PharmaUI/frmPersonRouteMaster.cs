@@ -50,10 +50,7 @@ namespace PharmaUI
             {
                 PharmaBusinessObjects.Master.PersonRouteMaster model = (PharmaBusinessObjects.Master.PersonRouteMaster)dgvPersonRoute.Rows[e.RowIndex].DataBoundItem;
 
-                frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(model);
-                form.FormClosed -= Form_FormClosed;
-                form.FormClosed += Form_FormClosed;
-                form.Show();
+                AddEditPersonRoute(model);
             }
         }
 
@@ -92,14 +89,6 @@ namespace PharmaUI
 
         }
 
-        private void btnAddPersonRoute_Click(object sender, EventArgs e)
-        {
-            frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate();
-            form.FormClosed -= Form_FormClosed;
-            form.FormClosed += Form_FormClosed;
-            form.ShowDialog();
-        }
-
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
             ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
@@ -113,17 +102,53 @@ namespace PharmaUI
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-
+            AddEditPersonRoute(null);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-
+            EditPersonRoute();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
 
         }
+
+
+        void AddEditPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster model)
+        {
+            frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(model);
+            form.FormClosed -= Form_FormClosed;
+            form.FormClosed += Form_FormClosed;
+            form.ShowDialog();
+        }
+
+
+        private void EditPersonRoute()
+        {
+            if (dgvPersonRoute.SelectedRows.Count == 0)
+                MessageBox.Show("Please select atleast one row to edit");
+
+            PharmaBusinessObjects.Master.PersonRouteMaster model = (PharmaBusinessObjects.Master.PersonRouteMaster)dgvPersonRoute.SelectedRows[0].DataBoundItem;
+                        
+            AddEditPersonRoute(model);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+                AddEditPersonRoute(null);
+            }
+            else if (keyData == Keys.F3)
+            {
+                EditPersonRoute();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }

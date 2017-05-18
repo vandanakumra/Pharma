@@ -135,6 +135,16 @@ namespace PharmaUI
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadDataGrid();
+
+            if (dgvCompanyList.Rows.Count == 0)
+            {
+                if (DialogResult.Yes == MessageBox.Show(Constants.Messages.NotExists, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    frmCompanyAddUpdate form = new frmCompanyAddUpdate(0,txtSearch.Text);
+                    form.FormClosed += Form_FormClosed;
+                    form.ShowDialog();
+                }
+            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)

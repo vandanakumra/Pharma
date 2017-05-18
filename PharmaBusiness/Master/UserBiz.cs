@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmaDAL.Master;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,56 @@ namespace PharmaBusiness.Master
             return new PharmaDAL.Master.UserDao(this.LoggedInUser).UpdateUser(p);
         }
 
+        public List<PharmaBusinessObjects.Master.Role> GetRoles(string searchText)
+        {
+            return new UserDao(this.LoggedInUser).GetRoles(searchText);
+        }
+
+        public List<PharmaBusinessObjects.Master.Role> GetActiveRoles()
+        {
+            List<PharmaBusinessObjects.Master.Role> roles = new UserDao(this.LoggedInUser).GetRoles(string.Empty);
+            return roles.Where(p => p.Status).ToList();
+        }
+
+        public PharmaBusinessObjects.Master.Role GetRoleById(int userid)
+        {
+            return new UserDao(this.LoggedInUser).GetRoleById(userid);
+        }
+
+        public bool AddRole(PharmaBusinessObjects.Master.Role p)
+        {
+            return new UserDao(this.LoggedInUser).AddRole(p);
+        }
+
+        public bool UpdateRole(PharmaBusinessObjects.Master.Role p)
+        {
+            return new UserDao(this.LoggedInUser).UpdateRole(p);
+        }
+
+        public List<PharmaBusinessObjects.Master.Privledge> GetPrivledges(string searchText)
+        {
+            return new UserDao(this.LoggedInUser).GetPrivledges(searchText);
+        }
+
+        public List<PharmaBusinessObjects.Master.Privledge> GetActivePrivledges()
+        {
+            return new UserDao(this.LoggedInUser).GetPrivledges(string.Empty).Where(p=>p.Status).ToList();
+        }
+
+        public PharmaBusinessObjects.Master.Privledge GetPrivledgeById(int userid)
+        {
+            return new UserDao(this.LoggedInUser).GetPrivledgeById(userid);
+        }
+
+        public bool AddPrivledge(PharmaBusinessObjects.Master.Privledge p)
+        {
+            return new UserDao(this.LoggedInUser).AddPrivledge(p);
+        }
+
+        public bool UpdatePrivledge(PharmaBusinessObjects.Master.Privledge p)
+        {
+            return new UserDao(this.LoggedInUser).UpdatePrivledges(p);
+        }
 
     }
 }

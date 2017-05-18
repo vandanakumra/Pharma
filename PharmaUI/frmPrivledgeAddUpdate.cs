@@ -15,50 +15,50 @@ using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI
 {
-    public partial class frmUserMasterAddUpdate : Form
+    public partial class frmPrivledgeAddUpdate : Form
     {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
+        public int PrivledgeId { get; set; }
+        public string PrivledgeName { get; set; }
         IApplicationFacade applicationFacade;
 
-        public frmUserMasterAddUpdate()
+        public frmPrivledgeAddUpdate()
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
-        public frmUserMasterAddUpdate(int userId)
+        public frmPrivledgeAddUpdate(int PrivledgeId)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.UserId = userId;
+            this.PrivledgeId = PrivledgeId;
         }
 
-        public frmUserMasterAddUpdate(string userName)
+        public frmPrivledgeAddUpdate(string PrivledgeName)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.UserName = userName;
+            this.PrivledgeName = PrivledgeName;
         }
 
-        private void frmUserMasterAddUpdate_Load(object sender, EventArgs e)
+        private void frmPrivledgeAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, UserId > 0 ? "User - Update" : "User - Add");
+            ExtensionMethods.FormLoad(this, PrivledgeId > 0 ? "Privledge - Update" : "Privledge - Add");
             GotFocusEventRaised(this);
             KeyDownEvents(this);
             FillCombo();
 
-            if (this.UserId > 0)
+            if (this.PrivledgeId > 0)
             {
                 FillFormForUpdate();
             }
 
-            if (!string.IsNullOrEmpty(this.UserName))
+            if (!string.IsNullOrEmpty(this.PrivledgeName))
             {
-                txtUserName.Text = this.UserName;
+                txtPrivledgeName.Text = this.PrivledgeName;
             }
         }
 
@@ -79,18 +79,13 @@ namespace PharmaUI
 
         private void FillFormForUpdate()
         {
-            UserMaster userMaster = applicationFacade.GetUserByUserId(this.UserId);
+            Privledge privledge = applicationFacade.GetPrivledgeById(this.PrivledgeId);
 
-            if (userMaster != null)
+            if (privledge != null)
             {
-                txtUserName.Text = userMaster.Username;
-                txtPassword.Text = userMaster.Password;
-                txtFirstName.Text = userMaster.FirstName;
-                txtLastName.Text = userMaster.LastName;
-                chkIsSystemAdmin.Checked = userMaster.IsSystemAdmin;
-                cbxRole.SelectedValue = userMaster.RoleID;
-                cbxStatus.SelectedItem = userMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
-
+                txtPrivledgeName.Text = privledge.PrivledgeName;
+                cbxStatus.SelectedItem = privledge.Status ? Enums.Status.Active : Enums.Status.Inactive;
+                txtControlName.Text = privledge.ControlName;
             }
         }
 
@@ -99,12 +94,6 @@ namespace PharmaUI
             //Fill status options
             cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
             cbxStatus.SelectedItem = Enums.Status.Active;
-
-            //Fill Roles option
-            cbxRole.DataSource = applicationFacade.GetActiveRoles();
-            cbxRole.ValueMember = "RoleId";
-            cbxRole.DisplayMember = "RoleName";
-            
         }
 
         private void C_KeyDown(object sender, KeyEventArgs e)
@@ -154,40 +143,25 @@ namespace PharmaUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtUserName.Text))
+            if (String.IsNullOrWhiteSpace(txtPrivledgeName.Text))
             {
-                errFrmUserAddUpdate.SetError(txtUserName, Constants.Messages.RequiredField);
-                txtUserName.SelectAll();
-                txtUserName.Focus();
-                return;
-            }
-
-            if (String.IsNullOrWhiteSpace(txtPassword.Text))
-            {
-                errFrmUserAddUpdate.SetError(txtPassword, Constants.Messages.InValidEmail);
-                txtPassword.SelectAll();
-                txtPassword.Focus();
+                errfrmPrivledgeAddUpdate.SetError(txtPrivledgeName, Constants.Messages.RequiredField);
+                txtPrivledgeName.SelectAll();
+                txtPrivledgeName.Focus();
                 return;
             }
 
             Status status;
-            int roleId = 0;
-            UserMaster user = new UserMaster();
-            user.UserId = this.UserId;
-            user.Username = txtUserName.Text;
-            user.FirstName = txtFirstName.Text;
-            user.LastName = txtLastName.Text;
-            user.Password = txtPassword.Text;
-            user.IsSystemAdmin = chkIsSystemAdmin.Checked;
-            Int32.TryParse(Convert.ToString(cbxRole.SelectedValue), out roleId);
-            user.RoleID = roleId;
-
+            Privledge privledge = new Privledge();
+            privledge.PrivledgeId = this.PrivledgeId;
+            privledge.PrivledgeName = txtPrivledgeName.Text;
+            privledge.ControlName = txtControlName.Text;
             Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
-            user.Status = status == Status.Active;
+            privledge.Status = status == Status.Active;
 
-            int result = this.UserId > 0 ? applicationFacade.UpdateUser(user) : applicationFacade.AddUser(user);
+            bool result = this.PrivledgeId > 0 ? applicationFacade.UpdatePrivledge(privledge) : applicationFacade.AddPrivledge(privledge);
 
-            if (result > 0)
+            if (result)
                 this.Close();
         }
     }
