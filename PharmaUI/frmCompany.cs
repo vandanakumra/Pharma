@@ -140,7 +140,7 @@ namespace PharmaUI
             {
                 if (DialogResult.Yes == MessageBox.Show(Constants.Messages.NotExists, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    frmCompanyAddUpdate form = new frmCompanyAddUpdate(txtSearch.Text);
+                    frmCompanyAddUpdate form = new frmCompanyAddUpdate(0,txtSearch.Text);
                     form.FormClosed += Form_FormClosed;
                     form.ShowDialog();
                 }
