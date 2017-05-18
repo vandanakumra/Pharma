@@ -595,6 +595,46 @@ namespace PharmaBusiness
         {
             return new UserBiz(this.LoggedInUser).UpdateUser(p);
         }
+        public List<PharmaBusinessObjects.Master.Role> GetRoles(string searchText)
+        {
+            return new UserBiz(this.LoggedInUser).GetRoles(searchText);
+        }
+        public List<PharmaBusinessObjects.Master.Role> GetActiveRoles()
+        {
+            return new UserBiz(this.LoggedInUser).GetActiveRoles();
+        }
+        public PharmaBusinessObjects.Master.Role GetRoleById(int userid)
+        {
+            return new UserBiz(this.LoggedInUser).GetRoleById(userid);
+        }
+        public bool AddRole(PharmaBusinessObjects.Master.Role p)
+        {
+            return new UserBiz(this.LoggedInUser).AddRole(p);
+        }
+        public bool UpdateRole(PharmaBusinessObjects.Master.Role p)
+        {
+            return new UserBiz(this.LoggedInUser).UpdateRole(p);
+        }
+        public List<PharmaBusinessObjects.Master.Privledge> GetPrivledges(string searchText)
+        {
+            return new UserBiz(this.LoggedInUser).GetPrivledges(searchText);
+        }
+        public List<PharmaBusinessObjects.Master.Privledge> GetActivePrivledges()
+        {
+            return new UserBiz(this.LoggedInUser).GetActivePrivledges();
+        }
+        public PharmaBusinessObjects.Master.Privledge GetPrivledgeById(int userid)
+        {
+            return new UserBiz(this.LoggedInUser).GetPrivledgeById(userid);
+        }
+        public bool AddPrivledge(PharmaBusinessObjects.Master.Privledge p)
+        {
+            return new UserBiz(this.LoggedInUser).AddPrivledge(p);
+        }
+        public bool UpdatePrivledge(PharmaBusinessObjects.Master.Privledge p)
+        {
+            return new UserBiz(this.LoggedInUser).UpdatePrivledge(p);
+        }
 
         #endregion
 

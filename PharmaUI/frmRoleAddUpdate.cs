@@ -15,50 +15,50 @@ using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI
 {
-    public partial class frmUserMasterAddUpdate : Form
+    public partial class frmRoleAddUpdate : Form
     {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
         IApplicationFacade applicationFacade;
 
-        public frmUserMasterAddUpdate()
+        public frmRoleAddUpdate()
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
-        public frmUserMasterAddUpdate(int userId)
+        public frmRoleAddUpdate(int RoleId)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.UserId = userId;
+            this.RoleId = RoleId;
         }
 
-        public frmUserMasterAddUpdate(string userName)
+        public frmRoleAddUpdate(string RoleName)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.UserName = userName;
+            this.RoleName = RoleName;
         }
 
-        private void frmUserMasterAddUpdate_Load(object sender, EventArgs e)
+        private void frmRoleAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, UserId > 0 ? "User - Update" : "User - Add");
+            ExtensionMethods.FormLoad(this, RoleId > 0 ? "Role - Update" : "Role - Add");
             GotFocusEventRaised(this);
             KeyDownEvents(this);
             FillCombo();
 
-            if (this.UserId > 0)
+            if (this.RoleId > 0)
             {
                 FillFormForUpdate();
             }
 
-            if (!string.IsNullOrEmpty(this.UserName))
+            if (!string.IsNullOrEmpty(this.RoleName))
             {
-                txtUserName.Text = this.UserName;
+                txtRoleName.Text = this.RoleName;
             }
         }
 
@@ -79,17 +79,23 @@ namespace PharmaUI
 
         private void FillFormForUpdate()
         {
-            UserMaster userMaster = applicationFacade.GetUserByUserId(this.UserId);
+            Role role = applicationFacade.GetRoleById(this.RoleId);
 
-            if (userMaster != null)
+            if (role != null)
             {
-                txtUserName.Text = userMaster.Username;
-                txtPassword.Text = userMaster.Password;
-                txtFirstName.Text = userMaster.FirstName;
-                txtLastName.Text = userMaster.LastName;
-                chkIsSystemAdmin.Checked = userMaster.IsSystemAdmin;
-                cbxRole.SelectedValue = userMaster.RoleID;
-                cbxStatus.SelectedItem = userMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
+                txtRoleName.Text = role.RoleName;
+                cbxStatus.SelectedItem = role.Status ? Enums.Status.Active : Enums.Status.Inactive;
+
+                if (role.PrivledgeList != null)
+                {
+                    for (int i = 0; i < chkPrivledgeList.Items.Count; i++)
+                    { 
+                        Privledge priv = (Privledge)chkPrivledgeList.Items[i];
+
+                        if(role.PrivledgeList.Any(x=> x.PrivledgeId  == priv.PrivledgeId))
+                            this.chkPrivledgeList.SetItemChecked(i, true);
+                    }
+                }
 
             }
         }
@@ -100,11 +106,11 @@ namespace PharmaUI
             cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
             cbxStatus.SelectedItem = Enums.Status.Active;
 
-            //Fill Roles option
-            cbxRole.DataSource = applicationFacade.GetActiveRoles();
-            cbxRole.ValueMember = "RoleId";
-            cbxRole.DisplayMember = "RoleName";
-            
+            //Fill privledge option
+            ((ListBox)chkPrivledgeList).DataSource = applicationFacade.GetActivePrivledges();
+            ((ListBox)chkPrivledgeList).DisplayMember = "PrivledgeName";
+            ((ListBox)chkPrivledgeList).ValueMember = "PrivledgeId";
+
         }
 
         private void C_KeyDown(object sender, KeyEventArgs e)
@@ -154,40 +160,30 @@ namespace PharmaUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtUserName.Text))
+            if (String.IsNullOrWhiteSpace(txtRoleName.Text))
             {
-                errFrmUserAddUpdate.SetError(txtUserName, Constants.Messages.RequiredField);
-                txtUserName.SelectAll();
-                txtUserName.Focus();
-                return;
-            }
-
-            if (String.IsNullOrWhiteSpace(txtPassword.Text))
-            {
-                errFrmUserAddUpdate.SetError(txtPassword, Constants.Messages.InValidEmail);
-                txtPassword.SelectAll();
-                txtPassword.Focus();
+                errFrmRoleAddUpdate.SetError(txtRoleName, Constants.Messages.RequiredField);
+                txtRoleName.SelectAll();
+                txtRoleName.Focus();
                 return;
             }
 
             Status status;
-            int roleId = 0;
-            UserMaster user = new UserMaster();
-            user.UserId = this.UserId;
-            user.Username = txtUserName.Text;
-            user.FirstName = txtFirstName.Text;
-            user.LastName = txtLastName.Text;
-            user.Password = txtPassword.Text;
-            user.IsSystemAdmin = chkIsSystemAdmin.Checked;
-            Int32.TryParse(Convert.ToString(cbxRole.SelectedValue), out roleId);
-            user.RoleID = roleId;
-
+            Role role = new Role();
+            role.RoleId = this.RoleId;
+            role.RoleName = txtRoleName.Text;
             Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
-            user.Status = status == Status.Active;
+            role.Status = status == Status.Active;
+            role.PrivledgeList = new List<Privledge>();
 
-            int result = this.UserId > 0 ? applicationFacade.UpdateUser(user) : applicationFacade.AddUser(user);
+            for (int i = 0; i < chkPrivledgeList.Items.Count; i++)
+            {
+                if(chkPrivledgeList.GetItemChecked(i))
+                role.PrivledgeList.Add(new Privledge() { PrivledgeId = ((Privledge)chkPrivledgeList.Items[i]).PrivledgeId });
+            }
+            bool result = this.RoleId > 0 ? applicationFacade.UpdateRole(role) : applicationFacade.AddRole(role);
 
-            if (result > 0)
+            if (result)
                 this.Close();
         }
     }
