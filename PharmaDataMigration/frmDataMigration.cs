@@ -22,6 +22,7 @@ namespace PharmaDataMigration
             Common.personalLedgerCodeMap = new List<PersonalLedgerCodeMap>();
             Common.controlCodeMap = new List<ControlCodeMap>();
             Common.accountLedgerCodeMap = new List<AccountLedgerCodeMap>();
+            Common.supplierLedgerCodeMap = new List<SupplierLedgerCodeMap>();
         }
 
         private void frmDataMigration_Load(object sender, EventArgs e)
@@ -61,6 +62,7 @@ namespace PharmaDataMigration
             PersonRouteMaster personRouteMaster = new PersonRouteMaster();
             PersonalLedgerMaster personalLedgerMaster = new PersonalLedgerMaster();
             AccountLedgerMaster accountLedgerMaster = new AccountLedgerMaster();
+            SupplierLedgerMaster supplierLedgerMaster = new SupplierLedgerMaster();
             int result;
 
             grdDataMigration.Rows.Add("Company Master", "Processing", 0);
@@ -190,6 +192,14 @@ namespace PharmaDataMigration
 
             grdDataMigration.Rows[15].Cells[1].Value = "Completed";
             grdDataMigration.Rows[15].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Supplier Ledger", "Processing", 0);
+            result = 0;
+
+            result = supplierLedgerMaster.InsertSupplierLedgerMasterData();
+
+            grdDataMigration.Rows[16].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[16].Cells[2].Value = result;
         }
     }
 }

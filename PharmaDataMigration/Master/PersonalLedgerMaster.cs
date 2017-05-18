@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PharmaDAL.Entity;
 
 namespace PharmaDataMigration.Master
@@ -31,7 +29,7 @@ namespace PharmaDataMigration.Master
                 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxPersonalLedgerID = context.PersonalLedger.Count() > 0 ? context.PersonalLedger.Max(q => q.PersonalLedgerId) : 0;
+                    var maxPersonalLedgerID = context.PersonalLedger.Count();
 
                     if (dtPersonalLedgerMaster != null && dtPersonalLedgerMaster.Rows.Count > 0)
                     {
@@ -47,7 +45,7 @@ namespace PharmaDataMigration.Master
                             {
                                 PersonalLedgerCode = personalLedgerCode,
                                 PersonalLedgerName = Convert.ToString(dr["ACName"]).TrimEnd(),
-                                PersonalLedgerShortName = Convert.ToString(dr["ACNO"]).TrimEnd(),
+                                PersonalLedgerShortName = Convert.ToString(dr["Alt_name_1"]).TrimEnd(),
                                 Address = string.Concat(Convert.ToString(dr["ACAD1"]).TrimEnd(), " ", Convert.ToString(dr["ACAD2"]).TrimEnd(), " ", Convert.ToString(dr["ACAD3"]).TrimEnd()),
                                 ContactPerson = Convert.ToString(dr["ACAD4"]).TrimEnd(),
                                 Mobile = Convert.ToString(dr["Mobile"]).TrimEnd(),
@@ -58,7 +56,8 @@ namespace PharmaDataMigration.Master
                                 EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
                                 CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
+                                CreatedOn = DateTime.Now,
+                                PersonalLedgerShortDesc = Convert.ToString(dr["Alt_name_2"]).TrimEnd()
                             };
 
                             listPersonalLedgerMaster.Add(newPersonalLedgerMaster);
