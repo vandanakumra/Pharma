@@ -19,33 +19,32 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         private int SupplierId { get; set; }
+        private string SupplierNameNew { get; set; }
 
-        public frmSupplierLedgerAddUpdate()
-        {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            ExtensionMethods.DisableAllTextBoxAndComboBox(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-        }
-
-        public frmSupplierLedgerAddUpdate(int supplierId)
+        public frmSupplierLedgerAddUpdate(int supplierId,string supplierName)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             this.SupplierId = supplierId;
+            SupplierNameNew = supplierName;
             
         }
 
         private void frmSupplierLedgerAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
-            FillCombo();
+            ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");          
             GotFocusEventRaised(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            FillCombo();
 
             if (this.SupplierId > 0)
             {
                 FillFormForUpdate();
+            }
+            else
+            {
+                ucSupplierCustomerInfo.CustomerSupplierName = SupplierNameNew;
             }
         }
 

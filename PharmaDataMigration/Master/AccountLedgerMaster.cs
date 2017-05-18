@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PharmaDAL.Entity;
 
 namespace PharmaDataMigration.Master
@@ -30,7 +28,7 @@ namespace PharmaDataMigration.Master
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q => q.AccountLedgerID) : 0;
+                    var maxAccountLedgerID = context.AccountLedgerMaster.Count();
                     int accountLedgerTypeID = context.AccountLedgerType.Where(p => p.SystemName == PharmaBusinessObjects.Common.Constants.AccountLedgerType.ControlCodes).FirstOrDefault().AccountLedgerTypeID;
                     
                     if (dtControlCodesMaster != null && dtControlCodesMaster.Rows.Count > 0)
@@ -56,7 +54,8 @@ namespace PharmaDataMigration.Master
                                 CreditControlCodeID = null,
                                 DebitControlCodeID = null,
                                 CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
+                                CreatedOn = DateTime.Now,
+                                SalePurchaseTaxType = null
                             };
 
                             listControlCodesMaster.Add(newControlCodeMaster);
@@ -88,7 +87,7 @@ namespace PharmaDataMigration.Master
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q => q.AccountLedgerID) : 0;
+                    var maxAccountLedgerID = context.AccountLedgerMaster.Count();
                     int accountLedgerTypeID = context.AccountLedgerType.Where(p => p.SystemName == PharmaBusinessObjects.Common.Constants.AccountLedgerType.IncomeLedger).FirstOrDefault().AccountLedgerTypeID;
                     
                     if (dtIncomeLedgerMaster != null && dtIncomeLedgerMaster.Rows.Count > 0)
@@ -120,7 +119,8 @@ namespace PharmaDataMigration.Master
                                 CreditControlCodeID = creditControlCodeID,
                                 DebitControlCodeID = debitControlCodeID,
                                 CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
+                                CreatedOn = DateTime.Now,
+                                SalePurchaseTaxType = null
                             };
 
                             listIncomeLedgerMaster.Add(newIncomeLedgerMaster);
@@ -152,7 +152,7 @@ namespace PharmaDataMigration.Master
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q => q.AccountLedgerID) : 0;
+                    var maxAccountLedgerID = context.AccountLedgerMaster.Count();
                     int accountLedgerTypeID = context.AccountLedgerType.Where(p => p.SystemName == PharmaBusinessObjects.Common.Constants.AccountLedgerType.ExpenditureLedger).FirstOrDefault().AccountLedgerTypeID;
 
                     if (dtExpenditureLedgerMaster != null && dtExpenditureLedgerMaster.Rows.Count > 0)
@@ -184,7 +184,8 @@ namespace PharmaDataMigration.Master
                                 CreditControlCodeID = creditControlCodeID,
                                 DebitControlCodeID = debitControlCodeID,
                                 CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
+                                CreatedOn = DateTime.Now,
+                                SalePurchaseTaxType = null
                             };
 
                             listExpenditureLedgerMaster.Add(newExpenditureLedgerMaster);
@@ -216,7 +217,7 @@ namespace PharmaDataMigration.Master
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q => q.AccountLedgerID) : 0;
+                    var maxAccountLedgerID = context.AccountLedgerMaster.Count();
                     int accountLedgerTypeID = context.AccountLedgerType.Where(p => p.SystemName == PharmaBusinessObjects.Common.Constants.AccountLedgerType.TransactionBooks).FirstOrDefault().AccountLedgerTypeID;
 
                     if (dtTransactionLedgerMaster != null && dtTransactionLedgerMaster.Rows.Count > 0)
@@ -248,7 +249,8 @@ namespace PharmaDataMigration.Master
                                 CreditControlCodeID = creditControlCodeID,
                                 DebitControlCodeID = debitControlCodeID,
                                 CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
+                                CreatedOn = DateTime.Now,
+                                SalePurchaseTaxType = null
                             };
 
                             listTransactionLedgerMaster.Add(newTransactionLedgerMaster);
@@ -280,7 +282,7 @@ namespace PharmaDataMigration.Master
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q => q.AccountLedgerID) : 0;
+                    var maxAccountLedgerID = context.AccountLedgerMaster.Count();
                     int accountLedgerTypeID = context.AccountLedgerType.Where(p => p.SystemName == PharmaBusinessObjects.Common.Constants.AccountLedgerType.GeneralLedger).FirstOrDefault().AccountLedgerTypeID;
 
                     if (dtGeneralLedgerMaster != null && dtGeneralLedgerMaster.Rows.Count > 0)
@@ -312,7 +314,8 @@ namespace PharmaDataMigration.Master
                                 CreditControlCodeID = creditControlCodeID,
                                 DebitControlCodeID = debitControlCodeID,
                                 CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
+                                CreatedOn = DateTime.Now,
+                                SalePurchaseTaxType = null
                             };
 
                             listGeneralLedgerMaster.Add(newGeneralLedgerMaster);
@@ -344,13 +347,28 @@ namespace PharmaDataMigration.Master
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q => q.AccountLedgerID) : 0;
+                    var maxAccountLedgerID = context.AccountLedgerMaster.Count();
                     int accountLedgerTypeID = context.AccountLedgerType.Where(p => p.SystemName == PharmaBusinessObjects.Common.Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault().AccountLedgerTypeID;
 
                     if (dtPurchaseLedgerMaster != null && dtPurchaseLedgerMaster.Rows.Count > 0)
                     {
                         foreach (DataRow dr in dtPurchaseLedgerMaster.Rows)
                         {
+                            decimal? salePurchaseTaxType = null;
+
+                            if(string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(),"PURCHASE - TAXABLE 5%") == 0)
+                            {
+                                salePurchaseTaxType = 5;
+                            }
+                            else if(string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 12.5%") == 0)
+                            {
+                                salePurchaseTaxType = Convert.ToDecimal(12.5);
+                            }
+                            else if(string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAX EXEMPTED") == 0)
+                            {
+                                salePurchaseTaxType = 0;
+                            }
+
                             maxAccountLedgerID++;
                             string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
                             int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
@@ -376,7 +394,8 @@ namespace PharmaDataMigration.Master
                                 CreditControlCodeID = creditControlCodeID,
                                 DebitControlCodeID = debitControlCodeID,
                                 CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
+                                CreatedOn = DateTime.Now,
+                                SalePurchaseTaxType = salePurchaseTaxType
                             };
 
                             listPurchaseLedgerMaster.Add(newPurchaseLedgerMaster);
@@ -408,13 +427,28 @@ namespace PharmaDataMigration.Master
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q => q.AccountLedgerID) : 0;
+                    var maxAccountLedgerID = context.AccountLedgerMaster.Count();
                     int accountLedgerTypeID = context.AccountLedgerType.Where(p => p.SystemName == PharmaBusinessObjects.Common.Constants.AccountLedgerType.SaleLedger).FirstOrDefault().AccountLedgerTypeID;
 
                     if (dtSaleLedgerMaster != null && dtSaleLedgerMaster.Rows.Count > 0)
                     {
                         foreach (DataRow dr in dtSaleLedgerMaster.Rows)
                         {
+                            decimal? salePurchaseTaxType = null;
+
+                            if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 5%") == 0)
+                            {
+                                salePurchaseTaxType = 5;
+                            }
+                            else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 12.5%") == 0)
+                            {
+                                salePurchaseTaxType = Convert.ToDecimal(12.5);
+                            }
+                            else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAX EXEMPTED") == 0)
+                            {
+                                salePurchaseTaxType = 0;
+                            }
+
                             maxAccountLedgerID++;
                             string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
                             int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
@@ -440,7 +474,8 @@ namespace PharmaDataMigration.Master
                                 CreditControlCodeID = creditControlCodeID,
                                 DebitControlCodeID = debitControlCodeID,
                                 CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
+                                CreatedOn = DateTime.Now,
+                                SalePurchaseTaxType = salePurchaseTaxType
                             };
 
                             listSaleLedgerMaster.Add(newSaleLedgerMaster);

@@ -57,12 +57,8 @@ namespace PharmaUI
             if (e.RowIndex != -1)
             {
                 PharmaBusinessObjects.Master.SupplierLedgerMaster model = (PharmaBusinessObjects.Master.SupplierLedgerMaster)dgvSupplier.Rows[e.RowIndex].DataBoundItem;
-                               
-                frmSupplierLedgerAddUpdate form = new frmSupplierLedgerAddUpdate(model.SupplierLedgerId);
-                form.FormClosed += Form_FormClosed;
-                form.ShowDialog();
 
-
+                AddEditSupplierLedger(model.SupplierLedgerId);
             }
         }
 
@@ -125,26 +121,60 @@ namespace PharmaUI
             //dgvAccountLedger.Columns["AccountLedgerCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       
         }
 
-        private void btnAddNewSupplier_Click(object sender, EventArgs e)
-        {
-            frmSupplierLedgerAddUpdate form = new frmSupplierLedgerAddUpdate();
-            form.FormClosed += Form_FormClosed;
-            form.ShowDialog();
-        }
+       
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-
+            AddEditSupplierLedger(0);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            EditLedger();
+        }
 
+        private void EditLedger()
+        {
+            if (dgvSupplier.SelectedRows.Count == 0)
+                MessageBox.Show("Please select atleast one row to edit");
+
+            PharmaBusinessObjects.Master.SupplierLedgerMaster model = (PharmaBusinessObjects.Master.SupplierLedgerMaster)dgvSupplier.SelectedRows[0].DataBoundItem;           
+
+            AddEditSupplierLedger(model.SupplierLedgerId);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
+                //applicationFacade.DeleteItem(itemToBeRemoved);
+                //LoadDataGrid(0);
+            }
+        }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+                AddEditSupplierLedger(0);
+                return true;
+            }
+            else if (keyData == Keys.F3)
+            {
+                EditLedger();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        void AddEditSupplierLedger(int supplierId)
+        {
+            frmSupplierLedgerAddUpdate form = new frmSupplierLedgerAddUpdate(supplierId,txtSearch.Text);
+            form.FormClosed -= Form_FormClosed;
+            form.FormClosed += Form_FormClosed;
+            form.ShowDialog();
         }
     }
 }
