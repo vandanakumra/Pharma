@@ -18,5 +18,7 @@ namespace PharmaBusinessObjects.Master
         public double? Breakage { get; set; }
         public double? Expired { get; set; }
         public bool IsLessEcise { get; set; }
+
+        public List<CustomerCopanyDiscount> CustomerItemDiscountMapping { get; set; }
     }
 }

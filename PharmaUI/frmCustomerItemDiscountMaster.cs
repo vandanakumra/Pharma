@@ -35,6 +35,11 @@ namespace PharmaUI
             ///
             this.lblSelectedCompanyName.Text = CustomerCopanyDiscount.CompanyName;
 
+           
+        }
+
+        private void LoadGrid()
+        {
             dgvCustomerItemDiscount.DataSource = applicationFacade.GetAllCompanyItemDiscountByCompanyID(CustomerCopanyDiscount.CompanyID);
 
             for (int i = 0; i < dgvCustomerItemDiscount.Columns.Count; i++)
@@ -65,5 +70,10 @@ namespace PharmaUI
             dgvCustomerItemDiscount.ReadOnly = false;
 
         }
+
+        //private List<CustomerCopanyDiscount> GetMergedItemDiscountList()
+        //{
+
+        //}
     }
 }
