@@ -1,4 +1,6 @@
-﻿using PharmaBusinessObjects.Master;
+﻿using PharmaBusiness;
+using PharmaBusinessObjects;
+using PharmaBusinessObjects.Master;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,17 +15,27 @@ namespace PharmaUI
 {
     public partial class frmCustomerItemDiscountMaster : Form
     {
-        private int CompanyID { get; set; }
+        private CustomerCopanyDiscount CustomerCopanyDiscount { get; set; }
+        IApplicationFacade applicationFacade;
 
-        public frmCustomerItemDiscountMaster(int CompanyID)
+        public frmCustomerItemDiscountMaster(CustomerCopanyDiscount CustomerCopanyDiscount)
         {
             InitializeComponent();
-            this.CompanyID = CompanyID;
+            //ExtensionMethods.SetFormProperties(this);
+
+            this.CustomerCopanyDiscount = CustomerCopanyDiscount;
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+
+           
         }
 
         private void frmCustomerItemDiscountMaster_Load(object sender, EventArgs e)
         {
-            dgvCustomerItemDiscount.DataSource = new List<CustomerCopanyDiscount>();
+            ///Display Company name
+            ///
+            this.lblSelectedCompanyName.Text = CustomerCopanyDiscount.CompanyName;
+
+            dgvCustomerItemDiscount.DataSource = applicationFacade.GetAllCompanyItemDiscountByCompanyID(CustomerCopanyDiscount.CompanyID);
 
             for (int i = 0; i < dgvCustomerItemDiscount.Columns.Count; i++)
             {

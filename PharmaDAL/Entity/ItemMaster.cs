@@ -23,7 +23,7 @@ namespace PharmaDAL.Entity
         public int ItemID { get; set; }
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
-        public string CompanyCode { get; set; }
+        public int CompanyID { get; set; }
         public Nullable<double> ConversionRate { get; set; }
         public string ShortName { get; set; }
         public string Packing { get; set; }
@@ -63,6 +63,7 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
+        public virtual CompanyMaster CompanyMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }
     }

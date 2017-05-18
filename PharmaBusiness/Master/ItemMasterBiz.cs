@@ -47,5 +47,24 @@ namespace PharmaBusiness.Master
             string getNextItemCode=String.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0'));
             return getNextItemCode;
         }
+
+        internal List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyID(int CompanyID)
+        {
+            List<CustomerCopanyDiscount> defaultItemDiscountByCompanyID = new List<CustomerCopanyDiscount>();
+            List<ItemMaster> itemListByCompanyID = new ItemDaoMaster(this.LoggedInUser).GetAllItemByCompanyID(CompanyID);
+
+            if (itemListByCompanyID != null)
+            {
+                defaultItemDiscountByCompanyID = itemListByCompanyID.Select(item => new CustomerCopanyDiscount()
+                {
+                    CompanyID=item.CompanyID,
+                    CompanyName=item.CompanyName,
+                    ItemID=item.ItemID,
+                    ItemName=item.ItemName
+
+                }).ToList();
+            }
+            return defaultItemDiscountByCompanyID;
+        }
     }
 }

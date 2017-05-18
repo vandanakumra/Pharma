@@ -18,6 +18,7 @@ namespace PharmaBusinessObjects
         bool DeleteItem(ItemMaster existingItem);
         string GetNextItemCode(string companyCode);
         List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy);
+        List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyID(int CompanyID);
         #endregion
 
         #region Company Master

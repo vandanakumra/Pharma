@@ -105,7 +105,7 @@ namespace PharmaUI
             //Fill the company list
             cbxComanyCode.DataSource = applicationFacade.GetCompanies(String.Empty);
             cbxComanyCode.DisplayMember = "CompanyName";
-            cbxComanyCode.ValueMember = "CompanyCode";
+            cbxComanyCode.ValueMember = "CompanyId";
 
             //Fill sale type list
             cbxSaleType.DataSource = applicationFacade.GetAccountLedgerBySystemName("SaleLedger");
@@ -131,7 +131,7 @@ namespace PharmaUI
                 ItemMaster item = new ItemMaster();
                 item.ItemCode = tbxItemCode.Text;
                 item.ItemName = tbxItemName.Text;
-                item.CompanyCode = (cbxComanyCode.SelectedItem as CompanyMaster).CompanyCode;
+                item.CompanyID = (cbxComanyCode.SelectedItem as CompanyMaster).CompanyId;
                 item.ConversionRate = ExtensionMethods.SafeConversionDouble(tbxConvRate.Text);
                 item.ShortName = tbxShortName.Text;
                 item.Packing = tbxPacking.Text;
@@ -334,7 +334,7 @@ namespace PharmaUI
             {
                 tbxItemCode.Text = existingItem.ItemCode;
                 tbxItemName.Text = existingItem.ItemName;
-                cbxComanyCode.SelectedValue = existingItem.CompanyCode;
+                cbxComanyCode.SelectedValue = existingItem.CompanyID;
                 tbxConvRate.Text = Convert.ToString(existingItem.ConversionRate);
                 tbxShortName.Text = existingItem.ShortName;
                 tbxPacking.Text = existingItem.Packing;

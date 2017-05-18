@@ -20,6 +20,7 @@ namespace PharmaDAL.Entity
             this.AccountLedgerMaster1 = new HashSet<AccountLedgerMaster>();
             this.AccountLedgerMaster11 = new HashSet<AccountLedgerMaster>();
             this.ItemMaster = new HashSet<ItemMaster>();
+            this.SupplierLedger = new HashSet<SupplierLedger>();
         }
     
         public int AccountLedgerID { get; set; }
@@ -36,6 +37,7 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public Nullable<decimal> SalePurchaseTaxType { get; set; }
     
         public virtual AccountLedgerType AccountLedgerType { get; set; }
         public virtual AccountType AccountType { get; set; }
@@ -47,5 +49,7 @@ namespace PharmaDAL.Entity
         public virtual AccountLedgerMaster AccountLedgerMaster3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemMaster> ItemMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SupplierLedger> SupplierLedger { get; set; }
     }
 }

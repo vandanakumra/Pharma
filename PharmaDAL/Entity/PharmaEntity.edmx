@@ -23,6 +23,7 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="SalePurchaseTaxType" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="AccountLedgerType">
           <Key>
@@ -133,6 +134,7 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="CustomerLedgerShortDesc" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="CustomerType">
           <Key>
@@ -159,7 +161,7 @@
           <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="ItemName" Type="nvarchar" MaxLength="30" />
-          <Property Name="CompanyCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
           <Property Name="ConversionRate" Type="float" />
           <Property Name="ShortName" Type="nvarchar" MaxLength="10" />
           <Property Name="Packing" Type="nvarchar" MaxLength="10" />
@@ -229,6 +231,7 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="PersonalLedgerShortDesc" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="PersonLedgerType">
           <Key>
@@ -312,6 +315,8 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="SupplierLedgerShortDesc" Type="nvarchar" MaxLength="20" />
+          <Property Name="PurchaseTypeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -534,6 +539,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItemMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Menu_Privledges">
           <End Role="Privledges" Type="Self.Privledges" Multiplicity="0..1" />
           <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
@@ -583,6 +600,18 @@
             </Principal>
             <Dependent Role="RolePrivledges">
               <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierLedger_PurchaseLedger">
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="SupplierLedger" Type="Self.SupplierLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountLedgerMaster">
+              <PropertyRef Name="AccountLedgerID" />
+            </Principal>
+            <Dependent Role="SupplierLedger">
+              <PropertyRef Name="PurchaseTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -687,6 +716,10 @@
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_CompanyMaster" Association="Self.FK_ItemMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
           <AssociationSet Name="FK_Menu_Privledges" Association="Self.FK_Menu_Privledges">
             <End Role="Privledges" EntitySet="Privledges" />
             <End Role="Menu" EntitySet="Menu" />
@@ -702,6 +735,10 @@
           <AssociationSet Name="FK_RolePrivledges_Roles" Association="Self.FK_RolePrivledges_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="RolePrivledges" EntitySet="RolePrivledges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierLedger_PurchaseLedger" Association="Self.FK_SupplierLedger_PurchaseLedger">
+            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+            <End Role="SupplierLedger" EntitySet="SupplierLedger" />
           </AssociationSet>
           <AssociationSet Name="FK_SupplierLedger_SalesPersonMaster" Association="Self.FK_SupplierLedger_SalesPersonMaster">
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
@@ -731,6 +768,7 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="SalePurchaseTaxType" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="AccountLedgerType" Relationship="Self.FK_AccountLedgerMaster_AccountLedgerType" FromRole="AccountLedgerMaster" ToRole="AccountLedgerType" />
           <NavigationProperty Name="AccountType" Relationship="Self.FK_AccountLedgerMaster_AccountType" FromRole="AccountLedgerMaster" ToRole="AccountType" />
           <NavigationProperty Name="AccountLedgerMaster1" Relationship="Self.FK_AccountLedgerMaster_CreditControlCode" FromRole="AccountLedgerMaster" ToRole="AccountLedgerMaster1" />
@@ -738,6 +776,7 @@
           <NavigationProperty Name="AccountLedgerMaster11" Relationship="Self.FK_AccountLedgerMaster_DebitControlCode" FromRole="AccountLedgerMaster" ToRole="AccountLedgerMaster1" />
           <NavigationProperty Name="AccountLedgerMaster3" Relationship="Self.FK_AccountLedgerMaster_DebitControlCode" FromRole="AccountLedgerMaster1" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="AccountLedgerMaster" ToRole="ItemMaster" />
+          <NavigationProperty Name="SupplierLedger" Relationship="Self.FK_SupplierLedger_PurchaseLedger" FromRole="AccountLedgerMaster" ToRole="SupplierLedger" />
         </EntityType>
         <EntityType Name="AccountLedgerType">
           <Key>
@@ -790,6 +829,7 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_CompanyMaster" FromRole="CompanyMaster" ToRole="CustomerCompanyDiscountRef" />
+          <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="ItemMaster" />
         </EntityType>
         <EntityType Name="CustomerCompanyDiscountRef">
           <Key>
@@ -854,6 +894,7 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="CustomerLedgerShortDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_CustomerLedger" FromRole="CustomerLedger" ToRole="CustomerCompanyDiscountRef" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="CustomerLedger" ToRole="PersonRouteMaster" />
           <NavigationProperty Name="CustomerType" Relationship="Self.FK_CustomerLedger_CustomerType" FromRole="CustomerLedger" ToRole="CustomerType" />
@@ -891,7 +932,7 @@
           <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ItemName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
           <Property Name="ConversionRate" Type="Double" />
           <Property Name="ShortName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Packing" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -930,6 +971,7 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ItemMaster_CompanyMaster" FromRole="ItemMaster" ToRole="CompanyMaster" />
           <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_ItemMaster" FromRole="ItemMaster" ToRole="CustomerCompanyDiscountRef" />
         </EntityType>
         <EntityType Name="Menu">
@@ -964,6 +1006,7 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="PersonalLedgerShortDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PersonLedgerType">
           <Key>
@@ -1062,6 +1105,9 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="SupplierLedgerShortDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_SupplierLedger_PurchaseLedger" FromRole="SupplierLedger" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_SupplierLedger_SalesPersonMaster" FromRole="SupplierLedger" ToRole="PersonRouteMaster" />
         </EntityType>
         <EntityType Name="Users">
@@ -1142,6 +1188,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SupplierLedger_PurchaseLedger">
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="SupplierLedger" Type="Self.SupplierLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountLedgerMaster">
+              <PropertyRef Name="AccountLedgerID" />
+            </Principal>
+            <Dependent Role="SupplierLedger">
+              <PropertyRef Name="PurchaseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerCompanyDiscountRef_CompanyMaster">
           <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
           <End Role="CustomerCompanyDiscountRef" Type="Self.CustomerCompanyDiscountRef" Multiplicity="*" />
@@ -1150,6 +1208,18 @@
               <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="CustomerCompanyDiscountRef">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="ItemMaster">
               <PropertyRef Name="CompanyID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1391,9 +1461,17 @@
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_SupplierLedger_PurchaseLedger" Association="Self.FK_SupplierLedger_PurchaseLedger">
+            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+            <End Role="SupplierLedger" EntitySet="SupplierLedger" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerCompanyDiscountRef_CompanyMaster" Association="Self.FK_CustomerCompanyDiscountRef_CompanyMaster">
             <End Role="CompanyMaster" EntitySet="CompanyMaster" />
             <End Role="CustomerCompanyDiscountRef" EntitySet="CustomerCompanyDiscountRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_CompanyMaster" Association="Self.FK_ItemMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerCompanyDiscountRef_CustomerLedger" Association="Self.FK_CustomerCompanyDiscountRef_CustomerLedger">
             <End Role="CustomerLedger" EntitySet="CustomerLedger" />
@@ -1483,6 +1561,7 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="SalePurchaseTaxType" ColumnName="SalePurchaseTaxType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1599,6 +1678,7 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CustomerLedgerShortDesc" ColumnName="CustomerLedgerShortDesc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1628,7 +1708,7 @@
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="ConversionRate" ColumnName="ConversionRate" />
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
                 <ScalarProperty Name="Packing" ColumnName="Packing" />
@@ -1700,6 +1780,7 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="PersonalLedgerShortDesc" ColumnName="PersonalLedgerShortDesc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1790,6 +1871,8 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="SupplierLedgerShortDesc" ColumnName="SupplierLedgerShortDesc" />
+                <ScalarProperty Name="PurchaseTypeID" ColumnName="PurchaseTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

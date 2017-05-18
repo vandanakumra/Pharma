@@ -37,7 +37,10 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public string SupplierLedgerShortDesc { get; set; }
+        public int PurchaseTypeID { get; set; }
     
+        public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }
     }
 }

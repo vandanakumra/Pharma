@@ -554,7 +554,9 @@ namespace PharmaUI
             {
                 if (dgvCompanyDiscount.SelectedCells.Count > 0 )
                 {
-                    frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(0);
+                    
+                    CustomerCopanyDiscount existingItem = (CustomerCopanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
+                    frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(existingItem);
                     form.Show();
                 }
             }

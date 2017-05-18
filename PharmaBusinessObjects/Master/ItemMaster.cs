@@ -11,6 +11,7 @@ namespace PharmaBusinessObjects.Master
         public int ItemID { get; set; }
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
+        public int CompanyID { get; set; }
         public string CompanyCode { get; set; }
         public string CompanyName { get; set; }
         public double ? ConversionRate { get; set; }
@@ -46,5 +47,6 @@ namespace PharmaBusinessObjects.Master
         public int ? MaximumStock { get; set; }
         public int SaleTypeId { get; set; }
         public bool Status { get; set; }
+        
     }
 }
