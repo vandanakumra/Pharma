@@ -117,12 +117,35 @@ namespace PharmaUI
                 menuStrip1.Visible = true;
                 ExtensionMethods.LoggedInUser = loginUser;
 
+                ToggleMenuItems(menuStrip1.Items);
                 frmDefault form = new frmDefault();
                 ExtensionMethods.AddFormToPanel(form, pnlMain);
                 form.Show();
 
             }
 
+        }
+
+        private void ToggleMenuItems(ToolStripItemCollection collection)
+        {
+            foreach (ToolStripMenuItem item in collection)
+            {
+                if(item.Text.ToLower() == "exit" || ExtensionMethods.LoggedInUser.Privledges.Any(x=>x.PrivledgeName.ToLower() == item.Text.ToLower()))
+                {
+                    continue;
+                }
+                else
+                {
+                    item.Visible = false;
+                    item.ShortcutKeys = Keys.None;
+
+                    if (item.HasDropDownItems) // if subMenu has children
+                    {
+                        ToggleMenuItems(item.DropDownItems); // Call recursive Method.
+                    }
+
+                }
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

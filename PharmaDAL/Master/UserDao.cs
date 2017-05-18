@@ -58,7 +58,13 @@ namespace PharmaDAL.Master
                     CreatedOn = p.CreatedOn,
                     ModifiedBy = p.ModifiedBy,
                     ModifiedOn = p.ModifiedOn,
-                    Status = p.Status
+                    Status = p.Status,
+                    Privledges = p.Roles.RolePrivledges.Where(x=>x.Privledges.Status).Select(x=>new Privledge() {
+                                PrivledgeId = x.PrivledgeId,
+                                PrivledgeName = x.Privledges.PriviledgeName,
+                                ControlName = x.Privledges.ControlName,
+                                Status = x.Privledges.Status
+                                }).ToList()
                 }).FirstOrDefault();
             }
         }
