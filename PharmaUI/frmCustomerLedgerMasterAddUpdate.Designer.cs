@@ -92,6 +92,12 @@
             this.tbxDL = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.ucSupplierCustomerInfo = new PharmaUI.ucSupplierCustomerInfo();
+            this.lblASMMsg = new System.Windows.Forms.Label();
+            this.lblRSMMsg = new System.Windows.Forms.Label();
+            this.lblZSMsg = new System.Windows.Forms.Label();
+            this.lblSalesmanMsg = new System.Windows.Forms.Label();
+            this.lblAreaMsg = new System.Windows.Forms.Label();
+            this.lblRouteMsg = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderCustomerLedger)).BeginInit();
             this.gbDiscountDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompanyDiscount)).BeginInit();
@@ -296,12 +302,19 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel2.Controls.Add(this.lblRSMMsg, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblZSMsg, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblSalesmanMsg, 2, 3);
+            this.tableLayoutPanel2.Controls.Add(this.lblAreaMsg, 2, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblRouteMsg, 2, 5);
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.lblItemCode, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblItemName, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblASMMsg, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 3);
@@ -388,49 +401,49 @@
             // cbxZSM
             // 
             this.cbxZSM.FormattingEnabled = true;
-            this.cbxZSM.Location = new System.Drawing.Point(110, 13);
+            this.cbxZSM.Location = new System.Drawing.Point(83, 13);
             this.cbxZSM.Name = "cbxZSM";
-            this.cbxZSM.Size = new System.Drawing.Size(222, 21);
+            this.cbxZSM.Size = new System.Drawing.Size(179, 21);
             this.cbxZSM.TabIndex = 301;
             // 
             // cbxRSM
             // 
             this.cbxRSM.FormattingEnabled = true;
-            this.cbxRSM.Location = new System.Drawing.Point(110, 35);
+            this.cbxRSM.Location = new System.Drawing.Point(83, 35);
             this.cbxRSM.Name = "cbxRSM";
-            this.cbxRSM.Size = new System.Drawing.Size(222, 21);
+            this.cbxRSM.Size = new System.Drawing.Size(179, 21);
             this.cbxRSM.TabIndex = 302;
             // 
             // cbxASM
             // 
             this.cbxASM.FormattingEnabled = true;
-            this.cbxASM.Location = new System.Drawing.Point(110, 57);
+            this.cbxASM.Location = new System.Drawing.Point(83, 57);
             this.cbxASM.Name = "cbxASM";
-            this.cbxASM.Size = new System.Drawing.Size(222, 21);
+            this.cbxASM.Size = new System.Drawing.Size(179, 21);
             this.cbxASM.TabIndex = 303;
             // 
             // cbxSalesman
             // 
             this.cbxSalesman.FormattingEnabled = true;
-            this.cbxSalesman.Location = new System.Drawing.Point(110, 79);
+            this.cbxSalesman.Location = new System.Drawing.Point(83, 79);
             this.cbxSalesman.Name = "cbxSalesman";
-            this.cbxSalesman.Size = new System.Drawing.Size(222, 21);
+            this.cbxSalesman.Size = new System.Drawing.Size(179, 21);
             this.cbxSalesman.TabIndex = 304;
             // 
             // cbxArea
             // 
             this.cbxArea.FormattingEnabled = true;
-            this.cbxArea.Location = new System.Drawing.Point(110, 101);
+            this.cbxArea.Location = new System.Drawing.Point(83, 101);
             this.cbxArea.Name = "cbxArea";
-            this.cbxArea.Size = new System.Drawing.Size(222, 21);
+            this.cbxArea.Size = new System.Drawing.Size(179, 21);
             this.cbxArea.TabIndex = 305;
             // 
             // cbxRoute
             // 
             this.cbxRoute.FormattingEnabled = true;
-            this.cbxRoute.Location = new System.Drawing.Point(110, 123);
+            this.cbxRoute.Location = new System.Drawing.Point(83, 123);
             this.cbxRoute.Name = "cbxRoute";
-            this.cbxRoute.Size = new System.Drawing.Size(222, 21);
+            this.cbxRoute.Size = new System.Drawing.Size(179, 21);
             this.cbxRoute.TabIndex = 306;
             // 
             // groupBox1
@@ -783,6 +796,66 @@
             this.ucSupplierCustomerInfo.TabIndex = 804;
             this.ucSupplierCustomerInfo.TaxRetail = PharmaBusinessObjects.Common.Enums.TaxRetail.R;
             // 
+            // lblASMMsg
+            // 
+            this.lblASMMsg.AutoSize = true;
+            this.lblASMMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblASMMsg.Location = new System.Drawing.Point(268, 57);
+            this.lblASMMsg.Margin = new System.Windows.Forms.Padding(3);
+            this.lblASMMsg.Name = "lblASMMsg";
+            this.lblASMMsg.Size = new System.Drawing.Size(0, 13);
+            this.lblASMMsg.TabIndex = 307;
+            // 
+            // lblRSMMsg
+            // 
+            this.lblRSMMsg.AutoSize = true;
+            this.lblRSMMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblRSMMsg.Location = new System.Drawing.Point(268, 35);
+            this.lblRSMMsg.Margin = new System.Windows.Forms.Padding(3);
+            this.lblRSMMsg.Name = "lblRSMMsg";
+            this.lblRSMMsg.Size = new System.Drawing.Size(0, 13);
+            this.lblRSMMsg.TabIndex = 805;
+            // 
+            // lblZSMsg
+            // 
+            this.lblZSMsg.AutoSize = true;
+            this.lblZSMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblZSMsg.Location = new System.Drawing.Point(268, 13);
+            this.lblZSMsg.Margin = new System.Windows.Forms.Padding(3);
+            this.lblZSMsg.Name = "lblZSMsg";
+            this.lblZSMsg.Size = new System.Drawing.Size(0, 13);
+            this.lblZSMsg.TabIndex = 806;
+            // 
+            // lblSalesmanMsg
+            // 
+            this.lblSalesmanMsg.AutoSize = true;
+            this.lblSalesmanMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblSalesmanMsg.Location = new System.Drawing.Point(268, 79);
+            this.lblSalesmanMsg.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSalesmanMsg.Name = "lblSalesmanMsg";
+            this.lblSalesmanMsg.Size = new System.Drawing.Size(0, 13);
+            this.lblSalesmanMsg.TabIndex = 807;
+            // 
+            // lblAreaMsg
+            // 
+            this.lblAreaMsg.AutoSize = true;
+            this.lblAreaMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblAreaMsg.Location = new System.Drawing.Point(268, 101);
+            this.lblAreaMsg.Margin = new System.Windows.Forms.Padding(3);
+            this.lblAreaMsg.Name = "lblAreaMsg";
+            this.lblAreaMsg.Size = new System.Drawing.Size(0, 13);
+            this.lblAreaMsg.TabIndex = 808;
+            // 
+            // lblRouteMsg
+            // 
+            this.lblRouteMsg.AutoSize = true;
+            this.lblRouteMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblRouteMsg.Location = new System.Drawing.Point(268, 123);
+            this.lblRouteMsg.Margin = new System.Windows.Forms.Padding(3);
+            this.lblRouteMsg.Name = "lblRouteMsg";
+            this.lblRouteMsg.Size = new System.Drawing.Size(0, 13);
+            this.lblRouteMsg.TabIndex = 809;
+            // 
             // frmCustomerLedgerMasterAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -883,5 +956,11 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbxCredtLimit;
         private ucSupplierCustomerInfo ucSupplierCustomerInfo;
+        private System.Windows.Forms.Label lblRSMMsg;
+        private System.Windows.Forms.Label lblZSMsg;
+        private System.Windows.Forms.Label lblSalesmanMsg;
+        private System.Windows.Forms.Label lblAreaMsg;
+        private System.Windows.Forms.Label lblRouteMsg;
+        private System.Windows.Forms.Label lblASMMsg;
     }
 }

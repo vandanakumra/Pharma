@@ -31,7 +31,9 @@
             this.dgvCustomerLedger = new System.Windows.Forms.DataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnAddNewLedger = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAddNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerLedger)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,6 +46,7 @@
             this.dgvCustomerLedger.Location = new System.Drawing.Point(14, 104);
             this.dgvCustomerLedger.Name = "dgvCustomerLedger";
             this.dgvCustomerLedger.ReadOnly = true;
+            this.dgvCustomerLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCustomerLedger.Size = new System.Drawing.Size(840, 260);
             this.dgvCustomerLedger.TabIndex = 17;
             // 
@@ -66,20 +69,44 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "Search String";
             // 
-            // btnAddNewLedger
+            // btnDelete
             // 
-            this.btnAddNewLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddNewLedger.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNewLedger.Image = global::PharmaUI.Properties.Resources.AddItem;
-            this.btnAddNewLedger.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewLedger.Location = new System.Drawing.Point(670, 53);
-            this.btnAddNewLedger.Name = "btnAddNewLedger";
-            this.btnAddNewLedger.Size = new System.Drawing.Size(184, 42);
-            this.btnAddNewLedger.TabIndex = 16;
-            this.btnAddNewLedger.Text = "Add New Customer";
-            this.btnAddNewLedger.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddNewLedger.UseVisualStyleBackColor = true;
-            this.btnAddNewLedger.Click += new System.EventHandler(this.btnAddNewLedger_Click);
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Location = new System.Drawing.Point(753, 54);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(99, 33);
+            this.btnDelete.TabIndex = 20;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Location = new System.Drawing.Point(647, 54);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(100, 33);
+            this.btnEdit.TabIndex = 19;
+            this.btnEdit.Text = "Edit (F3)";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnAddNew
+            // 
+            this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddNew.Location = new System.Drawing.Point(542, 54);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(99, 33);
+            this.btnAddNew.TabIndex = 18;
+            this.btnAddNew.Text = "New (F9)";
+            this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // frmCustomerLedgerMaster
             // 
@@ -87,8 +114,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 417);
             this.ControlBox = false;
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnAddNew);
             this.Controls.Add(this.dgvCustomerLedger);
-            this.Controls.Add(this.btnAddNewLedger);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -104,8 +133,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvCustomerLedger;
-        private System.Windows.Forms.Button btnAddNewLedger;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnAddNew;
     }
 }

@@ -72,6 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmCustomerItemDiscountMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomerItemDiscountMaster.Designer.cs">
+      <DependentUpon>frmCustomerItemDiscountMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCustomerLedgerMasterAddUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCompanyAddUpdate.resx">
       <DependentUpon>frmCompanyAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomerItemDiscountMaster.resx">
+      <DependentUpon>frmCustomerItemDiscountMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCustomerLedgerMaster.resx">
       <DependentUpon>frmCustomerLedgerMaster.cs</DependentUpon>
