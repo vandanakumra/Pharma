@@ -23,8 +23,8 @@ namespace PharmaDAL.Master
                     ItemID = p.ItemID,
                     ItemCode = p.ItemCode,
                     ItemName = p.ItemName,
-                    CompanyCode = p.CompanyCode,
-                    CompanyName = context.CompanyMaster.Where(x=>x.CompanyCode == p.CompanyCode).Select(x=>x.CompanyName).FirstOrDefault(),
+                    CompanyID=p.CompanyID,
+                    CompanyName = p.CompanyMaster.CompanyName,
                     ConversionRate = p.ConversionRate,
                     ShortName = p.ShortName,
                     Packing = p.Packing,
@@ -77,7 +77,7 @@ namespace PharmaDAL.Master
                     {
                         ItemCode = string.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
                         ItemName = newItem.ItemName,
-                        CompanyCode = newItem.CompanyCode,
+                        CompanyID=newItem.CompanyID,
                         ConversionRate = newItem.ConversionRate,
                         ShortName = newItem.ShortName,
                         Packing = newItem.Packing,
@@ -142,7 +142,7 @@ namespace PharmaDAL.Master
                 if (existingItemDB != null)
                 {
                     existingItemDB.ItemName = existingItem.ItemName;
-                    existingItemDB.CompanyCode = existingItem.CompanyCode;
+                    existingItemDB.CompanyID = existingItem.CompanyID;
                     existingItemDB.ConversionRate = existingItem.ConversionRate;
                     existingItemDB.ShortName = existingItem.ShortName;
                     existingItemDB.Packing = existingItem.Packing;
@@ -231,47 +231,67 @@ namespace PharmaDAL.Master
                 return context.ItemMaster.Where(p => p.Status
                                                 && (string.IsNullOrEmpty(searchString) || p.ItemName.Contains(searchString))
                                                 ).Select(p => new PharmaBusinessObjects.Master.ItemMaster()
-                {
-                    ItemID = p.ItemID,
-                    ItemCode = p.ItemCode,
-                    ItemName = p.ItemName,
-                    CompanyCode = p.CompanyCode,
-                    ConversionRate = p.ConversionRate,
-                    CompanyName = context.CompanyMaster.Where(x=>x.CompanyCode == p.CompanyCode).Select(x=>x.CompanyName).FirstOrDefault(),
-                    ShortName = p.ShortName,
-                    Packing = p.Packing,
-                    PurchaseRate = p.PurchaseRate,
-                    MRP = p.MRP,
-                    SaleRate = p.SaleRate,
-                    SpecialRate = p.SpecialRate,
-                    WholeSaleRate = p.WholeSaleRate,
-                    SaleExcise = p.SaleExcise,
-                    SurchargeOnSale = p.SurchargeOnSale,
-                    TaxOnSale = p.TaxOnSale,
-                    Scheme1 = p.Scheme1,
-                    Scheme2 = p.Scheme2,
-                    PurchaseExcise = p.PurchaseExcise,
-                    UPC = p.UPC,
-                    IsHalfScheme = p.IsHalfScheme,
-                    IsQTRScheme = p.IsQTRScheme,
-                    SpecialDiscount = p.SpecialDiscount,
-                    SpecialDiscountOnQty = p.SpecialDiscountOnQty,
-                    IsFixedDiscount = p.IsFixedDiscount,
-                    FixedDiscountRate = p.FixedDiscountRate,
-                    MaximumQty = p.MaximumQty,
-                    MaximumDiscount = p.MaximumDiscount,
-                    SurchargeOnPurchase = p.SurchargeOnPurchase,
-                    TaxOnPurchase = p.TaxOnPurchase,
-                    DiscountRecieved = p.DiscountRecieved,
-                    SpecialDiscountRecieved = p.SpecialDiscountRecieved,
-                    QtyPerCase = p.QtyPerCase,
-                    Location = p.Location,
-                    MinimumStock = p.MinimumStock,
-                    MaximumStock = p.MaximumStock,
-                    SaleTypeId = p.SaleTypeId,
-                    Status = p.Status
+                                                {
+                                                    ItemID = p.ItemID,
+                                                    ItemCode = p.ItemCode,
+                                                    ItemName = p.ItemName,
+                                                    CompanyID = p.CompanyID,
+                                                    ConversionRate = p.ConversionRate,
+                                                    CompanyName = p.CompanyMaster.CompanyName,
+                                                    ShortName = p.ShortName,
+                                                    Packing = p.Packing,
+                                                    PurchaseRate = p.PurchaseRate,
+                                                    MRP = p.MRP,
+                                                    SaleRate = p.SaleRate,
+                                                    SpecialRate = p.SpecialRate,
+                                                    WholeSaleRate = p.WholeSaleRate,
+                                                    SaleExcise = p.SaleExcise,
+                                                    SurchargeOnSale = p.SurchargeOnSale,
+                                                    TaxOnSale = p.TaxOnSale,
+                                                    Scheme1 = p.Scheme1,
+                                                    Scheme2 = p.Scheme2,
+                                                    PurchaseExcise = p.PurchaseExcise,
+                                                    UPC = p.UPC,
+                                                    IsHalfScheme = p.IsHalfScheme,
+                                                    IsQTRScheme = p.IsQTRScheme,
+                                                    SpecialDiscount = p.SpecialDiscount,
+                                                    SpecialDiscountOnQty = p.SpecialDiscountOnQty,
+                                                    IsFixedDiscount = p.IsFixedDiscount,
+                                                    FixedDiscountRate = p.FixedDiscountRate,
+                                                    MaximumQty = p.MaximumQty,
+                                                    MaximumDiscount = p.MaximumDiscount,
+                                                    SurchargeOnPurchase = p.SurchargeOnPurchase,
+                                                    TaxOnPurchase = p.TaxOnPurchase,
+                                                    DiscountRecieved = p.DiscountRecieved,
+                                                    SpecialDiscountRecieved = p.SpecialDiscountRecieved,
+                                                    QtyPerCase = p.QtyPerCase,
+                                                    Location = p.Location,
+                                                    MinimumStock = p.MinimumStock,
+                                                    MaximumStock = p.MaximumStock,
+                                                    SaleTypeId = p.SaleTypeId,
+                                                    Status = p.Status
 
-                }).ToList();
+                                                }).ToList();
+            }
+        }
+
+        public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemByCompanyID(int CompanyID)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                List<PharmaBusinessObjects.Master.ItemMaster> allItemByCompanyID = new List<PharmaBusinessObjects.Master.ItemMaster>();
+
+                allItemByCompanyID = context.ItemMaster.Where(item => item.CompanyID == CompanyID && item.Status)
+                                                                 .Select(item => new PharmaBusinessObjects.Master.ItemMaster()
+                                                                 {
+                                                                     CompanyID=CompanyID,
+                                                                     CompanyName=item.CompanyMaster.CompanyName,
+                                                                     ItemID=item.ItemID,
+                                                                     ItemName=item.ItemName
+
+                                                                 }).ToList();
+
+                return allItemByCompanyID;
             }
         }
     }

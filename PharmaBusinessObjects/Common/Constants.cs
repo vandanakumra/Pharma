@@ -16,6 +16,7 @@ namespace PharmaBusinessObjects.Common
             public const string InValidEmail = "Please enter valid EmailId";
             public const string ErrorOccured = "Something went wrong";
             public const string PersonRouteCreate = "{0} does not exist. Do you want to add new {0} ?";
+            public const string NotFound = "* Not Found ";
             public const string NotExists = "{0} does not exists. Do you want to add new?";
         }
 

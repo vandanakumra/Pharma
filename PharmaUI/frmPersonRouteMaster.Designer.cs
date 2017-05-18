@@ -28,29 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAddPersonRoute = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbPersonRouteType = new System.Windows.Forms.ComboBox();
             this.dgvPersonRoute = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonRoute)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnAddPersonRoute
-            // 
-            this.btnAddPersonRoute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddPersonRoute.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPersonRoute.Image = global::PharmaUI.Properties.Resources.AddItem;
-            this.btnAddPersonRoute.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPersonRoute.Location = new System.Drawing.Point(598, 64);
-            this.btnAddPersonRoute.Name = "btnAddPersonRoute";
-            this.btnAddPersonRoute.Size = new System.Drawing.Size(214, 61);
-            this.btnAddPersonRoute.TabIndex = 12;
-            this.btnAddPersonRoute.Text = "Add New Person/Route";
-            this.btnAddPersonRoute.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddPersonRoute.UseVisualStyleBackColor = true;
-            this.btnAddPersonRoute.Click += new System.EventHandler(this.btnAddPersonRoute_Click);
             // 
             // txtSearch
             // 
@@ -101,17 +90,67 @@
             this.dgvPersonRoute.Name = "dgvPersonRoute";
             this.dgvPersonRoute.ReadOnly = true;
             this.dgvPersonRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPersonRoute.Size = new System.Drawing.Size(798, 233);
+            this.dgvPersonRoute.Size = new System.Drawing.Size(753, 258);
             this.dgvPersonRoute.TabIndex = 7;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.btnDelete, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnEdit, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnNew, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(591, 64);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(176, 61);
+            this.tableLayoutPanel1.TabIndex = 12;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDelete.Location = new System.Drawing.Point(3, 33);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(82, 25);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEdit.Location = new System.Drawing.Point(91, 3);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(82, 24);
+            this.btnEdit.TabIndex = 3;
+            this.btnEdit.Text = "Edit (F3)";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnNew.Location = new System.Drawing.Point(3, 3);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(82, 24);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "New (F9)";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // frmPersonRouteMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(826, 413);
+            this.ClientSize = new System.Drawing.Size(781, 413);
             this.ControlBox = false;
-            this.Controls.Add(this.btnAddPersonRoute);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -122,18 +161,21 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPersonRouteMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonRoute)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAddPersonRoute;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbPersonRouteType;
         private System.Windows.Forms.DataGridView dgvPersonRoute;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnNew;
     }
 }

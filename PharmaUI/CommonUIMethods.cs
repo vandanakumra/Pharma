@@ -260,6 +260,31 @@ namespace PharmaUI
             if (emailaddress != null) return System.Text.RegularExpressions.Regex.IsMatch(emailaddress, MatchEmailPattern);
             else return false;
         }
-       
+
+        public static void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private static void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+
     }
 }

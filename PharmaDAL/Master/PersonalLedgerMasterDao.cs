@@ -81,7 +81,7 @@ namespace PharmaDAL.Master
 
                     if (personlLedgerMaster != null)
                     {
-                        personlLedgerMaster.PersonalLedgerCode = p.PersonalLedgerCode;
+                        
                         personlLedgerMaster.PersonalLedgerName = p.PersonalLedgerName;
                         personlLedgerMaster.PersonalLedgerShortName = p.PersonalLedgerShortName;
                         personlLedgerMaster.Address = p.Address;

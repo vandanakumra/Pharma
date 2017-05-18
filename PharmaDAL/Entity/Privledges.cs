@@ -17,17 +17,22 @@ namespace PharmaDAL.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Privledges()
         {
-            this.RolePrivledges = new HashSet<RolePrivledges>();
             this.Menu = new HashSet<Menu>();
+            this.RolePrivledges = new HashSet<RolePrivledges>();
         }
     
         public int PrivledgeId { get; set; }
         public string PriviledgeName { get; set; }
+        public string ControlName { get; set; }
         public bool Status { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RolePrivledges> RolePrivledges { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Menu> Menu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RolePrivledges> RolePrivledges { get; set; }
     }
 }

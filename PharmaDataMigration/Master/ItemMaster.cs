@@ -63,7 +63,8 @@ namespace PharmaDataMigration.Master
                             {
                                 ItemCode = itemCode,
                                 ItemName = Convert.ToString(dr["ACName"]).TrimEnd(),
-                                CompanyCode = companyCode,
+                                //Need to update as CompanyID
+                                //CompanyCode = companyCode,
                                 ConversionRate = Convert.ToDouble(dr["ConvRate"]),
                                 ShortName = Convert.ToString(dr["ALT_Name"]),
                                 Packing = Convert.ToString(dr["Size"]),

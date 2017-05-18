@@ -13,6 +13,12 @@ namespace PharmaDataMigration
             Common.LoggedInUser = new PharmaBusinessObjects.Master.UserMaster(){ Username = "admin" };
             Common.companyCodeMap = new List<CompanyCodeMap>();
             Common.itemCodeMap = new List<ItemCodeMap>();
+            Common.asmCodeMap = new List<ASMCodeMap>();
+            Common.rsmCodeMap = new List<RSMCodeMap>();
+            Common.zsmCodeMap = new List<ZSMCodeMap>();
+            Common.salesmanCodeMap = new List<SalesManCodeMap>();
+            Common.routeCodeMap = new List<RouteCodeMap>();
+            Common.areaCodeMap = new List<AreaCodeMap>();
             Common.personalLedgerCodeMap = new List<PersonalLedgerCodeMap>();
             Common.controlCodeMap = new List<ControlCodeMap>();
             Common.accountLedgerCodeMap = new List<AccountLedgerCodeMap>();
@@ -30,7 +36,7 @@ namespace PharmaDataMigration
             if (result == DialogResult.OK)
             {
                 txtDataDirectory.Text = fbdDataDirectory.SelectedPath;
-                Common.DataDirectory = txtDataDirectory.Text;
+                //Common.DataDirectory = txtDataDirectory.Text;
             }
         }
 
@@ -55,9 +61,11 @@ namespace PharmaDataMigration
             PersonRouteMaster personRouteMaster = new PersonRouteMaster();
             PersonalLedgerMaster personalLedgerMaster = new PersonalLedgerMaster();
             AccountLedgerMaster accountLedgerMaster = new AccountLedgerMaster();
-            int result = 0;
+            int result;
 
             grdDataMigration.Rows.Add("Company Master", "Processing", 0);
+            result = 0;
+
             result = companyMaster.InsertCompanyMasterData();
 
             grdDataMigration.Rows[0].Cells[1].Value = "Completed";

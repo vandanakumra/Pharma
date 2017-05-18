@@ -120,6 +120,24 @@ namespace PharmaBusiness
                 throw;
             }
         }
+
+        /// <summary>
+        /// Get default item discount for company
+        /// </summary>
+        /// <param name="CompanyID"></param>
+        /// <returns></returns>
+        public List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyID(int CompanyID)
+        {
+            try
+            {
+                return new ItemMasterBiz(this.LoggedInUser).GetAllCompanyItemDiscountByCompanyID(CompanyID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Company Master

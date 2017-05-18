@@ -35,15 +35,15 @@ namespace PharmaDAL.Entity
         public virtual DbSet<CustomerType> CustomerType { get; set; }
         public virtual DbSet<InterestType> InterestType { get; set; }
         public virtual DbSet<ItemMaster> ItemMaster { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<PersonalLedger> PersonalLedger { get; set; }
         public virtual DbSet<PersonLedgerType> PersonLedgerType { get; set; }
         public virtual DbSet<PersonRouteMaster> PersonRouteMaster { get; set; }
-        public virtual DbSet<RecordType> RecordType { get; set; }
-        public virtual DbSet<SupplierLedger> SupplierLedger { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Privledges> Privledges { get; set; }
+        public virtual DbSet<RecordType> RecordType { get; set; }
         public virtual DbSet<RolePrivledges> RolePrivledges { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<Menu> Menu { get; set; }
+        public virtual DbSet<SupplierLedger> SupplierLedger { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

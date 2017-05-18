@@ -18,42 +18,38 @@ namespace PharmaUI
     public partial class frmAccountLedgerMasterAddUpdate : Form
     {
         IApplicationFacade applicationFacade;
-        private int AccountLedgerId { get; set; }
+        private int _accountLedgerId { get; set; }
+        private string _accountLedgerName { get; set; }
 
-        public frmAccountLedgerMasterAddUpdate()
-        {
-            InitializeComponent();           
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            ExtensionMethods.SetChildFormProperties(this);
-        }
-
-        public frmAccountLedgerMasterAddUpdate(int accountLedgerId)
+        public frmAccountLedgerMasterAddUpdate(int accountLedgerId,string ledgerName)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.AccountLedgerId = accountLedgerId;
+            this._accountLedgerId = accountLedgerId;
+            this._accountLedgerName = ledgerName;
         }
 
 
         private void frmAccountLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {                       
-            ExtensionMethods.FormLoad(this, (this.AccountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
-            GotFocusEventRaised(this);
+            ExtensionMethods.FormLoad(this, (this._accountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
 
-            if (this.AccountLedgerId > 0)
+            GotFocusEventRaised(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
+
+            if (this._accountLedgerId > 0)
             {                
                 FillFormForUpdate();
             }
             else
             {                
                 FillCombo();
+                tbAccountName.Text = _accountLedgerName;                            
             }
 
+           
         }
-
-
-
 
         public void GotFocusEventRaised(Control control)
         {
@@ -94,7 +90,7 @@ namespace PharmaUI
             cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
             cbxStatus.SelectedItem = Enums.Status.Active;
 
-            var accountLedgerMaster = applicationFacade.GetAccountLedgerById(this.AccountLedgerId);
+            var accountLedgerMaster = applicationFacade.GetAccountLedgerById(this._accountLedgerId);
 
             cbAccountLedgerType.DataSource = accountLedgerMaster.AccountLedgerTypeList;
             cbAccountLedgerType.ValueMember = "AccountLedgerTypeID";
@@ -223,12 +219,16 @@ namespace PharmaUI
         {
             if (string.IsNullOrEmpty(tbAccountName.Text))
             {
-                throw new Exception("Account Name can not be blank");
+                MessageBox.Show("Account Name can not be blank");
+                tbAccountName.Focus();
+                return;
             }
 
             if (string.IsNullOrEmpty(tbOpeningBalance.Text))
             {
-                throw new Exception("Account Name can not be blank");
+                MessageBox.Show("Account Name can not be blank");
+                tbOpeningBalance.Focus();
+                return;
             }
 
             Status status;
@@ -246,12 +246,12 @@ namespace PharmaUI
                 model.DebitControlCodeID = (int)cbDebitControlCode.SelectedValue;
                 model.CreditControlCodeID = (int)cbCreditControlCode.SelectedValue;
             }
-            model.AccountLedgerID = this.AccountLedgerId;
+            model.AccountLedgerID = this._accountLedgerId;
 
             Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
             model.Status = status == Status.Active;
 
-            var result = this.AccountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
+            var result = this._accountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
 
             if (result > 0)
             {

@@ -93,9 +93,7 @@ namespace PharmaUI
                 this.ucSupplierCustomerInfo.Address = supplier.Address;
                 this.ucSupplierCustomerInfo.ContactPerson = supplier.ContactPerson;
                 this.ucSupplierCustomerInfo.EmailAddress = supplier.EmailAddress;
-                this.ucSupplierCustomerInfo.Fax = supplier.Fax;
                 this.ucSupplierCustomerInfo.Mobile = supplier.Mobile;
-                this.ucSupplierCustomerInfo.Pager = supplier.Pager;
                 this.ucSupplierCustomerInfo.OfficePhone = supplier.OfficePhone;
                 this.ucSupplierCustomerInfo.ResidentPhone = supplier.ResidentPhone;
                 this.ucSupplierCustomerInfo.TaxRetail = supplier.TaxRetail =="R" ? Enums.TaxRetail.R : Enums.TaxRetail.T;
@@ -151,13 +149,11 @@ namespace PharmaUI
             supplier.AreaId = areaId;
             supplier.DLNo = txtDLNo.Text;
             supplier.EmailAddress = this.ucSupplierCustomerInfo.EmailAddress;
-            supplier.Fax = this.ucSupplierCustomerInfo.Fax;
             supplier.Mobile = this.ucSupplierCustomerInfo.Mobile;
             supplier.OfficePhone = this.ucSupplierCustomerInfo.OfficePhone;
 
             decimal.TryParse(this.ucSupplierCustomerInfo.OpeningBal, out openingBal);
             supplier.OpeningBal = openingBal;
-            supplier.Pager = this.ucSupplierCustomerInfo.Pager;
             supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
             supplier.TINNo = txtTin.Text;
             supplier.TaxRetail =this.ucSupplierCustomerInfo.TaxRetail  == TaxRetail.R ? "R" : "T";

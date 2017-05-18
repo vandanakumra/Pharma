@@ -19,14 +19,16 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
 
-        private bool isInEditMode{get;set;}
+        private int _personLedgerid;
+        private string _personLedgerName;
 
-        public frmPersonalLedgerMasterAddUpdate(bool isInEditMode=false)
+        public frmPersonalLedgerMasterAddUpdate(int personLedgerid , string personLedgerName)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);           
-            this.isInEditMode = isInEditMode;            
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            _personLedgerid = personLedgerid;
+            _personLedgerName = personLedgerName;           
             LoadCombo();
 
         }
@@ -40,8 +42,14 @@ namespace PharmaUI
 
         private void frmPersonalLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, isInEditMode ? "Personal Diary - Update" : "Personal Diary - Add");
+            ExtensionMethods.FormLoad(this, _personLedgerid > 0 ? "Personal Diary - Update" : "Personal Diary - Add");
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
             GotFocusEventRaised(this);
+
+            if(_personLedgerid == 0)
+            {
+                tbxPersonalLedgerName.Text = _personLedgerName;
+            }
         }
 
         public void GotFocusEventRaised(Control control)
@@ -122,17 +130,18 @@ namespace PharmaUI
 
                 int actionResult = 0;
                 // if form is in Edit mode then udate item , else add item 
-                if (!isInEditMode)
+                if (_personLedgerid == 0)
                 {
                     actionResult = applicationFacade.AddPersonalLedger(personalLedgerMaster);
                 }
                 else
                 {
+                    personalLedgerMaster.PersonalLedgerId = _personLedgerid;                    
                     actionResult = applicationFacade.UpdatePersonalLedger(personalLedgerMaster);
                 }
 
                 //Close this form if operation is successful
-                if (actionResult >0)
+                if (actionResult > 0)
                 {
                     this.Close();
                 }
