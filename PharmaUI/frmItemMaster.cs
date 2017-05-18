@@ -87,7 +87,7 @@ namespace PharmaUI
         {
             if (e.RowIndex != -1)
             {
-                OpenItemAddUpdateForm(true);
+                EditItem();
             }
         }
 
@@ -97,7 +97,7 @@ namespace PharmaUI
         {
             try
             {
-                OpenItemAddUpdateForm(false);
+                OpenItemAddUpdateForm(0);
             }
             catch (Exception)
             {
@@ -105,18 +105,19 @@ namespace PharmaUI
             }
         }
 
-        private void OpenItemAddUpdateForm(bool isEdit)
+        private void OpenItemAddUpdateForm(int itemId)
         {
-            frmItemMasterAddUpdated form = new frmItemMasterAddUpdated(isEdit);
+            frmItemMasterAddUpdated form = new frmItemMasterAddUpdated(itemId,txtSearch.Text);
             ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
             form.WindowState = FormWindowState.Maximized; 
             
 
-            if (isEdit && dgvItemList.SelectedRows[0] != null)
+            if (itemId > 0 && dgvItemList.SelectedRows[0] != null)
             {
                 ItemMaster existingItem = (ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;
                 form.frmItemMasterAddUpdate_Fill_UsingExistingItem(existingItem);
             }
+
             form.FormClosed += Form_FormClosed;
             form.Show();
         }
@@ -178,26 +179,37 @@ namespace PharmaUI
             //Add
             if (keyData == (Keys.F9))
             {
-                OpenItemAddUpdateForm(false);
+                OpenItemAddUpdateForm(0);
                 return true;
             }
             else if (keyData == Keys.F3)
-            {
-                if (dgvItemList.SelectedRows.Count == 0)
-                    MessageBox.Show("Please select atleast one row to edit");
-
-                OpenItemAddUpdateForm(true);
-                return true;
+            {                
+                EditItem();
+              
             }
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void btnEditItem_Click(object sender, EventArgs e)
+        private void EditItem()
         {
             if (dgvItemList.SelectedRows.Count == 0)
                 MessageBox.Show("Please select atleast one row to edit");
 
-            OpenItemAddUpdateForm(true);
+            PharmaBusinessObjects.Master.ItemMaster model = (PharmaBusinessObjects.Master.ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;           
+
+            OpenItemAddUpdateForm(model.ItemID);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditItem();
+           
         }
     }
 }

@@ -16,6 +16,8 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
 
+        private int selectedRowIndex = 0;    
+
         public frmAccountLedgerMaster()
         {           
             InitializeComponent();
@@ -52,10 +54,7 @@ namespace PharmaUI
             {
                 PharmaBusinessObjects.Master.AccountLedgerMaster model = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.Rows[e.RowIndex].DataBoundItem;
 
-                frmAccountLedgerMasterAddUpdate form = new frmAccountLedgerMasterAddUpdate(model.AccountLedgerID);
-                form.FormClosed -= Form_FormClosed;
-                form.FormClosed += Form_FormClosed;
-                form.Show();
+                OpenAddEdit(model.AccountLedgerID);
             }
         }
 
@@ -114,19 +113,17 @@ namespace PharmaUI
             dgvAccountLedger.Columns["Status"].Visible = true;            
         }
 
-        private void btnAddNewLedger_Click(object sender, EventArgs e)
-        {
-            frmAccountLedgerMasterAddUpdate form = new frmAccountLedgerMasterAddUpdate();
-            form.FormClosed -= Form_FormClosed;
-            form.FormClosed += Form_FormClosed;
-            form.ShowDialog();
-
-        }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            LoadCombo();
-            LoadDataGrid(0);
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+            //LoadCombo();
+            LoadDataGrid((int)cbLedgerType.SelectedValue);           
+
+            if (dgvAccountLedger.Rows.Count > 0)
+            {
+                dgvAccountLedger.Rows[0].Selected = true;
+            }
 
         }
 
@@ -135,6 +132,62 @@ namespace PharmaUI
         {
             LoadDataGrid((int)cbLedgerType.SelectedValue);
         }
-        
+
+        private void OpenAddEdit(int accountLedgerId)
+        {
+            frmAccountLedgerMasterAddUpdate form = new frmAccountLedgerMasterAddUpdate(accountLedgerId,txtSearch.Text);
+            form.FormClosed -= Form_FormClosed;
+            form.FormClosed += Form_FormClosed;
+            form.ShowDialog();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            OpenAddEdit(0);           
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditLedger();
+        }
+
+        private void EditLedger()
+        {
+            if (dgvAccountLedger.SelectedRows.Count == 0)
+                MessageBox.Show("Please select atleast one row to edit");          
+
+            PharmaBusinessObjects.Master.AccountLedgerMaster model = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
+
+            selectedRowIndex = model.AccountLedgerID;           
+
+            OpenAddEdit(model.AccountLedgerID);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
+                //applicationFacade.DeleteItem(itemToBeRemoved);
+                //LoadDataGrid(0);
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+                OpenAddEdit(0);
+                return true;
+            }
+            else if (keyData == Keys.F3)
+            {
+                EditLedger();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }

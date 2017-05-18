@@ -68,6 +68,7 @@ namespace PharmaUI
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
             LoadDataGrid();
         }
 
@@ -129,6 +130,21 @@ namespace PharmaUI
             frmSupplierLedgerAddUpdate form = new frmSupplierLedgerAddUpdate();
             form.FormClosed += Form_FormClosed;
             form.ShowDialog();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

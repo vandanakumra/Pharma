@@ -18,16 +18,18 @@ namespace PharmaUI
     public partial class frmItemMasterAddUpdated : Form
     {
         IApplicationFacade applicationFacade;
-        private bool isInEditMode;
+        private int _itemId = 0;
+        private string _itemName = "";
 
 
-        public frmItemMasterAddUpdated(bool isInEditMode = false)
+        public frmItemMasterAddUpdated(int itemId , string itemName)
         {
-            InitializeComponent();
-            this.isInEditMode = isInEditMode;
+            InitializeComponent();           
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             ExtensionMethods.SetFormProperties(this);
-            ExtensionMethods.DisableAllTextBoxAndComboBox(this);
+            _itemId = itemId;
+            _itemName = itemName;           
+
             cbxComanyCode.KeyDown += CbxComanyCode_KeyDown;
             LoadCombo();
         }
@@ -43,7 +45,7 @@ namespace PharmaUI
 
                     if (result == DialogResult.Yes)
                     {
-                        frmCompanyAddUpdate form = new frmCompanyAddUpdate(cbxComanyCode.Text);
+                        frmCompanyAddUpdate form = new frmCompanyAddUpdate(0,cbxComanyCode.Text);
                         form.FormClosing += Form_FormClosing;
                         form.ShowDialog();
 
@@ -172,7 +174,7 @@ namespace PharmaUI
 
                 bool actionResult = false;
                 // if form is in Edit mode then udate item , else add item 
-                if (!isInEditMode)
+                if (_itemId == 0)
                 {
                     actionResult = applicationFacade.AddNewItem(item);
                 }
@@ -197,14 +199,17 @@ namespace PharmaUI
 
         private void frmItemMasterAddUpdatedNew_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, isInEditMode ? "Item Master - Update" : "Item Master - Add");
-            GotFocusEventRaised(this);           
-            
-            if (!isInEditMode)
+            ExtensionMethods.FormLoad(this, _itemId > 0 ? "Item Master - Update" : "Item Master - Add");
+            GotFocusEventRaised(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
+
+            if (_itemId == 0)
             {
                 cbxComanyCode.AutoCompleteSource = AutoCompleteSource.ListItems;
                 cbxComanyCode.AutoCompleteMode = AutoCompleteMode.Suggest;
                 cbxComanyCode.Enabled = true;
+
+                tbxItemName.Text = _itemName;
             }
             else
             {
