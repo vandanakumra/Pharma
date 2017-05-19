@@ -29,8 +29,8 @@ namespace PharmaDAL.Master
                     Address = p.Address,
                     ContactPerson = p.ContactPerson,
                     Mobile = p.Mobile,
-                    Pager = p.Pager,
-                    Fax = p.Fax,
+                    //Pager = p.Pager,
+                    //Fax = p.Fax,
                     OfficePhone = p.OfficePhone,
                     ResidentPhone = p.ResidentPhone,
                     EmailAddress=p.EmailAddress,
@@ -56,8 +56,8 @@ namespace PharmaDAL.Master
                     Address = p.Address,
                     ContactPerson = p.ContactPerson,
                     Mobile = p.Mobile,
-                    Pager = p.Pager,
-                    Fax = p.Fax,
+                    //Pager = p.Pager,
+                    //Fax = p.Fax,
                     OfficePhone = p.OfficePhone,
                     ResidentPhone = p.ResidentPhone,
                     EmailAddress = p.EmailAddress,
@@ -87,8 +87,8 @@ namespace PharmaDAL.Master
                         personlLedgerMaster.Address = p.Address;
                         personlLedgerMaster.ContactPerson = p.ContactPerson;
                         personlLedgerMaster.Mobile = p.Mobile;
-                        personlLedgerMaster.Pager = p.Pager;
-                        personlLedgerMaster.Fax = p.Fax;
+                        //personlLedgerMaster.Pager = p.Pager;
+                        //personlLedgerMaster.Fax = p.Fax;
                         personlLedgerMaster.OfficePhone = p.OfficePhone;
                         personlLedgerMaster.ResidentPhone = p.ResidentPhone;
                         personlLedgerMaster.EmailAddress = p.EmailAddress;

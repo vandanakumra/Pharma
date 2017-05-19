@@ -25,7 +25,6 @@ namespace PharmaDAL.Entity
         public string CompanyCode { get; set; }
         public string CompanyName { get; set; }
         public bool Status { get; set; }
-        public bool IsDirect { get; set; }
         public int OrderPreferenceRating { get; set; }
         public int BillingPreferenceRating { get; set; }
         public bool StockSummaryRequired { get; set; }

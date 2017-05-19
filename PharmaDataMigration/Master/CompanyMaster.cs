@@ -47,7 +47,7 @@ namespace PharmaDataMigration.Master
                                 CompanyCode = companyCode,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
                                 StockSummaryRequired = Convert.ToChar(dr["SSR"]) == 'Y' ? true : false,
-                                IsDirect = Convert.ToChar(dr["HALF"]) == 'D' ? true : false,
+                                //IsDirect = Convert.ToChar(dr["HALF"]) == 'D' ? true : false,
                                 OrderPreferenceRating = Convert.ToInt32(dr["CONVRATE"]),
                                 BillingPreferenceRating = Convert.ToInt32(dr["DISQTY"]),
                                 CompanyName = Convert.ToString(dr["ACNAME"]).TrimEnd(),

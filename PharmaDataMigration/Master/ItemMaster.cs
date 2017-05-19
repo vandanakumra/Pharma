@@ -60,6 +60,9 @@ namespace PharmaDataMigration.Master
                             string originalItemCode = Convert.ToString(dr["ACNO"]).TrimEnd();
                             Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = originalItemCode, MappedItemCode = itemCode });
 
+                            string saleLedgerCode = Common.accountLedgerCodeMap.Where(q => q.OriginalAccountLedgerCode == Convert.ToString(dr["SType"]).TrimEnd()).FirstOrDefault().MappedAccountLedgerCode;
+                            int saleTypeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == saleLedgerCode).FirstOrDefault().AccountLedgerID;
+
                             PharmaDAL.Entity.ItemMaster newItemMaster = new PharmaDAL.Entity.ItemMaster()
                             {
                                 ItemCode = itemCode,
@@ -86,17 +89,17 @@ namespace PharmaDataMigration.Master
                                 SpecialDiscountOnQty = Convert.ToDouble(dr["DISQTY"]),
                                 IsFixedDiscount = Convert.ToChar(dr["check_dis"]) == 'Y' ? true : false,
                                 FixedDiscountRate = Convert.ToDouble(dr["drate1"]),
-                                MaximumQty = Convert.ToDouble(dr["MAX_QTY"]),
-                                MaximumDiscount = Convert.ToDouble(dr["max_dis"]),
+                                //MaximumQty = Convert.ToDouble(dr["MAX_QTY"]),
+                                //MaximumDiscount = Convert.ToDouble(dr["max_dis"]),
                                 SurchargeOnPurchase = Convert.ToDouble(dr["PSC"]),
                                 TaxOnPurchase = Convert.ToDouble(dr["PTax"]),
                                 DiscountRecieved = Convert.ToDouble(dr["PDIS"]),
                                 SpecialDiscountRecieved = Convert.ToDouble(dr["PSPLDIS"]),
                                 QtyPerCase = Convert.ToDouble(dr["Case_Qty"]),
                                 Location = Convert.ToString(dr["location"]).TrimEnd(),
-                                MinimumStock = Convert.ToInt32(dr["min"]),
-                                MaximumStock = Convert.ToInt32(dr["max"]),
-                                SaleTypeId = 1, //Convert.ToInt32(dr["SType"]),
+                                //MinimumStock = Convert.ToInt32(dr["min"]),
+                                //MaximumStock = Convert.ToInt32(dr["max"]),
+                                SaleTypeId = saleTypeID,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
                                 CreatedBy = "admin",
                                 CreatedOn = DateTime.Now
