@@ -41,7 +41,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(16, 30);
+            this.label1.Location = new System.Drawing.Point(17, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 17);
             this.label1.TabIndex = 0;
@@ -51,7 +51,7 @@
             // 
             this.lblSelectedCompanyName.AutoSize = true;
             this.lblSelectedCompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectedCompanyName.Location = new System.Drawing.Point(106, 30);
+            this.lblSelectedCompanyName.Location = new System.Drawing.Point(107, 73);
             this.lblSelectedCompanyName.Name = "lblSelectedCompanyName";
             this.lblSelectedCompanyName.Size = new System.Drawing.Size(63, 17);
             this.lblSelectedCompanyName.TabIndex = 1;
@@ -59,23 +59,24 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(570, 23);
+            this.btnSave.Location = new System.Drawing.Point(571, 66);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.dgvCustomerItemDiscount, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 59);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 102);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(629, 332);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(629, 359);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // dgvCustomerItemDiscount
@@ -84,14 +85,14 @@
             this.dgvCustomerItemDiscount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCustomerItemDiscount.Location = new System.Drawing.Point(3, 3);
             this.dgvCustomerItemDiscount.Name = "dgvCustomerItemDiscount";
-            this.dgvCustomerItemDiscount.Size = new System.Drawing.Size(623, 326);
+            this.dgvCustomerItemDiscount.Size = new System.Drawing.Size(623, 353);
             this.dgvCustomerItemDiscount.TabIndex = 0;
             // 
             // frmCustomerItemDiscountMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 403);
+            this.ClientSize = new System.Drawing.Size(657, 468);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblSelectedCompanyName);
@@ -99,6 +100,7 @@
             this.Name = "frmCustomerItemDiscountMaster";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCustomerItemDiscountMaster";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCustomerItemDiscountMaster_FormClosing);
             this.Load += new System.EventHandler(this.frmCustomerItemDiscountMaster_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerItemDiscount)).EndInit();

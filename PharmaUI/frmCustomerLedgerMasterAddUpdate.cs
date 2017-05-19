@@ -347,7 +347,8 @@ namespace PharmaUI
                                                                                         Normal = (x.DataBoundItem as CustomerCopanyDiscount).Normal,
                                                                                         Breakage = (x.DataBoundItem as CustomerCopanyDiscount).Breakage,
                                                                                         Expired = (x.DataBoundItem as CustomerCopanyDiscount).Expired,
-                                                                                        IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise
+                                                                                        IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise,
+                                                                                        CustomerItemDiscountMapping= (x.DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping
 
                                                                                     }).ToList();               
 
@@ -544,7 +545,7 @@ namespace PharmaUI
                     };
                     frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(newPersonRouteMaster);
                     form.Tag = (this.ActiveControl).Name;
-                    form.FormClosing += Form_FormClosing;
+                    form.FormClosing += FormPersonRouteMaster_FormClosing;
                     form.ShowDialog();
                 }
 
@@ -553,19 +554,24 @@ namespace PharmaUI
             else if(keyData == (Keys.F3))
             {
                 if (dgvCompanyDiscount.SelectedCells.Count > 0 )
-                {
-                    
+                {                   
                     CustomerCopanyDiscount existingItem = (CustomerCopanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
                     frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(existingItem);
+                    form.FormClosed += FormCustomerItemDiscount_FormClosed;
                     form.Show();
                 }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-      
 
-        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormCustomerItemDiscount_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CustomerCopanyDiscount updatedCustomerCopanyDiscount = (sender as frmCustomerItemDiscountMaster).CustomerCopanyDiscount;
+            (dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping = updatedCustomerCopanyDiscount.CustomerItemDiscountMapping;
+        }
+
+        private void FormPersonRouteMaster_FormClosing(object sender, FormClosingEventArgs e)
         {
             int personRouteID = ((frmPersonRouteMasterAddUpdate)sender).PersonRouteID;
 
