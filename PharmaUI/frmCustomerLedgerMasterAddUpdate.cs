@@ -30,16 +30,6 @@ namespace PharmaUI
             this.isInEditMode = isInEditMode;
             this.customerLedgerID = 0;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-
-            {
-                tbxZSM.KeyDown += tbxPersonRouteType_KeyDown;
-                tbxRSM.KeyDown += tbxPersonRouteType_KeyDown;
-                tbxASM.KeyDown += tbxPersonRouteType_KeyDown;
-                tbxSalesman.KeyDown += tbxPersonRouteType_KeyDown;
-                tbxArea.KeyDown += tbxPersonRouteType_KeyDown;
-                tbxRoute.KeyDown += tbxPersonRouteType_KeyDown;
-            }
-
             LoadCombo();
 
             if (!isInEditMode)
@@ -79,10 +69,6 @@ namespace PharmaUI
             ///
             cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.LocalCentral));
             cbxLocaLCentral.SelectedItem = LocalCentral.L;
-
-            ///Fill User Control Controls-----------
-            ///
-
         }
 
         public void LoadCustomerCompanyDiscountGrid()
@@ -123,38 +109,7 @@ namespace PharmaUI
         {
             GotFocusEventRaised(this);
         }
-
-        public void GotFocusEventRaised(Control control)
-        {
-            foreach (Control c in control.Controls)
-            {
-                if (c.Controls.Count > 0)
-                {
-                    GotFocusEventRaised(c);
-                }
-                else
-                {
-                    if (c is TextBox)
-                    {
-                        TextBox tb1 = (TextBox)c;
-                        tb1.GotFocus += C_GotFocus;
-                    }
-
-                    else if (c is ComboBox)
-                    {
-                        ComboBox tb1 = (ComboBox)c;
-                        tb1.GotFocus += C_GotFocus;
-                    }
-                }
-            }
-        }
-
-        private void C_GotFocus(object sender, EventArgs e)
-        {
-            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
-            return;
-        }
-
+       
         public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
         {
             if (customerLedgerMaster != null)
@@ -344,73 +299,7 @@ namespace PharmaUI
                 this.Close();
             }
         }
-
-        private void tbxPersonRouteType_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                TextBox activePersonRouteType = new TextBox();
-                string activePersonRouteTypeString = String.Empty;
-
-                switch ((sender as TextBox).Name)
-                {
-                    case "tbxZSM":
-                        {
-                            activePersonRouteType = tbxZSM;
-                            activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
-                        }
-                        break;
-
-                    case "tbxRSM":
-                        {
-                            activePersonRouteType = tbxRSM;
-                            activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
-                        }
-                        break;
-
-                    case "tbxASM":
-                        {
-                            activePersonRouteType = tbxASM;
-                            activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
-                        }
-                        break;
-                    case "tbxSalesman":
-                        {
-                            activePersonRouteType = tbxSalesman;
-                            activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
-                        }
-                        break;
-                    case "tbxArea":
-                        {
-                            activePersonRouteType = tbxArea;
-                            activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
-                        }
-                        break;
-                    case "tbxRoute":
-                        {
-                            activePersonRouteType = tbxRoute;
-                            activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
-                        }
-                        break;
-                }
-
-                PersonRouteMaster personRouteMaster = new PersonRouteMaster()
-                {
-                    RecordTypeNme = activePersonRouteTypeString,
-                    PersonRouteID= Convert.ToInt16(activePersonRouteType.Tag),
-                    PersonRouteName = activePersonRouteType.Text
-                };
-
-                frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
-                ExtensionMethods.SetChildFormProperties(frmPersonRouteMaster);
-                frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
-
-                frmPersonRouteMaster.Show();
-                frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
-
-            }
-        }
-
+       
         private void FrmPersonRouteMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
             PersonRouteMaster lastSelectedPersonRoute= (sender as frmPersonRouteMaster).LastSelectedPersonRoute;
@@ -462,6 +351,8 @@ namespace PharmaUI
                 }
                
             }
+
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -481,6 +372,70 @@ namespace PharmaUI
                     form.Show();
                 }
             }
+            else if (keyData == Keys.F1)
+            {
+                TextBox activePersonRouteType = new TextBox();
+                string activePersonRouteTypeString = String.Empty;
+
+                switch (this.ActiveControl.Name)
+                {
+                    case "tbxZSM":
+                        {
+                            activePersonRouteType = tbxZSM;
+                            activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
+                        }
+                        break;
+
+                    case "tbxRSM":
+                        {
+                            activePersonRouteType = tbxRSM;
+                            activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
+                        }
+                        break;
+
+                    case "tbxASM":
+                        {
+                            activePersonRouteType = tbxASM;
+                            activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
+                        }
+                        break;
+                    case "tbxSalesman":
+                        {
+                            activePersonRouteType = tbxSalesman;
+                            activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
+                        }
+                        break;
+                    case "tbxArea":
+                        {
+                            activePersonRouteType = tbxArea;
+                            activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
+                        }
+                        break;
+                    case "tbxRoute":
+                        {
+                            activePersonRouteType = tbxRoute;
+                            activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
+                        }
+                        break;
+                }
+
+                PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                {
+                    RecordTypeNme = activePersonRouteTypeString,
+                    PersonRouteID = Convert.ToInt16(activePersonRouteType.Tag),
+                    PersonRouteName = activePersonRouteType.Text
+                };
+
+                frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                //Set Child UI
+                ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
+                frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+
+                frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
+                frmPersonRouteMaster.Show();
+                frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -490,134 +445,6 @@ namespace PharmaUI
             CustomerCopanyDiscount updatedCustomerCopanyDiscount = (sender as frmCustomerItemDiscountMaster).CustomerCopanyDiscount;
             (dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping = updatedCustomerCopanyDiscount.CustomerItemDiscountMapping;
         }
-
-        //private void FormPersonRouteMaster_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    int personRouteID = ((frmPersonRouteMasterAddUpdate)sender).PersonRouteID;
-
-        //    switch ((sender as frmPersonRouteMasterAddUpdate).Tag.ToString())
-        //    {
-        //        case "cbxZSM":
-        //            {
-        //                ////Fill ZSM options
-        //                cbxZSM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ZSM);
-        //                cbxZSM.DisplayMember = "PersonRouteName";
-        //                cbxZSM.ValueMember = "PersonRouteID";
-        //                ///set newly added item
-        //                ///
-        //                if (personRouteID == 0 && cbxZSM.Items.Count >0 )
-        //                {
-        //                    cbxZSM.SelectedIndex = 0;
-        //                }
-        //                else
-        //                {
-        //                    cbxZSM.SelectedValue = personRouteID ;
-        //                }
-
-        //            }
-        //            break;
-
-        //        case "cbxRSM":
-        //            {
-        //                ////Fill RSM options
-        //                cbxRSM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.RSM);
-        //                cbxRSM.DisplayMember = "PersonRouteName";
-        //                cbxRSM.ValueMember = "PersonRouteID";
-        //                ///set newly added item
-        //                ///
-
-        //                if (personRouteID == 0 && cbxRSM.Items.Count > 0)
-        //                {
-        //                    cbxRSM.SelectedIndex = 0;
-        //                }
-        //                else
-        //                {
-        //                    cbxRSM.SelectedValue = personRouteID;
-        //                }
-
-
-        //            }
-        //            break;
-
-        //        case "cbxASM":
-        //            {
-        //                ////Fill ASM options
-        //                cbxASM.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ASM);
-        //                cbxASM.DisplayMember = "PersonRouteName";
-        //                cbxASM.ValueMember = "PersonRouteID";
-        //                ///set newly added item
-        //                ///
-        //                if (personRouteID == 0 && cbxASM.Items.Count > 0)
-        //                {
-        //                    cbxASM.SelectedIndex = 0;
-        //                }
-        //                else
-        //                {
-        //                    cbxASM.SelectedValue = personRouteID;
-        //                }
-
-
-        //            }
-        //            break;
-        //        case "cbxSalesman":
-        //            {
-        //                ////Fill Salesman options
-        //                cbxSalesman.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.SALESMAN);
-        //                cbxSalesman.DisplayMember = "PersonRouteName";
-        //                cbxSalesman.ValueMember = "PersonRouteID";
-        //                ///set newly added item
-        //                ///
-        //                if (personRouteID == 0 && cbxSalesman.Items.Count > 0)
-        //                {
-        //                    cbxSalesman.SelectedIndex = 0;
-        //                }
-        //                else
-        //                {
-        //                    cbxSalesman.SelectedValue = personRouteID;
-        //                }
-
-        //            }
-        //            break;
-        //        case "cbxArea":
-        //            {
-        //                ////Fill Area options
-        //                cbxArea.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.AREA);
-        //                cbxArea.DisplayMember = "PersonRouteName";
-        //                cbxArea.ValueMember = "PersonRouteID";
-        //                ///set newly added item
-        //                ///
-        //                if (personRouteID == 0 && cbxArea.Items.Count > 0)
-        //                {
-        //                    cbxArea.SelectedIndex = 0;
-        //                }
-        //                else
-        //                {
-        //                    cbxArea.SelectedValue = personRouteID;
-        //                }
-
-        //            }
-        //            break;
-        //        case "cbxRoute":
-        //            {
-        //                ////Fill Route options
-        //                cbxRoute.DataSource = applicationFacade.GetPersonRoutesBySystemName(Constants.RecordType.ROUTE);
-        //                cbxRoute.DisplayMember = "PersonRouteName";
-        //                cbxRoute.ValueMember = "PersonRouteID";
-        //                ///set newly added item
-        //                ///
-        //                if (personRouteID == 0 && cbxRoute.Items.Count > 0)
-        //                {
-        //                    cbxRoute.SelectedIndex = 0;
-        //                }
-        //                else
-        //                {
-        //                    cbxRoute.SelectedValue = personRouteID;
-        //                }
-        //            }
-        //            break;
-        //    }
-
-        //}
 
         private void dgvCompanyDiscount_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
@@ -646,5 +473,39 @@ namespace PharmaUI
             }
         }
 
+       //Set focus for the controls
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
+        }
+
     }
+
 }
