@@ -419,22 +419,24 @@ namespace PharmaUI
                         break;
                 }
 
-                PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                if (!String.IsNullOrWhiteSpace(activePersonRouteTypeString))
                 {
-                    RecordTypeNme = activePersonRouteTypeString,
-                    PersonRouteID = Convert.ToInt16(activePersonRouteType.Tag),
-                    PersonRouteName = activePersonRouteType.Text
-                };
+                    PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                    {
+                        RecordTypeNme = activePersonRouteTypeString,
+                        PersonRouteID = Convert.ToInt16(activePersonRouteType.Tag),
+                        PersonRouteName = activePersonRouteType.Text
+                    };
 
-                frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
-                //Set Child UI
-                ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
-                frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+                    frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                    //Set Child UI
+                    ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
+                    frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
 
-                frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
-                frmPersonRouteMaster.Show();
-                frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
-
+                    frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
+                    frmPersonRouteMaster.Show();
+                    frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+                }          
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

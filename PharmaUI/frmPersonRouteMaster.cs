@@ -166,16 +166,26 @@ namespace PharmaUI
                 {
                     dgvPersonRoute.ClearSelection();
                     filteredRow.First().Selected = true;
-                } 
+                    filteredRow.First().Cells["PersonRouteCode"].Selected = true;
+                }
+                else
+                {
+                  if (dgvPersonRoute.RowCount>0)
+                    {
+                        dgvPersonRoute.ClearSelection();
+                        dgvPersonRoute.Rows.OfType<DataGridViewRow>().First().Selected = true;
+                        dgvPersonRoute.Rows.OfType<DataGridViewRow>().First().Cells["PersonRouteCode"].Selected = true;
+                    }
+                }
             }
 
         }
 
         private void frmPersonRouteMaster_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(dgvPersonRoute.SelectedRows != null)
+            if(dgvPersonRoute.CurrentRow != null)
             {
-                this.LastSelectedPersonRoute = dgvPersonRoute.SelectedRows[0].DataBoundItem as PersonRouteMaster;
+                this.LastSelectedPersonRoute = dgvPersonRoute.CurrentRow.DataBoundItem as PersonRouteMaster;
             }
             
         }
