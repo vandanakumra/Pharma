@@ -87,6 +87,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPersonRoute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPersonRoute.Location = new System.Drawing.Point(14, 143);
+            this.dgvPersonRoute.MultiSelect = false;
             this.dgvPersonRoute.Name = "dgvPersonRoute";
             this.dgvPersonRoute.ReadOnly = true;
             this.dgvPersonRoute.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -159,6 +160,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmPersonRouteMaster";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPersonRouteMaster_FormClosing);
             this.Load += new System.EventHandler(this.frmPersonRouteMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonRoute)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

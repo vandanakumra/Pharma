@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Master;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace PharmaUI
     public partial class frmPersonRouteMaster : Form
     {
         IApplicationFacade applicationFacade;
+        public PersonRouteMaster LastSelectedPersonRoute { get; set; }
 
         public frmPersonRouteMaster()
         {
@@ -41,7 +43,10 @@ namespace PharmaUI
 
         private void DgvPersonRoute_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (e.KeyCode==Keys.Enter)
+            {
+                this.Close();
+            }
         }
 
         private void DgvPersonRoute_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -115,7 +120,6 @@ namespace PharmaUI
 
         }
 
-
         void AddEditPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster model)
         {
             frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(model);
@@ -123,7 +127,6 @@ namespace PharmaUI
             form.FormClosed += Form_FormClosed;
             form.ShowDialog();
         }
-
 
         private void EditPersonRoute()
         {
@@ -150,5 +153,31 @@ namespace PharmaUI
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        public void ConfigurePersonRoute(PersonRouteMaster model)
+        {
+            if(model != null)
+            {
+                this.cbPersonRouteType.Text = model.RecordTypeNme;
+                this.cbPersonRouteType.Enabled = false;
+               
+
+                List<DataGridViewRow> filteredRow = dgvPersonRoute.Rows.OfType<DataGridViewRow>().Where(x => (int)x.Cells["PersonRouteID"].Value == model.PersonRouteID).ToList();
+                if(filteredRow.Count > 0)
+                {
+                    dgvPersonRoute.ClearSelection();
+                    filteredRow.First().Selected = true;
+                } 
+            }
+
+        }
+
+        private void frmPersonRouteMaster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(dgvPersonRoute.SelectedRows != null)
+            {
+                this.LastSelectedPersonRoute = dgvPersonRoute.SelectedRows[0].DataBoundItem as PersonRouteMaster;
+            }
+            
+        }
     }
 }
