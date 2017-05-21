@@ -79,6 +79,10 @@
     <Compile Include="Master\SupplierLedgerMaster.cs" />
     <Compile Include="Master\UserMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction\PurchaseBookHeader.cs" />
+    <Compile Include="Transaction\PurchaseBookLineItem.cs" />
+    <Compile Include="Transaction\PurchaseFormType.cs" />
+    <Compile Include="Transaction\PurchaseType.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

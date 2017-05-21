@@ -45,5 +45,11 @@ namespace PharmaDAL.Entity
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SupplierLedger> SupplierLedger { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<PurchaseBookHeader> PurchaseBookHeader { get; set; }
+        public virtual DbSet<PurchaseBookLineItem> PurchaseBookLineItem { get; set; }
+        public virtual DbSet<TempPurchaseBookHeader> TempPurchaseBookHeader { get; set; }
+        public virtual DbSet<TempPurchaseBookLineItem> TempPurchaseBookLineItem { get; set; }
+        public virtual DbSet<PurchaseEntryForm> PurchaseEntryForm { get; set; }
+        public virtual DbSet<PurchaseEntryType> PurchaseEntryType { get; set; }
     }
 }

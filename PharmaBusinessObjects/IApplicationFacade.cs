@@ -1,4 +1,5 @@
 ﻿using PharmaBusinessObjects.Master;
+using PharmaBusinessObjects.Transaction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace PharmaBusinessObjects
 
         #region Common
 
+        PharmaBusinessObjects.Common.AccountLedgerType GetAccountLedgerTypeByName(string name);
         List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypesWithAll();
         List<PharmaBusinessObjects.Common.AccountType> GetAccountTypes();
         List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypes();
@@ -113,6 +115,13 @@ namespace PharmaBusinessObjects
 
         #endregion
 
-    }
+        #region Transaction
+        int InsertTempPurchaseHeader(PurchaseBookHeader header);
+        int UpdateTempPurchaseHeader(PurchaseBookHeader header);
+        List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes();
+        List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);
+        
+        #endregion
+        }
 
 }

@@ -14,11 +14,27 @@ namespace PharmaUI
 {
     public partial class frmSupplierLedger : Form
     {
+        private string supplierCode = string.Empty;
+        private string supplierName = string.Empty;
+
+        public string SupplierCode { get { return supplierCode; } }
+        public string SupplierName { get { return supplierName; } }
+
         IApplicationFacade applicationFacade;
+
         public frmSupplierLedger()
         {
             InitializeComponent();
             ExtensionMethods.SetFormProperties(this);
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+        }
+
+        public frmSupplierLedger(bool isDialog)
+        {
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
+            this.WindowState = FormWindowState.Normal;
+            btnClose.Visible = true;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
@@ -29,8 +45,35 @@ namespace PharmaUI
             dgvSupplier.CellDoubleClick += dgvSupplier_DoubleClick;
             dgvSupplier.KeyDown += dgvSupplier_KeyDown; ;
             dgvSupplier.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //dgvSupplier.Click += DgvSupplier_Click;
+            dgvSupplier.SelectionChanged += DgvSupplier_SelectionChanged;
 
         }
+
+        private void DgvSupplier_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvSupplier.SelectedRows != null && dgvSupplier.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dgvSupplier.SelectedRows[0];
+
+                if (row != null)
+                {
+                    supplierCode = Convert.ToString(row.Cells["SupplierLedgerCode"].Value);
+                    supplierName = Convert.ToString(row.Cells["SupplierLedgerName"].Value);
+                }
+            }
+        }
+
+        //private void DgvSupplier_Click(object sender, EventArgs e)
+        //{
+        //    DataGridViewRow row = dgvSupplier.SelectedRows[0];
+
+        //    if (row != null)
+        //    {
+        //        supplierCode = Convert.ToString(row.Cells["SupplierCode"]);
+        //        supplierName = Convert.ToString(row.Cells["SupplierName"]);
+        //    }
+        //}
 
         private void dgvSupplier_KeyDown(object sender, KeyEventArgs e)
         {
@@ -175,6 +218,11 @@ namespace PharmaUI
             form.FormClosed -= Form_FormClosed;
             form.FormClosed += Form_FormClosed;
             form.ShowDialog();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

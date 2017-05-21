@@ -49,6 +49,16 @@
         <AssociationConnector Association="PharmaDBModel.FK_RolePrivledges_Privledges" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_RolePrivledges_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK__Users__RoleID__5C37ACAD" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PharmaDBModel.PurchaseBookHeader" Width="1.5" PointX="15.375" PointY="15.125" />
+        <EntityTypeShape EntityType="PharmaDBModel.PurchaseBookLineItem" Width="1.5" PointX="17.625" PointY="15.125" />
+        <EntityTypeShape EntityType="PharmaDBModel.TempPurchaseBookHeader" Width="1.5" PointX="15.375" PointY="1.125" />
+        <EntityTypeShape EntityType="PharmaDBModel.TempPurchaseBookLineItem" Width="1.5" PointX="17.625" PointY="1.125" />
+        <AssociationConnector Association="PharmaDBModel.FK__PurchaseB__Purch__6E2152BE" />
+        <AssociationConnector Association="PharmaDBModel.FK__TempPurch__Purch__76B698BF" />
+        <EntityTypeShape EntityType="PharmaDBModel.PurchaseEntryForm" Width="1.5" PointX="13.125" PointY="18.375" />
+        <EntityTypeShape EntityType="PharmaDBModel.PurchaseEntryType" Width="1.5" PointX="10.875" PointY="19" />
+        <AssociationConnector Association="PharmaDBModel.FK_PurchaseEntryForm_PurchaseEntryType" />
+        <AssociationConnector Association="PharmaDBModel.FK_TempPurchaseBookHeader_PurchaseEntryForm" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

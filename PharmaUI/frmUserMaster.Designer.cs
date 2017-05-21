@@ -31,19 +31,19 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnAddNewUser = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvUser = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPrivledge = new System.Windows.Forms.DataGridView();
             this.txtPrivledgeSearch = new System.Windows.Forms.TextBox();
+            this.btnAddPrivledge = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvRole = new System.Windows.Forms.DataGridView();
             this.txtRoleSearch = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnAddNewUser = new System.Windows.Forms.Button();
-            this.btnAddPrivledge = new System.Windows.Forms.Button();
             this.btnAddRole = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
@@ -105,6 +105,21 @@
             this.txtSearch.TabIndex = 15;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
+            // btnAddNewUser
+            // 
+            this.btnAddNewUser.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnAddNewUser.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddNewUser.Image = global::PharmaUI.Properties.Resources.AddItem;
+            this.btnAddNewUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddNewUser.Location = new System.Drawing.Point(555, 3);
+            this.btnAddNewUser.Name = "btnAddNewUser";
+            this.btnAddNewUser.Size = new System.Drawing.Size(146, 34);
+            this.btnAddNewUser.TabIndex = 16;
+            this.btnAddNewUser.Text = "Add New User";
+            this.btnAddNewUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddNewUser.UseVisualStyleBackColor = true;
+            this.btnAddNewUser.Click += new System.EventHandler(this.buttonAddNewUser_Click);
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -117,11 +132,14 @@
             // 
             // dgvUser
             // 
+            this.dgvUser.AllowUserToAddRows = false;
             this.dgvUser.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel2.SetColumnSpan(this.dgvUser, 3);
             this.dgvUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUser.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvUser.Location = new System.Drawing.Point(3, 43);
+            this.dgvUser.MultiSelect = false;
             this.dgvUser.Name = "dgvUser";
             this.dgvUser.Size = new System.Drawing.Size(698, 20);
             this.dgvUser.TabIndex = 18;
@@ -149,10 +167,12 @@
             // 
             // dgvPrivledge
             // 
+            this.dgvPrivledge.AllowUserToAddRows = false;
             this.dgvPrivledge.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvPrivledge.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel3.SetColumnSpan(this.dgvPrivledge, 3);
             this.dgvPrivledge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPrivledge.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvPrivledge.Location = new System.Drawing.Point(3, 43);
             this.dgvPrivledge.Name = "dgvPrivledge";
             this.dgvPrivledge.Size = new System.Drawing.Size(343, 19);
@@ -168,6 +188,21 @@
             this.txtPrivledgeSearch.Size = new System.Drawing.Size(115, 23);
             this.txtPrivledgeSearch.TabIndex = 15;
             this.txtPrivledgeSearch.TextChanged += new System.EventHandler(this.txtPrivledgeSearch_TextChanged);
+            // 
+            // btnAddPrivledge
+            // 
+            this.btnAddPrivledge.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnAddPrivledge.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPrivledge.Image = global::PharmaUI.Properties.Resources.AddItem;
+            this.btnAddPrivledge.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddPrivledge.Location = new System.Drawing.Point(200, 3);
+            this.btnAddPrivledge.Name = "btnAddPrivledge";
+            this.btnAddPrivledge.Size = new System.Drawing.Size(146, 34);
+            this.btnAddPrivledge.TabIndex = 16;
+            this.btnAddPrivledge.Text = "Add Privledge";
+            this.btnAddPrivledge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAddPrivledge.UseVisualStyleBackColor = true;
+            this.btnAddPrivledge.Click += new System.EventHandler(this.btnAddPrivledge_Click);
             // 
             // label2
             // 
@@ -202,11 +237,14 @@
             // 
             // dgvRole
             // 
+            this.dgvRole.AllowUserToAddRows = false;
             this.dgvRole.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvRole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel4.SetColumnSpan(this.dgvRole, 3);
             this.dgvRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvRole.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvRole.Location = new System.Drawing.Point(3, 43);
+            this.dgvRole.MultiSelect = false;
             this.dgvRole.Name = "dgvRole";
             this.dgvRole.Size = new System.Drawing.Size(343, 19);
             this.dgvRole.TabIndex = 19;
@@ -220,46 +258,6 @@
             this.txtRoleSearch.Size = new System.Drawing.Size(115, 23);
             this.txtRoleSearch.TabIndex = 15;
             this.txtRoleSearch.TextChanged += new System.EventHandler(this.txtRoleSearch_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Search";
-            // 
-            // btnAddNewUser
-            // 
-            this.btnAddNewUser.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnAddNewUser.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNewUser.Image = global::PharmaUI.Properties.Resources.AddItem;
-            this.btnAddNewUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewUser.Location = new System.Drawing.Point(555, 3);
-            this.btnAddNewUser.Name = "btnAddNewUser";
-            this.btnAddNewUser.Size = new System.Drawing.Size(146, 34);
-            this.btnAddNewUser.TabIndex = 16;
-            this.btnAddNewUser.Text = "Add New User";
-            this.btnAddNewUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddNewUser.UseVisualStyleBackColor = true;
-            this.btnAddNewUser.Click += new System.EventHandler(this.buttonAddNewUser_Click);
-            // 
-            // btnAddPrivledge
-            // 
-            this.btnAddPrivledge.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnAddPrivledge.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPrivledge.Image = global::PharmaUI.Properties.Resources.AddItem;
-            this.btnAddPrivledge.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPrivledge.Location = new System.Drawing.Point(200, 3);
-            this.btnAddPrivledge.Name = "btnAddPrivledge";
-            this.btnAddPrivledge.Size = new System.Drawing.Size(146, 34);
-            this.btnAddPrivledge.TabIndex = 16;
-            this.btnAddPrivledge.Text = "Add Privledge";
-            this.btnAddPrivledge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddPrivledge.UseVisualStyleBackColor = true;
-            this.btnAddPrivledge.Click += new System.EventHandler(this.btnAddPrivledge_Click);
             // 
             // btnAddRole
             // 
@@ -275,6 +273,16 @@
             this.btnAddRole.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddRole.UseVisualStyleBackColor = true;
             this.btnAddRole.Click += new System.EventHandler(this.btnAddRole_Click);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Search";
             // 
             // frmUserMaster
             // 

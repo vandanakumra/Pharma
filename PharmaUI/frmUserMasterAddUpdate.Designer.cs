@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblIsSysAdmin = new System.Windows.Forms.Label();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -41,7 +40,6 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.lblLastName = new System.Windows.Forms.Label();
-            this.chkIsSystemAdmin = new System.Windows.Forms.CheckBox();
             this.cbxRole = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.cbxStatus = new System.Windows.Forms.ComboBox();
@@ -56,22 +54,20 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblIsSysAdmin, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.txtLastName, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtFirstName, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtPassword, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblUserName, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblRole, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.lblFirstName, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblPassword, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtUserName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblLastName, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.chkIsSystemAdmin, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cbxRole, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.btnSave, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblRole, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.cbxRole, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.btnSave, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 1, 6);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 49);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 8;
@@ -91,23 +87,13 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(153, 248);
+            this.btnCancel.Location = new System.Drawing.Point(153, 213);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // lblIsSysAdmin
-            // 
-            this.lblIsSysAdmin.AutoSize = true;
-            this.lblIsSysAdmin.Location = new System.Drawing.Point(3, 143);
-            this.lblIsSysAdmin.Margin = new System.Windows.Forms.Padding(3);
-            this.lblIsSysAdmin.Name = "lblIsSysAdmin";
-            this.lblIsSysAdmin.Size = new System.Drawing.Size(78, 13);
-            this.lblIsSysAdmin.TabIndex = 5;
-            this.lblIsSysAdmin.Text = "IsSystemAdmin";
             // 
             // txtLastName
             // 
@@ -146,7 +132,7 @@
             // lblRole
             // 
             this.lblRole.AutoSize = true;
-            this.lblRole.Location = new System.Drawing.Point(3, 178);
+            this.lblRole.Location = new System.Drawing.Point(3, 143);
             this.lblRole.Margin = new System.Windows.Forms.Padding(3);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(29, 13);
@@ -191,20 +177,11 @@
             this.lblLastName.TabIndex = 4;
             this.lblLastName.Text = "Last Name";
             // 
-            // chkIsSystemAdmin
-            // 
-            this.chkIsSystemAdmin.AutoSize = true;
-            this.chkIsSystemAdmin.Location = new System.Drawing.Point(153, 143);
-            this.chkIsSystemAdmin.Name = "chkIsSystemAdmin";
-            this.chkIsSystemAdmin.Size = new System.Drawing.Size(15, 14);
-            this.chkIsSystemAdmin.TabIndex = 5;
-            this.chkIsSystemAdmin.UseVisualStyleBackColor = true;
-            // 
             // cbxRole
             // 
             this.cbxRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRole.FormattingEnabled = true;
-            this.cbxRole.Location = new System.Drawing.Point(153, 178);
+            this.cbxRole.Location = new System.Drawing.Point(153, 143);
             this.cbxRole.Name = "cbxRole";
             this.cbxRole.Size = new System.Drawing.Size(121, 21);
             this.cbxRole.TabIndex = 6;
@@ -212,7 +189,7 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(3, 213);
+            this.lblStatus.Location = new System.Drawing.Point(3, 178);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(3);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(37, 13);
@@ -224,7 +201,7 @@
             this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxStatus.FormattingEnabled = true;
-            this.cbxStatus.Location = new System.Drawing.Point(153, 213);
+            this.cbxStatus.Location = new System.Drawing.Point(153, 178);
             this.cbxStatus.Name = "cbxStatus";
             this.cbxStatus.Size = new System.Drawing.Size(127, 24);
             this.cbxStatus.TabIndex = 7;
@@ -232,7 +209,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(72, 248);
+            this.btnSave.Location = new System.Drawing.Point(72, 213);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 8;
@@ -266,7 +243,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lblIsSysAdmin;
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.TextBox txtPassword;
@@ -278,7 +254,6 @@
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.ComboBox cbxStatus;
         private System.Windows.Forms.Label lblLastName;
-        private System.Windows.Forms.CheckBox chkIsSystemAdmin;
         private System.Windows.Forms.ComboBox cbxRole;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

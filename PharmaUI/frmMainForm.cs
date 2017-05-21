@@ -117,7 +117,7 @@ namespace PharmaUI
                 menuStrip1.Visible = true;
                 ExtensionMethods.LoggedInUser = loginUser;
 
-                ToggleMenuItems(menuStrip1.Items);
+               // ToggleMenuItems(menuStrip1.Items);
                 frmDefault form = new frmDefault();
                 ExtensionMethods.AddFormToPanel(form, pnlMain);
                 form.Show();
@@ -179,6 +179,13 @@ namespace PharmaUI
             {
                 Login();
             }
+        }
+
+        private void purchaseTransactionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPurchaseBookTransaction form = new frmPurchaseBookTransaction();
+            ExtensionMethods.AddFormToPanel(form, pnlMain);
+            form.Show();
         }
     }
 }

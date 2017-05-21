@@ -49,6 +49,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.inventoryMaintenanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transactionCtrlPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlLogin.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +61,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.homeToolStripMenuItem,
             this.masterMaintenanceToolStripMenuItem,
+            this.inventoryMaintenanceToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -244,6 +248,30 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "User Name";
             // 
+            // inventoryMaintenanceToolStripMenuItem
+            // 
+            this.inventoryMaintenanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.purchaseBookToolStripMenuItem});
+            this.inventoryMaintenanceToolStripMenuItem.Name = "inventoryMaintenanceToolStripMenuItem";
+            this.inventoryMaintenanceToolStripMenuItem.Size = new System.Drawing.Size(141, 20);
+            this.inventoryMaintenanceToolStripMenuItem.Text = "Inventory Maintenance";
+            // 
+            // purchaseBookToolStripMenuItem
+            // 
+            this.purchaseBookToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.transactionCtrlPToolStripMenuItem});
+            this.purchaseBookToolStripMenuItem.Name = "purchaseBookToolStripMenuItem";
+            this.purchaseBookToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.purchaseBookToolStripMenuItem.Text = "Purchase Book";
+            // 
+            // transactionCtrlPToolStripMenuItem
+            // 
+            this.transactionCtrlPToolStripMenuItem.Name = "transactionCtrlPToolStripMenuItem";
+            this.transactionCtrlPToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.transactionCtrlPToolStripMenuItem.Text = "Transaction";
+            this.transactionCtrlPToolStripMenuItem.Click += new System.EventHandler(this.purchaseTransactionToolStripMenuItem_Click);
+            // 
             // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,5 +319,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventoryMaintenanceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseBookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transactionCtrlPToolStripMenuItem;
     }
 }

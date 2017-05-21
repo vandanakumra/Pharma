@@ -87,7 +87,6 @@ namespace PharmaUI
                 txtPassword.Text = userMaster.Password;
                 txtFirstName.Text = userMaster.FirstName;
                 txtLastName.Text = userMaster.LastName;
-                chkIsSystemAdmin.Checked = userMaster.IsSystemAdmin;
                 cbxRole.SelectedValue = userMaster.RoleID;
                 cbxStatus.SelectedItem = userMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
 
@@ -178,7 +177,6 @@ namespace PharmaUI
             user.FirstName = txtFirstName.Text;
             user.LastName = txtLastName.Text;
             user.Password = txtPassword.Text;
-            user.IsSystemAdmin = chkIsSystemAdmin.Checked;
             Int32.TryParse(Convert.ToString(cbxRole.SelectedValue), out roleId);
             user.RoleID = roleId;
 

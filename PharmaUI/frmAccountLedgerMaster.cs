@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,14 @@ namespace PharmaUI
 {
     public partial class frmAccountLedgerMaster : Form
     {
+        private string accountLedgerCode = string.Empty;
+        private string accountLedgerName = string.Empty;
+        private bool isOpenAsDialog = false;
+        private string ledgerType = string.Empty;
+
+        public string AccountLedgerID { get { return accountLedgerCode; } }
+        public string AccountLedgerName { get { return accountLedgerName; } }
+
         IApplicationFacade applicationFacade;
 
         private int selectedRowIndex = 0;    
@@ -25,14 +34,57 @@ namespace PharmaUI
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
+        public frmAccountLedgerMaster(bool isDialog, string ledgerTypeName)
+        {
+            InitializeComponent();
+            ExtensionMethods.SetChildFormProperties(this);
+
+            List<Control> allControls = ExtensionMethods.GetAllControls(this);
+            allControls.ForEach(k => k.Visible = false);
+
+            this.WindowState = FormWindowState.Normal;
+            btnClose.Visible = true;
+            dgvAccountLedger.Visible = true;
+            ledgerType = ledgerTypeName;
+            isOpenAsDialog = isDialog;
+
+            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+        }
+
         private void frmAccountLedgerMaster_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, "Account Ledger Master");
 
             LoadCombo();
-            LoadDataGrid(0);
-            dgvAccountLedger.CellDoubleClick += DgvAccountLedger_CellDoubleClick;
-            dgvAccountLedger.KeyDown += DgvAccountLedger_KeyDown;
+            
+
+            if (isOpenAsDialog)
+            {
+                dgvAccountLedger.SelectionChanged += DgvAccountLedger_SelectionChanged;
+                AccountLedgerType master = applicationFacade.GetAccountLedgerTypeByName(ledgerType);
+                LoadDataGrid(master != null ? master.AccountLedgerTypeID : 0);
+            }
+            else
+            {
+                LoadDataGrid(0);
+                dgvAccountLedger.CellContentDoubleClick += DgvAccountLedger_CellDoubleClick;
+                dgvAccountLedger.KeyDown += DgvAccountLedger_KeyDown;
+            }
+            dgvAccountLedger.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        private void DgvAccountLedger_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvAccountLedger.SelectedRows != null && dgvAccountLedger.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dgvAccountLedger.SelectedRows[0];
+
+                if (row != null)
+                {
+                    accountLedgerCode = Convert.ToString(row.Cells["AccountLedgerCode"].Value);
+                    accountLedgerName = Convert.ToString(row.Cells["AccountLedgerName"].Value);
+                }
+            }
         }
 
         private void DgvAccountLedger_KeyDown(object sender, KeyEventArgs e)
@@ -189,5 +241,9 @@ namespace PharmaUI
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

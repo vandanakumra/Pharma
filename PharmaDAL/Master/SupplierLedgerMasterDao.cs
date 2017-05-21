@@ -108,6 +108,7 @@ namespace PharmaDAL.Master
                         DLNo = p.DLNo,
                         OpeningBal = p.OpeningBal,
                         TaxRetail = p.TaxRetail,
+                        PurchaseTypeID = p.PurchaseTypeId,
                         TINNo = p.TINNo,
                         Status = p.Status,
                         CreatedBy = this.LoggedInUser.Username,

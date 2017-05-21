@@ -35,6 +35,13 @@ namespace PharmaBusiness.Common
             return accountLedgerTypes;
         }
 
+        public PharmaBusinessObjects.Common.AccountLedgerType GetAccountLedgerTypeByName(string name)
+        {
+            var accountLedgerTypes = new CommonDao().GetAccountLedgerTypes() ?? new List<PharmaBusinessObjects.Common.AccountLedgerType>(); ;
+            PharmaBusinessObjects.Common.AccountLedgerType accountLedger = accountLedgerTypes.FirstOrDefault(p => p.AccountLedgerTypeName.ToLower() == name.ToLower());
+            return accountLedger;
+        }
+
         public List<PharmaBusinessObjects.Common.CustomerType> GetCustomerTypes()
         {
             return new CommonDao().GetCustomerTypes();

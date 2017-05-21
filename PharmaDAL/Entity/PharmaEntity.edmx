@@ -268,6 +268,77 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="PurchaseBookHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" Nullable="false" />
+          <Property Name="CompanyCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AccountLedgerCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TotalAmount" Type="float" Nullable="false" />
+          <Property Name="Excise" Type="float" />
+          <Property Name="HSCM" Type="float" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="Tax" Type="float" />
+          <Property Name="Net" Type="float" />
+          <Property Name="PurAmount1" Type="float" />
+          <Property Name="VAT1" Type="float" />
+          <Property Name="PurAmount2" Type="float" />
+          <Property Name="VAT2" Type="float" />
+          <Property Name="ExemptedAmount" Type="float" />
+          <Property Name="OtherAmount" Type="float" />
+          <Property Name="InvoiceAmount" Type="float" />
+          <Property Name="Narration1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Narration2" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PurchaseBookLineItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseBookHeaderID" Type="int" Nullable="false" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="BatchNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="FreeQuantity" Type="int" />
+          <Property Name="Scheme1" Type="float" />
+          <Property Name="Scheme2" Type="float" />
+          <Property Name="IsHalfScheme" Type="bit" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="SpecialDiscount" Type="float" />
+          <Property Name="MRP" Type="float" />
+          <Property Name="Excise" Type="float" />
+          <Property Name="Expiry" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PurchaseEntryForm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseTypeID" Type="int" Nullable="false" />
+          <Property Name="PurchaseFormName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PurchaseEntryType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseTypeCode" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="PurchaseTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="RecordType">
           <Key>
             <PropertyRef Name="RecordTypeId" />
@@ -318,7 +389,7 @@
           <Property Name="TaxRetail" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="AreaId" Type="int" Nullable="false" />
-          <Property Name="DLNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DLNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TINNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -326,6 +397,56 @@
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="SupplierLedgerShortDesc" Type="nvarchar" MaxLength="20" />
           <Property Name="PurchaseTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TempPurchaseBookHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" Nullable="false" />
+          <Property Name="SupplierCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PurchaseEntryFormID" Type="int" />
+          <Property Name="TotalAmount" Type="float" />
+          <Property Name="Excise" Type="float" />
+          <Property Name="HSCM" Type="float" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="Tax" Type="float" />
+          <Property Name="Net" Type="float" />
+          <Property Name="PurAmount1" Type="float" />
+          <Property Name="VAT1" Type="float" />
+          <Property Name="PurAmount2" Type="float" />
+          <Property Name="VAT2" Type="float" />
+          <Property Name="ExemptedAmount" Type="float" />
+          <Property Name="OtherAmount" Type="float" />
+          <Property Name="InvoiceAmount" Type="float" />
+          <Property Name="Narration1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Narration2" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TempPurchaseBookLineItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseBookHeaderID" Type="int" Nullable="false" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="BatchNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="FreeQuantity" Type="int" />
+          <Property Name="Scheme1" Type="float" />
+          <Property Name="Scheme2" Type="float" />
+          <Property Name="IsHalfScheme" Type="bit" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="SpecialDiscount" Type="float" />
+          <Property Name="MRP" Type="float" />
+          <Property Name="Excise" Type="float" />
+          <Property Name="Expiry" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -344,6 +465,42 @@
           <Property Name="IsSysAdmin" Type="bit" Nullable="false" />
           <Property Name="RoleID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__PurchaseB__Accou__6B44E613' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__PurchaseB__Accou__6B44E613" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__PurchaseB__Compa__6A50C1DA' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__PurchaseB__Compa__6A50C1DA" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__PurchaseB__ItemC__6F1576F7' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__PurchaseB__ItemC__6F1576F7" />-->
+        <Association Name="FK__PurchaseB__Purch__6E2152BE">
+          <End Role="PurchaseBookHeader" Type="Self.PurchaseBookHeader" Multiplicity="1" />
+          <End Role="PurchaseBookLineItem" Type="Self.PurchaseBookLineItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseBookHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseBookLineItem">
+              <PropertyRef Name="PurchaseBookHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__TempPurch__ItemC__77AABCF8' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__TempPurch__ItemC__77AABCF8" />-->
+        <Association Name="FK__TempPurch__Purch__76B698BF">
+          <End Role="TempPurchaseBookHeader" Type="Self.TempPurchaseBookHeader" Multiplicity="1" />
+          <End Role="TempPurchaseBookLineItem" Type="Self.TempPurchaseBookLineItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TempPurchaseBookHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TempPurchaseBookLineItem">
+              <PropertyRef Name="PurchaseBookHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Users__RoleID__5C37ACAD">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -584,6 +741,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PurchaseEntryForm_PurchaseEntryType">
+          <End Role="PurchaseEntryType" Type="Self.PurchaseEntryType" Multiplicity="1" />
+          <End Role="PurchaseEntryForm" Type="Self.PurchaseEntryForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseEntryType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseEntryForm">
+              <PropertyRef Name="PurchaseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RolePrivledges_Privledges">
           <End Role="Privledges" Type="Self.Privledges" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -636,6 +805,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TempPurchaseBookHeader_PurchaseEntryForm">
+          <End Role="PurchaseEntryForm" Type="Self.PurchaseEntryForm" Multiplicity="0..1" />
+          <End Role="TempPurchaseBookHeader" Type="Self.TempPurchaseBookHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseEntryForm">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TempPurchaseBookHeader">
+              <PropertyRef Name="PurchaseEntryFormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_TempPurchaseBookHeader_TempPurchaseBookHeader" />-->
         <EntityContainer Name="PharmaDBModelStoreContainer">
           <EntitySet Name="AccountLedgerMaster" EntityType="Self.AccountLedgerMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountLedgerType" EntityType="Self.AccountLedgerType" Schema="dbo" store:Type="Tables" />
@@ -652,11 +836,25 @@
           <EntitySet Name="PersonLedgerType" EntityType="Self.PersonLedgerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Privledges" EntityType="Self.Privledges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseBookHeader" EntityType="Self.PurchaseBookHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseBookLineItem" EntityType="Self.PurchaseBookLineItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseEntryForm" EntityType="Self.PurchaseEntryForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseEntryType" EntityType="Self.PurchaseEntryType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolePrivledges" EntityType="Self.RolePrivledges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempPurchaseBookHeader" EntityType="Self.TempPurchaseBookHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempPurchaseBookLineItem" EntityType="Self.TempPurchaseBookLineItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__PurchaseB__Purch__6E2152BE" Association="Self.FK__PurchaseB__Purch__6E2152BE">
+            <End Role="PurchaseBookHeader" EntitySet="PurchaseBookHeader" />
+            <End Role="PurchaseBookLineItem" EntitySet="PurchaseBookLineItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TempPurch__Purch__76B698BF" Association="Self.FK__TempPurch__Purch__76B698BF">
+            <End Role="TempPurchaseBookHeader" EntitySet="TempPurchaseBookHeader" />
+            <End Role="TempPurchaseBookLineItem" EntitySet="TempPurchaseBookLineItem" />
+          </AssociationSet>
           <AssociationSet Name="FK__Users__RoleID__5C37ACAD" Association="Self.FK__Users__RoleID__5C37ACAD">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
@@ -737,6 +935,10 @@
             <End Role="RecordType" EntitySet="RecordType" />
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_PurchaseEntryForm_PurchaseEntryType" Association="Self.FK_PurchaseEntryForm_PurchaseEntryType">
+            <End Role="PurchaseEntryType" EntitySet="PurchaseEntryType" />
+            <End Role="PurchaseEntryForm" EntitySet="PurchaseEntryForm" />
+          </AssociationSet>
           <AssociationSet Name="FK_RolePrivledges_Privledges" Association="Self.FK_RolePrivledges_Privledges">
             <End Role="Privledges" EntitySet="Privledges" />
             <End Role="RolePrivledges" EntitySet="RolePrivledges" />
@@ -752,6 +954,10 @@
           <AssociationSet Name="FK_SupplierLedger_SalesPersonMaster" Association="Self.FK_SupplierLedger_SalesPersonMaster">
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
             <End Role="SupplierLedger" EntitySet="SupplierLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempPurchaseBookHeader_PurchaseEntryForm" Association="Self.FK_TempPurchaseBookHeader_PurchaseEntryForm">
+            <End Role="PurchaseEntryForm" EntitySet="PurchaseEntryForm" />
+            <End Role="TempPurchaseBookHeader" EntitySet="TempPurchaseBookHeader" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1116,7 +1322,7 @@
           <Property Name="TaxRetail" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="AreaId" Type="Int32" Nullable="false" />
-          <Property Name="DLNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DLNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
@@ -1554,7 +1760,206 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="PurchaseBookHeader" EntityType="PharmaDBModel.PurchaseBookHeader" />
+          <EntitySet Name="PurchaseBookLineItem" EntityType="PharmaDBModel.PurchaseBookLineItem" />
+          <EntitySet Name="TempPurchaseBookHeader" EntityType="PharmaDBModel.TempPurchaseBookHeader" />
+          <EntitySet Name="TempPurchaseBookLineItem" EntityType="PharmaDBModel.TempPurchaseBookLineItem" />
+          <AssociationSet Name="FK__PurchaseB__Purch__6E2152BE" Association="PharmaDBModel.FK__PurchaseB__Purch__6E2152BE">
+            <End Role="PurchaseBookHeader" EntitySet="PurchaseBookHeader" />
+            <End Role="PurchaseBookLineItem" EntitySet="PurchaseBookLineItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TempPurch__Purch__76B698BF" Association="PharmaDBModel.FK__TempPurch__Purch__76B698BF">
+            <End Role="TempPurchaseBookHeader" EntitySet="TempPurchaseBookHeader" />
+            <End Role="TempPurchaseBookLineItem" EntitySet="TempPurchaseBookLineItem" />
+          </AssociationSet>
+          <EntitySet Name="PurchaseEntryForm" EntityType="PharmaDBModel.PurchaseEntryForm" />
+          <EntitySet Name="PurchaseEntryType" EntityType="PharmaDBModel.PurchaseEntryType" />
+          <AssociationSet Name="FK_PurchaseEntryForm_PurchaseEntryType" Association="PharmaDBModel.FK_PurchaseEntryForm_PurchaseEntryType">
+            <End Role="PurchaseEntryType" EntitySet="PurchaseEntryType" />
+            <End Role="PurchaseEntryForm" EntitySet="PurchaseEntryForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempPurchaseBookHeader_PurchaseEntryForm" Association="PharmaDBModel.FK_TempPurchaseBookHeader_PurchaseEntryForm">
+            <End Role="PurchaseEntryForm" EntitySet="PurchaseEntryForm" />
+            <End Role="TempPurchaseBookHeader" EntitySet="TempPurchaseBookHeader" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PurchaseBookHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AccountLedgerCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Double" Nullable="false" />
+          <Property Name="Excise" Type="Double" />
+          <Property Name="HSCM" Type="Double" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="Tax" Type="Double" />
+          <Property Name="Net" Type="Double" />
+          <Property Name="PurAmount1" Type="Double" />
+          <Property Name="VAT1" Type="Double" />
+          <Property Name="PurAmount2" Type="Double" />
+          <Property Name="VAT2" Type="Double" />
+          <Property Name="ExemptedAmount" Type="Double" />
+          <Property Name="OtherAmount" Type="Double" />
+          <Property Name="InvoiceAmount" Type="Double" />
+          <Property Name="Narration1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Narration2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseBookLineItem" Relationship="PharmaDBModel.FK__PurchaseB__Purch__6E2152BE" FromRole="PurchaseBookHeader" ToRole="PurchaseBookLineItem" />
+        </EntityType>
+        <EntityType Name="PurchaseBookLineItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseBookHeaderID" Type="Int32" Nullable="false" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="BatchNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="FreeQuantity" Type="Int32" />
+          <Property Name="Scheme1" Type="Double" />
+          <Property Name="Scheme2" Type="Double" />
+          <Property Name="IsHalfScheme" Type="Boolean" Nullable="false" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="SpecialDiscount" Type="Double" />
+          <Property Name="MRP" Type="Double" />
+          <Property Name="Excise" Type="Double" />
+          <Property Name="Expiry" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PurchaseBookHeader" Relationship="PharmaDBModel.FK__PurchaseB__Purch__6E2152BE" FromRole="PurchaseBookLineItem" ToRole="PurchaseBookHeader" />
+        </EntityType>
+        <EntityType Name="TempPurchaseBookHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Double" />
+          <Property Name="Excise" Type="Double" />
+          <Property Name="HSCM" Type="Double" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="Tax" Type="Double" />
+          <Property Name="Net" Type="Double" />
+          <Property Name="PurAmount1" Type="Double" />
+          <Property Name="VAT1" Type="Double" />
+          <Property Name="PurAmount2" Type="Double" />
+          <Property Name="VAT2" Type="Double" />
+          <Property Name="ExemptedAmount" Type="Double" />
+          <Property Name="OtherAmount" Type="Double" />
+          <Property Name="InvoiceAmount" Type="Double" />
+          <Property Name="Narration1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Narration2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TempPurchaseBookLineItem" Relationship="PharmaDBModel.FK__TempPurch__Purch__76B698BF" FromRole="TempPurchaseBookHeader" ToRole="TempPurchaseBookLineItem" />
+          <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseEntryFormID" Type="Int32" />
+          <NavigationProperty Name="PurchaseEntryForm" Relationship="PharmaDBModel.FK_TempPurchaseBookHeader_PurchaseEntryForm" FromRole="TempPurchaseBookHeader" ToRole="PurchaseEntryForm" />
+        </EntityType>
+        <EntityType Name="TempPurchaseBookLineItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseBookHeaderID" Type="Int32" Nullable="false" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="BatchNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="FreeQuantity" Type="Int32" />
+          <Property Name="Scheme1" Type="Double" />
+          <Property Name="Scheme2" Type="Double" />
+          <Property Name="IsHalfScheme" Type="Boolean" Nullable="false" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="SpecialDiscount" Type="Double" />
+          <Property Name="MRP" Type="Double" />
+          <Property Name="Excise" Type="Double" />
+          <Property Name="Expiry" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TempPurchaseBookHeader" Relationship="PharmaDBModel.FK__TempPurch__Purch__76B698BF" FromRole="TempPurchaseBookLineItem" ToRole="TempPurchaseBookHeader" />
+        </EntityType>
+        <Association Name="FK__PurchaseB__Purch__6E2152BE">
+          <End Type="PharmaDBModel.PurchaseBookHeader" Role="PurchaseBookHeader" Multiplicity="1" />
+          <End Type="PharmaDBModel.PurchaseBookLineItem" Role="PurchaseBookLineItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseBookHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseBookLineItem">
+              <PropertyRef Name="PurchaseBookHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TempPurch__Purch__76B698BF">
+          <End Type="PharmaDBModel.TempPurchaseBookHeader" Role="TempPurchaseBookHeader" Multiplicity="1" />
+          <End Type="PharmaDBModel.TempPurchaseBookLineItem" Role="TempPurchaseBookLineItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TempPurchaseBookHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TempPurchaseBookLineItem">
+              <PropertyRef Name="PurchaseBookHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PurchaseEntryForm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseTypeID" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseFormName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PurchaseEntryType" Relationship="PharmaDBModel.FK_PurchaseEntryForm_PurchaseEntryType" FromRole="PurchaseEntryForm" ToRole="PurchaseEntryType" />
+          <NavigationProperty Name="TempPurchaseBookHeader" Relationship="PharmaDBModel.FK_TempPurchaseBookHeader_PurchaseEntryForm" FromRole="PurchaseEntryForm" ToRole="TempPurchaseBookHeader" />
+        </EntityType>
+        <EntityType Name="PurchaseEntryType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseTypeCode" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PurchaseTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseEntryForm" Relationship="PharmaDBModel.FK_PurchaseEntryForm_PurchaseEntryType" FromRole="PurchaseEntryType" ToRole="PurchaseEntryForm" />
+        </EntityType>
+        <Association Name="FK_PurchaseEntryForm_PurchaseEntryType">
+          <End Type="PharmaDBModel.PurchaseEntryType" Role="PurchaseEntryType" Multiplicity="1" />
+          <End Type="PharmaDBModel.PurchaseEntryForm" Role="PurchaseEntryForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseEntryType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseEntryForm">
+              <PropertyRef Name="PurchaseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TempPurchaseBookHeader_PurchaseEntryForm">
+          <End Type="PharmaDBModel.PurchaseEntryForm" Role="PurchaseEntryForm" Multiplicity="0..1" />
+          <End Type="PharmaDBModel.TempPurchaseBookHeader" Role="TempPurchaseBookHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseEntryForm">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TempPurchaseBookHeader">
+              <PropertyRef Name="PurchaseEntryFormID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1917,6 +2322,133 @@
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="IsSysAdmin" ColumnName="IsSysAdmin" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseBookHeader">
+            <EntityTypeMapping TypeName="PharmaDBModel.PurchaseBookHeader">
+              <MappingFragment StoreEntitySet="PurchaseBookHeader">
+                <ScalarProperty Name="Narration2" ColumnName="Narration2" />
+                <ScalarProperty Name="Narration1" ColumnName="Narration1" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="OtherAmount" ColumnName="OtherAmount" />
+                <ScalarProperty Name="ExemptedAmount" ColumnName="ExemptedAmount" />
+                <ScalarProperty Name="VAT2" ColumnName="VAT2" />
+                <ScalarProperty Name="PurAmount2" ColumnName="PurAmount2" />
+                <ScalarProperty Name="VAT1" ColumnName="VAT1" />
+                <ScalarProperty Name="PurAmount1" ColumnName="PurAmount1" />
+                <ScalarProperty Name="Net" ColumnName="Net" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="HSCM" ColumnName="HSCM" />
+                <ScalarProperty Name="Excise" ColumnName="Excise" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="AccountLedgerCode" ColumnName="AccountLedgerCode" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseBookLineItem">
+            <EntityTypeMapping TypeName="PharmaDBModel.PurchaseBookLineItem">
+              <MappingFragment StoreEntitySet="PurchaseBookLineItem">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Expiry" ColumnName="Expiry" />
+                <ScalarProperty Name="Excise" ColumnName="Excise" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="SpecialDiscount" ColumnName="SpecialDiscount" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="IsHalfScheme" ColumnName="IsHalfScheme" />
+                <ScalarProperty Name="Scheme2" ColumnName="Scheme2" />
+                <ScalarProperty Name="Scheme1" ColumnName="Scheme1" />
+                <ScalarProperty Name="FreeQuantity" ColumnName="FreeQuantity" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="PurchaseBookHeaderID" ColumnName="PurchaseBookHeaderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempPurchaseBookHeader">
+            <EntityTypeMapping TypeName="PharmaDBModel.TempPurchaseBookHeader">
+              <MappingFragment StoreEntitySet="TempPurchaseBookHeader">
+                <ScalarProperty Name="PurchaseEntryFormID" ColumnName="PurchaseEntryFormID" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="Narration2" ColumnName="Narration2" />
+                <ScalarProperty Name="Narration1" ColumnName="Narration1" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="OtherAmount" ColumnName="OtherAmount" />
+                <ScalarProperty Name="ExemptedAmount" ColumnName="ExemptedAmount" />
+                <ScalarProperty Name="VAT2" ColumnName="VAT2" />
+                <ScalarProperty Name="PurAmount2" ColumnName="PurAmount2" />
+                <ScalarProperty Name="VAT1" ColumnName="VAT1" />
+                <ScalarProperty Name="PurAmount1" ColumnName="PurAmount1" />
+                <ScalarProperty Name="Net" ColumnName="Net" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="HSCM" ColumnName="HSCM" />
+                <ScalarProperty Name="Excise" ColumnName="Excise" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempPurchaseBookLineItem">
+            <EntityTypeMapping TypeName="PharmaDBModel.TempPurchaseBookLineItem">
+              <MappingFragment StoreEntitySet="TempPurchaseBookLineItem">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Expiry" ColumnName="Expiry" />
+                <ScalarProperty Name="Excise" ColumnName="Excise" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="SpecialDiscount" ColumnName="SpecialDiscount" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="IsHalfScheme" ColumnName="IsHalfScheme" />
+                <ScalarProperty Name="Scheme2" ColumnName="Scheme2" />
+                <ScalarProperty Name="Scheme1" ColumnName="Scheme1" />
+                <ScalarProperty Name="FreeQuantity" ColumnName="FreeQuantity" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="PurchaseBookHeaderID" ColumnName="PurchaseBookHeaderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseEntryForm">
+            <EntityTypeMapping TypeName="PharmaDBModel.PurchaseEntryForm">
+              <MappingFragment StoreEntitySet="PurchaseEntryForm">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PurchaseFormName" ColumnName="PurchaseFormName" />
+                <ScalarProperty Name="PurchaseTypeID" ColumnName="PurchaseTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseEntryType">
+            <EntityTypeMapping TypeName="PharmaDBModel.PurchaseEntryType">
+              <MappingFragment StoreEntitySet="PurchaseEntryType">
+                <ScalarProperty Name="PurchaseTypeName" ColumnName="PurchaseTypeName" />
+                <ScalarProperty Name="PurchaseTypeCode" ColumnName="PurchaseTypeCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

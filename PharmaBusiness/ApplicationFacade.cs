@@ -7,6 +7,7 @@ using PharmaBusinessObjects;
 using PharmaBusinessObjects.Master;
 using PharmaBusiness.Master;
 using PharmaBusiness.Common;
+using PharmaBusinessObjects.Transaction;
 
 namespace PharmaBusiness
 {
@@ -296,6 +297,10 @@ namespace PharmaBusiness
         #endregion
 
         #region Common
+        public PharmaBusinessObjects.Common.AccountLedgerType GetAccountLedgerTypeByName(string name)
+        {
+            return new CommonBiz().GetAccountLedgerTypeByName(name);
+        }
 
         public List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypesWithAll()
         {
@@ -654,6 +659,29 @@ namespace PharmaBusiness
             return new UserBiz(this.LoggedInUser).UpdatePrivledge(p);
         }
 
+        #endregion
+
+        #region Purchase Entry
+
+        public int InsertTempPurchaseHeader(PurchaseBookHeader header)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertTempPurchaseHeader(header);
+        }
+
+        public int UpdateTempPurchaseHeader(PurchaseBookHeader header)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).UpdateTempPurchaseHeader(header);
+        }
+
+        public List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes()
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseEntryTypes();
+        }
+
+        public List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseFormTypes(purchaseTypeID);
+        }
         #endregion
 
 

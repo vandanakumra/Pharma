@@ -151,6 +151,10 @@ namespace PharmaUI
             supplier.Mobile = this.ucSupplierCustomerInfo.Mobile;
             supplier.OfficePhone = this.ucSupplierCustomerInfo.OfficePhone;
 
+            int purchaseTypeId = 0;
+            Int32.TryParse(Convert.ToString(cbxPurchaseType.SelectedValue), out purchaseTypeId);
+            supplier.PurchaseTypeId = purchaseTypeId;
+
             decimal.TryParse(this.ucSupplierCustomerInfo.OpeningBal, out openingBal);
             supplier.OpeningBal = openingBal;
             supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
