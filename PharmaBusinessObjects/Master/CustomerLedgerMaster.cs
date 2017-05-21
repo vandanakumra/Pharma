@@ -24,6 +24,7 @@ namespace PharmaBusinessObjects.Master
         public string CustomerLedgerShortName { get; set; }
         public string Address { get; set; }
         public string ContactPerson { get; set; }
+        public string Telephone { get; set; }
         public string Mobile { get; set; }
         public string OfficePhone { get; set; }
         public string ResidentPhone { get; set; }
