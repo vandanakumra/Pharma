@@ -108,6 +108,7 @@ namespace PharmaUI
         private void frmCustomerLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {
             GotFocusEventRaised(this);
+            this.ucSupplierCustomerInfo.SetFocus();
         }
        
         public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
@@ -259,6 +260,7 @@ namespace PharmaUI
                                                                                         CustomerItemDiscountMapping = (x.DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping
 
                                                                                     }).ToList();
+
 
                 int _result = 0;
                 if (isInEditMode)

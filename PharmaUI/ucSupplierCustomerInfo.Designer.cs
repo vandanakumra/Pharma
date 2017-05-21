@@ -55,9 +55,9 @@
             this.cbxStatus = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.RichTextBox();
-            this.gbCustomerSupplierInfo = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbxTelephone = new System.Windows.Forms.TextBox();
+            this.gbCustomerSupplierInfo = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbCustomerSupplierInfo.SuspendLayout();
             this.SuspendLayout();
@@ -124,6 +124,7 @@
             this.cbxCreditDebit.Name = "cbxCreditDebit";
             this.cbxCreditDebit.Size = new System.Drawing.Size(127, 21);
             this.cbxCreditDebit.TabIndex = 1;
+            this.cbxCreditDebit.Tag = "113";
             // 
             // txtOpeningBal
             // 
@@ -133,6 +134,7 @@
             this.txtOpeningBal.Name = "txtOpeningBal";
             this.txtOpeningBal.Size = new System.Drawing.Size(127, 20);
             this.txtOpeningBal.TabIndex = 113;
+            this.txtOpeningBal.Tag = "112";
             // 
             // txtPhoneR
             // 
@@ -142,6 +144,7 @@
             this.txtPhoneR.Name = "txtPhoneR";
             this.txtPhoneR.Size = new System.Drawing.Size(127, 20);
             this.txtPhoneR.TabIndex = 110;
+            this.txtPhoneR.Tag = "110";
             // 
             // txtPhoneO
             // 
@@ -151,6 +154,7 @@
             this.txtPhoneO.Name = "txtPhoneO";
             this.txtPhoneO.Size = new System.Drawing.Size(127, 20);
             this.txtPhoneO.TabIndex = 109;
+            this.txtPhoneO.Tag = "109";
             // 
             // txtMobile
             // 
@@ -160,6 +164,7 @@
             this.txtMobile.Name = "txtMobile";
             this.txtMobile.Size = new System.Drawing.Size(127, 20);
             this.txtMobile.TabIndex = 106;
+            this.txtMobile.Tag = "107";
             // 
             // txtContactPerson
             // 
@@ -169,6 +174,7 @@
             this.txtContactPerson.Name = "txtContactPerson";
             this.txtContactPerson.Size = new System.Drawing.Size(127, 20);
             this.txtContactPerson.TabIndex = 105;
+            this.txtContactPerson.Tag = "106";
             // 
             // txtShortName
             // 
@@ -178,6 +184,7 @@
             this.txtShortName.Name = "txtShortName";
             this.txtShortName.Size = new System.Drawing.Size(127, 20);
             this.txtShortName.TabIndex = 103;
+            this.txtShortName.Tag = "103";
             // 
             // label13
             // 
@@ -269,6 +276,7 @@
             this.txtCode.ReadOnly = true;
             this.txtCode.Size = new System.Drawing.Size(127, 20);
             this.txtCode.TabIndex = 101;
+            this.txtCode.Tag = "101";
             // 
             // txtCustSupplierName
             // 
@@ -278,6 +286,7 @@
             this.txtCustSupplierName.Name = "txtCustSupplierName";
             this.txtCustSupplierName.Size = new System.Drawing.Size(127, 20);
             this.txtCustSupplierName.TabIndex = 19;
+            this.txtCustSupplierName.Tag = "101";
             // 
             // label3
             // 
@@ -307,6 +316,7 @@
             this.txtEmailAddress.Name = "txtEmailAddress";
             this.txtEmailAddress.Size = new System.Drawing.Size(127, 20);
             this.txtEmailAddress.TabIndex = 111;
+            this.txtEmailAddress.Tag = "108";
             // 
             // label15
             // 
@@ -328,6 +338,7 @@
             this.cbxTaxRetail.Name = "cbxTaxRetail";
             this.cbxTaxRetail.Size = new System.Drawing.Size(127, 21);
             this.cbxTaxRetail.TabIndex = 115;
+            this.cbxTaxRetail.Tag = "111";
             // 
             // label12
             // 
@@ -349,6 +360,7 @@
             this.cbxStatus.Name = "cbxStatus";
             this.cbxStatus.Size = new System.Drawing.Size(127, 21);
             this.cbxStatus.TabIndex = 112;
+            this.cbxStatus.Tag = "114";
             // 
             // label4
             // 
@@ -369,18 +381,8 @@
             this.tableLayoutPanel1.SetRowSpan(this.txtAddress, 3);
             this.txtAddress.Size = new System.Drawing.Size(189, 84);
             this.txtAddress.TabIndex = 116;
+            this.txtAddress.Tag = "104";
             this.txtAddress.Text = "";
-            // 
-            // gbCustomerSupplierInfo
-            // 
-            this.gbCustomerSupplierInfo.Controls.Add(this.tableLayoutPanel1);
-            this.gbCustomerSupplierInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbCustomerSupplierInfo.Location = new System.Drawing.Point(0, 0);
-            this.gbCustomerSupplierInfo.Name = "gbCustomerSupplierInfo";
-            this.gbCustomerSupplierInfo.Size = new System.Drawing.Size(900, 160);
-            this.gbCustomerSupplierInfo.TabIndex = 1;
-            this.gbCustomerSupplierInfo.TabStop = false;
-            this.gbCustomerSupplierInfo.Text = "Customer Info";
             // 
             // label7
             // 
@@ -400,6 +402,18 @@
             this.tbxTelephone.Name = "tbxTelephone";
             this.tbxTelephone.Size = new System.Drawing.Size(189, 20);
             this.tbxTelephone.TabIndex = 118;
+            this.tbxTelephone.Tag = "105";
+            // 
+            // gbCustomerSupplierInfo
+            // 
+            this.gbCustomerSupplierInfo.Controls.Add(this.tableLayoutPanel1);
+            this.gbCustomerSupplierInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbCustomerSupplierInfo.Location = new System.Drawing.Point(0, 0);
+            this.gbCustomerSupplierInfo.Name = "gbCustomerSupplierInfo";
+            this.gbCustomerSupplierInfo.Size = new System.Drawing.Size(900, 160);
+            this.gbCustomerSupplierInfo.TabIndex = 1;
+            this.gbCustomerSupplierInfo.TabStop = false;
+            this.gbCustomerSupplierInfo.Text = "Customer Info";
             // 
             // ucSupplierCustomerInfo
             // 
