@@ -70,8 +70,6 @@ namespace PharmaUI
             dgvLineItem.Columns["Amount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["Amount"].FillWeight = 5;
 
-            dgvLineItem.KeyDown += DgvLineItem_KeyDown;
-
             dgvLineItem.Rows.Clear();
         }
 
@@ -100,35 +98,6 @@ namespace PharmaUI
             }
         }
 
-        private void DgvLineItem_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F9)
-            {
-                if (invoiceID != 0)
-                {
-                    int srNo = lineItemList.Max(p => p.SrNo);
-                    lineItemList.Add(new PurchaseBookLineItem { InvoiceID = invoiceID, SrNo = srNo + 1 });
-                   
-                    dgvLineItem.Rows.Add(lineItemList);
-                }
-                else
-                {
-                    MessageBox.Show("Please add header information first");
-                }
-            }
-            else if (e.KeyCode == Keys.F1)
-            {
-                if (dgvLineItem.SelectedCells.Count > 0)
-                {
-                    string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
-
-                    if (columnName == "ItemCode")
-                    {
-
-                    }
-                }
-            }
-        }
 
         private void dtPurchaseDate_Validated(object sender, EventArgs e)
         {
@@ -143,21 +112,14 @@ namespace PharmaUI
             }
         }
 
-        private void txtSupplierCode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.F1)
-            {
-                frmSupplierLedger ledger = new frmSupplierLedger(true);
-                ledger.FormClosed += Ledger_FormClosed;
-                ledger.ShowDialog();
-            }
-        }
-
         private void Ledger_FormClosed(object sender, FormClosedEventArgs e)
         {
             frmSupplierLedger ledger = (frmSupplierLedger)sender;
-            lblSupplierName.Text = ledger.SupplierName;
-            txtSupplierCode.Text = ledger.SupplierCode;
+            if (ledger.LastSelectedSupplier != null)
+            {
+                lblSupplierName.Text = ledger.LastSelectedSupplier.SupplierLedgerName;
+                txtSupplierCode.Text = ledger.LastSelectedSupplier.SupplierLedgerCode;
+            }
             ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
         }
 
@@ -213,6 +175,93 @@ namespace PharmaUI
                 invoiceID = invoiceID == 0 ? applicationFacade.InsertTempPurchaseHeader(header) : applicationFacade.UpdateTempPurchaseHeader(header);
             }
 
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+                if (invoiceID != 0)
+                {
+                    int srNo = lineItemList.Max(p => p.SrNo);
+                    lineItemList.Add(new PurchaseBookLineItem { InvoiceID = invoiceID, SrNo = srNo + 1 });
+
+                    dgvLineItem.Rows.Add(lineItemList);
+                }
+                else
+                {
+                    MessageBox.Show("Please add header information first");
+                }
+            }
+            else if (keyData == (Keys.F3))
+            {
+                if (dgvLineItem.SelectedCells.Count > 0)
+                {
+                    dgvLineItem.BeginEdit(true);
+                }
+            }
+            else if (keyData == Keys.F1)
+            {
+                switch (this.ActiveControl.Name)
+                {
+                    case "txtSupplierCode":
+                        {
+                            frmSupplierLedger ledger = new frmSupplierLedger();
+                            //Set Child UI
+                            ExtensionMethods.AddChildFormToPanel(this, ledger, ExtensionMethods.MainPanel);
+                            ledger.WindowState = FormWindowState.Maximized;
+
+                            ledger.FormClosed += Ledger_FormClosed;
+                            ledger.Show();
+                        }
+                        break;
+                    case "dgvLineItem":
+                        {
+                            if (dgvLineItem.SelectedCells.Count > 0)
+                            {
+                                if(dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name == "ItemCode")
+                                {
+                                    frmItemMaster itemMaster = new frmItemMaster();
+                                    //Set Child UI
+                                    ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
+                                    itemMaster.WindowState = FormWindowState.Maximized;
+
+                                    itemMaster.FormClosed += ItemMaster_FormClosed; ;
+                                    itemMaster.Show();
+                                }
+                            }
+                        }
+                        break;
+
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void ItemMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmItemMaster itemMaster = (frmItemMaster)sender;
+            if (itemMaster.LastSelectedItemMaster != null && dgvLineItem.SelectedCells.Count > 0)
+            {
+                int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
+
+                dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value = itemMaster.LastSelectedItemMaster.ItemCode;
+                dgvLineItem.Rows[rowIndex].Cells["ItemName"].Value = itemMaster.LastSelectedItemMaster.ItemName;
+                dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value = itemMaster.LastSelectedItemMaster.QtyPerCase;
+                dgvLineItem.Rows[rowIndex].Cells["FreeQty"].Value = "0";
+                dgvLineItem.Rows[rowIndex].Cells["Rate"].Value = itemMaster.LastSelectedItemMaster.PurchaseRate;
+            }
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+        }
+
+        private void frmPurchaseBookTransaction_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }

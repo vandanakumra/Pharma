@@ -15,6 +15,7 @@ namespace PharmaUI
 {
     public partial class frmItemMaster : Form
     {
+        public PharmaBusinessObjects.Master.ItemMaster LastSelectedItemMaster { get; set; }
         IApplicationFacade applicationFacade;
         public frmItemMaster()
         {
@@ -187,6 +188,11 @@ namespace PharmaUI
                 EditItem();
               
             }
+            else if (keyData == Keys.Escape)
+            {
+                this.Close();
+
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -210,6 +216,22 @@ namespace PharmaUI
         {
             EditItem();
            
+        }
+
+        private void frmItemMaster_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void frmItemMaster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (dgvItemList.CurrentRow != null)
+            {
+                this.LastSelectedItemMaster = dgvItemList.CurrentRow.DataBoundItem as PharmaBusinessObjects.Master.ItemMaster;
+            }
         }
     }
 }

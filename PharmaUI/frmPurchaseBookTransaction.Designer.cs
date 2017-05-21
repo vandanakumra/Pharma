@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblPurchaseTypeName = new System.Windows.Forms.Label();
             this.lblPurchaseType = new System.Windows.Forms.Label();
             this.lblInvoiceNumber = new System.Windows.Forms.Label();
             this.txtInvoiceNumber = new System.Windows.Forms.TextBox();
@@ -40,9 +39,10 @@
             this.dtPurchaseDate = new System.Windows.Forms.DateTimePicker();
             this.txtSupplierCode = new System.Windows.Forms.TextBox();
             this.dgvLineItem = new System.Windows.Forms.DataGridView();
-            this.errFrmPurchaseBookHeader = new System.Windows.Forms.ErrorProvider(this.components);
             this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
+            this.lblPurchaseTypeName = new System.Windows.Forms.Label();
             this.cbxPurchaseFormType = new System.Windows.Forms.ComboBox();
+            this.errFrmPurchaseBookHeader = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errFrmPurchaseBookHeader)).BeginInit();
@@ -81,15 +81,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(909, 239);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // lblPurchaseTypeName
-            // 
-            this.lblPurchaseTypeName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPurchaseTypeName.AutoSize = true;
-            this.lblPurchaseTypeName.Location = new System.Drawing.Point(3, 222);
-            this.lblPurchaseTypeName.Name = "lblPurchaseTypeName";
-            this.lblPurchaseTypeName.Size = new System.Drawing.Size(0, 13);
-            this.lblPurchaseTypeName.TabIndex = 10;
             // 
             // lblPurchaseType
             // 
@@ -167,7 +158,6 @@
             this.txtSupplierCode.Name = "txtSupplierCode";
             this.txtSupplierCode.Size = new System.Drawing.Size(146, 20);
             this.txtSupplierCode.TabIndex = 4;
-            this.txtSupplierCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSupplierCode_KeyDown);
             // 
             // dgvLineItem
             // 
@@ -181,10 +171,6 @@
             this.dgvLineItem.Size = new System.Drawing.Size(903, 113);
             this.dgvLineItem.TabIndex = 11;
             // 
-            // errFrmPurchaseBookHeader
-            // 
-            this.errFrmPurchaseBookHeader.ContainerControl = this;
-            // 
             // cbxPurchaseType
             // 
             this.cbxPurchaseType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -194,6 +180,15 @@
             this.cbxPurchaseType.Name = "cbxPurchaseType";
             this.cbxPurchaseType.Size = new System.Drawing.Size(230, 21);
             this.cbxPurchaseType.TabIndex = 12;
+            // 
+            // lblPurchaseTypeName
+            // 
+            this.lblPurchaseTypeName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPurchaseTypeName.AutoSize = true;
+            this.lblPurchaseTypeName.Location = new System.Drawing.Point(3, 222);
+            this.lblPurchaseTypeName.Name = "lblPurchaseTypeName";
+            this.lblPurchaseTypeName.Size = new System.Drawing.Size(0, 13);
+            this.lblPurchaseTypeName.TabIndex = 10;
             // 
             // cbxPurchaseFormType
             // 
@@ -205,6 +200,10 @@
             this.cbxPurchaseFormType.Size = new System.Drawing.Size(231, 21);
             this.cbxPurchaseFormType.TabIndex = 13;
             this.cbxPurchaseFormType.Visible = false;
+            // 
+            // errFrmPurchaseBookHeader
+            // 
+            this.errFrmPurchaseBookHeader.ContainerControl = this;
             // 
             // frmPurchaseBookTransaction
             // 
@@ -219,6 +218,7 @@
             this.Name = "frmPurchaseBookTransaction";
             this.Text = "frmPurchaseBookTransaction";
             this.Load += new System.EventHandler(this.frmPurchaseBookTransaction_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPurchaseBookTransaction_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).EndInit();

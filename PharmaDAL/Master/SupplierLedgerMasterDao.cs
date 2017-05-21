@@ -29,8 +29,8 @@ namespace PharmaDAL.Master
                     Address = p.Address,
                     ContactPerson = p.ContactPerson,
                     Mobile = p.Mobile,
-                    Pager = p.Pager,
-                    Fax = p.Fax,
+                    //Pager = p.Pager,
+                    //Fax = p.Fax,
                     OfficePhone = p.OfficePhone,
                     ResidentPhone = p.ResidentPhone,
                     EmailAddress = p.EmailAddress,                   
@@ -60,8 +60,8 @@ namespace PharmaDAL.Master
                     Address = p.Address,
                     ContactPerson = p.ContactPerson,
                     Mobile = p.Mobile,
-                    Pager = p.Pager,
-                    Fax = p.Fax,
+                    //Pager = p.Pager,
+                    //Fax = p.Fax,
                     OfficePhone = p.OfficePhone,
                     ResidentPhone = p.ResidentPhone,
                     EmailAddress = p.EmailAddress,
@@ -98,8 +98,8 @@ namespace PharmaDAL.Master
                         Address = p.Address,
                         ContactPerson = p.ContactPerson,
                         Mobile = p.Mobile,
-                        Pager = p.Pager,
-                        Fax = p.Fax,
+                        //Pager = p.Pager,
+                        //Fax = p.Fax,
                         OfficePhone = p.OfficePhone,
                         ResidentPhone = p.ResidentPhone,
                         EmailAddress = p.EmailAddress,
@@ -140,8 +140,8 @@ namespace PharmaDAL.Master
                         supplierLedgerMaster.Address = p.Address;
                         supplierLedgerMaster.ContactPerson = p.ContactPerson;
                         supplierLedgerMaster.Mobile = p.Mobile;
-                        supplierLedgerMaster.Pager = p.Pager;
-                        supplierLedgerMaster.Fax = p.Fax;
+                        //supplierLedgerMaster.Pager = p.Pager;
+                        //supplierLedgerMaster.Fax = p.Fax;
                         supplierLedgerMaster.OfficePhone = p.OfficePhone;
                         supplierLedgerMaster.ResidentPhone = p.ResidentPhone;
                         supplierLedgerMaster.EmailAddress = p.EmailAddress;

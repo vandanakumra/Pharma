@@ -36,7 +36,6 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupplier)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -74,7 +73,7 @@
             this.dgvSupplier.Location = new System.Drawing.Point(3, 70);
             this.dgvSupplier.Name = "dgvSupplier";
             this.dgvSupplier.ReadOnly = true;
-            this.dgvSupplier.Size = new System.Drawing.Size(695, 125);
+            this.dgvSupplier.Size = new System.Drawing.Size(695, 165);
             this.dgvSupplier.TabIndex = 9;
             // 
             // tableLayoutPanel1
@@ -142,28 +141,14 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtSearch, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.dgvSupplier, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btnClose, 1, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 60);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(701, 238);
             this.tableLayoutPanel2.TabIndex = 13;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tableLayoutPanel2.SetColumnSpan(this.btnClose, 2);
-            this.btnClose.Location = new System.Drawing.Point(295, 206);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 13;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Visible = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frmSupplierLedger
             // 
@@ -176,7 +161,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmSupplierLedger";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSupplierLedger_FormClosing);
             this.Load += new System.EventHandler(this.frmSupplierLedger_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmSupplierLedger_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupplier)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -194,6 +181,5 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button btnClose;
     }
 }

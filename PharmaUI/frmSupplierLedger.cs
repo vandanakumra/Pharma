@@ -14,12 +14,7 @@ namespace PharmaUI
 {
     public partial class frmSupplierLedger : Form
     {
-        private string supplierCode = string.Empty;
-        private string supplierName = string.Empty;
-
-        public string SupplierCode { get { return supplierCode; } }
-        public string SupplierName { get { return supplierName; } }
-
+        public PharmaBusinessObjects.Master.SupplierLedgerMaster LastSelectedSupplier { get; set; }
         IApplicationFacade applicationFacade;
 
         public frmSupplierLedger()
@@ -29,70 +24,17 @@ namespace PharmaUI
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
-        public frmSupplierLedger(bool isDialog)
-        {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            this.WindowState = FormWindowState.Normal;
-            btnClose.Visible = true;
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-        }
-
         private void frmSupplierLedger_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, "Ledger Master");
             LoadDataGrid();
             dgvSupplier.CellDoubleClick += dgvSupplier_DoubleClick;
-            dgvSupplier.KeyDown += dgvSupplier_KeyDown; ;
-            dgvSupplier.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+          
             //dgvSupplier.Click += DgvSupplier_Click;
-            dgvSupplier.SelectionChanged += DgvSupplier_SelectionChanged;
+           
 
         }
-
-        private void DgvSupplier_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvSupplier.SelectedRows != null && dgvSupplier.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dgvSupplier.SelectedRows[0];
-
-                if (row != null)
-                {
-                    supplierCode = Convert.ToString(row.Cells["SupplierLedgerCode"].Value);
-                    supplierName = Convert.ToString(row.Cells["SupplierLedgerName"].Value);
-                }
-            }
-        }
-
-        //private void DgvSupplier_Click(object sender, EventArgs e)
-        //{
-        //    DataGridViewRow row = dgvSupplier.SelectedRows[0];
-
-        //    if (row != null)
-        //    {
-        //        supplierCode = Convert.ToString(row.Cells["SupplierCode"]);
-        //        supplierName = Convert.ToString(row.Cells["SupplierName"]);
-        //    }
-        //}
-
-        private void dgvSupplier_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete && dgvSupplier.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dgvSupplier.SelectedRows[0];
-
-                if (row != null)
-                {
-                    if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        int supplierId = 0;
-                        Int32.TryParse(Convert.ToString(row.Cells["SupplierId"].Value), out supplierId);
-                        //applicationFacade.DeleteSupplier(supplierId);
-                        LoadDataGrid();
-                    }
-                }
-            }
-        }
+        
 
 
         private void dgvSupplier_DoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -208,6 +150,10 @@ namespace PharmaUI
             {
                 EditLedger();
             }
+            else if (keyData == Keys.Escape)
+            {
+                this.Close();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -220,9 +166,22 @@ namespace PharmaUI
             form.ShowDialog();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void frmSupplierLedger_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Close();
+            if (dgvSupplier.CurrentRow != null)
+            {
+                this.LastSelectedSupplier = dgvSupplier.CurrentRow.DataBoundItem as PharmaBusinessObjects.Master.SupplierLedgerMaster;
+            }
+
+        }
+
+        private void frmSupplierLedger_KeyDown(object sender, KeyEventArgs e)
+        {
+           if (e.KeyCode == Keys.Escape)
+           {
+                    this.Close();
+           }
+           
         }
     }
 }

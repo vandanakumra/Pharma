@@ -15,13 +15,14 @@ namespace PharmaUI
 {
     public partial class frmCustomerItemDiscountMaster : Form
     {
-        private CustomerCopanyDiscount CustomerCopanyDiscount { get; set; }
+        public CustomerCopanyDiscount CustomerCopanyDiscount { get; set; }
         IApplicationFacade applicationFacade;
 
         public frmCustomerItemDiscountMaster(CustomerCopanyDiscount CustomerCopanyDiscount)
         {
             InitializeComponent();
-            //ExtensionMethods.SetFormProperties(this);
+           // ExtensionMethods.SetFormProperties(this);
+            ExtensionMethods.FormLoad(this, "Customer Item Discount");
 
             this.CustomerCopanyDiscount = CustomerCopanyDiscount;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
@@ -34,13 +35,12 @@ namespace PharmaUI
             ///Display Company name
             ///
             this.lblSelectedCompanyName.Text = CustomerCopanyDiscount.CompanyName;
-
-           
+            LoadGrid();
         }
 
         private void LoadGrid()
         {
-            dgvCustomerItemDiscount.DataSource = applicationFacade.GetAllCompanyItemDiscountByCompanyID(CustomerCopanyDiscount.CompanyID);
+            dgvCustomerItemDiscount.DataSource = GetMergedItemDiscountList();
 
             for (int i = 0; i < dgvCustomerItemDiscount.Columns.Count; i++)
             {
@@ -71,9 +71,57 @@ namespace PharmaUI
 
         }
 
-        //private List<CustomerCopanyDiscount> GetMergedItemDiscountList()
-        //{
+        private List<CustomerCopanyDiscount> GetMergedItemDiscountList()
+        {
+            try
+            {
+                List<CustomerCopanyDiscount> allItemDiscountList = applicationFacade.GetAllCompanyItemDiscountByCompanyID(CustomerCopanyDiscount.CompanyID);
+                List<CustomerCopanyDiscount> mappedItemDiscountList = this.CustomerCopanyDiscount.CustomerItemDiscountMapping;
 
-        //}
+                if (mappedItemDiscountList!=null)
+                {
+                    allItemDiscountList.RemoveAll(x => mappedItemDiscountList.Any(y => y.ItemID == x.ItemID));
+                    allItemDiscountList.AddRange(mappedItemDiscountList);
+                }
+
+                return allItemDiscountList.OrderBy(x => x.ItemName).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void frmCustomerItemDiscountMaster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                this.CustomerCopanyDiscount.CustomerItemDiscountMapping = dgvCustomerItemDiscount.Rows
+                                                                                                .Cast<DataGridViewRow>()
+                                                                                                .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
+                                                                                                            || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
+                                                                                                            || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Expired"].Value))
+                                                                                                ).Select(x => new CustomerCopanyDiscount()
+                                                                                                {
+                                                                                                    CompanyID = (x.DataBoundItem as CustomerCopanyDiscount).CompanyID,
+                                                                                                    ItemID = (x.DataBoundItem as CustomerCopanyDiscount).ItemID,
+                                                                                                    ItemName = (x.DataBoundItem as CustomerCopanyDiscount).ItemName,
+                                                                                                    Normal = (x.DataBoundItem as CustomerCopanyDiscount).Normal,
+                                                                                                    Breakage = (x.DataBoundItem as CustomerCopanyDiscount).Breakage,
+                                                                                                    Expired = (x.DataBoundItem as CustomerCopanyDiscount).Expired,
+                                                                                                    IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise
+
+                                                                                                }).ToList();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
