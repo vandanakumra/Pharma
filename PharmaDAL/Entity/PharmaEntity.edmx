@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -96,6 +96,7 @@
           <Property Name="CustomerLedgerShortName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
           <Property Name="OfficePhone" Type="nvarchar" MaxLength="50" />
           <Property Name="ResidentPhone" Type="nvarchar" MaxLength="50" />
@@ -951,7 +952,8 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
             <End Role="TempPurchaseBookHeader" EntitySet="TempPurchaseBookHeader" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1061,6 +1063,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
           <Property Name="CustomerLedgerShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OfficePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ResidentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1294,7 +1297,6 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
           <Property Name="SupplierLedgerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SupplierLedgerShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OfficePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ResidentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1312,6 +1314,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="SupplierLedgerShortDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="PurchaseTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_SupplierLedger_PurchaseLedger" FromRole="SupplierLedger" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_SupplierLedger_SalesPersonMaster" FromRole="SupplierLedger" ToRole="PersonRouteMaster" />
         </EntityType>
@@ -2044,6 +2047,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
                 <ScalarProperty Name="CustomerLedgerShortName" ColumnName="CustomerLedgerShortName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
                 <ScalarProperty Name="ResidentPhone" ColumnName="ResidentPhone" />
@@ -2259,7 +2263,6 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
                 <ScalarProperty Name="SupplierLedgerName" ColumnName="SupplierLedgerName" />
                 <ScalarProperty Name="SupplierLedgerShortName" ColumnName="SupplierLedgerShortName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
                 <ScalarProperty Name="ResidentPhone" ColumnName="ResidentPhone" />
@@ -2277,6 +2280,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="SupplierLedgerShortDesc" ColumnName="SupplierLedgerShortDesc" />
                 <ScalarProperty Name="PurchaseTypeID" ColumnName="PurchaseTypeID" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

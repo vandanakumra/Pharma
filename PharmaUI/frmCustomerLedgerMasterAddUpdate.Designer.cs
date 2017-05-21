@@ -112,7 +112,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(134, 30);
             this.btnSave.TabIndex = 801;
-            this.btnSave.Tag = "1000";
+            this.btnSave.Tag = "";
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -124,7 +124,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(134, 30);
             this.btnCancel.TabIndex = 802;
-            this.btnCancel.Tag = "1001";
+            this.btnCancel.Tag = "";
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -141,7 +141,7 @@
             this.gbDiscountDetails.Location = new System.Drawing.Point(649, 201);
             this.gbDiscountDetails.Name = "gbDiscountDetails";
             this.gbDiscountDetails.Size = new System.Drawing.Size(471, 286);
-            this.gbDiscountDetails.TabIndex = 5;
+            this.gbDiscountDetails.TabIndex = 599;
             this.gbDiscountDetails.TabStop = false;
             this.gbDiscountDetails.Text = "Company Discount Details";
             // 
@@ -150,10 +150,12 @@
             this.dgvCompanyDiscount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCompanyDiscount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCompanyDiscount.Location = new System.Drawing.Point(3, 16);
+            this.dgvCompanyDiscount.MultiSelect = false;
             this.dgvCompanyDiscount.Name = "dgvCompanyDiscount";
             this.dgvCompanyDiscount.Size = new System.Drawing.Size(465, 267);
-            this.dgvCompanyDiscount.TabIndex = 700;
-            this.dgvCompanyDiscount.Tag = "600";
+            this.dgvCompanyDiscount.TabIndex = 600;
+            this.dgvCompanyDiscount.Tag = "";
+            this.dgvCompanyDiscount.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCompanyDiscount_CellEnter);
             this.dgvCompanyDiscount.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCompanyDiscount_EditingControlShowing);
             // 
             // gbCustomerBillingDetails
@@ -162,7 +164,7 @@
             this.gbCustomerBillingDetails.Location = new System.Drawing.Point(15, 201);
             this.gbCustomerBillingDetails.Name = "gbCustomerBillingDetails";
             this.gbCustomerBillingDetails.Size = new System.Drawing.Size(271, 139);
-            this.gbCustomerBillingDetails.TabIndex = 7;
+            this.gbCustomerBillingDetails.TabIndex = 198;
             this.gbCustomerBillingDetails.TabStop = false;
             this.gbCustomerBillingDetails.Text = "Customer Billing Details";
             // 
@@ -192,7 +194,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(265, 120);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.TabIndex = 199;
             // 
             // label12
             // 
@@ -211,8 +213,8 @@
             this.cbxCustomerType.Location = new System.Drawing.Point(135, 8);
             this.cbxCustomerType.Name = "cbxCustomerType";
             this.cbxCustomerType.Size = new System.Drawing.Size(122, 21);
-            this.cbxCustomerType.TabIndex = 401;
-            this.cbxCustomerType.Tag = "201";
+            this.cbxCustomerType.TabIndex = 201;
+            this.cbxCustomerType.Tag = "";
             // 
             // cbxLessExcise
             // 
@@ -221,8 +223,8 @@
             this.cbxLessExcise.Location = new System.Drawing.Point(135, 30);
             this.cbxLessExcise.Name = "cbxLessExcise";
             this.cbxLessExcise.Size = new System.Drawing.Size(122, 21);
-            this.cbxLessExcise.TabIndex = 402;
-            this.cbxLessExcise.Tag = "202";
+            this.cbxLessExcise.TabIndex = 202;
+            this.cbxLessExcise.Tag = "";
             // 
             // label14
             // 
@@ -251,8 +253,8 @@
             this.cbxRateType.Location = new System.Drawing.Point(135, 52);
             this.cbxRateType.Name = "cbxRateType";
             this.cbxRateType.Size = new System.Drawing.Size(122, 21);
-            this.cbxRateType.TabIndex = 403;
-            this.cbxRateType.Tag = "203";
+            this.cbxRateType.TabIndex = 203;
+            this.cbxRateType.Tag = "";
             // 
             // label21
             // 
@@ -269,8 +271,8 @@
             this.tbxSaleBillFormat.Location = new System.Drawing.Point(135, 74);
             this.tbxSaleBillFormat.Name = "tbxSaleBillFormat";
             this.tbxSaleBillFormat.Size = new System.Drawing.Size(122, 20);
-            this.tbxSaleBillFormat.TabIndex = 404;
-            this.tbxSaleBillFormat.Tag = "204";
+            this.tbxSaleBillFormat.TabIndex = 204;
+            this.tbxSaleBillFormat.Tag = "";
             // 
             // label28
             // 
@@ -287,8 +289,8 @@
             this.tbxDiscount.Location = new System.Drawing.Point(135, 96);
             this.tbxDiscount.Name = "tbxDiscount";
             this.tbxDiscount.Size = new System.Drawing.Size(122, 20);
-            this.tbxDiscount.TabIndex = 410;
-            this.tbxDiscount.Tag = "205";
+            this.tbxDiscount.TabIndex = 205;
+            this.tbxDiscount.Tag = "";
             this.tbxDiscount.Text = "0";
             // 
             // groupBox2
@@ -298,7 +300,7 @@
             this.groupBox2.Location = new System.Drawing.Point(292, 202);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(351, 174);
-            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabIndex = 298;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Person/Route Details";
             // 
@@ -331,55 +333,55 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(345, 155);
-            this.tableLayoutPanel2.TabIndex = 1;
+            this.tableLayoutPanel2.TabIndex = 299;
             // 
             // tbxRoute
             // 
             this.tbxRoute.Location = new System.Drawing.Point(83, 123);
             this.tbxRoute.Name = "tbxRoute";
             this.tbxRoute.Size = new System.Drawing.Size(179, 20);
-            this.tbxRoute.TabIndex = 814;
-            this.tbxRoute.Tag = "306";
+            this.tbxRoute.TabIndex = 306;
+            this.tbxRoute.Tag = "";
             // 
             // tbxArea
             // 
             this.tbxArea.Location = new System.Drawing.Point(83, 101);
             this.tbxArea.Name = "tbxArea";
             this.tbxArea.Size = new System.Drawing.Size(179, 20);
-            this.tbxArea.TabIndex = 813;
-            this.tbxArea.Tag = "305";
+            this.tbxArea.TabIndex = 305;
+            this.tbxArea.Tag = "";
             // 
             // tbxSalesman
             // 
             this.tbxSalesman.Location = new System.Drawing.Point(83, 79);
             this.tbxSalesman.Name = "tbxSalesman";
             this.tbxSalesman.Size = new System.Drawing.Size(179, 20);
-            this.tbxSalesman.TabIndex = 812;
-            this.tbxSalesman.Tag = "304";
+            this.tbxSalesman.TabIndex = 304;
+            this.tbxSalesman.Tag = "";
             // 
             // tbxASM
             // 
             this.tbxASM.Location = new System.Drawing.Point(83, 57);
             this.tbxASM.Name = "tbxASM";
             this.tbxASM.Size = new System.Drawing.Size(179, 20);
-            this.tbxASM.TabIndex = 811;
-            this.tbxASM.Tag = "303";
+            this.tbxASM.TabIndex = 303;
+            this.tbxASM.Tag = "";
             // 
             // tbxRSM
             // 
             this.tbxRSM.Location = new System.Drawing.Point(83, 35);
             this.tbxRSM.Name = "tbxRSM";
             this.tbxRSM.Size = new System.Drawing.Size(179, 20);
-            this.tbxRSM.TabIndex = 810;
-            this.tbxRSM.Tag = "302";
+            this.tbxRSM.TabIndex = 302;
+            this.tbxRSM.Tag = "";
             // 
             // tbxZSM
             // 
             this.tbxZSM.Location = new System.Drawing.Point(83, 13);
             this.tbxZSM.Name = "tbxZSM";
             this.tbxZSM.Size = new System.Drawing.Size(179, 20);
-            this.tbxZSM.TabIndex = 805;
-            this.tbxZSM.Tag = "301";
+            this.tbxZSM.TabIndex = 301;
+            this.tbxZSM.Tag = "";
             // 
             // label4
             // 
@@ -447,7 +449,7 @@
             this.groupBox1.Location = new System.Drawing.Point(15, 346);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(268, 195);
-            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabIndex = 398;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bill Details";
             // 
@@ -484,15 +486,15 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(262, 176);
-            this.tableLayoutPanel3.TabIndex = 1;
+            this.tableLayoutPanel3.TabIndex = 399;
             // 
             // tbxCredtLimit
             // 
             this.tbxCredtLimit.Location = new System.Drawing.Point(134, 101);
             this.tbxCredtLimit.Name = "tbxCredtLimit";
             this.tbxCredtLimit.Size = new System.Drawing.Size(115, 20);
-            this.tbxCredtLimit.TabIndex = 205;
-            this.tbxCredtLimit.Tag = "405";
+            this.tbxCredtLimit.TabIndex = 405;
+            this.tbxCredtLimit.Tag = "";
             this.tbxCredtLimit.Text = "0";
             // 
             // tbxMaxOSAmount
@@ -500,8 +502,8 @@
             this.tbxMaxOSAmount.Location = new System.Drawing.Point(134, 13);
             this.tbxMaxOSAmount.Name = "tbxMaxOSAmount";
             this.tbxMaxOSAmount.Size = new System.Drawing.Size(115, 20);
-            this.tbxMaxOSAmount.TabIndex = 501;
-            this.tbxMaxOSAmount.Tag = "401";
+            this.tbxMaxOSAmount.TabIndex = 401;
+            this.tbxMaxOSAmount.Tag = "";
             this.tbxMaxOSAmount.Text = "0";
             // 
             // tbxMaxGracePeriod
@@ -509,8 +511,8 @@
             this.tbxMaxGracePeriod.Location = new System.Drawing.Point(134, 79);
             this.tbxMaxGracePeriod.Name = "tbxMaxGracePeriod";
             this.tbxMaxGracePeriod.Size = new System.Drawing.Size(115, 20);
-            this.tbxMaxGracePeriod.TabIndex = 504;
-            this.tbxMaxGracePeriod.Tag = "404";
+            this.tbxMaxGracePeriod.TabIndex = 404;
+            this.tbxMaxGracePeriod.Tag = "";
             this.tbxMaxGracePeriod.Text = "0";
             // 
             // label11
@@ -568,8 +570,8 @@
             this.tbxMaxNumberOfOSBill.Location = new System.Drawing.Point(134, 57);
             this.tbxMaxNumberOfOSBill.Name = "tbxMaxNumberOfOSBill";
             this.tbxMaxNumberOfOSBill.Size = new System.Drawing.Size(115, 20);
-            this.tbxMaxNumberOfOSBill.TabIndex = 503;
-            this.tbxMaxNumberOfOSBill.Tag = "403";
+            this.tbxMaxNumberOfOSBill.TabIndex = 403;
+            this.tbxMaxNumberOfOSBill.Tag = "";
             this.tbxMaxNumberOfOSBill.Text = "0";
             // 
             // tbxMaxBillAmmount
@@ -577,8 +579,8 @@
             this.tbxMaxBillAmmount.Location = new System.Drawing.Point(134, 35);
             this.tbxMaxBillAmmount.Name = "tbxMaxBillAmmount";
             this.tbxMaxBillAmmount.Size = new System.Drawing.Size(115, 20);
-            this.tbxMaxBillAmmount.TabIndex = 502;
-            this.tbxMaxBillAmmount.Tag = "402";
+            this.tbxMaxBillAmmount.TabIndex = 402;
+            this.tbxMaxBillAmmount.Tag = "";
             this.tbxMaxBillAmmount.Text = "0";
             // 
             // label27
@@ -598,8 +600,8 @@
             this.cbxLocaLCentral.Location = new System.Drawing.Point(134, 145);
             this.cbxLocaLCentral.Name = "cbxLocaLCentral";
             this.cbxLocaLCentral.Size = new System.Drawing.Size(115, 21);
-            this.cbxLocaLCentral.TabIndex = 506;
-            this.cbxLocaLCentral.Tag = "407";
+            this.cbxLocaLCentral.TabIndex = 407;
+            this.cbxLocaLCentral.Tag = "";
             // 
             // label26
             // 
@@ -618,8 +620,8 @@
             this.cbxFollowConditionStrictly.Location = new System.Drawing.Point(134, 123);
             this.cbxFollowConditionStrictly.Name = "cbxFollowConditionStrictly";
             this.cbxFollowConditionStrictly.Size = new System.Drawing.Size(115, 21);
-            this.cbxFollowConditionStrictly.TabIndex = 505;
-            this.cbxFollowConditionStrictly.Tag = "406";
+            this.cbxFollowConditionStrictly.TabIndex = 406;
+            this.cbxFollowConditionStrictly.Tag = "";
             // 
             // groupBox3
             // 
@@ -628,7 +630,7 @@
             this.groupBox3.Location = new System.Drawing.Point(295, 382);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(345, 92);
-            this.groupBox3.TabIndex = 803;
+            this.groupBox3.TabIndex = 499;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Other Details";
             // 
@@ -667,8 +669,8 @@
             this.tbxPAN.Location = new System.Drawing.Point(222, 50);
             this.tbxPAN.Name = "tbxPAN";
             this.tbxPAN.Size = new System.Drawing.Size(112, 20);
-            this.tbxPAN.TabIndex = 609;
-            this.tbxPAN.Tag = "506";
+            this.tbxPAN.TabIndex = 506;
+            this.tbxPAN.Tag = "";
             // 
             // label10
             // 
@@ -715,16 +717,16 @@
             this.tbxCIN.Location = new System.Drawing.Point(55, 27);
             this.tbxCIN.Name = "tbxCIN";
             this.tbxCIN.Size = new System.Drawing.Size(111, 20);
-            this.tbxCIN.TabIndex = 603;
-            this.tbxCIN.Tag = "503";
+            this.tbxCIN.TabIndex = 503;
+            this.tbxCIN.Tag = "";
             // 
             // tbxGST
             // 
             this.tbxGST.Location = new System.Drawing.Point(222, 5);
             this.tbxGST.Name = "tbxGST";
             this.tbxGST.Size = new System.Drawing.Size(112, 20);
-            this.tbxGST.TabIndex = 602;
-            this.tbxGST.Tag = "502";
+            this.tbxGST.TabIndex = 502;
+            this.tbxGST.Tag = "";
             // 
             // label7
             // 
@@ -741,8 +743,8 @@
             this.tbxLIN.Location = new System.Drawing.Point(222, 27);
             this.tbxLIN.Name = "tbxLIN";
             this.tbxLIN.Size = new System.Drawing.Size(111, 20);
-            this.tbxLIN.TabIndex = 605;
-            this.tbxLIN.Tag = "504";
+            this.tbxLIN.TabIndex = 504;
+            this.tbxLIN.Tag = "";
             // 
             // label8
             // 
@@ -759,16 +761,16 @@
             this.tbxServiceTax.Location = new System.Drawing.Point(55, 50);
             this.tbxServiceTax.Name = "tbxServiceTax";
             this.tbxServiceTax.Size = new System.Drawing.Size(111, 20);
-            this.tbxServiceTax.TabIndex = 607;
-            this.tbxServiceTax.Tag = "505";
+            this.tbxServiceTax.TabIndex = 505;
+            this.tbxServiceTax.Tag = "";
             // 
             // tbxDL
             // 
             this.tbxDL.Location = new System.Drawing.Point(55, 5);
             this.tbxDL.Name = "tbxDL";
             this.tbxDL.Size = new System.Drawing.Size(111, 20);
-            this.tbxDL.TabIndex = 601;
-            this.tbxDL.Tag = "501";
+            this.tbxDL.TabIndex = 501;
+            this.tbxDL.Tag = "";
             // 
             // tableLayoutPanel4
             // 
@@ -801,7 +803,7 @@
             this.ucSupplierCustomerInfo.ShortName = "";
             this.ucSupplierCustomerInfo.Size = new System.Drawing.Size(1105, 140);
             this.ucSupplierCustomerInfo.Status = PharmaBusinessObjects.Common.Enums.Status.Active;
-            this.ucSupplierCustomerInfo.TabIndex = 804;
+            this.ucSupplierCustomerInfo.TabIndex = 1;
             this.ucSupplierCustomerInfo.TaxRetail = PharmaBusinessObjects.Common.Enums.TaxRetail.R;
             // 
             // frmCustomerLedgerMasterAddUpdate

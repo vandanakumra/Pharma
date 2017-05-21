@@ -102,13 +102,14 @@ namespace PharmaUI
             dgvCompanyDiscount.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCompanyDiscount.AllowUserToAddRows = false;
             dgvCompanyDiscount.AllowUserToDeleteRows = false;
-            dgvCompanyDiscount.ReadOnly = false;
+            dgvCompanyDiscount.ReadOnly = false;           
         }
 
         private void frmCustomerLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {
             GotFocusEventRaised(this);
             this.ucSupplierCustomerInfo.SetFocus();
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
         }
        
         public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
@@ -127,6 +128,7 @@ namespace PharmaUI
                 ucSupplierCustomerInfo.ShortName = customerLedgerMaster.CustomerLedgerShortName;
                 ucSupplierCustomerInfo.Address = customerLedgerMaster.Address;
                 ucSupplierCustomerInfo.ContactPerson = customerLedgerMaster.ContactPerson;
+                ucSupplierCustomerInfo.Telephone = customerLedgerMaster.Telephone;
                 ucSupplierCustomerInfo.Mobile = customerLedgerMaster.Mobile;
                 ucSupplierCustomerInfo.OfficePhone = customerLedgerMaster.OfficePhone;
                 ucSupplierCustomerInfo.ResidentPhone = customerLedgerMaster.ResidentPhone;
@@ -197,6 +199,7 @@ namespace PharmaUI
                 customerLedgerMaster.CustomerLedgerShortName = ucSupplierCustomerInfo.ShortName;
                 customerLedgerMaster.Address = ucSupplierCustomerInfo.Address;
                 customerLedgerMaster.ContactPerson = ucSupplierCustomerInfo.ContactPerson;
+                customerLedgerMaster.Telephone = ucSupplierCustomerInfo.Telephone;
                 customerLedgerMaster.Mobile = ucSupplierCustomerInfo.Mobile;
                 customerLedgerMaster.OfficePhone = ucSupplierCustomerInfo.OfficePhone;
                 customerLedgerMaster.ResidentPhone = ucSupplierCustomerInfo.ResidentPhone;
@@ -426,7 +429,7 @@ namespace PharmaUI
                     PersonRouteMaster personRouteMaster = new PersonRouteMaster()
                     {
                         RecordTypeNme = activePersonRouteTypeString,
-                        PersonRouteID = Convert.ToInt16(activePersonRouteType.Tag),
+                        PersonRouteID = ExtensionMethods.SafeConversionInt(Convert.ToString(activePersonRouteType.Tag)) ?? 0,
                         PersonRouteName = activePersonRouteType.Text
                     };
 
@@ -446,7 +449,7 @@ namespace PharmaUI
 
         private void FormCustomerItemDiscount_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CustomerCopanyDiscount updatedCustomerCopanyDiscount = (sender as frmCustomerItemDiscountMaster).CustomerCopanyDiscount;
+            CustomerCopanyDiscount updatedCustomerCopanyDiscount = (sender as frmCustomerItemDiscountMaster).retCustomerCopanyDiscount;
             (dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping = updatedCustomerCopanyDiscount.CustomerItemDiscountMapping;
         }
 
@@ -510,6 +513,13 @@ namespace PharmaUI
             return;
         }
 
+        private void dgvCompanyDiscount_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvCompanyDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
+            {
+                SendKeys.Send("{tab}");
+            }
+        }
     }
 
 }
