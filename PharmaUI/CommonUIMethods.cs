@@ -200,7 +200,7 @@ namespace PharmaUI
         {
             pnl.Controls.Remove(childFrm);
 
-            if (parentForm != null)
+            if (parentForm != null && pnl.Controls[parentForm.Name] != null)
             {
                 pnl.Controls[parentForm.Name].Visible = true;
             }

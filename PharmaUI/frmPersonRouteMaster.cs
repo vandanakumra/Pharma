@@ -17,6 +17,7 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         public PersonRouteMaster LastSelectedPersonRoute { get; set; }
+        public PersonRouteMaster NextPersonRoute { get; set; }
 
         public frmPersonRouteMaster()
         {
@@ -97,7 +98,22 @@ namespace PharmaUI
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
             ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            LoadDataGrid(0);
+            if(this.NextPersonRoute != null)
+            {
+                LoadDataGrid((int)this.cbPersonRouteType.SelectedValue);
+            }
+            else
+            {
+                LoadDataGrid(0);
+            }
+
+            List<DataGridViewRow> filteredRow = dgvPersonRoute.Rows.OfType<DataGridViewRow>().Where(x => (int)x.Cells["PersonRouteID"].Value == (sender as frmPersonRouteMasterAddUpdate).PersonRouteID).ToList();
+            if (filteredRow.Count > 0)
+            {
+                dgvPersonRoute.ClearSelection();
+                filteredRow.First().Selected = true;
+                filteredRow.First().Cells["PersonRouteCode"].Selected = true;
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -105,21 +121,7 @@ namespace PharmaUI
             LoadDataGrid((int)cbPersonRouteType.SelectedValue);
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            AddEditPersonRoute(null);
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            EditPersonRoute();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
+     
         void AddEditPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster model)
         {
             frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(model);
@@ -131,7 +133,7 @@ namespace PharmaUI
         private void EditPersonRoute()
         {
             if (dgvPersonRoute.SelectedRows.Count == 0)
-                MessageBox.Show("Please select atleast one row to edit");
+                MessageBox.Show("Please select at least one row to edit");
 
             PharmaBusinessObjects.Master.PersonRouteMaster model = (PharmaBusinessObjects.Master.PersonRouteMaster)dgvPersonRoute.SelectedRows[0].DataBoundItem;
                         
@@ -143,7 +145,7 @@ namespace PharmaUI
             //Add
             if (keyData == (Keys.F9))
             {
-                AddEditPersonRoute(null);
+                AddEditPersonRoute(NextPersonRoute);
             }
             else if (keyData == Keys.F3)
             {
@@ -159,7 +161,14 @@ namespace PharmaUI
             {
                 this.cbPersonRouteType.Text = model.RecordTypeNme;
                 this.cbPersonRouteType.Enabled = false;
-               
+                {
+                    this.NextPersonRoute = new PersonRouteMaster()
+                    {
+                        RecordTypeNme=model.RecordTypeNme,
+                        RecordTypeId=(int)this.cbPersonRouteType.SelectedValue
+                    };
+                }
+                
 
                 List<DataGridViewRow> filteredRow = dgvPersonRoute.Rows.OfType<DataGridViewRow>().Where(x => (int)x.Cells["PersonRouteID"].Value == model.PersonRouteID).ToList();
                 if(filteredRow.Count > 0)
@@ -188,6 +197,21 @@ namespace PharmaUI
                 this.LastSelectedPersonRoute = dgvPersonRoute.CurrentRow.DataBoundItem as PersonRouteMaster;
             }
             
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            AddEditPersonRoute(NextPersonRoute);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditPersonRoute();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

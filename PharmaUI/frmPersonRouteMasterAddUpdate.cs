@@ -136,7 +136,7 @@ namespace PharmaUI
             model.PersonRouteName = tbPersonRouteName.Text;
             model.PersonRouteCode = this.PersonRouteMaster.PersonRouteCode;
 
-            var result = this.PersonRouteMaster.RecordTypeId > 0 ? applicationFacade.UpdatePersonRoute(model) : applicationFacade.AddPersonRoute(model);
+            var result = this.PersonRouteMaster.RecordTypeId > 0 && this.PersonRouteMaster.PersonRouteID > 0 ? applicationFacade.UpdatePersonRoute(model) : applicationFacade.AddPersonRoute(model);
 
             if (result > 0)
             {
