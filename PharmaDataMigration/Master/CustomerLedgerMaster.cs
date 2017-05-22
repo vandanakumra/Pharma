@@ -124,5 +124,59 @@ namespace PharmaDataMigration.Master
                 throw;
             }
         }
+
+        public int InsertCustomerCompanyReferenceData()
+        {
+            try
+            {
+                string query = "select * from DIS";
+
+                DataTable dtCustomerCompanyRef = dbConnection.GetData(query);
+
+                List<CustomerCompanyDiscountRef> listCustomerCompanyRef = new List<CustomerCompanyDiscountRef>();
+
+                int _result = 0;
+
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    if (dtCustomerCompanyRef != null && dtCustomerCompanyRef.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dtCustomerCompanyRef.Rows)
+                        {
+                            string customerLedgerCode = Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["PCode"]).TrimEnd()).FirstOrDefault().MappedCustomerLedgerCode;
+                            int customerLedgerID = context.CustomerLedger.Where(p => p.CustomerLedgerCode == customerLedgerCode).FirstOrDefault().CustomerLedgerId;
+
+                            string companyCode = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == Convert.ToString(dr["Ccode"]).TrimEnd()).FirstOrDefault().MappedCompanyCode;
+                            int companyID = context.CompanyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
+
+                            string itemCode = Common.itemCodeMap.Where(p => p.OriginalItemCode == Convert.ToString(dr["ICode"]).TrimEnd()).FirstOrDefault().MappedItemCode;
+                            int itemID = context.ItemMaster.Where(p => p.ItemCode == itemCode).FirstOrDefault().ItemID;
+
+                            CustomerCompanyDiscountRef newCustomerCompanyRef = new CustomerCompanyDiscountRef()
+                            {
+                                CustomerLedgerID = customerLedgerID,
+                                CompanyID = companyID,
+                                ItemID = itemID,
+                                Normal = Convert.ToDouble(dr["Disamt"]),
+                                Breakage = Convert.ToDouble(dr["Disamtbe"]),
+                                Expired = Convert.ToDouble(dr["Disamtex"]),
+                                IsLessEcise = Convert.ToChar(dr["Less_ex"]) == 'Y' ? true : false
+                            };
+
+                            listCustomerCompanyRef.Add(newCustomerCompanyRef);
+                        }
+                    }
+
+                    context.CustomerCompanyDiscountRef.AddRange(listCustomerCompanyRef);
+                    _result = context.SaveChanges();
+
+                    return _result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
