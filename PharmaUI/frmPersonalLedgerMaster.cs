@@ -29,8 +29,10 @@ namespace PharmaUI
         private void frmPersonalLedgerMaster_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, "Personal Diary");
-            FillGrid();
+            GotFocusEventRaised(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
 
+            FillGrid();
             dgvPersonalLedger.CellDoubleClick += dgvPersonalLedger_CellDoubleClick;
             dgvPersonalLedger.KeyDown += DgvPersonalLedger_KeyDown;
         }
@@ -46,6 +48,12 @@ namespace PharmaUI
                     //FillGrid();
                 }
             }
+            else if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else
+                base.OnKeyDown(e);
         }
 
         private void FillGrid()
@@ -112,28 +120,6 @@ namespace PharmaUI
             }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            FillGrid();
-        }
-
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            OpenAddEdit(0);
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            EditPersonLedger();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //Add
@@ -159,6 +145,63 @@ namespace PharmaUI
             PharmaBusinessObjects.Master.PersonalLedgerMaster model = (PharmaBusinessObjects.Master.PersonalLedgerMaster)dgvPersonalLedger.SelectedRows[0].DataBoundItem;
 
             OpenAddEdit(model.PersonalLedgerId);
+        }
+
+
+        ///Action button
+        ///
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            FillGrid();
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            OpenAddEdit(0);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditPersonLedger();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Set focus for the controls
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
     }
 }

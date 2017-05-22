@@ -65,12 +65,12 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 60);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 64);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(710, 143);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(886, 381);
             this.tableLayoutPanel1.TabIndex = 17;
             // 
             // tableLayoutPanel2
@@ -86,22 +86,22 @@
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.dgvUser, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 74);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 193);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(704, 66);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(880, 185);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Location = new System.Drawing.Point(79, 8);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(470, 23);
+            this.txtSearch.Size = new System.Drawing.Size(358, 23);
             this.txtSearch.TabIndex = 15;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -109,9 +109,8 @@
             // 
             this.btnAddNewUser.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnAddNewUser.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNewUser.Image = global::PharmaUI.Properties.Resources.AddItem;
             this.btnAddNewUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewUser.Location = new System.Drawing.Point(555, 3);
+            this.btnAddNewUser.Location = new System.Drawing.Point(731, 3);
             this.btnAddNewUser.Name = "btnAddNewUser";
             this.btnAddNewUser.Size = new System.Drawing.Size(146, 34);
             this.btnAddNewUser.TabIndex = 16;
@@ -141,7 +140,7 @@
             this.dgvUser.Location = new System.Drawing.Point(3, 43);
             this.dgvUser.MultiSelect = false;
             this.dgvUser.Name = "dgvUser";
-            this.dgvUser.Size = new System.Drawing.Size(698, 20);
+            this.dgvUser.Size = new System.Drawing.Size(874, 139);
             this.dgvUser.TabIndex = 18;
             // 
             // tableLayoutPanel3
@@ -162,7 +161,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(349, 65);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(437, 184);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
             // dgvPrivledge
@@ -175,7 +174,7 @@
             this.dgvPrivledge.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvPrivledge.Location = new System.Drawing.Point(3, 43);
             this.dgvPrivledge.Name = "dgvPrivledge";
-            this.dgvPrivledge.Size = new System.Drawing.Size(343, 19);
+            this.dgvPrivledge.Size = new System.Drawing.Size(431, 138);
             this.dgvPrivledge.TabIndex = 19;
             this.dgvPrivledge.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPrivledge_DataBindingComplete);
             // 
@@ -185,7 +184,7 @@
             this.txtPrivledgeSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrivledgeSearch.Location = new System.Drawing.Point(79, 8);
             this.txtPrivledgeSearch.Name = "txtPrivledgeSearch";
-            this.txtPrivledgeSearch.Size = new System.Drawing.Size(115, 23);
+            this.txtPrivledgeSearch.Size = new System.Drawing.Size(203, 23);
             this.txtPrivledgeSearch.TabIndex = 15;
             this.txtPrivledgeSearch.TextChanged += new System.EventHandler(this.txtPrivledgeSearch_TextChanged);
             // 
@@ -193,9 +192,8 @@
             // 
             this.btnAddPrivledge.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnAddPrivledge.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPrivledge.Image = global::PharmaUI.Properties.Resources.AddItem;
             this.btnAddPrivledge.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPrivledge.Location = new System.Drawing.Point(200, 3);
+            this.btnAddPrivledge.Location = new System.Drawing.Point(288, 3);
             this.btnAddPrivledge.Name = "btnAddPrivledge";
             this.btnAddPrivledge.Size = new System.Drawing.Size(146, 34);
             this.btnAddPrivledge.TabIndex = 16;
@@ -226,13 +224,13 @@
             this.tableLayoutPanel4.Controls.Add(this.btnAddRole, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(358, 3);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(446, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(349, 65);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(437, 184);
             this.tableLayoutPanel4.TabIndex = 2;
             // 
             // dgvRole
@@ -246,7 +244,7 @@
             this.dgvRole.Location = new System.Drawing.Point(3, 43);
             this.dgvRole.MultiSelect = false;
             this.dgvRole.Name = "dgvRole";
-            this.dgvRole.Size = new System.Drawing.Size(343, 19);
+            this.dgvRole.Size = new System.Drawing.Size(431, 138);
             this.dgvRole.TabIndex = 19;
             // 
             // txtRoleSearch
@@ -255,7 +253,7 @@
             this.txtRoleSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRoleSearch.Location = new System.Drawing.Point(79, 8);
             this.txtRoleSearch.Name = "txtRoleSearch";
-            this.txtRoleSearch.Size = new System.Drawing.Size(115, 23);
+            this.txtRoleSearch.Size = new System.Drawing.Size(203, 23);
             this.txtRoleSearch.TabIndex = 15;
             this.txtRoleSearch.TextChanged += new System.EventHandler(this.txtRoleSearch_TextChanged);
             // 
@@ -263,9 +261,8 @@
             // 
             this.btnAddRole.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnAddRole.Font = new System.Drawing.Font("Segoe UI Light", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddRole.Image = global::PharmaUI.Properties.Resources.AddItem;
             this.btnAddRole.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddRole.Location = new System.Drawing.Point(200, 3);
+            this.btnAddRole.Location = new System.Drawing.Point(288, 3);
             this.btnAddRole.Name = "btnAddRole";
             this.btnAddRole.Size = new System.Drawing.Size(146, 34);
             this.btnAddRole.TabIndex = 16;
@@ -288,10 +285,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 260);
+            this.ClientSize = new System.Drawing.Size(898, 448);
+            this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmUserMaster";
-            this.Text = "frmUserMaster";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmUserMaster_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -321,8 +320,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TextBox txtPrivledgeSearch;
         private System.Windows.Forms.Button btnAddPrivledge;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvPrivledge;
         private System.Windows.Forms.DataGridView dgvRole;
+        private System.Windows.Forms.Label label2;
     }
 }
