@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmaBusinessObjects.Transaction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,6 +48,26 @@ namespace PharmaBusinessObjects.Master
         public int ? MaximumStock { get; set; }
         public int SaleTypeId { get; set; }
         public bool Status { get; set; }
+
+        public PurchaseBookLineItem ToPurchaseBookLineItem()
+        {
+            PurchaseBookLineItem lineItem = new PurchaseBookLineItem();
+            lineItem.ItemCode = this.ItemCode;
+            lineItem.ItemName = this.ItemName;
+            lineItem.Quantity = this.QtyPerCase == null ? 0 : Convert.ToInt32(this.QtyPerCase);
+            lineItem.IsHalfScheme = this.IsHalfScheme;
+            lineItem.MRP = this.MRP;
+            lineItem.Scheme1 = this.Scheme1 == null ? 0 : Convert.ToInt32(this.Scheme1);
+            lineItem.Scheme2 = this.Scheme2 == null ? 0 : Convert.ToInt32(this.Scheme2);
+            lineItem.Discount = this.DiscountRecieved ?? 0L;
+            lineItem.SpecialDiscount = this.SpecialDiscount ?? 0L;
+            lineItem.VolumeDiscount = 0L;
+            lineItem.MRP = this.MRP;
+            lineItem.Excise = this.PurchaseExcise??0L;
+            lineItem.FreeQty = 0;
+
+            return lineItem;
+        }
         
     }
 }

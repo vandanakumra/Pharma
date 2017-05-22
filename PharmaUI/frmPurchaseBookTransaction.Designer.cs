@@ -109,8 +109,6 @@
             this.txtInvoiceNumber.Name = "txtInvoiceNumber";
             this.txtInvoiceNumber.Size = new System.Drawing.Size(146, 20);
             this.txtInvoiceNumber.TabIndex = 7;
-            this.txtInvoiceNumber.TextChanged += new System.EventHandler(this.txtInvoiceNumber_TextChanged);
-            this.txtInvoiceNumber.Validated += new System.EventHandler(this.txtInvoiceNumber_Validated);
             // 
             // lblSupplierName
             // 
@@ -149,7 +147,6 @@
             this.dtPurchaseDate.Name = "dtPurchaseDate";
             this.dtPurchaseDate.Size = new System.Drawing.Size(200, 20);
             this.dtPurchaseDate.TabIndex = 3;
-            this.dtPurchaseDate.Validated += new System.EventHandler(this.dtPurchaseDate_Validated);
             // 
             // txtSupplierCode
             // 
@@ -200,6 +197,7 @@
             this.cbxPurchaseFormType.Size = new System.Drawing.Size(231, 21);
             this.cbxPurchaseFormType.TabIndex = 13;
             this.cbxPurchaseFormType.Visible = false;
+            this.cbxPurchaseFormType.SelectedIndexChanged += new System.EventHandler(this.cbxPurchaseFormType_SelectedIndexChanged);
             // 
             // errFrmPurchaseBookHeader
             // 

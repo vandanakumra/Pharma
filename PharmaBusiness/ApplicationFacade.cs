@@ -682,6 +682,16 @@ namespace PharmaBusiness
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseFormTypes(purchaseTypeID);
         }
+
+        public int InsertTempPurchaseLineItem(PurchaseBookLineItem lineItem)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertTempLineItem(lineItem);
+        }
+
+        public int UpdateTempPurchaseLineItem(PurchaseBookLineItem lineItem)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).UpdateTempLineItem(lineItem);
+        }
         #endregion
 
 

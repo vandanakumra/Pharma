@@ -47,6 +47,46 @@ namespace PharmaDAL.Transaction
             }
         }
 
+        public int InsertTempLineItem(PharmaBusinessObjects.Transaction.PurchaseBookLineItem lineItem)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                Entity.TempPurchaseBookLineItem item = new Entity.TempPurchaseBookLineItem();
+                item.PurchaseBookHeaderID = lineItem.InvoiceID;
+                item.ItemCode = lineItem.ItemCode;
+                item.BatchNo = string.Empty;
+                item.Quantity = lineItem.Quantity;
+                item.Rate = lineItem.Rate;
+
+                context.TempPurchaseBookLineItem.Add(item);
+                context.SaveChanges();
+
+                return item.ID;
+            }
+        }
+
+        public int UpdateTempLineItem(PharmaBusinessObjects.Transaction.PurchaseBookLineItem lineItem)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                Entity.TempPurchaseBookLineItem item = context.TempPurchaseBookLineItem.FirstOrDefault(p => p.ID == lineItem.ID);
+
+                if (item != null)
+                {
+                    item.PurchaseBookHeaderID = lineItem.InvoiceID;
+                    item.ItemCode = lineItem.ItemCode;
+                    item.BatchNo = string.Empty;
+                    item.Quantity = lineItem.Quantity;
+                    item.Rate = lineItem.Rate;
+
+                    context.TempPurchaseBookLineItem.Add(item);
+                    context.SaveChanges();
+                }
+
+                return item.ID;
+            }
+        }
+
         public List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())

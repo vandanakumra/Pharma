@@ -29,11 +29,20 @@ namespace PharmaBusiness.Transaction
         {
             return new PurchaseBookDao(this.LoggedInUser).GetPurchaseEntryTypes();
         }
-        
 
         public List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID)
         {
             return new PurchaseBookDao(this.LoggedInUser).GetPurchaseFormTypes(purchaseTypeID);
+        }
+
+        public int InsertTempLineItem(PurchaseBookLineItem lineItem)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).InsertTempLineItem(lineItem);
+        }
+
+        public int UpdateTempLineItem(PurchaseBookLineItem lineItem)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).UpdateTempLineItem(lineItem);
         }
 
     }

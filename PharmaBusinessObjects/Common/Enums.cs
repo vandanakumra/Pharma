@@ -43,5 +43,12 @@ namespace PharmaBusinessObjects.Common
             L,
             C
         };
+
+        public enum LineItemUpdateMode
+        {
+            Batch,
+            Scheme,
+            Discount
+        };
     }
 }

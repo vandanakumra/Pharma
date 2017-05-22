@@ -120,8 +120,9 @@ namespace PharmaBusinessObjects
         int UpdateTempPurchaseHeader(PurchaseBookHeader header);
         List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes();
         List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);
-        
+        int InsertTempPurchaseLineItem(PurchaseBookLineItem lineItem);
+        int UpdateTempPurchaseLineItem(PurchaseBookLineItem lineItem);
         #endregion
-        }
+    }
 
 }

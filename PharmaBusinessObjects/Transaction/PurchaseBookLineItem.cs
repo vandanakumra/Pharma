@@ -14,14 +14,19 @@ namespace PharmaBusinessObjects.Transaction
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
         public int FreeQty { get; set; }
-        public decimal Rate { get; set; }
-        public decimal Amount { get; set; }
+        public double Rate { get; set; }
+        public double Amount { get; set; }
         public int Scheme1 { get; set; }
         public int Scheme2 { get; set; }
-        public decimal MRP { get; set; }
+        public double MRP { get; set; }
         public bool IsHalfScheme { get; set; }
         public int Quantity { get; set; }
         public string BatchNumber { get; set; }
+        public double Discount { get; set; }
+        public double SpecialDiscount { get; set; }
+        public double VolumeDiscount { get; set; }
+        public double Excise { get; set; }
+        public DateTime Expiry { get; set; }
 
         public PurchaseBookLineItem()
         {
@@ -33,11 +38,11 @@ namespace PharmaBusinessObjects.Transaction
             BatchNumber = string.Empty;
             ItemCode = string.Empty;
             ItemName = string.Empty;
-            MRP = 0M;
+            MRP = 0L;
             Scheme1 = 0;
             Scheme2 = 0;
-            Amount = 0M;
-            Rate = 0M;
+            Amount = 0L;
+            Rate = 0L;
         }
     }
 }
