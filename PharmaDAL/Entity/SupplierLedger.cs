@@ -19,7 +19,6 @@ namespace PharmaDAL.Entity
         public string SupplierLedgerName { get; set; }
         public string SupplierLedgerShortName { get; set; }
         public string Address { get; set; }
-        public string ContactPerson { get; set; }
         public string Mobile { get; set; }
         public string OfficePhone { get; set; }
         public string ResidentPhone { get; set; }
@@ -37,6 +36,7 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string SupplierLedgerShortDesc { get; set; }
         public int PurchaseTypeID { get; set; }
+        public string ContactPerson { get; set; }
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }

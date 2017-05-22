@@ -83,6 +83,18 @@ namespace PharmaUI
             }
         }
 
+        public string Telephone
+        {
+            get
+            {
+                return txtTelephone.Text;
+            }
+            set
+            {
+                txtTelephone.Text = value;
+            }
+        }
+
         public string EmailAddress
         {
             get
@@ -182,7 +194,7 @@ namespace PharmaUI
             CustomerSupplierName = String.Empty;
             FillCombo();
 
-            txtCustSupplierName.Focus();
+            
         }
 
         private void FillCombo()
@@ -198,6 +210,11 @@ namespace PharmaUI
             ////Fill Status options
             cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
             cbxStatus.SelectedItem = Enums.Status.Active;
+        }
+
+        public void SetFocus()
+        {
+            txtCustSupplierName.Focus();
         }
 
     }

@@ -15,16 +15,18 @@ namespace PharmaUI
 {
     public partial class frmCustomerItemDiscountMaster : Form
     {
-        public CustomerCopanyDiscount CustomerCopanyDiscount { get; set; }
         IApplicationFacade applicationFacade;
+        public CustomerCopanyDiscount retCustomerCopanyDiscount { get; set; }
+
 
         public frmCustomerItemDiscountMaster(CustomerCopanyDiscount CustomerCopanyDiscount)
         {
             InitializeComponent();
-           // ExtensionMethods.SetFormProperties(this);
+            ExtensionMethods.SetChildFormProperties(this);
             ExtensionMethods.FormLoad(this, "Customer Item Discount");
 
-            this.CustomerCopanyDiscount = CustomerCopanyDiscount;
+            this.retCustomerCopanyDiscount = CustomerCopanyDiscount;
+            
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
 
            
@@ -34,7 +36,7 @@ namespace PharmaUI
         {
             ///Display Company name
             ///
-            this.lblSelectedCompanyName.Text = CustomerCopanyDiscount.CompanyName;
+            this.lblSelectedCompanyName.Text = retCustomerCopanyDiscount.CompanyName;
             LoadGrid();
         }
 
@@ -50,6 +52,7 @@ namespace PharmaUI
             dgvCustomerItemDiscount.Columns["ItemName"].Visible = true;
             dgvCustomerItemDiscount.Columns["ItemName"].HeaderText = "Item Name";
             dgvCustomerItemDiscount.Columns["ItemName"].ReadOnly = true;
+
 
             dgvCustomerItemDiscount.Columns["Normal"].Visible = true;
             dgvCustomerItemDiscount.Columns["Normal"].HeaderText = "Normal";
@@ -75,8 +78,8 @@ namespace PharmaUI
         {
             try
             {
-                List<CustomerCopanyDiscount> allItemDiscountList = applicationFacade.GetAllCompanyItemDiscountByCompanyID(CustomerCopanyDiscount.CompanyID);
-                List<CustomerCopanyDiscount> mappedItemDiscountList = this.CustomerCopanyDiscount.CustomerItemDiscountMapping;
+                List<CustomerCopanyDiscount> allItemDiscountList = applicationFacade.GetAllCompanyItemDiscountByCompanyID(retCustomerCopanyDiscount.CompanyID);
+                List<CustomerCopanyDiscount> mappedItemDiscountList = this.retCustomerCopanyDiscount.CustomerItemDiscountMapping;
 
                 if (mappedItemDiscountList!=null)
                 {
@@ -94,9 +97,14 @@ namespace PharmaUI
 
         private void frmCustomerItemDiscountMaster_FormClosing(object sender, FormClosingEventArgs e)
         {
+          
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
             try
             {
-                this.CustomerCopanyDiscount.CustomerItemDiscountMapping = dgvCustomerItemDiscount.Rows
+                this.retCustomerCopanyDiscount.CustomerItemDiscountMapping = dgvCustomerItemDiscount.Rows
                                                                                                 .Cast<DataGridViewRow>()
                                                                                                 .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
                                                                                                             || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
@@ -112,6 +120,22 @@ namespace PharmaUI
                                                                                                     IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise
 
                                                                                                 }).ToList();
+
+                this.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+
+           
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
             }
             catch (Exception)
             {
@@ -119,9 +143,23 @@ namespace PharmaUI
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void dgvCustomerItemDiscount_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            this.Close();
+            if (dgvCustomerItemDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
+            {
+                SendKeys.Send("{tab}");
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Close on escape
+            if (keyData == (Keys.Escape))
+            {
+                this.Close();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
