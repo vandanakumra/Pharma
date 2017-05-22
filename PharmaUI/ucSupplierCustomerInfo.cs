@@ -83,6 +83,18 @@ namespace PharmaUI
             }
         }
 
+        public string Telephone
+        {
+            get
+            {
+                return txtTelephone.Text;
+            }
+            set
+            {
+                txtTelephone.Text = value;
+            }
+        }
+
         public string EmailAddress
         {
             get

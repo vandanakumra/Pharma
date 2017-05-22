@@ -27,6 +27,7 @@ namespace PharmaDAL.Master
                     CustomerLedgerShortName = p.CustomerLedgerShortName,
                     Address = p.Address,
                     ContactPerson = p.ContactPerson,
+                    Telephone=p.Telephone,
                     Mobile = p.Mobile,
                     OfficePhone = p.OfficePhone,
                     ResidentPhone = p.ResidentPhone,
@@ -93,6 +94,7 @@ namespace PharmaDAL.Master
                         CustomerLedgerShortName = p.CustomerLedgerShortName,
                         Address = p.Address,
                         ContactPerson = p.ContactPerson,
+                        Telephone=p.Telephone,
                         Mobile = p.Mobile,
                         OfficePhone = p.OfficePhone,
                         ResidentPhone = p.ResidentPhone,
@@ -192,6 +194,7 @@ namespace PharmaDAL.Master
                         customerLedgerMaster.CustomerLedgerShortName = p.CustomerLedgerShortName;
                         customerLedgerMaster.Address = p.Address;
                         customerLedgerMaster.ContactPerson = p.ContactPerson;
+                        customerLedgerMaster.Telephone = p.Telephone;   
                         customerLedgerMaster.Mobile = p.Mobile;
                         customerLedgerMaster.OfficePhone = p.OfficePhone;
                         customerLedgerMaster.ResidentPhone = p.ResidentPhone;
