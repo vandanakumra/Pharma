@@ -129,6 +129,18 @@
     <Compile Include="Entity\Privledges.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\PurchaseBookHeader.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PurchaseBookLineItem.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PurchaseEntryForm.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\PurchaseEntryType.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\RecordType.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
@@ -139,6 +151,12 @@
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\SupplierLedger.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TempPurchaseBookHeader.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TempPurchaseBookLineItem.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Users.cs">

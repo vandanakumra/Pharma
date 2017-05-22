@@ -4,27 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="16b51229aeea4dc782f9fad424f63221" Name="Diagram1">
-        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerMaster" Width="1.5" PointX="6" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="3.75" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.AccountType" Width="1.5" PointX="3.75" PointY="24.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.AuditHistory" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.CompanyMaster" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.CustomerCompanyDiscountRef" Width="1.5" PointX="10.5" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.CustomerLedger" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.CustomerType" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.InterestType" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.ItemMaster" Width="1.5" PointX="8.25" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.Menu" Width="1.5" PointX="13" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.PersonalLedger" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.PersonLedgerType" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.PersonRouteMaster" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.Privledges" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.RecordType" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.RolePrivledges" Width="1.5" PointX="13" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.Roles" Width="1.5" PointX="10.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.SupplierLedger" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.Users" Width="1.5" PointX="13" PointY="7.25" IsExpanded="true" />
+      <Diagram DiagramId="33e07a521850436b8c3733263692b38f" Name="Diagram1">
+        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerMaster" Width="1.5" PointX="6" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="3.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.AccountType" Width="1.5" PointX="3.75" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.AuditHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.CompanyMaster" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.CustomerCompanyDiscountRef" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.CustomerLedger" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.CustomerType" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.InterestType" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.ItemMaster" Width="1.5" PointX="8.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.Menu" Width="1.5" PointX="15" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PersonalLedger" Width="1.5" PointX="0.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PersonLedgerType" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PersonRouteMaster" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.Privledges" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PurchaseBookHeader" Width="1.5" PointX="14.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PurchaseBookLineItem" Width="1.5" PointX="17" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PurchaseEntryForm" Width="1.5" PointX="13" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PurchaseEntryType" Width="1.5" PointX="10.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.RecordType" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.RolePrivledges" Width="1.5" PointX="15" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.Roles" Width="1.5" PointX="12.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.SupplierLedger" Width="1.5" PointX="8.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.TempPurchaseBookHeader" Width="1.5" PointX="15.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.TempPurchaseBookLineItem" Width="1.5" PointX="17.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.Users" Width="1.5" PointX="15" PointY="12.25" IsExpanded="true" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_AccountLedgerType" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_AccountType" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_CreditControlCode" ManuallyRouted="false" />
@@ -47,8 +53,12 @@
         <AssociationConnector Association="PharmaDBModel.FK_PersonRouteMaster_RecordType" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_SupplierLedger_SalesPersonMaster" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_RolePrivledges_Privledges" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmaDBModel.FK__PurchaseB__Purch__4C364F0E" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmaDBModel.FK_PurchaseEntryForm_PurchaseEntryType" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmaDBModel.FK_TempPurchaseBookHeader_PurchaseEntryForm" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_RolePrivledges_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK__Users__RoleID__5C37ACAD" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmaDBModel.FK__TempPurch__Purch__76B698BF" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

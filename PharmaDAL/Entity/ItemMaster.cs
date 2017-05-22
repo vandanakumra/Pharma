@@ -45,12 +45,16 @@ namespace PharmaDAL.Entity
         public Nullable<double> SpecialDiscountOnQty { get; set; }
         public bool IsFixedDiscount { get; set; }
         public Nullable<double> FixedDiscountRate { get; set; }
+        public Nullable<double> MaximumQty { get; set; }
+        public Nullable<double> MaximumDiscount { get; set; }
         public Nullable<double> SurchargeOnPurchase { get; set; }
         public Nullable<double> TaxOnPurchase { get; set; }
         public Nullable<double> DiscountRecieved { get; set; }
         public Nullable<double> SpecialDiscountRecieved { get; set; }
         public Nullable<double> QtyPerCase { get; set; }
         public string Location { get; set; }
+        public Nullable<int> MinimumStock { get; set; }
+        public Nullable<int> MaximumStock { get; set; }
         public int SaleTypeId { get; set; }
         public bool Status { get; set; }
         public string CreatedBy { get; set; }
