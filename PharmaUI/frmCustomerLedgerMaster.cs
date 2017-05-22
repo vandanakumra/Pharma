@@ -28,6 +28,8 @@ namespace PharmaUI
         private void frmCustomerLedgerMaster_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, "Customer Ledger Master");
+            GotFocusEventRaised(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
 
             LoadDataGrid();
 
@@ -102,7 +104,7 @@ namespace PharmaUI
             dgvCustomerLedger.Columns["Status"].HeaderText = "Status";
 
             //Change order
-            dgvCustomerLedger.Columns["Status"].DisplayIndex = dgvCustomerLedger.ColumnCount-1;
+            dgvCustomerLedger.Columns["Status"].DisplayIndex = dgvCustomerLedger.ColumnCount - 1;
 
         }
 
@@ -157,9 +159,9 @@ namespace PharmaUI
                     form.FormClosed += Form_FormClosed;
                     form.Show();
                 }
-               
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -205,7 +207,7 @@ namespace PharmaUI
                 OpenCustomerLedgerddUpdateForm(true);
                 return true;
             }
-            else if(keyData == Keys.Delete)
+            else if (keyData == Keys.Delete)
             {
                 DialogResult result = MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -242,13 +244,57 @@ namespace PharmaUI
             form.Show();
         }
 
-        private void deleteCustomerLedger(CustomerLedgerMaster customerLedger )
+        private void deleteCustomerLedger(CustomerLedgerMaster customerLedger)
         {
             if (customerLedger != null)
             {
                 applicationFacade.DeleteCustomerLedger(customerLedger.CustomerLedgerId);
                 LoadDataGrid();
             }
+        }
+
+        //Disable row change on Enter
+        private void dgvCustomerLedger_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else
+                base.OnKeyDown(e);
+        }
+
+        //Set focus for the controls
+
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
     }
 }
