@@ -18,6 +18,8 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         public CustomerCopanyDiscount retCustomerCopanyDiscount { get; set; }
 
+        private List<CustomerCopanyDiscount> companyItemSelectedList { get; set; }
+
 
         public frmCustomerItemDiscountMaster(CustomerCopanyDiscount CustomerCopanyDiscount)
         {
@@ -79,6 +81,16 @@ namespace PharmaUI
             try
             {
                 List<CustomerCopanyDiscount> allItemDiscountList = applicationFacade.GetAllCompanyItemDiscountByCompanyID(retCustomerCopanyDiscount.CompanyID);
+
+                allItemDiscountList.ForEach(p => {
+                    p.Normal = retCustomerCopanyDiscount.Normal;
+                    p.Breakage = retCustomerCopanyDiscount.Breakage;
+                    p.Expired = retCustomerCopanyDiscount.Expired;
+                    p.IsLessEcise = retCustomerCopanyDiscount.IsLessEcise;
+                });
+
+                companyItemSelectedList = this.retCustomerCopanyDiscount.CustomerItemDiscountMapping;
+
                 List<CustomerCopanyDiscount> mappedItemDiscountList = this.retCustomerCopanyDiscount.CustomerItemDiscountMapping;
 
                 if (mappedItemDiscountList!=null)
@@ -104,22 +116,24 @@ namespace PharmaUI
         {
             try
             {
-                this.retCustomerCopanyDiscount.CustomerItemDiscountMapping = dgvCustomerItemDiscount.Rows
-                                                                                                .Cast<DataGridViewRow>()
-                                                                                                .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
-                                                                                                            || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
-                                                                                                            || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Expired"].Value))
-                                                                                                ).Select(x => new CustomerCopanyDiscount()
-                                                                                                {
-                                                                                                    CompanyID = (x.DataBoundItem as CustomerCopanyDiscount).CompanyID,
-                                                                                                    ItemID = (x.DataBoundItem as CustomerCopanyDiscount).ItemID,
-                                                                                                    ItemName = (x.DataBoundItem as CustomerCopanyDiscount).ItemName,
-                                                                                                    Normal = (x.DataBoundItem as CustomerCopanyDiscount).Normal,
-                                                                                                    Breakage = (x.DataBoundItem as CustomerCopanyDiscount).Breakage,
-                                                                                                    Expired = (x.DataBoundItem as CustomerCopanyDiscount).Expired,
-                                                                                                    IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise
+                this.retCustomerCopanyDiscount.CustomerItemDiscountMapping = companyItemSelectedList;
 
-                                                                                                }).ToList();
+                //dgvCustomerItemDiscount.Rows
+                //                                                                            .Cast<DataGridViewRow>()
+                //                                                                            .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
+                //                                                                                        || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
+                //                                                                                        || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Expired"].Value))
+                //                                                                            ).Select(x => new CustomerCopanyDiscount()
+                //                                                                            {
+                //                                                                                CompanyID = (x.DataBoundItem as CustomerCopanyDiscount).CompanyID,
+                //                                                                                ItemID = (x.DataBoundItem as CustomerCopanyDiscount).ItemID,
+                //                                                                                ItemName = (x.DataBoundItem as CustomerCopanyDiscount).ItemName,
+                //                                                                                Normal = (x.DataBoundItem as CustomerCopanyDiscount).Normal,
+                //                                                                                Breakage = (x.DataBoundItem as CustomerCopanyDiscount).Breakage,
+                //                                                                                Expired = (x.DataBoundItem as CustomerCopanyDiscount).Expired,
+                //                                                                                IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise
+
+                //                                                                            }).ToList();
 
                 this.Close();
             }
@@ -160,6 +174,20 @@ namespace PharmaUI
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void dgvCustomerItemDiscount_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            PharmaBusinessObjects.Master.CustomerCopanyDiscount model = (PharmaBusinessObjects.Master.CustomerCopanyDiscount)dgvCustomerItemDiscount.Rows[e.RowIndex].DataBoundItem;
+
+            var existing = companyItemSelectedList.Where(x => x.CompanyID == model.CompanyID && x.ItemID == model.ItemID).FirstOrDefault();
+
+            if (existing != null)
+            {
+                companyItemSelectedList.Remove(existing);
+            }
+
+            companyItemSelectedList.Add(model);
         }
     }
 }
