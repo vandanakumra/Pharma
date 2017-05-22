@@ -18,6 +18,7 @@ namespace PharmaDataMigration
         public static List<ControlCodeMap> controlCodeMap;
         public static List<AccountLedgerCodeMap> accountLedgerCodeMap;
         public static List<SupplierLedgerCodeMap> supplierLedgerCodeMap;
+        public static List<CustomerLedgerCodeMap> customerLedgerCodeMap;
     }
 
     public class CompanyCodeMap
@@ -91,5 +92,11 @@ namespace PharmaDataMigration
     {
         public string OriginalSupplierLedgerCode { get; set; }
         public string MappedSupplierLedgerCode { get; set; }
+    }
+
+    public class CustomerLedgerCodeMap
+    {
+        public string OriginalCustomerLedgerCode { get; set; }
+        public string MappedCustomerLedgerCode { get; set; }
     }
 }

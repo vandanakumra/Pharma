@@ -29,7 +29,7 @@ namespace PharmaDataMigration.Master
                                 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var maxSupplierLedgerID = context.PersonalLedger.Count();
+                    var maxSupplierLedgerID = context.SupplierLedger.Count();
 
                     if (dtSupplierLedgerMaster != null && dtSupplierLedgerMaster.Rows.Count > 0)
                     {

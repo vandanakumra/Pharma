@@ -201,6 +201,7 @@
             this.ucSupplierCustomerInfo.Status = PharmaBusinessObjects.Common.Enums.Status.Active;
             this.ucSupplierCustomerInfo.TabIndex = 72;
             this.ucSupplierCustomerInfo.TaxRetail = PharmaBusinessObjects.Common.Enums.TaxRetail.R;
+            this.ucSupplierCustomerInfo.Telephone = "";
             // 
             // frmSupplierLedgerAddUpdate
             // 
