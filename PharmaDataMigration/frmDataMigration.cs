@@ -23,6 +23,7 @@ namespace PharmaDataMigration
             Common.controlCodeMap = new List<ControlCodeMap>();
             Common.accountLedgerCodeMap = new List<AccountLedgerCodeMap>();
             Common.supplierLedgerCodeMap = new List<SupplierLedgerCodeMap>();
+            Common.customerLedgerCodeMap = new List<CustomerLedgerCodeMap>();
         }
 
         private void frmDataMigration_Load(object sender, EventArgs e)
