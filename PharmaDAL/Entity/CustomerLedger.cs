@@ -26,7 +26,6 @@ namespace PharmaDAL.Entity
         public string CustomerLedgerShortName { get; set; }
         public string Address { get; set; }
         public string ContactPerson { get; set; }
-        public string Telephone { get; set; }
         public string Mobile { get; set; }
         public string OfficePhone { get; set; }
         public string ResidentPhone { get; set; }
@@ -65,6 +64,7 @@ namespace PharmaDAL.Entity
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string CustomerLedgerShortDesc { get; set; }
+        public string Telephone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }
