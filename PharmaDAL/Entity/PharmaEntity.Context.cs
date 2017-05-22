@@ -51,6 +51,5 @@ namespace PharmaDAL.Entity
         public virtual DbSet<TempPurchaseBookHeader> TempPurchaseBookHeader { get; set; }
         public virtual DbSet<TempPurchaseBookLineItem> TempPurchaseBookLineItem { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-       
     }
 }
