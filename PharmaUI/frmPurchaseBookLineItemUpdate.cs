@@ -36,8 +36,54 @@ namespace PharmaUI
 
             GotFocusEventRaised(this);
             ExtensionMethods.EnterKeyDownForTabEvents(this);
-            //FillFormForUpdate();
+            FillFormForUpdate();
 
+        }
+
+        private void FillFormForUpdate()
+        {
+
+            if (updateMode == PharmaBusinessObjects.Common.Enums.LineItemUpdateMode.Scheme)
+            {
+                tblMain.RowStyles[1].Height = 0;
+                tblMain.RowStyles[2].Height = 0;
+                if (purchaseBookLineItem != null)
+                {
+                    txtScheme1.Text = Convert.ToString(purchaseBookLineItem.Scheme1);
+                    txtScheme2.Text = Convert.ToString(purchaseBookLineItem.Scheme1);
+                    chkIsHalfScheme.Checked = purchaseBookLineItem.IsHalfScheme;
+                }
+            }
+
+            if (updateMode == PharmaBusinessObjects.Common.Enums.LineItemUpdateMode.Discount)
+            {
+                tblMain.RowStyles[0].Height = 0;
+                tblMain.RowStyles[2].Height = 0;
+                if (purchaseBookLineItem != null)
+                {
+                    txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
+                    txtSpecialDiscount.Text = Convert.ToString(purchaseBookLineItem.SpecialDiscount);
+                    txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);
+                    txtMRP.Text = Convert.ToString(purchaseBookLineItem.MRP);
+                    txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
+                    dtExpiry.Value = purchaseBookLineItem.Expiry == DateTime.MinValue ? dtExpiry.MinDate : purchaseBookLineItem.Expiry;
+                }
+            }
+
+            if (updateMode == PharmaBusinessObjects.Common.Enums.LineItemUpdateMode.Batch)
+            {
+                tblMain.RowStyles[0].Height = 0;
+                tblMain.RowStyles[1].Height = 0;
+                if (purchaseBookLineItem != null)
+                {
+                    //txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
+                    //txtSpecialDiscount.Text = Convert.ToString(purchaseBookLineItem.SpecialDiscount);
+                    //txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);
+                    //txtMRP.Text = Convert.ToString(purchaseBookLineItem.MRP);
+                    //txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
+                    //dtExpiry.Value = Convert.ToDateTime(purchaseBookLineItem.Expiry);
+                }
+            }
         }
 
         public void GotFocusEventRaised(Control control)
@@ -71,5 +117,57 @@ namespace PharmaUI
             ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void frmPurchaseBookLineItemUpdate_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (updateMode == PharmaBusinessObjects.Common.Enums.LineItemUpdateMode.Scheme)
+            {
+                if (purchaseBookLineItem != null)
+                {
+                    int id = 0;
+                    Int32.TryParse(txtScheme1.Text, out id);
+                    purchaseBookLineItem.Scheme1 = id;
+
+                    Int32.TryParse(txtScheme2.Text, out id);
+                    purchaseBookLineItem.Scheme2 = id;
+                    purchaseBookLineItem.IsHalfScheme = chkIsHalfScheme.Checked;
+                }
+            }
+
+            if (updateMode == PharmaBusinessObjects.Common.Enums.LineItemUpdateMode.Discount)
+            {
+                if (purchaseBookLineItem != null)
+                {
+                    double value = 0L;
+                    double.TryParse(txtDiscount.Text, out value);
+                    purchaseBookLineItem.Discount = value;
+
+                    double.TryParse(txtSpecialDiscount.Text, out value);
+                    purchaseBookLineItem.SpecialDiscount = value;
+
+                    double.TryParse(txtVolDiscount.Text, out value);
+                    purchaseBookLineItem.VolumeDiscount = value;
+
+                    double.TryParse(txtMRP.Text, out value);
+                    purchaseBookLineItem.MRP = value;
+
+                    double.TryParse(txtExcise.Text, out value);
+                    purchaseBookLineItem.Excise = value;
+
+                    purchaseBookLineItem.Expiry = dtExpiry.Value.Date;
+                }
+            }
+        }
+
     }
 }

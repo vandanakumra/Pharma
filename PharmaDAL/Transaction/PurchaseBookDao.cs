@@ -57,6 +57,16 @@ namespace PharmaDAL.Transaction
                 item.BatchNo = string.Empty;
                 item.Quantity = lineItem.Quantity;
                 item.Rate = lineItem.Rate;
+                item.Amount = lineItem.Amount;
+                item.FreeQuantity = lineItem.FreeQty;
+                item.Discount = lineItem.Discount;
+                item.SpecialDiscount = lineItem.SpecialDiscount;
+                item.MRP = lineItem.MRP;
+                item.Excise = lineItem.Excise;
+                item.Expiry = lineItem.Expiry == DateTime.MinValue ? Convert.ToDateTime(DBNull.Value) : lineItem.Expiry;
+                item.Scheme1 = lineItem.Scheme1;
+                item.Scheme2 = lineItem.Scheme2;
+                item.IsHalfScheme = lineItem.IsHalfScheme;
 
                 context.TempPurchaseBookLineItem.Add(item);
                 context.SaveChanges();
@@ -75,10 +85,22 @@ namespace PharmaDAL.Transaction
                 {
                     item.PurchaseBookHeaderID = lineItem.InvoiceID;
                     item.ItemCode = lineItem.ItemCode;
-                    item.BatchNo = string.Empty;
+                    item.BatchNo = lineItem.BatchNumber;
                     item.Quantity = lineItem.Quantity;
                     item.Rate = lineItem.Rate;
-
+                    item.Amount = lineItem.Amount;
+                    item.FreeQuantity = lineItem.FreeQty;
+                    item.Discount = lineItem.Discount;
+                    item.SpecialDiscount = lineItem.SpecialDiscount;
+                    item.MRP = lineItem.MRP;
+                    item.Excise = lineItem.Excise;
+                    if (lineItem.Expiry == DateTime.MinValue)
+                        item.Expiry = null;
+                    else
+                        item.Expiry = lineItem.Expiry;
+                    item.Scheme1 = lineItem.Scheme1;
+                    item.Scheme2 = lineItem.Scheme2;
+                    item.IsHalfScheme = lineItem.IsHalfScheme;
                     context.TempPurchaseBookLineItem.Add(item);
                     context.SaveChanges();
                 }
@@ -109,5 +131,6 @@ namespace PharmaDAL.Transaction
                 }).ToList();
             }
         }
+
     }
 }

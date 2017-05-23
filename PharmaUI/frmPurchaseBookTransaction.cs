@@ -135,17 +135,29 @@ namespace PharmaUI
         {
             int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
             PurchaseBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+            string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
 
             if (isCellEdit && !isBatchUpdate && lineItem.ID > 0)
             {
+                if (columnName == "Quantity" || columnName == "Rate")
+                {
+                    double amount = GetLineItemAmount(lineItem);
+                    dgvLineItem.CurrentRow.Cells["Amount"].Value = amount;
+                    lineItem.Amount = amount;
+                }
                 applicationFacade.UpdateTempPurchaseLineItem(lineItem);
             }
-
-            string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
 
             if (columnName == "FreeQty")
             {
                 frmPurchaseBookLineItemUpdate updateForm = new frmPurchaseBookLineItemUpdate(lineItem, Enums.LineItemUpdateMode.Scheme);
+                updateForm.FormClosed += frmPurchaseBookLineItemUpdate_FormClosed;
+                updateForm.ShowDialog();
+            }
+
+            if (columnName == "Rate")
+            {
+                frmPurchaseBookLineItemUpdate updateForm = new frmPurchaseBookLineItemUpdate(lineItem, Enums.LineItemUpdateMode.Discount);
                 updateForm.FormClosed += frmPurchaseBookLineItemUpdate_FormClosed;
                 updateForm.ShowDialog();
             }
@@ -440,7 +452,7 @@ namespace PharmaUI
                     lineItem.InvoiceID = invoiceID;
                     lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
 
-                    dgvLineItem.Rows[rowIndex].Cells["ID"].Value = lineItemID;
+                    dgvLineItem.Rows[rowIndex].Cells["ID"].Value = lineItem.ID;
                     dgvLineItem.Rows[rowIndex].Cells["InvoiceID"].Value = invoiceID;
                     dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value = lineItem.ItemCode;
                     dgvLineItem.Rows[rowIndex].Cells["ItemName"].Value = lineItem.ItemName;
@@ -449,7 +461,7 @@ namespace PharmaUI
                     dgvLineItem.Rows[rowIndex].Cells["InvoiceID"].Value = lineItem.InvoiceID;
                     dgvLineItem.Rows[rowIndex].Cells["BatchNumber"].Value = lineItem.BatchNumber;
                     dgvLineItem.Rows[rowIndex].Cells["Rate"].Value = lineItem.Rate;
-                    dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = lineItem.Amount;
+                    dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = GetLineItemAmount(lineItem);
                     dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
                     dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
                     dgvLineItem.Rows[rowIndex].Cells["IsHalfScheme"].Value = lineItem.IsHalfScheme;
@@ -459,7 +471,6 @@ namespace PharmaUI
                     dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
                     dgvLineItem.Rows[rowIndex].Cells["Excise"].Value = lineItem.Excise;
                     dgvLineItem.Rows[rowIndex].Cells["Expiry"].Value = lineItem.Expiry;
-
                 }
                 isBatchUpdate = false;
             }
@@ -476,7 +487,46 @@ namespace PharmaUI
 
         private void frmPurchaseBookLineItemUpdate_FormClosed(object sender, FormClosedEventArgs e)
         {
-            throw new NotImplementedException();
+            frmPurchaseBookLineItemUpdate lineItemUpdate = (frmPurchaseBookLineItemUpdate)sender;
+            int rowIndex = -1;
+            int colIndex = -1;
+
+            if (dgvLineItem.SelectedCells.Count > 0)
+            {
+                rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
+                colIndex = dgvLineItem.SelectedCells[0].ColumnIndex;
+
+                if (lineItemUpdate.PurchaseBookLinetem != null)
+                {
+                    isBatchUpdate = true;
+                    int lineItemID = 0;
+                    Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ID"].Value), out lineItemID);
+
+                    PurchaseBookLineItem lineItem = lineItemUpdate.PurchaseBookLinetem;
+                    lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+
+                    if (lineItemUpdate.LineItemUpdateMode == Enums.LineItemUpdateMode.Scheme)
+                    {
+                        dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
+                        dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
+                        dgvLineItem.Rows[rowIndex].Cells["IsHalfScheme"].Value = lineItem.IsHalfScheme;
+                    }
+
+                    if (lineItemUpdate.LineItemUpdateMode == Enums.LineItemUpdateMode.Discount)
+                    {
+                        dgvLineItem.Rows[rowIndex].Cells["Discount"].Value = lineItem.Discount;
+                        dgvLineItem.Rows[rowIndex].Cells["SpecialDiscount"].Value = lineItem.SpecialDiscount;
+                        dgvLineItem.Rows[rowIndex].Cells["VolumeDiscount"].Value = lineItem.VolumeDiscount;
+                        dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
+                        dgvLineItem.Rows[rowIndex].Cells["Excise"].Value = lineItem.Excise;
+                        dgvLineItem.Rows[rowIndex].Cells["Expiry"].Value = lineItem.Expiry;
+                        dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = GetLineItemAmount(lineItem);
+                    }
+                }
+                isBatchUpdate = false;
+            }
+
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
         }
 
 
@@ -545,11 +595,20 @@ namespace PharmaUI
                 DateTime.TryParse(Convert.ToString(row.Cells["Expiry"].Value), out date);
                 item.Expiry = date;
                
-
-
             }
 
             return item;
+        }
+
+        private double GetLineItemAmount(PurchaseBookLineItem item)
+        {
+            double amount = 0L;
+            amount = item.Quantity * item.Rate;
+            amount = amount - ((item.Discount * amount) / 100);
+            amount = amount - ((item.SpecialDiscount * amount) / 100);
+            amount = amount - ((item.VolumeDiscount * amount) / 100);
+
+            return amount;
         }
 
     }
