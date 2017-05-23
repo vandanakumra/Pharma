@@ -43,7 +43,7 @@ namespace PharmaUI
             allControls.ForEach(k => k.Visible = false);
 
             this.WindowState = FormWindowState.Normal;
-            btnClose.Visible = true;
+          //  btnClose.Visible = true;
             dgvAccountLedger.Visible = true;
             ledgerType = ledgerTypeName;
             isOpenAsDialog = isDialog;
@@ -51,9 +51,43 @@ namespace PharmaUI
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
         }
 
+        //Set focus for the controls
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
+        }
+
         private void frmAccountLedgerMaster_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, "Account Ledger Master");
+            GotFocusEventRaised(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
 
             LoadCombo();
             
@@ -71,6 +105,8 @@ namespace PharmaUI
                 dgvAccountLedger.KeyDown += DgvAccountLedger_KeyDown;
             }
             dgvAccountLedger.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            txtSearch.Focus();
         }
 
         private void DgvAccountLedger_SelectionChanged(object sender, EventArgs e)

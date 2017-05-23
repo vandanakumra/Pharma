@@ -36,7 +36,9 @@ namespace PharmaUI
             dgvItemList.KeyDown += DgvCompanyList_KeyDown;
             dgvItemList.SelectionChanged += DgvItemList_SelectionChanged;
 
-            rdName.Checked = true;
+            txtSearch.Focus();
+
+            //rdName.Checked = true;
         }
 
         private void DgvItemList_SelectionChanged(object sender, EventArgs e)
@@ -136,7 +138,7 @@ namespace PharmaUI
 
             if(string.IsNullOrEmpty(txtSearch.Text))
             {
-                searchBy = rdCode.Checked ? "Code" : rdMRP.Checked ? "MRP" : rdPack.Checked ? "Pack" : rdLocation.Checked ? "Location" : rdBarCode.Checked ? "BarCode" : string.Empty;
+               // searchBy = rdCode.Checked ? "Code" : rdMRP.Checked ? "MRP" : rdPack.Checked ? "Pack" : rdLocation.Checked ? "Location" : rdBarCode.Checked ? "BarCode" : string.Empty;
 
             }
 
@@ -266,6 +268,31 @@ namespace PharmaUI
         {
             ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
+        }
+
+        private void lblCode_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPack_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblLocation_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblUPC_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
