@@ -134,7 +134,7 @@ namespace PharmaUI
         private void DgvLineItem_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
-            PurchaseBookLineItem lineItem = (PurchaseBookLineItem)dgvLineItem.CurrentRow.DataBoundItem;
+            PurchaseBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
 
             if (isCellEdit && !isBatchUpdate && lineItem.ID > 0)
             {
@@ -441,6 +441,7 @@ namespace PharmaUI
                     lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
 
                     dgvLineItem.Rows[rowIndex].Cells["ID"].Value = lineItemID;
+                    dgvLineItem.Rows[rowIndex].Cells["InvoiceID"].Value = invoiceID;
                     dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value = lineItem.ItemCode;
                     dgvLineItem.Rows[rowIndex].Cells["ItemName"].Value = lineItem.ItemName;
                     dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value = lineItem.Quantity;
@@ -485,6 +486,70 @@ namespace PharmaUI
             {
                 this.Close();
             }
+        }
+
+        private PurchaseBookLineItem ConvertToPurchaseBookLineItem(DataGridViewRow row)
+        {
+            PurchaseBookLineItem item = new PurchaseBookLineItem();
+            int id = 0;
+            double dValue = 0L;
+
+            if(row != null)
+            {
+                Int32.TryParse(Convert.ToString(row.Cells["ID"].Value), out id);
+                item.ID = id;
+
+                Int32.TryParse(Convert.ToString(row.Cells["InvoiceID"].Value), out id);
+                item.InvoiceID = id;
+
+                item.ItemCode = Convert.ToString(row.Cells["ItemCode"].Value);
+                item.ItemName = Convert.ToString(row.Cells["ItemName"].Value);
+                item.BatchNumber = Convert.ToString(row.Cells["BatchNumber"].Value);
+
+                Int32.TryParse(Convert.ToString(row.Cells["Quantity"].Value), out id);
+                item.Quantity = id;
+
+                Int32.TryParse(Convert.ToString(row.Cells["FreeQty"].Value), out id);
+                item.FreeQty = id;
+
+                double.TryParse(Convert.ToString(row.Cells["Rate"].Value), out dValue);
+                item.Rate = dValue;
+
+                double.TryParse(Convert.ToString(row.Cells["Amount"].Value), out dValue);
+                item.Amount = dValue;
+
+                Int32.TryParse(Convert.ToString(row.Cells["Scheme1"].Value), out id);
+                item.Scheme1 = id;
+
+                Int32.TryParse(Convert.ToString(row.Cells["Scheme2"].Value), out id);
+                item.Scheme2 = id;
+
+                item.IsHalfScheme = Convert.ToBoolean(row.Cells["IsHalfScheme"].Value);
+
+                double.TryParse(Convert.ToString(row.Cells["Discount"].Value), out dValue);
+                item.Discount = dValue;
+
+                double.TryParse(Convert.ToString(row.Cells["SpecialDiscount"].Value), out dValue);
+                item.SpecialDiscount = dValue;
+
+                double.TryParse(Convert.ToString(row.Cells["VolumeDiscount"].Value), out dValue);
+                item.VolumeDiscount = dValue;
+
+                double.TryParse(Convert.ToString(row.Cells["MRP"].Value), out dValue);
+                item.MRP = dValue;
+
+                double.TryParse(Convert.ToString(row.Cells["Excise"].Value), out dValue);
+                item.Excise = dValue;
+
+                DateTime date = DateTime.MinValue;
+                DateTime.TryParse(Convert.ToString(row.Cells["Expiry"].Value), out date);
+                item.Expiry = date;
+               
+
+
+            }
+
+            return item;
         }
 
     }
