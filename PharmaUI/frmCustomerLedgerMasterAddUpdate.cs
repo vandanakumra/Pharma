@@ -22,8 +22,6 @@ namespace PharmaUI
         private bool isInEditMode { get; set; }
         private int customerLedgerID { get; set; }
 
-        private List<CustomerCopanyDiscount> customerCompanyDiscount { get; set; }
-
         public frmCustomerLedgerMasterAddUpdate(bool isInEditMode = false)
         {
             InitializeComponent();
@@ -33,7 +31,6 @@ namespace PharmaUI
             this.customerLedgerID = 0;
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             LoadCombo();
-            customerCompanyDiscount = new List<CustomerCopanyDiscount>();
 
             if (!isInEditMode)
                 LoadCustomerCompanyDiscountGrid();
@@ -80,8 +77,6 @@ namespace PharmaUI
             List<CustomerCopanyDiscount> customerCopanyDiscountList = applicationFacade.GetCompleteCompanyDiscountList(customerLedgerID);
             dgvCompanyDiscount.DataSource = customerCopanyDiscountList;
 
-            customerCompanyDiscount = customerCopanyDiscountList;
-
             for (int i = 0; i < dgvCompanyDiscount.Columns.Count; i++)
             {
                 dgvCompanyDiscount.Columns[i].Visible = false;
@@ -99,19 +94,20 @@ namespace PharmaUI
             dgvCompanyDiscount.Columns["Breakage"].Visible = true;
             dgvCompanyDiscount.Columns["Breakage"].DisplayIndex = 2;
             dgvCompanyDiscount.Columns["Breakage"].HeaderText = "Breakage";
-           
+
             dgvCompanyDiscount.Columns["Expired"].Visible = true;
             dgvCompanyDiscount.Columns["Expired"].DisplayIndex = 3;
             dgvCompanyDiscount.Columns["Expired"].HeaderText = "Expired";
-           
+
+
             dgvCompanyDiscount.Columns["IsLessEcise"].Visible = true;
             dgvCompanyDiscount.Columns["IsLessEcise"].DisplayIndex = 4;
             dgvCompanyDiscount.Columns["IsLessEcise"].HeaderText = "LessEcise";
-           
+
             dgvCompanyDiscount.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCompanyDiscount.AllowUserToAddRows = false;
             dgvCompanyDiscount.AllowUserToDeleteRows = false;
-            dgvCompanyDiscount.ReadOnly = false;           
+            dgvCompanyDiscount.ReadOnly = false;
         }
 
 
@@ -121,7 +117,7 @@ namespace PharmaUI
             this.ucSupplierCustomerInfo.SetFocus();
             ExtensionMethods.EnterKeyDownForTabEvents(this);
         }
-       
+
         public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
         {
             if (customerLedgerMaster != null)
@@ -258,27 +254,21 @@ namespace PharmaUI
 
                 ///Get All the mapping for Company discount 
                 ///
+                customerLedgerMaster.CustomerCopanyDiscountList = dgvCompanyDiscount.Rows
+                                                                                    .Cast<DataGridViewRow>()
+                                                                                    .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
+                                                                                                || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
+                                                                                                || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Expired"].Value))
+                                                                                    ).Select(x => new CustomerCopanyDiscount()
+                                                                                    {
+                                                                                        CompanyID = (x.DataBoundItem as CustomerCopanyDiscount).CompanyID,
+                                                                                        Normal = (x.DataBoundItem as CustomerCopanyDiscount).Normal,
+                                                                                        Breakage = (x.DataBoundItem as CustomerCopanyDiscount).Breakage,
+                                                                                        Expired = (x.DataBoundItem as CustomerCopanyDiscount).Expired,
+                                                                                        IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise,
+                                                                                        CustomerItemDiscountMapping = (x.DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping
 
-                customerLedgerMaster.CustomerCopanyDiscountList = customerCompanyDiscount;
-
-
-
-                //customerLedgerMaster.CustomerCopanyDiscountList = dgvCompanyDiscount.Rows
-                //                                                                    .Cast<DataGridViewRow>()
-                //                                                                    .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
-                //                                                                                || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
-                //                                                                                || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Expired"].Value))
-                //                                                                                || Convert.ToBoolean(r.Cells["IsLessEcise"].Value)
-                //                                                                    ).Select(x => new CustomerCopanyDiscount()
-                //                                                                    {
-                //                                                                        CompanyID = (x.DataBoundItem as CustomerCopanyDiscount).CompanyID,
-                //                                                                        Normal = (x.DataBoundItem as CustomerCopanyDiscount).Normal,
-                //                                                                        Breakage = (x.DataBoundItem as CustomerCopanyDiscount).Breakage,
-                //                                                                        Expired = (x.DataBoundItem as CustomerCopanyDiscount).Expired,
-                //                                                                        IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise,
-                //                                                                        CustomerItemDiscountMapping = (x.DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping
-
-                //                                                                    }).ToList();
+                                                                                    }).ToList();
 
 
                 int _result = 0;
@@ -320,7 +310,7 @@ namespace PharmaUI
                 this.Close();
             }
         }
-       
+
         private void FrmPersonRouteMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
             PersonRouteMaster lastSelectedPersonRoute= (sender as frmPersonRouteMaster).LastSelectedPersonRoute;
@@ -370,7 +360,7 @@ namespace PharmaUI
                         }
                         break;
                 }
-               
+
             }
 
             ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
@@ -457,7 +447,7 @@ namespace PharmaUI
                     frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
                     frmPersonRouteMaster.Show();
                     frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
-                }          
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -496,7 +486,7 @@ namespace PharmaUI
             }
         }
 
-       //Set focus for the controls
+        //Set focus for the controls
 
         public void GotFocusEventRaised(Control control)
         {
@@ -531,69 +521,10 @@ namespace PharmaUI
 
         private void dgvCompanyDiscount_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            //if (dgvCompanyDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
-            //{
-            //    SendKeys.Send("{tab}");
-            //}
-        }
-
-        private void dgvCompanyDiscount_KeyDown(object sender, KeyEventArgs e)
-        {
-            e.SuppressKeyPress = true;
-
-            if (e.KeyData == Keys.Enter)
+            if (dgvCompanyDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
             {
-                int rowIndex = dgvCompanyDiscount.CurrentCell.RowIndex;
-                int columnIndex = 0;
-                string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
-
-                int columnDisplayIndex = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].DisplayIndex;
-
-                for(int i = 0; i< dgvCompanyDiscount.ColumnCount;i++)
-                {
-                    if(dgvCompanyDiscount.Columns[i].DisplayIndex == columnDisplayIndex + 1)
-                    {
-                        columnIndex = i;
-                        break;
-                    }
-                }
-               
-                if (rowIndex == (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
-                {
-                    btnSave.Focus();
-                   
-                }
-                else if (rowIndex < (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
-                {
-                    for(int i = 0;i < dgvCompanyDiscount.Columns.Count - 1; i++)
-                    {
-                        if(dgvCompanyDiscount.Columns[i].DisplayIndex == 0)
-                        {
-                            dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[i, rowIndex + 1];
-                            break;
-                        }
-                    }                
-                }
-                else
-                {
-                    dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[columnIndex, rowIndex];
-                }
+                SendKeys.Send("{tab}");
             }
-        }
-
-        private void dgvCompanyDiscount_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            PharmaBusinessObjects.Master.CustomerCopanyDiscount model = (PharmaBusinessObjects.Master.CustomerCopanyDiscount)dgvCompanyDiscount.Rows[e.RowIndex].DataBoundItem;
-
-            var existing = customerCompanyDiscount.Where(x => x.CompanyID == model.CompanyID).FirstOrDefault();
-
-            if (existing != null)
-            {
-                customerCompanyDiscount.Remove(existing);
-            }
-
-            customerCompanyDiscount.Add(model);
-
         }
     }
 
