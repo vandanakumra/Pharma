@@ -123,7 +123,7 @@ namespace PharmaUI
         {
 
             List<Control> allControls = ExtensionMethods.GetAllControls(form);
-            allControls.ForEach(k => { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize);  });
+            allControls.ForEach(k =>{ if (k.Name != "lblSearch" && k.Name != "txtSearch" && k.Name != "lblPersonRouteType" && k.Name!= "cbPersonRouteType") { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); } });
 
             Panel panel1 = new Panel();
             panel1.Location = new Point(0, 0);

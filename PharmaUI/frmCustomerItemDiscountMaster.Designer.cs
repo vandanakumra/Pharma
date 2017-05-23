@@ -89,6 +89,7 @@
             this.dgvCustomerItemDiscount.Name = "dgvCustomerItemDiscount";
             this.dgvCustomerItemDiscount.Size = new System.Drawing.Size(623, 312);
             this.dgvCustomerItemDiscount.TabIndex = 101;
+            this.dgvCustomerItemDiscount.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomerItemDiscount_CellEndEdit);
             this.dgvCustomerItemDiscount.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomerItemDiscount_CellEnter);
             // 
             // btnCancel

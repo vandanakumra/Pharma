@@ -29,11 +29,13 @@ namespace PharmaUI
         private void frmPersonRouteMaster_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, "Person Route Master");
+            GotFocusEventRaised(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
+
             LoadCombo();
             LoadDataGrid(0);
             dgvPersonRoute.CellDoubleClick += DgvPersonRoute_CellDoubleClick;
             dgvPersonRoute.KeyDown += DgvPersonRoute_KeyDown;
-
             cbPersonRouteType.SelectedIndexChanged += CbPersonRouteType_SelectedIndexChanged;
         }
 
@@ -44,10 +46,16 @@ namespace PharmaUI
 
         private void DgvPersonRoute_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode==Keys.Enter)
+            if (e.KeyCode==Keys.Enter && NextPersonRoute!= null)
             {
                 this.Close();
             }
+            if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else
+                base.OnKeyDown(e);
         }
 
         private void DgvPersonRoute_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -95,7 +103,7 @@ namespace PharmaUI
 
         }
 
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmPersonRouteMasterAddUpdate_FormClosed(object sender, FormClosedEventArgs e)
         {
             ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
             if(this.NextPersonRoute != null)
@@ -115,19 +123,13 @@ namespace PharmaUI
                 filteredRow.First().Cells["PersonRouteCode"].Selected = true;
             }
         }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadDataGrid((int)cbPersonRouteType.SelectedValue);
-        }
-
-     
+        
         void AddEditPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster model)
         {
-            frmPersonRouteMasterAddUpdate form = new frmPersonRouteMasterAddUpdate(model);
-            form.FormClosed -= Form_FormClosed;
-            form.FormClosed += Form_FormClosed;
-            form.ShowDialog();
+            frmPersonRouteMasterAddUpdate frmPersonRouteMasterAddUpdate = new frmPersonRouteMasterAddUpdate(model);
+            frmPersonRouteMasterAddUpdate.FormClosed -= frmPersonRouteMasterAddUpdate_FormClosed;
+            frmPersonRouteMasterAddUpdate.FormClosed += frmPersonRouteMasterAddUpdate_FormClosed;
+            frmPersonRouteMasterAddUpdate.ShowDialog();
         }
 
         private void EditPersonRoute()
@@ -199,6 +201,13 @@ namespace PharmaUI
             
         }
 
+        //Action Buttons
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadDataGrid((int)cbPersonRouteType.SelectedValue);
+        }
+
         private void btnAddNew_Click(object sender, EventArgs e)
         {
             AddEditPersonRoute(NextPersonRoute);
@@ -212,6 +221,38 @@ namespace PharmaUI
         private void btnDelete_Click(object sender, EventArgs e)
         {
 
+        }
+
+        //Set focus for the controls
+        public void GotFocusEventRaised(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    GotFocusEventRaised(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        TextBox tb1 = (TextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+
+                    else if (c is ComboBox)
+                    {
+                        ComboBox tb1 = (ComboBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                    }
+                }
+            }
+        }
+
+        private void C_GotFocus(object sender, EventArgs e)
+        {
+            ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
+            return;
         }
     }
 }
