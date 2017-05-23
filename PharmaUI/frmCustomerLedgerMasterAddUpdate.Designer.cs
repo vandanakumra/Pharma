@@ -157,6 +157,7 @@
             this.dgvCompanyDiscount.Tag = "";
             this.dgvCompanyDiscount.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCompanyDiscount_CellEnter);
             this.dgvCompanyDiscount.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCompanyDiscount_EditingControlShowing);
+            this.dgvCompanyDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCompanyDiscount_KeyDown);
             // 
             // gbCustomerBillingDetails
             // 

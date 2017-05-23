@@ -143,9 +143,8 @@ namespace PharmaDAL.Master
                     {
                         context.CustomerCompanyDiscountRef.Add(new Entity.CustomerCompanyDiscountRef()
                         {
-                            CustomerLedgerID = table.CustomerLedgerId,
+                            CustomerLedgerID = p.CustomerLedgerId,
                             CompanyID = newEntry.CompanyID,
-                            ItemID=newEntry.ItemID,
                             Normal = newEntry.Normal,
                             Breakage = newEntry.Breakage,
                             Expired = newEntry.Expired,
@@ -243,7 +242,6 @@ namespace PharmaDAL.Master
                             {
                                 CustomerLedgerID = p.CustomerLedgerId,
                                 CompanyID = newEntry.CompanyID,
-                                ItemID = newEntry.ItemID,
                                 Normal = newEntry.Normal,
                                 Breakage = newEntry.Breakage,
                                 Expired = newEntry.Expired,
@@ -340,22 +338,6 @@ namespace PharmaDAL.Master
                                                           CompanyName = x.CompanyName   
                                                           
                                                       }).ToList();
-
-
-                    ///Isssue in a single linq
-                    foreach (var item in allCompanyDiscountMapping)
-                    {
-                        item.CustomerItemDiscountMapping = context.ItemMaster.Where(m => m.CompanyID == item.CompanyID && m.Status)
-                                                                                                        .Select(y => new PharmaBusinessObjects.Master.CustomerCopanyDiscount()
-                                                                                                        {
-                                                                                                            CompanyID = y.CompanyID,
-                                                                                                            CompanyName = y.CompanyMaster.CompanyName,
-                                                                                                            ItemID = y.ItemID,
-                                                                                                            ItemName = y.ItemName
-
-                                                                                                        }).ToList();
-                    }
-
 
                     allCompanyDiscountMapping.RemoveAll(x => mappedDiscount.Any(y => y.CompanyID == x.CompanyID));
                     allCompanyDiscountMapping.AddRange(mappedDiscount);

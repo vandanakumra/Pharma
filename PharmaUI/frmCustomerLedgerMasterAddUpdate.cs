@@ -259,6 +259,7 @@ namespace PharmaUI
                                                                                     .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
                                                                                                 || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
                                                                                                 || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Expired"].Value))
+                                                                                                || Convert.ToBoolean(r.Cells["IsLessEcise"].Value)
                                                                                     ).Select(x => new CustomerCopanyDiscount()
                                                                                     {
                                                                                         CompanyID = (x.DataBoundItem as CustomerCopanyDiscount).CompanyID,
@@ -377,10 +378,21 @@ namespace PharmaUI
             {
                 if (dgvCompanyDiscount.SelectedCells.Count > 0)
                 {
-                    CustomerCopanyDiscount existingItem = (CustomerCopanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
-                    frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(existingItem);
-                    form.FormClosed += FormCustomerItemDiscount_FormClosed;
-                    form.Show();
+                    bool DoesCompanyHaveDiscountMapping = dgvCompanyDiscount.CurrentRow != null && !(
+                                                                                                String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Normal"].Value)))
+                                                                                                && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Breakage"].Value)))
+                                                                                                && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Expired"].Value)))
+                                                                                                && !Convert.ToBoolean(dgvCompanyDiscount.CurrentRow.Cells["IsLessEcise"].Value)
+                                                                                                );
+                    
+                    ///OPen item discount mapping screen only if company discount existing 
+                    if (DoesCompanyHaveDiscountMapping)
+                    {
+                        CustomerCopanyDiscount existingItem = (CustomerCopanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
+                        frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(existingItem);
+                        form.FormClosed += FormCustomerItemDiscount_FormClosed;
+                        form.Show();
+                    }                  
                 }
             }
             else if (keyData == Keys.F1)
@@ -524,6 +536,50 @@ namespace PharmaUI
             if (dgvCompanyDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
             {
                 SendKeys.Send("{tab}");
+            }
+        }
+
+        private void dgvCompanyDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+
+            if (e.KeyData == Keys.Enter)
+            {
+                int rowIndex = dgvCompanyDiscount.CurrentCell.RowIndex;
+                int columnIndex = 0;
+                string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
+
+                int columnDisplayIndex = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].DisplayIndex;
+
+                for (int i = 0; i < dgvCompanyDiscount.ColumnCount; i++)
+                {
+                    if (dgvCompanyDiscount.Columns[i].DisplayIndex == columnDisplayIndex + 1)
+                    {
+                        columnIndex = i;
+                        break;
+                    }
+                }
+
+                if (rowIndex == (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
+                {
+                    btnSave.Focus();
+
+                }
+                else if (rowIndex < (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
+                {
+                    for (int i = 0; i < dgvCompanyDiscount.Columns.Count - 1; i++)
+                    {
+                        if (dgvCompanyDiscount.Columns[i].DisplayIndex == 0)
+                        {
+                            dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[i, rowIndex + 1];
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[columnIndex, rowIndex];
+                }
             }
         }
     }
