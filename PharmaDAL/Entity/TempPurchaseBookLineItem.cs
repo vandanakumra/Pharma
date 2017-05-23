@@ -27,9 +27,11 @@ namespace PharmaDAL.Entity
         public double Amount { get; set; }
         public Nullable<double> Discount { get; set; }
         public Nullable<double> SpecialDiscount { get; set; }
+        public Nullable<double> VolumeDiscount { get; set; }
         public Nullable<double> MRP { get; set; }
         public Nullable<double> Excise { get; set; }
         public Nullable<System.DateTime> Expiry { get; set; }
+        public Nullable<double> TaxOnPurchase { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }

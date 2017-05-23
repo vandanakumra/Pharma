@@ -17,6 +17,7 @@ namespace PharmaDAL.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PurchaseEntryForm()
         {
+            this.PurchaseBookHeader = new HashSet<PurchaseBookHeader>();
             this.TempPurchaseBookHeader = new HashSet<TempPurchaseBookHeader>();
         }
     
@@ -29,6 +30,8 @@ namespace PharmaDAL.Entity
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseBookHeader> PurchaseBookHeader { get; set; }
         public virtual PurchaseEntryType PurchaseEntryType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TempPurchaseBookHeader> TempPurchaseBookHeader { get; set; }

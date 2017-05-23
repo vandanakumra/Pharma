@@ -122,6 +122,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);
         int InsertTempPurchaseLineItem(PurchaseBookLineItem lineItem);
         int UpdateTempPurchaseLineItem(PurchaseBookLineItem lineItem);
+        List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
         #endregion
     }
 

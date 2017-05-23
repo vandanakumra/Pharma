@@ -109,5 +109,29 @@ namespace PharmaDAL.Transaction
                 }).ToList();
             }
         }
+
+
+        public List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.PurchaseBookLineItem.Where(p => p.PurchaseBookHeader.SupplierCode == supplierCode & p.ItemCode == itemCode)
+                    .Select(p => new PharmaBusinessObjects.Transaction.PurchaseBookLineItem()
+                    {
+                        ID = p.ID,
+                        ItemCode = p.ItemCode,
+                        Rate = p.Rate,
+                        Discount = p.Discount,
+                        SpecialDiscount = p.SpecialDiscount,
+                        VolumeDiscount = p.VolumeDiscount,
+                        TaxOnPurchase = p.TaxOnPurchase,
+                        PurchaseDate = p.PurchaseBookHeader.PurchaseDate,
+                        BatchNumber = p.BatchNo
+                    }).OrderByDescending(p => p.ID).Take(5).ToList();
+            }
+
+        }
+
+
     }
 }
