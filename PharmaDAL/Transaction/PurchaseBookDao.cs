@@ -67,6 +67,7 @@ namespace PharmaDAL.Transaction
                 item.Scheme1 = lineItem.Scheme1;
                 item.Scheme2 = lineItem.Scheme2;
                 item.IsHalfScheme = lineItem.IsHalfScheme;
+                item.VolumeDiscount = lineItem.VolumeDiscount;
 
                 context.TempPurchaseBookLineItem.Add(item);
                 context.SaveChanges();
@@ -91,6 +92,7 @@ namespace PharmaDAL.Transaction
                     item.Amount = lineItem.Amount;
                     item.FreeQuantity = lineItem.FreeQty;
                     item.Discount = lineItem.Discount;
+                    item.VolumeDiscount = lineItem.VolumeDiscount;
                     item.SpecialDiscount = lineItem.SpecialDiscount;
                     item.MRP = lineItem.MRP;
                     item.Excise = lineItem.Excise;

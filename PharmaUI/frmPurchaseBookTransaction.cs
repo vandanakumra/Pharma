@@ -602,13 +602,13 @@ namespace PharmaUI
 
         private double GetLineItemAmount(PurchaseBookLineItem item)
         {
-            double amount = 0L;
+            double? amount = 0L;
             amount = item.Quantity * item.Rate;
-            amount = amount - ((item.Discount * amount) / 100);
-            amount = amount - ((item.SpecialDiscount * amount) / 100);
-            amount = amount - ((item.VolumeDiscount * amount) / 100);
+            amount = amount - ((item.Discount??0 * amount??0) / 100);
+            amount = amount - ((item.SpecialDiscount??0 * amount??0) / 100);
+            amount = amount - ((item.VolumeDiscount??0 * amount??0) / 100);
 
-            return amount;
+            return amount??0;
         }
 
     }
