@@ -45,5 +45,10 @@ namespace PharmaBusiness.Transaction
             return new PurchaseBookDao(this.LoggedInUser).UpdateTempLineItem(lineItem);
         }
 
+        internal List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).GetLastNBatchNoForSupplierItem(supplierCode,itemCode);
+        }
+
     }
 }

@@ -692,6 +692,14 @@ namespace PharmaBusiness
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).UpdateTempLineItem(lineItem);
         }
+
+        public List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetLastNBatchNoForSupplierItem(supplierCode,itemCode);
+        }
+
+
+
         #endregion
 
 

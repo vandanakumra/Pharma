@@ -22,11 +22,14 @@ namespace PharmaBusinessObjects.Transaction
         public bool IsHalfScheme { get; set; }
         public int Quantity { get; set; }
         public string BatchNumber { get; set; }
-        public double Discount { get; set; }
-        public double SpecialDiscount { get; set; }
-        public double VolumeDiscount { get; set; }
-        public double Excise { get; set; }
+        public double? Discount { get; set; }
+        public double? SpecialDiscount { get; set; }
+        public double? VolumeDiscount { get; set; }
+        public double? Excise { get; set; }
         public DateTime Expiry { get; set; }
+        public double? TaxOnPurchase { get; set; }
+        public DateTime PurchaseDate { get; set; }
+
 
         public PurchaseBookLineItem()
         {

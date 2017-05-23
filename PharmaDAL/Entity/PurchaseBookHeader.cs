@@ -22,10 +22,10 @@ namespace PharmaDAL.Entity
     
         public int ID { get; set; }
         public System.DateTime PurchaseDate { get; set; }
-        public string CompanyCode { get; set; }
+        public string SupplierCode { get; set; }
         public string InvoiceNumber { get; set; }
-        public string AccountLedgerCode { get; set; }
-        public double TotalAmount { get; set; }
+        public Nullable<int> PurchaseEntryFormID { get; set; }
+        public Nullable<double> TotalAmount { get; set; }
         public Nullable<double> Excise { get; set; }
         public Nullable<double> HSCM { get; set; }
         public Nullable<double> Discount { get; set; }
@@ -43,5 +43,6 @@ namespace PharmaDAL.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseBookLineItem> PurchaseBookLineItem { get; set; }
+        public virtual PurchaseEntryForm PurchaseEntryForm { get; set; }
     }
 }
