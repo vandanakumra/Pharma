@@ -20,69 +20,105 @@ namespace PharmaUI
 
         public frmUserMaster()
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
 
         }
 
         private void frmUserMaster_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "User Master");
+            try
+            {
+                ExtensionMethods.FormLoad(this, "User Master");
 
-            LoadUserGrid();
-            dgvUser.DoubleClick += DgvUser_DoubleClick;
-            dgvUser.KeyDown += DgvUser_KeyDown;
-            dgvUser.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                LoadUserGrid();
+                dgvUser.DoubleClick += DgvUser_DoubleClick;
+                dgvUser.KeyDown += DgvUser_KeyDown;
+                dgvUser.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            LoadRoleGrid();
-            dgvRole.DoubleClick += DgvRole_DoubleClick; ;
-            dgvRole.KeyDown += DgvRole_KeyDown;
-            dgvRole.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                LoadRoleGrid();
+                dgvRole.DoubleClick += DgvRole_DoubleClick; ;
+                dgvRole.KeyDown += DgvRole_KeyDown;
+                dgvRole.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            LoadPrivledgeGrid();
-            dgvPrivledge.DoubleClick += DgvPrivledge_DoubleClick;
-            dgvPrivledge.KeyDown += DgvPrivledge_KeyDown;
-            dgvPrivledge.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                LoadPrivledgeGrid();
+                dgvPrivledge.DoubleClick += DgvPrivledge_DoubleClick;
+                dgvPrivledge.KeyDown += DgvPrivledge_KeyDown;
+                dgvPrivledge.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
 
         }
 
         private void DgvPrivledge_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F3)
+            try
             {
-                DataGridViewRow row = dgvPrivledge.SelectedRows[0];
-
-                if (row != null)
+                if (e.KeyCode == Keys.F3)
                 {
-                    int privledgeId = 0;
+                    DataGridViewRow row = dgvPrivledge.SelectedRows[0];
 
-                    Int32.TryParse(Convert.ToString(row.Cells["PrivledgeId"].Value), out privledgeId);
-                    frmPrivledgeAddUpdate form = new frmPrivledgeAddUpdate(privledgeId);
-                    form.FormClosed -= Form_PrivledgeFormClosed;
-                    form.FormClosed += Form_PrivledgeFormClosed;
-                    form.ShowDialog();
+                    if (row != null)
+                    {
+                        int privledgeId = 0;
+
+                        Int32.TryParse(Convert.ToString(row.Cells["PrivledgeId"].Value), out privledgeId);
+                        frmPrivledgeAddUpdate form = new frmPrivledgeAddUpdate(privledgeId);
+                        form.FormClosed -= Form_PrivledgeFormClosed;
+                        form.FormClosed += Form_PrivledgeFormClosed;
+                        form.ShowDialog();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         private void DgvPrivledge_DoubleClick(object sender, EventArgs e)
         {
-            if (dgvUser.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow row = dgvPrivledge.SelectedRows[0];
-
-                if (row != null)
+                if (dgvUser.SelectedRows.Count > 0)
                 {
-                    int privledgeId = 0;
+                    DataGridViewRow row = dgvPrivledge.SelectedRows[0];
 
-                    Int32.TryParse(Convert.ToString(row.Cells["PrivledgeId"].Value), out privledgeId);
-                    frmPrivledgeAddUpdate form = new frmPrivledgeAddUpdate(privledgeId);
-                    form.FormClosed -= Form_PrivledgeFormClosed;
-                    form.FormClosed += Form_PrivledgeFormClosed;
-                    form.ShowDialog();
+                    if (row != null)
+                    {
+                        int privledgeId = 0;
+
+                        Int32.TryParse(Convert.ToString(row.Cells["PrivledgeId"].Value), out privledgeId);
+                        frmPrivledgeAddUpdate form = new frmPrivledgeAddUpdate(privledgeId);
+                        form.FormClosed -= Form_PrivledgeFormClosed;
+                        form.FormClosed += Form_PrivledgeFormClosed;
+                        form.ShowDialog();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+           
         }
 
         private void LoadRoleGrid()
@@ -137,82 +173,127 @@ namespace PharmaUI
 
         private void DgvRole_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F3)
+            try
             {
-                DataGridViewRow row = dgvRole.SelectedRows[0];
-
-                if (row != null)
+                if (e.KeyCode == Keys.F3)
                 {
-                    int roleId = 0;
+                    DataGridViewRow row = dgvRole.SelectedRows[0];
 
-                    Int32.TryParse(Convert.ToString(row.Cells["RoleId"].Value), out roleId);
-                    frmRoleAddUpdate form = new frmRoleAddUpdate(roleId);
-                    form.FormClosed -= Form_RoleFormClosed;
-                    form.FormClosed += Form_RoleFormClosed;
-                    form.ShowDialog();
+                    if (row != null)
+                    {
+                        int roleId = 0;
+
+                        Int32.TryParse(Convert.ToString(row.Cells["RoleId"].Value), out roleId);
+                        frmRoleAddUpdate form = new frmRoleAddUpdate(roleId);
+                        form.FormClosed -= Form_RoleFormClosed;
+                        form.FormClosed += Form_RoleFormClosed;
+                        form.ShowDialog();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         private void DgvRole_DoubleClick(object sender, EventArgs e)
         {
-            if (dgvRole.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow row = dgvRole.SelectedRows[0];
-
-                if (row != null)
+                if (dgvRole.SelectedRows.Count > 0)
                 {
-                    int roleId = 0;
+                    DataGridViewRow row = dgvRole.SelectedRows[0];
 
-                    Int32.TryParse(Convert.ToString(row.Cells["RoleId"].Value), out roleId);
-                    frmRoleAddUpdate form = new frmRoleAddUpdate(roleId);
-                    form.FormClosed -= Form_RoleFormClosed;
-                    form.FormClosed += Form_RoleFormClosed;
-                    form.ShowDialog();
+                    if (row != null)
+                    {
+                        int roleId = 0;
 
+                        Int32.TryParse(Convert.ToString(row.Cells["RoleId"].Value), out roleId);
+                        frmRoleAddUpdate form = new frmRoleAddUpdate(roleId);
+                        form.FormClosed -= Form_RoleFormClosed;
+                        form.FormClosed += Form_RoleFormClosed;
+                        form.ShowDialog();
+
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
-            frmUserMasterAddUpdate frm = new frmUserMasterAddUpdate();
-            frm.ShowDialog();
+            try
+            {
+                frmUserMasterAddUpdate frm = new frmUserMasterAddUpdate();
+                frm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
 
         }
 
         private void DgvUser_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F3)
+            try
             {
-                DataGridViewRow row = dgvUser.SelectedRows[0];
-
-                if (row != null)
+                if (e.KeyCode == Keys.F3)
                 {
-                    int userId = 0;
+                    DataGridViewRow row = dgvUser.SelectedRows[0];
 
-                    Int32.TryParse(Convert.ToString(row.Cells["UserId"].Value), out userId);
-                    frmUserMasterAddUpdate form = new frmUserMasterAddUpdate(userId);
-                    form.FormClosed -= Form_FormClosed;
-                    form.FormClosed += Form_FormClosed;
-                    form.ShowDialog();
+                    if (row != null)
+                    {
+                        int userId = 0;
+
+                        Int32.TryParse(Convert.ToString(row.Cells["UserId"].Value), out userId);
+                        frmUserMasterAddUpdate form = new frmUserMasterAddUpdate(userId);
+                        form.FormClosed -= Form_FormClosed;
+                        form.FormClosed += Form_FormClosed;
+                        form.ShowDialog();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadUserGrid();
-
-            if (dgvUser.Rows.Count == 0)
+            try
             {
-                if (DialogResult.Yes == MessageBox.Show(string.Format(Constants.Messages.NotExists,"User"), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                LoadUserGrid();
+
+                if (dgvUser.Rows.Count == 0)
                 {
-                    frmUserMasterAddUpdate form = new frmUserMasterAddUpdate(txtSearch.Text);
-                    form.FormClosed += Form_FormClosed;
-                    form.ShowDialog();
+                    if (DialogResult.Yes == MessageBox.Show(string.Format(Constants.Messages.NotExists, "User"), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        frmUserMasterAddUpdate form = new frmUserMasterAddUpdate(txtSearch.Text);
+                        form.FormClosed += Form_FormClosed;
+                        form.ShowDialog();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void LoadUserGrid()
@@ -257,98 +338,187 @@ namespace PharmaUI
 
         private void buttonAddNewUser_Click(object sender, EventArgs e)
         {
-            frmUserMasterAddUpdate form = new frmUserMasterAddUpdate();
-            form.FormClosed += Form_FormClosed;
-            form.ShowDialog();
+            try
+            {
+                frmUserMasterAddUpdate form = new frmUserMasterAddUpdate();
+                form.FormClosed += Form_FormClosed;
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+           
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            LoadUserGrid();
+            try
+            {
+                LoadUserGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            
         }
 
         private void DgvUser_DoubleClick(object sender, EventArgs e)
         {
-            if (dgvUser.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow row = dgvUser.SelectedRows[0];
-
-                if (row != null)
+                if (dgvUser.SelectedRows.Count > 0)
                 {
-                    int userId = 0;
+                    DataGridViewRow row = dgvUser.SelectedRows[0];
 
-                    Int32.TryParse(Convert.ToString(row.Cells["UserId"].Value), out userId);
-                    frmUserMasterAddUpdate form = new frmUserMasterAddUpdate(userId);
-                    form.FormClosed -= Form_FormClosed;
-                    form.FormClosed += Form_FormClosed;
-                    form.ShowDialog();
+                    if (row != null)
+                    {
+                        int userId = 0;
 
+                        Int32.TryParse(Convert.ToString(row.Cells["UserId"].Value), out userId);
+                        frmUserMasterAddUpdate form = new frmUserMasterAddUpdate(userId);
+                        form.FormClosed -= Form_FormClosed;
+                        form.FormClosed += Form_FormClosed;
+                        form.ShowDialog();
+
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void btnAddPrivledge_Click(object sender, EventArgs e)
         {
-            frmPrivledgeAddUpdate form = new frmPrivledgeAddUpdate();
-            form.FormClosed += Form_PrivledgeFormClosed;
-            form.ShowDialog();
+            try
+            {
+                frmPrivledgeAddUpdate form = new frmPrivledgeAddUpdate();
+                form.FormClosed += Form_PrivledgeFormClosed;
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void Form_PrivledgeFormClosed(object sender, FormClosedEventArgs e)
         {
-            LoadPrivledgeGrid();
+            try
+            {
+                LoadPrivledgeGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+           
         }
 
         private void txtPrivledgeSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadPrivledgeGrid();
-
-            if (dgvPrivledge.Rows.Count == 0)
+            try
             {
-                if (DialogResult.Yes == MessageBox.Show(string.Format(Constants.Messages.NotExists, "Privledge"), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                LoadPrivledgeGrid();
+
+                if (dgvPrivledge.Rows.Count == 0)
                 {
-                    frmPrivledgeAddUpdate form = new frmPrivledgeAddUpdate(txtPrivledgeSearch.Text);
-                    form.FormClosed += Form_PrivledgeFormClosed;
-                    form.ShowDialog();
+                    if (DialogResult.Yes == MessageBox.Show(string.Format(Constants.Messages.NotExists, "Privledge"), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        frmPrivledgeAddUpdate form = new frmPrivledgeAddUpdate(txtPrivledgeSearch.Text);
+                        form.FormClosed += Form_PrivledgeFormClosed;
+                        form.ShowDialog();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void btnAddRole_Click(object sender, EventArgs e)
         {
-            frmRoleAddUpdate form = new frmRoleAddUpdate();
-            form.FormClosed += Form_RoleFormClosed;
-            form.ShowDialog();
+            try
+            {
+                frmRoleAddUpdate form = new frmRoleAddUpdate();
+                form.FormClosed += Form_RoleFormClosed;
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
 
         private void Form_RoleFormClosed(object sender, FormClosedEventArgs e)
         {
-            LoadRoleGrid();
+            try
+            {
+                LoadRoleGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+           
         }
 
         private void txtRoleSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadRoleGrid();
-
-            if (dgvRole.Rows.Count == 0)
+            try
             {
-                if (DialogResult.Yes == MessageBox.Show(string.Format(Constants.Messages.NotExists,"Role"), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                LoadRoleGrid();
+
+                if (dgvRole.Rows.Count == 0)
                 {
-                    frmRoleAddUpdate form = new frmRoleAddUpdate(txtRoleSearch.Text);
-                    form.FormClosed += Form_RoleFormClosed;
-                    form.ShowDialog();
+                    if (DialogResult.Yes == MessageBox.Show(string.Format(Constants.Messages.NotExists, "Role"), Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        frmRoleAddUpdate form = new frmRoleAddUpdate(txtRoleSearch.Text);
+                        form.FormClosed += Form_RoleFormClosed;
+                        form.ShowDialog();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+           
         }
 
         private void dgvPrivledge_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            var dataGridView = sender as DataGridView;
-            if (dataGridView != null)
+            try
             {
-                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                var dataGridView = sender as DataGridView;
+                if (dataGridView != null)
+                {
+                    dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                    dataGridView.Columns[dataGridView.ColumnCount - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }         
         }
     }
 }

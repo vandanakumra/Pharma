@@ -19,22 +19,35 @@ namespace PharmaUI
 
         public frmCompany()
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void frmCompany_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "Company Master");
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            try
+            {
+                ExtensionMethods.FormLoad(this, "Company Master");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-            LoadDataGrid();
+                LoadDataGrid();
 
-            dgvCompanyList.CellDoubleClick += DgvCompanyList_DoubleClick;
-            dgvCompanyList.KeyDown += DgvCompanyList_KeyDown; ;
-
+                dgvCompanyList.CellDoubleClick += DgvCompanyList_DoubleClick;
+                dgvCompanyList.KeyDown += DgvCompanyList_KeyDown; ;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadDataGrid()
@@ -75,43 +88,58 @@ namespace PharmaUI
 
         private void DgvCompanyList_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Delete && dgvCompanyList.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow row = dgvCompanyList.SelectedRows[0];
-
-                if (row != null)
+                if (e.KeyCode == Keys.Delete && dgvCompanyList.SelectedRows.Count > 0)
                 {
-                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    DataGridViewRow row = dgvCompanyList.SelectedRows[0];
+
+                    if (row != null)
                     {
-                        int companyId = 0;
-                        Int32.TryParse(Convert.ToString(row.Cells["CompanyId"].Value), out companyId);
-                        applicationFacade.DeleteCompany(companyId);
-                        LoadDataGrid();
+                        if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        {
+                            int companyId = 0;
+                            Int32.TryParse(Convert.ToString(row.Cells["CompanyId"].Value), out companyId);
+                            applicationFacade.DeleteCompany(companyId);
+                            LoadDataGrid();
+                        }
                     }
                 }
+                else if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
             }
-            else if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+            catch (Exception ex)
             {
-                e.SuppressKeyPress = true;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-                base.OnKeyDown(e);
         }
         
         private void DgvCompanyList_DoubleClick(object sender, EventArgs e)
         {
-            if (dgvCompanyList.SelectedRows.Count > 0)
+
+            try
             {
-                DataGridViewRow row = dgvCompanyList.SelectedRows[0];
-
-                if (row != null)
+                if (dgvCompanyList.SelectedRows.Count > 0)
                 {
-                    int companyId = 0;
-                    Int32.TryParse(Convert.ToString(row.Cells["CompanyId"].Value), out companyId);
-                    OpenAddEdit(companyId);
+                    DataGridViewRow row = dgvCompanyList.SelectedRows[0];
 
+                    if (row != null)
+                    {
+                        int companyId = 0;
+                        Int32.TryParse(Convert.ToString(row.Cells["CompanyId"].Value), out companyId);
+                        OpenAddEdit(companyId);
+
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }        
         }
 
         private void OpenAddEdit(int companyId)
@@ -133,8 +161,16 @@ namespace PharmaUI
 
         private void frmCompanyAddUpdate_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            LoadDataGrid();
+            try
+            {
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                LoadDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -155,32 +191,61 @@ namespace PharmaUI
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDataGrid();
-
-            if (dgvCompanyList.Rows.Count == 0)
+            try
             {
-                if (DialogResult.Yes == MessageBox.Show(Constants.Messages.NotExists, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                LoadDataGrid();
+                if (dgvCompanyList.Rows.Count == 0)
                 {
-                    frmCompanyAddUpdate form = new frmCompanyAddUpdate(0, txtSearch.Text);
-                    form.FormClosed += frmCompanyAddUpdate_FormClosed;
-                    form.ShowDialog();
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.NotExists, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        frmCompanyAddUpdate form = new frmCompanyAddUpdate(0, txtSearch.Text);
+                        form.FormClosed += frmCompanyAddUpdate_FormClosed;
+                        form.ShowDialog();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            OpenAddEdit(0);
+            try
+            {
+                OpenAddEdit(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            EditCompany();
+            try
+            {
+                EditCompany();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 

@@ -21,28 +21,42 @@ namespace PharmaUI
 
         public frmCustomerItemDiscountMaster(CustomerCopanyDiscount CustomerCopanyDiscount)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            ExtensionMethods.FormLoad(this, "Customer Item Discount");
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                ExtensionMethods.FormLoad(this, "Customer Item Discount");
 
-            this.retCustomerCopanyDiscount = CustomerCopanyDiscount;
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.retCustomerCopanyDiscount = CustomerCopanyDiscount;
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void frmCustomerItemDiscountMaster_Load(object sender, EventArgs e)
         {
-            ///Display Company name
-            ///
-            this.lblSelectedCompanyName.Text = retCustomerCopanyDiscount.CompanyName;
+            try
+            {
+                ///Display Company name
+                ///
+                this.lblSelectedCompanyName.Text = retCustomerCopanyDiscount.CompanyName;
 
-            ///Display company discount
-            ///
-            this.tbxNormal.Text =Convert.ToString(retCustomerCopanyDiscount.Normal);
-            this.tbxBreakage.Text = Convert.ToString(retCustomerCopanyDiscount.Breakage);
-            this.tbxExpired.Text = Convert.ToString(retCustomerCopanyDiscount.Expired);
-            this.tbxLessExcise.Text = Convert.ToString(retCustomerCopanyDiscount.IsLessEcise ? "YES" : "NO");
+                ///Display company discount
+                ///
+                this.tbxNormal.Text = Convert.ToString(retCustomerCopanyDiscount.Normal);
+                this.tbxBreakage.Text = Convert.ToString(retCustomerCopanyDiscount.Breakage);
+                this.tbxExpired.Text = Convert.ToString(retCustomerCopanyDiscount.Expired);
+                this.tbxLessExcise.Text = Convert.ToString(retCustomerCopanyDiscount.IsLessEcise ? "YES" : "NO");
 
-            LoadGrid();
+                LoadGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadGrid()
@@ -133,9 +147,9 @@ namespace PharmaUI
 
                 this.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -147,18 +161,25 @@ namespace PharmaUI
             {
                 this.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void dgvCustomerItemDiscount_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvCustomerItemDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
+            try
             {
-                SendKeys.Send("{tab}");
+                if (dgvCustomerItemDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
+                {
+                    SendKeys.Send("{tab}");
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }         
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -174,15 +195,22 @@ namespace PharmaUI
 
         private void dgvCustomerItemDiscount_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            string columnName = dgvCustomerItemDiscount.Columns[dgvCustomerItemDiscount.CurrentCell.ColumnIndex].Name;
-
-            if (columnName.Equals("ItemName") || columnName.Equals("IsLessEcise")) return;
-
-            e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
-            TextBox tb = e.Control as TextBox;
-            if (tb != null)
+            try
             {
-                tb.KeyPress += new KeyPressEventHandler(Column_KeyPress);
+                string columnName = dgvCustomerItemDiscount.Columns[dgvCustomerItemDiscount.CurrentCell.ColumnIndex].Name;
+
+                if (columnName.Equals("ItemName") || columnName.Equals("IsLessEcise")) return;
+
+                e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column_KeyPress);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -201,46 +229,53 @@ namespace PharmaUI
 
         private void dgvCustomerItemDiscount_KeyDown(object sender, KeyEventArgs e)
         {
-            e.SuppressKeyPress = true;
-
-            if (e.KeyData == Keys.Enter)
+            try
             {
-                int rowIndex = dgvCustomerItemDiscount.CurrentCell.RowIndex;
-                int columnIndex = 0;
-                string columnName = dgvCustomerItemDiscount.Columns[dgvCustomerItemDiscount.CurrentCell.ColumnIndex].Name;
+                e.SuppressKeyPress = true;
 
-                int columnDisplayIndex = dgvCustomerItemDiscount.Columns[dgvCustomerItemDiscount.CurrentCell.ColumnIndex].DisplayIndex;
-
-                for (int i = 0; i < dgvCustomerItemDiscount.ColumnCount; i++)
+                if (e.KeyData == Keys.Enter)
                 {
-                    if (dgvCustomerItemDiscount.Columns[i].DisplayIndex == columnDisplayIndex + 1)
+                    int rowIndex = dgvCustomerItemDiscount.CurrentCell.RowIndex;
+                    int columnIndex = 0;
+                    string columnName = dgvCustomerItemDiscount.Columns[dgvCustomerItemDiscount.CurrentCell.ColumnIndex].Name;
+
+                    int columnDisplayIndex = dgvCustomerItemDiscount.Columns[dgvCustomerItemDiscount.CurrentCell.ColumnIndex].DisplayIndex;
+
+                    for (int i = 0; i < dgvCustomerItemDiscount.ColumnCount; i++)
                     {
-                        columnIndex = i;
-                        break;
-                    }
-                }
-
-                if (rowIndex == (dgvCustomerItemDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
-                {
-                    btnSave.Focus();
-
-                }
-                else if (rowIndex < (dgvCustomerItemDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
-                {
-                    for (int i = 0; i < dgvCustomerItemDiscount.Columns.Count - 1; i++)
-                    {
-                        if (dgvCustomerItemDiscount.Columns[i].DisplayIndex == 0)
+                        if (dgvCustomerItemDiscount.Columns[i].DisplayIndex == columnDisplayIndex + 1)
                         {
-                            dgvCustomerItemDiscount.CurrentCell = dgvCustomerItemDiscount[i, rowIndex + 1];
+                            columnIndex = i;
                             break;
                         }
                     }
-                }
-                else
-                {
-                    dgvCustomerItemDiscount.CurrentCell = dgvCustomerItemDiscount[columnIndex, rowIndex];
+
+                    if (rowIndex == (dgvCustomerItemDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
+                    {
+                        btnSave.Focus();
+
+                    }
+                    else if (rowIndex < (dgvCustomerItemDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
+                    {
+                        for (int i = 0; i < dgvCustomerItemDiscount.Columns.Count - 1; i++)
+                        {
+                            if (dgvCustomerItemDiscount.Columns[i].DisplayIndex == 0)
+                            {
+                                dgvCustomerItemDiscount.CurrentCell = dgvCustomerItemDiscount[i, rowIndex + 1];
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        dgvCustomerItemDiscount.CurrentCell = dgvCustomerItemDiscount[columnIndex, rowIndex];
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }        
         }
     }
 }

@@ -24,38 +24,51 @@ namespace PharmaUI
 
         public frmItemMasterAddUpdated(int itemId , string itemName)
         {
-            InitializeComponent();           
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            ExtensionMethods.SetFormProperties(this);
-            _itemId = itemId;
-            _itemName = itemName;           
+            try
+            {
+                InitializeComponent();
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                ExtensionMethods.SetFormProperties(this);
+                _itemId = itemId;
+                _itemName = itemName;
 
-            cbxComanyCode.KeyDown += CbxComanyCode_KeyDown;
-            LoadCombo();
+                cbxComanyCode.KeyDown += CbxComanyCode_KeyDown;
+                LoadCombo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CbxComanyCode_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                int index = cbxComanyCode.FindString(cbxComanyCode.Text);
-                if (index < 0)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    DialogResult result = MessageBox.Show("Comany does not exist. Do you want to add new company ?", Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
+                    int index = cbxComanyCode.FindString(cbxComanyCode.Text);
+                    if (index < 0)
                     {
-                        frmCompanyAddUpdate form = new frmCompanyAddUpdate(0,cbxComanyCode.Text);
-                        form.FormClosing += Form_FormClosing;
-                        form.ShowDialog();
+                        DialogResult result = MessageBox.Show("Comany does not exist. Do you want to add new company ?", Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                    }
-                    else
-                    {
-                        cbxComanyCode.SelectedIndex = 0;
-                        return;
+                        if (result == DialogResult.Yes)
+                        {
+                            frmCompanyAddUpdate form = new frmCompanyAddUpdate(0, cbxComanyCode.Text);
+                            form.FormClosing += Form_FormClosing;
+                            form.ShowDialog();
+                        }
+                        else
+                        {
+                            cbxComanyCode.SelectedIndex = 0;
+                            return;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -191,7 +204,7 @@ namespace PharmaUI
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -199,51 +212,59 @@ namespace PharmaUI
 
         private void frmItemMasterAddUpdatedNew_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, _itemId > 0 ? "Item Master - Update" : "Item Master - Add");
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
-
-            if (_itemId == 0)
+            try
             {
-                cbxComanyCode.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cbxComanyCode.AutoCompleteMode = AutoCompleteMode.Suggest;
-                cbxComanyCode.Enabled = true;
 
-                tbxItemName.Text = _itemName;
+                ExtensionMethods.FormLoad(this, _itemId > 0 ? "Item Master - Update" : "Item Master - Add");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
+
+                if (_itemId == 0)
+                {
+                    cbxComanyCode.AutoCompleteSource = AutoCompleteSource.ListItems;
+                    cbxComanyCode.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    cbxComanyCode.Enabled = true;
+
+                    tbxItemName.Text = _itemName;
+                }
+                else
+                {
+                    cbxComanyCode.Enabled = false;
+                }
+
+                tbxItemName.Focus();
+
+                //Event to allow only decimal entry
+                {
+                    tbxConvRate.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxPacking.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxPurchaseRate.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxMRP.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxSaleRate.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxSpecialRate.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxWholeSaleRate.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxSaleExcise.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxSCOnSale.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxScheme1.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxScheme2.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxPurchaseExcise.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxSpecialDiscount.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxSpecialDiscountOnQty.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxFixedDiscountRate.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxMaxQty.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxMaxDiscount.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxSCOnPurchase.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxTaxOnPurchase.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxDiscountRecieved.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxSpecialDiscountRecieved.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxQtyPerCase.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxMinimumStock.KeyPress += TbxAllowDecimal_KeyPress;
+                    tbxMaximumStock.KeyPress += TbxAllowDecimal_KeyPress;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                cbxComanyCode.Enabled = false;
-            }
-
-            tbxItemName.Focus();
-
-            //Event to allow only decimal entry
-            {
-                tbxConvRate.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxPacking.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxPurchaseRate.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxMRP.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxSaleRate.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxSpecialRate.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxWholeSaleRate.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxSaleExcise.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxSCOnSale.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxScheme1.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxScheme2.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxPurchaseExcise.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxSpecialDiscount.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxSpecialDiscountOnQty.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxFixedDiscountRate.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxMaxQty.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxMaxDiscount.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxSCOnPurchase.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxTaxOnPurchase.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxDiscountRecieved.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxSpecialDiscountRecieved.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxQtyPerCase.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxMinimumStock.KeyPress += TbxAllowDecimal_KeyPress;
-                tbxMaximumStock.KeyPress += TbxAllowDecimal_KeyPress;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -281,18 +302,26 @@ namespace PharmaUI
 
         private void CbxFixedDiscount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbxFixedDiscount.SelectedItem == null) return;
-
-            Choice choice;
-            Enum.TryParse<Choice>(cbxFixedDiscount.SelectedItem.ToString(), out choice);
-
-            if (choice == Choice.Yes)
+            try
             {
-                tbxFixedDiscountRate.ReadOnly = false;
+
+                if (cbxFixedDiscount.SelectedItem == null) return;
+
+                Choice choice;
+                Enum.TryParse<Choice>(cbxFixedDiscount.SelectedItem.ToString(), out choice);
+
+                if (choice == Choice.Yes)
+                {
+                    tbxFixedDiscountRate.ReadOnly = false;
+                }
+                else
+                {
+                    tbxFixedDiscountRate.ReadOnly = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                tbxFixedDiscountRate.ReadOnly = true;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -329,8 +358,16 @@ namespace PharmaUI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            errorProviderItem.Clear();
-            this.Close();
+            try
+            {
+                errorProviderItem.Clear();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+          
         }
 
         public void frmItemMasterAddUpdate_Fill_UsingExistingItem(ItemMaster existingItem)
@@ -391,18 +428,22 @@ namespace PharmaUI
 
         private void tbxItemName_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbxItemName.Text))
+            try
             {
-                errorProviderItem.SetError((sender as Control), Constants.Messages.RequiredField);
-                (sender as TextBox).SelectAll();
+                if (string.IsNullOrEmpty(tbxItemName.Text))
+                {
+                    errorProviderItem.SetError((sender as Control), Constants.Messages.RequiredField);
+                    (sender as TextBox).SelectAll();
+                }
+                else
+                {
+                    errorProviderItem.SetError((sender as Control), String.Empty);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                errorProviderItem.SetError((sender as Control), String.Empty);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-       
-        
+        }       
     }
 }

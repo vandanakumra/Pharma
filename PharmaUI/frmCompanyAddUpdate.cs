@@ -23,30 +23,46 @@ namespace PharmaUI
 
         public frmCompanyAddUpdate(int companyId,string companyName)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.CompanyId = companyId;
-            this.CompanyNameNew = companyName;
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.CompanyId = companyId;
+                this.CompanyNameNew = companyName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void frmCompanyAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, (this.CompanyId > 0) ? "Company Master - Update" : "Company Master - Add");
-
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
-
-            FillCombo();
-
-            if (this.CompanyId > 0)
+            try
             {
-                FillFormForUpdate();
+                ExtensionMethods.FormLoad(this, (this.CompanyId > 0) ? "Company Master - Update" : "Company Master - Add");
+
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
+
+                FillCombo();
+
+                if (this.CompanyId > 0)
+                {
+                    FillFormForUpdate();
+                }
+                else
+                {
+                    txtCompanyName.Text = this.CompanyNameNew;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                txtCompanyName.Text = this.CompanyNameNew;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+           
         }
      
 
@@ -117,52 +133,83 @@ namespace PharmaUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCompanyName.Text))
+            try
             {
-                throw new Exception("Company Name can not be blank");
+                if (string.IsNullOrEmpty(txtCompanyName.Text))
+                {
+                    throw new Exception("Company Name can not be blank");
+                }
+                Status status;
+                Choice choice;
+                DI di;
+
+                CompanyMaster company = new CompanyMaster();
+                company.CompanyCode = txtCompanyCode.Text;
+                company.CompanyId = this.CompanyId;
+                company.CompanyName = txtCompanyName.Text;
+                company.OrderPreferenceRating = string.IsNullOrEmpty(txtOrderPrefRating.Text) ? 0 : Convert.ToInt32(txtOrderPrefRating.Text);
+                company.BillingPreferenceRating = string.IsNullOrEmpty(txtBillingPrefRating.Text) ? 0 : Convert.ToInt32(txtBillingPrefRating.Text);
+                Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+                company.Status = status == Status.Active;
+                Enum.TryParse<Choice>(cbxSSRequired.SelectedValue.ToString(), out choice);
+                company.StockSummaryRequired = choice == Choice.Yes;
+                Enum.TryParse<DI>(cbxDI.SelectedValue.ToString(), out di);
+                company.IsDirect = di == DI.Direct;
+
+                int result = CompanyId > 0 ? applicationFacade.UpdateCompany(company) : applicationFacade.AddCompany(company);
+
+                //Close this form if operation is successful
+                if (result > 0)
+                {
+                    this.CompanyId = result;
+                    this.Close();
+                }
             }
-            Status status;
-            Choice choice;
-            DI di;
-
-            CompanyMaster company = new CompanyMaster();
-            company.CompanyCode = txtCompanyCode.Text;
-            company.CompanyId = this.CompanyId;
-            company.CompanyName = txtCompanyName.Text;
-            company.OrderPreferenceRating = string.IsNullOrEmpty(txtOrderPrefRating.Text) ? 0 : Convert.ToInt32(txtOrderPrefRating.Text);
-            company.BillingPreferenceRating = string.IsNullOrEmpty(txtBillingPrefRating.Text) ? 0 : Convert.ToInt32(txtBillingPrefRating.Text);
-            Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
-            company.Status = status == Status.Active;
-            Enum.TryParse<Choice>(cbxSSRequired.SelectedValue.ToString(), out choice);
-            company.StockSummaryRequired = choice == Choice.Yes;
-            Enum.TryParse<DI>(cbxDI.SelectedValue.ToString(), out di);
-            company.IsDirect = di == DI.Direct;
-
-            int result = CompanyId > 0 ? applicationFacade.UpdateCompany(company) : applicationFacade.AddCompany(company);
-
-            //Close this form if operation is successful
-            if (result > 0)
+            catch (Exception ex)
             {
-                this.CompanyId = result;
-                this.Close();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void txtOrderPrefRating_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back)))
-                e.Handled = true;
+            try
+            {
+                if (!(Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back)))
+                    e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void txtBillingPrefRating_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back)))
-                e.Handled = true;
+            try
+            {
+                if (!(Char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Back)))
+                    e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
 

@@ -23,50 +23,71 @@ namespace PharmaUI
 
         private void SetUIForSpecificRecordType()
         {
-            if (this.PersonRouteMaster!=null && !String.IsNullOrWhiteSpace(this.PersonRouteMaster.RecordTypeNme))
+            try
             {
-                tbPersonRouteName.Text = this.PersonRouteMaster.PersonRouteName;
-                cbPersonRouteType.SelectedIndex= cbPersonRouteType.FindString(this.PersonRouteMaster.RecordTypeNme);
-                cbPersonRouteType.Enabled = false;
+                if (this.PersonRouteMaster != null && !String.IsNullOrWhiteSpace(this.PersonRouteMaster.RecordTypeNme))
+                {
+                    tbPersonRouteName.Text = this.PersonRouteMaster.PersonRouteName;
+                    cbPersonRouteType.SelectedIndex = cbPersonRouteType.FindString(this.PersonRouteMaster.RecordTypeNme);
+                    cbPersonRouteType.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         public frmPersonRouteMasterAddUpdate(PersonRouteMaster personRouteMaster)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
 
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            if (personRouteMaster != null)
-            {
-                this.PersonRouteMaster = personRouteMaster;
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                if (personRouteMaster != null)
+                {
+                    this.PersonRouteMaster = personRouteMaster;
+                }
+                else
+                {
+                    this.PersonRouteMaster = new PersonRouteMaster();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.PersonRouteMaster = new PersonRouteMaster();
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
         private void frmPersonRouteMasterAddUpdate_Load(object sender, EventArgs e)
         {
-            //ExtensionMethods.FormLoad(this, "Person Route Master  - Add");
-            GotFocusEventRaised(this);
-            ExtensionMethods.FormLoad(this, (this.PersonRouteMaster.PersonRouteID > 0) ? "Person Route Master - Update" : "Person Route Master - Add");
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            try
+            {
+                //ExtensionMethods.FormLoad(this, "Person Route Master  - Add");
+                GotFocusEventRaised(this);
+                ExtensionMethods.FormLoad(this, (this.PersonRouteMaster.PersonRouteID > 0) ? "Person Route Master - Update" : "Person Route Master - Add");
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-            if (this.PersonRouteMaster.PersonRouteID > 0)
-            {
-                FillFormForUpdate();
-            }
-            else
-            {
-                FillCombo();
-                cbxStatus.SelectedItem = Enums.Status.Active;
-                if (this.PersonRouteMaster!=null)
+                if (this.PersonRouteMaster.PersonRouteID > 0)
                 {
-                    SetUIForSpecificRecordType();
+                    FillFormForUpdate();
                 }
+                else
+                {
+                    FillCombo();
+                    cbxStatus.SelectedItem = Enums.Status.Active;
+                    if (this.PersonRouteMaster != null)
+                    {
+                        SetUIForSpecificRecordType();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -118,37 +139,49 @@ namespace PharmaUI
             txtPersonRouteCode.Text = this.PersonRouteMaster.PersonRouteCode;
             cbPersonRouteType.SelectedValue = this.PersonRouteMaster.RecordTypeId;
             cbxStatus.SelectedItem = this.PersonRouteMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
-
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            PersonRouteMaster model = new PersonRouteMaster();
-
-            model.PersonRouteID = this.PersonRouteMaster.PersonRouteID;
-            model.RecordTypeId = (int)cbPersonRouteType.SelectedValue;
-
-            Status status;
-            Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
-            model.Status = status == Status.Active;
-
-            model.PersonRouteName = tbPersonRouteName.Text;
-            model.PersonRouteCode = this.PersonRouteMaster.PersonRouteCode;
-
-            var result = this.PersonRouteMaster.RecordTypeId > 0 && this.PersonRouteMaster.PersonRouteID > 0 ? applicationFacade.UpdatePersonRoute(model) : applicationFacade.AddPersonRoute(model);
-
-            if (result > 0)
+            try
             {
-                this.PersonRouteID = result;
-            }
+                PersonRouteMaster model = new PersonRouteMaster();
 
-            this.Close();
+                model.PersonRouteID = this.PersonRouteMaster.PersonRouteID;
+                model.RecordTypeId = (int)cbPersonRouteType.SelectedValue;
+
+                Status status;
+                Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+                model.Status = status == Status.Active;
+
+                model.PersonRouteName = tbPersonRouteName.Text;
+                model.PersonRouteCode = this.PersonRouteMaster.PersonRouteCode;
+
+                var result = this.PersonRouteMaster.RecordTypeId > 0 && this.PersonRouteMaster.PersonRouteID > 0 ? applicationFacade.UpdatePersonRoute(model) : applicationFacade.AddPersonRoute(model);
+
+                if (result > 0)
+                {
+                    this.PersonRouteID = result;
+                }
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

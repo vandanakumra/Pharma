@@ -23,43 +23,78 @@ namespace PharmaUI
 
         public frmRoleAddUpdate()
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         public frmRoleAddUpdate(int RoleId)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.RoleId = RoleId;
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.RoleId = RoleId;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         public frmRoleAddUpdate(string RoleName)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.RoleName = RoleName;
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.RoleName = RoleName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+           
         }
 
         private void frmRoleAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, RoleId > 0 ? "Role - Update" : "Role - Add");
-            GotFocusEventRaised(this);
-            KeyDownEvents(this);
-            FillCombo();
-
-            if (this.RoleId > 0)
+            try
             {
-                FillFormForUpdate();
+                ExtensionMethods.FormLoad(this, RoleId > 0 ? "Role - Update" : "Role - Add");
+                GotFocusEventRaised(this);
+                KeyDownEvents(this);
+                FillCombo();
+
+                if (this.RoleId > 0)
+                {
+                    FillFormForUpdate();
+                }
+
+                if (!string.IsNullOrEmpty(this.RoleName))
+                {
+                    txtRoleName.Text = this.RoleName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (!string.IsNullOrEmpty(this.RoleName))
-            {
-                txtRoleName.Text = this.RoleName;
-            }
+          
         }
 
         private void KeyDownEvents(Control control)
@@ -155,36 +190,52 @@ namespace PharmaUI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtRoleName.Text))
+            try
             {
-                errFrmRoleAddUpdate.SetError(txtRoleName, Constants.Messages.RequiredField);
-                txtRoleName.SelectAll();
-                txtRoleName.Focus();
-                return;
+                if (String.IsNullOrWhiteSpace(txtRoleName.Text))
+                {
+                    errFrmRoleAddUpdate.SetError(txtRoleName, Constants.Messages.RequiredField);
+                    txtRoleName.SelectAll();
+                    txtRoleName.Focus();
+                    return;
+                }
+
+                Status status;
+                Role role = new Role();
+                role.RoleId = this.RoleId;
+                role.RoleName = txtRoleName.Text;
+                Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+                role.Status = status == Status.Active;
+                role.PrivledgeList = new List<Privledge>();
+
+                for (int i = 0; i < chkPrivledgeList.Items.Count; i++)
+                {
+                    if (chkPrivledgeList.GetItemChecked(i))
+                        role.PrivledgeList.Add(new Privledge() { PrivledgeId = ((Privledge)chkPrivledgeList.Items[i]).PrivledgeId });
+                }
+                bool result = this.RoleId > 0 ? applicationFacade.UpdateRole(role) : applicationFacade.AddRole(role);
+
+                if (result)
+                    this.Close();
             }
-
-            Status status;
-            Role role = new Role();
-            role.RoleId = this.RoleId;
-            role.RoleName = txtRoleName.Text;
-            Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
-            role.Status = status == Status.Active;
-            role.PrivledgeList = new List<Privledge>();
-
-            for (int i = 0; i < chkPrivledgeList.Items.Count; i++)
+            catch (Exception ex)
             {
-                if(chkPrivledgeList.GetItemChecked(i))
-                role.PrivledgeList.Add(new Privledge() { PrivledgeId = ((Privledge)chkPrivledgeList.Items[i]).PrivledgeId });
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            bool result = this.RoleId > 0 ? applicationFacade.UpdateRole(role) : applicationFacade.AddRole(role);
-
-            if (result)
-                this.Close();
         }
     }
 }

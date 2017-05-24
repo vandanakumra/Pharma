@@ -19,79 +19,108 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         public frmItemMaster()
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+          
         }
 
         private void frmItemMaster_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "Item Master");
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            try
+            {
+                ExtensionMethods.FormLoad(this, "Item Master");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-            LoadDataGrid();
+                LoadDataGrid();
 
-            dgvItemList.CellDoubleClick += DgvItemList_CellDoubleClick;
-            dgvItemList.KeyDown += DgvCompanyList_KeyDown;
-            dgvItemList.SelectionChanged += DgvItemList_SelectionChanged;
+                dgvItemList.CellDoubleClick += DgvItemList_CellDoubleClick;
+                dgvItemList.KeyDown += DgvCompanyList_KeyDown;
+                dgvItemList.SelectionChanged += DgvItemList_SelectionChanged;
 
-            txtSearch.Focus();
+                txtSearch.Focus();
 
-            //rdName.Checked = true;
+                //rdName.Checked = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void DgvItemList_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvItemList.SelectedRows.Count > 0)
+            try
             {
-               ItemMaster selectedItem = (ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;
-                //Display selected Item data
-                lblCodeVal.Text = selectedItem.ItemCode;
-                lblStatusVal.Text = selectedItem.Status ? "ACTIVE" : "INACTIVE";
-                lblStatusVal.ForeColor = selectedItem.Status ? Color.MidnightBlue : Color.Red;
-                lblPackVal.Text = selectedItem.Packing;
-                lblLocationVal.Text = selectedItem.Location;
-                lblUPCVal.Text = selectedItem.UPC;
+                if (dgvItemList.SelectedRows.Count > 0)
+                {
+                    ItemMaster selectedItem = (ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;
+                    //Display selected Item data
+                    lblCodeVal.Text = selectedItem.ItemCode;
+                    lblStatusVal.Text = selectedItem.Status ? "ACTIVE" : "INACTIVE";
+                    lblStatusVal.ForeColor = selectedItem.Status ? Color.MidnightBlue : Color.Red;
+                    lblPackVal.Text = selectedItem.Packing;
+                    lblLocationVal.Text = selectedItem.Location;
+                    lblUPCVal.Text = selectedItem.UPC;
 
-                lblMRPVal.Text = Convert.ToString(selectedItem.MRP);
-                lblSchemeVal.Text = Convert.ToString(selectedItem.Scheme1) + " + " + Convert.ToString(selectedItem.Scheme2);
-                lblHalfSchemeVal.Text = selectedItem.IsHalfScheme ? "Y" : "N";
-                lblQtrSchemeVal.Text = selectedItem.IsQTRScheme ? "Y" : "N";
-                lblMaxQtyVal.Text = Convert.ToString(selectedItem.MaximumQty);
-                lblMaxDiscountVal.Text = Convert.ToString(selectedItem.MaximumDiscount);
-                
-                lblSaleRateVal.Text = Convert.ToString(selectedItem.SaleRate);
-                lblSpecialRateVal.Text = Convert.ToString(selectedItem.SpecialRate);
-                lblWSRateVal.Text = Convert.ToString(selectedItem.WholeSaleRate);
-                lblExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
-                lblVATVal.Text = Convert.ToString(selectedItem.TaxOnSale);
-                lblSpecialDiscountVal.Text = Convert.ToString(selectedItem.SpecialDiscountOnQty);
-                lblFixedDiscountVal.Text = Convert.ToString(selectedItem.FixedDiscountRate);
-                lblSurchargeVal.Text = Convert.ToString(selectedItem.SurchargeOnSale);
+                    lblMRPVal.Text = Convert.ToString(selectedItem.MRP);
+                    lblSchemeVal.Text = Convert.ToString(selectedItem.Scheme1) + " + " + Convert.ToString(selectedItem.Scheme2);
+                    lblHalfSchemeVal.Text = selectedItem.IsHalfScheme ? "Y" : "N";
+                    lblQtrSchemeVal.Text = selectedItem.IsQTRScheme ? "Y" : "N";
+                    lblMaxQtyVal.Text = Convert.ToString(selectedItem.MaximumQty);
+                    lblMaxDiscountVal.Text = Convert.ToString(selectedItem.MaximumDiscount);
 
-                lblPurchaseRateVal.Text = Convert.ToString(selectedItem.PurchaseRate);
-                lblPExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
-                lblPVATVal.Text = Convert.ToString(selectedItem.TaxOnPurchase);
-                lblPDiscountVal.Text = Convert.ToString(selectedItem.DiscountRecieved);
-                lblPSpecialDiscountVal.Text = Convert.ToString(selectedItem.SpecialDiscountRecieved);
-                lblPSurchargeVal.Text = Convert.ToString(selectedItem.SurchargeOnPurchase);
+                    lblSaleRateVal.Text = Convert.ToString(selectedItem.SaleRate);
+                    lblSpecialRateVal.Text = Convert.ToString(selectedItem.SpecialRate);
+                    lblWSRateVal.Text = Convert.ToString(selectedItem.WholeSaleRate);
+                    lblExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
+                    lblVATVal.Text = Convert.ToString(selectedItem.TaxOnSale);
+                    lblSpecialDiscountVal.Text = Convert.ToString(selectedItem.SpecialDiscountOnQty);
+                    lblFixedDiscountVal.Text = Convert.ToString(selectedItem.FixedDiscountRate);
+                    lblSurchargeVal.Text = Convert.ToString(selectedItem.SurchargeOnSale);
 
-                //lblPurchaseRateVal.Text = Convert.ToString(selectedItem.PurchaseRate);
-                //lblPExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
-                //lblPVATVal.Text = Convert.ToString(selectedItem.TaxOnPurchase);
-                //lblPDiscountVal.Text = Convert.ToString(selectedItem.DiscountRecieved);
-                lblMaxStockVal.Text = Convert.ToString(selectedItem.MaximumStock);
-                lblMinStockVal.Text = Convert.ToString(selectedItem.MinimumStock);
+                    lblPurchaseRateVal.Text = Convert.ToString(selectedItem.PurchaseRate);
+                    lblPExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
+                    lblPVATVal.Text = Convert.ToString(selectedItem.TaxOnPurchase);
+                    lblPDiscountVal.Text = Convert.ToString(selectedItem.DiscountRecieved);
+                    lblPSpecialDiscountVal.Text = Convert.ToString(selectedItem.SpecialDiscountRecieved);
+                    lblPSurchargeVal.Text = Convert.ToString(selectedItem.SurchargeOnPurchase);
 
+                    //lblPurchaseRateVal.Text = Convert.ToString(selectedItem.PurchaseRate);
+                    //lblPExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
+                    //lblPVATVal.Text = Convert.ToString(selectedItem.TaxOnPurchase);
+                    //lblPDiscountVal.Text = Convert.ToString(selectedItem.DiscountRecieved);
+                    lblMaxStockVal.Text = Convert.ToString(selectedItem.MaximumStock);
+                    lblMinStockVal.Text = Convert.ToString(selectedItem.MinimumStock);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void DgvItemList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                EditItem();
+                if (e.RowIndex != -1)
+                {
+                    EditItem();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -103,9 +132,9 @@ namespace PharmaUI
             {
                 OpenItemAddUpdateForm(0);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -128,8 +157,15 @@ namespace PharmaUI
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            LoadDataGrid();
+            try
+            {
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                LoadDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadDataGrid()
@@ -175,7 +211,15 @@ namespace PharmaUI
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDataGrid();
+            try
+            {
+                LoadDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -212,13 +256,26 @@ namespace PharmaUI
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            EditItem();
-           
+            try
+            {
+                EditItem();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void frmItemMaster_KeyDown(object sender, KeyEventArgs e)
@@ -231,9 +288,16 @@ namespace PharmaUI
 
         private void frmItemMaster_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (dgvItemList.CurrentRow != null)
+            try
             {
-                this.LastSelectedItemMaster = dgvItemList.CurrentRow.DataBoundItem as PharmaBusinessObjects.Master.ItemMaster;
+                if (dgvItemList.CurrentRow != null)
+                {
+                    this.LastSelectedItemMaster = dgvItemList.CurrentRow.DataBoundItem as PharmaBusinessObjects.Master.ItemMaster;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -268,31 +332,6 @@ namespace PharmaUI
         {
             ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
-        }
-
-        private void lblCode_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblStatus_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPack_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblLocation_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblUPC_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

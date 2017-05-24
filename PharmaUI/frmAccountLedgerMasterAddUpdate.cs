@@ -23,32 +23,44 @@ namespace PharmaUI
 
         public frmAccountLedgerMasterAddUpdate(int accountLedgerId,string ledgerName)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this._accountLedgerId = accountLedgerId;
-            this._accountLedgerName = ledgerName;
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this._accountLedgerId = accountLedgerId;
+                this._accountLedgerName = ledgerName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }        
         }
 
 
         private void frmAccountLedgerMasterAddUpdate_Load(object sender, EventArgs e)
-        {                       
-            ExtensionMethods.FormLoad(this, (this._accountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
+        {
+            try
+            {
+                ExtensionMethods.FormLoad(this, (this._accountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
 
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-            if (this._accountLedgerId > 0)
-            {                
-                FillFormForUpdate();
+                if (this._accountLedgerId > 0)
+                {
+                    FillFormForUpdate();
+                }
+                else
+                {
+                    FillCombo();
+                    tbAccountName.Text = _accountLedgerName;
+                }
             }
-            else
-            {                
-                FillCombo();
-                tbAccountName.Text = _accountLedgerName;                            
-            }
-
-           
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }          
         }
 
         public void GotFocusEventRaised(Control control)
@@ -183,94 +195,130 @@ namespace PharmaUI
 
         private void CbAccountLedgerType_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            var accountLedger = applicationFacade.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == (int)cbAccountLedgerType.SelectedValue).FirstOrDefault();
-
-            if (accountLedger.AccountLedgerTypeSystemName != "ControlCodes")
+            try
             {
-                var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
-                var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+                var accountLedger = applicationFacade.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == (int)cbAccountLedgerType.SelectedValue).FirstOrDefault();
 
-                cbDebitControlCode.DataSource = debitControlCodes;
-                cbCreditControlCode.DataSource = creditControlCodes;
+                if (accountLedger.AccountLedgerTypeSystemName != "ControlCodes")
+                {
+                    var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+                    var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
 
-                cbDebitControlCode.ValueMember = "AccountLedgerID";
-                cbDebitControlCode.DisplayMember = "AccountLedgerCode";
+                    cbDebitControlCode.DataSource = debitControlCodes;
+                    cbCreditControlCode.DataSource = creditControlCodes;
 
-                cbCreditControlCode.ValueMember = "AccountLedgerID";
-                cbCreditControlCode.DisplayMember = "AccountLedgerCode";
+                    cbDebitControlCode.ValueMember = "AccountLedgerID";
+                    cbDebitControlCode.DisplayMember = "AccountLedgerCode";
 
-                gbBalanceSheet.Visible = true;
+                    cbCreditControlCode.ValueMember = "AccountLedgerID";
+                    cbCreditControlCode.DisplayMember = "AccountLedgerCode";
+
+                    gbBalanceSheet.Visible = true;
+                }
+                else
+                {
+                    cbDebitControlCode.DataSource = null;
+                    cbCreditControlCode.DataSource = null;
+                    gbBalanceSheet.Visible = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                cbDebitControlCode.DataSource = null;
-                cbCreditControlCode.DataSource = null;
-                gbBalanceSheet.Visible = false;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+          
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbAccountName.Text))
+
+            try
             {
-                MessageBox.Show("Account Name can not be blank");
-                tbAccountName.Focus();
-                return;
+                if (string.IsNullOrEmpty(tbAccountName.Text))
+                {
+                    MessageBox.Show("Account Name can not be blank");
+                    tbAccountName.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(tbOpeningBalance.Text))
+                {
+                    MessageBox.Show("Account Name can not be blank");
+                    tbOpeningBalance.Focus();
+                    return;
+                }
+
+                Status status;
+
+                AccountLedgerMaster model = new AccountLedgerMaster();
+                model.AccountLedgerTypeId = (int)cbAccountLedgerType.SelectedValue;
+                model.AccountLedgerName = tbAccountName.Text;
+                model.AccountTypeId = (int)cbAccountType.SelectedValue;
+                model.OpeningBalance = Convert.ToDouble(tbOpeningBalance.Text);
+                model.CreditDebit = cbDebitCredit.Text;
+                model.AccountLedgerCode = txtAccountLedgerCode.Text;
+
+                if (cbDebitControlCode.DataSource != null)
+                {
+                    model.DebitControlCodeID = (int)cbDebitControlCode.SelectedValue;
+                    model.CreditControlCodeID = (int)cbCreditControlCode.SelectedValue;
+                }
+                model.AccountLedgerID = this._accountLedgerId;
+
+                Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+                model.Status = status == Status.Active;
+
+                var result = this._accountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
+
+                if (result > 0)
+                {
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (string.IsNullOrEmpty(tbOpeningBalance.Text))
-            {
-                MessageBox.Show("Account Name can not be blank");
-                tbOpeningBalance.Focus();
-                return;
-            }
-
-            Status status;
-
-            AccountLedgerMaster model = new AccountLedgerMaster();
-            model.AccountLedgerTypeId = (int)cbAccountLedgerType.SelectedValue;
-            model.AccountLedgerName = tbAccountName.Text;
-            model.AccountTypeId = (int)cbAccountType.SelectedValue;
-            model.OpeningBalance = Convert.ToDouble(tbOpeningBalance.Text);
-            model.CreditDebit = cbDebitCredit.Text;
-            model.AccountLedgerCode = txtAccountLedgerCode.Text;
-
-            if (cbDebitControlCode.DataSource != null)
-            {
-                model.DebitControlCodeID = (int)cbDebitControlCode.SelectedValue;
-                model.CreditControlCodeID = (int)cbCreditControlCode.SelectedValue;
-            }
-            model.AccountLedgerID = this._accountLedgerId;
-
-            Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
-            model.Status = status == Status.Active;
-
-            var result = this._accountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
-
-            if (result > 0)
-            {
-                this.Close();
-            }
+          
         }
 
         private void tbOpeningBalance_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            try
             {
-                e.Handled = true;
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+
+                // only allow one decimal point
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
+          
         }
     }
 }
