@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="94fc02de5c134692b3d7b7e693ebb6e7" Name="Diagram1">
-        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerMaster" Width="1.5" PointX="6" PointY="19.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="3.75" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.AccountType" Width="1.5" PointX="3.75" PointY="22.5" IsExpanded="true" />
+      <Diagram DiagramId="c721c4ac46b24fadbca57954f4c3b83e" Name="Diagram1">
+        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerMaster" Width="1.5" PointX="6" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="3.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.AccountType" Width="1.5" PointX="3.75" PointY="23.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.AuditHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.CompanyMaster" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.CompanyMaster" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CustomerCompanyDiscountRef" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CustomerLedger" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CustomerType" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.InterestType" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.ItemMaster" Width="1.5" PointX="8.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.ItemMaster" Width="1.5" PointX="8.25" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.Menu" Width="1.5" PointX="13" PointY="23.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.PersonalLedger" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.PersonLedgerType" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
@@ -36,6 +36,7 @@
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_CreditControlCode" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_DebitControlCode" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_ItemMaster_AccountLedgerMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="PharmaDBModel.FK_ItemMaster_AccountLedgerMasterPurchase" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_SupplierLedger_PurchaseLedger" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_CustomerCompanyDiscountRef_CompanyMaster" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_ItemMaster_CompanyMaster" ManuallyRouted="false" />

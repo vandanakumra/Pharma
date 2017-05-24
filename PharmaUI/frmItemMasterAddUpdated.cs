@@ -126,6 +126,11 @@ namespace PharmaUI
             cbxSaleType.DataSource = applicationFacade.GetAccountLedgerBySystemName("SaleLedger");
             cbxSaleType.DisplayMember = "AccountLedgerName";
             cbxSaleType.ValueMember = "AccountLedgerID";
+
+            //Fill purchase type list
+            cbxPurchaseType.DataSource = applicationFacade.GetAccountLedgerBySystemName("PurchaseLedger");
+            cbxPurchaseType.DisplayMember = "AccountLedgerName";
+            cbxPurchaseType.ValueMember = "AccountLedgerID";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -182,6 +187,7 @@ namespace PharmaUI
                 item.MinimumStock = ExtensionMethods.SafeConversionInt(tbxMinimumStock.Text);
                 item.MaximumStock = ExtensionMethods.SafeConversionInt(tbxMaximumStock.Text);
                 item.SaleTypeId = (cbxSaleType.SelectedItem as AccountLedgerMaster).AccountLedgerID;
+                item.PurchaseTypeId = (cbxPurchaseType.SelectedItem as AccountLedgerMaster).AccountLedgerID;
                 Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
                 item.Status = status == Status.Active;
 
@@ -409,6 +415,7 @@ namespace PharmaUI
                 tbxMinimumStock.Text = Convert.ToString(existingItem.MinimumStock);
                 tbxMaximumStock.Text = Convert.ToString(existingItem.MaximumStock);
                 cbxSaleType.SelectedValue = existingItem.SaleTypeId;
+                cbxPurchaseType.SelectedValue = existingItem.PurchaseTypeId;
                 cbxStatus.SelectedItem = existingItem.Status ? Status.Active : Status.Inactive;
             }
         }
