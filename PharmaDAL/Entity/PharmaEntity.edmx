@@ -321,6 +321,9 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="SaleRate" Type="float" />
+          <Property Name="WholeSaleRate" Type="float" />
+          <Property Name="SpecialRate" Type="float" />
         </EntityType>
         <EntityType Name="PurchaseEntryForm">
           <Key>
@@ -454,6 +457,9 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="SaleRate" Type="float" />
+          <Property Name="WholeSaleRate" Type="float" />
+          <Property Name="SpecialRate" Type="float" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -1349,6 +1355,9 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="SaleRate" Type="Double" />
+          <Property Name="WholeSaleRate" Type="Double" />
+          <Property Name="SpecialRate" Type="Double" />
           <NavigationProperty Name="PurchaseBookHeader" Relationship="Self.FK__Purch__Purch__76B698BF" FromRole="PurchaseBookLineItem" ToRole="PurchaseBookHeader" />
         </EntityType>
         <EntityType Name="PurchaseEntryForm">
@@ -1496,6 +1505,9 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="SaleRate" Type="Double" />
+          <Property Name="WholeSaleRate" Type="Double" />
+          <Property Name="SpecialRate" Type="Double" />
           <NavigationProperty Name="TempPurchaseBookHeader" Relationship="Self.FK__TempPurch__Purch__76B698BF" FromRole="TempPurchaseBookLineItem" ToRole="TempPurchaseBookHeader" />
         </EntityType>
         <EntityType Name="Users">
@@ -2349,6 +2361,9 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="SaleRate" ColumnName="SaleRate" />
+                <ScalarProperty Name="WholeSaleRate" ColumnName="WholeSaleRate" />
+                <ScalarProperty Name="SpecialRate" ColumnName="SpecialRate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2490,6 +2505,9 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="SaleRate" ColumnName="SaleRate" />
+                <ScalarProperty Name="WholeSaleRate" ColumnName="WholeSaleRate" />
+                <ScalarProperty Name="SpecialRate" ColumnName="SpecialRate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

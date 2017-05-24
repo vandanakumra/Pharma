@@ -37,6 +37,9 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public Nullable<double> SaleRate { get; set; }
+        public Nullable<double> WholeSaleRate { get; set; }
+        public Nullable<double> SpecialRate { get; set; }
     
         public virtual TempPurchaseBookHeader TempPurchaseBookHeader { get; set; }
     }
