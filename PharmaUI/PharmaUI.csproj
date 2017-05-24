@@ -169,11 +169,17 @@
     <Compile Include="frmPrivledgeAddUpdate.Designer.cs">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchase Entry\frmPurchaseBookLineItemUpdate.cs">
+    <Compile Include="Purchase Entry\frmLineItemScheme.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchase Entry\frmPurchaseBookLineItemUpdate.Designer.cs">
-      <DependentUpon>frmPurchaseBookLineItemUpdate.cs</DependentUpon>
+    <Compile Include="Purchase Entry\frmLineItemScheme.Designer.cs">
+      <DependentUpon>frmLineItemScheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase Entry\frmLineItemDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase Entry\frmLineItemDiscount.Designer.cs">
+      <DependentUpon>frmLineItemDiscount.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchase Entry\frmPurchaseBookTransaction.cs">
       <SubType>Form</SubType>
@@ -276,8 +282,11 @@
     <EmbeddedResource Include="frmPrivledgeAddUpdate.resx">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Purchase Entry\frmPurchaseBookLineItemUpdate.resx">
-      <DependentUpon>frmPurchaseBookLineItemUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Purchase Entry\frmLineItemScheme.resx">
+      <DependentUpon>frmLineItemScheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase Entry\frmLineItemDiscount.resx">
+      <DependentUpon>frmLineItemDiscount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase Entry\frmPurchaseBookTransaction.resx">
       <DependentUpon>frmPurchaseBookTransaction.cs</DependentUpon>

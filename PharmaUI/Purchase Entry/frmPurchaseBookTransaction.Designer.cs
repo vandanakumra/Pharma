@@ -177,7 +177,7 @@
             this.cbxPurchaseType.Location = new System.Drawing.Point(439, 64);
             this.cbxPurchaseType.Name = "cbxPurchaseType";
             this.cbxPurchaseType.Size = new System.Drawing.Size(230, 21);
-            this.cbxPurchaseType.TabIndex = 12;
+            this.cbxPurchaseType.TabIndex = 8;
             // 
             // lblPurchaseTypeName
             // 
@@ -196,7 +196,7 @@
             this.cbxPurchaseFormType.Location = new System.Drawing.Point(675, 64);
             this.cbxPurchaseFormType.Name = "cbxPurchaseFormType";
             this.cbxPurchaseFormType.Size = new System.Drawing.Size(231, 21);
-            this.cbxPurchaseFormType.TabIndex = 13;
+            this.cbxPurchaseFormType.TabIndex = 9;
             this.cbxPurchaseFormType.Visible = false;
             this.cbxPurchaseFormType.SelectedIndexChanged += new System.EventHandler(this.cbxPurchaseFormType_SelectedIndexChanged);
             // 

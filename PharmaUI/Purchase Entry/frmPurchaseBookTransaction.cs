@@ -35,6 +35,7 @@ namespace PharmaUI
         {
             ExtensionMethods.FormLoad(this, "Purchase Book Transaction");
             GotFocusEventRaised(this);
+            ExtensionMethods.EnterKeyDownForTabEvents(this);
             FillCombo();
             InitializeGrid();
             dtPurchaseDate.Focus();
@@ -49,6 +50,7 @@ namespace PharmaUI
             dgvLineItem.Columns.Add("SrNo", "SrNo");
             dgvLineItem.Columns["SrNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["SrNo"].FillWeight = 5;
+            dgvLineItem.Columns["SrNo"].ReadOnly = true;
 
             dgvLineItem.Columns.Add("ItemCode", "Item Code");
             dgvLineItem.Columns["ItemCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -138,7 +140,7 @@ namespace PharmaUI
             string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
 
             if (isCellEdit && !isBatchUpdate && lineItem.ID > 0)
-            {
+                {
                 if (columnName == "Quantity" || columnName == "Rate")
                 {
                     double amount = GetLineItemAmount(lineItem);
@@ -150,8 +152,8 @@ namespace PharmaUI
 
             if (columnName == "FreeQty")
             {
-                frmPurchaseBookLineItemUpdate updateForm = new frmPurchaseBookLineItemUpdate(lineItem, Enums.LineItemUpdateMode.Scheme);
-                updateForm.FormClosed += frmPurchaseBookLineItemUpdate_FormClosed;
+                PharmaUI.Purchase_Entry.frmLineItemScheme updateForm = new PharmaUI.Purchase_Entry.frmLineItemScheme(lineItem);
+                updateForm.FormClosed += frmLineItemScheme_FormClosed;
                 updateForm.ShowDialog();
             }
 
@@ -420,6 +422,37 @@ namespace PharmaUI
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void frmLineItemScheme_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Purchase_Entry.frmLineItemScheme lineItemScheme = (Purchase_Entry.frmLineItemScheme)sender;
+            int rowIndex = -1;
+            int colIndex = -1;
+
+            if (dgvLineItem.SelectedCells.Count > 0)
+            {
+                rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
+                colIndex = dgvLineItem.SelectedCells[0].ColumnIndex;
+
+                if (lineItemScheme.PurchaseBookLinetem != null)
+                {
+                    isBatchUpdate = true;
+                    int lineItemID = 0;
+                    Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ID"].Value), out lineItemID);
+
+                    PurchaseBookLineItem lineItem = lineItemScheme.PurchaseBookLinetem;
+                    lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+                    
+                    dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
+                    dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
+                    dgvLineItem.Rows[rowIndex].Cells["IsHalfScheme"].Value = lineItem.IsHalfScheme;
+                    
+                }
+                isBatchUpdate = false;
+            }
+
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+        }
+
         private void ItemMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
             frmItemMaster itemMaster = (frmItemMaster)sender;
@@ -441,7 +474,10 @@ namespace PharmaUI
                     lineItem.InvoiceID = invoiceID;
                     lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
 
+                    int srno = dgvLineItem.Rows.Cast<DataGridViewRow>().Max(r => Convert.ToInt32(r.Cells["SrNo"].Value));
+
                     dgvLineItem.Rows[rowIndex].Cells["ID"].Value = lineItem.ID;
+                    dgvLineItem.Rows[rowIndex].Cells["SrNo"].Value = srno + 1;
                     dgvLineItem.Rows[rowIndex].Cells["InvoiceID"].Value = invoiceID;
                     dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value = lineItem.ItemCode;
                     dgvLineItem.Rows[rowIndex].Cells["ItemName"].Value = lineItem.ItemName;
@@ -593,10 +629,6 @@ namespace PharmaUI
         {
             double? amount = 0L;
             amount = item.Quantity * item.Rate;
-            amount = amount - ((item.Discount ?? 0 * amount ?? 0) / 100);
-            amount = amount - ((item.SpecialDiscount ?? 0 * amount ?? 0) / 100);
-            amount = amount - ((item.VolumeDiscount ?? 0 * amount ?? 0) / 100);
-
             return amount ?? 0;
         }
 
