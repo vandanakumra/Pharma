@@ -63,11 +63,18 @@ namespace PharmaDAL.Transaction
                 item.SpecialDiscount = lineItem.SpecialDiscount;
                 item.MRP = lineItem.MRP;
                 item.Excise = lineItem.Excise;
-              //  item.Expiry = lineItem.Expiry == DateTime.MinValue ? Convert.ToDateTime(DBNull.Value) : lineItem.Expiry;
+                if (lineItem.Expiry == DateTime.MinValue)
+                    item.Expiry = null;
+                else
+                    item.Expiry = lineItem.Expiry;
                 item.Scheme1 = lineItem.Scheme1;
                 item.Scheme2 = lineItem.Scheme2;
                 item.IsHalfScheme = lineItem.IsHalfScheme;
                 item.VolumeDiscount = lineItem.VolumeDiscount;
+                item.SpecialRate = lineItem.SpecialRate;
+                item.WholeSaleRate = lineItem.WholeSaleRate;
+                item.SaleRate = lineItem.SaleRate;
+                item.PurchaseTaxType = lineItem.PurchaseTaxType;
 
                 context.TempPurchaseBookLineItem.Add(item);
                 context.SaveChanges();
@@ -103,7 +110,12 @@ namespace PharmaDAL.Transaction
                     item.Scheme1 = lineItem.Scheme1;
                     item.Scheme2 = lineItem.Scheme2;
                     item.IsHalfScheme = lineItem.IsHalfScheme;
-                    context.TempPurchaseBookLineItem.Add(item);
+                    item.SpecialRate = lineItem.SpecialRate;
+                    item.WholeSaleRate = lineItem.WholeSaleRate;
+                    item.SaleRate = lineItem.SaleRate;
+                    item.PurchaseTaxType = "L000012";//lineItem.PurchaseTaxType;
+                    //IsNewRate and Purchase Rate
+                    //context.TempPurchaseBookLineItem.Add(item);
                     context.SaveChanges();
                 }
 

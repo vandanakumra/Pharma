@@ -169,6 +169,12 @@
     <Compile Include="frmPrivledgeAddUpdate.Designer.cs">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase Entry\frmLineItemBriefDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase Entry\frmLineItemBriefDiscount.Designer.cs">
+      <DependentUpon>frmLineItemBriefDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchase Entry\frmLineItemScheme.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrivledgeAddUpdate.resx">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase Entry\frmLineItemBriefDiscount.resx">
+      <DependentUpon>frmLineItemBriefDiscount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase Entry\frmLineItemScheme.resx">
       <DependentUpon>frmLineItemScheme.cs</DependentUpon>

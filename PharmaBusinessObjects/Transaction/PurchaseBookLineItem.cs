@@ -29,23 +29,19 @@ namespace PharmaBusinessObjects.Transaction
         public DateTime Expiry { get; set; }
         public double? TaxOnPurchase { get; set; }
         public DateTime PurchaseDate { get; set; }
-
+        public bool IsNewRate { get; set; }
+        public double SaleRate { get; set; }
+        public double WholeSaleRate { get; set; }
+        public double SpecialRate { get; set; }
+        public string PurchaseTaxType { get; set; }
 
         public PurchaseBookLineItem()
         {
-            Quantity = 0;
-            ID = 0;
-            SrNo = 0;
-            InvoiceID = 0;
-            FreeQty = 0;
-            BatchNumber = string.Empty;
-            ItemCode = string.Empty;
-            ItemName = string.Empty;
-            MRP = 0L;
-            Scheme1 = 0;
-            Scheme2 = 0;
-            Amount = 0L;
-            Rate = 0L;
+            BatchNumber = ItemName = ItemCode = PurchaseTaxType = string.Empty;
+            Quantity = ID = SrNo = InvoiceID = FreeQty = Scheme2 = Scheme1 = 0;
+            Rate = SpecialRate = WholeSaleRate = SaleRate = Amount = MRP = 0L;
+            VolumeDiscount = SpecialDiscount = Discount = TaxOnPurchase = Excise = 0L;
+            Expiry = PurchaseDate = DateTime.MinValue;
         }
     }
 }
