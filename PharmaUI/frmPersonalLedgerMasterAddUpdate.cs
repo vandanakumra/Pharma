@@ -24,12 +24,20 @@ namespace PharmaUI
 
         public frmPersonalLedgerMasterAddUpdate(int personLedgerid , string personLedgerName)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            _personLedgerid = personLedgerid;
-            _personLedgerName = personLedgerName;           
-            LoadCombo();
+            try
+            {
+
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                _personLedgerid = personLedgerid;
+                _personLedgerName = personLedgerName;
+                LoadCombo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -42,14 +50,22 @@ namespace PharmaUI
 
         private void frmPersonalLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, _personLedgerid > 0 ? "Personal Diary - Update" : "Personal Diary - Add");
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
-            GotFocusEventRaised(this);
-
-            if(_personLedgerid == 0)
+            try
             {
-                tbxPersonalLedgerName.Text = _personLedgerName;
+                ExtensionMethods.FormLoad(this, _personLedgerid > 0 ? "Personal Diary - Update" : "Personal Diary - Add");
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
+                GotFocusEventRaised(this);
+
+                if (_personLedgerid == 0)
+                {
+                    tbxPersonalLedgerName.Text = _personLedgerName;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+          
         }
 
         public void GotFocusEventRaised(Control control)
@@ -87,7 +103,15 @@ namespace PharmaUI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -148,54 +172,75 @@ namespace PharmaUI
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
         public void frmPersonalLedgerMasterAddUpdate_Fill_UsingExistingItem(PersonalLedgerMaster existingItem)
         {
-            if (existingItem != null)
+            try
             {
-                tbxPersonalLedgerName.Text = existingItem.PersonalLedgerName;
-                tbxPersonalLedgerShortName.Text = existingItem.PersonalLedgerShortName;
-                tbxAddress.Text = existingItem.Address;
-                tbxContactPerson.Text = existingItem.ContactPerson;
-                tbxMobile.Text = existingItem.Mobile;
-                tbxPager.Text = existingItem.Pager;
-                tbxFax.Text = existingItem.Fax;
-                tbxOfficePhone.Text = existingItem.OfficePhone;
-                tbxResidentPhone.Text = existingItem.ResidentPhone;
-                tbxEmailAddress.Text = existingItem.EmailAddress;
-                cbxStatus.SelectedItem= existingItem.Status ? Status.Active : Status.Inactive;
+                if (existingItem != null)
+                {
+                    tbxPersonalLedgerName.Text = existingItem.PersonalLedgerName;
+                    tbxPersonalLedgerShortName.Text = existingItem.PersonalLedgerShortName;
+                    tbxAddress.Text = existingItem.Address;
+                    tbxContactPerson.Text = existingItem.ContactPerson;
+                    tbxMobile.Text = existingItem.Mobile;
+                    tbxPager.Text = existingItem.Pager;
+                    tbxFax.Text = existingItem.Fax;
+                    tbxOfficePhone.Text = existingItem.OfficePhone;
+                    tbxResidentPhone.Text = existingItem.ResidentPhone;
+                    tbxEmailAddress.Text = existingItem.EmailAddress;
+                    cbxStatus.SelectedItem = existingItem.Status ? Status.Active : Status.Inactive;
+                }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void tbxLedgerName_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(tbxPersonalLedgerName.Text))
+            try
             {
-                errorProviderPerLedger.SetError((sender as Control), Constants.Messages.RequiredField);
-                (sender as TextBox).SelectAll();
+                if (String.IsNullOrWhiteSpace(tbxPersonalLedgerName.Text))
+                {
+                    errorProviderPerLedger.SetError((sender as Control), Constants.Messages.RequiredField);
+                    (sender as TextBox).SelectAll();
+                }
+                else
+                {
+                    errorProviderPerLedger.SetError((sender as Control), String.Empty);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                errorProviderPerLedger.SetError((sender as Control), String.Empty);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+           
         }
 
         private void tbxEmailAddress_Vaidating(object sender, CancelEventArgs e)
         {
-            if (!ExtensionMethods.IsValidEmail(tbxEmailAddress.Text))
+            try
             {
-                errorProviderPerLedger.SetError((sender as Control), Constants.Messages.InValidEmail);
-                (sender as TextBox).SelectAll();
+                if (!ExtensionMethods.IsValidEmail(tbxEmailAddress.Text))
+                {
+                    errorProviderPerLedger.SetError((sender as Control), Constants.Messages.InValidEmail);
+                    (sender as TextBox).SelectAll();
+                }
+                else
+                {
+                    errorProviderPerLedger.SetError((sender as Control), String.Empty);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                errorProviderPerLedger.SetError((sender as Control), String.Empty);
-            }
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }          
         }
     }
 }

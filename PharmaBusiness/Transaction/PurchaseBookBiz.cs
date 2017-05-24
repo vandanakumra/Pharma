@@ -50,5 +50,15 @@ namespace PharmaBusiness.Transaction
             return new PurchaseBookDao(this.LoggedInUser).GetLastNBatchNoForSupplierItem(supplierCode,itemCode);
         }
 
+        internal bool SavePurchaseData(int purchaseBookHeaderID)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).SavePurchaseData(purchaseBookHeaderID);
+        }
+
+        internal PharmaBusinessObjects.Transaction.PurchaseBookHeader GetFinalAmountWithTaxForPurchase(int purchaseBookHeaderID)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).GetFinalAmountWithTaxForPurchase(purchaseBookHeaderID);
+        }
+
     }
 }

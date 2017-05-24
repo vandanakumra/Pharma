@@ -17,16 +17,29 @@ namespace PharmaUI
 
         public frmDefault()
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.Dock = DockStyle.Fill;
-
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.Dock = DockStyle.Fill;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void frmDefault_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.HomeFormLoad(this, "List Of Hot Keys");
+            try
+            {
+                ExtensionMethods.HomeFormLoad(this, "List Of Hot Keys");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     }

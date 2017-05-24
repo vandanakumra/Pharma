@@ -699,6 +699,15 @@ namespace PharmaBusiness
         }
 
 
+        public bool SavePurchaseData(int purchaseBookHeaderID)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).SavePurchaseData(purchaseBookHeaderID);
+        }
+
+        public PharmaBusinessObjects.Transaction.PurchaseBookHeader GetFinalAmountWithTaxForPurchase(int purchaseBookHeaderID)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetFinalAmountWithTaxForPurchase(purchaseBookHeaderID);
+        }
 
         #endregion
 

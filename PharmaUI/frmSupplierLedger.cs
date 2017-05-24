@@ -19,35 +19,71 @@ namespace PharmaUI
 
         public frmSupplierLedger()
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         private void frmSupplierLedger_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "Ledger Master");
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            try
+            {
 
-            LoadDataGrid();
-            dgvSupplier.CellDoubleClick += dgvSupplier_DoubleClick;                 
+                ExtensionMethods.FormLoad(this, "Ledger Master");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
+
+                LoadDataGrid();
+                dgvSupplier.CellDoubleClick += dgvSupplier_DoubleClick;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+               
         }
         
         private void dgvSupplier_DoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                PharmaBusinessObjects.Master.SupplierLedgerMaster model = (PharmaBusinessObjects.Master.SupplierLedgerMaster)dgvSupplier.Rows[e.RowIndex].DataBoundItem;
+                if (e.RowIndex != -1)
+                {
+                    PharmaBusinessObjects.Master.SupplierLedgerMaster model = (PharmaBusinessObjects.Master.SupplierLedgerMaster)dgvSupplier.Rows[e.RowIndex].DataBoundItem;
 
-                AddEditSupplierLedger(model.SupplierLedgerId);
+                    AddEditSupplierLedger(model.SupplierLedgerId);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+          
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            LoadDataGrid();
+            try
+            {
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                LoadDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void LoadDataGrid()
@@ -128,36 +164,81 @@ namespace PharmaUI
 
         private void frmSupplierLedger_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (dgvSupplier.CurrentRow != null)
+            try
             {
-                this.LastSelectedSupplier = dgvSupplier.CurrentRow.DataBoundItem as PharmaBusinessObjects.Master.SupplierLedgerMaster;
+                if (dgvSupplier.CurrentRow != null)
+                {
+                    this.LastSelectedSupplier = dgvSupplier.CurrentRow.DataBoundItem as PharmaBusinessObjects.Master.SupplierLedgerMaster;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
 
         }
 
         private void frmSupplierLedger_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            try
             {
-                this.Close();
+                if (e.KeyCode == Keys.Escape)
+                {
+                    this.Close();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
 
         //Action buttons 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDataGrid();
+            try
+            {
+                LoadDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            AddEditSupplierLedger(0);
+            try
+            {
+                AddEditSupplierLedger(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            EditLedger();
+            try
+            {
+                EditLedger();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+           
         }
 
         private void EditLedger()
@@ -172,12 +253,21 @@ namespace PharmaUI
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            try
             {
-                //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
-                //applicationFacade.DeleteItem(itemToBeRemoved);
-                //LoadDataGrid(0);
+                if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
+                    //applicationFacade.DeleteItem(itemToBeRemoved);
+                    //LoadDataGrid(0);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            
         }
 
         //Set focus for the controls
@@ -215,12 +305,21 @@ namespace PharmaUI
 
         private void dgvSupplier_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+            try
             {
-                e.SuppressKeyPress = true;
+                if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
             }
-            else
-                base.OnKeyDown(e);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+          
         }
     }
 }

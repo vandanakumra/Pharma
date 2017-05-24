@@ -21,51 +21,95 @@ namespace PharmaUI
 
         public frmPersonRouteMaster()
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+          
         }
 
         private void frmPersonRouteMaster_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "Person Route Master");
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            try
+            {
+                ExtensionMethods.FormLoad(this, "Person Route Master");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-            LoadCombo();
-            LoadDataGrid(0);
-            dgvPersonRoute.CellDoubleClick += DgvPersonRoute_CellDoubleClick;
-            dgvPersonRoute.KeyDown += DgvPersonRoute_KeyDown;
-            cbPersonRouteType.SelectedIndexChanged += CbPersonRouteType_SelectedIndexChanged;
+                LoadCombo();
+                LoadDataGrid(0);
+                dgvPersonRoute.CellDoubleClick += DgvPersonRoute_CellDoubleClick;
+                dgvPersonRoute.KeyDown += DgvPersonRoute_KeyDown;
+                cbPersonRouteType.SelectedIndexChanged += CbPersonRouteType_SelectedIndexChanged;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void CbPersonRouteType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadDataGrid((int)cbPersonRouteType.SelectedValue);
+            try
+            {
+                LoadDataGrid((int)cbPersonRouteType.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void DgvPersonRoute_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode==Keys.Enter && NextPersonRoute!= null)
+            try
             {
-                this.Close();
+                if (e.KeyCode == Keys.Enter && NextPersonRoute != null)
+                {
+                    this.Close();
+                }
+                if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
             }
-            if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+            catch (Exception ex)
             {
-                e.SuppressKeyPress = true;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-                base.OnKeyDown(e);
+
+           
         }
 
         private void DgvPersonRoute_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                PharmaBusinessObjects.Master.PersonRouteMaster model = (PharmaBusinessObjects.Master.PersonRouteMaster)dgvPersonRoute.Rows[e.RowIndex].DataBoundItem;
+                if (e.RowIndex != -1)
+                {
+                    PharmaBusinessObjects.Master.PersonRouteMaster model = (PharmaBusinessObjects.Master.PersonRouteMaster)dgvPersonRoute.Rows[e.RowIndex].DataBoundItem;
 
-                AddEditPersonRoute(model);
+                    AddEditPersonRoute(model);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         private void LoadCombo()
@@ -105,23 +149,30 @@ namespace PharmaUI
 
         private void frmPersonRouteMasterAddUpdate_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            if(this.NextPersonRoute != null)
+            try
             {
-                LoadDataGrid((int)this.cbPersonRouteType.SelectedValue);
-            }
-            else
-            {
-                LoadDataGrid(0);
-            }
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                if (this.NextPersonRoute != null)
+                {
+                    LoadDataGrid((int)this.cbPersonRouteType.SelectedValue);
+                }
+                else
+                {
+                    LoadDataGrid(0);
+                }
 
-            List<DataGridViewRow> filteredRow = dgvPersonRoute.Rows.OfType<DataGridViewRow>().Where(x => (int)x.Cells["PersonRouteID"].Value == (sender as frmPersonRouteMasterAddUpdate).PersonRouteID).ToList();
-            if (filteredRow.Count > 0)
-            {
-                dgvPersonRoute.ClearSelection();
-                filteredRow.First().Selected = true;
-                filteredRow.First().Cells["PersonRouteCode"].Selected = true;
+                List<DataGridViewRow> filteredRow = dgvPersonRoute.Rows.OfType<DataGridViewRow>().Where(x => (int)x.Cells["PersonRouteID"].Value == (sender as frmPersonRouteMasterAddUpdate).PersonRouteID).ToList();
+                if (filteredRow.Count > 0)
+                {
+                    dgvPersonRoute.ClearSelection();
+                    filteredRow.First().Selected = true;
+                    filteredRow.First().Cells["PersonRouteCode"].Selected = true;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }           
         }
         
         void AddEditPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster model)
@@ -194,32 +245,73 @@ namespace PharmaUI
 
         private void frmPersonRouteMaster_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(dgvPersonRoute.CurrentRow != null)
+            try
             {
-                this.LastSelectedPersonRoute = dgvPersonRoute.CurrentRow.DataBoundItem as PersonRouteMaster;
+                if (dgvPersonRoute.CurrentRow != null)
+                {
+                    this.LastSelectedPersonRoute = dgvPersonRoute.CurrentRow.DataBoundItem as PersonRouteMaster;
+                }
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }          
         }
 
         //Action Buttons
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDataGrid((int)cbPersonRouteType.SelectedValue);
+
+            try
+            {
+                LoadDataGrid((int)cbPersonRouteType.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            AddEditPersonRoute(NextPersonRoute);
+            try
+            {
+                AddEditPersonRoute(NextPersonRoute);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            EditPersonRoute();
+            try
+            {
+                EditPersonRoute();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 

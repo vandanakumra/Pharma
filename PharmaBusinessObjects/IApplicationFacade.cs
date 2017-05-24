@@ -123,6 +123,8 @@ namespace PharmaBusinessObjects
         int InsertTempPurchaseLineItem(PurchaseBookLineItem lineItem);
         int UpdateTempPurchaseLineItem(PurchaseBookLineItem lineItem);
         List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
+        bool SavePurchaseData(int purchaseBookHeaderID);
+        PharmaBusinessObjects.Transaction.PurchaseBookHeader GetFinalAmountWithTaxForPurchase(int purchaseBookHeaderID);
         #endregion
     }
 

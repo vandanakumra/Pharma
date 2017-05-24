@@ -57,6 +57,7 @@ namespace PharmaDAL.Master
                     //MinimumStock = p.MinimumStock,
                     //MaximumStock = p.MaximumStock,
                     SaleTypeId = p.SaleTypeId,
+                    PurchaseTypeId=p.PurchaseTypeId,
                     Status = p.Status
 
                 }).ToList();
@@ -110,6 +111,7 @@ namespace PharmaDAL.Master
                         //MinimumStock = newItem.MinimumStock,
                         //MaximumStock = newItem.MaximumStock,
                         SaleTypeId = newItem.SaleTypeId,
+                        PurchaseTypeId=newItem.PurchaseTypeId,
                         Status = newItem.Status,
                         CreatedBy = this.LoggedInUser.Username,
                         CreatedOn = System.DateTime.Now
@@ -175,6 +177,7 @@ namespace PharmaDAL.Master
                     //existingItemDB.MinimumStock = existingItem.MinimumStock;
                     //existingItemDB.MaximumStock = existingItem.MaximumStock;
                     existingItemDB.SaleTypeId = existingItem.SaleTypeId;
+                    existingItemDB.PurchaseTypeId = existingItem.PurchaseTypeId;
                     existingItemDB.Status = existingItem.Status;
                     existingItemDB.ModifiedBy = this.LoggedInUser.Username;
                     existingItemDB.ModifiedOn = System.DateTime.Now;
@@ -269,6 +272,7 @@ namespace PharmaDAL.Master
                                                     //MinimumStock = p.MinimumStock,
                                                     //MaximumStock = p.MaximumStock,
                                                     SaleTypeId = p.SaleTypeId,
+                                                    PurchaseTypeId = p.PurchaseTypeId,
                                                     Status = p.Status
 
                                                 }).ToList();

@@ -23,29 +23,47 @@ namespace PharmaUI
 
         public frmSupplierLedgerAddUpdate(int supplierId,string supplierName)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.SupplierId = supplierId;
-            SupplierNameNew = supplierName;
-            
+            try
+            {
+
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.SupplierId = supplierId;
+                SupplierNameNew = supplierName;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void frmSupplierLedgerAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");          
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
-            FillCombo();
+            try
+            {
+                ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
+                FillCombo();
 
-            if (this.SupplierId > 0)
-            {
-                FillFormForUpdate();
+                if (this.SupplierId > 0)
+                {
+                    FillFormForUpdate();
+                }
+                else
+                {
+                    ucSupplierCustomerInfo.CustomerSupplierName = SupplierNameNew;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ucSupplierCustomerInfo.CustomerSupplierName = SupplierNameNew;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+          
         }
 
         public void GotFocusEventRaised(Control control)
@@ -126,68 +144,95 @@ namespace PharmaUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo.CustomerSupplierName))
+            try
             {
-                throw new Exception("Supplier Name can not be blank");
+                if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo.CustomerSupplierName))
+                {
+                    throw new Exception("Supplier Name can not be blank");
+                }
+
+                Status status;
+                int areaId = 0;
+                decimal openingBal = 0.00M;
+
+                SupplierLedgerMaster supplier = new SupplierLedgerMaster();
+                supplier.SupplierLedgerCode = this.ucSupplierCustomerInfo.Code;
+                supplier.SupplierLedgerName = this.ucSupplierCustomerInfo.CustomerSupplierName;
+                supplier.SupplierLedgerShortName = this.ucSupplierCustomerInfo.ShortName;
+                supplier.Address = this.ucSupplierCustomerInfo.Address;
+                supplier.ContactPerson = this.ucSupplierCustomerInfo.ContactPerson;
+                Enum.TryParse<Status>(this.ucSupplierCustomerInfo.Status.ToString(), out status);
+                supplier.Status = status == Status.Active;
+                supplier.CreditDebit = this.ucSupplierCustomerInfo.CreditDebit == Enums.TransType.C ? "C" : "D";
+                Int32.TryParse(cbxArea.SelectedValue.ToString(), out areaId);
+                supplier.AreaId = areaId;
+                supplier.DLNo = txtDLNo.Text;
+                supplier.EmailAddress = this.ucSupplierCustomerInfo.EmailAddress;
+                supplier.Mobile = this.ucSupplierCustomerInfo.Mobile;
+                supplier.OfficePhone = this.ucSupplierCustomerInfo.OfficePhone;
+
+                int purchaseTypeId = 0;
+                Int32.TryParse(Convert.ToString(cbxPurchaseType.SelectedValue), out purchaseTypeId);
+                supplier.PurchaseTypeId = purchaseTypeId;
+
+                decimal.TryParse(this.ucSupplierCustomerInfo.OpeningBal, out openingBal);
+                supplier.OpeningBal = openingBal;
+                supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
+                supplier.TINNo = txtTin.Text;
+                supplier.TaxRetail = this.ucSupplierCustomerInfo.TaxRetail == TaxRetail.R ? "R" : "T";
+                supplier.SupplierLedgerId = SupplierId;
+
+                int result = SupplierId > 0 ? applicationFacade.UpdateSupplierLedger(supplier) : applicationFacade.AddSupplierLedger(supplier);
+
+                //Close this form if operation is successful
+                if (result > 0)
+                {
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            Status status;
-            int areaId = 0;
-            decimal openingBal = 0.00M;
-            
-            SupplierLedgerMaster supplier = new SupplierLedgerMaster();
-            supplier.SupplierLedgerCode = this.ucSupplierCustomerInfo.Code;
-            supplier.SupplierLedgerName = this.ucSupplierCustomerInfo.CustomerSupplierName;
-            supplier.SupplierLedgerShortName = this.ucSupplierCustomerInfo.ShortName;
-            supplier.Address = this.ucSupplierCustomerInfo.Address;
-            supplier.ContactPerson = this.ucSupplierCustomerInfo.ContactPerson;
-            Enum.TryParse<Status>(this.ucSupplierCustomerInfo.Status.ToString(), out status);
-            supplier.Status = status == Status.Active;
-            supplier.CreditDebit = this.ucSupplierCustomerInfo.CreditDebit == Enums.TransType.C ? "C" : "D";
-            Int32.TryParse(cbxArea.SelectedValue.ToString(), out areaId);
-            supplier.AreaId = areaId;
-            supplier.DLNo = txtDLNo.Text;
-            supplier.EmailAddress = this.ucSupplierCustomerInfo.EmailAddress;
-            supplier.Mobile = this.ucSupplierCustomerInfo.Mobile;
-            supplier.OfficePhone = this.ucSupplierCustomerInfo.OfficePhone;
-
-            int purchaseTypeId = 0;
-            Int32.TryParse(Convert.ToString(cbxPurchaseType.SelectedValue), out purchaseTypeId);
-            supplier.PurchaseTypeId = purchaseTypeId;
-
-            decimal.TryParse(this.ucSupplierCustomerInfo.OpeningBal, out openingBal);
-            supplier.OpeningBal = openingBal;
-            supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
-            supplier.TINNo = txtTin.Text;
-            supplier.TaxRetail =this.ucSupplierCustomerInfo.TaxRetail  == TaxRetail.R ? "R" : "T";
-            supplier.SupplierLedgerId = SupplierId;
-
-            int result = SupplierId > 0 ? applicationFacade.UpdateSupplierLedger(supplier) : applicationFacade.AddSupplierLedger(supplier);
-
-            //Close this form if operation is successful
-            if (result > 0)
-            {
-                this.Close();
-            }
+           
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void txtOpeningBal_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            try
             {
-                e.Handled = true;
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                {
+                    e.Handled = true;
+                }
+
+                // only allow one decimal point
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
+           
         }
 
     }

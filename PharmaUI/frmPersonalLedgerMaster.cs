@@ -20,40 +20,64 @@ namespace PharmaUI
 
         public frmPersonalLedgerMaster()
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+          
         }
 
 
         private void frmPersonalLedgerMaster_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "Personal Diary");
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            try
+            {
+                ExtensionMethods.FormLoad(this, "Personal Diary");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-            FillGrid();
-            dgvPersonalLedger.CellDoubleClick += dgvPersonalLedger_CellDoubleClick;
-            dgvPersonalLedger.KeyDown += DgvPersonalLedger_KeyDown;
+                FillGrid();
+                dgvPersonalLedger.CellDoubleClick += dgvPersonalLedger_CellDoubleClick;
+                dgvPersonalLedger.KeyDown += DgvPersonalLedger_KeyDown;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void DgvPersonalLedger_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && dgvPersonalLedger.SelectedRows.Count > 0)
+            try
             {
-                if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (e.KeyCode == Keys.Delete && dgvPersonalLedger.SelectedRows.Count > 0)
                 {
-                    //PersonalLedgerMaster itemToBeRemoved = (PersonalLedgerMaster)dgvPersonalLedger.SelectedRows[0].DataBoundItem;
-                    //applicationFacade.DeletePersonalLedger(itemToBeRemoved);
-                    //FillGrid();
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        //PersonalLedgerMaster itemToBeRemoved = (PersonalLedgerMaster)dgvPersonalLedger.SelectedRows[0].DataBoundItem;
+                        //applicationFacade.DeletePersonalLedger(itemToBeRemoved);
+                        //FillGrid();
+                    }
                 }
+                else if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
+
             }
-            else if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+            catch (Exception ex)
             {
-                e.SuppressKeyPress = true;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-                base.OnKeyDown(e);
+           
         }
 
         private void FillGrid()
@@ -106,18 +130,34 @@ namespace PharmaUI
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            FillGrid();
+            try
+            {
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                FillGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
 
 
         private void dgvPersonalLedger_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                EditPersonLedger();
+                if (e.RowIndex != -1)
+                {
+                    EditPersonLedger();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -153,22 +193,53 @@ namespace PharmaUI
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            FillGrid();
+            try
+            {
+                FillGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+          
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            OpenAddEdit(0);
+            try
+            {
+                OpenAddEdit(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            EditPersonLedger();
+            try
+            {
+                EditPersonLedger();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //Set focus for the controls

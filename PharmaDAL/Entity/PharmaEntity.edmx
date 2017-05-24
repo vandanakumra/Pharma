@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -195,6 +195,7 @@
           <Property Name="MinimumStock" Type="int" />
           <Property Name="MaximumStock" Type="int" />
           <Property Name="SaleTypeId" Type="int" Nullable="false" />
+          <Property Name="PurchaseTypeId" Type="int" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -712,6 +713,18 @@ warning 6035: The relationship 'FK__TempPurch__ItemC__1BF30A66' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItemMaster_AccountLedgerMasterPurchase">
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountLedgerMaster">
+              <PropertyRef Name="AccountLedgerID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="PurchaseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ItemMaster_CompanyMaster">
           <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
           <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
@@ -951,6 +964,10 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_AccountLedgerMasterPurchase" Association="Self.FK_ItemMaster_AccountLedgerMasterPurchase">
+            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
           <AssociationSet Name="FK_ItemMaster_CompanyMaster" Association="Self.FK_ItemMaster_CompanyMaster">
             <End Role="CompanyMaster" EntitySet="CompanyMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
@@ -1023,6 +1040,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
           <NavigationProperty Name="AccountLedgerMaster11" Relationship="Self.FK_AccountLedgerMaster_DebitControlCode" FromRole="AccountLedgerMaster" ToRole="AccountLedgerMaster1" />
           <NavigationProperty Name="AccountLedgerMaster3" Relationship="Self.FK_AccountLedgerMaster_DebitControlCode" FromRole="AccountLedgerMaster1" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="AccountLedgerMaster" ToRole="ItemMaster" />
+          <NavigationProperty Name="ItemMaster1" Relationship="Self.FK_ItemMaster_AccountLedgerMasterPurchase" FromRole="AccountLedgerMaster" ToRole="ItemMaster" />
           <NavigationProperty Name="SupplierLedger" Relationship="Self.FK_SupplierLedger_PurchaseLedger" FromRole="AccountLedgerMaster" ToRole="SupplierLedger" />
         </EntityType>
         <EntityType Name="AccountLedgerType">
@@ -1213,12 +1231,14 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
           <Property Name="MinimumStock" Type="Int32" />
           <Property Name="MaximumStock" Type="Int32" />
           <Property Name="SaleTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseTypeId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
+          <NavigationProperty Name="AccountLedgerMaster1" Relationship="Self.FK_ItemMaster_AccountLedgerMasterPurchase" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ItemMaster_CompanyMaster" FromRole="ItemMaster" ToRole="CompanyMaster" />
           <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_ItemMaster" FromRole="ItemMaster" ToRole="CustomerCompanyDiscountRef" />
         </EntityType>
@@ -1588,6 +1608,18 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItemMaster_AccountLedgerMasterPurchase">
+          <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountLedgerMaster">
+              <PropertyRef Name="AccountLedgerID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="PurchaseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SupplierLedger_PurchaseLedger">
           <End Role="AccountLedgerMaster" Type="Self.AccountLedgerMaster" Multiplicity="1" />
           <End Role="SupplierLedger" Type="Self.SupplierLedger" Multiplicity="*" />
@@ -1927,6 +1959,10 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_AccountLedgerMasterPurchase" Association="Self.FK_ItemMaster_AccountLedgerMasterPurchase">
+            <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
           <AssociationSet Name="FK_SupplierLedger_PurchaseLedger" Association="Self.FK_SupplierLedger_PurchaseLedger">
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
             <End Role="SupplierLedger" EntitySet="SupplierLedger" />
@@ -2228,6 +2264,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster'
                 <ScalarProperty Name="MinimumStock" ColumnName="MinimumStock" />
                 <ScalarProperty Name="MaximumStock" ColumnName="MaximumStock" />
                 <ScalarProperty Name="SaleTypeId" ColumnName="SaleTypeId" />
+                <ScalarProperty Name="PurchaseTypeId" ColumnName="PurchaseTypeId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />

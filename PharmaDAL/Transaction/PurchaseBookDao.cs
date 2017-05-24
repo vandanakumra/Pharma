@@ -2,6 +2,8 @@
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -165,7 +167,55 @@ namespace PharmaDAL.Transaction
                         BatchNumber = p.BatchNo
                     }).OrderByDescending(p => p.ID).Take(5).ToList();
             }
+        }
 
+
+        public bool SavePurchaseData(int purchaseBookHeaderID)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                SqlCommand cmd = new SqlCommand("SavePurchaseData", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ID",purchaseBookHeaderID));
+
+                cmd.ExecuteNonQuery();
+
+
+            }
+                return true;
+        }
+
+        public PharmaBusinessObjects.Transaction.PurchaseBookHeader GetFinalAmountWithTaxForPurchase(int purchaseBookHeaderID)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                SqlCommand cmd = new SqlCommand("GetFinalAmountWithTaxForPurchase", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ID", purchaseBookHeaderID));
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+
+                if(dt != null && dt.Rows.Count > 0)
+                {
+                    PharmaBusinessObjects.Transaction.PurchaseBookHeader obj = new PharmaBusinessObjects.Transaction.PurchaseBookHeader();
+                    obj.PurchaseBookHeaderID = Convert.ToInt32(dt.Rows[0]["PurchaseBookHeaderID"]);
+                    obj.PurchaseTaxType = Convert.ToString(dt.Rows[0]["PurchaseTaxType"]);
+                    obj.Amount = Convert.ToDecimal(dt.Rows[0]["Amount"]);
+                    obj.TaxOnPurchase = Convert.ToDecimal(dt.Rows[0]["TaxOnPurchase"]);
+
+                    return obj;
+                }
+            }
+
+
+            return new PharmaBusinessObjects.Transaction.PurchaseBookHeader();
         }
 
 

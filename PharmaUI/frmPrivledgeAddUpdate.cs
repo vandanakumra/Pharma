@@ -23,43 +23,81 @@ namespace PharmaUI
 
         public frmPrivledgeAddUpdate()
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         public frmPrivledgeAddUpdate(int PrivledgeId)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.PrivledgeId = PrivledgeId;
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.PrivledgeId = PrivledgeId;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         public frmPrivledgeAddUpdate(string PrivledgeName)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.PrivledgeName = PrivledgeName;
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.PrivledgeName = PrivledgeName;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         private void frmPrivledgeAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, PrivledgeId > 0 ? "Privledge - Update" : "Privledge - Add");
-            GotFocusEventRaised(this);
-            KeyDownEvents(this);
-            FillCombo();
-
-            if (this.PrivledgeId > 0)
+            try
             {
-                FillFormForUpdate();
-            }
+                ExtensionMethods.FormLoad(this, PrivledgeId > 0 ? "Privledge - Update" : "Privledge - Add");
+                GotFocusEventRaised(this);
+                KeyDownEvents(this);
+                FillCombo();
 
-            if (!string.IsNullOrEmpty(this.PrivledgeName))
-            {
-                txtPrivledgeName.Text = this.PrivledgeName;
+                if (this.PrivledgeId > 0)
+                {
+                    FillFormForUpdate();
+                }
+
+                if (!string.IsNullOrEmpty(this.PrivledgeName))
+                {
+                    txtPrivledgeName.Text = this.PrivledgeName;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+          
         }
 
         private void KeyDownEvents(Control control)
@@ -138,31 +176,47 @@ namespace PharmaUI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtPrivledgeName.Text))
+            try
             {
-                errfrmPrivledgeAddUpdate.SetError(txtPrivledgeName, Constants.Messages.RequiredField);
-                txtPrivledgeName.SelectAll();
-                txtPrivledgeName.Focus();
-                return;
+                if (String.IsNullOrWhiteSpace(txtPrivledgeName.Text))
+                {
+                    errfrmPrivledgeAddUpdate.SetError(txtPrivledgeName, Constants.Messages.RequiredField);
+                    txtPrivledgeName.SelectAll();
+                    txtPrivledgeName.Focus();
+                    return;
+                }
+
+                Status status;
+                Privledge privledge = new Privledge();
+                privledge.PrivledgeId = this.PrivledgeId;
+                privledge.PrivledgeName = txtPrivledgeName.Text;
+                privledge.ControlName = txtControlName.Text;
+                Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+                privledge.Status = status == Status.Active;
+
+                bool result = this.PrivledgeId > 0 ? applicationFacade.UpdatePrivledge(privledge) : applicationFacade.AddPrivledge(privledge);
+
+                if (result)
+                    this.Close();
             }
-
-            Status status;
-            Privledge privledge = new Privledge();
-            privledge.PrivledgeId = this.PrivledgeId;
-            privledge.PrivledgeName = txtPrivledgeName.Text;
-            privledge.ControlName = txtControlName.Text;
-            Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
-            privledge.Status = status == Status.Active;
-
-            bool result = this.PrivledgeId > 0 ? applicationFacade.UpdatePrivledge(privledge) : applicationFacade.AddPrivledge(privledge);
-
-            if (result)
-                this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

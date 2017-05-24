@@ -23,43 +23,79 @@ namespace PharmaUI
 
         public frmUserMasterAddUpdate()
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         public frmUserMasterAddUpdate(int userId)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.UserId = userId;
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.UserId = userId;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
 
         public frmUserMasterAddUpdate(string userName)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            this.UserName = userName;
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                this.UserName = userName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+           
         }
 
         private void frmUserMasterAddUpdate_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, UserId > 0 ? "User - Update" : "User - Add");
-            GotFocusEventRaised(this);
-            KeyDownEvents(this);
-            FillCombo();
-
-            if (this.UserId > 0)
+            try
             {
-                FillFormForUpdate();
+                ExtensionMethods.FormLoad(this, UserId > 0 ? "User - Update" : "User - Add");
+                GotFocusEventRaised(this);
+                KeyDownEvents(this);
+                FillCombo();
+
+                if (this.UserId > 0)
+                {
+                    FillFormForUpdate();
+                }
+
+                if (!string.IsNullOrEmpty(this.UserName))
+                {
+                    txtUserName.Text = this.UserName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (!string.IsNullOrEmpty(this.UserName))
-            {
-                txtUserName.Text = this.UserName;
-            }
+          
         }
 
         private void KeyDownEvents(Control control)
@@ -108,10 +144,19 @@ namespace PharmaUI
 
         private void C_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                SendKeys.Send("{TAB}");
+                if (e.KeyCode == Keys.Enter)
+                {
+                    SendKeys.Send("{TAB}");
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         public void GotFocusEventRaised(Control control)
@@ -148,45 +193,61 @@ namespace PharmaUI
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(txtUserName.Text))
+            try
             {
-                errFrmUserAddUpdate.SetError(txtUserName, Constants.Messages.RequiredField);
-                txtUserName.SelectAll();
-                txtUserName.Focus();
-                return;
-            }
+                if (String.IsNullOrWhiteSpace(txtUserName.Text))
+                {
+                    errFrmUserAddUpdate.SetError(txtUserName, Constants.Messages.RequiredField);
+                    txtUserName.SelectAll();
+                    txtUserName.Focus();
+                    return;
+                }
 
-            if (String.IsNullOrWhiteSpace(txtPassword.Text))
+                if (String.IsNullOrWhiteSpace(txtPassword.Text))
+                {
+                    errFrmUserAddUpdate.SetError(txtPassword, Constants.Messages.InValidEmail);
+                    txtPassword.SelectAll();
+                    txtPassword.Focus();
+                    return;
+                }
+
+                Status status;
+                int roleId = 0;
+                UserMaster user = new UserMaster();
+                user.UserId = this.UserId;
+                user.Username = txtUserName.Text;
+                user.FirstName = txtFirstName.Text;
+                user.LastName = txtLastName.Text;
+                user.Password = txtPassword.Text;
+                Int32.TryParse(Convert.ToString(cbxRole.SelectedValue), out roleId);
+                user.RoleID = roleId;
+
+                Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
+                user.Status = status == Status.Active;
+
+                int result = this.UserId > 0 ? applicationFacade.UpdateUser(user) : applicationFacade.AddUser(user);
+
+                if (result > 0)
+                    this.Close();
+            }
+            catch (Exception ex)
             {
-                errFrmUserAddUpdate.SetError(txtPassword, Constants.Messages.InValidEmail);
-                txtPassword.SelectAll();
-                txtPassword.Focus();
-                return;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
-
-            Status status;
-            int roleId = 0;
-            UserMaster user = new UserMaster();
-            user.UserId = this.UserId;
-            user.Username = txtUserName.Text;
-            user.FirstName = txtFirstName.Text;
-            user.LastName = txtLastName.Text;
-            user.Password = txtPassword.Text;
-            Int32.TryParse(Convert.ToString(cbxRole.SelectedValue), out roleId);
-            user.RoleID = roleId;
-
-            Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
-            user.Status = status == Status.Active;
-
-            int result = this.UserId > 0 ? applicationFacade.UpdateUser(user) : applicationFacade.AddUser(user);
-
-            if (result > 0)
-                this.Close();
         }
     }
 }

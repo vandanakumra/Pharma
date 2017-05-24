@@ -24,51 +24,57 @@ namespace PharmaUI
 
         public frmCustomerLedgerMasterAddUpdate(bool isInEditMode = false)
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            ExtensionMethods.FormLoad(this, isInEditMode ? "Customer Ledger -Update" : "Customer Ledger - Add");
-            this.isInEditMode = isInEditMode;
-            this.customerLedgerID = 0;
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-            LoadCombo();
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                ExtensionMethods.FormLoad(this, isInEditMode ? "Customer Ledger -Update" : "Customer Ledger - Add");
+                this.isInEditMode = isInEditMode;
+                this.customerLedgerID = 0;
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                LoadCombo();
 
-            if (!isInEditMode)
-                LoadCustomerCompanyDiscountGrid();
-
+                if (!isInEditMode)
+                    LoadCustomerCompanyDiscountGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadCombo()
         {
-            ////Fill Costumer Type options
-            cbxCustomerType.DataSource = applicationFacade.GetCustomerTypes();
-            cbxCustomerType.DisplayMember = "CustomerTypeName";
-            cbxCustomerType.ValueMember = "CustomerTypeId";
+                ////Fill Costumer Type options
+                cbxCustomerType.DataSource = applicationFacade.GetCustomerTypes();
+                cbxCustomerType.DisplayMember = "CustomerTypeName";
+                cbxCustomerType.ValueMember = "CustomerTypeId";
 
-            cbxCustomerType.AutoCompleteSource = AutoCompleteSource.ListItems;
-            cbxCustomerType.AutoCompleteMode = AutoCompleteMode.Suggest;
+                cbxCustomerType.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cbxCustomerType.AutoCompleteMode = AutoCompleteMode.Suggest;
 
-            ////Fill Rate Type options
-            cbxRateType.DataSource = applicationFacade.GetInterestTypes();
-            cbxRateType.DisplayMember = "InterestTypeName";
-            cbxRateType.ValueMember = "InterestTypeId";
+                ////Fill Rate Type options
+                cbxRateType.DataSource = applicationFacade.GetInterestTypes();
+                cbxRateType.DisplayMember = "InterestTypeName";
+                cbxRateType.ValueMember = "InterestTypeId";
 
-            ////Fill Less Excise options
-            cbxLessExcise.DataSource = Enum.GetValues(typeof(Enums.Choice));
-            cbxLessExcise.SelectedItem = Choice.No;
+                ////Fill Less Excise options
+                cbxLessExcise.DataSource = Enum.GetValues(typeof(Enums.Choice));
+                cbxLessExcise.SelectedItem = Choice.No;
 
 
-            ////Fill Follow condition strictly options
-            cbxFollowConditionStrictly.DataSource = Enum.GetValues(typeof(Enums.Choice));
-            cbxFollowConditionStrictly.SelectedItem = Choice.No;
+                ////Fill Follow condition strictly options
+                cbxFollowConditionStrictly.DataSource = Enum.GetValues(typeof(Enums.Choice));
+                cbxFollowConditionStrictly.SelectedItem = Choice.No;
 
-            ////Fill discount strictly options
-            cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.Choice));
-            cbxLocaLCentral.SelectedItem = Choice.No;
+                ////Fill discount strictly options
+                cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.Choice));
+                cbxLocaLCentral.SelectedItem = Choice.No;
 
-            ///Fill Local/Central options
-            ///
-            cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.LocalCentral));
-            cbxLocaLCentral.SelectedItem = LocalCentral.L;
+                ///Fill Local/Central options
+                ///
+                cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.LocalCentral));
+                cbxLocaLCentral.SelectedItem = LocalCentral.L;       
         }
 
         public void LoadCustomerCompanyDiscountGrid()
@@ -110,12 +116,19 @@ namespace PharmaUI
             dgvCompanyDiscount.ReadOnly = false;
         }
 
-
         private void frmCustomerLedgerMasterAddUpdate_Load(object sender, EventArgs e)
         {
-            GotFocusEventRaised(this);
-            this.ucSupplierCustomerInfo.SetFocus();
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            try
+            {
+                GotFocusEventRaised(this);
+                this.ucSupplierCustomerInfo.SetFocus();
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
@@ -294,195 +307,233 @@ namespace PharmaUI
             }
             catch (Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            errorProviderCustomerLedger.Clear();
-            this.Close();
+            try
+            {
+                errorProviderCustomerLedger.Clear();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void frmCustomerLedgerMasterAddUpdate_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            try
             {
-                this.Close();
+                if (e.KeyCode == Keys.Escape)
+                {
+                    this.Close();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }         
         }
 
         private void FrmPersonRouteMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
-            PersonRouteMaster lastSelectedPersonRoute= (sender as frmPersonRouteMaster).LastSelectedPersonRoute;
-            if (lastSelectedPersonRoute != null)
+
+            try
             {
-                switch (lastSelectedPersonRoute.RecordTypeNme)
+
+                PersonRouteMaster lastSelectedPersonRoute = (sender as frmPersonRouteMaster).LastSelectedPersonRoute;
+                if (lastSelectedPersonRoute != null)
                 {
-                    case Constants.RecordType.ZSMDISPLAYNAME:
-                        {
-                            tbxZSM.Text = lastSelectedPersonRoute.PersonRouteName;
-                            tbxZSM.Tag = lastSelectedPersonRoute.PersonRouteID;
-                        }
-                        break;
+                    switch (lastSelectedPersonRoute.RecordTypeNme)
+                    {
+                        case Constants.RecordType.ZSMDISPLAYNAME:
+                            {
+                                tbxZSM.Text = lastSelectedPersonRoute.PersonRouteName;
+                                tbxZSM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                            }
+                            break;
 
-                    case Constants.RecordType.RSMDISPLAYNAME:
-                        {
-                            tbxRSM.Text = lastSelectedPersonRoute.PersonRouteName;
-                            tbxRSM.Tag = lastSelectedPersonRoute.PersonRouteID;
-                        }
-                        break;
+                        case Constants.RecordType.RSMDISPLAYNAME:
+                            {
+                                tbxRSM.Text = lastSelectedPersonRoute.PersonRouteName;
+                                tbxRSM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                            }
+                            break;
 
-                    case Constants.RecordType.ASMDISPLAYNAME:
-                        {
-                            tbxASM.Text = lastSelectedPersonRoute.PersonRouteName;
-                            tbxASM.Tag = lastSelectedPersonRoute.PersonRouteID;
-                        }
-                        break;
+                        case Constants.RecordType.ASMDISPLAYNAME:
+                            {
+                                tbxASM.Text = lastSelectedPersonRoute.PersonRouteName;
+                                tbxASM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                            }
+                            break;
 
-                    case Constants.RecordType.SALESMANDISPLAYNAME:
-                        {
-                            tbxSalesman.Text = lastSelectedPersonRoute.PersonRouteName;
-                            tbxSalesman.Tag = lastSelectedPersonRoute.PersonRouteID;
-                        }
-                        break;
+                        case Constants.RecordType.SALESMANDISPLAYNAME:
+                            {
+                                tbxSalesman.Text = lastSelectedPersonRoute.PersonRouteName;
+                                tbxSalesman.Tag = lastSelectedPersonRoute.PersonRouteID;
+                            }
+                            break;
 
-                    case Constants.RecordType.AREADISPLAYNAME:
-                        {
-                            tbxArea.Text = lastSelectedPersonRoute.PersonRouteName;
-                            tbxArea.Tag = lastSelectedPersonRoute.PersonRouteID;
-                        }
-                        break;
+                        case Constants.RecordType.AREADISPLAYNAME:
+                            {
+                                tbxArea.Text = lastSelectedPersonRoute.PersonRouteName;
+                                tbxArea.Tag = lastSelectedPersonRoute.PersonRouteID;
+                            }
+                            break;
 
-                    case Constants.RecordType.ROUTEDISPLAYNAME:
-                        {
-                            tbxRoute.Text = lastSelectedPersonRoute.PersonRouteName;
-                            tbxRoute.Tag = lastSelectedPersonRoute.PersonRouteID;
-                        }
-                        break;
+                        case Constants.RecordType.ROUTEDISPLAYNAME:
+                            {
+                                tbxRoute.Text = lastSelectedPersonRoute.PersonRouteName;
+                                tbxRoute.Tag = lastSelectedPersonRoute.PersonRouteID;
+                            }
+                            break;
+                    }
+
                 }
 
-            }
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
 
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            //Add
-            if (keyData == (Keys.F9))
-            {
-
-            }
-            else if (keyData == (Keys.F3))
-            {
-                if (dgvCompanyDiscount.SelectedCells.Count > 0)
+                //Add
+                if (keyData == (Keys.F9))
                 {
-                    bool DoesCompanyHaveDiscountMapping = dgvCompanyDiscount.CurrentRow != null && !(
-                                                                                                String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Normal"].Value)))
-                                                                                                && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Breakage"].Value)))
-                                                                                                && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Expired"].Value)))
-                                                                                                && !Convert.ToBoolean(dgvCompanyDiscount.CurrentRow.Cells["IsLessEcise"].Value)
-                                                                                                );
-                    
-                    ///OPen item discount mapping screen only if company discount existing 
-                    if (DoesCompanyHaveDiscountMapping)
+
+                }
+                else if (keyData == (Keys.F3))
+                {
+                    if (dgvCompanyDiscount.SelectedCells.Count > 0)
                     {
-                        CustomerCopanyDiscount existingItem = (CustomerCopanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
-                        frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(existingItem);
-                        form.FormClosed += FormCustomerItemDiscount_FormClosed;
-                        form.Show();
-                    }                  
+                        bool DoesCompanyHaveDiscountMapping = dgvCompanyDiscount.CurrentRow != null && !(
+                                                                                                    String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Normal"].Value)))
+                                                                                                    && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Breakage"].Value)))
+                                                                                                    && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Expired"].Value)))
+                                                                                                    && !Convert.ToBoolean(dgvCompanyDiscount.CurrentRow.Cells["IsLessEcise"].Value)
+                                                                                                    );
+
+                        ///OPen item discount mapping screen only if company discount existing 
+                        if (DoesCompanyHaveDiscountMapping)
+                        {
+                            CustomerCopanyDiscount existingItem = (CustomerCopanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
+                            frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(existingItem);
+                            form.FormClosed += FormCustomerItemDiscount_FormClosed;
+                            form.Show();
+                        }
+                    }
                 }
-            }
-            else if (keyData == Keys.F1)
-            {
-                TextBox activePersonRouteType = new TextBox();
-                string activePersonRouteTypeString = String.Empty;
-
-                switch (this.ActiveControl.Name)
+                else if (keyData == Keys.F1)
                 {
-                    case "tbxZSM":
-                        {
-                            activePersonRouteType = tbxZSM;
-                            activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
-                        }
-                        break;
+                    TextBox activePersonRouteType = new TextBox();
+                    string activePersonRouteTypeString = String.Empty;
 
-                    case "tbxRSM":
-                        {
-                            activePersonRouteType = tbxRSM;
-                            activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
-                        }
-                        break;
-
-                    case "tbxASM":
-                        {
-                            activePersonRouteType = tbxASM;
-                            activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
-                        }
-                        break;
-                    case "tbxSalesman":
-                        {
-                            activePersonRouteType = tbxSalesman;
-                            activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
-                        }
-                        break;
-                    case "tbxArea":
-                        {
-                            activePersonRouteType = tbxArea;
-                            activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
-                        }
-                        break;
-                    case "tbxRoute":
-                        {
-                            activePersonRouteType = tbxRoute;
-                            activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
-                        }
-                        break;
-                }
-
-                if (!String.IsNullOrWhiteSpace(activePersonRouteTypeString))
-                {
-                    PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                    switch (this.ActiveControl.Name)
                     {
-                        RecordTypeNme = activePersonRouteTypeString,
-                        PersonRouteID = ExtensionMethods.SafeConversionInt(Convert.ToString(activePersonRouteType.Tag)) ?? 0,
-                        PersonRouteName = activePersonRouteType.Text
-                    };
+                        case "tbxZSM":
+                            {
+                                activePersonRouteType = tbxZSM;
+                                activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
+                            }
+                            break;
 
-                    frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
-                    //Set Child UI
-                    ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
-                    frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+                        case "tbxRSM":
+                            {
+                                activePersonRouteType = tbxRSM;
+                                activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
+                            }
+                            break;
 
-                    frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
-                    frmPersonRouteMaster.Show();
-                    frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+                        case "tbxASM":
+                            {
+                                activePersonRouteType = tbxASM;
+                                activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
+                            }
+                            break;
+                        case "tbxSalesman":
+                            {
+                                activePersonRouteType = tbxSalesman;
+                                activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
+                            }
+                            break;
+                        case "tbxArea":
+                            {
+                                activePersonRouteType = tbxArea;
+                                activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
+                            }
+                            break;
+                        case "tbxRoute":
+                            {
+                                activePersonRouteType = tbxRoute;
+                                activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
+                            }
+                            break;
+                    }
+
+                    if (!String.IsNullOrWhiteSpace(activePersonRouteTypeString))
+                    {
+                        PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                        {
+                            RecordTypeNme = activePersonRouteTypeString,
+                            PersonRouteID = ExtensionMethods.SafeConversionInt(Convert.ToString(activePersonRouteType.Tag)) ?? 0,
+                            PersonRouteName = activePersonRouteType.Text
+                        };
+
+                        frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                        //Set Child UI
+                        ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
+                        frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+
+                        frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
+                        frmPersonRouteMaster.Show();
+                        frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+                    }
                 }
-            }
 
-            return base.ProcessCmdKey(ref msg, keyData);
+                return base.ProcessCmdKey(ref msg, keyData);         
         }
 
         private void FormCustomerItemDiscount_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CustomerCopanyDiscount updatedCustomerCopanyDiscount = (sender as frmCustomerItemDiscountMaster).retCustomerCopanyDiscount;
-            (dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping = updatedCustomerCopanyDiscount.CustomerItemDiscountMapping;
+            try
+            {
+                CustomerCopanyDiscount updatedCustomerCopanyDiscount = (sender as frmCustomerItemDiscountMaster).retCustomerCopanyDiscount;
+                (dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping = updatedCustomerCopanyDiscount.CustomerItemDiscountMapping;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dgvCompanyDiscount_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
-
-            if (columnName.Equals("CompanyName") || columnName.Equals("IsLessEcise")) return;
-
-            e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
-            TextBox tb = e.Control as TextBox;
-            if (tb != null)
+            try
             {
-                tb.KeyPress += new KeyPressEventHandler(Column_KeyPress);
+                string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
+
+                if (columnName.Equals("CompanyName") || columnName.Equals("IsLessEcise")) return;
+
+                e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column_KeyPress);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }         
         }
 
         private void Column_KeyPress(object sender, KeyPressEventArgs e)
@@ -533,54 +584,68 @@ namespace PharmaUI
 
         private void dgvCompanyDiscount_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvCompanyDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
+            try
             {
-                SendKeys.Send("{tab}");
+                if (dgvCompanyDiscount.CurrentRow.Cells[e.ColumnIndex].ReadOnly)
+                {
+                    SendKeys.Send("{tab}");
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }          
         }
 
         private void dgvCompanyDiscount_KeyDown(object sender, KeyEventArgs e)
         {
-            e.SuppressKeyPress = true;
-
-            if (e.KeyData == Keys.Enter)
+            try
             {
-                int rowIndex = dgvCompanyDiscount.CurrentCell.RowIndex;
-                int columnIndex = 0;
-                string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
+                e.SuppressKeyPress = true;
 
-                int columnDisplayIndex = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].DisplayIndex;
-
-                for (int i = 0; i < dgvCompanyDiscount.ColumnCount; i++)
+                if (e.KeyData == Keys.Enter)
                 {
-                    if (dgvCompanyDiscount.Columns[i].DisplayIndex == columnDisplayIndex + 1)
+                    int rowIndex = dgvCompanyDiscount.CurrentCell.RowIndex;
+                    int columnIndex = 0;
+                    string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
+
+                    int columnDisplayIndex = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].DisplayIndex;
+
+                    for (int i = 0; i < dgvCompanyDiscount.ColumnCount; i++)
                     {
-                        columnIndex = i;
-                        break;
-                    }
-                }
-
-                if (rowIndex == (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
-                {
-                    btnSave.Focus();
-
-                }
-                else if (rowIndex < (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
-                {
-                    for (int i = 0; i < dgvCompanyDiscount.Columns.Count - 1; i++)
-                    {
-                        if (dgvCompanyDiscount.Columns[i].DisplayIndex == 0)
+                        if (dgvCompanyDiscount.Columns[i].DisplayIndex == columnDisplayIndex + 1)
                         {
-                            dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[i, rowIndex + 1];
+                            columnIndex = i;
                             break;
                         }
                     }
-                }
-                else
-                {
-                    dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[columnIndex, rowIndex];
+
+                    if (rowIndex == (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
+                    {
+                        btnSave.Focus();
+
+                    }
+                    else if (rowIndex < (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
+                    {
+                        for (int i = 0; i < dgvCompanyDiscount.Columns.Count - 1; i++)
+                        {
+                            if (dgvCompanyDiscount.Columns[i].DisplayIndex == 0)
+                            {
+                                dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[i, rowIndex + 1];
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[columnIndex, rowIndex];
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }          
         }
     }
 

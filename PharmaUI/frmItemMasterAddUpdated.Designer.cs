@@ -109,6 +109,8 @@
             this.errorProviderItem = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.lblPurchaseType = new System.Windows.Forms.Label();
+            this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -396,7 +398,7 @@
             this.groupBox1.Location = new System.Drawing.Point(13, 183);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(345, 195);
+            this.groupBox1.Size = new System.Drawing.Size(345, 220);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Purchase Details";
@@ -406,6 +408,8 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.cbxPurchaseType, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.lblPurchaseType, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.tbxSpecialDiscountRecieved, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.lblSplDiscRecieved, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.lblTaxOnPurchase, 0, 3);
@@ -423,19 +427,20 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 23);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 162);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 187);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // tbxSpecialDiscountRecieved
             // 
-            this.tbxSpecialDiscountRecieved.Location = new System.Drawing.Point(165, 133);
+            this.tbxSpecialDiscountRecieved.Location = new System.Drawing.Point(165, 138);
             this.tbxSpecialDiscountRecieved.Name = "tbxSpecialDiscountRecieved";
             this.tbxSpecialDiscountRecieved.Size = new System.Drawing.Size(142, 20);
             this.tbxSpecialDiscountRecieved.TabIndex = 207;
@@ -444,7 +449,7 @@
             // lblSplDiscRecieved
             // 
             this.lblSplDiscRecieved.AutoSize = true;
-            this.lblSplDiscRecieved.Location = new System.Drawing.Point(3, 133);
+            this.lblSplDiscRecieved.Location = new System.Drawing.Point(3, 138);
             this.lblSplDiscRecieved.Margin = new System.Windows.Forms.Padding(3);
             this.lblSplDiscRecieved.Name = "lblSplDiscRecieved";
             this.lblSplDiscRecieved.Size = new System.Drawing.Size(136, 13);
@@ -454,7 +459,7 @@
             // lblTaxOnPurchase
             // 
             this.lblTaxOnPurchase.AutoSize = true;
-            this.lblTaxOnPurchase.Location = new System.Drawing.Point(3, 81);
+            this.lblTaxOnPurchase.Location = new System.Drawing.Point(3, 84);
             this.lblTaxOnPurchase.Margin = new System.Windows.Forms.Padding(3);
             this.lblTaxOnPurchase.Name = "lblTaxOnPurchase";
             this.lblTaxOnPurchase.Size = new System.Drawing.Size(90, 13);
@@ -463,7 +468,7 @@
             // 
             // tbxDiscountRecieved
             // 
-            this.tbxDiscountRecieved.Location = new System.Drawing.Point(165, 107);
+            this.tbxDiscountRecieved.Location = new System.Drawing.Point(165, 111);
             this.tbxDiscountRecieved.Name = "tbxDiscountRecieved";
             this.tbxDiscountRecieved.Size = new System.Drawing.Size(142, 20);
             this.tbxDiscountRecieved.TabIndex = 205;
@@ -472,7 +477,7 @@
             // lblSCOnPurchase
             // 
             this.lblSCOnPurchase.AutoSize = true;
-            this.lblSCOnPurchase.Location = new System.Drawing.Point(3, 55);
+            this.lblSCOnPurchase.Location = new System.Drawing.Point(3, 57);
             this.lblSCOnPurchase.Margin = new System.Windows.Forms.Padding(3);
             this.lblSCOnPurchase.Name = "lblSCOnPurchase";
             this.lblSCOnPurchase.Size = new System.Drawing.Size(121, 13);
@@ -481,7 +486,7 @@
             // 
             // tbxTaxOnPurchase
             // 
-            this.tbxTaxOnPurchase.Location = new System.Drawing.Point(165, 81);
+            this.tbxTaxOnPurchase.Location = new System.Drawing.Point(165, 84);
             this.tbxTaxOnPurchase.Name = "tbxTaxOnPurchase";
             this.tbxTaxOnPurchase.Size = new System.Drawing.Size(142, 20);
             this.tbxTaxOnPurchase.TabIndex = 204;
@@ -490,7 +495,7 @@
             // lblPurchaseExcise
             // 
             this.lblPurchaseExcise.AutoSize = true;
-            this.lblPurchaseExcise.Location = new System.Drawing.Point(3, 29);
+            this.lblPurchaseExcise.Location = new System.Drawing.Point(3, 30);
             this.lblPurchaseExcise.Margin = new System.Windows.Forms.Padding(3);
             this.lblPurchaseExcise.Name = "lblPurchaseExcise";
             this.lblPurchaseExcise.Size = new System.Drawing.Size(86, 13);
@@ -499,7 +504,7 @@
             // 
             // tbxPurchaseExcise
             // 
-            this.tbxPurchaseExcise.Location = new System.Drawing.Point(165, 29);
+            this.tbxPurchaseExcise.Location = new System.Drawing.Point(165, 30);
             this.tbxPurchaseExcise.Name = "tbxPurchaseExcise";
             this.tbxPurchaseExcise.Size = new System.Drawing.Size(142, 20);
             this.tbxPurchaseExcise.TabIndex = 202;
@@ -507,7 +512,7 @@
             // 
             // tbxSCOnPurchase
             // 
-            this.tbxSCOnPurchase.Location = new System.Drawing.Point(165, 55);
+            this.tbxSCOnPurchase.Location = new System.Drawing.Point(165, 57);
             this.tbxSCOnPurchase.Name = "tbxSCOnPurchase";
             this.tbxSCOnPurchase.Size = new System.Drawing.Size(142, 20);
             this.tbxSCOnPurchase.TabIndex = 203;
@@ -534,7 +539,7 @@
             // lblDiscountRec
             // 
             this.lblDiscountRec.AutoSize = true;
-            this.lblDiscountRec.Location = new System.Drawing.Point(3, 107);
+            this.lblDiscountRec.Location = new System.Drawing.Point(3, 111);
             this.lblDiscountRec.Margin = new System.Windows.Forms.Padding(3);
             this.lblDiscountRec.Name = "lblDiscountRec";
             this.lblDiscountRec.Size = new System.Drawing.Size(98, 13);
@@ -965,6 +970,25 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lblPurchaseType
+            // 
+            this.lblPurchaseType.AutoSize = true;
+            this.lblPurchaseType.Location = new System.Drawing.Point(3, 165);
+            this.lblPurchaseType.Margin = new System.Windows.Forms.Padding(3);
+            this.lblPurchaseType.Name = "lblPurchaseType";
+            this.lblPurchaseType.Size = new System.Drawing.Size(79, 13);
+            this.lblPurchaseType.TabIndex = 208;
+            this.lblPurchaseType.Text = "Purchase Type";
+            // 
+            // cbxPurchaseType
+            // 
+            this.cbxPurchaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPurchaseType.FormattingEnabled = true;
+            this.cbxPurchaseType.Location = new System.Drawing.Point(165, 165);
+            this.cbxPurchaseType.Name = "cbxPurchaseType";
+            this.cbxPurchaseType.Size = new System.Drawing.Size(142, 21);
+            this.cbxPurchaseType.TabIndex = 208;
+            // 
             // frmItemMasterAddUpdated
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1078,5 +1102,7 @@
         private System.Windows.Forms.ErrorProvider errorProviderItem;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ComboBox cbxPurchaseType;
+        private System.Windows.Forms.Label lblPurchaseType;
     }
 }

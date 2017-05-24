@@ -154,20 +154,22 @@ namespace PharmaDAL.Master
                         ///All entry for item mappings
                         ///
 
-                        foreach (var newItem in newEntry.CustomerItemDiscountMapping)
+                        if (newEntry.CustomerItemDiscountMapping != null)
                         {
-                            context.CustomerCompanyDiscountRef.Add(new Entity.CustomerCompanyDiscountRef()
+                            foreach (var newItem in newEntry.CustomerItemDiscountMapping)
                             {
-                                CustomerLedgerID = table.CustomerLedgerId,
-                                CompanyID = newEntry.CompanyID,
-                                ItemID = newItem.ItemID,
-                                Normal = newItem.Normal,
-                                Breakage = newItem.Breakage,
-                                Expired = newItem.Expired,
-                                IsLessEcise = newItem.IsLessEcise
-                            });
+                                context.CustomerCompanyDiscountRef.Add(new Entity.CustomerCompanyDiscountRef()
+                                {
+                                    CustomerLedgerID = table.CustomerLedgerId,
+                                    CompanyID = newEntry.CompanyID,
+                                    ItemID = newItem.ItemID,
+                                    Normal = newItem.Normal,
+                                    Breakage = newItem.Breakage,
+                                    Expired = newItem.Expired,
+                                    IsLessEcise = newItem.IsLessEcise
+                                });
+                            }
                         }
-
                     }
                     return context.SaveChanges();
                 }
@@ -250,19 +252,21 @@ namespace PharmaDAL.Master
 
                             ///All entry for item mappings
                             ///
-
-                            foreach (var newItem in newEntry.CustomerItemDiscountMapping)
+                            if (newEntry.CustomerItemDiscountMapping != null)
                             {
-                                context.CustomerCompanyDiscountRef.Add(new Entity.CustomerCompanyDiscountRef()
+                                foreach (var newItem in newEntry.CustomerItemDiscountMapping)
                                 {
-                                    CustomerLedgerID = p.CustomerLedgerId,
-                                    CompanyID = newEntry.CompanyID,
-                                    ItemID = newItem.ItemID,
-                                    Normal = newItem.Normal,
-                                    Breakage = newItem.Breakage,
-                                    Expired = newItem.Expired,
-                                    IsLessEcise = newItem.IsLessEcise
-                                });
+                                    context.CustomerCompanyDiscountRef.Add(new Entity.CustomerCompanyDiscountRef()
+                                    {
+                                        CustomerLedgerID = p.CustomerLedgerId,
+                                        CompanyID = newEntry.CompanyID,
+                                        ItemID = newItem.ItemID,
+                                        Normal = newItem.Normal,
+                                        Breakage = newItem.Breakage,
+                                        Expired = newItem.Expired,
+                                        IsLessEcise = newItem.IsLessEcise
+                                    });
+                                }
                             }
                         }
                     }
@@ -335,8 +339,8 @@ namespace PharmaDAL.Master
                                                       .Select(x => new PharmaBusinessObjects.Master.CustomerCopanyDiscount()
                                                       {
                                                           CompanyID = x.CompanyId,
-                                                          CompanyName = x.CompanyName   
-                                                          
+                                                          CompanyName = x.CompanyName
+
                                                       }).ToList();
 
                     allCompanyDiscountMapping.RemoveAll(x => mappedDiscount.Any(y => y.CompanyID == x.CompanyID));

@@ -28,27 +28,41 @@ namespace PharmaUI
         private int selectedRowIndex = 0;    
 
         public frmAccountLedgerMaster()
-        {           
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+        {
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public frmAccountLedgerMaster(bool isDialog, string ledgerTypeName)
         {
-            InitializeComponent();
-            ExtensionMethods.SetChildFormProperties(this);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetChildFormProperties(this);
 
-            List<Control> allControls = ExtensionMethods.GetAllControls(this);
-            allControls.ForEach(k => k.Visible = false);
+                List<Control> allControls = ExtensionMethods.GetAllControls(this);
+                allControls.ForEach(k => k.Visible = false);
 
-            this.WindowState = FormWindowState.Normal;
-          //  btnClose.Visible = true;
-            dgvAccountLedger.Visible = true;
-            ledgerType = ledgerTypeName;
-            isOpenAsDialog = isDialog;
+                this.WindowState = FormWindowState.Normal;
+                //  btnClose.Visible = true;
+                dgvAccountLedger.Visible = true;
+                ledgerType = ledgerTypeName;
+                isOpenAsDialog = isDialog;
 
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //Set focus for the controls
@@ -85,65 +99,99 @@ namespace PharmaUI
 
         private void frmAccountLedgerMaster_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "Account Ledger Master");
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
-
-            LoadCombo();
-            
-
-            if (isOpenAsDialog)
+            try
             {
-                dgvAccountLedger.SelectionChanged += DgvAccountLedger_SelectionChanged;
-                AccountLedgerType master = applicationFacade.GetAccountLedgerTypeByName(ledgerType);
-                LoadDataGrid(master != null ? master.AccountLedgerTypeID : 0);
-            }
-            else
-            {
-                LoadDataGrid(0);
-                dgvAccountLedger.CellContentDoubleClick += DgvAccountLedger_CellDoubleClick;
-                dgvAccountLedger.KeyDown += DgvAccountLedger_KeyDown;
-            }
-            dgvAccountLedger.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                ExtensionMethods.FormLoad(this, "Account Ledger Master");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-            txtSearch.Focus();
+                LoadCombo();
+
+
+                if (isOpenAsDialog)
+                {
+                    dgvAccountLedger.SelectionChanged += DgvAccountLedger_SelectionChanged;
+                    AccountLedgerType master = applicationFacade.GetAccountLedgerTypeByName(ledgerType);
+                    LoadDataGrid(master != null ? master.AccountLedgerTypeID : 0);
+                }
+                else
+                {
+                    LoadDataGrid(0);
+                    dgvAccountLedger.CellContentDoubleClick += DgvAccountLedger_CellDoubleClick;
+                    dgvAccountLedger.KeyDown += DgvAccountLedger_KeyDown;
+                }
+                dgvAccountLedger.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                txtSearch.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void DgvAccountLedger_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvAccountLedger.SelectedRows != null && dgvAccountLedger.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow row = dgvAccountLedger.SelectedRows[0];
-
-                if (row != null)
+                if (dgvAccountLedger.SelectedRows != null && dgvAccountLedger.SelectedRows.Count > 0)
                 {
-                    accountLedgerCode = Convert.ToString(row.Cells["AccountLedgerCode"].Value);
-                    accountLedgerName = Convert.ToString(row.Cells["AccountLedgerName"].Value);
+                    DataGridViewRow row = dgvAccountLedger.SelectedRows[0];
+
+                    if (row != null)
+                    {
+                        accountLedgerCode = Convert.ToString(row.Cells["AccountLedgerCode"].Value);
+                        accountLedgerName = Convert.ToString(row.Cells["AccountLedgerName"].Value);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void DgvAccountLedger_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && dgvAccountLedger.SelectedRows.Count > 0)
+            try
             {
-                if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (e.KeyCode == Keys.Delete && dgvAccountLedger.SelectedRows.Count > 0)
                 {
-                    //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
-                    //applicationFacade.DeleteItem(itemToBeRemoved);
-                    //LoadDataGrid(0);
+                    if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
+                        //applicationFacade.DeleteItem(itemToBeRemoved);
+                        //LoadDataGrid(0);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         private void DgvAccountLedger_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                PharmaBusinessObjects.Master.AccountLedgerMaster model = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.Rows[e.RowIndex].DataBoundItem;
+                if (e.RowIndex != -1)
+                {
+                    PharmaBusinessObjects.Master.AccountLedgerMaster model = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.Rows[e.RowIndex].DataBoundItem;
 
-                OpenAddEdit(model.AccountLedgerID);
+                    OpenAddEdit(model.AccountLedgerID);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void LoadCombo()
@@ -159,8 +207,17 @@ namespace PharmaUI
         }
 
         private void CbLedgerType_SelectedIndexChanged(object sender, EventArgs e)
-        {          
-            LoadDataGrid(cbLedgerType.SelectedIndex);
+        {
+            try
+            {
+                LoadDataGrid(cbLedgerType.SelectedIndex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void LoadDataGrid(int ledgerTypeID)
@@ -204,21 +261,39 @@ namespace PharmaUI
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            //LoadCombo();
-            LoadDataGrid((int)cbLedgerType.SelectedValue);           
-
-            if (dgvAccountLedger.Rows.Count > 0)
+            try
             {
-                dgvAccountLedger.Rows[0].Selected = true;
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                //LoadCombo();
+                LoadDataGrid((int)cbLedgerType.SelectedValue);
+
+                if (dgvAccountLedger.Rows.Count > 0)
+                {
+                    dgvAccountLedger.Rows[0].Selected = true;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
 
         }
 
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDataGrid((int)cbLedgerType.SelectedValue);
+            try
+            {
+                LoadDataGrid((int)cbLedgerType.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void OpenAddEdit(int accountLedgerId)
@@ -231,12 +306,30 @@ namespace PharmaUI
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            OpenAddEdit(0);           
+            try
+            {
+                OpenAddEdit(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+                    
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            EditLedger();
+            try
+            {
+                EditLedger();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+          
         }
 
         private void EditLedger()
@@ -253,12 +346,21 @@ namespace PharmaUI
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            try
             {
-                //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
-                //applicationFacade.DeleteItem(itemToBeRemoved);
-                //LoadDataGrid(0);
+                if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
+                    //applicationFacade.DeleteItem(itemToBeRemoved);
+                    //LoadDataGrid(0);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -279,7 +381,16 @@ namespace PharmaUI
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
     }
 }

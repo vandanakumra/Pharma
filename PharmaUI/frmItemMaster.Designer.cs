@@ -190,7 +190,6 @@
             this.lblUPC.Size = new System.Drawing.Size(29, 12);
             this.lblUPC.TabIndex = 8;
             this.lblUPC.Text = "UPC";
-            this.lblUPC.Click += new System.EventHandler(this.lblUPC_Click);
             // 
             // lblLocationVal
             // 
@@ -211,7 +210,6 @@
             this.lblLocation.Size = new System.Drawing.Size(48, 12);
             this.lblLocation.TabIndex = 6;
             this.lblLocation.Text = "Location";
-            this.lblLocation.Click += new System.EventHandler(this.lblLocation_Click);
             // 
             // lblPackVal
             // 
@@ -232,7 +230,6 @@
             this.lblPack.Size = new System.Drawing.Size(32, 12);
             this.lblPack.TabIndex = 4;
             this.lblPack.Text = "Pack";
-            this.lblPack.Click += new System.EventHandler(this.lblPack_Click);
             // 
             // lblStatusVal
             // 
@@ -253,7 +250,6 @@
             this.lblStatus.Size = new System.Drawing.Size(37, 12);
             this.lblStatus.TabIndex = 2;
             this.lblStatus.Text = "Status";
-            this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
             // 
             // lblCodeVal
             // 
@@ -274,7 +270,6 @@
             this.lblCode.Size = new System.Drawing.Size(32, 12);
             this.lblCode.TabIndex = 0;
             this.lblCode.Text = "Code";
-            this.lblCode.Click += new System.EventHandler(this.lblCode_Click);
             // 
             // grpDetails
             // 

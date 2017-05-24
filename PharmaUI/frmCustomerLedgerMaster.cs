@@ -20,45 +20,72 @@ namespace PharmaUI
 
         public frmCustomerLedgerMaster()
         {
-            InitializeComponent();
-            ExtensionMethods.SetFormProperties(this);
-            applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            try
+            {
+                InitializeComponent();
+                ExtensionMethods.SetFormProperties(this);
+                applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+          
         }
 
         private void frmCustomerLedgerMaster_Load(object sender, EventArgs e)
         {
-            ExtensionMethods.FormLoad(this, "Customer Ledger Master");
-            GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
-
-            LoadDataGrid();
-
-            dgvCustomerLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvCustomerLedger.AllowUserToAddRows = false;
-            dgvCustomerLedger.AllowUserToDeleteRows = false;
-            dgvCustomerLedger.ReadOnly = true;
-
-            dgvCustomerLedger.CellDoubleClick += dgvCustomerLedger_CellDoubleClick;
+            try
+            {
+                ExtensionMethods.FormLoad(this, "Customer Ledger Master");
+                GotFocusEventRaised(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
+                LoadDataGrid();
+                dgvCustomerLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvCustomerLedger.AllowUserToAddRows = false;
+                dgvCustomerLedger.AllowUserToDeleteRows = false;
+                dgvCustomerLedger.ReadOnly = true;
+                dgvCustomerLedger.CellDoubleClick += dgvCustomerLedger_CellDoubleClick;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dgvCustomerLedger_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(true);
-                ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
-                CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.CurrentRow.DataBoundItem;
-                form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
-                form.LoadCustomerCompanyDiscountGrid();
-                form.FormClosed += Form_FormClosed;
-                form.Show();
+
+                if (e.RowIndex != -1)
+                {
+                    frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(true);
+                    ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+                    CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.CurrentRow.DataBoundItem;
+                    form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
+                    form.LoadCustomerCompanyDiscountGrid();
+                    form.FormClosed += Form_FormClosed;
+                    form.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (frmCustomerLedgerMasterAddUpdate)sender, ExtensionMethods.MainPanel);
-            LoadDataGrid();
+            try
+            {
+                ExtensionMethods.RemoveChildFormToPanel(this, (frmCustomerLedgerMasterAddUpdate)sender, ExtensionMethods.MainPanel);
+                LoadDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadDataGrid()
@@ -108,14 +135,19 @@ namespace PharmaUI
 
         }
 
-
         //Search Functionality
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDataGrid();
+            try
+            {
+                LoadDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
 
         //ADD/UPDATE/DELETE Functionality
 
@@ -124,16 +156,14 @@ namespace PharmaUI
             try
             {
                 var form = new frmCustomerLedgerMasterAddUpdate();
-
                 ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 form.WindowState = FormWindowState.Maximized;
-
                 form.FormClosed += Form_FormClosed;
                 form.Show();
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -163,7 +193,7 @@ namespace PharmaUI
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -187,7 +217,7 @@ namespace PharmaUI
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -229,19 +259,26 @@ namespace PharmaUI
 
         private void OpenCustomerLedgerddUpdateForm(bool isEdit)
         {
-            frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(isEdit);
-            ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
-            form.WindowState = FormWindowState.Maximized;
-
-
-            if (isEdit && dgvCustomerLedger.SelectedRows[0] != null)
+            try
             {
-                CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.SelectedRows[0].DataBoundItem;
-                form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
-                form.LoadCustomerCompanyDiscountGrid();
+                frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(isEdit);
+                ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+                form.WindowState = FormWindowState.Maximized;
+
+                if (isEdit && dgvCustomerLedger.SelectedRows[0] != null)
+                {
+                    CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.SelectedRows[0].DataBoundItem;
+                    form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
+                    form.LoadCustomerCompanyDiscountGrid();
+                }
+                form.FormClosed += Form_FormClosed;
+                form.Show();
             }
-            form.FormClosed += Form_FormClosed;
-            form.Show();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void deleteCustomerLedger(CustomerLedgerMaster customerLedger)
@@ -256,12 +293,19 @@ namespace PharmaUI
         //Disable row change on Enter
         private void dgvCustomerLedger_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+            try
             {
-                e.SuppressKeyPress = true;
+                if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
             }
-            else
-                base.OnKeyDown(e);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //Set focus for the controls
