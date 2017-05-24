@@ -302,6 +302,7 @@
           <Property Name="PurchaseBookHeaderID" Type="int" Nullable="false" />
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="BatchNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PurchaseTaxType" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="FreeQuantity" Type="int" />
           <Property Name="Scheme1" Type="float" />
@@ -320,6 +321,9 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="SaleRate" Type="float" />
+          <Property Name="WholeSaleRate" Type="float" />
+          <Property Name="SpecialRate" Type="float" />
         </EntityType>
         <EntityType Name="PurchaseEntryForm">
           <Key>
@@ -434,6 +438,7 @@
           <Property Name="PurchaseBookHeaderID" Type="int" Nullable="false" />
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="BatchNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PurchaseTaxType" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="FreeQuantity" Type="int" />
           <Property Name="Scheme1" Type="float" />
@@ -452,6 +457,9 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="SaleRate" Type="float" />
+          <Property Name="WholeSaleRate" Type="float" />
+          <Property Name="SpecialRate" Type="float" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -755,6 +763,9 @@ warning 6035: The relationship 'FK_PurchaseBookHeader_PurchaseBookHeader' has co
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_PurchaseBookLineItem_AccountLedgerMaster' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_PurchaseBookLineItem_AccountLedgerMaster" />-->
         <Association Name="FK_PurchaseEntryForm_PurchaseEntryType">
           <End Role="PurchaseEntryType" Type="Self.PurchaseEntryType" Multiplicity="1" />
           <End Role="PurchaseEntryForm" Type="Self.PurchaseEntryForm" Multiplicity="*" />
@@ -834,6 +845,9 @@ warning 6035: The relationship 'FK_PurchaseBookHeader_PurchaseBookHeader' has co
         <!--Errors Found During Generation:
 warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_TempPurchaseBookHeader_TempPurchaseBookHeader" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_TempPurchaseBookLineItem_AccountLedgerMaster' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_TempPurchaseBookLineItem_AccountLedgerMaster" />-->
         <EntityContainer Name="PharmaDBModelStoreContainer">
           <EntitySet Name="AccountLedgerMaster" EntityType="Self.AccountLedgerMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountLedgerType" EntityType="Self.AccountLedgerType" Schema="dbo" store:Type="Tables" />
@@ -1322,6 +1336,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
           <Property Name="PurchaseBookHeaderID" Type="Int32" Nullable="false" />
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BatchNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PurchaseTaxType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="FreeQuantity" Type="Int32" />
           <Property Name="Scheme1" Type="Double" />
@@ -1340,6 +1355,9 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="SaleRate" Type="Double" />
+          <Property Name="WholeSaleRate" Type="Double" />
+          <Property Name="SpecialRate" Type="Double" />
           <NavigationProperty Name="PurchaseBookHeader" Relationship="Self.FK__Purch__Purch__76B698BF" FromRole="PurchaseBookLineItem" ToRole="PurchaseBookHeader" />
         </EntityType>
         <EntityType Name="PurchaseEntryForm">
@@ -1468,6 +1486,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
           <Property Name="PurchaseBookHeaderID" Type="Int32" Nullable="false" />
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BatchNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PurchaseTaxType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="FreeQuantity" Type="Int32" />
           <Property Name="Scheme1" Type="Double" />
@@ -1486,6 +1505,9 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="SaleRate" Type="Double" />
+          <Property Name="WholeSaleRate" Type="Double" />
+          <Property Name="SpecialRate" Type="Double" />
           <NavigationProperty Name="TempPurchaseBookHeader" Relationship="Self.FK__TempPurch__Purch__76B698BF" FromRole="TempPurchaseBookLineItem" ToRole="TempPurchaseBookHeader" />
         </EntityType>
         <EntityType Name="Users">
@@ -2320,6 +2342,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
                 <ScalarProperty Name="PurchaseBookHeaderID" ColumnName="PurchaseBookHeaderID" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
                 <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="PurchaseTaxType" ColumnName="PurchaseTaxType" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="FreeQuantity" ColumnName="FreeQuantity" />
                 <ScalarProperty Name="Scheme1" ColumnName="Scheme1" />
@@ -2338,6 +2361,9 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="SaleRate" ColumnName="SaleRate" />
+                <ScalarProperty Name="WholeSaleRate" ColumnName="WholeSaleRate" />
+                <ScalarProperty Name="SpecialRate" ColumnName="SpecialRate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2460,6 +2486,7 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
                 <ScalarProperty Name="PurchaseBookHeaderID" ColumnName="PurchaseBookHeaderID" />
                 <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
                 <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="PurchaseTaxType" ColumnName="PurchaseTaxType" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="FreeQuantity" ColumnName="FreeQuantity" />
                 <ScalarProperty Name="Scheme1" ColumnName="Scheme1" />
@@ -2478,6 +2505,9 @@ warning 6035: The relationship 'FK_TempPurchaseBookHeader_TempPurchaseBookHeader
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="SaleRate" ColumnName="SaleRate" />
+                <ScalarProperty Name="WholeSaleRate" ColumnName="WholeSaleRate" />
+                <ScalarProperty Name="SpecialRate" ColumnName="SpecialRate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

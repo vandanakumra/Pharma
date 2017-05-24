@@ -18,6 +18,7 @@ namespace PharmaDAL.Entity
         public int PurchaseBookHeaderID { get; set; }
         public string ItemCode { get; set; }
         public string BatchNo { get; set; }
+        public string PurchaseTaxType { get; set; }
         public int Quantity { get; set; }
         public Nullable<int> FreeQuantity { get; set; }
         public Nullable<double> Scheme1 { get; set; }
@@ -36,6 +37,9 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public Nullable<double> SaleRate { get; set; }
+        public Nullable<double> WholeSaleRate { get; set; }
+        public Nullable<double> SpecialRate { get; set; }
     
         public virtual TempPurchaseBookHeader TempPurchaseBookHeader { get; set; }
     }
