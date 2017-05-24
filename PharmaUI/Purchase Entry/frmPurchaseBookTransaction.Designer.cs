@@ -167,6 +167,7 @@
             this.dgvLineItem.Name = "dgvLineItem";
             this.dgvLineItem.Size = new System.Drawing.Size(903, 113);
             this.dgvLineItem.TabIndex = 11;
+            this.dgvLineItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvLineItem_KeyDown);
             // 
             // cbxPurchaseType
             // 

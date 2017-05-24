@@ -63,7 +63,7 @@ namespace PharmaDAL.Transaction
                 item.SpecialDiscount = lineItem.SpecialDiscount;
                 item.MRP = lineItem.MRP;
                 item.Excise = lineItem.Excise;
-                item.Expiry = lineItem.Expiry == DateTime.MinValue ? Convert.ToDateTime(DBNull.Value) : lineItem.Expiry;
+              //  item.Expiry = lineItem.Expiry == DateTime.MinValue ? Convert.ToDateTime(DBNull.Value) : lineItem.Expiry;
                 item.Scheme1 = lineItem.Scheme1;
                 item.Scheme2 = lineItem.Scheme2;
                 item.IsHalfScheme = lineItem.IsHalfScheme;

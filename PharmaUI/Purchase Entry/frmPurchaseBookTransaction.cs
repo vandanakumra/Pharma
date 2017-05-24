@@ -176,7 +176,7 @@ namespace PharmaUI
 
         private void FillCombo()
         {
-            
+
             cbxPurchaseType.DataSource = applicationFacade.GetPurchaseEntryTypes();
             cbxPurchaseType.DisplayMember = "PurchaseTypeName";
             cbxPurchaseType.ValueMember = "ID";
@@ -243,12 +243,12 @@ namespace PharmaUI
                         tb1.GotFocus += C_GotFocus;
                         tb1.ValueChanged += Tb1_TextChanged;
                         tb1.LostFocus += Tb1_Leave;
-                    
+
                     }
                 }
             }
         }
-        
+
         private void Tb1_Leave(object sender, EventArgs e)
         {
             if (isDirty)
@@ -258,20 +258,20 @@ namespace PharmaUI
                 switch (text.Name)
                 {
                     case "txtInvoiceNumber":
-                    {
-                        PurchaseBookHeader header = new PurchaseBookHeader();
-                        bool result = GetPurchaseBookHeader(ref header);
-
-                        if (result && isDirty)
                         {
-                            invoiceID = invoiceID == 0 ? applicationFacade.InsertTempPurchaseHeader(header) : applicationFacade.UpdateTempPurchaseHeader(header);
-                        }
-                    }
+                            PurchaseBookHeader header = new PurchaseBookHeader();
+                            bool result = GetPurchaseBookHeader(ref header);
 
-                    break;
+                            if (result && isDirty)
+                            {
+                                invoiceID = invoiceID == 0 ? applicationFacade.InsertTempPurchaseHeader(header) : applicationFacade.UpdateTempPurchaseHeader(header);
+                            }
+                        }
+
+                        break;
                     case "txtSupplierCode":
                         {
-                            if(invoiceID > 0 && isDirty)
+                            if (invoiceID > 0 && isDirty)
                             {
                                 PurchaseBookHeader header = new PurchaseBookHeader();
                                 bool result = GetPurchaseBookHeader(ref header);
@@ -327,14 +327,14 @@ namespace PharmaUI
                 lblSupplierName.Text = ledger.LastSelectedSupplier.SupplierLedgerName;
                 txtSupplierCode.Text = ledger.LastSelectedSupplier.SupplierLedgerCode;
             }
-            
+
             ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
             txtSupplierCode.Focus();
         }
 
         private bool GetPurchaseBookHeader(ref PurchaseBookHeader header)
         {
-            if(dtPurchaseDate.Value.Date == DateTime.MinValue)
+            if (dtPurchaseDate.Value.Date == DateTime.MinValue)
             {
                 errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.RequiredField);
                 dtPurchaseDate.Focus();
@@ -376,6 +376,7 @@ namespace PharmaUI
                 if (invoiceID != 0)
                 {
                     int srNo = lineItemList.Max(p => p.SrNo);
+
                     lineItemList.Add(new PurchaseBookLineItem { InvoiceID = invoiceID, SrNo = srNo + 1 });
 
                     dgvLineItem.Rows.Add(lineItemList);
@@ -409,19 +410,7 @@ namespace PharmaUI
                         break;
                     case "dgvLineItem":
                         {
-                            if (dgvLineItem.SelectedCells.Count > 0)
-                            {
-                                if(dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name == "ItemCode")
-                                {
-                                    frmItemMaster itemMaster = new frmItemMaster();
-                                    //Set Child UI
-                                    ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
-                                    itemMaster.WindowState = FormWindowState.Maximized;
-
-                                    itemMaster.FormClosed += ItemMaster_FormClosed; ;
-                                    itemMaster.Show();
-                                }
-                            }
+                            
                         }
                         break;
 
@@ -544,7 +533,7 @@ namespace PharmaUI
             int id = 0;
             double dValue = 0L;
 
-            if(row != null)
+            if (row != null)
             {
                 Int32.TryParse(Convert.ToString(row.Cells["ID"].Value), out id);
                 item.ID = id;
@@ -594,7 +583,7 @@ namespace PharmaUI
                 DateTime date = DateTime.MinValue;
                 DateTime.TryParse(Convert.ToString(row.Cells["Expiry"].Value), out date);
                 item.Expiry = date;
-               
+
             }
 
             return item;
@@ -604,12 +593,36 @@ namespace PharmaUI
         {
             double? amount = 0L;
             amount = item.Quantity * item.Rate;
-            amount = amount - ((item.Discount??0 * amount??0) / 100);
-            amount = amount - ((item.SpecialDiscount??0 * amount??0) / 100);
-            amount = amount - ((item.VolumeDiscount??0 * amount??0) / 100);
+            amount = amount - ((item.Discount ?? 0 * amount ?? 0) / 100);
+            amount = amount - ((item.SpecialDiscount ?? 0 * amount ?? 0) / 100);
+            amount = amount - ((item.VolumeDiscount ?? 0 * amount ?? 0) / 100);
 
-            return amount??0;
+            return amount ?? 0;
         }
 
+        private void dgvLineItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.F1)
+            {
+                if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "ItemCode")
+                {
+                    frmItemMaster itemMaster = new frmItemMaster();
+                    //Set Child UI
+                    ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
+                    itemMaster.WindowState = FormWindowState.Maximized;
+
+                    itemMaster.FormClosed += ItemMaster_FormClosed; ;
+                    itemMaster.Show();
+                }
+                else if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "BatchNumber")
+                {
+                     frmLastNBatchNo form = new frmLastNBatchNo();
+                    //Set Child UI
+                  
+                    form.ShowDialog();
+                }
+
+            }
+        }
     }
 }

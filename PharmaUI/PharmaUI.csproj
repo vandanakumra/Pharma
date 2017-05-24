@@ -169,16 +169,16 @@
     <Compile Include="frmPrivledgeAddUpdate.Designer.cs">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPurchaseBookLineItemUpdate.cs">
+    <Compile Include="Purchase Entry\frmPurchaseBookLineItemUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPurchaseBookLineItemUpdate.Designer.cs">
+    <Compile Include="Purchase Entry\frmPurchaseBookLineItemUpdate.Designer.cs">
       <DependentUpon>frmPurchaseBookLineItemUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPurchaseBookTransaction.cs">
+    <Compile Include="Purchase Entry\frmPurchaseBookTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPurchaseBookTransaction.Designer.cs">
+    <Compile Include="Purchase Entry\frmPurchaseBookTransaction.Designer.cs">
       <DependentUpon>frmPurchaseBookTransaction.cs</DependentUpon>
     </Compile>
     <Compile Include="frmRoleAddUpdate.cs">
@@ -219,6 +219,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase Entry\frmLastNBatchNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase Entry\frmLastNBatchNo.Designer.cs">
+      <DependentUpon>frmLastNBatchNo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucSupplierCustomerInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -270,10 +276,10 @@
     <EmbeddedResource Include="frmPrivledgeAddUpdate.resx">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPurchaseBookLineItemUpdate.resx">
+    <EmbeddedResource Include="Purchase Entry\frmPurchaseBookLineItemUpdate.resx">
       <DependentUpon>frmPurchaseBookLineItemUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPurchaseBookTransaction.resx">
+    <EmbeddedResource Include="Purchase Entry\frmPurchaseBookTransaction.resx">
       <DependentUpon>frmPurchaseBookTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRoleAddUpdate.resx">
@@ -307,6 +313,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Purchase Entry\frmLastNBatchNo.resx">
+      <DependentUpon>frmLastNBatchNo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucSupplierCustomerInfo.resx">
       <DependentUpon>ucSupplierCustomerInfo.cs</DependentUpon>
     </EmbeddedResource>
