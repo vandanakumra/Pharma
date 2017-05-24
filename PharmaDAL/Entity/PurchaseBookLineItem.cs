@@ -18,6 +18,7 @@ namespace PharmaDAL.Entity
         public int PurchaseBookHeaderID { get; set; }
         public string ItemCode { get; set; }
         public string BatchNo { get; set; }
+        public string PurchaseTaxType { get; set; }
         public int Quantity { get; set; }
         public Nullable<int> FreeQuantity { get; set; }
         public Nullable<double> Scheme1 { get; set; }

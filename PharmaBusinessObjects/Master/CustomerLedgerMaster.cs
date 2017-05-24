@@ -58,11 +58,6 @@ namespace PharmaBusinessObjects.Master
         public bool IsFollowConditionStrictly { get; set; }
         public double ?  Discount { get; set; }
         public string CentralLocal { get; set; }
-        public string CreatedBy { get; set; }
-        public  System.DateTime  ?  CreatedOn { get; set; }
-        public string ModifiedBy { get; set; }
-        public  System.DateTime  ?  ModifiedOn { get; set; }
-
         public List<CustomerCopanyDiscount> CustomerCopanyDiscountList { get; set; }
     }
 }
