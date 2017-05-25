@@ -128,5 +128,9 @@ namespace PharmaUI
             purchaseBookLineItem.PurchaseDate = dtLIDate.Value.Date == dtLIDate.MinDate ? DateTime.MinValue : dtLIDate.Value.Date;
         }
 
+        private void tblDiscount_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

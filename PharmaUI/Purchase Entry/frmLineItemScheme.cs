@@ -1,4 +1,5 @@
 ﻿using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Transaction;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI.Purchase_Entry
 {
@@ -33,7 +35,14 @@ namespace PharmaUI.Purchase_Entry
 
             GotFocusEventRaised(this);
             ExtensionMethods.EnterKeyDownForTabEvents(this);
+
+            //Fill half Scheme options
+            cbxHalfScheme.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxHalfScheme.SelectedItem = Choice.No;
+
             FillFormForUpdate();
+
+            txtScheme1.Focus();
 
         }
 
@@ -43,7 +52,7 @@ namespace PharmaUI.Purchase_Entry
             {
                 txtScheme1.Text = Convert.ToString(purchaseBookLineItem.Scheme1);
                 txtScheme2.Text = Convert.ToString(purchaseBookLineItem.Scheme1);
-                chkIsHalfScheme.Checked = purchaseBookLineItem.IsHalfScheme;
+                cbxHalfScheme.SelectedItem = purchaseBookLineItem.IsHalfScheme ? Choice.Yes : Choice.No;
             }
         }
 
@@ -89,6 +98,12 @@ namespace PharmaUI.Purchase_Entry
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
+        private void cbxHalfScheme_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.Enter)
+            {
+                this.Close();
+            }
+        }
     }
 }

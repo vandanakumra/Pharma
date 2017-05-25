@@ -57,6 +57,8 @@
             this.tbxQtyPerCase = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
+            this.lblPurchaseType = new System.Windows.Forms.Label();
             this.tbxSpecialDiscountRecieved = new System.Windows.Forms.TextBox();
             this.lblSplDiscRecieved = new System.Windows.Forms.Label();
             this.lblTaxOnPurchase = new System.Windows.Forms.Label();
@@ -109,8 +111,6 @@
             this.errorProviderItem = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.lblPurchaseType = new System.Windows.Forms.Label();
-            this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -437,6 +437,25 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 187);
             this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // cbxPurchaseType
+            // 
+            this.cbxPurchaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPurchaseType.FormattingEnabled = true;
+            this.cbxPurchaseType.Location = new System.Drawing.Point(165, 165);
+            this.cbxPurchaseType.Name = "cbxPurchaseType";
+            this.cbxPurchaseType.Size = new System.Drawing.Size(142, 21);
+            this.cbxPurchaseType.TabIndex = 208;
+            // 
+            // lblPurchaseType
+            // 
+            this.lblPurchaseType.AutoSize = true;
+            this.lblPurchaseType.Location = new System.Drawing.Point(3, 165);
+            this.lblPurchaseType.Margin = new System.Windows.Forms.Padding(3);
+            this.lblPurchaseType.Name = "lblPurchaseType";
+            this.lblPurchaseType.Size = new System.Drawing.Size(79, 13);
+            this.lblPurchaseType.TabIndex = 208;
+            this.lblPurchaseType.Text = "Purchase Type";
             // 
             // tbxSpecialDiscountRecieved
             // 
@@ -969,25 +988,6 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // lblPurchaseType
-            // 
-            this.lblPurchaseType.AutoSize = true;
-            this.lblPurchaseType.Location = new System.Drawing.Point(3, 165);
-            this.lblPurchaseType.Margin = new System.Windows.Forms.Padding(3);
-            this.lblPurchaseType.Name = "lblPurchaseType";
-            this.lblPurchaseType.Size = new System.Drawing.Size(79, 13);
-            this.lblPurchaseType.TabIndex = 208;
-            this.lblPurchaseType.Text = "Purchase Type";
-            // 
-            // cbxPurchaseType
-            // 
-            this.cbxPurchaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPurchaseType.FormattingEnabled = true;
-            this.cbxPurchaseType.Location = new System.Drawing.Point(165, 165);
-            this.cbxPurchaseType.Name = "cbxPurchaseType";
-            this.cbxPurchaseType.Size = new System.Drawing.Size(142, 21);
-            this.cbxPurchaseType.TabIndex = 208;
             // 
             // frmItemMasterAddUpdated
             // 
