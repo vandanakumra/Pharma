@@ -101,6 +101,7 @@
             this.Controls.Add(this.lblScheme);
             this.Controls.Add(this.txtScheme1);
             this.Name = "frmLineItemScheme";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLineItemScheme_FormClosing);
             this.Load += new System.EventHandler(this.frmLineItemScheme_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

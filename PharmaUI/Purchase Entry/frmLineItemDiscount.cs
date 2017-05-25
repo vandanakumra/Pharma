@@ -1,4 +1,5 @@
 ﻿using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Transaction;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI
 {
@@ -33,6 +35,11 @@ namespace PharmaUI
 
             GotFocusEventRaised(this);
             ExtensionMethods.EnterKeyDownForTabEvents(this);
+
+            //Fill half Scheme options
+            cbxNewRate.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxNewRate.SelectedItem = Choice.No;
+
             FillFormForUpdate();
 
         }
@@ -49,8 +56,8 @@ namespace PharmaUI
             txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
             txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);
             dtLIDate.Value = purchaseBookLineItem.PurchaseDate == DateTime.MinValue ? dtLIDate.MinDate : purchaseBookLineItem.PurchaseDate;
-            dtExpiry.Value = purchaseBookLineItem.Expiry == DateTime.MinValue ? dtExpiry.MinDate : purchaseBookLineItem.Expiry;
-            chkIsNewRate.Checked = purchaseBookLineItem.IsNewRate;
+            dtExpiry.Value = purchaseBookLineItem.Expiry == DateTime.MinValue ? dtExpiry.MinDate : purchaseBookLineItem.Expiry;           
+            cbxNewRate.SelectedItem = purchaseBookLineItem.IsNewRate ? Choice.Yes : Choice.No;
         }
 
         public void GotFocusEventRaised(Control control)
@@ -122,7 +129,10 @@ namespace PharmaUI
             double.TryParse(txtWholeSaleRate.Text, out value);
             purchaseBookLineItem.WholeSaleRate = value;
 
-            purchaseBookLineItem.IsNewRate = chkIsNewRate.Checked;
+            Choice choice;
+            Enum.TryParse<Choice>(cbxNewRate.SelectedValue.ToString(), out choice);
+
+            purchaseBookLineItem.IsNewRate = choice == Choice.Yes;
 
             purchaseBookLineItem.Expiry = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
             purchaseBookLineItem.PurchaseDate = dtLIDate.Value.Date == dtLIDate.MinDate ? DateTime.MinValue : dtLIDate.Value.Date;

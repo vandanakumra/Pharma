@@ -17,13 +17,18 @@ namespace PharmaUI
     {
         public PharmaBusinessObjects.Master.ItemMaster LastSelectedItemMaster { get; set; }
         IApplicationFacade applicationFacade;
-        public frmItemMaster()
+
+        private bool isOpenAsChild = false;
+
+        public frmItemMaster(bool _isOpenAsChild = false)
         {
             try
             {
                 InitializeComponent();
                 ExtensionMethods.SetFormProperties(this);
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+
+                isOpenAsChild = _isOpenAsChild;
             }
             catch (Exception ex)
             {
@@ -43,7 +48,7 @@ namespace PharmaUI
                 LoadDataGrid();
 
                 dgvItemList.CellDoubleClick += DgvItemList_CellDoubleClick;
-                dgvItemList.KeyDown += DgvCompanyList_KeyDown;
+                dgvItemList.KeyDown += DgvItemList_KeyDown;
                 dgvItemList.SelectionChanged += DgvItemList_SelectionChanged;
 
                 txtSearch.Focus();
@@ -151,11 +156,11 @@ namespace PharmaUI
                 form.frmItemMasterAddUpdate_Fill_UsingExistingItem(existingItem);
             }
 
-            form.FormClosed += Form_FormClosed;
+            form.FormClosed += FormItemMasterAddUpdated_FormClosed;
             form.Show();
         }
 
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        private void FormItemMasterAddUpdated_FormClosed(object sender, FormClosedEventArgs e)
         {
             try
             {
@@ -204,9 +209,25 @@ namespace PharmaUI
             dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
         }
 
-        private void DgvCompanyList_KeyDown(object sender, KeyEventArgs e)
+        private void DgvItemList_KeyDown(object sender, KeyEventArgs e)
         {
-
+            try
+            {
+                if (e.KeyCode == Keys.Enter && isOpenAsChild)
+                {
+                    this.Close();
+                }
+                if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -238,7 +259,6 @@ namespace PharmaUI
             else if (keyData == Keys.Escape)
             {
                 this.Close();
-
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

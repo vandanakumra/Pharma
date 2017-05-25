@@ -105,5 +105,24 @@ namespace PharmaUI.Purchase_Entry
                 this.Close();
             }
         }
+
+        private void frmLineItemScheme_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            int scheme1 = 0;
+            int.TryParse(txtScheme1.Text, out scheme1);
+
+            int scheme2 = 0;
+            int.TryParse(txtScheme2.Text, out scheme2);
+
+            Choice choice;
+            Enum.TryParse<Choice>(cbxHalfScheme.SelectedValue.ToString(), out choice);
+
+
+            purchaseBookLineItem.Scheme1 = scheme1;
+            purchaseBookLineItem.Scheme2 = scheme2;
+            purchaseBookLineItem.IsHalfScheme = choice == Choice.Yes;
+
+        }        
+       
     }
 }

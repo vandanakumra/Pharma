@@ -16,14 +16,16 @@ namespace PharmaUI
     {
         public PharmaBusinessObjects.Master.SupplierLedgerMaster LastSelectedSupplier { get; set; }
         IApplicationFacade applicationFacade;
+        private bool isOpenAsChild;
 
-        public frmSupplierLedger()
+        public frmSupplierLedger(bool _isOpenAsChild = false)
         {
             try
             {
                 InitializeComponent();
                 ExtensionMethods.SetFormProperties(this);
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+                isOpenAsChild = _isOpenAsChild;
             }
             catch (Exception ex)
             {
@@ -44,6 +46,7 @@ namespace PharmaUI
 
                 LoadDataGrid();
                 dgvSupplier.CellDoubleClick += dgvSupplier_DoubleClick;
+                dgvSupplier.KeyDown += DgvSupplier_KeyDown;
             }
             catch (Exception ex)
             {
@@ -51,7 +54,28 @@ namespace PharmaUI
             }
                
         }
-        
+
+        private void DgvSupplier_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter && isOpenAsChild)
+                {
+                    this.Close();
+                }
+                if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void dgvSupplier_DoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -71,7 +95,7 @@ namespace PharmaUI
           
         }
 
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        private void FormSupplierLedgerAddUpdate_FormClosed(object sender, FormClosedEventArgs e)
         {
             try
             {
@@ -157,8 +181,8 @@ namespace PharmaUI
         void AddEditSupplierLedger(int supplierId)
         {
             frmSupplierLedgerAddUpdate form = new frmSupplierLedgerAddUpdate(supplierId,txtSearch.Text);
-            form.FormClosed -= Form_FormClosed;
-            form.FormClosed += Form_FormClosed;
+            form.FormClosed -= FormSupplierLedgerAddUpdate_FormClosed;
+            form.FormClosed += FormSupplierLedgerAddUpdate_FormClosed;
             form.ShowDialog();
         }
 
