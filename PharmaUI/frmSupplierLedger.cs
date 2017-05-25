@@ -40,7 +40,7 @@ namespace PharmaUI
             try
             {
 
-                ExtensionMethods.FormLoad(this, "Ledger Master");
+                ExtensionMethods.FormLoad(this, "Supplier Ledger Master");
                 GotFocusEventRaised(this);
                 ExtensionMethods.EnterKeyDownForTabEvents(this);
 

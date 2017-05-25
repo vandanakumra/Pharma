@@ -34,18 +34,16 @@ namespace PharmaUI
         {
             try
             {
-                menuStrip1.Visible = false;
-
-                pnlLogin.Location = new Point(
-                this.ClientSize.Width / 2 - pnlLogin.Size.Width / 2,
-                this.ClientSize.Height / 2 - pnlLogin.Size.Height / 2);
-                pnlLogin.Anchor = AnchorStyles.None;
-
-
                 pnlMain.Dock = DockStyle.Fill;
 
                 List<Control> allControls = ExtensionMethods.GetAllControls(this);
                 allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
+
+
+                // ToggleMenuItems(menuStrip1.Items);
+                frmDefault form = new frmDefault();
+                ExtensionMethods.AddFormToPanel(form, pnlMain);
+                form.Show();
 
             }
             catch (Exception ex)
@@ -200,47 +198,6 @@ namespace PharmaUI
            
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Login();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-           
-        }
-
-        private void Login()
-        {
-            try
-            {
-                PharmaBusinessObjects.Master.UserMaster loginUser = applicationFacade.GetUserByUserName(tbUserName.Text);
-
-                if (loginUser != null)
-                {
-                    pnlLogin.Visible = false;
-                    menuStrip1.Visible = true;
-                    ExtensionMethods.LoggedInUser = loginUser;
-
-                    // ToggleMenuItems(menuStrip1.Items);
-                    frmDefault form = new frmDefault();
-                    ExtensionMethods.AddFormToPanel(form, pnlMain);
-                    form.Show();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-          
-
-        }
 
         private void ToggleMenuItems(ToolStripItemCollection collection)
         {
@@ -273,24 +230,6 @@ namespace PharmaUI
            
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Application.Exit();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-           
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -308,39 +247,7 @@ namespace PharmaUI
            
         }
 
-        private void tbUserName_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    Login();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-           
-        }
-
-        private void tbPassword_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-
-                if (e.KeyCode == Keys.Enter)
-                {
-                    Login();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
+      
 
         private void purchaseTransactionToolStripMenuItem_Click(object sender, EventArgs e)
         {
