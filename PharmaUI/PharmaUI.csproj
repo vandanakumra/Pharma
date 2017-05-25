@@ -237,6 +237,12 @@
     <Compile Include="Purchase Entry\frmLastNBatchNo.Designer.cs">
       <DependentUpon>frmLastNBatchNo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase Entry\frmPurchaseHeaderAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase Entry\frmPurchaseHeaderAmount.Designer.cs">
+      <DependentUpon>frmPurchaseHeaderAmount.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucSupplierCustomerInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -333,6 +339,9 @@
     </Compile>
     <EmbeddedResource Include="Purchase Entry\frmLastNBatchNo.resx">
       <DependentUpon>frmLastNBatchNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase Entry\frmPurchaseHeaderAmount.resx">
+      <DependentUpon>frmPurchaseHeaderAmount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucSupplierCustomerInfo.resx">
       <DependentUpon>ucSupplierCustomerInfo.cs</DependentUpon>

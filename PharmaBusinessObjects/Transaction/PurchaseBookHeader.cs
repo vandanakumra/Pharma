@@ -13,9 +13,19 @@ namespace PharmaBusinessObjects.Transaction
         public DateTime PurchaseDate { get; set; }
         public string SupplierCode { get; set; }
         public int PurchaseFormTypeID { get; set; }
+        public List<PurchaseBookAmount> PurchaseAmountList { get; set; }
+        public double ExemptedAmount { get; set; }
+        public double OtherAmount { get; set; }
+        public double InvoiceAmount { get; set; }
+        public string Narration1 { get; set; }
+        public string Narration2 { get; set; }
+    }
+
+    public class PurchaseBookAmount : BaseBusinessObjects
+    {
         public int PurchaseBookHeaderID { get; set; }
         public string PurchaseTaxType { get; set; }
-        public decimal Amount { get; set; }
-        public decimal TaxOnPurchase { get; set; }
+        public double Amount { get; set; }
+        public double TaxOnPurchase { get; set; }
     }
 }

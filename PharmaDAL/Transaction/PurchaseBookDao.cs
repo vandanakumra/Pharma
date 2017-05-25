@@ -77,6 +77,8 @@ namespace PharmaDAL.Transaction
                 item.WholeSaleRate = lineItem.WholeSaleRate;
                 item.SaleRate = lineItem.SaleRate;
                 item.PurchaseTaxType = lineItem.PurchaseTaxType;
+                item.CreatedBy = this.LoggedInUser.Username;
+                item.CreatedOn = DateTime.Now;
 
                 context.TempPurchaseBookLineItem.Add(item);
                 context.SaveChanges();
@@ -116,6 +118,8 @@ namespace PharmaDAL.Transaction
                     item.WholeSaleRate = lineItem.WholeSaleRate;
                     item.SaleRate = lineItem.SaleRate;
                     item.PurchaseTaxType = "L000012";//lineItem.PurchaseTaxType;
+                    item.ModifiedBy = this.LoggedInUser.Username;
+                    item.ModifiedOn = DateTime.Now;
                     //IsNewRate and Purchase Rate
                     //context.TempPurchaseBookLineItem.Add(item);
                     context.SaveChanges();
@@ -189,6 +193,11 @@ namespace PharmaDAL.Transaction
 
         public PharmaBusinessObjects.Transaction.PurchaseBookHeader GetFinalAmountWithTaxForPurchase(int purchaseBookHeaderID)
         {
+            PharmaBusinessObjects.Transaction.PurchaseBookHeader header = new PharmaBusinessObjects.Transaction.PurchaseBookHeader();
+            header.InvoiceID = purchaseBookHeaderID;
+
+            header.PurchaseAmountList = new List<PharmaBusinessObjects.Transaction.PurchaseBookAmount>();
+
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 SqlConnection connection = (SqlConnection)context.Database.Connection;
@@ -204,20 +213,24 @@ namespace PharmaDAL.Transaction
 
                 if(dt != null && dt.Rows.Count > 0)
                 {
-                    PharmaBusinessObjects.Transaction.PurchaseBookHeader obj = new PharmaBusinessObjects.Transaction.PurchaseBookHeader();
-                    obj.PurchaseBookHeaderID = Convert.ToInt32(dt.Rows[0]["PurchaseBookHeaderID"]);
-                    obj.PurchaseTaxType = Convert.ToString(dt.Rows[0]["PurchaseTaxType"]);
-                    obj.Amount = Convert.ToDecimal(dt.Rows[0]["Amount"]);
-                    obj.TaxOnPurchase = Convert.ToDecimal(dt.Rows[0]["TaxOnPurchase"]);
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        PharmaBusinessObjects.Transaction.PurchaseBookAmount obj = new PharmaBusinessObjects.Transaction.PurchaseBookAmount();
+                    
+                        obj.PurchaseTaxType = Convert.ToString(row["PurchaseTaxType"]);
+                        obj.Amount = Convert.IsDBNull(row["Amount"]) ? 0L :  Convert.ToDouble(row["Amount"]);
+                        obj.TaxOnPurchase = Convert.IsDBNull(row["TaxOnPurchase"]) ? 0L :  Convert.ToDouble(row["TaxOnPurchase"]);
 
-                    return obj;
+                        header.PurchaseAmountList.Add(obj);
+                    }
                 }
             }
 
+            double totalAmount = header.PurchaseAmountList.Sum(p => p.Amount) + header.PurchaseAmountList.Sum(p => p.TaxOnPurchase);
+            header.InvoiceAmount = totalAmount;
 
-            return new PharmaBusinessObjects.Transaction.PurchaseBookHeader();
+            return header;
         }
-
 
     }
 }
