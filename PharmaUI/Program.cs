@@ -16,7 +16,19 @@ namespace PharmaUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMainForm());
+
+            frmLogin fLogin = new frmLogin();
+            if (fLogin.ShowDialog() == DialogResult.OK)
+            {               
+                Application.Run(new frmMainForm());
+            }
+            else
+            {
+                Application.Exit();
+            }
+
+
+           
             
         }
     }

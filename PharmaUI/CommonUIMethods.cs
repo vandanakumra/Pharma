@@ -127,7 +127,7 @@ namespace PharmaUI
 
             Panel panel1 = new Panel();
             panel1.Location = new Point(0, 0);
-            panel1.BackColor = Color.MidnightBlue;
+            panel1.BackColor = Color.Gray;
             panel1.Width = form.Width;
             panel1.Height = 50;
             panel1.Dock = DockStyle.Fill;
@@ -157,7 +157,7 @@ namespace PharmaUI
 
             Panel panel1 = new Panel();
             panel1.Location = new Point(0, 0);
-            panel1.BackColor = Color.MidnightBlue;
+            panel1.BackColor = Color.Gray;
             panel1.Width = form.Width;
             panel1.Height = 50;
             panel1.Dock = DockStyle.Fill;

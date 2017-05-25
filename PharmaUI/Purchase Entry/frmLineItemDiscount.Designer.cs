@@ -47,16 +47,16 @@
             this.lblSaleRate = new System.Windows.Forms.Label();
             this.lblWholeSaleRate = new System.Windows.Forms.Label();
             this.lblSpecialRate = new System.Windows.Forms.Label();
-            this.chkIsNewRate = new System.Windows.Forms.CheckBox();
             this.txtSpecialRate = new System.Windows.Forms.TextBox();
             this.dtLIDate = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblAppSaleRateValue = new System.Windows.Forms.Label();
-            this.lblAppSaleExcise = new System.Windows.Forms.Label();
-            this.lblAppExciseValue = new System.Windows.Forms.Label();
-            this.lblNewRate = new System.Windows.Forms.Label();
-            this.lblNewRateValue = new System.Windows.Forms.Label();
             this.lblAppSaleRate = new System.Windows.Forms.Label();
+            this.lblAppExciseValue = new System.Windows.Forms.Label();
+            this.lblAppSaleExcise = new System.Windows.Forms.Label();
+            this.lblNewRateValue = new System.Windows.Forms.Label();
+            this.lblNewRate = new System.Windows.Forms.Label();
+            this.cbxNewRate = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -154,7 +154,7 @@
             this.dtExpiry.Location = new System.Drawing.Point(354, 121);
             this.dtExpiry.Name = "dtExpiry";
             this.dtExpiry.Size = new System.Drawing.Size(111, 20);
-            this.dtExpiry.TabIndex = 22;
+            this.dtExpiry.TabIndex = 21;
             // 
             // txtWholeSaleRate
             // 
@@ -243,16 +243,6 @@
             this.lblSpecialRate.TabIndex = 9;
             this.lblSpecialRate.Text = "Special Rate";
             // 
-            // chkIsNewRate
-            // 
-            this.chkIsNewRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkIsNewRate.AutoSize = true;
-            this.chkIsNewRate.Location = new System.Drawing.Point(588, 36);
-            this.chkIsNewRate.Name = "chkIsNewRate";
-            this.chkIsNewRate.Size = new System.Drawing.Size(15, 14);
-            this.chkIsNewRate.TabIndex = 13;
-            this.chkIsNewRate.UseVisualStyleBackColor = true;
-            // 
             // txtSpecialRate
             // 
             this.txtSpecialRate.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -284,10 +274,16 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel2.Controls.Add(this.cbxNewRate, 5, 1);
             this.tableLayoutPanel2.Controls.Add(this.dtExpiry, 3, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblAppSaleRateValue, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblExpiry, 2, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblAppSaleRate, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblAppExciseValue, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtMRP, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.txtSpecialRate, 5, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblAppSaleExcise, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblNewRateValue, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblMRP, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.txtVolDiscount, 5, 3);
             this.tableLayoutPanel2.Controls.Add(this.lblSpecialRate, 4, 2);
@@ -295,21 +291,15 @@
             this.tableLayoutPanel2.Controls.Add(this.txtSpecialDiscount, 3, 3);
             this.tableLayoutPanel2.Controls.Add(this.txtWholeSaleRate, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblSpecialDiscount, 2, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblAppSaleRateValue, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtDiscount, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.lblWholeSaleRate, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblDiscount, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblAppSaleExcise, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblSaleRate, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblIsNewRate, 4, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtExcise, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblAppExciseValue, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.chkIsNewRate, 5, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblLIExcise, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblNewRate, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblLineItemDate, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblNewRateValue, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblAppSaleRate, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.dtLIDate, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtSaleRate, 1, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(15, 71);
@@ -327,29 +317,51 @@
             // 
             this.lblAppSaleRateValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblAppSaleRateValue.AutoSize = true;
-            this.lblAppSaleRateValue.Location = new System.Drawing.Point(120, 8);
+            this.lblAppSaleRateValue.Location = new System.Drawing.Point(588, 8);
             this.lblAppSaleRateValue.Name = "lblAppSaleRateValue";
-            this.lblAppSaleRateValue.Size = new System.Drawing.Size(0, 13);
+            this.lblAppSaleRateValue.Size = new System.Drawing.Size(60, 13);
             this.lblAppSaleRateValue.TabIndex = 7;
+            this.lblAppSaleRateValue.Text = "Rate Value";
             // 
-            // lblAppSaleExcise
+            // lblAppSaleRate
             // 
-            this.lblAppSaleExcise.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblAppSaleExcise.AutoSize = true;
-            this.lblAppSaleExcise.Location = new System.Drawing.Point(471, 8);
-            this.lblAppSaleExcise.Name = "lblAppSaleExcise";
-            this.lblAppSaleExcise.Size = new System.Drawing.Size(77, 13);
-            this.lblAppSaleExcise.TabIndex = 6;
-            this.lblAppSaleExcise.Text = "Approx. Excise";
+            this.lblAppSaleRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblAppSaleRate.AutoSize = true;
+            this.lblAppSaleRate.Location = new System.Drawing.Point(471, 8);
+            this.lblAppSaleRate.Name = "lblAppSaleRate";
+            this.lblAppSaleRate.Size = new System.Drawing.Size(90, 13);
+            this.lblAppSaleRate.TabIndex = 2;
+            this.lblAppSaleRate.Text = "Approx Sale Rate";
             // 
             // lblAppExciseValue
             // 
             this.lblAppExciseValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblAppExciseValue.AutoSize = true;
-            this.lblAppExciseValue.Location = new System.Drawing.Point(237, 8);
+            this.lblAppExciseValue.Location = new System.Drawing.Point(354, 8);
             this.lblAppExciseValue.Name = "lblAppExciseValue";
-            this.lblAppExciseValue.Size = new System.Drawing.Size(0, 13);
+            this.lblAppExciseValue.Size = new System.Drawing.Size(68, 13);
             this.lblAppExciseValue.TabIndex = 5;
+            this.lblAppExciseValue.Text = "Excise Value";
+            // 
+            // lblAppSaleExcise
+            // 
+            this.lblAppSaleExcise.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblAppSaleExcise.AutoSize = true;
+            this.lblAppSaleExcise.Location = new System.Drawing.Point(237, 8);
+            this.lblAppSaleExcise.Name = "lblAppSaleExcise";
+            this.lblAppSaleExcise.Size = new System.Drawing.Size(77, 13);
+            this.lblAppSaleExcise.TabIndex = 6;
+            this.lblAppSaleExcise.Text = "Approx. Excise";
+            // 
+            // lblNewRateValue
+            // 
+            this.lblNewRateValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblNewRateValue.AutoSize = true;
+            this.lblNewRateValue.Location = new System.Drawing.Point(120, 8);
+            this.lblNewRateValue.Name = "lblNewRateValue";
+            this.lblNewRateValue.Size = new System.Drawing.Size(70, 13);
+            this.lblNewRateValue.TabIndex = 3;
+            this.lblNewRateValue.Text = "New Rate llbl";
             // 
             // lblNewRate
             // 
@@ -361,24 +373,14 @@
             this.lblNewRate.TabIndex = 4;
             this.lblNewRate.Text = "New Rate";
             // 
-            // lblNewRateValue
+            // cbxNewRate
             // 
-            this.lblNewRateValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblNewRateValue.AutoSize = true;
-            this.lblNewRateValue.Location = new System.Drawing.Point(354, 8);
-            this.lblNewRateValue.Name = "lblNewRateValue";
-            this.lblNewRateValue.Size = new System.Drawing.Size(0, 13);
-            this.lblNewRateValue.TabIndex = 3;
-            // 
-            // lblAppSaleRate
-            // 
-            this.lblAppSaleRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblAppSaleRate.AutoSize = true;
-            this.lblAppSaleRate.Location = new System.Drawing.Point(588, 8);
-            this.lblAppSaleRate.Name = "lblAppSaleRate";
-            this.lblAppSaleRate.Size = new System.Drawing.Size(90, 13);
-            this.lblAppSaleRate.TabIndex = 2;
-            this.lblAppSaleRate.Text = "Approx Sale Rate";
+            this.cbxNewRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxNewRate.FormattingEnabled = true;
+            this.cbxNewRate.Location = new System.Drawing.Point(588, 32);
+            this.cbxNewRate.Name = "cbxNewRate";
+            this.cbxNewRate.Size = new System.Drawing.Size(112, 21);
+            this.cbxNewRate.TabIndex = 13;
             // 
             // frmLineItemDiscount
             // 
@@ -426,6 +428,6 @@
         private System.Windows.Forms.Label lblNewRate;
         private System.Windows.Forms.Label lblNewRateValue;
         private System.Windows.Forms.Label lblAppSaleRate;
-        private System.Windows.Forms.CheckBox chkIsNewRate;
+        private System.Windows.Forms.ComboBox cbxNewRate;
     }
 }

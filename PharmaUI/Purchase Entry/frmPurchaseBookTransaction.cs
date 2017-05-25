@@ -489,7 +489,7 @@ namespace PharmaUI
                 {
                     case "txtSupplierCode":
                         {
-                            frmSupplierLedger ledger = new frmSupplierLedger();
+                            frmSupplierLedger ledger = new frmSupplierLedger(true);
                             //Set Child UI
                             ExtensionMethods.AddChildFormToPanel(this, ledger, ExtensionMethods.MainPanel);
                             ledger.WindowState = FormWindowState.Maximized;
@@ -785,7 +785,7 @@ namespace PharmaUI
             {
                 if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "ItemCode")
                 {
-                    frmItemMaster itemMaster = new frmItemMaster();
+                    frmItemMaster itemMaster = new frmItemMaster(true);
                     //Set Child UI
                     ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
                     itemMaster.WindowState = FormWindowState.Maximized;
