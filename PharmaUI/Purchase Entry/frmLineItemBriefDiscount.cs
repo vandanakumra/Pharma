@@ -36,6 +36,8 @@ namespace PharmaUI
             ExtensionMethods.EnterKeyDownForTabEvents(this);
             FillFormForUpdate();
 
+            txtDiscount.Focus();
+
         }
 
         private void FillFormForUpdate()
