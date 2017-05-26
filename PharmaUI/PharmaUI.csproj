@@ -249,12 +249,6 @@
     <Compile Include="Purchase Entry\frmPurchaseHeaderAmount.Designer.cs">
       <DependentUpon>frmPurchaseHeaderAmount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchase Entry\PurchaseBookModification.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Purchase Entry\PurchaseBookModification.Designer.cs">
-      <DependentUpon>PurchaseBookModification.cs</DependentUpon>
-    </Compile>
     <Compile Include="ucSupplierCustomerInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -357,9 +351,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase Entry\frmPurchaseHeaderAmount.resx">
       <DependentUpon>frmPurchaseHeaderAmount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Purchase Entry\PurchaseBookModification.resx">
-      <DependentUpon>PurchaseBookModification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucSupplierCustomerInfo.resx">
       <DependentUpon>ucSupplierCustomerInfo.cs</DependentUpon>
