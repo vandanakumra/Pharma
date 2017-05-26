@@ -155,6 +155,7 @@ namespace PharmaUI
         private void DgvLineItem_SelectionChanged(object sender, EventArgs e)
         {
             isCellEdit = false;
+
             if (dgvLineItem.SelectedCells.Count > 0)
             {
                 string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
@@ -169,6 +170,7 @@ namespace PharmaUI
         {
             string columnName = dgvLineItem.Columns[e.ColumnIndex].Name;
             string itemCode = Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value);
+
             if (columnName == "Rate" && !isCellEdit)
             {
                 double newRate = 0L;

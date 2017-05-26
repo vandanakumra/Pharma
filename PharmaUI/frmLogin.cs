@@ -70,6 +70,7 @@ namespace PharmaUI
 
                 if (loginUser != null)
                 {
+                    ExtensionMethods.LoggedInUser = loginUser;
                     DialogResult = DialogResult.OK;
                     
                 }
