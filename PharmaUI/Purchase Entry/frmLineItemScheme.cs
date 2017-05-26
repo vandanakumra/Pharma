@@ -90,7 +90,7 @@ namespace PharmaUI.Purchase_Entry
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Escape)
+            if (keyData == Keys.Escape || keyData == Keys.End)
             {
                 this.Close();
 

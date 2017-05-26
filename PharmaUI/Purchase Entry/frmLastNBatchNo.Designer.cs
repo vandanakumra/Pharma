@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvLineItem = new System.Windows.Forms.DataGridView();
+            this.dgvLastBatch = new System.Windows.Forms.DataGridView();
             this.btnCancel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLastBatch)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvLineItem
+            // dgvLastBatch
             // 
-            this.dgvLineItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvLastBatch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvLineItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLineItem.Location = new System.Drawing.Point(12, 63);
-            this.dgvLineItem.Name = "dgvLineItem";
-            this.dgvLineItem.Size = new System.Drawing.Size(561, 248);
-            this.dgvLineItem.TabIndex = 12;
+            this.dgvLastBatch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLastBatch.Location = new System.Drawing.Point(12, 63);
+            this.dgvLastBatch.Name = "dgvLastBatch";
+            this.dgvLastBatch.Size = new System.Drawing.Size(561, 248);
+            this.dgvLastBatch.TabIndex = 12;
             // 
             // btnCancel
             // 
@@ -64,18 +64,18 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(578, 323);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.dgvLineItem);
+            this.Controls.Add(this.dgvLastBatch);
             this.Name = "frmLastNBatchNo";
             this.Text = "frmLastNBatchNo";
             this.Load += new System.EventHandler(this.frmLastNBatchNo_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLastBatch)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvLineItem;
+        private System.Windows.Forms.DataGridView dgvLastBatch;
         private System.Windows.Forms.Button btnCancel;
     }
 }

@@ -43,6 +43,16 @@ namespace PharmaDAL.Transaction
                 h.PurchaseDate = header.PurchaseDate;
                 h.SupplierCode = header.SupplierCode;
                 h.PurchaseEntryFormID = header.PurchaseFormTypeID == 0 ? (int?)null : header.PurchaseFormTypeID;
+                h.OtherAmount = header.OtherAmount;
+                h.InvoiceAmount = header.InvoiceAmount;
+                h.Narration1 = header.Narration1;
+                h.Narration2 = header.Narration2;
+                h.ExemptedAmount = header.ExemptedAmount;
+                h.PurAmount1 = header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().Amount : 0L;
+                h.PurAmount2 = header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().Amount : 0L;
+                h.VAT1 = header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().TaxOnPurchase : 0L;
+                h.VAT2 = header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().TaxOnPurchase : 0L;
+                
                 context.SaveChanges();
 
                 return h.ID;
@@ -178,14 +188,22 @@ namespace PharmaDAL.Transaction
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                SqlConnection connection = (SqlConnection)context.Database.Connection;
+                SqlConnection connection = (SqlConnection)context.Database.Connection; ;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SavePurchaseData", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@ID", purchaseBookHeaderID));
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
 
-                SqlCommand cmd = new SqlCommand("SavePurchaseData", connection);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@ID",purchaseBookHeaderID));
+                }
+                finally
+                {
 
-                cmd.ExecuteNonQuery();
-
+                    connection.Close();
+                }
+                
 
             }
                 return true;

@@ -51,8 +51,10 @@ namespace PharmaUI
                 dgvItemList.KeyDown += DgvItemList_KeyDown;
                 dgvItemList.SelectionChanged += DgvItemList_SelectionChanged;
 
-                txtSearch.Focus();
-
+                if (isOpenAsChild && dgvItemList.Rows.Count > 0)
+                    dgvItemList.CurrentCell = dgvItemList.Rows[0].Cells[2];
+                else
+                    txtSearch.Focus();
                 //rdName.Checked = true;
             }
             catch (Exception ex)
@@ -252,11 +254,15 @@ namespace PharmaUI
                 return true;
             }
             else if (keyData == Keys.F3)
-            {                
+            {
                 EditItem();
-              
+
             }
             else if (keyData == Keys.Escape)
+            {
+                this.Close();
+            }
+            else if (keyData == Keys.Enter && isOpenAsChild && this.ActiveControl.Name == "dgvItemList") 
             {
                 this.Close();
             }

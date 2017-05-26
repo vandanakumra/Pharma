@@ -47,6 +47,12 @@ namespace PharmaUI
                 LoadDataGrid();
                 dgvSupplier.CellDoubleClick += dgvSupplier_DoubleClick;
                 dgvSupplier.KeyDown += DgvSupplier_KeyDown;
+
+                if(isOpenAsChild && dgvSupplier.Rows.Count > 0)
+                {
+                    dgvSupplier.CurrentCell = dgvSupplier.Rows[0].Cells[1];
+                }
+
             }
             catch (Exception ex)
             {

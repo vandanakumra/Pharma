@@ -49,6 +49,7 @@ namespace PharmaBusinessObjects.Master
         public int SaleTypeId { get; set; }
         public bool Status { get; set; }
         public int PurchaseTypeId { get; set; }
+        public string PurchaseTypeCode { get; set; }
 
         public PurchaseBookLineItem ToPurchaseBookLineItem()
         {

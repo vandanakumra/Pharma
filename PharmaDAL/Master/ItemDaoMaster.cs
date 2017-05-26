@@ -58,6 +58,7 @@ namespace PharmaDAL.Master
                     //MaximumStock = p.MaximumStock,
                     SaleTypeId = p.SaleTypeId,
                     PurchaseTypeId=p.PurchaseTypeId,
+                    PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
                     Status = p.Status
 
                 }).ToList();
@@ -273,6 +274,7 @@ namespace PharmaDAL.Master
                                                     //MaximumStock = p.MaximumStock,
                                                     SaleTypeId = p.SaleTypeId,
                                                     PurchaseTypeId = p.PurchaseTypeId,
+                                                    PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
                                                     Status = p.Status
 
                                                 }).ToList();

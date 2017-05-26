@@ -39,7 +39,7 @@ namespace PharmaUI
             tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPanel1.ColumnCount = 4;
             tableLayoutPanel1.RowCount = purchaseBookHeader.PurchaseAmountList.Count + 5;
-            tableLayoutPanel1.Size = new Size(this.Width, this.Height);
+            tableLayoutPanel1.Size = new Size(this.Width - 20, this.Height - 20);
 
             int i = 0;
             for (i = 0; i < purchaseBookHeader.PurchaseAmountList.Count; i++)
@@ -108,7 +108,7 @@ namespace PharmaUI
             TextBox box3 = new TextBox();
             box3.Text = purchaseBookHeader.Narration1;
             box3.Name = "txtNarration1";
-            box3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            box3.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             tableLayoutPanel1.Controls.Add(box3, 1, i+2);
             tableLayoutPanel1.SetColumnSpan(box3, 3);
 
@@ -120,7 +120,7 @@ namespace PharmaUI
             TextBox box4 = new TextBox();
             box4.Text = purchaseBookHeader.Narration1;
             box4.Name = "txtNarration2";
-            box4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            box4.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             tableLayoutPanel1.Controls.Add(box4, 1,i+3);
             tableLayoutPanel1.SetColumnSpan(box4, 3);
 
@@ -151,7 +151,7 @@ namespace PharmaUI
             ExtensionMethods.EnterKeyDownForTabEvents(this);
 
             //Fill half Scheme options
-            FillFormForUpdate();
+            this.FormClosing += FrmPurchaseHeaderAmount_FormClosing;
 
             string controlName = purchaseBookHeader.PurchaseAmountList.Select(p => p.PurchaseTaxType).FirstOrDefault();
 
@@ -165,6 +165,40 @@ namespace PharmaUI
                 box.Focus();
             }
 
+        }
+
+        private void FrmPurchaseHeaderAmount_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (var purchaseBookAmount in purchaseBookHeader.PurchaseAmountList)
+            {
+                var control = tableLayoutPanel1.Controls[purchaseBookAmount.PurchaseTaxType];
+                double value = 0L;
+                if (control != null)
+                {
+                    double.TryParse(control.Text, out value);
+                    purchaseBookAmount.Amount = value;
+                }
+
+                control = tableLayoutPanel1.Controls[purchaseBookAmount.PurchaseTaxType + "_VAT"];
+                if (control != null)
+                {
+                    double.TryParse(control.Text, out value);
+                    purchaseBookAmount.TaxOnPurchase = value;
+                } 
+            }
+            double doubleVal = 0L;
+            purchaseBookHeader.Narration1 = tableLayoutPanel1.Controls["txtNarration1"].Text;
+            purchaseBookHeader.Narration2 = tableLayoutPanel1.Controls["txtNarration2"].Text;
+            double.TryParse(tableLayoutPanel1.Controls["txtInvoiceAmount"].Text, out doubleVal);
+            purchaseBookHeader.InvoiceAmount = doubleVal;
+
+            double.TryParse(tableLayoutPanel1.Controls["txtOtherAmount"].Text, out doubleVal);
+            purchaseBookHeader.OtherAmount = doubleVal;
+
+            double.TryParse(tableLayoutPanel1.Controls["txtExemptedAmount"].Text, out doubleVal);
+            purchaseBookHeader.ExemptedAmount = doubleVal;
+
+            applicationFacade.UpdateTempPurchaseHeader(purchaseBookHeader);
         }
 
         private void FillFormForUpdate()

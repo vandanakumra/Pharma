@@ -18,6 +18,7 @@ namespace PharmaUI
 
         public string SupplierCode { get; set; }
         public string ItemCode { get; set; }
+        public string BatchNumber { get; set; }
 
         public frmLastNBatchNo()
         {
@@ -29,7 +30,27 @@ namespace PharmaUI
         private void frmLastNBatchNo_Load(object sender, EventArgs e)
         {
             ExtensionMethods.FormLoad(this, "Last 5 Batch No.");
-            dgvLineItem.DataSource = applicationFacade.GetLastNBatchNoForSupplierItem(SupplierCode,ItemCode);
+            List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> list = applicationFacade.GetLastNBatchNoForSupplierItem(SupplierCode,ItemCode);
+            this.FormClosing += FrmLastNBatchNo_FormClosing;
+            dgvLastBatch.DataSource = list;
+
+            if (list.Count == 0)
+            {
+                this.Close();
+            }
+            else
+            {
+                dgvLastBatch.CurrentCell = dgvLastBatch.Rows[0].Cells[1];
+            }
+        }
+
+        private void FrmLastNBatchNo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (dgvLastBatch.SelectedCells.Count > 0)
+            {
+                BatchNumber = Convert.ToString(dgvLastBatch.CurrentRow.Cells["BatchNumber"].Value);
+            }
+            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
