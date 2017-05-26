@@ -517,6 +517,13 @@ namespace PharmaUI
                 }
 
             }
+
+            else if(keyData == Keys.F5)
+            {
+                frmPurchaseBookTransaction form = new frmPurchaseBookTransaction();
+                ExtensionMethods.AddTrasanctionFormToPanel(form, ExtensionMethods.MainPanel);
+                form.Show();
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -804,6 +811,16 @@ namespace PharmaUI
                     form.ShowDialog();
                 }
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmPurchaseBookTransaction_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ExtensionMethods.RemoveTransactionFormToPanel(this, ExtensionMethods.MainPanel);
         }
     }
 }

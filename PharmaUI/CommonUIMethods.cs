@@ -11,8 +11,20 @@ using System.Windows.Forms;
 
 namespace PharmaUI
 {
+
+    public class TransctionForm
+    {
+        public int FormNo { get; set; }
+        public string FormName { get; set; }
+        public bool Visible { get; set; }
+        public string ControlName { get; set; }
+    }
+
+
     public static class ExtensionMethods
     {
+        private static List<TransctionForm> TransactionForms = new List<TransctionForm>(); 
+
         public static PharmaBusinessObjects.Master.UserMaster LoggedInUser { get; set; }
         public static string FontFamily = "Microsoft Sans Serif";
 
@@ -205,6 +217,70 @@ namespace PharmaUI
                 pnl.Controls[parentForm.Name].Visible = true;
             }
         }
+
+
+        public static void AddTrasanctionFormToPanel(Control childFrm, Panel pnl)
+        {
+            int max = TransactionForms.Count() + 1;
+
+            childFrm.Name = max.ToString() + "_" + childFrm.Name;
+
+            TransactionForms.Add(new TransctionForm() { FormNo = max, FormName = childFrm.Name,  Visible = true });
+
+            if (max > 1)
+            {
+                pnl.Controls[TransactionForms.Where(p => p.FormNo == (max - 1)).FirstOrDefault().FormName].Visible = false;                
+            }
+            else
+            {
+                foreach (Form control in pnl.Controls)
+                {
+                    control.Close();
+                    pnl.Controls.Remove(control);
+                }
+            }
+
+            pnl.Controls.Add(childFrm);
+        }
+
+        public static void RemoveTransactionFormToPanel(Control childFrm, Panel pnl)
+        {
+
+            string[] form = childFrm.Name.Split('_');
+
+            if(form[0] == "1")
+            {
+                TransctionForm tform = TransactionForms.Where(p => p.FormName == childFrm.Name).FirstOrDefault();
+                TransactionForms.Remove(tform);
+
+                pnl.Controls.Remove(childFrm);
+
+                frmDefault dform = new frmDefault();
+                AddFormToPanel(dform, MainPanel);
+                dform.Show();
+
+            }
+            else
+            {
+                TransctionForm tform = TransactionForms.Where(p => p.FormName == childFrm.Name).FirstOrDefault();
+                TransactionForms.Remove(tform);
+                pnl.Controls.Remove(childFrm);
+
+                pnl.Controls[TransactionForms.Where(p=>p.FormNo == 1).FirstOrDefault().FormName].Visible = true;
+
+            }
+
+
+            
+
+            //if (parentForm != null && pnl.Controls[parentForm.Name] != null)
+            //{
+            //    pnl.Controls[parentForm.Name].Visible = true;
+            //}
+        }
+
+
+
 
         public static void SetFormProperties(Form frm)
         {           
