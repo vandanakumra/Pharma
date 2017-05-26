@@ -41,6 +41,7 @@
             this.cbxPurchaseFormType = new System.Windows.Forms.ComboBox();
             this.errFrmPurchaseBookHeader = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblSupplierName = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errFrmPurchaseBookHeader)).BeginInit();
             this.SuspendLayout();
@@ -148,12 +149,24 @@
             this.lblSupplierName.Size = new System.Drawing.Size(0, 13);
             this.lblSupplierName.TabIndex = 12;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(823, 55);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(83, 48);
+            this.btnCancel.TabIndex = 23;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // frmPurchaseBookTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(910, 301);
             this.ControlBox = false;
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblSupplierName);
             this.Controls.Add(this.lblPurchaseType);
             this.Controls.Add(this.dgvLineItem);
@@ -170,6 +183,7 @@
             this.MinimizeBox = false;
             this.Name = "frmPurchaseBookTransaction";
             this.Text = "frmPurchaseBookTransaction";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmPurchaseBookTransaction_FormClosed);
             this.Load += new System.EventHandler(this.frmPurchaseBookTransaction_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPurchaseBookTransaction_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).EndInit();
@@ -192,5 +206,6 @@
         private System.Windows.Forms.ComboBox cbxPurchaseType;
         private System.Windows.Forms.ComboBox cbxPurchaseFormType;
         private System.Windows.Forms.Label lblSupplierName;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
