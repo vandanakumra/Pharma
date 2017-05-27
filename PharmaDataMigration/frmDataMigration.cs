@@ -10,7 +10,7 @@ namespace PharmaDataMigration
         public frmDataMigration()
         {
             InitializeComponent();
-            Common.LoggedInUser = new PharmaBusinessObjects.Master.UserMaster(){ Username = "admin" };
+            Common.LoggedInUser = new PharmaBusinessObjects.Master.UserMaster() { Username = "admin" };
             Common.companyCodeMap = new List<CompanyCodeMap>();
             Common.itemCodeMap = new List<ItemCodeMap>();
             Common.asmCodeMap = new List<ASMCodeMap>();
@@ -28,8 +28,8 @@ namespace PharmaDataMigration
 
         private void frmDataMigration_Load(object sender, EventArgs e)
         {
-            
-        }        
+
+        }
 
         private void btnDataDirectory_Click(object sender, EventArgs e)
         {
@@ -44,7 +44,7 @@ namespace PharmaDataMigration
 
         private void btnStartMigration_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtDataDirectory.Text))
+            if (string.IsNullOrEmpty(txtDataDirectory.Text))
             {
                 return;
             }
@@ -174,7 +174,7 @@ namespace PharmaDataMigration
             grdDataMigration.Rows.Add("Purchase Ledger", "Processing", 0);
             result = 0;
 
-            result = accountLedgerMaster.InsertPurchaseLedgerData();
+          result = accountLedgerMaster.InsertPurchaseLedgerData();
 
             grdDataMigration.Rows[13].Cells[1].Value = "Completed";
             grdDataMigration.Rows[13].Cells[2].Value = result;
@@ -190,7 +190,7 @@ namespace PharmaDataMigration
             grdDataMigration.Rows.Add("Item Master", "Processing", 0);
             result = 0;
 
-            result = itemMaster.InsertItemMasterData();
+           result = itemMaster.InsertItemMasterData();
 
             grdDataMigration.Rows[15].Cells[1].Value = "Completed";
             grdDataMigration.Rows[15].Cells[2].Value = result;
@@ -198,7 +198,7 @@ namespace PharmaDataMigration
             grdDataMigration.Rows.Add("Supplier Ledger", "Processing", 0);
             result = 0;
 
-            result = supplierLedgerMaster.InsertSupplierLedgerMasterData();
+           result = supplierLedgerMaster.InsertSupplierLedgerMasterData();
 
             grdDataMigration.Rows[16].Cells[1].Value = "Completed";
             grdDataMigration.Rows[16].Cells[2].Value = result;
@@ -206,11 +206,12 @@ namespace PharmaDataMigration
             grdDataMigration.Rows.Add("Customer Ledger", "Processing", 0);
             result = 0;
 
-            result = customerLedgerMaster.InsertCustomerLedgerMasterData();
+            result = customerLedgerMaster.InsertCustomerLedgerMasterData(); //confirm mapping columns for columns having comments in CustomerLedgerMaster
 
             grdDataMigration.Rows[17].Cells[1].Value = "Completed";
             grdDataMigration.Rows[17].Cells[2].Value = result;
 
+            //For below method check comments in CustomerLedgerMaster
             grdDataMigration.Rows.Add("Customer Company Discount", "Processing", 0);
             result = 0;
 

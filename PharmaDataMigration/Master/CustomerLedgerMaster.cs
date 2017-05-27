@@ -43,23 +43,25 @@ namespace PharmaDataMigration.Master
                             string originalCustomerLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
                             Common.customerLedgerCodeMap.Add(new CustomerLedgerCodeMap() { OriginalCustomerLedgerCode = originalCustomerLedgerCode, MappedCustomerLedgerCode = customerLedgerCode });
 
-                            string areaCode = Common.areaCodeMap.Where(p => p.OriginalAreaCode == Convert.ToString(dr["Parea"]).TrimEnd()).FirstOrDefault().MappedAreaCode;
-                            int areaID = context.PersonRouteMaster.Where(q => q.PersonRouteCode == areaCode).FirstOrDefault().PersonRouteID;
+                            string areaCode = string.IsNullOrEmpty(Convert.ToString(dr["Parea"]).TrimEnd()) ? null : Common.areaCodeMap.Where(p => p.OriginalAreaCode == Convert.ToString(dr["Parea"]).TrimEnd()).FirstOrDefault().MappedAreaCode;
+                            int? areaID = areaCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == areaCode).FirstOrDefault().PersonRouteID;
 
-                            string salesmanCode = Common.salesmanCodeMap.Where(p => p.OriginalSalesManCode == Convert.ToString(dr["Sman"]).TrimEnd()).FirstOrDefault().MappedSalesManCode;
-                            int salesmanID = context.PersonRouteMaster.Where(q => q.PersonRouteCode == salesmanCode).FirstOrDefault().PersonRouteID;
+                            string salesmanCode = string.IsNullOrEmpty(Convert.ToString(dr["Sman"]).TrimEnd())
+                                                    || Convert.ToString(dr["Sman"]).TrimEnd() == "020" //this value is not present in MASTERS as Salesman Code
+                                                    ? null : Common.salesmanCodeMap.Where(p => p.OriginalSalesManCode == Convert.ToString(dr["Sman"]).TrimEnd()).FirstOrDefault().MappedSalesManCode;
+                            int? salesmanID = salesmanCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == salesmanCode).FirstOrDefault().PersonRouteID;
 
-                            string routeCode = Common.routeCodeMap.Where(p => p.OriginalRouteCode == Convert.ToString(dr["Route"]).TrimEnd()).FirstOrDefault().MappedRouteCode;
-                            int routeID = context.PersonRouteMaster.Where(q => q.PersonRouteCode == routeCode).FirstOrDefault().PersonRouteID;
+                            string routeCode = string.IsNullOrEmpty(Convert.ToString(dr["Route"]).TrimEnd()) ? null : Common.routeCodeMap.Where(p => p.OriginalRouteCode == Convert.ToString(dr["Route"]).TrimEnd()).FirstOrDefault().MappedRouteCode;
+                            int? routeID = routeCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == routeCode).FirstOrDefault().PersonRouteID;
 
-                            string asmCode = Common.asmCodeMap.Where(p => p.OriginalASMCode == Convert.ToString(dr["Asm"]).TrimEnd()).FirstOrDefault().MappedASMCode;
-                            int asmID = context.PersonRouteMaster.Where(q => q.PersonRouteCode == asmCode).FirstOrDefault().PersonRouteID;
+                            string asmCode = string.IsNullOrEmpty(Convert.ToString(dr["Asm"]).TrimEnd()) ? null : Common.asmCodeMap.Where(p => p.OriginalASMCode == Convert.ToString(dr["Asm"]).TrimEnd()).FirstOrDefault().MappedASMCode;
+                            int? asmID = asmCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == asmCode).FirstOrDefault().PersonRouteID;
 
-                            string rsmCode = Common.rsmCodeMap.Where(p => p.OriginalRSMCode == Convert.ToString(dr["Rsm"]).TrimEnd()).FirstOrDefault().MappedRSMCode;
-                            int rsmID = context.PersonRouteMaster.Where(q => q.PersonRouteCode == rsmCode).FirstOrDefault().PersonRouteID;
+                            string rsmCode = string.IsNullOrEmpty(Convert.ToString(dr["Rsm"]).TrimEnd()) ? null : Common.rsmCodeMap.Where(p => p.OriginalRSMCode == Convert.ToString(dr["Rsm"]).TrimEnd()).FirstOrDefault().MappedRSMCode;
+                            int? rsmID = rsmCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == rsmCode).FirstOrDefault().PersonRouteID;
 
-                            string zsmCode = Common.zsmCodeMap.Where(p => p.OriginalZSMCode == Convert.ToString(dr["Zsm"]).TrimEnd()).FirstOrDefault().MappedZSMCode;
-                            int zsmID = context.PersonRouteMaster.Where(q => q.PersonRouteCode == zsmCode).FirstOrDefault().PersonRouteID;
+                            string zsmCode = string.IsNullOrEmpty(Convert.ToString(dr["Zsm"]).TrimEnd()) ? null : Common.zsmCodeMap.Where(p => p.OriginalZSMCode == Convert.ToString(dr["Zsm"]).TrimEnd()).FirstOrDefault().MappedZSMCode;
+                            int? zsmID = zsmCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == zsmCode).FirstOrDefault().PersonRouteID;
 
                             string customerType = Convert.ToString(dr["Wr"]).TrimEnd();
                             int customerTypeID = context.CustomerType.Where(p => p.CustomerTypeShortName == customerType).FirstOrDefault().CustomerTypeId;
@@ -78,12 +80,12 @@ namespace PharmaDataMigration.Master
                                 EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
                                 AreaId = areaID,
                                 CreditDebit = Convert.ToDouble(dr["Abop"]) > 0 ? Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.D) : Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.C),
-                                DLNo = Convert.ToString(dr["DRNO"]).TrimEnd(), //confirm
-                                GSTNo = Convert.ToString(dr["Stnoc"]).TrimEnd(), //confirm
-                                CINNo = Convert.ToString(dr["Stnoc"]).TrimEnd(), //confirm
-                                LINNo = Convert.ToString(dr["Stnol"]).TrimEnd(), //confirm
-                                ServiceTaxNo = Convert.ToString(dr["Stnol"]).TrimEnd(), //confirm
-                                PANNo = Convert.ToString(dr["Stnol"]).TrimEnd(), //confirm
+                                DLNo = "test", //Convert.ToString(dr["DRNO"]).TrimEnd(), //confirm -> increase size more than 20
+                                GSTNo = "test", //Convert.ToString(dr["Stnoc"]).TrimEnd() -> confirm
+                                CINNo = "test", //Convert.ToString(dr["Stnoc"]).TrimEnd() -> confirm
+                                LINNo = "test", //Convert.ToString(dr["Stnol"]).TrimEnd(), //confirm
+                                ServiceTaxNo = "test",//Convert.ToString(dr["Stnol"]).TrimEnd() -> //confirm
+                                PANNo = "test", //Convert.ToString(dr["Stnol"]).TrimEnd() -> confirm
                                 OpeningBal = Convert.ToDecimal(dr["Abop"]),
                                 TaxRetail = Convert.ToString(dr["Vat"]).TrimEnd(),
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
@@ -104,7 +106,7 @@ namespace PharmaDataMigration.Master
                                 MaxGracePeriod = Convert.ToInt32(dr["Grace_days"]),
                                 IsFollowConditionStrictly = Convert.ToChar(dr["Validate"]) == 'Y' ? true : false,
                                 Discount = 0,//Convert.ToString(dr["ACNO"]).TrimEnd(),
-                                CentralLocal = "Local",//Convert.ToString(dr["ACNO"]).TrimEnd(),
+                                CentralLocal = "C",//Convert.ToString(dr["ACNO"]).TrimEnd(),
                                 CreatedBy = "admin",
                                 CreatedOn = DateTime.Now
                             };
@@ -121,7 +123,7 @@ namespace PharmaDataMigration.Master
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -129,7 +131,7 @@ namespace PharmaDataMigration.Master
         {
             try
             {
-                string query = "select * from DIS";
+                string query = "select * from DIS where Ccode= '011'";
 
                 DataTable dtCustomerCompanyRef = dbConnection.GetData(query);
 
@@ -146,11 +148,18 @@ namespace PharmaDataMigration.Master
                             string customerLedgerCode = Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["PCode"]).TrimEnd()).FirstOrDefault().MappedCustomerLedgerCode;
                             int customerLedgerID = context.CustomerLedger.Where(p => p.CustomerLedgerCode == customerLedgerCode).FirstOrDefault().CustomerLedgerId;
 
-                            string companyCode = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == Convert.ToString(dr["Ccode"]).TrimEnd()).FirstOrDefault().MappedCompanyCode;
+                            string companyCode = (string.IsNullOrEmpty(Convert.ToString(dr["Ccode"]).TrimEnd())
+                                                    || Convert.ToString(dr["Ccode"]).TrimEnd() == "004" //these values are not available as Company Codes in MASTERS
+                                                    || Convert.ToString(dr["Ccode"]).TrimEnd() == "007"
+                                                    || Convert.ToString(dr["Ccode"]).TrimEnd() == "040"
+                                                    || Convert.ToString(dr["Ccode"]).TrimEnd() == "091")
+                                                    //|| Convert.ToString(dr["Ccode"]).TrimEnd() == "011") //this value is available as Company Code but is not matching. Unable to identify reason of mismatch
+                                                    ? "001" : 
+                                                    Common.companyCodeMap.Where(p => p.OriginalCompanyCode.PadLeft(3,'0') == Convert.ToString(dr["Ccode"]).TrimEnd().PadLeft(3,'0')).FirstOrDefault().MappedCompanyCode;
                             int companyID = context.CompanyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
 
-                            string itemCode = Common.itemCodeMap.Where(p => p.OriginalItemCode == Convert.ToString(dr["ICode"]).TrimEnd()).FirstOrDefault().MappedItemCode;
-                            int itemID = context.ItemMaster.Where(p => p.ItemCode == itemCode).FirstOrDefault().ItemID;
+                            string itemCode = string.IsNullOrEmpty(Convert.ToString(dr["ICode"]).TrimEnd()) ? null : Common.itemCodeMap.Where(p => p.OriginalItemCode == Convert.ToString(dr["ICode"]).TrimEnd()).FirstOrDefault().MappedItemCode;
+                            int? itemID = itemCode == null ? (int?)null : context.ItemMaster.Where(p => p.ItemCode == itemCode).FirstOrDefault().ItemID;
 
                             CustomerCompanyDiscountRef newCustomerCompanyRef = new CustomerCompanyDiscountRef()
                             {
@@ -175,7 +184,7 @@ namespace PharmaDataMigration.Master
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
     }
