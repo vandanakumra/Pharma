@@ -113,7 +113,7 @@
             this.dgvLineItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLineItem.Location = new System.Drawing.Point(6, 115);
             this.dgvLineItem.Name = "dgvLineItem";
-            this.dgvLineItem.Size = new System.Drawing.Size(900, 174);
+            this.dgvLineItem.Size = new System.Drawing.Size(900, 199);
             this.dgvLineItem.TabIndex = 11;
             this.dgvLineItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvLineItem_KeyDown);
             // 
@@ -165,7 +165,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(910, 301);
+            this.ClientSize = new System.Drawing.Size(910, 326);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblSupplierName);

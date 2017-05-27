@@ -110,6 +110,17 @@ namespace PharmaUI
             }
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape || keyData == Keys.End)
+            {
+                this.Close();
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
         private void FrmLastNBatchNo_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (dgvLastBatch.SelectedCells.Count > 0)

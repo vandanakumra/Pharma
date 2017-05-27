@@ -65,7 +65,7 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyCode == Keys.Enter && isOpenAsChild)
+                if (e.KeyCode == Keys.End && isOpenAsChild)
                 {
                     this.Close();
                 }
@@ -199,7 +199,7 @@ namespace PharmaUI
             {
                 EditLedger();
             }
-            else if (keyData == Keys.Escape)
+            else if (keyData == Keys.Escape || keyData == Keys.End)
             {
                 this.Close();
             }
