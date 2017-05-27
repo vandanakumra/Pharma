@@ -174,7 +174,7 @@ namespace PharmaDataMigration
             grdDataMigration.Rows.Add("Purchase Ledger", "Processing", 0);
             result = 0;
 
-          result = accountLedgerMaster.InsertPurchaseLedgerData();
+            result = accountLedgerMaster.InsertPurchaseLedgerData();
 
             grdDataMigration.Rows[13].Cells[1].Value = "Completed";
             grdDataMigration.Rows[13].Cells[2].Value = result;
@@ -190,7 +190,7 @@ namespace PharmaDataMigration
             grdDataMigration.Rows.Add("Item Master", "Processing", 0);
             result = 0;
 
-           result = itemMaster.InsertItemMasterData();
+            result = itemMaster.InsertItemMasterData();
 
             grdDataMigration.Rows[15].Cells[1].Value = "Completed";
             grdDataMigration.Rows[15].Cells[2].Value = result;
@@ -198,7 +198,7 @@ namespace PharmaDataMigration
             grdDataMigration.Rows.Add("Supplier Ledger", "Processing", 0);
             result = 0;
 
-           result = supplierLedgerMaster.InsertSupplierLedgerMasterData();
+            result = supplierLedgerMaster.InsertSupplierLedgerMasterData();
 
             grdDataMigration.Rows[16].Cells[1].Value = "Completed";
             grdDataMigration.Rows[16].Cells[2].Value = result;
@@ -219,6 +219,8 @@ namespace PharmaDataMigration
 
             grdDataMigration.Rows[18].Cells[1].Value = "Completed";
             grdDataMigration.Rows[18].Cells[2].Value = result;
+
+            MessageBox.Show("Process Completed");
         }
     }
 }

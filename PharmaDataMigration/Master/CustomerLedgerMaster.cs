@@ -35,6 +35,16 @@ namespace PharmaDataMigration.Master
 
                     if (dtCustomerLedgerMaster != null && dtCustomerLedgerMaster.Rows.Count > 0)
                     {
+                        var personRouteList = context.PersonRouteMaster.Select(r => r).ToList();
+                        var areaList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.AREA).Select(r => r).ToList();
+                        var salesmanList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.SALESMAN).Select(r => r).ToList();
+                        var routeList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ROUTE).Select(r => r).ToList();
+                        var asmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ASM).Select(r => r).ToList();
+                        var rsmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.RSM).Select(r => r).ToList();
+                        var zsmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ZSM).Select(r => r).ToList();
+
+                        var customerTypeList = context.CustomerType.Select(p => p);
+
                         foreach (DataRow dr in dtCustomerLedgerMaster.Rows)
                         {
                             maxCustomerLedgerID++;
@@ -44,27 +54,27 @@ namespace PharmaDataMigration.Master
                             Common.customerLedgerCodeMap.Add(new CustomerLedgerCodeMap() { OriginalCustomerLedgerCode = originalCustomerLedgerCode, MappedCustomerLedgerCode = customerLedgerCode });
 
                             string areaCode = string.IsNullOrEmpty(Convert.ToString(dr["Parea"]).TrimEnd()) ? null : Common.areaCodeMap.Where(p => p.OriginalAreaCode == Convert.ToString(dr["Parea"]).TrimEnd()).FirstOrDefault().MappedAreaCode;
-                            int? areaID = areaCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == areaCode).FirstOrDefault().PersonRouteID;
+                            int? areaID = areaCode == null ? (int?)null : areaList.Where(q => q.PersonRouteCode == areaCode).FirstOrDefault().PersonRouteID;
 
                             string salesmanCode = string.IsNullOrEmpty(Convert.ToString(dr["Sman"]).TrimEnd())
                                                     || Convert.ToString(dr["Sman"]).TrimEnd() == "020" //this value is not present in MASTERS as Salesman Code
                                                     ? null : Common.salesmanCodeMap.Where(p => p.OriginalSalesManCode == Convert.ToString(dr["Sman"]).TrimEnd()).FirstOrDefault().MappedSalesManCode;
-                            int? salesmanID = salesmanCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == salesmanCode).FirstOrDefault().PersonRouteID;
+                            int? salesmanID = salesmanCode == null ? (int?)null : salesmanList.Where(q => q.PersonRouteCode == salesmanCode).FirstOrDefault().PersonRouteID;
 
                             string routeCode = string.IsNullOrEmpty(Convert.ToString(dr["Route"]).TrimEnd()) ? null : Common.routeCodeMap.Where(p => p.OriginalRouteCode == Convert.ToString(dr["Route"]).TrimEnd()).FirstOrDefault().MappedRouteCode;
-                            int? routeID = routeCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == routeCode).FirstOrDefault().PersonRouteID;
+                            int? routeID = routeCode == null ? (int?)null : routeList.Where(q => q.PersonRouteCode == routeCode).FirstOrDefault().PersonRouteID;
 
                             string asmCode = string.IsNullOrEmpty(Convert.ToString(dr["Asm"]).TrimEnd()) ? null : Common.asmCodeMap.Where(p => p.OriginalASMCode == Convert.ToString(dr["Asm"]).TrimEnd()).FirstOrDefault().MappedASMCode;
-                            int? asmID = asmCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == asmCode).FirstOrDefault().PersonRouteID;
+                            int? asmID = asmCode == null ? (int?)null : asmList.Where(q => q.PersonRouteCode == asmCode).FirstOrDefault().PersonRouteID;
 
                             string rsmCode = string.IsNullOrEmpty(Convert.ToString(dr["Rsm"]).TrimEnd()) ? null : Common.rsmCodeMap.Where(p => p.OriginalRSMCode == Convert.ToString(dr["Rsm"]).TrimEnd()).FirstOrDefault().MappedRSMCode;
-                            int? rsmID = rsmCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == rsmCode).FirstOrDefault().PersonRouteID;
+                            int? rsmID = rsmCode == null ? (int?)null : rsmList.Where(q => q.PersonRouteCode == rsmCode).FirstOrDefault().PersonRouteID;
 
                             string zsmCode = string.IsNullOrEmpty(Convert.ToString(dr["Zsm"]).TrimEnd()) ? null : Common.zsmCodeMap.Where(p => p.OriginalZSMCode == Convert.ToString(dr["Zsm"]).TrimEnd()).FirstOrDefault().MappedZSMCode;
-                            int? zsmID = zsmCode == null ? (int?)null : context.PersonRouteMaster.Where(q => q.PersonRouteCode == zsmCode).FirstOrDefault().PersonRouteID;
+                            int? zsmID = zsmCode == null ? (int?)null : zsmList.Where(q => q.PersonRouteCode == zsmCode).FirstOrDefault().PersonRouteID;
 
                             string customerType = Convert.ToString(dr["Wr"]).TrimEnd();
-                            int customerTypeID = context.CustomerType.Where(p => p.CustomerTypeShortName == customerType).FirstOrDefault().CustomerTypeId;
+                            int customerTypeID = customerTypeList.Where(p => p.CustomerTypeShortName == customerType).FirstOrDefault().CustomerTypeId;
 
                             CustomerLedger newCustomerLedgerMaster = new CustomerLedger()
                             {
@@ -131,7 +141,8 @@ namespace PharmaDataMigration.Master
         {
             try
             {
-                string query = "select * from DIS where Ccode= '011'";
+                //string query = "select * from DIS where Icode not in (select distinct acno from masters where slcd = 'IT') and Ccode not in (select distinct acno from masters where slcd = 'CO')";
+                string query = "select * from DIS";
 
                 DataTable dtCustomerCompanyRef = dbConnection.GetData(query);
 
@@ -143,36 +154,54 @@ namespace PharmaDataMigration.Master
                 {
                     if (dtCustomerCompanyRef != null && dtCustomerCompanyRef.Rows.Count > 0)
                     {
+                        var companyList = context.CompanyMaster.Select(p => p).ToList();
+                        var customerLedgerList = context.CustomerLedger.Select(p => p).ToList();
+                        var itemList = context.ItemMaster.Select(p => p).ToList();
+
                         foreach (DataRow dr in dtCustomerCompanyRef.Rows)
                         {
-                            string customerLedgerCode = Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["PCode"]).TrimEnd()).FirstOrDefault().MappedCustomerLedgerCode;
-                            int customerLedgerID = context.CustomerLedger.Where(p => p.CustomerLedgerCode == customerLedgerCode).FirstOrDefault().CustomerLedgerId;
-
-                            string companyCode = (string.IsNullOrEmpty(Convert.ToString(dr["Ccode"]).TrimEnd())
-                                                    || Convert.ToString(dr["Ccode"]).TrimEnd() == "004" //these values are not available as Company Codes in MASTERS
-                                                    || Convert.ToString(dr["Ccode"]).TrimEnd() == "007"
-                                                    || Convert.ToString(dr["Ccode"]).TrimEnd() == "040"
-                                                    || Convert.ToString(dr["Ccode"]).TrimEnd() == "091")
-                                                    //|| Convert.ToString(dr["Ccode"]).TrimEnd() == "011") //this value is available as Company Code but is not matching. Unable to identify reason of mismatch
-                                                    ? "001" : 
-                                                    Common.companyCodeMap.Where(p => p.OriginalCompanyCode.PadLeft(3,'0') == Convert.ToString(dr["Ccode"]).TrimEnd().PadLeft(3,'0')).FirstOrDefault().MappedCompanyCode;
-                            int companyID = context.CompanyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
-
-                            string itemCode = string.IsNullOrEmpty(Convert.ToString(dr["ICode"]).TrimEnd()) ? null : Common.itemCodeMap.Where(p => p.OriginalItemCode == Convert.ToString(dr["ICode"]).TrimEnd()).FirstOrDefault().MappedItemCode;
-                            int? itemID = itemCode == null ? (int?)null : context.ItemMaster.Where(p => p.ItemCode == itemCode).FirstOrDefault().ItemID;
-
-                            CustomerCompanyDiscountRef newCustomerCompanyRef = new CustomerCompanyDiscountRef()
+                            try
                             {
-                                CustomerLedgerID = customerLedgerID,
-                                CompanyID = companyID,
-                                ItemID = itemID,
-                                Normal = Convert.ToDouble(dr["Disamt"]),
-                                Breakage = Convert.ToDouble(dr["Disamtbe"]),
-                                Expired = Convert.ToDouble(dr["Disamtex"]),
-                                IsLessEcise = Convert.ToChar(dr["Less_ex"]) == 'Y' ? true : false
-                            };
+                                string customerLedgerCode = Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["PCode"]).TrimEnd()).FirstOrDefault().MappedCustomerLedgerCode;
+                                int customerLedgerID = customerLedgerList.Where(p => p.CustomerLedgerCode == customerLedgerCode).FirstOrDefault().CustomerLedgerId;
+                                string companyCode = string.Empty;
+                                //var companyCode = (string.IsNullOrEmpty(Convert.ToString(dr["Ccode"]).TrimEnd())
+                                //                        || Convert.ToString(dr["Ccode"]).TrimEnd() == "004" //these values are not available as Company Codes in MASTERS
+                                //                        || Convert.ToString(dr["Ccode"]).TrimEnd() == "007"
+                                //                        || Convert.ToString(dr["Ccode"]).TrimEnd() == "040"
+                                //                        || Convert.ToString(dr["Ccode"]).TrimEnd() == "091")
+                                //                        //|| Convert.ToString(dr["Ccode"]).TrimEnd().Contains("011") //this value is available as Company Code but is not matching. Unable to identify reason of mismatch
+                                //                        ? "001" : Common.companyCodeMap.Where(p => p.OriginalCompanyCode == Convert.ToString(dr["Ccode"]).TrimEnd()).FirstOrDefault().MappedCompanyCode;
+                                var company = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == Convert.ToString(dr["Ccode"]).TrimEnd()).FirstOrDefault();
 
-                            listCustomerCompanyRef.Add(newCustomerCompanyRef);
+                                if (company == null)
+                                {
+                                    continue;
+                                }
+
+                                companyCode = company.MappedCompanyCode;
+                                int companyID = companyList.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
+
+                                string itemCode = string.IsNullOrEmpty(Convert.ToString(dr["ICode"]).TrimEnd()) ? null : Common.itemCodeMap.Where(p => p.OriginalItemCode == Convert.ToString(dr["ICode"]).TrimEnd()).FirstOrDefault().MappedItemCode;
+                                int? itemID = itemCode == null ? (int?)null : itemList.Where(p => p.ItemCode == itemCode).FirstOrDefault().ItemID;
+
+                                CustomerCompanyDiscountRef newCustomerCompanyRef = new CustomerCompanyDiscountRef()
+                                {
+                                    CustomerLedgerID = customerLedgerID,
+                                    CompanyID = companyID,
+                                    ItemID = itemID,
+                                    Normal = Convert.ToDouble(dr["Disamt"]),
+                                    Breakage = Convert.ToDouble(dr["Disamtbe"]),
+                                    Expired = Convert.ToDouble(dr["Disamtex"]),
+                                    IsLessEcise = Convert.ToString(dr["Less_ex"]) == "Y" ? true : false
+                                };
+
+                                listCustomerCompanyRef.Add(newCustomerCompanyRef);
+                            }
+                            catch (Exception)
+                            {
+                                //throw ex;
+                            }
                         }
                     }
 

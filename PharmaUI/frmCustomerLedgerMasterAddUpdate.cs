@@ -608,7 +608,12 @@ namespace PharmaUI
         {
             try
             {
-                e.SuppressKeyPress = true;
+                if(e.KeyData == Keys.Up || e.KeyData == Keys.Left || e.KeyData == Keys.Right || e.KeyData == Keys.Down || e.KeyData == Keys.Tab)
+                {
+                    return;
+                }
+
+                  e.SuppressKeyPress = true;
 
                 if (e.KeyData == Keys.Enter)
                 {
