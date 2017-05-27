@@ -1,4 +1,5 @@
 ﻿
+using PharmaBusinessObjects.Common;
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace PharmaDAL.Master
                     DebitControlCodeID = p.DebitControlCodeID,
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
+                    SalePurchaseTaxValue = p.SalePurchaseTaxType,
                     Status = p.Status           
                 }).ToList();
             }
@@ -60,6 +62,7 @@ namespace PharmaDAL.Master
                     CreditControlCode = p.AccountLedgerMaster2.AccountLedgerName,
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
+                    SalePurchaseTaxValue = p.SalePurchaseTaxType,
                     Status = p.Status
                     
                 }).FirstOrDefault();
@@ -83,14 +86,15 @@ namespace PharmaDAL.Master
                     AccountTypeId = p.AccountTypeId,
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
-                    Status = p.Status,
+                    SalePurchaseTaxType = p.SalePurchaseTaxValue,
+                    Status = p.Status,                    
                     CreatedBy = this.LoggedInUser.Username,
                     CreatedOn = System.DateTime.Now
                 };
 
                 var accountLedger=  new Common.CommonDao().GetAccountLedgerTypes().Where(q => q.AccountLedgerTypeID == p.AccountLedgerTypeId).FirstOrDefault();
 
-                if (accountLedger.AccountLedgerTypeSystemName != "ControlCodes")
+                if (accountLedger.AccountLedgerTypeSystemName != Constants.AccountLedgerType.ControlCodes)
                 {
                     table.CreditControlCodeID = p.CreditControlCodeID;
                     table.DebitControlCodeID = p.DebitControlCodeID;
@@ -120,6 +124,7 @@ namespace PharmaDAL.Master
                         accountLedgerMaster.OpeningBalance = p.OpeningBalance;
                         accountLedgerMaster.CreditDebit = p.CreditDebit;
                         accountLedgerMaster.Status = p.Status;
+                        accountLedgerMaster.SalePurchaseTaxType = p.SalePurchaseTaxValue;
                         accountLedgerMaster.CreatedBy =this.LoggedInUser.Username;
                         accountLedgerMaster.CreatedOn =System.DateTime.Now;
                     }
@@ -157,6 +162,7 @@ namespace PharmaDAL.Master
                                           CreditControlCode = p.AccountLedgerMaster2.AccountLedgerName,
                                           OpeningBalance = p.OpeningBalance,
                                           CreditDebit = p.CreditDebit,
+                                          SalePurchaseTaxValue = p.SalePurchaseTaxType,
                                           Status = p.Status
                                       }).ToList();
 

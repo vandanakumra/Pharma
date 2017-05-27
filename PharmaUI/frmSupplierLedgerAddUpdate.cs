@@ -18,7 +18,7 @@ namespace PharmaUI
     public partial class frmSupplierLedgerAddUpdate : Form
     {
         IApplicationFacade applicationFacade;
-        private int SupplierId { get; set; }
+        public int SupplierId { get; set; }
         private string SupplierNameNew { get; set; }
 
         public frmSupplierLedgerAddUpdate(int supplierId,string supplierName)

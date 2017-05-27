@@ -107,6 +107,29 @@ namespace PharmaUI
             {
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
                 LoadDataGrid();
+
+                frmSupplierLedgerAddUpdate frm = (frmSupplierLedgerAddUpdate)sender;
+
+                if (dgvSupplier.Rows.Count > 0)
+                {
+                    int id = frm.SupplierId;
+
+                    foreach (DataGridViewRow row in dgvSupplier.Rows)
+                    {
+                        if (row.Cells["SupplierLedgerId"].Value.ToString().Equals(frm.SupplierId.ToString()))
+                        {
+                            dgvSupplier.Rows[row.Index].Selected = true;
+
+                            if (row.Index != 0)
+                            {
+                                dgvSupplier.Rows[0].Selected = false;
+                            }
+
+                            break;
+
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

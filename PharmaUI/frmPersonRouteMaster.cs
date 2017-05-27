@@ -152,16 +152,20 @@ namespace PharmaUI
             try
             {
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                if (this.NextPersonRoute != null)
-                {
-                    LoadDataGrid((int)this.cbPersonRouteType.SelectedValue);
-                }
-                else
-                {
-                    LoadDataGrid(0);
-                }
+
+                //if (this.NextPersonRoute != null)
+                //{
+                //    LoadDataGrid((int)this.cbPersonRouteType.SelectedValue);
+                //}
+                //else
+                //{
+                //    LoadDataGrid(0);
+                //}
+
+                LoadDataGrid((int)cbPersonRouteType.SelectedValue);
 
                 List<DataGridViewRow> filteredRow = dgvPersonRoute.Rows.OfType<DataGridViewRow>().Where(x => (int)x.Cells["PersonRouteID"].Value == (sender as frmPersonRouteMasterAddUpdate).PersonRouteID).ToList();
+
                 if (filteredRow.Count > 0)
                 {
                     dgvPersonRoute.ClearSelection();

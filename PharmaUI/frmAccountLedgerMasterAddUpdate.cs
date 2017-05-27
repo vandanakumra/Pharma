@@ -18,7 +18,7 @@ namespace PharmaUI
     public partial class frmAccountLedgerMasterAddUpdate : Form
     {
         IApplicationFacade applicationFacade;
-        private int _accountLedgerId { get; set; }
+        public int AccountLedgerId { get; set; }
         private string _accountLedgerName { get; set; }
 
         public frmAccountLedgerMasterAddUpdate(int accountLedgerId,string ledgerName)
@@ -28,7 +28,7 @@ namespace PharmaUI
                 InitializeComponent();
                 ExtensionMethods.SetChildFormProperties(this);
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
-                this._accountLedgerId = accountLedgerId;
+                this.AccountLedgerId = accountLedgerId;
                 this._accountLedgerName = ledgerName;
             }
             catch (Exception ex)
@@ -42,12 +42,12 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.FormLoad(this, (this._accountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
+                ExtensionMethods.FormLoad(this, (this.AccountLedgerId > 0) ? "Account Ledger Master - Update" : "Account Ledger Master - Add");
 
                 GotFocusEventRaised(this);
                 ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-                if (this._accountLedgerId > 0)
+                if (this.AccountLedgerId > 0)
                 {
                     FillFormForUpdate();
                 }
@@ -102,7 +102,7 @@ namespace PharmaUI
             cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
             cbxStatus.SelectedItem = Enums.Status.Active;
 
-            var accountLedgerMaster = applicationFacade.GetAccountLedgerById(this._accountLedgerId);
+            var accountLedgerMaster = applicationFacade.GetAccountLedgerById(this.AccountLedgerId);
 
             cbAccountLedgerType.DataSource = accountLedgerMaster.AccountLedgerTypeList;
             cbAccountLedgerType.ValueMember = "AccountLedgerTypeID";
@@ -112,19 +112,19 @@ namespace PharmaUI
             cbAccountType.ValueMember = "AccountTypeID";
             cbAccountType.DisplayMember = "AccountTypeDisplayName";
 
-            if (accountLedgerMaster.AccountLedgerTypeSystemName != "ControlCodes")
+            if (accountLedgerMaster.AccountLedgerTypeSystemName != Constants.AccountLedgerType.ControlCodes)
             {
-                var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
-                var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+                var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName(Constants.AccountLedgerType.ControlCodes);
+                var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName(Constants.AccountLedgerType.ControlCodes);
 
                 cbDebitControlCode.DataSource = debitControlCodes;
                 cbCreditControlCode.DataSource = creditControlCodes;
 
                 cbDebitControlCode.ValueMember = "AccountLedgerID";
-                cbDebitControlCode.DisplayMember = "AccountLedgerCode";
+                cbDebitControlCode.DisplayMember = "AccountLedgerName";
 
                 cbCreditControlCode.ValueMember = "AccountLedgerID";
-                cbCreditControlCode.DisplayMember = "AccountLedgerCode";
+                cbCreditControlCode.DisplayMember = "AccountLedgerName";
 
                 cbCreditControlCode.SelectedValue = accountLedgerMaster.CreditControlCodeID;
                 cbDebitControlCode.SelectedValue = accountLedgerMaster.DebitControlCodeID;
@@ -145,7 +145,23 @@ namespace PharmaUI
             tbAccountName.Text = accountLedgerMaster.AccountLedgerName;
             txtAccountLedgerCode.Text = accountLedgerMaster.AccountLedgerCode;
             tbOpeningBalance.Text = Convert.ToString(accountLedgerMaster.OpeningBalance);
+            txtSalePurchaseValue.Text = Convert.ToString(accountLedgerMaster.SalePurchaseTaxValue);
 
+            cbAccountLedgerType.Enabled = false;
+
+            if (accountLedgerMaster.AccountLedgerTypeSystemName == Constants.AccountLedgerType.SaleLedger
+                    || accountLedgerMaster.AccountLedgerTypeSystemName == Constants.AccountLedgerType.PurchaseLedger)
+            {
+                txtSalePurchaseValue.Enabled = true;
+            }
+            else
+            {
+                txtSalePurchaseValue.Enabled = false;
+                txtSalePurchaseValue.Text = "0.00";
+            }
+
+
+            tbAccountName.Focus();
 
         }
 
@@ -166,10 +182,10 @@ namespace PharmaUI
 
             cbDebitCredit.SelectedItem = "C";
 
-            if (accountLedgerTypes.FirstOrDefault().AccountLedgerTypeSystemName != "ControlCodes")
+            if (accountLedgerTypes.FirstOrDefault().AccountLedgerTypeSystemName != Constants.AccountLedgerType.ControlCodes)
             {
-                var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
-                var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+                var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName(Constants.AccountLedgerType.ControlCodes);
+                var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName(Constants.AccountLedgerType.ControlCodes);
 
                 cbDebitControlCode.DataSource = debitControlCodes;
                 cbCreditControlCode.DataSource = creditControlCodes;
@@ -199,10 +215,11 @@ namespace PharmaUI
             {
                 var accountLedger = applicationFacade.GetAccountLedgerTypes().Where(p => p.AccountLedgerTypeID == (int)cbAccountLedgerType.SelectedValue).FirstOrDefault();
 
-                if (accountLedger.AccountLedgerTypeSystemName != "ControlCodes")
+                if (accountLedger.AccountLedgerTypeSystemName != Constants.AccountLedgerType.ControlCodes)
                 {
-                    var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
-                    var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName("ControlCodes");
+                   
+                    var debitControlCodes = applicationFacade.GetAccountLedgerBySystemName(Constants.AccountLedgerType.ControlCodes);
+                    var creditControlCodes = applicationFacade.GetAccountLedgerBySystemName(Constants.AccountLedgerType.ControlCodes);
 
                     cbDebitControlCode.DataSource = debitControlCodes;
                     cbCreditControlCode.DataSource = creditControlCodes;
@@ -221,6 +238,20 @@ namespace PharmaUI
                     cbCreditControlCode.DataSource = null;
                     gbBalanceSheet.Visible = false;
                 }
+
+
+                if (accountLedger.AccountLedgerTypeSystemName == Constants.AccountLedgerType.SaleLedger
+                    || accountLedger.AccountLedgerTypeSystemName == Constants.AccountLedgerType.PurchaseLedger)
+                {
+                    txtSalePurchaseValue.Enabled = true;
+                }
+                else
+                {
+                    txtSalePurchaseValue.Enabled = false;
+                    txtSalePurchaseValue.Text = "0.00";
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -269,21 +300,22 @@ namespace PharmaUI
                 model.AccountLedgerTypeId = (int)cbAccountLedgerType.SelectedValue;
                 model.AccountLedgerName = tbAccountName.Text;
                 model.AccountTypeId = (int)cbAccountType.SelectedValue;
-                model.OpeningBalance = Convert.ToDouble(tbOpeningBalance.Text);
+                model.OpeningBalance = (double)ExtensionMethods.SafeConversionDouble(tbOpeningBalance.Text);
                 model.CreditDebit = cbDebitCredit.Text;
                 model.AccountLedgerCode = txtAccountLedgerCode.Text;
+                model.SalePurchaseTaxValue = ExtensionMethods.SafeConversionDecimal(txtSalePurchaseValue.Text);
 
                 if (cbDebitControlCode.DataSource != null)
                 {
                     model.DebitControlCodeID = (int)cbDebitControlCode.SelectedValue;
                     model.CreditControlCodeID = (int)cbCreditControlCode.SelectedValue;
                 }
-                model.AccountLedgerID = this._accountLedgerId;
+                model.AccountLedgerID = this.AccountLedgerId;
 
                 Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
                 model.Status = status == Status.Active;
 
-                var result = this._accountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
+                var result = this.AccountLedgerId > 0 ? applicationFacade.UpdateAccountLedger(model) : applicationFacade.AddAccountLedger(model);
 
                 if (result > 0)
                 {

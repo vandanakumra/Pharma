@@ -117,7 +117,7 @@ namespace PharmaUI
                 else
                 {
                     LoadDataGrid(0);
-                    dgvAccountLedger.CellContentDoubleClick += DgvAccountLedger_CellDoubleClick;
+                    dgvAccountLedger.CellDoubleClick += DgvAccountLedger_CellDoubleClick;
                     dgvAccountLedger.KeyDown += DgvAccountLedger_KeyDown;
                 }
                 dgvAccountLedger.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -259,17 +259,35 @@ namespace PharmaUI
         }
 
 
-        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmAccountLedgerMasterAddUpdate_FormClosed(object sender, FormClosedEventArgs e)
         {
             try
             {
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                //LoadCombo();
+
                 LoadDataGrid((int)cbLedgerType.SelectedValue);
+
+                frmAccountLedgerMasterAddUpdate frm = (frmAccountLedgerMasterAddUpdate)sender;
 
                 if (dgvAccountLedger.Rows.Count > 0)
                 {
-                    dgvAccountLedger.Rows[0].Selected = true;
+                    int id = frm.AccountLedgerId;
+
+                    foreach (DataGridViewRow row in dgvAccountLedger.Rows)
+                    {
+                        if (row.Cells["AccountLedgerId"].Value.ToString().Equals(frm.AccountLedgerId.ToString()))
+                        {
+                            dgvAccountLedger.Rows[row.Index].Selected = true;
+                            
+                            if(row.Index != 0)
+                            {
+                                dgvAccountLedger.Rows[0].Selected = false;
+                            }
+
+                            break; 
+
+                        }
+                    }                   
                 }
             }
             catch (Exception ex)
@@ -299,8 +317,8 @@ namespace PharmaUI
         private void OpenAddEdit(int accountLedgerId)
         {
             frmAccountLedgerMasterAddUpdate form = new frmAccountLedgerMasterAddUpdate(accountLedgerId,txtSearch.Text);
-            form.FormClosed -= Form_FormClosed;
-            form.FormClosed += Form_FormClosed;
+            form.FormClosed -= frmAccountLedgerMasterAddUpdate_FormClosed;
+            form.FormClosed += frmAccountLedgerMasterAddUpdate_FormClosed;
             form.ShowDialog();
         }
 

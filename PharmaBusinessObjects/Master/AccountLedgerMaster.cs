@@ -24,6 +24,8 @@ namespace PharmaBusinessObjects.Master
         public string CreditControlCode { get; set; }
         public bool Status { get; set; }
 
+        public decimal? SalePurchaseTaxValue{ get; set; }
+
 
         public List<Common.AccountLedgerType> AccountLedgerTypeList { get; set; }
         public List<Common.AccountType> AccountTypeList { get; set; }
