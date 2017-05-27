@@ -4,6 +4,8 @@ using System.Data;
 using System.Linq;
 using PharmaDAL.Entity;
 using PharmaDAL.Master;
+using System.Data.Entity.Validation;
+using System.Windows.Forms;
 
 namespace PharmaDataMigration.Master
 {
@@ -42,6 +44,7 @@ namespace PharmaDataMigration.Master
                             string companyCode = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == originalItemCompanyCode).FirstOrDefault().MappedCompanyCode;
                             int companyID = context.CompanyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
                             int totalItemsFromSameCompany = companyCodeCounts.Where(p => p.CompanyCode == companyCode).Select(p => p.CompanyCodeCount).FirstOrDefault();
+
                             totalItemsFromSameCompany++;
 
                             if (totalItemsFromSameCompany > 1)
@@ -100,6 +103,7 @@ namespace PharmaDataMigration.Master
                                 //MinimumStock = Convert.ToInt32(dr["min"]),
                                 //MaximumStock = Convert.ToInt32(dr["max"]),
                                 SaleTypeId = saleTypeID,
+                                PurchaseTypeId = saleTypeID,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
                                 CreatedBy = "admin",
                                 CreatedOn = DateTime.Now
@@ -115,9 +119,13 @@ namespace PharmaDataMigration.Master
                     return _result;
                 }
             }
+            catch(DbEntityValidationException ex)
+            {
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

@@ -289,7 +289,7 @@ namespace PharmaUI
             {
                 dgvLineItem.CurrentRow.Cells[dgvLineItem.SelectedCells[0].ColumnIndex].Value = batch.BatchNumber;
                 dgvLineItem.CurrentRow.Cells["Quantity"].Selected = true;
-                dgvLineItem.BeginEdit(false);
+                //dgvLineItem.BeginEdit(false);
             }
         }
 

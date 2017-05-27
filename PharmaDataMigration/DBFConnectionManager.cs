@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.OleDb;
+using System.Windows.Forms;
 
 namespace PharmaDataMigration
 {
@@ -28,17 +29,25 @@ namespace PharmaDataMigration
 
         public DataTable GetData(string query)
         {
-            DataTable dtResult = new DataTable();
-
-            if (dbConnection.State == ConnectionState.Open)
+            try
             {
-                OleDbCommand cmd = new OleDbCommand(query, dbConnection);
-                OleDbDataAdapter DA = new OleDbDataAdapter(cmd);
 
-                DA.Fill(dtResult);
+                DataTable dtResult = new DataTable();
+
+                if (dbConnection.State == ConnectionState.Open)
+                {
+                    OleDbCommand cmd = new OleDbCommand(query, dbConnection);
+                    OleDbDataAdapter DA = new OleDbDataAdapter(cmd);
+
+                    DA.Fill(dtResult);
+                }
+
+                return dtResult;
+            }            
+            finally
+            {
+                CloseOleDBConnection();
             }
-
-            return dtResult;
         }
     }
 }
