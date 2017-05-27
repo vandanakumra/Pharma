@@ -15,6 +15,11 @@ namespace PharmaDataMigration
             CreateOleDBConnection();
         }
 
+        ~DBFConnectionManager()
+        {
+            CloseOleDBConnection();
+        }
+
         private void CreateOleDBConnection()
         {
             dbConnection = new OleDbConnection(@"Provider=VFPOLEDB.1;Data Source=" + dataDirectory);
@@ -24,7 +29,7 @@ namespace PharmaDataMigration
 
         private void CloseOleDBConnection()
         {
-            dbConnection.Close();
+           // dbConnection.Close();
         }
 
         public DataTable GetData(string query)

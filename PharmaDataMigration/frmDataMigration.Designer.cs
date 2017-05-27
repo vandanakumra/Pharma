@@ -80,7 +80,8 @@
             // grdDataMigration
             // 
             this.grdDataMigration.AllowUserToDeleteRows = false;
-            this.grdDataMigration.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grdDataMigration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdDataMigration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdDataMigration.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -128,6 +129,7 @@
             this.Controls.Add(this.txtDataDirectory);
             this.Name = "frmDataMigration";
             this.Text = "Data Migration";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmDataMigration_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdDataMigration)).EndInit();
             this.ResumeLayout(false);
