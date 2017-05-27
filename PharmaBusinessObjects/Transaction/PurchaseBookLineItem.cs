@@ -40,7 +40,8 @@ namespace PharmaBusinessObjects.Transaction
             BatchNumber = ItemName = ItemCode = PurchaseTaxType = string.Empty;
             Quantity = ID = SrNo = InvoiceID = FreeQty = Scheme2 = Scheme1 = 0;
             Rate = SpecialRate = WholeSaleRate = SaleRate = Amount = MRP = 0L;
-            VolumeDiscount = SpecialDiscount = Discount = TaxOnPurchase = Excise = 0L;
+            VolumeDiscount = SpecialDiscount = Discount = Excise = 0L;
+            TaxOnPurchase = 0;
             Expiry = PurchaseDate = DateTime.MinValue;
         }
     }

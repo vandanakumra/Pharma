@@ -175,10 +175,10 @@ namespace PharmaUI
                 cbCreditControlCode.DataSource = creditControlCodes;
 
                 cbDebitControlCode.ValueMember = "AccountLedgerID";
-                cbDebitControlCode.DisplayMember = "AccountLedgerCode";
+                cbDebitControlCode.DisplayMember = "AccountLedgerName";
 
                 cbCreditControlCode.ValueMember = "AccountLedgerID";
-                cbCreditControlCode.DisplayMember = "AccountLedgerCode";
+                cbCreditControlCode.DisplayMember = "AccountLedgerName";
 
                 gbBalanceSheet.Visible = true;
             }
@@ -208,10 +208,10 @@ namespace PharmaUI
                     cbCreditControlCode.DataSource = creditControlCodes;
 
                     cbDebitControlCode.ValueMember = "AccountLedgerID";
-                    cbDebitControlCode.DisplayMember = "AccountLedgerCode";
+                    cbDebitControlCode.DisplayMember = "AccountLedgerName";
 
                     cbCreditControlCode.ValueMember = "AccountLedgerID";
-                    cbCreditControlCode.DisplayMember = "AccountLedgerCode";
+                    cbCreditControlCode.DisplayMember = "AccountLedgerName";
 
                     gbBalanceSheet.Visible = true;
                 }

@@ -50,6 +50,8 @@ namespace PharmaBusinessObjects.Master
         public bool Status { get; set; }
         public int PurchaseTypeId { get; set; }
         public string PurchaseTypeCode { get; set; }
+        public string PurchaseTypeName { get; set; }
+        public decimal? PurchaseTypeRate { get; set; }
 
         public PurchaseBookLineItem ToPurchaseBookLineItem()
         {
@@ -70,7 +72,8 @@ namespace PharmaBusinessObjects.Master
             lineItem.SpecialRate = this.SpecialRate ?? 0L;
             lineItem.WholeSaleRate = this.WholeSaleRate ?? 0L;
             lineItem.SaleRate = this.SaleRate ?? 0L;
-            lineItem.PurchaseTaxType = "L000012";
+            lineItem.PurchaseTaxType = PurchaseTypeCode;
+            lineItem.TaxOnPurchase = (double)PurchaseTypeRate;
             return lineItem;
         }
         

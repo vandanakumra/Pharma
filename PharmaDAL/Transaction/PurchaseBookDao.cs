@@ -87,6 +87,7 @@ namespace PharmaDAL.Transaction
                 item.WholeSaleRate = lineItem.WholeSaleRate;
                 item.SaleRate = lineItem.SaleRate;
                 item.PurchaseTaxType = lineItem.PurchaseTaxType;
+                item.TaxOnPurchase = (double)lineItem.TaxOnPurchase;
                 item.CreatedBy = this.LoggedInUser.Username;
                 item.CreatedOn = DateTime.Now;
 
@@ -127,7 +128,8 @@ namespace PharmaDAL.Transaction
                     item.SpecialRate = lineItem.SpecialRate;
                     item.WholeSaleRate = lineItem.WholeSaleRate;
                     item.SaleRate = lineItem.SaleRate;
-                    item.PurchaseTaxType = "L000012";//lineItem.PurchaseTaxType;
+                    item.PurchaseTaxType = lineItem.PurchaseTaxType;
+                    item.TaxOnPurchase = (double)lineItem.TaxOnPurchase;
                     item.ModifiedBy = this.LoggedInUser.Username;
                     item.ModifiedOn = DateTime.Now;
                     //IsNewRate and Purchase Rate

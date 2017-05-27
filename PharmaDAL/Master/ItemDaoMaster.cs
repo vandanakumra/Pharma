@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PharmaDAL.Entity;
+using System.Data.Entity.Validation;
 
 namespace PharmaDAL.Master
 {
@@ -59,6 +60,8 @@ namespace PharmaDAL.Master
                     SaleTypeId = p.SaleTypeId,
                     PurchaseTypeId=p.PurchaseTypeId,
                     PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
+                    PurchaseTypeName=  p.AccountLedgerMaster1.AccountLedgerName,
+                    PurchaseTypeRate= p.AccountLedgerMaster1.SalePurchaseTaxType,
                     Status = p.Status
 
                 }).ToList();
@@ -127,7 +130,7 @@ namespace PharmaDAL.Master
                         return false;
                 }
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException ex)
             {
                 throw;
             }
@@ -275,6 +278,8 @@ namespace PharmaDAL.Master
                                                     SaleTypeId = p.SaleTypeId,
                                                     PurchaseTypeId = p.PurchaseTypeId,
                                                     PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
+                                                    PurchaseTypeName = p.AccountLedgerMaster1.AccountLedgerName,
+                                                    PurchaseTypeRate = p.AccountLedgerMaster1.SalePurchaseTaxType,
                                                     Status = p.Status
 
                                                 }).ToList();
