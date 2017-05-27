@@ -48,10 +48,10 @@ namespace PharmaDAL.Transaction
                 h.Narration1 = header.Narration1;
                 h.Narration2 = header.Narration2;
                 h.ExemptedAmount = header.ExemptedAmount;
-                h.PurAmount1 = header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().Amount : 0L;
-                h.PurAmount2 = header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().Amount : 0L;
-                h.VAT1 = header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().TaxOnPurchase : 0L;
-                h.VAT2 = header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().TaxOnPurchase : 0L;
+                h.PurAmount1 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().Amount : 0L;
+                h.PurAmount2 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().Amount : 0L;
+                h.VAT1 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().TaxOnPurchase : 0L;
+                h.VAT2 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().TaxOnPurchase : 0L;
                 
                 context.SaveChanges();
 

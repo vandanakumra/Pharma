@@ -268,11 +268,16 @@ namespace PharmaUI
 
             if(columnName == "BatchNumber")
             {
-                frmLastNBatchNo batch = new frmLastNBatchNo();
-                batch.SupplierCode = txtSupplierCode.Text;
-                batch.ItemCode = Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value);
-                batch.FormClosed += Batch_FormClosed;
-                batch.Show();
+                var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
+
+                if (list != null && list.Count > 0)
+                {
+                    frmLastNBatchNo batch = new frmLastNBatchNo(list);
+                    //batch.SupplierCode = txtSupplierCode.Text;
+                    //batch.ItemCode = Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value);
+                    batch.FormClosed += Batch_FormClosed;
+                    batch.ShowDialog();
+                }
             }            
         }
 
@@ -821,6 +826,10 @@ namespace PharmaUI
                 item.IsNewRate = false;
                 item.PurchaseDate = dtPurchaseDate.Value;
                 item.PurchaseTaxType = Convert.ToString(row.Cells["PurchaseTaxType"].Value);
+
+                double.TryParse(Convert.ToString(row.Cells["TaxOnPurchase"].Value), out dValue);
+
+                item.TaxOnPurchase = dValue;
 
             }
 

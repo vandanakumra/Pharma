@@ -66,6 +66,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.dgvLastBatch);
             this.Name = "frmLastNBatchNo";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLastNBatchNo";
             this.Load += new System.EventHandler(this.frmLastNBatchNo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLastBatch)).EndInit();
