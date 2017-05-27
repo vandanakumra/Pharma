@@ -161,6 +161,75 @@ namespace PharmaUI
             form.Controls.Add(panel1);
         }
 
+        internal static void AddFooter(Form form)
+        {
+            Panel panel1 = new Panel();
+            panel1.Location = new Point(0, form.Height - 50);
+            panel1.Width = form.Width;
+            panel1.Height = 40;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Margin = new Padding(3, 3, 3, 3);
+            panel1.Padding = new Padding(3, 3, 3, 3);
+            panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel1.Anchor = (AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right);
+
+            TableLayoutPanel tblPanel = new TableLayoutPanel();
+            tblPanel.Width = form.Width;
+            tblPanel.Height = 34;
+            //panel1.Dock = DockStyle.Fill;
+            tblPanel.Margin = new Padding(3, 3, 3, 3);
+            tblPanel.Padding = new Padding(3, 3, 3, 3);
+            tblPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tblPanel.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
+            tblPanel.RowCount = 1;
+            tblPanel.BackColor = Color.Gray;
+            tblPanel.ColumnCount = 5;
+            tblPanel.ColumnStyles.Clear();
+
+            for (int x = 0; x < tblPanel.ColumnCount; x++)
+                tblPanel.ColumnStyles.Add(new ColumnStyle() { Width = 20F, SizeType = SizeType.Percent });
+
+            panel1.Controls.Add(tblPanel);
+
+            Label lbl = new Label();
+            lbl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            lbl.Text = "<End> Close Dialog";
+            lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize);
+            lbl.ForeColor = Color.White;
+            tblPanel.Controls.Add(lbl, 0, 0);
+
+
+            Label lbl1 = new Label();
+            lbl1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            lbl1.Text = "<Ctrl + F1> Open Dialog";
+            lbl1.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize);
+            lbl1.ForeColor = Color.White;
+            tblPanel.Controls.Add(lbl1, 1, 0);
+
+            Label lbl2 = new Label();
+            lbl2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            lbl2.Text = "<Enter|Tab> Focus Next Control";
+            lbl2.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize);
+            lbl2.ForeColor = Color.White;
+            tblPanel.Controls.Add(lbl2, 2, 0);
+
+            Label lbl3 = new Label();
+            lbl3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            lbl3.Text = "<Arrow Key> Change date in Datepicker";
+            lbl3.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize);
+            lbl3.ForeColor = Color.White;
+            tblPanel.Controls.Add(lbl3, 3, 0);
+
+            Label lbl4 = new Label();
+            lbl4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            lbl4.Text = "<End> Save Purchase Entry";
+            lbl4.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize);
+            lbl4.ForeColor = Color.White;
+            tblPanel.Controls.Add(lbl4, 4, 0);
+
+            form.Controls.Add(panel1);
+        }
+
         internal static void HomeFormLoad(Form form, string lblText)
         {
 
