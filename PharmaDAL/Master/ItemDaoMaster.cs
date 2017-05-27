@@ -132,7 +132,7 @@ namespace PharmaDAL.Master
             }
             catch (DbEntityValidationException ex)
             {
-                throw;
+                throw ex;
             }
 
         }

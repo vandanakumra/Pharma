@@ -344,6 +344,7 @@ namespace PharmaUI
 
             try
             {
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
 
                 PersonRouteMaster lastSelectedPersonRoute = (sender as frmPersonRouteMaster).LastSelectedPersonRoute;
                 if (lastSelectedPersonRoute != null)
@@ -354,6 +355,7 @@ namespace PharmaUI
                             {
                                 tbxZSM.Text = lastSelectedPersonRoute.PersonRouteName;
                                 tbxZSM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                tbxRSM.Focus();
                             }
                             break;
 
@@ -361,6 +363,7 @@ namespace PharmaUI
                             {
                                 tbxRSM.Text = lastSelectedPersonRoute.PersonRouteName;
                                 tbxRSM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                tbxASM.Focus();
                             }
                             break;
 
@@ -368,6 +371,7 @@ namespace PharmaUI
                             {
                                 tbxASM.Text = lastSelectedPersonRoute.PersonRouteName;
                                 tbxASM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                tbxSalesman.Focus();
                             }
                             break;
 
@@ -375,6 +379,7 @@ namespace PharmaUI
                             {
                                 tbxSalesman.Text = lastSelectedPersonRoute.PersonRouteName;
                                 tbxSalesman.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                tbxArea.Focus();
                             }
                             break;
 
@@ -382,6 +387,7 @@ namespace PharmaUI
                             {
                                 tbxArea.Text = lastSelectedPersonRoute.PersonRouteName;
                                 tbxArea.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                tbxRoute.Focus();
                             }
                             break;
 
@@ -389,13 +395,14 @@ namespace PharmaUI
                             {
                                 tbxRoute.Text = lastSelectedPersonRoute.PersonRouteName;
                                 tbxRoute.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                tbxMaxOSAmount.Focus();
                             }
                             break;
                     }
 
                 }
 
-                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                
 
             }
             catch (Exception ex)

@@ -20,7 +20,7 @@ namespace PharmaUI
         private bool isBatchUpdate = false;
         private bool isDirty = false;
         private bool isCellEdit = true;
-        private bool isDiscountWindowOpen = false;
+       
       
         List<PurchaseBookLineItem> lineItemList = new List<PurchaseBookLineItem>();
 
@@ -243,7 +243,7 @@ namespace PharmaUI
                     frmLineItemBriefDiscount updateForm = new frmLineItemBriefDiscount(lineItem);
                     updateForm.FormClosed += frmLineItemBriefDiscount_FormClosed;
                     updateForm.ShowDialog();
-                    isDiscountWindowOpen = true;
+                    
                 }
 
                 if (e.RowIndex == 0 && dgvLineItem.Rows.Count == (e.RowIndex + 1))
@@ -670,7 +670,7 @@ namespace PharmaUI
 
         private void frmLineItemBriefDiscount_FormClosed (object sender, FormClosedEventArgs e)
         {
-            isDiscountWindowOpen = false;
+            
             frmLineItemBriefDiscount lineItemUpdate = (frmLineItemBriefDiscount)sender;
             int rowIndex = -1;
             int colIndex = -1;
@@ -707,7 +707,7 @@ namespace PharmaUI
 
         private void frmLineItemDiscount_FormClosed(object sender, FormClosedEventArgs e)
         {
-            isDiscountWindowOpen = false;
+            
             frmLineItemDiscount lineItemUpdate = (frmLineItemDiscount)sender;
             int rowIndex = -1;
             int colIndex = -1;

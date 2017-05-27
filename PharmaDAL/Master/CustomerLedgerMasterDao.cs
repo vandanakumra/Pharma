@@ -174,7 +174,7 @@ namespace PharmaDAL.Master
                     return context.SaveChanges();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 0;
 

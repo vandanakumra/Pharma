@@ -149,6 +149,17 @@ namespace PharmaUI
 
             cbAccountLedgerType.Enabled = false;
 
+            if (accountLedgerMaster.AccountLedgerTypeSystemName == Constants.AccountLedgerType.SaleLedger
+                    || accountLedgerMaster.AccountLedgerTypeSystemName == Constants.AccountLedgerType.PurchaseLedger)
+            {
+                txtSalePurchaseValue.Enabled = true;
+            }
+            else
+            {
+                txtSalePurchaseValue.Enabled = false;
+                txtSalePurchaseValue.Text = "0.00";
+            }
+
 
             tbAccountName.Focus();
 

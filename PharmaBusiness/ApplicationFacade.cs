@@ -182,8 +182,7 @@ namespace PharmaBusiness
             }
             catch (Exception ex)
             {
-
-                throw;
+                throw ex;
             }
 
         }
@@ -263,8 +262,7 @@ namespace PharmaBusiness
             }
             catch (Exception ex)
             {
-
-                throw;
+                throw ex;
             }
 
         }

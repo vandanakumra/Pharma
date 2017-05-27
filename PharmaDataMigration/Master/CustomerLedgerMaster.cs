@@ -121,7 +121,7 @@ namespace PharmaDataMigration.Master
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -175,7 +175,7 @@ namespace PharmaDataMigration.Master
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
     }
