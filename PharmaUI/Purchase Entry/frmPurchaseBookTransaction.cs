@@ -335,7 +335,7 @@ namespace PharmaUI
                 {
                     dgvLineItem.CurrentRow.Cells[dgvLineItem.SelectedCells[0].ColumnIndex].Value = batch.BatchNumber;
                     dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Quantity"];
-                    dgvLineItem.BeginEdit(false);
+                  //  dgvLineItem.BeginEdit(false);
                 }
             }
             catch (Exception ex)

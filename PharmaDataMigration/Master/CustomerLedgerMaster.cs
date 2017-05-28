@@ -97,12 +97,12 @@ namespace PharmaDataMigration.Master
                                 ServiceTaxNo = "test",//Convert.ToString(dr["Stnol"]).TrimEnd() -> //confirm
                                 PANNo = "test", //Convert.ToString(dr["Stnol"]).TrimEnd() -> confirm
                                 OpeningBal = Convert.ToDecimal(dr["Abop"]),
-                                TaxRetail = Convert.ToString(dr["Vat"]).TrimEnd(),
+                                TaxRetail = Convert.ToString(dr["Vat"]).TrimEnd(), // Remove
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
                                 ASMId = asmID,
                                 CreditLimit = Convert.ToInt32(dr["Cr_limit"]),
                                 CustomerTypeID = customerTypeID,
-                                InterestTypeID = 1, //Convert.ToString(dr["ACNO"]).TrimEnd(), confirm
+                                InterestTypeID = 1, //Convert.ToString(dr["ACNO"]).TrimEnd(), confirm  SBType
                                 IsLessExcise = Convert.ToChar(dr["Less_ex"]) == 'Y' ? true : false,
                                 RateTypeID = 1, //Convert.ToString(dr["ACNO"]).TrimEnd(), confirm
                                 RouteId = routeID,
@@ -116,7 +116,7 @@ namespace PharmaDataMigration.Master
                                 MaxGracePeriod = Convert.ToInt32(dr["Grace_days"]),
                                 IsFollowConditionStrictly = Convert.ToChar(dr["Validate"]) == 'Y' ? true : false,
                                 Discount = 0,//Convert.ToString(dr["ACNO"]).TrimEnd(),
-                                CentralLocal = "C",//Convert.ToString(dr["ACNO"]).TrimEnd(),
+                                CentralLocal = "C",//Convert.ToString(dr["ACNO"]).TrimEnd(), //LC
                                 CreatedBy = "admin",
                                 CreatedOn = DateTime.Now
                             };
