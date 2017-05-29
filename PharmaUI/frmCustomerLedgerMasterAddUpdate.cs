@@ -45,36 +45,48 @@ namespace PharmaUI
 
         private void LoadCombo()
         {
-                ////Fill Costumer Type options
-                cbxCustomerType.DataSource = applicationFacade.GetCustomerTypes();
-                cbxCustomerType.DisplayMember = "CustomerTypeName";
-                cbxCustomerType.ValueMember = "CustomerTypeId";
+            ////Fill Credit/Debit options
+            cbxCreditDebit.DataSource = Enum.GetValues(typeof(Enums.TransType));
+            cbxCreditDebit.SelectedItem = TransType.C;
 
-                cbxCustomerType.AutoCompleteSource = AutoCompleteSource.ListItems;
-                cbxCustomerType.AutoCompleteMode = AutoCompleteMode.Suggest;
+            ////Fill Credit/Debit options
+            cbxTaxRetail.DataSource = Enum.GetValues(typeof(Enums.TaxRetail));
+            cbxTaxRetail.SelectedItem = Enums.TaxRetail.R;
 
-                ////Fill Rate Type options
-                cbxRateType.DataSource = applicationFacade.GetInterestTypes();
-                cbxRateType.DisplayMember = "InterestTypeName";
-                cbxRateType.ValueMember = "InterestTypeId";
+            ////Fill Status options
+            cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
+            cbxStatus.SelectedItem = Enums.Status.Active;
 
-                ////Fill Less Excise options
-                cbxLessExcise.DataSource = Enum.GetValues(typeof(Enums.Choice));
-                cbxLessExcise.SelectedItem = Choice.No;
+            ////Fill Costumer Type options
+            cbxCustomerType.DataSource = applicationFacade.GetCustomerTypes();
+            cbxCustomerType.DisplayMember = "CustomerTypeName";
+            cbxCustomerType.ValueMember = "CustomerTypeId";
+
+            cbxCustomerType.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbxCustomerType.AutoCompleteMode = AutoCompleteMode.Suggest;
+
+            ////Fill Rate Type options
+            cbxRateType.DataSource = applicationFacade.GetInterestTypes();
+            cbxRateType.DisplayMember = "InterestTypeName";
+            cbxRateType.ValueMember = "InterestTypeId";
+
+            ////Fill Less Excise options
+            cbxLessExcise.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxLessExcise.SelectedItem = Choice.No;
 
 
-                ////Fill Follow condition strictly options
-                cbxFollowConditionStrictly.DataSource = Enum.GetValues(typeof(Enums.Choice));
-                cbxFollowConditionStrictly.SelectedItem = Choice.No;
+            ////Fill Follow condition strictly options
+            cbxFollowConditionStrictly.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxFollowConditionStrictly.SelectedItem = Choice.No;
 
-                ////Fill discount strictly options
-                cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.Choice));
-                cbxLocaLCentral.SelectedItem = Choice.No;
+            ////Fill discount strictly options
+            cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.Choice));
+            cbxLocaLCentral.SelectedItem = Choice.No;
 
-                ///Fill Local/Central options
-                ///
-                cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.LocalCentral));
-                cbxLocaLCentral.SelectedItem = LocalCentral.L;       
+            ///Fill Local/Central options
+            ///
+            cbxLocaLCentral.DataSource = Enum.GetValues(typeof(Enums.LocalCentral));
+            cbxLocaLCentral.SelectedItem = LocalCentral.L;
         }
 
         public void LoadCustomerCompanyDiscountGrid()
@@ -121,8 +133,8 @@ namespace PharmaUI
             try
             {
                 GotFocusEventRaised(this);
-                this.ucSupplierCustomerInfo.SetFocus();
-                ExtensionMethods.EnterKeyDownForTabEvents(this);
+                EnterKeyDownForTabEvents(this);
+                txtCustSupplierName.Focus();
             }
             catch (Exception ex)
             {
@@ -142,20 +154,20 @@ namespace PharmaUI
 
                 ///Fill user control data
                 ///
-                ucSupplierCustomerInfo.Code = customerLedgerMaster.CustomerLedgerCode;
-                ucSupplierCustomerInfo.CustomerSupplierName = customerLedgerMaster.CustomerLedgerName;
-                ucSupplierCustomerInfo.ShortName = customerLedgerMaster.CustomerLedgerShortName;
-                ucSupplierCustomerInfo.Address = customerLedgerMaster.Address;
-                ucSupplierCustomerInfo.ContactPerson = customerLedgerMaster.ContactPerson;
-                ucSupplierCustomerInfo.Telephone = customerLedgerMaster.Telephone;
-                ucSupplierCustomerInfo.Mobile = customerLedgerMaster.Mobile;
-                ucSupplierCustomerInfo.OfficePhone = customerLedgerMaster.OfficePhone;
-                ucSupplierCustomerInfo.ResidentPhone = customerLedgerMaster.ResidentPhone;
-                ucSupplierCustomerInfo.EmailAddress = customerLedgerMaster.EmailAddress;
-                ucSupplierCustomerInfo.OpeningBal = Convert.ToString(customerLedgerMaster.OpeningBal);
-                ucSupplierCustomerInfo.CreditDebit = customerLedgerMaster.CreditDebit == "C" ? Enums.TransType.C : Enums.TransType.D;
-                ucSupplierCustomerInfo.TaxRetail = customerLedgerMaster.TaxRetail == "T" ? Enums.TaxRetail.T : Enums.TaxRetail.R;
-                ucSupplierCustomerInfo.Status = customerLedgerMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
+                txtCode.Text = customerLedgerMaster.CustomerLedgerCode;
+                txtCustSupplierName.Text = customerLedgerMaster.CustomerLedgerName;
+                txtShortName.Text = customerLedgerMaster.CustomerLedgerShortName;
+                txtAddress.Text = customerLedgerMaster.Address;
+                txtContactPerson.Text = customerLedgerMaster.ContactPerson;
+                txtTelephone.Text = customerLedgerMaster.Telephone;
+                txtMobile.Text = customerLedgerMaster.Mobile;
+                txtPhoneO.Text = customerLedgerMaster.OfficePhone;
+                txtPhoneR.Text = customerLedgerMaster.ResidentPhone;
+                txtEmailAddress.Text = customerLedgerMaster.EmailAddress;
+                txtOpeningBal.Text = Convert.ToString(customerLedgerMaster.OpeningBal);
+                cbxCreditDebit.SelectedItem = customerLedgerMaster.CreditDebit == "C" ? Enums.TransType.C : Enums.TransType.D;
+                cbxTaxRetail.SelectedItem = customerLedgerMaster.TaxRetail == "T" ? Enums.TaxRetail.T : Enums.TaxRetail.R;
+                cbxStatus.SelectedItem = customerLedgerMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
 
                 tbxZSM.Text = customerLedgerMaster.ZSMName;
                 tbxZSM.Tag = customerLedgerMaster.ZSMId;
@@ -205,7 +217,7 @@ namespace PharmaUI
                 LocalCentral localCentral;
                 CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
 
-                if (String.IsNullOrWhiteSpace(ucSupplierCustomerInfo.CustomerSupplierName))
+                if (String.IsNullOrWhiteSpace(txtCustSupplierName.Text))
                 {
                     MessageBox.Show("Customer Name " + Constants.Messages.RequiredField);
                     return;
@@ -214,19 +226,19 @@ namespace PharmaUI
                 customerLedgerMaster.CustomerLedgerId = this.customerLedgerID;
 
                 //values from User Control
-                customerLedgerMaster.CustomerLedgerName = ucSupplierCustomerInfo.CustomerSupplierName;
-                customerLedgerMaster.CustomerLedgerShortName = ucSupplierCustomerInfo.ShortName;
-                customerLedgerMaster.Address = ucSupplierCustomerInfo.Address;
-                customerLedgerMaster.ContactPerson = ucSupplierCustomerInfo.ContactPerson;
-                customerLedgerMaster.Telephone = ucSupplierCustomerInfo.Telephone;
-                customerLedgerMaster.Mobile = ucSupplierCustomerInfo.Mobile;
-                customerLedgerMaster.OfficePhone = ucSupplierCustomerInfo.OfficePhone;
-                customerLedgerMaster.ResidentPhone = ucSupplierCustomerInfo.ResidentPhone;
-                customerLedgerMaster.EmailAddress = ucSupplierCustomerInfo.EmailAddress;
-                customerLedgerMaster.OpeningBal = ExtensionMethods.SafeConversionDecimal(ucSupplierCustomerInfo.OpeningBal);
-                customerLedgerMaster.CreditDebit = ucSupplierCustomerInfo.CreditDebit == Enums.TransType.C ? "C" : "D";
-                customerLedgerMaster.TaxRetail = ucSupplierCustomerInfo.TaxRetail == Enums.TaxRetail.T ? "T" : "R";
-                customerLedgerMaster.Status = ucSupplierCustomerInfo.Status == Enums.Status.Active ? true : false;
+                customerLedgerMaster.CustomerLedgerName = txtCustSupplierName.Text;
+                customerLedgerMaster.CustomerLedgerShortName = txtShortName.Text;
+                customerLedgerMaster.Address = txtAddress.Text;
+                customerLedgerMaster.ContactPerson = txtContactPerson.Text;
+                customerLedgerMaster.Telephone =txtTelephone.Text;
+                customerLedgerMaster.Mobile = txtMobile.Text;
+                customerLedgerMaster.OfficePhone = txtPhoneO.Text;
+                customerLedgerMaster.ResidentPhone = txtPhoneR.Text;
+                customerLedgerMaster.EmailAddress = txtEmailAddress.Text;
+                customerLedgerMaster.OpeningBal = ExtensionMethods.SafeConversionDecimal(txtOpeningBal.Text);
+                customerLedgerMaster.CreditDebit =Convert.ToString(cbxCreditDebit.SelectedItem) ;
+                customerLedgerMaster.TaxRetail = Convert.ToString(cbxTaxRetail.SelectedItem);
+                customerLedgerMaster.Status = Convert.ToBoolean(cbxStatus.SelectedItem);
 
                 //values from User this form
                 customerLedgerMaster.ZSMId = String.IsNullOrWhiteSpace(tbxZSM.Text) ?null : (int?)tbxZSM.Tag;
@@ -349,61 +361,60 @@ namespace PharmaUI
                 PersonRouteMaster lastSelectedPersonRoute = (sender as frmPersonRouteMaster).LastSelectedPersonRoute;
                 if (lastSelectedPersonRoute != null)
                 {
-                    switch (lastSelectedPersonRoute.RecordTypeNme)
+                    if (lastSelectedPersonRoute.PersonRouteID > 0)
                     {
-                        case Constants.RecordType.ZSMDISPLAYNAME:
-                            {
-                                tbxZSM.Text = lastSelectedPersonRoute.PersonRouteName;
-                                tbxZSM.Tag = lastSelectedPersonRoute.PersonRouteID;
-                                tbxRSM.Focus();
-                            }
-                            break;
+                        switch (lastSelectedPersonRoute.RecordTypeNme)
+                        {
+                            case Constants.RecordType.ZSMDISPLAYNAME:
+                                {
+                                    tbxZSM.Text = lastSelectedPersonRoute.PersonRouteName;
+                                    tbxZSM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                    tbxRSM.Focus();
+                                }
+                                break;
 
-                        case Constants.RecordType.RSMDISPLAYNAME:
-                            {
-                                tbxRSM.Text = lastSelectedPersonRoute.PersonRouteName;
-                                tbxRSM.Tag = lastSelectedPersonRoute.PersonRouteID;
-                                tbxASM.Focus();
-                            }
-                            break;
+                            case Constants.RecordType.RSMDISPLAYNAME:
+                                {
+                                    tbxRSM.Text = lastSelectedPersonRoute.PersonRouteName;
+                                    tbxRSM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                    tbxASM.Focus();
+                                }
+                                break;
 
-                        case Constants.RecordType.ASMDISPLAYNAME:
-                            {
-                                tbxASM.Text = lastSelectedPersonRoute.PersonRouteName;
-                                tbxASM.Tag = lastSelectedPersonRoute.PersonRouteID;
-                                tbxSalesman.Focus();
-                            }
-                            break;
+                            case Constants.RecordType.ASMDISPLAYNAME:
+                                {
+                                    tbxASM.Text = lastSelectedPersonRoute.PersonRouteName;
+                                    tbxASM.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                    tbxSalesman.Focus();
+                                }
+                                break;
 
-                        case Constants.RecordType.SALESMANDISPLAYNAME:
-                            {
-                                tbxSalesman.Text = lastSelectedPersonRoute.PersonRouteName;
-                                tbxSalesman.Tag = lastSelectedPersonRoute.PersonRouteID;
-                                tbxArea.Focus();
-                            }
-                            break;
+                            case Constants.RecordType.SALESMANDISPLAYNAME:
+                                {
+                                    tbxSalesman.Text = lastSelectedPersonRoute.PersonRouteName;
+                                    tbxSalesman.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                    tbxArea.Focus();
+                                }
+                                break;
 
-                        case Constants.RecordType.AREADISPLAYNAME:
-                            {
-                                tbxArea.Text = lastSelectedPersonRoute.PersonRouteName;
-                                tbxArea.Tag = lastSelectedPersonRoute.PersonRouteID;
-                                tbxRoute.Focus();
-                            }
-                            break;
+                            case Constants.RecordType.AREADISPLAYNAME:
+                                {
+                                    tbxArea.Text = lastSelectedPersonRoute.PersonRouteName;
+                                    tbxArea.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                    tbxRoute.Focus();
+                                }
+                                break;
 
-                        case Constants.RecordType.ROUTEDISPLAYNAME:
-                            {
-                                tbxRoute.Text = lastSelectedPersonRoute.PersonRouteName;
-                                tbxRoute.Tag = lastSelectedPersonRoute.PersonRouteID;
-                                tbxMaxOSAmount.Focus();
-                            }
-                            break;
+                            case Constants.RecordType.ROUTEDISPLAYNAME:
+                                {
+                                    tbxRoute.Text = lastSelectedPersonRoute.PersonRouteName;
+                                    tbxRoute.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                    tbxMaxOSAmount.Focus();
+                                }
+                                break;
+                        }
                     }
-
                 }
-
-                
-
             }
             catch (Exception ex)
             {
@@ -441,22 +452,117 @@ namespace PharmaUI
                 }
                 else if (keyData == Keys.F1)
                 {
-                    TextBox activePersonRouteType = new TextBox();
-                    string activePersonRouteTypeString = String.Empty;
+                ///DO NOT REMOVE BELOW CODE AS ITS WORKING FUNCTIONALITY
+                ///
 
-                    switch (this.ActiveControl.Name)
+                    //TextBox activePersonRouteType = new TextBox();
+                    //string activePersonRouteTypeString = String.Empty;
+
+                    //switch (this.ActiveControl.Name)
+                    //{
+                    //    case "tbxZSM":
+                    //        {
+                    //            activePersonRouteType = tbxZSM;
+                    //            activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
+                    //        }
+                    //        break;
+
+                    //    case "tbxRSM":
+                    //        {
+                    //            activePersonRouteType = tbxRSM;
+                    //            activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
+                    //        }
+                    //        break;
+
+                    //    case "tbxASM":
+                    //        {
+                    //            activePersonRouteType = tbxASM;
+                    //            activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
+                    //        }
+                    //        break;
+                    //    case "tbxSalesman":
+                    //        {
+                    //            activePersonRouteType = tbxSalesman;
+                    //            activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
+                    //        }
+                    //        break;
+                    //    case "tbxArea":
+                    //        {
+                    //            activePersonRouteType = tbxArea;
+                    //            activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
+                    //        }
+                    //        break;
+                    //    case "tbxRoute":
+                    //        {
+                    //            activePersonRouteType = tbxRoute;
+                    //            activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
+                    //        }
+                    //        break;
+                    //}
+
+                    //if (!String.IsNullOrWhiteSpace(activePersonRouteTypeString))
+                    //{
+                    //    PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                    //    {
+                    //        RecordTypeNme = activePersonRouteTypeString,
+                    //        PersonRouteID = ExtensionMethods.SafeConversionInt(Convert.ToString(activePersonRouteType.Tag)) ?? 0,
+                    //        PersonRouteName = activePersonRouteType.Text
+                    //    };
+
+                    //    frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                    //    //Set Child UI
+                    //    ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
+                    //    frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+
+                    //    frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
+                    //    frmPersonRouteMaster.Show();
+                    //    frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+                    //}
+                }
+
+                return base.ProcessCmdKey(ref msg, keyData);         
+        }
+
+        private void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private  void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (sender is TextBox)
+                {
+                    TextBox activePersonRouteType = sender as TextBox;
+                    string activePersonRouteTypeString = String.Empty;
+                    bool isValidTextbox = false;
+
+                    switch (activePersonRouteType.Name)
                     {
                         case "tbxZSM":
                             {
                                 activePersonRouteType = tbxZSM;
                                 activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
+                                isValidTextbox = true;
                             }
                             break;
-
                         case "tbxRSM":
                             {
                                 activePersonRouteType = tbxRSM;
                                 activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
+                                isValidTextbox = true;
                             }
                             break;
 
@@ -464,29 +570,33 @@ namespace PharmaUI
                             {
                                 activePersonRouteType = tbxASM;
                                 activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
+                                isValidTextbox = true;
                             }
                             break;
                         case "tbxSalesman":
                             {
                                 activePersonRouteType = tbxSalesman;
                                 activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
+                                isValidTextbox = true;
                             }
                             break;
                         case "tbxArea":
                             {
                                 activePersonRouteType = tbxArea;
                                 activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
+                                isValidTextbox = true;
                             }
                             break;
                         case "tbxRoute":
                             {
                                 activePersonRouteType = tbxRoute;
                                 activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
+                                isValidTextbox = true;
                             }
                             break;
                     }
 
-                    if (!String.IsNullOrWhiteSpace(activePersonRouteTypeString))
+                    if (isValidTextbox && String.IsNullOrWhiteSpace(activePersonRouteType.Text))
                     {
                         PersonRouteMaster personRouteMaster = new PersonRouteMaster()
                         {
@@ -499,14 +609,20 @@ namespace PharmaUI
                         //Set Child UI
                         ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
                         frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
-
                         frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
                         frmPersonRouteMaster.Show();
                         frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
                     }
+                    else
+                    {
+                        SendKeys.Send("{TAB}");
+                    }
                 }
-
-                return base.ProcessCmdKey(ref msg, keyData);         
+                else
+                {
+                    SendKeys.Send("{TAB}");
+                }
+            }
         }
 
         private void FormCustomerItemDiscount_FormClosed(object sender, FormClosedEventArgs e)

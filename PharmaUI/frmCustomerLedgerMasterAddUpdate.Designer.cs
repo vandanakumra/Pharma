@@ -91,7 +91,36 @@
             this.tbxServiceTax = new System.Windows.Forms.TextBox();
             this.tbxDL = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.ucSupplierCustomerInfo = new PharmaUI.ucSupplierCustomerInfo();
+            this.gbCustomerSupplierInfo = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbxCreditDebit = new System.Windows.Forms.ComboBox();
+            this.txtOpeningBal = new System.Windows.Forms.TextBox();
+            this.txtPhoneR = new System.Windows.Forms.TextBox();
+            this.txtPhoneO = new System.Windows.Forms.TextBox();
+            this.txtMobile = new System.Windows.Forms.TextBox();
+            this.txtContactPerson = new System.Windows.Forms.TextBox();
+            this.txtShortName = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.txtCode = new System.Windows.Forms.TextBox();
+            this.txtCustSupplierName = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.txtEmailAddress = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.cbxTaxRetail = new System.Windows.Forms.ComboBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.cbxStatus = new System.Windows.Forms.ComboBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.txtAddress = new System.Windows.Forms.RichTextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.txtTelephone = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderCustomerLedger)).BeginInit();
             this.gbDiscountDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompanyDiscount)).BeginInit();
@@ -103,6 +132,8 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.gbCustomerSupplierInfo.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -786,34 +817,364 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(141, 100);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
-            // ucSupplierCustomerInfo
+            // gbCustomerSupplierInfo
             // 
-            this.ucSupplierCustomerInfo.Address = "";
-            this.ucSupplierCustomerInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ucSupplierCustomerInfo.Code = "";
-            this.ucSupplierCustomerInfo.ContactPerson = "";
-            this.ucSupplierCustomerInfo.CreditDebit = PharmaBusinessObjects.Common.Enums.TransType.C;
-            this.ucSupplierCustomerInfo.CustomerSupplierName = "";
-            this.ucSupplierCustomerInfo.EmailAddress = "";
-            this.ucSupplierCustomerInfo.Location = new System.Drawing.Point(15, 56);
-            this.ucSupplierCustomerInfo.Mobile = "";
-            this.ucSupplierCustomerInfo.Name = "ucSupplierCustomerInfo";
-            this.ucSupplierCustomerInfo.OfficePhone = "";
-            this.ucSupplierCustomerInfo.OpeningBal = "";
-            this.ucSupplierCustomerInfo.ResidentPhone = "";
-            this.ucSupplierCustomerInfo.ShortName = "";
-            this.ucSupplierCustomerInfo.Size = new System.Drawing.Size(1105, 140);
-            this.ucSupplierCustomerInfo.Status = PharmaBusinessObjects.Common.Enums.Status.Active;
-            this.ucSupplierCustomerInfo.TabIndex = 1;
-            this.ucSupplierCustomerInfo.TaxRetail = PharmaBusinessObjects.Common.Enums.TaxRetail.R;
-            this.ucSupplierCustomerInfo.Telephone = "";
+            this.gbCustomerSupplierInfo.Controls.Add(this.tableLayoutPanel6);
+            this.gbCustomerSupplierInfo.Location = new System.Drawing.Point(18, 67);
+            this.gbCustomerSupplierInfo.Name = "gbCustomerSupplierInfo";
+            this.gbCustomerSupplierInfo.Size = new System.Drawing.Size(1102, 129);
+            this.gbCustomerSupplierInfo.TabIndex = 803;
+            this.gbCustomerSupplierInfo.TabStop = false;
+            this.gbCustomerSupplierInfo.Text = "Customer Info";
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel6.ColumnCount = 8;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.44165F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.44165F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.44165F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.67505F));
+            this.tableLayoutPanel6.Controls.Add(this.cbxCreditDebit, 3, 3);
+            this.tableLayoutPanel6.Controls.Add(this.txtOpeningBal, 1, 3);
+            this.tableLayoutPanel6.Controls.Add(this.txtPhoneR, 3, 2);
+            this.tableLayoutPanel6.Controls.Add(this.txtPhoneO, 1, 2);
+            this.tableLayoutPanel6.Controls.Add(this.txtMobile, 3, 1);
+            this.tableLayoutPanel6.Controls.Add(this.txtContactPerson, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.txtShortName, 5, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label13, 0, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label16, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label17, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label18, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label19, 2, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label20, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label29, 2, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label30, 2, 3);
+            this.tableLayoutPanel6.Controls.Add(this.txtCode, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.txtCustSupplierName, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label31, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label32, 4, 1);
+            this.tableLayoutPanel6.Controls.Add(this.txtEmailAddress, 5, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label33, 4, 2);
+            this.tableLayoutPanel6.Controls.Add(this.cbxTaxRetail, 5, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label34, 4, 3);
+            this.tableLayoutPanel6.Controls.Add(this.cbxStatus, 5, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label35, 6, 0);
+            this.tableLayoutPanel6.Controls.Add(this.txtAddress, 7, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label36, 6, 3);
+            this.tableLayoutPanel6.Controls.Add(this.txtTelephone, 7, 3);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.Padding = new System.Windows.Forms.Padding(10);
+            this.tableLayoutPanel6.RowCount = 4;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1096, 110);
+            this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // cbxCreditDebit
+            // 
+            this.cbxCreditDebit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxCreditDebit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCreditDebit.FormattingEnabled = true;
+            this.cbxCreditDebit.Location = new System.Drawing.Point(331, 79);
+            this.cbxCreditDebit.Name = "cbxCreditDebit";
+            this.cbxCreditDebit.Size = new System.Drawing.Size(172, 21);
+            this.cbxCreditDebit.TabIndex = 113;
+            this.cbxCreditDebit.Tag = "";
+            // 
+            // txtOpeningBal
+            // 
+            this.txtOpeningBal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOpeningBal.Location = new System.Drawing.Point(83, 79);
+            this.txtOpeningBal.Name = "txtOpeningBal";
+            this.txtOpeningBal.Size = new System.Drawing.Size(172, 20);
+            this.txtOpeningBal.TabIndex = 112;
+            this.txtOpeningBal.Tag = "";
+            // 
+            // txtPhoneR
+            // 
+            this.txtPhoneR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPhoneR.Location = new System.Drawing.Point(331, 57);
+            this.txtPhoneR.Name = "txtPhoneR";
+            this.txtPhoneR.Size = new System.Drawing.Size(172, 20);
+            this.txtPhoneR.TabIndex = 110;
+            this.txtPhoneR.Tag = "";
+            // 
+            // txtPhoneO
+            // 
+            this.txtPhoneO.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPhoneO.Location = new System.Drawing.Point(83, 57);
+            this.txtPhoneO.Name = "txtPhoneO";
+            this.txtPhoneO.Size = new System.Drawing.Size(172, 20);
+            this.txtPhoneO.TabIndex = 109;
+            this.txtPhoneO.Tag = "";
+            // 
+            // txtMobile
+            // 
+            this.txtMobile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMobile.Location = new System.Drawing.Point(331, 35);
+            this.txtMobile.Name = "txtMobile";
+            this.txtMobile.Size = new System.Drawing.Size(172, 20);
+            this.txtMobile.TabIndex = 107;
+            this.txtMobile.Tag = "";
+            // 
+            // txtContactPerson
+            // 
+            this.txtContactPerson.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtContactPerson.Location = new System.Drawing.Point(83, 35);
+            this.txtContactPerson.Name = "txtContactPerson";
+            this.txtContactPerson.Size = new System.Drawing.Size(172, 20);
+            this.txtContactPerson.TabIndex = 106;
+            this.txtContactPerson.Tag = "";
+            // 
+            // txtShortName
+            // 
+            this.txtShortName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtShortName.Location = new System.Drawing.Point(579, 13);
+            this.txtShortName.Name = "txtShortName";
+            this.txtShortName.Size = new System.Drawing.Size(172, 20);
+            this.txtShortName.TabIndex = 103;
+            this.txtShortName.Tag = "";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(13, 79);
+            this.label13.Margin = new System.Windows.Forms.Padding(3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(50, 18);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Opening Bal";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(261, 13);
+            this.label16.Margin = new System.Windows.Forms.Padding(3);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(35, 13);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Name";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(13, 13);
+            this.label17.Margin = new System.Windows.Forms.Padding(3);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(32, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Code";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(13, 35);
+            this.label18.Margin = new System.Windows.Forms.Padding(3);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(47, 16);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "Contact Person";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(261, 35);
+            this.label19.Margin = new System.Windows.Forms.Padding(3);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(38, 13);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "Mobile";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(13, 57);
+            this.label20.Margin = new System.Windows.Forms.Padding(3);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(55, 13);
+            this.label20.TabIndex = 8;
+            this.label20.Text = "Phone (O)";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(261, 57);
+            this.label29.Margin = new System.Windows.Forms.Padding(3);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(55, 13);
+            this.label29.TabIndex = 9;
+            this.label29.Text = "Phone (R)";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(261, 79);
+            this.label30.Margin = new System.Windows.Forms.Padding(3);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(64, 13);
+            this.label30.TabIndex = 12;
+            this.label30.Text = "Credit/Debit";
+            // 
+            // txtCode
+            // 
+            this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCode.Enabled = false;
+            this.txtCode.Location = new System.Drawing.Point(83, 13);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.ReadOnly = true;
+            this.txtCode.Size = new System.Drawing.Size(172, 20);
+            this.txtCode.TabIndex = 101;
+            this.txtCode.Tag = "";
+            // 
+            // txtCustSupplierName
+            // 
+            this.txtCustSupplierName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCustSupplierName.Location = new System.Drawing.Point(331, 13);
+            this.txtCustSupplierName.Name = "txtCustSupplierName";
+            this.txtCustSupplierName.Size = new System.Drawing.Size(172, 20);
+            this.txtCustSupplierName.TabIndex = 0;
+            this.txtCustSupplierName.Tag = "";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(509, 13);
+            this.label31.Margin = new System.Windows.Forms.Padding(3);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(63, 13);
+            this.label31.TabIndex = 2;
+            this.label31.Text = "Short Name";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(509, 35);
+            this.label32.Margin = new System.Windows.Forms.Padding(3);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(45, 16);
+            this.label32.TabIndex = 10;
+            this.label32.Text = "Email Address";
+            // 
+            // txtEmailAddress
+            // 
+            this.txtEmailAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmailAddress.Location = new System.Drawing.Point(579, 35);
+            this.txtEmailAddress.Name = "txtEmailAddress";
+            this.txtEmailAddress.Size = new System.Drawing.Size(172, 20);
+            this.txtEmailAddress.TabIndex = 108;
+            this.txtEmailAddress.Tag = "";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(509, 57);
+            this.label33.Margin = new System.Windows.Forms.Padding(3);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(57, 13);
+            this.label33.TabIndex = 13;
+            this.label33.Text = "Tax/Retail";
+            // 
+            // cbxTaxRetail
+            // 
+            this.cbxTaxRetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxTaxRetail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxTaxRetail.FormattingEnabled = true;
+            this.cbxTaxRetail.Location = new System.Drawing.Point(579, 57);
+            this.cbxTaxRetail.Name = "cbxTaxRetail";
+            this.cbxTaxRetail.Size = new System.Drawing.Size(172, 21);
+            this.cbxTaxRetail.TabIndex = 111;
+            this.cbxTaxRetail.Tag = "";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(509, 79);
+            this.label34.Margin = new System.Windows.Forms.Padding(3);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(37, 13);
+            this.label34.TabIndex = 11;
+            this.label34.Text = "Status";
+            // 
+            // cbxStatus
+            // 
+            this.cbxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxStatus.FormattingEnabled = true;
+            this.cbxStatus.Location = new System.Drawing.Point(579, 79);
+            this.cbxStatus.Name = "cbxStatus";
+            this.cbxStatus.Size = new System.Drawing.Size(172, 21);
+            this.cbxStatus.TabIndex = 114;
+            this.cbxStatus.Tag = "";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(757, 13);
+            this.label35.Margin = new System.Windows.Forms.Padding(3);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(45, 13);
+            this.label35.TabIndex = 3;
+            this.label35.Text = "Address";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAddress.Location = new System.Drawing.Point(827, 13);
+            this.txtAddress.Name = "txtAddress";
+            this.tableLayoutPanel6.SetRowSpan(this.txtAddress, 3);
+            this.txtAddress.Size = new System.Drawing.Size(256, 60);
+            this.txtAddress.TabIndex = 104;
+            this.txtAddress.Tag = "";
+            this.txtAddress.Text = "";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(757, 79);
+            this.label36.Margin = new System.Windows.Forms.Padding(3);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(58, 13);
+            this.label36.TabIndex = 117;
+            this.label36.Text = "Telephone";
+            // 
+            // txtTelephone
+            // 
+            this.txtTelephone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTelephone.Location = new System.Drawing.Point(827, 79);
+            this.txtTelephone.Name = "txtTelephone";
+            this.txtTelephone.Size = new System.Drawing.Size(256, 20);
+            this.txtTelephone.TabIndex = 105;
+            this.txtTelephone.Tag = "";
             // 
             // frmCustomerLedgerMasterAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1131, 553);
-            this.Controls.Add(this.ucSupplierCustomerInfo);
+            this.Controls.Add(this.gbCustomerSupplierInfo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -840,6 +1201,9 @@
             this.groupBox3.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.gbCustomerSupplierInfo.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -901,12 +1265,41 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbxCredtLimit;
-        private ucSupplierCustomerInfo ucSupplierCustomerInfo;
         private System.Windows.Forms.TextBox tbxRoute;
         private System.Windows.Forms.TextBox tbxArea;
         private System.Windows.Forms.TextBox tbxSalesman;
         private System.Windows.Forms.TextBox tbxASM;
         private System.Windows.Forms.TextBox tbxRSM;
         private System.Windows.Forms.TextBox tbxZSM;
+        private System.Windows.Forms.GroupBox gbCustomerSupplierInfo;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.ComboBox cbxCreditDebit;
+        private System.Windows.Forms.TextBox txtOpeningBal;
+        private System.Windows.Forms.TextBox txtPhoneR;
+        private System.Windows.Forms.TextBox txtPhoneO;
+        private System.Windows.Forms.TextBox txtMobile;
+        private System.Windows.Forms.TextBox txtContactPerson;
+        private System.Windows.Forms.TextBox txtShortName;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.TextBox txtCustSupplierName;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox txtEmailAddress;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.ComboBox cbxTaxRetail;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox cbxStatus;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.RichTextBox txtAddress;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox txtTelephone;
     }
 }
