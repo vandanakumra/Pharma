@@ -77,6 +77,12 @@
             this.lblPExcise = new System.Windows.Forms.Label();
             this.lblSpecialDiscountReceived = new System.Windows.Forms.Label();
             this.lblPSurcharge = new System.Windows.Forms.Label();
+            this.lblPurchaseRateVal = new System.Windows.Forms.Label();
+            this.lblPExciseVal = new System.Windows.Forms.Label();
+            this.lblPVATVal = new System.Windows.Forms.Label();
+            this.lblPDiscountVal = new System.Windows.Forms.Label();
+            this.lblPSpecialDiscountVal = new System.Windows.Forms.Label();
+            this.lblPSurchargeVal = new System.Windows.Forms.Label();
             this.grpSaleDetails = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSurcharge = new System.Windows.Forms.Label();
@@ -96,12 +102,6 @@
             this.lblFixedDiscountVal = new System.Windows.Forms.Label();
             this.lblFixedDiscount = new System.Windows.Forms.Label();
             this.lblTotalUnits = new System.Windows.Forms.Label();
-            this.lblPSurchargeVal = new System.Windows.Forms.Label();
-            this.lblPSpecialDiscountVal = new System.Windows.Forms.Label();
-            this.lblPDiscountVal = new System.Windows.Forms.Label();
-            this.lblPVATVal = new System.Windows.Forms.Label();
-            this.lblPExciseVal = new System.Windows.Forms.Label();
-            this.lblPurchaseRateVal = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -715,6 +715,66 @@
             this.lblPSurcharge.TabIndex = 11;
             this.lblPSurcharge.Text = "Surcharge";
             // 
+            // lblPurchaseRateVal
+            // 
+            this.lblPurchaseRateVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPurchaseRateVal.AutoSize = true;
+            this.lblPurchaseRateVal.Location = new System.Drawing.Point(83, 3);
+            this.lblPurchaseRateVal.Name = "lblPurchaseRateVal";
+            this.lblPurchaseRateVal.Size = new System.Drawing.Size(0, 13);
+            this.lblPurchaseRateVal.TabIndex = 13;
+            this.lblPurchaseRateVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPExciseVal
+            // 
+            this.lblPExciseVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPExciseVal.AutoSize = true;
+            this.lblPExciseVal.Location = new System.Drawing.Point(83, 23);
+            this.lblPExciseVal.Name = "lblPExciseVal";
+            this.lblPExciseVal.Size = new System.Drawing.Size(0, 13);
+            this.lblPExciseVal.TabIndex = 14;
+            this.lblPExciseVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPVATVal
+            // 
+            this.lblPVATVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPVATVal.AutoSize = true;
+            this.lblPVATVal.Location = new System.Drawing.Point(83, 43);
+            this.lblPVATVal.Name = "lblPVATVal";
+            this.lblPVATVal.Size = new System.Drawing.Size(0, 13);
+            this.lblPVATVal.TabIndex = 15;
+            this.lblPVATVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPDiscountVal
+            // 
+            this.lblPDiscountVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPDiscountVal.AutoSize = true;
+            this.lblPDiscountVal.Location = new System.Drawing.Point(83, 63);
+            this.lblPDiscountVal.Name = "lblPDiscountVal";
+            this.lblPDiscountVal.Size = new System.Drawing.Size(0, 13);
+            this.lblPDiscountVal.TabIndex = 16;
+            this.lblPDiscountVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPSpecialDiscountVal
+            // 
+            this.lblPSpecialDiscountVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPSpecialDiscountVal.AutoSize = true;
+            this.lblPSpecialDiscountVal.Location = new System.Drawing.Point(83, 83);
+            this.lblPSpecialDiscountVal.Name = "lblPSpecialDiscountVal";
+            this.lblPSpecialDiscountVal.Size = new System.Drawing.Size(0, 13);
+            this.lblPSpecialDiscountVal.TabIndex = 17;
+            this.lblPSpecialDiscountVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPSurchargeVal
+            // 
+            this.lblPSurchargeVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPSurchargeVal.AutoSize = true;
+            this.lblPSurchargeVal.Location = new System.Drawing.Point(83, 105);
+            this.lblPSurchargeVal.Name = "lblPSurchargeVal";
+            this.lblPSurchargeVal.Size = new System.Drawing.Size(0, 13);
+            this.lblPSurchargeVal.TabIndex = 12;
+            this.lblPSurchargeVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // grpSaleDetails
             // 
             this.grpSaleDetails.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -939,66 +999,6 @@
             this.lblTotalUnits.Size = new System.Drawing.Size(58, 13);
             this.lblTotalUnits.TabIndex = 10;
             this.lblTotalUnits.Text = "Total Units";
-            // 
-            // lblPSurchargeVal
-            // 
-            this.lblPSurchargeVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPSurchargeVal.AutoSize = true;
-            this.lblPSurchargeVal.Location = new System.Drawing.Point(83, 105);
-            this.lblPSurchargeVal.Name = "lblPSurchargeVal";
-            this.lblPSurchargeVal.Size = new System.Drawing.Size(0, 13);
-            this.lblPSurchargeVal.TabIndex = 12;
-            this.lblPSurchargeVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblPSpecialDiscountVal
-            // 
-            this.lblPSpecialDiscountVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPSpecialDiscountVal.AutoSize = true;
-            this.lblPSpecialDiscountVal.Location = new System.Drawing.Point(83, 83);
-            this.lblPSpecialDiscountVal.Name = "lblPSpecialDiscountVal";
-            this.lblPSpecialDiscountVal.Size = new System.Drawing.Size(0, 13);
-            this.lblPSpecialDiscountVal.TabIndex = 17;
-            this.lblPSpecialDiscountVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblPDiscountVal
-            // 
-            this.lblPDiscountVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPDiscountVal.AutoSize = true;
-            this.lblPDiscountVal.Location = new System.Drawing.Point(83, 63);
-            this.lblPDiscountVal.Name = "lblPDiscountVal";
-            this.lblPDiscountVal.Size = new System.Drawing.Size(0, 13);
-            this.lblPDiscountVal.TabIndex = 16;
-            this.lblPDiscountVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblPVATVal
-            // 
-            this.lblPVATVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPVATVal.AutoSize = true;
-            this.lblPVATVal.Location = new System.Drawing.Point(83, 43);
-            this.lblPVATVal.Name = "lblPVATVal";
-            this.lblPVATVal.Size = new System.Drawing.Size(0, 13);
-            this.lblPVATVal.TabIndex = 15;
-            this.lblPVATVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblPExciseVal
-            // 
-            this.lblPExciseVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPExciseVal.AutoSize = true;
-            this.lblPExciseVal.Location = new System.Drawing.Point(83, 23);
-            this.lblPExciseVal.Name = "lblPExciseVal";
-            this.lblPExciseVal.Size = new System.Drawing.Size(0, 13);
-            this.lblPExciseVal.TabIndex = 14;
-            this.lblPExciseVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblPurchaseRateVal
-            // 
-            this.lblPurchaseRateVal.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPurchaseRateVal.AutoSize = true;
-            this.lblPurchaseRateVal.Location = new System.Drawing.Point(83, 3);
-            this.lblPurchaseRateVal.Name = "lblPurchaseRateVal";
-            this.lblPurchaseRateVal.Size = new System.Drawing.Size(0, 13);
-            this.lblPurchaseRateVal.TabIndex = 13;
-            this.lblPurchaseRateVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtSearch
             // 

@@ -52,7 +52,6 @@ namespace PharmaUI
                 allControls.ForEach(k => k.Visible = false);
 
                 this.WindowState = FormWindowState.Normal;
-                //  btnClose.Visible = true;
                 dgvAccountLedger.Visible = true;
                 ledgerType = ledgerTypeName;
                 isOpenAsDialog = isDialog;
@@ -222,18 +221,9 @@ namespace PharmaUI
 
         private void LoadDataGrid(int ledgerTypeID)
         {
-            dgvAccountLedger.DataSource = applicationFacade.GetAccountLedgerByLedgerTypeIdAndSearch (ledgerTypeID,txtSearch.Text);
+            dgvAccountLedger.DataSource = applicationFacade.GetAccountLedgerByLedgerTypeIdAndSearch(ledgerTypeID).OrderBy(p => p.AccountLedgerName).ToList();
+            ExtensionMethods.SetGridDefaultProperty(dgvAccountLedger);
 
-            for (int i = 0; i < dgvAccountLedger.Columns.Count; i++)
-            {
-                dgvAccountLedger.Columns[i].Visible = false;
-            }
-
-            dgvAccountLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvAccountLedger.AllowUserToAddRows = false;
-            dgvAccountLedger.AllowUserToDeleteRows = false;
-            dgvAccountLedger.ReadOnly = true;
-           
             dgvAccountLedger.Columns["AccountLedgerCode"].Visible = true;
             dgvAccountLedger.Columns["AccountLedgerCode"].HeaderText = "Account No";
            
@@ -255,7 +245,9 @@ namespace PharmaUI
             dgvAccountLedger.Columns["CreditControlCode"].Visible = true;
             dgvAccountLedger.Columns["CreditControlCode"].HeaderText = "Credit";
 
-            dgvAccountLedger.Columns["Status"].Visible = true;            
+            dgvAccountLedger.Columns["Status"].Visible = true;
+
+            txtSearch_TextChanged(null,null);
         }
 
 
@@ -304,7 +296,7 @@ namespace PharmaUI
         {
             try
             {
-                LoadDataGrid((int)cbLedgerType.SelectedValue);
+                ExtensionMethods.GridSelectionOnSearch(dgvAccountLedger, "AccountLedgerName",txtSearch.Text);
             }
             catch (Exception ex)
             {

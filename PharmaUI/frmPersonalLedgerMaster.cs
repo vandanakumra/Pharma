@@ -42,7 +42,7 @@ namespace PharmaUI
                 GotFocusEventRaised(this);
                 ExtensionMethods.EnterKeyDownForTabEvents(this);
 
-                FillGrid();
+                LoadDataGrid();
                 dgvPersonalLedger.CellDoubleClick += dgvPersonalLedger_CellDoubleClick;
                 dgvPersonalLedger.KeyDown += DgvPersonalLedger_KeyDown;
             }
@@ -62,7 +62,7 @@ namespace PharmaUI
                     {
                         //PersonalLedgerMaster itemToBeRemoved = (PersonalLedgerMaster)dgvPersonalLedger.SelectedRows[0].DataBoundItem;
                         //applicationFacade.DeletePersonalLedger(itemToBeRemoved);
-                        //FillGrid();
+                        //LoadDataGrid();
                     }
                 }
                 else if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
@@ -80,19 +80,10 @@ namespace PharmaUI
            
         }
 
-        private void FillGrid()
+        private void LoadDataGrid()
         {
-            dgvPersonalLedger.DataSource = applicationFacade.GetPersonalLedgers(txtSearch.Text);
-
-            for (int i = 0; i < dgvPersonalLedger.Columns.Count; i++)
-            {
-                dgvPersonalLedger.Columns[i].Visible = false;
-            }
-
-            dgvPersonalLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPersonalLedger.AllowUserToAddRows = false;
-            dgvPersonalLedger.AllowUserToDeleteRows = false;
-            dgvPersonalLedger.ReadOnly = true;
+            dgvPersonalLedger.DataSource = applicationFacade.GetPersonalLedgers(null).OrderBy(s=>s.PersonalLedgerName).ToList();
+            ExtensionMethods.SetGridDefaultProperty(dgvPersonalLedger);
 
             dgvPersonalLedger.Columns["PersonalLedgerCode"].Visible = true;
             dgvPersonalLedger.Columns["PersonalLedgerCode"].HeaderText = "Account No";            
@@ -108,8 +99,8 @@ namespace PharmaUI
             
             dgvPersonalLedger.Columns["EmailAddress"].Visible = true;
             dgvPersonalLedger.Columns["EmailAddress"].HeaderText = "Email";
-            
-                     
+
+            txtSearch_TextChanged(null, null);
         }
 
       
@@ -133,7 +124,7 @@ namespace PharmaUI
             try
             {
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                FillGrid();
+                LoadDataGrid();
             }
             catch (Exception ex)
             {
@@ -195,7 +186,7 @@ namespace PharmaUI
         {
             try
             {
-                FillGrid();
+                ExtensionMethods.GridSelectionOnSearch(dgvPersonalLedger, "PersonalLedgerName",txtSearch.Text);
             }
             catch (Exception ex)
             {

@@ -90,18 +90,8 @@ namespace PharmaUI
 
         private void LoadDataGrid()
         {
-            dgvCustomerLedger.DataSource = applicationFacade.GetCustomerLedgers(txtSearch.Text);
-
-            for (int i = 0; i < dgvCustomerLedger.Columns.Count; i++)
-            {
-                dgvCustomerLedger.Columns[i].Visible = false;
-            }
-
-            dgvCustomerLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvCustomerLedger.AllowUserToAddRows = false;
-            dgvCustomerLedger.AllowUserToDeleteRows = false;
-            dgvCustomerLedger.ReadOnly = true;
-
+            dgvCustomerLedger.DataSource = applicationFacade.GetCustomerLedgers().OrderBy(s=>s.CustomerLedgerName).ToList();
+            ExtensionMethods.SetGridDefaultProperty(dgvCustomerLedger);
 
             dgvCustomerLedger.Columns["CustomerLedgerCode"].Visible = true;
             dgvCustomerLedger.Columns["CustomerLedgerCode"].HeaderText = "Ledger Code";
@@ -133,6 +123,8 @@ namespace PharmaUI
             //Change order
             dgvCustomerLedger.Columns["Status"].DisplayIndex = dgvCustomerLedger.ColumnCount - 1;
 
+            txtSearch_TextChanged(null, null);
+
         }
 
         //Search Functionality
@@ -141,7 +133,7 @@ namespace PharmaUI
         {
             try
             {
-                LoadDataGrid();
+                ExtensionMethods.GridSelectionOnSearch(dgvCustomerLedger, "CustomerLedgerName", txtSearch.Text);
             }
             catch (Exception ex)
             {

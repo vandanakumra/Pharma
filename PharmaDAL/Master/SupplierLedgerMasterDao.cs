@@ -20,7 +20,7 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.SupplierLedger.Where(p=>p.SupplierLedgerName.Contains(searchText)).Select(p => new PharmaBusinessObjects.Master.SupplierLedgerMaster()
+                return context.SupplierLedger.Where(p => (string.IsNullOrEmpty(searchText) || p.SupplierLedgerName.Contains(searchText))).Select(p => new PharmaBusinessObjects.Master.SupplierLedgerMaster()
                 {
                     SupplierLedgerId = p.SupplierLedgerId,
                     SupplierLedgerCode = p.SupplierLedgerCode,
