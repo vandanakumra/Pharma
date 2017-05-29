@@ -52,17 +52,8 @@ namespace PharmaUI
 
         private void LoadDataGrid()
         {
-            dgvCompanyList.DataSource = applicationFacade.GetCompanies(txtSearch.Text);
-
-            for (int i = 0; i < dgvCompanyList.Columns.Count; i++)
-            {
-                dgvCompanyList.Columns[i].Visible = false;
-            }
-
-            dgvCompanyList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvCompanyList.AllowUserToAddRows = false;
-            dgvCompanyList.AllowUserToDeleteRows = false;
-            dgvCompanyList.ReadOnly = true;
+            dgvCompanyList.DataSource = applicationFacade.GetCompanies(null).OrderBy(s=>s.CompanyName).ToList();
+            ExtensionMethods.SetGridDefaultProperty(dgvCompanyList);
 
             dgvCompanyList.Columns["CompanyCode"].Visible = true;
             dgvCompanyList.Columns["CompanyCode"].HeaderText = "Company Code";
@@ -84,6 +75,8 @@ namespace PharmaUI
 
             dgvCompanyList.Columns["Status"].Visible = true;
             dgvCompanyList.Columns["Status"].HeaderText = "Status";
+
+            txtSearch_TextChanged(null, null);
         }
 
         private void DgvCompanyList_KeyDown(object sender, KeyEventArgs e)
@@ -193,7 +186,7 @@ namespace PharmaUI
         {
             try
             {
-                LoadDataGrid();
+                ExtensionMethods.GridSelectionOnSearch(dgvCompanyList, "CompanyName",txtSearch.Text);
                 if (dgvCompanyList.Rows.Count == 0)
                 {
                     if (DialogResult.Yes == MessageBox.Show(Constants.Messages.NotExists, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))

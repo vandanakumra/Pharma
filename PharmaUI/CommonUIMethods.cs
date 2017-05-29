@@ -457,5 +457,54 @@ namespace PharmaUI
 
         }
 
+
+        public static void GridSelectionOnSearch(DataGridView dgv,string searchColumnName,string searchString)
+        {
+            bool flag = true;
+
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                int rowIndex = row.Index;
+                dgv.Rows[rowIndex].DefaultCellStyle = new DataGridViewCellStyle { ForeColor = Color.Black, BackColor = Color.White };
+            }
+
+            if (string.IsNullOrEmpty(searchString))
+                return;
+
+            int rowIndex1 = 0;
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (row.Cells[searchColumnName].Value.ToString().ToLower().Contains(searchString.ToLower()))
+                {
+                    int row2 = row.Index;
+                    if (flag)
+                    {
+                        rowIndex1 = row.Index;
+                        dgv.ClearSelection();
+                        flag = false;
+                    }
+                    dgv.Rows[row2].DefaultCellStyle = new DataGridViewCellStyle { ForeColor = Color.Green, BackColor = Color.AliceBlue };
+                }
+            }
+            dgv.Rows[rowIndex1].Selected = true;
+            dgv.FirstDisplayedScrollingRowIndex = rowIndex1;
+            dgv.Rows[rowIndex1].Selected = true;
+            dgv.Rows[rowIndex1].Cells[searchColumnName].Selected = true;
+        }
+
+        public static void SetGridDefaultProperty(DataGridView dgv)
+        {
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.ReadOnly = true;
+            dgv.DefaultCellStyle.SelectionBackColor = Color.Pink;
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                dgv.Columns[i].Visible = false;
+            }
+        }
     }
 }

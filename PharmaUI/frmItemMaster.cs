@@ -43,7 +43,7 @@ namespace PharmaUI
             {
                 ExtensionMethods.FormLoad(this, "Item Master");
                 GotFocusEventRaised(this);
-               // ExtensionMethods.EnterKeyDownForTabEvents(this);
+                ExtensionMethods.EnterKeyDownForTabEvents(this);
 
                 LoadDataGrid();
 
@@ -55,23 +55,10 @@ namespace PharmaUI
                     dgvItemList.CurrentCell = dgvItemList.Rows[0].Cells[2];
                 else
                     txtSearch.Focus();
-
-
-                txtSearch.KeyDown += TxtSearch_KeyDown;
-                //rdName.Checked = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void TxtSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyData == Keys.Enter || e.KeyData == Keys.Tab )
-            {
-                dgvItemList.Focus();
-                dgvItemList.Rows[dgvItemList.SelectedRows[0].Index].Selected = true;
             }
         }
 
@@ -189,27 +176,10 @@ namespace PharmaUI
 
         private void LoadDataGrid()
         {
-            string searchBy = "Name";
+            string searchBy = "Name";            
+            dgvItemList.DataSource = applicationFacade.GetAllItemsBySearch(null, searchBy).OrderBy(p=>p.ItemName).ToList();
+            ExtensionMethods.SetGridDefaultProperty(dgvItemList);
 
-            if(string.IsNullOrEmpty(txtSearch.Text))
-            {
-               // searchBy = rdCode.Checked ? "Code" : rdMRP.Checked ? "MRP" : rdPack.Checked ? "Pack" : rdLocation.Checked ? "Location" : rdBarCode.Checked ? "BarCode" : string.Empty;
-
-            }
-
-            dgvItemList.DataSource = applicationFacade.GetAllItemsBySearch(txtSearch.Text, searchBy).OrderBy(p=>p.ItemName).ToList();
-
-            for (int i = 0; i < dgvItemList.Columns.Count; i++)
-            {
-                dgvItemList.Columns[i].Visible = false;
-            }
-
-            dgvItemList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvItemList.AllowUserToAddRows = false;
-            dgvItemList.AllowUserToDeleteRows = false;
-            dgvItemList.ReadOnly = true;
-
-            
             dgvItemList.Columns["ItemName"].Visible = true;
             dgvItemList.Columns["ItemName"].HeaderText = "Item";
 
@@ -221,6 +191,8 @@ namespace PharmaUI
 
             dgvItemList.Columns["QtyPerCase"].Visible = true;
             dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
+
+            txtSearch_TextChanged(null, null);
         }
 
         private void DgvItemList_KeyDown(object sender, KeyEventArgs e)
@@ -248,45 +220,7 @@ namespace PharmaUI
         {
             try
             {
-                bool flag = true;
-
-                foreach (DataGridViewRow row in dgvItemList.Rows)
-                {
-                    int rowIndex = row.Index;
-
-                    dgvItemList.Rows[rowIndex].Cells["ItemName"].Style = new DataGridViewCellStyle { ForeColor = Color.Black,BackColor = Color.White };
-                }
-
-                if (string.IsNullOrEmpty(txtSearch.Text))
-                    return;
-
-                int rowIndex1 = 0;
-
-                foreach (DataGridViewRow row in dgvItemList.Rows)
-                {
-                    if (row.Cells["ItemName"].Value.ToString().ToLower().StartsWith(txtSearch.Text.ToLower()))
-                    {
-                        int row2 = row.Index;
-                        if (flag)
-                        {
-                            rowIndex1= row.Index;
-
-                            dgvItemList.ClearSelection();
-                                                       
-                            flag = false;
-                        }
-                        // dgvItemList.Focus();
-                        dgvItemList.Rows[row2].Cells["ItemName"].Style = new DataGridViewCellStyle { ForeColor = Color.White, BackColor = Color.Blue };
-                    }
-                }
-
-
-                dgvItemList.Rows[rowIndex1].Selected = true;
-                
-                dgvItemList.FirstDisplayedScrollingRowIndex = rowIndex1;
-
-
-                // LoadDataGrid();
+                ExtensionMethods.GridSelectionOnSearch(dgvItemList,"ItemName",txtSearch.Text);
             }
             catch (Exception ex)
             {

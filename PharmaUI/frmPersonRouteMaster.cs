@@ -121,17 +121,8 @@ namespace PharmaUI
 
         private void LoadDataGrid(int recordTypeId)
         {
-            dgvPersonRoute.DataSource = applicationFacade.GetPersonRoutesByRecordTypeIdAndSearch(recordTypeId, txtSearch.Text);
-
-            for (int i = 0; i < dgvPersonRoute.Columns.Count; i++)
-            {
-                dgvPersonRoute.Columns[i].Visible = false;
-            }
-
-            dgvPersonRoute.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPersonRoute.AllowUserToAddRows = false;
-            dgvPersonRoute.AllowUserToDeleteRows = false;
-            dgvPersonRoute.ReadOnly = true;
+            dgvPersonRoute.DataSource = applicationFacade.GetPersonRoutesByRecordTypeIdAndSearch(recordTypeId).OrderBy(s=>s.PersonRouteName).ToList();
+            ExtensionMethods.SetGridDefaultProperty(dgvPersonRoute);
 
             dgvPersonRoute.Columns["PersonRouteCode"].Visible = true;
             dgvPersonRoute.Columns["PersonRouteCode"].HeaderText = "Account No";
@@ -143,8 +134,8 @@ namespace PharmaUI
             dgvPersonRoute.Columns["PersonRouteName"].HeaderText = "Person/Route Name";
 
             dgvPersonRoute.Columns["Status"].Visible = true;
-           
 
+            txtSearch_TextChanged(null, null);
         }
 
         private void frmPersonRouteMasterAddUpdate_FormClosed(object sender, FormClosedEventArgs e)
@@ -269,7 +260,7 @@ namespace PharmaUI
 
             try
             {
-                LoadDataGrid((int)cbPersonRouteType.SelectedValue);
+                ExtensionMethods.GridSelectionOnSearch(dgvPersonRoute, "PersonRouteName",txtSearch.Text);
             }
             catch (Exception ex)
             {

@@ -141,18 +141,8 @@ namespace PharmaUI
 
         private void LoadDataGrid()
         {
-            dgvSupplier.DataSource = applicationFacade.GetSupplierLedgers(txtSearch.Text);
-
-            for (int i = 0; i < dgvSupplier.Columns.Count; i++)
-            {
-                dgvSupplier.Columns[i].Visible = false;
-            }
-
-            dgvSupplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvSupplier.AllowUserToAddRows = false;
-            dgvSupplier.AllowUserToDeleteRows = false;
-            dgvSupplier.ReadOnly = true;
-          
+            dgvSupplier.DataSource = applicationFacade.GetSupplierLedgers(null).OrderBy(s=>s.SupplierLedgerName).ToList();
+            ExtensionMethods.SetGridDefaultProperty(dgvSupplier);
 
             dgvSupplier.Columns["SupplierLedgerCode"].Visible = true;
             dgvSupplier.Columns["SupplierLedgerCode"].HeaderText = "Supplier Code";
@@ -163,7 +153,6 @@ namespace PharmaUI
             dgvSupplier.Columns["SupplierLedgerName"].FillWeight = 1.5F;
 
             dgvSupplier.Columns["Status"].Visible = false;
-            //dgvCompanyList.Columns["Status"].HeaderText = "Company Code";
 
             dgvSupplier.Columns["SupplierLedgerShortName"].Visible = true;
             dgvSupplier.Columns["SupplierLedgerShortName"].HeaderText = "Supplier Short Name";
@@ -184,7 +173,8 @@ namespace PharmaUI
             dgvSupplier.Columns["OfficePhone"].Visible = true;
             dgvSupplier.Columns["OfficePhone"].HeaderText = "Office Phone";
             dgvSupplier.Columns["OfficePhone"].FillWeight = 1.5F;
-            //dgvAccountLedger.Columns["AccountLedgerCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       
+
+            txtSearch_TextChanged(null, null);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -256,7 +246,7 @@ namespace PharmaUI
         {
             try
             {
-                LoadDataGrid();
+                ExtensionMethods.GridSelectionOnSearch(dgvSupplier, "SupplierLedgerName", txtSearch.Text);
             }
             catch (Exception ex)
             {
