@@ -973,21 +973,21 @@ namespace PharmaUI
 
                     if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentCell.Value)) || columnName == "SrNo")
                     {
+                        e.Handled = true;
                         double val = 0L;
                         double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out val);
 
                         if ((columnName != "Quantity" && columnName != "Rate") || (val != 0 && (columnName == "Quantity" || columnName == "Rate")))
                         {
                             int colIndex = dgvLineItem.CurrentCell.ColumnIndex + 1;
+                            int rowIndex = dgvLineItem.CurrentCell.RowIndex;
 
                             if (colIndex <= 8)
                             {
-                                dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.CurrentCell.RowIndex].Cells[colIndex];
+                                dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells[colIndex];
                             }
                             else
                             {
-                                int rowIndex = dgvLineItem.CurrentCell.RowIndex;
-
                                 if (rowIndex == dgvLineItem.Rows.Count - 1)
                                 {
                                     dgvLineItem.Rows.Add();
