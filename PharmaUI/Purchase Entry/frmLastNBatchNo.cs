@@ -76,6 +76,7 @@ namespace PharmaUI
             dgvLastBatch.ReadOnly = true;
             dgvLastBatch.KeyDown += DgvLastBatch_KeyDown;
 
+
             if (list.Count == 0)
             {
                 this.Close();

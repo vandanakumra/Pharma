@@ -46,7 +46,7 @@ namespace PharmaUI
                 ExtensionMethods.FormLoad(this, "Purchase Book Transaction");
                 ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
-                ExtensionMethods.EnterKeyDownForTabEvents(this);
+                EnterKeyDownForTabEvents(this);
                 FillCombo();
                 InitializeGrid();
                 dtPurchaseDate.Focus();
@@ -212,6 +212,18 @@ namespace PharmaUI
                         e.Handled = true;
                     }
                 }
+                if(!string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
+                {
+                    dgvLineItem.EndEdit();
+                    e.Handled = true;
+                }
+                if (string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
+                {
+                    e.Handled = true;
+                    int rowIndex = dgvLineItem.CurrentCell.RowIndex;
+                    int colIndex = dgvLineItem.CurrentCell.ColumnIndex;
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex + 1];
+                }
             }
             catch (Exception ex)
             {
@@ -245,7 +257,18 @@ namespace PharmaUI
                         lineItem.Amount = amount;
                     }
 
-                    applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+                    double value = 0L;
+                    double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out value);
+
+                    if (value == 0 && (columnName == "Quantity" || columnName == "Rate"))
+                    {
+                        dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
+                        dgvLineItem.BeginEdit(true);
+                    }
+                    else
+                    {
+                        applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+                    }
                 }
 
                 if (columnName == "FreeQty")
@@ -277,10 +300,10 @@ namespace PharmaUI
                     
                 }
 
-                    if (e.RowIndex == 0 && dgvLineItem.Rows.Count == (e.RowIndex + 1))
-                    {
-                        dgvLineItem.Rows.Add();
-                    }
+                    //if (e.RowIndex == 0 && dgvLineItem.Rows.Count == (e.RowIndex + 1))
+                    //{
+                    //    dgvLineItem.Rows.Add();
+                    //}
                 }
 
 
@@ -303,21 +326,7 @@ namespace PharmaUI
                     dgvLineItem.CancelEdit();
                 }
 
-                string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
-
-                if (columnName == "BatchNumber")
-                {
-                    var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
-
-                    if (list != null && list.Count > 0)
-                    {
-                        frmLastNBatchNo batch = new frmLastNBatchNo(list);
-                        //batch.SupplierCode = txtSupplierCode.Text;
-                        //batch.ItemCode = Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value);
-                        batch.FormClosed += Batch_FormClosed;
-                        batch.ShowDialog();
-                    }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -334,6 +343,7 @@ namespace PharmaUI
                 if (dgvLineItem.SelectedCells.Count > 0 && !string.IsNullOrEmpty(batch.BatchNumber))
                 {
                     dgvLineItem.CurrentRow.Cells[dgvLineItem.SelectedCells[0].ColumnIndex].Value = batch.BatchNumber;
+                    dgvLineItem.Focus();
                     dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Quantity"];
                   //  dgvLineItem.BeginEdit(false);
                 }
@@ -416,7 +426,13 @@ namespace PharmaUI
                         tb1.TextChanged += Tb1_TextChanged;
                         tb1.Leave += Tb1_Leave;
                     }
-
+                    else if (c is MaskedTextBox)
+                    {
+                        MaskedTextBox tb1 = (MaskedTextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                        tb1.TextChanged += Tb1_TextChanged;
+                        tb1.Leave += Tb1_Leave;
+                    }
                     else if (c is ComboBox)
                     {
                         ComboBox tb1 = (ComboBox)c;
@@ -476,19 +492,25 @@ namespace PharmaUI
                             break;
                         case "dtPurchaseDate":
                             {
-                                DateTimePicker dtPicker = (DateTimePicker)sender;
-                                if (string.IsNullOrWhiteSpace(dtPicker.Text))
+                                MaskedTextBox dtPicker = (MaskedTextBox)sender;
+
+                                if (string.IsNullOrWhiteSpace(dtPicker.Text) || dtPicker.Text == "  /  /")
                                 {
                                     errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.RequiredField);
                                     dtPurchaseDate.Focus();
                                 }
-                                else if (dtPicker.Value.Date > DateTime.Today || dtPicker.Value < DateTime.Today)
+                                else
                                 {
-                                    DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dtPicker.Value > DateTime.Today ? "ahead of" : "less than"));
+                                    DateTime dt = new DateTime();
+                                    DateTime.TryParse(dtPicker.Text, out dt);
+                                    if (dt > DateTime.Today || dt < DateTime.Today)
+                                    {
+                                        DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
 
-                                    if (result == DialogResult.No)
-                                        dtPicker.Value = DateTime.Now;
+                                        if (result == DialogResult.No)
+                                            dtPicker.Text = DateTime.Now.ToShortDateString();
 
+                                    }
                                 }
                             }
                             break;
@@ -544,7 +566,9 @@ namespace PharmaUI
 
         private bool GetPurchaseBookHeader(ref PurchaseBookHeader header)
         {
-            if (dtPurchaseDate.Value.Date == DateTime.MinValue)
+            DateTime purchaseDate = new DateTime();
+            DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+            if (purchaseDate == DateTime.MinValue)
             {
                 errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.RequiredField);
                 dtPurchaseDate.Focus();
@@ -568,7 +592,8 @@ namespace PharmaUI
 
             header = new PurchaseBookHeader();
             header.InvoiceID = invoiceID;
-            header.PurchaseDate = dtPurchaseDate.Value.Date;
+            
+            header.PurchaseDate = purchaseDate;
             header.InvoiceNumber = txtInvoiceNumber.Text;
             header.SupplierCode = txtSupplierCode.Text;
 
@@ -582,53 +607,7 @@ namespace PharmaUI
         {
             try
             {
-                //Add
-                if (keyData == (Keys.F9))
-                {
-                    if (invoiceID != 0)
-                    {
-                        int srNo = lineItemList.Max(p => p.SrNo);
-
-                        lineItemList.Add(new PurchaseBookLineItem { InvoiceID = invoiceID, SrNo = srNo + 1 });
-
-                        dgvLineItem.Rows.Add(lineItemList);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please add header information first");
-                    }
-                }
-                else if (keyData == (Keys.F3))
-                {
-                    if (dgvLineItem.SelectedCells.Count > 0)
-                    {
-                        dgvLineItem.BeginEdit(true);
-                    }
-                }
-                else if (keyData == Keys.F1)
-                {
-                    switch (this.ActiveControl.Name)
-                    {
-                        case "txtSupplierCode":
-                            {
-                                frmSupplierLedger ledger = new frmSupplierLedger(true);
-                                //Set Child UI
-                                ExtensionMethods.AddChildFormToPanel(this, ledger, ExtensionMethods.MainPanel);
-                                ledger.WindowState = FormWindowState.Maximized;
-
-                                ledger.FormClosed += Ledger_FormClosed;
-                                ledger.Show();
-                            }
-                            break;
-                        case "dgvLineItem":
-                            {
-
-                            }
-                            break;
-
-                    }
-                }
-                else if (keyData == Keys.End)
+                if (keyData == Keys.End)
                 {
                     if (invoiceID > 0 && dgvLineItem.Rows.Count > 0)
                     {
@@ -763,7 +742,9 @@ namespace PharmaUI
                         dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value = lineItem.SaleRate;
                         dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
                         dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;
-                        dgvLineItem.Rows[rowIndex].Cells["PurchaseDate"].Value = dtPurchaseDate.Value;
+                        DateTime purchaseDate = new DateTime();
+                        DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+                        dgvLineItem.Rows[rowIndex].Cells["PurchaseDate"].Value = purchaseDate;
                         dgvLineItem.Rows[rowIndex].Cells["PurchaseTaxType"].Value = lineItem.PurchaseTaxType;
                         dgvLineItem.Rows[rowIndex].Cells["TaxOnPurchase"].Value = lineItem.TaxOnPurchase;
                     }
@@ -774,8 +755,9 @@ namespace PharmaUI
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
                 if (rowIndex != -1 && colIndex != -1)
                 {
+                    dgvLineItem.Focus();
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["BatchNumber"];
-                    dgvLineItem.BeginEdit(false);
+                    //dgvLineItem.BeginEdit(false);
 
                 }
 
@@ -957,7 +939,10 @@ namespace PharmaUI
                 
                 //TODO:Is New Rate
                 item.IsNewRate = false;
-                item.PurchaseDate = dtPurchaseDate.Value;
+
+                DateTime purchaseDate = new DateTime();
+                DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+                item.PurchaseDate = purchaseDate;
                 item.PurchaseTaxType = Convert.ToString(row.Cells["PurchaseTaxType"].Value);
 
                 double.TryParse(Convert.ToString(row.Cells["TaxOnPurchase"].Value), out dValue);
@@ -980,24 +965,81 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyData == Keys.F1)
+                // e.SuppressKeyPress = true;
+
+                if (e.KeyData == Keys.Enter)
                 {
-                    if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "ItemCode")
+                    string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
+
+                    if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentCell.Value)) || columnName == "SrNo")
                     {
+                        double val = 0L;
+                        double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out val);
 
-                        frmItemMaster itemMaster = new frmItemMaster(true);
-                        //Set Child UI
-                        ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
-                        itemMaster.WindowState = FormWindowState.Maximized;
+                        if ((columnName != "Quantity" && columnName != "Rate") || (val != 0 && (columnName == "Quantity" || columnName == "Rate")))
+                        {
+                            int colIndex = dgvLineItem.CurrentCell.ColumnIndex + 1;
 
-                        itemMaster.FormClosed += ItemMaster_FormClosed; ;
-                        itemMaster.Show();
+                            if (colIndex <= 8)
+                            {
+                                dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.CurrentCell.RowIndex].Cells[colIndex];
+                            }
+                            else
+                            {
+                                int rowIndex = dgvLineItem.CurrentCell.RowIndex;
+
+                                if (rowIndex == dgvLineItem.Rows.Count - 1)
+                                {
+                                    dgvLineItem.Rows.Add();
+                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells[1];
+                                }
+                                else
+                                {
+                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells[1];
+                                }
+                            }
+
+                        }
+                        else {
+                            dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
+                        }
+                    }
+                    else
+                    {
+                       
+
+                        if (columnName == "ItemCode")
+                        {
+                            e.SuppressKeyPress = true;
+                            frmItemMaster itemMaster = new frmItemMaster(true);
+                            //Set Child UI
+                            ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
+                            itemMaster.WindowState = FormWindowState.Maximized;
+
+                            itemMaster.FormClosed += ItemMaster_FormClosed; ;
+                            itemMaster.Show();
+                        }
+                        else if (columnName == "BatchNumber")
+                        {
+                            e.SuppressKeyPress = true;
+                            var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
+
+                                if (list != null && list.Count > 0)
+                                {
+                                    frmLastNBatchNo batch = new frmLastNBatchNo(list);
+                                    //batch.SupplierCode = txtSupplierCode.Text;
+                                    //batch.ItemCode = Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value);
+                                    batch.FormClosed += Batch_FormClosed;
+                                    batch.ShowDialog();
+                                }
+                            
+                        }
                     }
                 }
-                else if ((e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter) && dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "Rate")
-                {
-                    dgvLineItem.Rows.Add();
-                }
+                //else if ((e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter) && dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "Rate")
+                //{
+                //    dgvLineItem.Rows.Add();
+                //}
             }
             catch (Exception ex)
             {
@@ -1023,6 +1065,75 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message);
             }
             
+        }
+
+        private void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox txt = (TextBox)sender;
+
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (!string.IsNullOrEmpty(txt.Text))
+                    {
+                        this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                    }
+                    else
+                    {
+                        if (txt.Name == "txtSupplierCode")
+                        {
+                            frmSupplierLedger ledger = new frmSupplierLedger(true);
+                            //Set Child UI
+
+
+
+
+                            ExtensionMethods.AddChildFormToPanel(this, ledger, ExtensionMethods.MainPanel);
+                            ledger.WindowState = FormWindowState.Maximized;
+
+                            ledger.FormClosed += Ledger_FormClosed;
+                            ledger.Show();
+
+                        }
+                    }
+                }
+            }
+
+            else if (sender is MaskedTextBox)
+            {
+                MaskedTextBox txt = (MaskedTextBox)sender;
+
+                if (e.KeyCode == Keys.Enter && txt.Text != "  /  /")
+                {
+                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                }
+            }
+            else if (sender is ComboBox)
+            {
+                ComboBox box = (ComboBox)sender;
+
+                if (e.KeyCode == Keys.Enter)
+                {
+                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                }
+            }
         }
     }
 }

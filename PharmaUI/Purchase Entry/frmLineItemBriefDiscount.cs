@@ -33,7 +33,7 @@ namespace PharmaUI
             ExtensionMethods.FormLoad(this, string.Format("Item {0} {1}", purchaseBookLineItem.ItemCode, purchaseBookLineItem.ItemName));
 
             GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            EnterKeyDownForTabEvents(this);
             FillFormForUpdate();
 
             txtDiscount.Focus();
@@ -82,15 +82,15 @@ namespace PharmaUI
             return;
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Escape || keyData == Keys.End)
-            {
-                this.Close();
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (keyData == Keys.Escape || keyData == Keys.End)
+        //    {
+        //        this.Close();
 
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
+        //    }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
 
         private void frmPurchaseBookLineItemUpdate_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -112,5 +112,38 @@ namespace PharmaUI
 
             purchaseBookLineItem.Expiry = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
         }
+
+        private void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Control ctl = sender as Control;
+                if (ctl.Name == "dtExpiry")
+                {
+                    this.Close();
+                }
+                else
+                {
+                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                }
+            }
+        }
+
     }
 }

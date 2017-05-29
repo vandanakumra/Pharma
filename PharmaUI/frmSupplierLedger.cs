@@ -50,6 +50,7 @@ namespace PharmaUI
 
                 if(isOpenAsChild && dgvSupplier.Rows.Count > 0)
                 {
+                    dgvSupplier.Focus();
                     dgvSupplier.CurrentCell = dgvSupplier.Rows[0].Cells[1];
                 }
 
@@ -65,13 +66,16 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyCode == Keys.End && isOpenAsChild)
-                {
-                    this.Close();
-                }
                 if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
                 {
-                    e.SuppressKeyPress = true;
+                    if (isOpenAsChild && dgvSupplier.SelectedCells.Count > 0)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        e.SuppressKeyPress = true;
+                    }
                 }
                 else
                     base.OnKeyDown(e);
@@ -199,10 +203,10 @@ namespace PharmaUI
             {
                 EditLedger();
             }
-            else if (keyData == Keys.Escape || keyData == Keys.End)
-            {
-                this.Close();
-            }
+            //else if (keyData == Keys.Escape || keyData == Keys.End)
+            //{
+            //    this.Close();
+            //}
 
             return base.ProcessCmdKey(ref msg, keyData);
         }

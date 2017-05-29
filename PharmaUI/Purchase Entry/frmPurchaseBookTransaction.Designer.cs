@@ -34,7 +34,6 @@
             this.txtInvoiceNumber = new System.Windows.Forms.TextBox();
             this.lblPurchaseDate = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtPurchaseDate = new System.Windows.Forms.DateTimePicker();
             this.txtSupplierCode = new System.Windows.Forms.TextBox();
             this.dgvLineItem = new System.Windows.Forms.DataGridView();
             this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
@@ -42,6 +41,7 @@
             this.errFrmPurchaseBookHeader = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblSupplierName = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.dtPurchaseDate = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errFrmPurchaseBookHeader)).BeginInit();
             this.SuspendLayout();
@@ -89,14 +89,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Supplier";
             // 
-            // dtPurchaseDate
-            // 
-            this.dtPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtPurchaseDate.Location = new System.Drawing.Point(97, 57);
-            this.dtPurchaseDate.Name = "dtPurchaseDate";
-            this.dtPurchaseDate.Size = new System.Drawing.Size(146, 20);
-            this.dtPurchaseDate.TabIndex = 3;
-            // 
             // txtSupplierCode
             // 
             this.txtSupplierCode.Location = new System.Drawing.Point(373, 57);
@@ -111,6 +103,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLineItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLineItem.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dgvLineItem.Location = new System.Drawing.Point(6, 115);
             this.dgvLineItem.Name = "dgvLineItem";
             this.dgvLineItem.Size = new System.Drawing.Size(900, 199);
@@ -161,18 +154,27 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // dtPurchaseDate
+            // 
+            this.dtPurchaseDate.Location = new System.Drawing.Point(98, 57);
+            this.dtPurchaseDate.Mask = "00/00/0000";
+            this.dtPurchaseDate.Name = "dtPurchaseDate";
+            this.dtPurchaseDate.Size = new System.Drawing.Size(100, 20);
+            this.dtPurchaseDate.TabIndex = 3;
+            this.dtPurchaseDate.ValidatingType = typeof(System.DateTime);
+            // 
             // frmPurchaseBookTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(910, 326);
             this.ControlBox = false;
+            this.Controls.Add(this.dtPurchaseDate);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblSupplierName);
             this.Controls.Add(this.lblPurchaseType);
             this.Controls.Add(this.dgvLineItem);
             this.Controls.Add(this.lblInvoiceNumber);
-            this.Controls.Add(this.dtPurchaseDate);
             this.Controls.Add(this.cbxPurchaseType);
             this.Controls.Add(this.txtInvoiceNumber);
             this.Controls.Add(this.lblPurchaseDate);
@@ -197,7 +199,6 @@
         #endregion
         private System.Windows.Forms.Label lblPurchaseDate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dtPurchaseDate;
         private System.Windows.Forms.TextBox txtSupplierCode;
         private System.Windows.Forms.Label lblInvoiceNumber;
         private System.Windows.Forms.TextBox txtInvoiceNumber;
@@ -208,5 +209,6 @@
         private System.Windows.Forms.ComboBox cbxPurchaseFormType;
         private System.Windows.Forms.Label lblSupplierName;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.MaskedTextBox dtPurchaseDate;
     }
 }

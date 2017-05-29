@@ -87,7 +87,6 @@
             this.cbxHalfScheme.Name = "cbxHalfScheme";
             this.cbxHalfScheme.Size = new System.Drawing.Size(78, 21);
             this.cbxHalfScheme.TabIndex = 3;
-            this.cbxHalfScheme.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbxHalfScheme_KeyDown);
             // 
             // frmLineItemScheme
             // 
