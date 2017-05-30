@@ -62,5 +62,8 @@ namespace PharmaDAL.Entity
         public Nullable<double> SpecialDiscountAmount { get; set; }
         public Nullable<double> VolumeDiscountAmount { get; set; }
         public Nullable<double> TotalDiscountAmount { get; set; }
+    
+        public virtual FIFO FIFO { get; set; }
+        public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }
     }
 }

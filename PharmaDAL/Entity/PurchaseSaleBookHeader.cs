@@ -20,6 +20,7 @@ namespace PharmaDAL.Entity
             this.BillOutStandings = new HashSet<BillOutStandings>();
             this.BillOutStandingsAudjustment = new HashSet<BillOutStandingsAudjustment>();
             this.FIFO = new HashSet<FIFO>();
+            this.PurchaseSaleBookLineItem = new HashSet<PurchaseSaleBookLineItem>();
             this.TRN = new HashSet<TRN>();
         }
     
@@ -100,6 +101,8 @@ namespace PharmaDAL.Entity
         public virtual ICollection<BillOutStandingsAudjustment> BillOutStandingsAudjustment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FIFO> FIFO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseSaleBookLineItem> PurchaseSaleBookLineItem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRN> TRN { get; set; }
     }

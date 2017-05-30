@@ -271,21 +271,20 @@ namespace PharmaDAL.Transaction
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                //return context.PurchaseSaleBookLineItem.Where(p => p.PurchaseSaleBookHeader.LedgerTypeCode == supplierCode & p.ItemCode == itemCode)
-                //    .Select(p => new PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem()
-                //    {
-                //        ID = p.PurchaseSaleBookLineItemID,
-                //        ItemCode = p.ItemCode,
-                //        Rate = p.PurchaseSaleRate,
-                //        Discount = p.Discount,
-                //        SpecialDiscount = p.SpecialDiscount,
-                //        VolumeDiscount = p.VolumeDiscount,
-                //        TaxOnPurchase = p.SalePurchaseTax,
-                //        PurchaseDate = p.PurchaseSaleBookHeader.VoucherDate,
-                //        BatchNumber = p.Batch
-                //    }).OrderByDescending(p => p.ID).Take(5).ToList();
-
-                return new List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem>();
+                return context.PurchaseSaleBookLineItem.Where(p => p.PurchaseSaleBookHeader.LedgerTypeCode == supplierCode & p.ItemCode == itemCode)
+                    .Select(p => new PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem()
+                    {
+                        PurchaseSaleBookLineItemID = p.PurchaseSaleBookLineItemID,
+                        ItemCode = p.ItemCode,
+                        PurchaseSaleRate = p.PurchaseSaleRate,
+                        Discount = p.Discount,
+                        SpecialDiscount = p.SpecialDiscount,
+                        VolumeDiscount = p.VolumeDiscount,
+                        PurchaseSaleTax = p.SalePurchaseTax,
+                        PurchaseBillDate = p.PurchaseSaleBookHeader.VoucherDate,
+                        Batch = p.Batch
+                    }).OrderByDescending(p => p.PurchaseSaleBookLineItemID).Take(5).ToList();
+                
             }
         }
 

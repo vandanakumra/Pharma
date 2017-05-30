@@ -14,6 +14,12 @@ namespace PharmaDAL.Entity
     
     public partial class TempPurchaseSaleBookHeader
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TempPurchaseSaleBookHeader()
+        {
+            this.TempPurchaseSaleBookLineItem = new HashSet<TempPurchaseSaleBookLineItem>();
+        }
+    
         public long PurchaseSaleBookHeaderID { get; set; }
         public string VoucherTypeCode { get; set; }
         public System.DateTime VoucherDate { get; set; }
@@ -75,5 +81,8 @@ namespace PharmaDAL.Entity
         public System.DateTime CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TempPurchaseSaleBookLineItem> TempPurchaseSaleBookLineItem { get; set; }
     }
 }
