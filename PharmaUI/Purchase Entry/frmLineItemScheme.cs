@@ -17,11 +17,11 @@ namespace PharmaUI.Purchase_Entry
     public partial class frmLineItemScheme : Form
     {
         IApplicationFacade applicationFacade;
-        PurchaseBookLineItem purchaseBookLineItem;
+        PurchaseSaleBookLineItem purchaseBookLineItem;
 
-        public PurchaseBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
+        public PurchaseSaleBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
 
-        public frmLineItemScheme(PurchaseBookLineItem lineItem)
+        public frmLineItemScheme(PurchaseSaleBookLineItem lineItem)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
@@ -34,7 +34,7 @@ namespace PharmaUI.Purchase_Entry
             ExtensionMethods.FormLoad(this, string.Format("Item - {0} Update",purchaseBookLineItem.ItemName));
 
             GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            EnterKeyDownForTabEvents(this);
 
             //Fill half Scheme options
             cbxHalfScheme.DataSource = Enum.GetValues(typeof(Enums.Choice));
@@ -88,23 +88,23 @@ namespace PharmaUI.Purchase_Entry
             return;
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Escape || keyData == Keys.End)
-            {
-                this.Close();
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (keyData == Keys.Escape || keyData == Keys.End)
+        //    {
+        //        this.Close();
 
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
+        //    }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
 
-        private void cbxHalfScheme_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyData == Keys.Enter)
-            {
-                this.Close();
-            }
-        }
+        //private void cbxHalfScheme_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if(e.KeyData == Keys.Enter)
+        //    {
+        //        this.Close();
+        //    }
+        //}
 
         private void frmLineItemScheme_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -122,7 +122,40 @@ namespace PharmaUI.Purchase_Entry
             purchaseBookLineItem.Scheme2 = scheme2;
             purchaseBookLineItem.IsHalfScheme = choice == Choice.Yes;
 
-        }        
-       
+        }
+
+        private void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Control ctl = sender as Control;
+
+                if (ctl.Name == "cbxHalfScheme")
+                {
+                    this.Close();
+                }
+                else
+                {
+                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                }
+            }
+        }
+
     }
 }

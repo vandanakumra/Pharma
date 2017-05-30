@@ -15,14 +15,23 @@ namespace PharmaBusiness.Transaction
 
         }
 
-        internal int InsertTempPurchaseHeader(PurchaseBookHeader header)
-        {
-            return new PurchaseBookDao(this.LoggedInUser).InsertTempPurchaseBookHeader(header);
-        }
+        //internal long InsertTempPurchaseHeader(PurchaseSaleBookHeader header)
+        //{
+        //    return new PurchaseBookDao(this.LoggedInUser).InsertTempPurchaseBookHeader(header);
+        //}
 
-        internal int UpdateTempPurchaseHeader(PurchaseBookHeader header)
+        //internal long UpdateTempPurchaseHeader(PurchaseSaleBookHeader header)
+        //{
+        //    return new PurchaseBookDao(this.LoggedInUser).UpdateTempPurchaseBookHeader(header);
+        //}
+
+        internal long InsertUpdateTempPurchaseBookHeader(PurchaseSaleBookHeader header)
         {
-            return new PurchaseBookDao(this.LoggedInUser).UpdateTempPurchaseBookHeader(header);
+            header.CreatedBy = this.LoggedInUser.Username;
+            header.CreatedOn = DateTime.Now;
+            header.ModifiedBy = this.LoggedInUser.Username;
+            header.ModifiedOn = DateTime.Now;
+            return new PurchaseBookDao(this.LoggedInUser).InsertUpdateTempPurchaseBookHeader(header);
         }
 
         public List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes()
@@ -35,27 +44,39 @@ namespace PharmaBusiness.Transaction
             return new PurchaseBookDao(this.LoggedInUser).GetPurchaseFormTypes(purchaseTypeID);
         }
 
-        public int InsertTempLineItem(PurchaseBookLineItem lineItem)
+        //public long InsertTempLineItem(PurchaseSaleBookLineItem lineItem)
+        //{
+        //    return new PurchaseBookDao(this.LoggedInUser).InsertTempLineItem(lineItem);
+        //}
+
+        //public long UpdateTempLineItem(PurchaseSaleBookLineItem lineItem)
+        //{
+        //    return new PurchaseBookDao(this.LoggedInUser).UpdateTempLineItem(lineItem);
+        //}
+
+        public long InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem)
         {
-            return new PurchaseBookDao(this.LoggedInUser).InsertTempLineItem(lineItem);
+            lineItem.CreatedBy = this.LoggedInUser.Username;
+            lineItem.CreatedOn = DateTime.Now;
+            lineItem.ModifiedBy = this.LoggedInUser.Username;
+            lineItem.ModifiedOn = DateTime.Now;
+
+            return new PurchaseBookDao(this.LoggedInUser).InsertUpdateTempPurchaseBookLineItem(lineItem);
         }
 
-        public int UpdateTempLineItem(PurchaseBookLineItem lineItem)
-        {
-            return new PurchaseBookDao(this.LoggedInUser).UpdateTempLineItem(lineItem);
-        }
+        
 
-        internal List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
+        internal List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
         {
             return new PurchaseBookDao(this.LoggedInUser).GetLastNBatchNoForSupplierItem(supplierCode,itemCode);
         }
 
-        internal bool SavePurchaseData(int purchaseBookHeaderID)
+        internal bool SavePurchaseData(long purchaseBookHeaderID)
         {
             return new PurchaseBookDao(this.LoggedInUser).SavePurchaseData(purchaseBookHeaderID);
         }
 
-        internal PharmaBusinessObjects.Transaction.PurchaseBookHeader GetFinalAmountWithTaxForPurchase(int purchaseBookHeaderID)
+        internal PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
         {
             return new PurchaseBookDao(this.LoggedInUser).GetFinalAmountWithTaxForPurchase(purchaseBookHeaderID);
         }

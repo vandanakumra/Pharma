@@ -16,13 +16,13 @@ namespace PharmaUI
 {
     public partial class frmPurchaseBookTransaction : Form
     {
-        private int invoiceID = 0;
+        private long purchaseSaleBookHeaderID = 0;
         private bool isBatchUpdate = false;
         private bool isDirty = false;
         private bool isCellEdit = true;
        
       
-        List<PurchaseBookLineItem> lineItemList = new List<PurchaseBookLineItem>();
+        List<PurchaseSaleBookLineItem> lineItemList = new List<PurchaseSaleBookLineItem>();
 
         IApplicationFacade applicationFacade;
         public frmPurchaseBookTransaction()
@@ -46,7 +46,7 @@ namespace PharmaUI
                 ExtensionMethods.FormLoad(this, "Purchase Book Transaction");
                 ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
-                ExtensionMethods.EnterKeyDownForTabEvents(this);
+                EnterKeyDownForTabEvents(this);
                 FillCombo();
                 InitializeGrid();
                 dtPurchaseDate.Focus();
@@ -59,9 +59,9 @@ namespace PharmaUI
 
         private void InitializeGrid()
         {
-            dgvLineItem.Columns.Add("ID", "ID");
-            dgvLineItem.Columns["ID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["ID"].Visible = false;
+            dgvLineItem.Columns.Add("PurchaseSaleBookLineItemID", "PurchaseSaleBookLineItemID");
+            dgvLineItem.Columns["PurchaseSaleBookLineItemID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["PurchaseSaleBookLineItemID"].Visible = false;
 
             dgvLineItem.Columns.Add("SrNo", "SrNo");
             dgvLineItem.Columns["SrNo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -76,34 +76,34 @@ namespace PharmaUI
             dgvLineItem.Columns["ItemName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["ItemName"].FillWeight = 15;
 
-            dgvLineItem.Columns.Add("BatchNumber", "Batch No");
-            dgvLineItem.Columns["BatchNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["BatchNumber"].FillWeight = 10;
+            dgvLineItem.Columns.Add("Batch", "Batch No");
+            dgvLineItem.Columns["Batch"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["Batch"].FillWeight = 10;
 
             dgvLineItem.Columns.Add("Quantity", "Quantity");
             dgvLineItem.Columns["Quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["Quantity"].FillWeight = 5;
 
-            dgvLineItem.Columns.Add("FreeQty", "Free Quantity");
-            dgvLineItem.Columns["FreeQty"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["FreeQty"].FillWeight = 5;
+            dgvLineItem.Columns.Add("FreeQuantity", "Free Quantity");
+            dgvLineItem.Columns["FreeQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["FreeQuantity"].FillWeight = 5;
 
-            dgvLineItem.Columns.Add("Rate", "Rate");
-            dgvLineItem.Columns["Rate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["Rate"].FillWeight = 5;
+            dgvLineItem.Columns.Add("PurchaseSaleRate", "Rate");
+            dgvLineItem.Columns["PurchaseSaleRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["PurchaseSaleRate"].FillWeight = 5;
 
             dgvLineItem.Columns.Add("Amount", "Amount");
             dgvLineItem.Columns["Amount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["Amount"].FillWeight = 5;
 
 
-            dgvLineItem.Columns.Add("OldRate", "OldRate");
-            dgvLineItem.Columns["OldRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["OldRate"].Visible = false;
+            dgvLineItem.Columns.Add("OldPurchaseSaleRate", "OldPurchaseSaleRate");
+            dgvLineItem.Columns["OldPurchaseSaleRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["OldPurchaseSaleRate"].Visible = false;
 
-            dgvLineItem.Columns.Add("InvoiceID", "InvoiceID");
-            dgvLineItem.Columns["InvoiceID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["InvoiceID"].Visible = false;
+            dgvLineItem.Columns.Add("PurchaseSaleBookHeaderID", "PurchaseSaleBookHeaderID");
+            dgvLineItem.Columns["PurchaseSaleBookHeaderID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["PurchaseSaleBookHeaderID"].Visible = false;
 
             dgvLineItem.Columns.Add("Scheme1", "Scheme1");
             dgvLineItem.Columns["Scheme1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -133,21 +133,21 @@ namespace PharmaUI
             dgvLineItem.Columns["MRP"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["MRP"].Visible = false;
 
-            dgvLineItem.Columns.Add("Excise", "Excise");
-            dgvLineItem.Columns["Excise"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["Excise"].Visible = false;
+            //dgvLineItem.Columns.Add("Excise", "Excise");
+            //dgvLineItem.Columns["Excise"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvLineItem.Columns["Excise"].Visible = false;
 
-            dgvLineItem.Columns.Add("Expiry", "Expiry");
-            dgvLineItem.Columns["Expiry"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["Expiry"].Visible = false;
+            dgvLineItem.Columns.Add("ExpiryDate", "ExpiryDate");
+            dgvLineItem.Columns["ExpiryDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["ExpiryDate"].Visible = false;
 
-            dgvLineItem.Columns.Add("PurchaseDate", "PurchaseDate");
-            dgvLineItem.Columns["PurchaseDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["PurchaseDate"].Visible = false;
+            dgvLineItem.Columns.Add("PurchaseBillDate", "PurchaseBillDate");
+            dgvLineItem.Columns["PurchaseBillDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["PurchaseBillDate"].Visible = false;
 
-            dgvLineItem.Columns.Add("IsNewRate", "IsNewRate");
-            dgvLineItem.Columns["IsNewRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["IsNewRate"].Visible = false;
+            //dgvLineItem.Columns.Add("IsNewRate", "IsNewRate");
+            //dgvLineItem.Columns["IsNewRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvLineItem.Columns["IsNewRate"].Visible = false;
 
             dgvLineItem.Columns.Add("SaleRate", "SaleRate");
             dgvLineItem.Columns["SaleRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -161,13 +161,23 @@ namespace PharmaUI
             dgvLineItem.Columns["SpecialRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["SpecialRate"].Visible = false;
 
-            dgvLineItem.Columns.Add("PurchaseTaxType", "PurchaseTaxType");
-            dgvLineItem.Columns["PurchaseTaxType"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["PurchaseTaxType"].Visible = false;
+            dgvLineItem.Columns.Add("PurchaseSaleTypeCode", "PurchaseSaleTypeCode");
+            dgvLineItem.Columns["PurchaseSaleTypeCode"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["PurchaseSaleTypeCode"].Visible = false;
 
-            dgvLineItem.Columns.Add("TaxOnPurchase", "TaxOnPurchase");
-            dgvLineItem.Columns["TaxOnPurchase"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["TaxOnPurchase"].Visible = false;         
+            dgvLineItem.Columns.Add("PurchaseSaleTax", "PurchaseSaleTax");
+            dgvLineItem.Columns["PurchaseSaleTax"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["PurchaseSaleTax"].Visible = false;
+
+            dgvLineItem.Columns.Add("LocalCentral", "LocalCentral");
+            dgvLineItem.Columns["LocalCentral"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["LocalCentral"].Visible = false;
+
+
+            dgvLineItem.Columns.Add("ConversionRate", "ConversionRate");
+            dgvLineItem.Columns["ConversionRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["ConversionRate"].Visible = false;
+                        
 
             dgvLineItem.CellBeginEdit += DgvLineItem_CellBeginEdit;
             dgvLineItem.CellEndEdit += DgvLineItem_CellEndEdit;
@@ -199,8 +209,8 @@ namespace PharmaUI
             try
             {
                 if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "Quantity"
-                || dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "FreeQty"
-                || dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "Rate")
+                || dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "FreeQuantity"
+                || dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "PurchaseSaleRate")
                 {
                     if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
                     {
@@ -211,6 +221,18 @@ namespace PharmaUI
                     {
                         e.Handled = true;
                     }
+                }
+                if(!string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
+                {
+                    dgvLineItem.EndEdit();
+                    e.Handled = true;
+                }
+                if (string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
+                {
+                    e.Handled = true;
+                    int rowIndex = dgvLineItem.CurrentCell.RowIndex;
+                    int colIndex = dgvLineItem.CurrentCell.ColumnIndex;
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex + 1];
                 }
             }
             catch (Exception ex)
@@ -233,34 +255,45 @@ namespace PharmaUI
             try
             {
                 int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
-                PurchaseBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
                 string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
 
-                if (isCellEdit && !isBatchUpdate && lineItem.ID > 0)
+                if (isCellEdit && !isBatchUpdate && lineItem.PurchaseSaleBookLineItemID > 0)
                 {
-                    if (columnName == "Quantity" || columnName == "Rate")
+                    if (columnName == "Quantity" || columnName == "PurchaseSaleRate")
                     {
                         double amount = GetLineItemAmount(lineItem);
                         dgvLineItem.CurrentRow.Cells["Amount"].Value = amount;
                         lineItem.Amount = amount;
                     }
 
-                    applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+                    double value = 0L;
+                    double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out value);
+
+                    if (value == 0 && (columnName == "Quantity" || columnName == "PurchaseSaleRate"))
+                    {
+                        dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
+                        dgvLineItem.BeginEdit(true);
+                    }
+                    else
+                    {
+                        applicationFacade.InsertUpdateTempPurchaseBookLineItem(lineItem);
+                    }
                 }
 
-                if (columnName == "FreeQty")
+                if (columnName == "FreeQuantity")
                 {
                     PharmaUI.Purchase_Entry.frmLineItemScheme updateForm = new PharmaUI.Purchase_Entry.frmLineItemScheme(lineItem);
                     updateForm.FormClosed += frmLineItemScheme_FormClosed;
                     updateForm.ShowDialog();
                 }
-                else if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "Rate")
+                else if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "PurchaseSaleRate")
                 {
                     double newRate = 0L;
                     double oldRate = 0L;
 
-                    double.TryParse(Convert.ToString(dgvLineItem["OldRate", e.RowIndex].Value), out oldRate);
-                    double.TryParse(Convert.ToString(dgvLineItem["Rate", e.RowIndex].Value), out newRate);
+                    double.TryParse(Convert.ToString(dgvLineItem["OldPurchaseSaleRate", e.RowIndex].Value), out oldRate);
+                    double.TryParse(Convert.ToString(dgvLineItem["PurchaseSaleRate", e.RowIndex].Value), out newRate);
 
                     if (oldRate != newRate)
                     {
@@ -277,10 +310,10 @@ namespace PharmaUI
                     
                 }
 
-                    if (e.RowIndex == 0 && dgvLineItem.Rows.Count == (e.RowIndex + 1))
-                    {
-                        dgvLineItem.Rows.Add();
-                    }
+                    //if (e.RowIndex == 0 && dgvLineItem.Rows.Count == (e.RowIndex + 1))
+                    //{
+                    //    dgvLineItem.Rows.Add();
+                    //}
                 }
 
 
@@ -297,27 +330,13 @@ namespace PharmaUI
             {
                 isCellEdit = false;
 
-                if (invoiceID == 0)
+                if (purchaseSaleBookHeaderID == 0)
                 {
                     MessageBox.Show("Please enter invoice number before adding the items");
                     dgvLineItem.CancelEdit();
                 }
 
-                string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
-
-                if (columnName == "BatchNumber")
-                {
-                    var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
-
-                    if (list != null && list.Count > 0)
-                    {
-                        frmLastNBatchNo batch = new frmLastNBatchNo(list);
-                        //batch.SupplierCode = txtSupplierCode.Text;
-                        //batch.ItemCode = Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value);
-                        batch.FormClosed += Batch_FormClosed;
-                        batch.ShowDialog();
-                    }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -334,6 +353,7 @@ namespace PharmaUI
                 if (dgvLineItem.SelectedCells.Count > 0 && !string.IsNullOrEmpty(batch.BatchNumber))
                 {
                     dgvLineItem.CurrentRow.Cells[dgvLineItem.SelectedCells[0].ColumnIndex].Value = batch.BatchNumber;
+                    dgvLineItem.Focus();
                     dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Quantity"];
                   //  dgvLineItem.BeginEdit(false);
                 }
@@ -382,14 +402,14 @@ namespace PharmaUI
         {
             try
             {
-                if (invoiceID > 0)
+                if (purchaseSaleBookHeaderID > 0)
                 {
-                    PurchaseBookHeader header = new PurchaseBookHeader();
+                    PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
                     bool result = GetPurchaseBookHeader(ref header);
 
                     if (result)
                     {
-                        applicationFacade.UpdateTempPurchaseHeader(header);
+                        applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
                     }
                 }
             }
@@ -416,7 +436,13 @@ namespace PharmaUI
                         tb1.TextChanged += Tb1_TextChanged;
                         tb1.Leave += Tb1_Leave;
                     }
-
+                    else if (c is MaskedTextBox)
+                    {
+                        MaskedTextBox tb1 = (MaskedTextBox)c;
+                        tb1.GotFocus += C_GotFocus;
+                        tb1.TextChanged += Tb1_TextChanged;
+                        tb1.Leave += Tb1_Leave;
+                    }
                     else if (c is ComboBox)
                     {
                         ComboBox tb1 = (ComboBox)c;
@@ -446,12 +472,12 @@ namespace PharmaUI
                     {
                         case "txtInvoiceNumber":
                             {
-                                PurchaseBookHeader header = new PurchaseBookHeader();
+                                PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
                                 bool result = GetPurchaseBookHeader(ref header);
 
                                 if (result && isDirty)
                                 {
-                                    invoiceID = invoiceID == 0 ? applicationFacade.InsertTempPurchaseHeader(header) : applicationFacade.UpdateTempPurchaseHeader(header);
+                                    purchaseSaleBookHeaderID = applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
                                 }
 
                                 dgvLineItem.Rows.Add();
@@ -461,14 +487,15 @@ namespace PharmaUI
                             break;
                         case "txtSupplierCode":
                             {
-                                if (invoiceID > 0 && isDirty)
+                                if (purchaseSaleBookHeaderID > 0 && isDirty)
                                 {
-                                    PurchaseBookHeader header = new PurchaseBookHeader();
+                                    PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
                                     bool result = GetPurchaseBookHeader(ref header);
 
                                     if (result)
                                     {
-                                        applicationFacade.UpdateTempPurchaseHeader(header);
+                                        applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
+
                                     }
                                 }
                             }
@@ -476,19 +503,25 @@ namespace PharmaUI
                             break;
                         case "dtPurchaseDate":
                             {
-                                DateTimePicker dtPicker = (DateTimePicker)sender;
-                                if (string.IsNullOrWhiteSpace(dtPicker.Text))
+                                MaskedTextBox dtPicker = (MaskedTextBox)sender;
+
+                                if (string.IsNullOrWhiteSpace(dtPicker.Text) || dtPicker.Text == "  /  /")
                                 {
                                     errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.RequiredField);
                                     dtPurchaseDate.Focus();
                                 }
-                                else if (dtPicker.Value.Date > DateTime.Today || dtPicker.Value < DateTime.Today)
+                                else
                                 {
-                                    DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dtPicker.Value > DateTime.Today ? "ahead of" : "less than"));
+                                    DateTime dt = new DateTime();
+                                    DateTime.TryParse(dtPicker.Text, out dt);
+                                    if (dt > DateTime.Today || dt < DateTime.Today)
+                                    {
+                                        DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
 
-                                    if (result == DialogResult.No)
-                                        dtPicker.Value = DateTime.Now;
+                                        if (result == DialogResult.No)
+                                            dtPicker.Text = DateTime.Now.ToShortDateString();
 
+                                    }
                                 }
                             }
                             break;
@@ -542,9 +575,11 @@ namespace PharmaUI
             }
         }
 
-        private bool GetPurchaseBookHeader(ref PurchaseBookHeader header)
+        private bool GetPurchaseBookHeader(ref PurchaseSaleBookHeader header)
         {
-            if (dtPurchaseDate.Value.Date == DateTime.MinValue)
+            DateTime purchaseDate = new DateTime();
+            DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+            if (purchaseDate == DateTime.MinValue)
             {
                 errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.RequiredField);
                 dtPurchaseDate.Focus();
@@ -564,16 +599,27 @@ namespace PharmaUI
                 txtInvoiceNumber.Focus();
                 return false;
             }
+
             int purchaseFormTypeID = 0;
 
-            header = new PurchaseBookHeader();
-            header.InvoiceID = invoiceID;
-            header.PurchaseDate = dtPurchaseDate.Value.Date;
-            header.InvoiceNumber = txtInvoiceNumber.Text;
-            header.SupplierCode = txtSupplierCode.Text;
+            header = new PurchaseSaleBookHeader();
+            header.PurchaseSaleBookHeaderID = purchaseSaleBookHeaderID;
+
+            header.VoucherDate = purchaseDate;
+            header.PurchaseBillNo = txtInvoiceNumber.Text;
+            header.LedgerTypeCode = txtSupplierCode.Text;
+            header.LedgerType = "SUPPLIERLEDGER";
+            header.VoucherTypeCode = "PURCHASEENTRY";
+            header.TotalTaxAmount = 0;
+
+
+            PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
+            header.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
+           
+
 
             Int32.TryParse(Convert.ToString(cbxPurchaseFormType.SelectedValue), out purchaseFormTypeID);
-            header.PurchaseFormTypeID = purchaseFormTypeID;
+            header.PurchaseEntryFormID = purchaseFormTypeID;
 
             return true;
         }
@@ -582,57 +628,11 @@ namespace PharmaUI
         {
             try
             {
-                //Add
-                if (keyData == (Keys.F9))
+                if (keyData == Keys.End)
                 {
-                    if (invoiceID != 0)
+                    if (purchaseSaleBookHeaderID > 0 && dgvLineItem.Rows.Count > 0)
                     {
-                        int srNo = lineItemList.Max(p => p.SrNo);
-
-                        lineItemList.Add(new PurchaseBookLineItem { InvoiceID = invoiceID, SrNo = srNo + 1 });
-
-                        dgvLineItem.Rows.Add(lineItemList);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please add header information first");
-                    }
-                }
-                else if (keyData == (Keys.F3))
-                {
-                    if (dgvLineItem.SelectedCells.Count > 0)
-                    {
-                        dgvLineItem.BeginEdit(true);
-                    }
-                }
-                else if (keyData == Keys.F1)
-                {
-                    switch (this.ActiveControl.Name)
-                    {
-                        case "txtSupplierCode":
-                            {
-                                frmSupplierLedger ledger = new frmSupplierLedger(true);
-                                //Set Child UI
-                                ExtensionMethods.AddChildFormToPanel(this, ledger, ExtensionMethods.MainPanel);
-                                ledger.WindowState = FormWindowState.Maximized;
-
-                                ledger.FormClosed += Ledger_FormClosed;
-                                ledger.Show();
-                            }
-                            break;
-                        case "dgvLineItem":
-                            {
-
-                            }
-                            break;
-
-                    }
-                }
-                else if (keyData == Keys.End)
-                {
-                    if (invoiceID > 0 && dgvLineItem.Rows.Count > 0)
-                    {
-                        PurchaseBookHeader header = new PurchaseBookHeader();
+                        PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
                         GetPurchaseBookHeader(ref header);
                         frmPurchaseHeaderAmount amount = new frmPurchaseHeaderAmount(header);
                         amount.FormClosed += Amount_FormClosed;
@@ -666,7 +666,7 @@ namespace PharmaUI
                 var result = MessageBox.Show("Are you sure you want to save the purchase entry", "Confirmation", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.OK)
                 {
-                    applicationFacade.SavePurchaseData(invoiceID);
+                    applicationFacade.SavePurchaseData(purchaseSaleBookHeaderID);
                     this.Close();
                 }
             }
@@ -693,10 +693,10 @@ namespace PharmaUI
                     {
                         isBatchUpdate = true;
                         int lineItemID = 0;
-                        Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ID"].Value), out lineItemID);
+                        Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value), out lineItemID);
 
-                        PurchaseBookLineItem lineItem = lineItemScheme.PurchaseBookLinetem;
-                        lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+                        PurchaseSaleBookLineItem lineItem = lineItemScheme.PurchaseBookLinetem;
+                        lineItem.PurchaseSaleBookLineItemID = applicationFacade.InsertUpdateTempPurchaseBookLineItem(lineItem);
 
                         dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
                         dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
@@ -731,25 +731,34 @@ namespace PharmaUI
                     {
                         isBatchUpdate = true;
                         int lineItemID = 0;
-                        Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ID"].Value), out lineItemID);
+                        Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value), out lineItemID);
 
-                        PurchaseBookLineItem lineItem = itemMaster.LastSelectedItemMaster.ToPurchaseBookLineItem();
-                        lineItem.InvoiceID = invoiceID;
-                        lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+                        PurchaseSaleBookLineItem lineItem = itemMaster.LastSelectedItemMaster.ToPurchaseBookLineItem();
+                        lineItem.PurchaseSaleBookHeaderID = purchaseSaleBookHeaderID;
+                        lineItem.PurchaseSaleBookLineItemID = lineItemID;
+
+                        DateTime purchaseDate = new DateTime();
+                        DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+
+                        lineItem.PurchaseBillDate = purchaseDate;
+
+                        PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
+                        lineItem.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
+
+                        lineItem.PurchaseSaleBookLineItemID = applicationFacade.InsertUpdateTempPurchaseBookLineItem(lineItem);
 
                         int srno = dgvLineItem.Rows.Cast<DataGridViewRow>().Max(r => Convert.ToInt32(r.Cells["SrNo"].Value));
 
-                        dgvLineItem.Rows[rowIndex].Cells["ID"].Value = lineItem.ID;
+                        dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value = lineItem.PurchaseSaleBookLineItemID;
                         dgvLineItem.Rows[rowIndex].Cells["SrNo"].Value = srno + 1;
-                        dgvLineItem.Rows[rowIndex].Cells["InvoiceID"].Value = invoiceID;
+                        dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookHeaderID"].Value = purchaseSaleBookHeaderID;
                         dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value = lineItem.ItemCode;
                         dgvLineItem.Rows[rowIndex].Cells["ItemName"].Value = lineItem.ItemName;
                         dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value = "0";
-                        dgvLineItem.Rows[rowIndex].Cells["FreeQty"].Value = "0";
-                        dgvLineItem.Rows[rowIndex].Cells["InvoiceID"].Value = lineItem.InvoiceID;
-                        dgvLineItem.Rows[rowIndex].Cells["BatchNumber"].Value = lineItem.BatchNumber;
-                        dgvLineItem.Rows[rowIndex].Cells["Rate"].Value = lineItem.Rate;
-                        dgvLineItem.Rows[rowIndex].Cells["OldRate"].Value = lineItem.Rate;
+                        dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = "0";                       
+                        dgvLineItem.Rows[rowIndex].Cells["Batch"].Value = lineItem.Batch;
+                        dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
+                        dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
                         dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = GetLineItemAmount(lineItem);
                         dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
                         dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
@@ -758,14 +767,16 @@ namespace PharmaUI
                         dgvLineItem.Rows[rowIndex].Cells["SpecialDiscount"].Value = lineItem.SpecialDiscount;
                         dgvLineItem.Rows[rowIndex].Cells["VolumeDiscount"].Value = lineItem.VolumeDiscount;
                         dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
-                        dgvLineItem.Rows[rowIndex].Cells["Excise"].Value = lineItem.Excise;
-                        dgvLineItem.Rows[rowIndex].Cells["Expiry"].Value = lineItem.Expiry;
+                       // dgvLineItem.Rows[rowIndex].Cells["Excise"].Value = lineItem.Excise;
+                        dgvLineItem.Rows[rowIndex].Cells["ExpiryDate"].Value = lineItem.ExpiryDate;
                         dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value = lineItem.SaleRate;
                         dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
-                        dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;
-                        dgvLineItem.Rows[rowIndex].Cells["PurchaseDate"].Value = dtPurchaseDate.Value;
-                        dgvLineItem.Rows[rowIndex].Cells["PurchaseTaxType"].Value = lineItem.PurchaseTaxType;
-                        dgvLineItem.Rows[rowIndex].Cells["TaxOnPurchase"].Value = lineItem.TaxOnPurchase;
+                        dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;                        
+                       
+                        dgvLineItem.Rows[rowIndex].Cells["PurchaseBillDate"].Value = purchaseDate;
+                        dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTypeCode"].Value = lineItem.PurchaseSaleTypeCode;
+                        dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTax"].Value = lineItem.PurchaseSaleTax;
+                        dgvLineItem.Rows[rowIndex].Cells["LocalCentral"].Value = lineItem.LocalCentral;
                     }
 
                     isBatchUpdate = false;
@@ -774,8 +785,9 @@ namespace PharmaUI
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
                 if (rowIndex != -1 && colIndex != -1)
                 {
-                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["BatchNumber"];
-                    dgvLineItem.BeginEdit(false);
+                    dgvLineItem.Focus();
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Batch"];
+                    //dgvLineItem.BeginEdit(false);
 
                 }
 
@@ -804,18 +816,22 @@ namespace PharmaUI
                     {
                         isBatchUpdate = true;
                         int lineItemID = 0;
-                        Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ID"].Value), out lineItemID);
+                        Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value), out lineItemID);
 
-                        PurchaseBookLineItem lineItem = lineItemUpdate.PurchaseBookLinetem;
-                        lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+                        PurchaseSaleBookLineItem lineItem = lineItemUpdate.PurchaseBookLinetem;
+
+                        double amt = GetLineItemAmount(lineItem);
+                        lineItem.Amount = amt;
+
+                        lineItem.PurchaseSaleBookLineItemID = applicationFacade.InsertUpdateTempPurchaseBookLineItem(lineItem);
 
                         dgvLineItem.Rows[rowIndex].Cells["Discount"].Value = lineItem.Discount;
                         dgvLineItem.Rows[rowIndex].Cells["SpecialDiscount"].Value = lineItem.SpecialDiscount;
                         dgvLineItem.Rows[rowIndex].Cells["VolumeDiscount"].Value = lineItem.VolumeDiscount;
                         dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
-                        dgvLineItem.Rows[rowIndex].Cells["Excise"].Value = lineItem.Excise;
-                        dgvLineItem.Rows[rowIndex].Cells["Expiry"].Value = lineItem.Expiry;
-                        dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = GetLineItemAmount(lineItem);
+                      //  dgvLineItem.Rows[rowIndex].Cells["Excise"].Value = lineItem.Excise;
+                        dgvLineItem.Rows[rowIndex].Cells["ExpiryDate"].Value = lineItem.ExpiryDate;
+                        dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = amt;
                     }
                     isBatchUpdate = false;
                 }
@@ -847,23 +863,33 @@ namespace PharmaUI
                     {
                         isBatchUpdate = true;
                         int lineItemID = 0;
-                        Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ID"].Value), out lineItemID);
+                        Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value), out lineItemID);
 
-                        PurchaseBookLineItem lineItem = lineItemUpdate.PurchaseBookLinetem;
-                        lineItem.ID = lineItemID == 0 ? applicationFacade.InsertTempPurchaseLineItem(lineItem) : applicationFacade.UpdateTempPurchaseLineItem(lineItem);
+                        PurchaseSaleBookLineItem lineItem = lineItemUpdate.PurchaseBookLinetem;
+
+                        double amt = GetLineItemAmount(lineItem);
+                        lineItem.Amount = amt;
+
+                        DateTime purchaseDate = new DateTime();
+                        DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+
+                        lineItem.PurchaseBillDate = purchaseDate;
+
+
+                        lineItem.PurchaseSaleBookLineItemID = applicationFacade.InsertUpdateTempPurchaseBookLineItem(lineItem);
 
                         dgvLineItem.Rows[rowIndex].Cells["Discount"].Value = lineItem.Discount;
                         dgvLineItem.Rows[rowIndex].Cells["SpecialDiscount"].Value = lineItem.SpecialDiscount;
                         dgvLineItem.Rows[rowIndex].Cells["VolumeDiscount"].Value = lineItem.VolumeDiscount;
                         dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
-                        dgvLineItem.Rows[rowIndex].Cells["Excise"].Value = lineItem.Excise;
-                        dgvLineItem.Rows[rowIndex].Cells["Expiry"].Value = lineItem.Expiry;
-                        dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = GetLineItemAmount(lineItem);
+                       // dgvLineItem.Rows[rowIndex].Cells["Excise"].Value = lineItem.Excise;
+                        dgvLineItem.Rows[rowIndex].Cells["ExpiryDate"].Value = lineItem.ExpiryDate;
+                        dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = amt;
                         dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;
                         dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value = lineItem.SaleRate;
                         dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
-                        dgvLineItem.Rows[rowIndex].Cells["IsNewRate"].Value = lineItem.IsNewRate;
-                        dgvLineItem.Rows[rowIndex].Cells["PurchaseDate"].Value = lineItem.PurchaseDate;
+                      //  dgvLineItem.Rows[rowIndex].Cells["IsNewRate"].Value = lineItem.IsNewRate;
+                        dgvLineItem.Rows[rowIndex].Cells["PurchaseBillDate"].Value = purchaseDate;
 
                     }
                     isBatchUpdate = false;
@@ -889,32 +915,32 @@ namespace PharmaUI
             }
         }
 
-        private PurchaseBookLineItem ConvertToPurchaseBookLineItem(DataGridViewRow row)
+        private PurchaseSaleBookLineItem ConvertToPurchaseBookLineItem(DataGridViewRow row)
         {
-            PurchaseBookLineItem item = new PurchaseBookLineItem();
+            PurchaseSaleBookLineItem item = new PurchaseSaleBookLineItem();
             int id = 0;
             double dValue = 0L;
 
             if (row != null)
             {
-                Int32.TryParse(Convert.ToString(row.Cells["ID"].Value), out id);
-                item.ID = id;
+                Int32.TryParse(Convert.ToString(row.Cells["PurchaseSaleBookLineItemID"].Value), out id);
+                item.PurchaseSaleBookLineItemID = id;
 
-                Int32.TryParse(Convert.ToString(row.Cells["InvoiceID"].Value), out id);
-                item.InvoiceID = id;
+                Int32.TryParse(Convert.ToString(row.Cells["PurchaseSaleBookHeaderID"].Value), out id);
+                item.PurchaseSaleBookHeaderID = id;
 
                 item.ItemCode = Convert.ToString(row.Cells["ItemCode"].Value);
                 item.ItemName = Convert.ToString(row.Cells["ItemName"].Value);
-                item.BatchNumber = Convert.ToString(row.Cells["BatchNumber"].Value);
+                item.Batch = Convert.ToString(row.Cells["Batch"].Value);
 
                 Int32.TryParse(Convert.ToString(row.Cells["Quantity"].Value), out id);
                 item.Quantity = id;
 
-                Int32.TryParse(Convert.ToString(row.Cells["FreeQty"].Value), out id);
-                item.FreeQty = id;
+                Int32.TryParse(Convert.ToString(row.Cells["FreeQuantity"].Value), out id);
+                item.FreeQuantity = id;
 
-                double.TryParse(Convert.ToString(row.Cells["Rate"].Value), out dValue);
-                item.Rate = dValue;
+                double.TryParse(Convert.ToString(row.Cells["PurchaseSaleRate"].Value), out dValue);
+                item.PurchaseSaleRate = dValue;
 
                 double.TryParse(Convert.ToString(row.Cells["Amount"].Value), out dValue);
                 item.Amount = dValue;
@@ -939,12 +965,12 @@ namespace PharmaUI
                 double.TryParse(Convert.ToString(row.Cells["MRP"].Value), out dValue);
                 item.MRP = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["Excise"].Value), out dValue);
-                item.Excise = dValue;
+                //double.TryParse(Convert.ToString(row.Cells["Excise"].Value), out dValue);
+                //item.Excise = dValue;
 
                 DateTime date = DateTime.MinValue;
-                DateTime.TryParse(Convert.ToString(row.Cells["Expiry"].Value), out date);
-                item.Expiry = date;
+                DateTime.TryParse(Convert.ToString(row.Cells["ExpiryDate"].Value), out date);
+                item.ExpiryDate = date;
 
                 double.TryParse(Convert.ToString(row.Cells["WholeSaleRate"].Value), out dValue);
                 item.WholeSaleRate = dValue;
@@ -955,24 +981,32 @@ namespace PharmaUI
                 double.TryParse(Convert.ToString(row.Cells["SaleRate"].Value), out dValue);
                 item.SaleRate = dValue;
                 
-                //TODO:Is New Rate
-                item.IsNewRate = false;
-                item.PurchaseDate = dtPurchaseDate.Value;
-                item.PurchaseTaxType = Convert.ToString(row.Cells["PurchaseTaxType"].Value);
+               
+                DateTime purchaseDate = new DateTime();
+                DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
 
-                double.TryParse(Convert.ToString(row.Cells["TaxOnPurchase"].Value), out dValue);
+                item.PurchaseBillDate = purchaseDate;
 
-                item.TaxOnPurchase = dValue;
+                item.PurchaseSaleTypeCode = Convert.ToString(row.Cells["PurchaseSaleTypeCode"].Value);
+
+                double.TryParse(Convert.ToString(row.Cells["PurchaseSaleTax"].Value), out dValue);
+
+                item.PurchaseSaleTax = dValue;
+
+                PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
+                item.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
+
+               
 
             }
 
             return item;
         }
 
-        private double GetLineItemAmount(PurchaseBookLineItem item)
+        private double GetLineItemAmount(PurchaseSaleBookLineItem item)
         {
             double? amount = 0L;
-            amount = item.Quantity * item.Rate;
+            amount = item.Quantity * item.PurchaseSaleRate;
             return amount ?? 0;
         }
 
@@ -980,29 +1014,85 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyData == Keys.F1)
+                // e.SuppressKeyPress = true;
+
+                if (e.KeyData == Keys.Enter)
                 {
-                    if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "ItemCode")
+                    string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
+
+                    if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentCell.Value)) || columnName == "SrNo")
                     {
+                        e.Handled = true;
+                        double val = 0L;
+                        double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out val);
 
-                        frmItemMaster itemMaster = new frmItemMaster(true);
-                        //Set Child UI
-                        ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
-                        itemMaster.WindowState = FormWindowState.Maximized;
+                        if ((columnName != "Quantity" && columnName != "PurchaseSaleRate") || (val != 0 && (columnName == "Quantity" || columnName == "PurchaseSaleRate")))
+                        {
+                            int colIndex = dgvLineItem.CurrentCell.ColumnIndex + 1;
+                            int rowIndex = dgvLineItem.CurrentCell.RowIndex;
 
-                        itemMaster.FormClosed += ItemMaster_FormClosed; ;
-                        itemMaster.Show();
+                            if (colIndex <= 8)
+                            {
+                                dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells[colIndex];
+                            }
+                            else
+                            {
+                                if (rowIndex == dgvLineItem.Rows.Count - 1)
+                                {
+                                    dgvLineItem.Rows.Add();
+                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells[1];
+                                }
+                                else
+                                {
+                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells[1];
+                                }
+                            }
+
+                        }
+                        else {
+                            dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
+                        }
+                    }
+                    else
+                    {
+                       
+
+                        if (columnName == "ItemCode")
+                        {
+                            e.SuppressKeyPress = true;
+                            frmItemMaster itemMaster = new frmItemMaster(true);
+                            //Set Child UI
+                            ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
+                            itemMaster.WindowState = FormWindowState.Maximized;
+
+                            itemMaster.FormClosed += ItemMaster_FormClosed; ;
+                            itemMaster.Show();
+                        }
+                        else if (columnName == "Batch")
+                        {
+                            e.SuppressKeyPress = true;
+                            var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
+
+                                if (list != null && list.Count > 0)
+                                {
+                                    frmLastNBatchNo batch = new frmLastNBatchNo(list);
+                                    //batch.SupplierCode = txtSupplierCode.Text;
+                                    //batch.ItemCode = Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value);
+                                    batch.FormClosed += Batch_FormClosed;
+                                    batch.ShowDialog();
+                                }
+                            
+                        }
                     }
                 }
-                else if ((e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter) && dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "Rate")
-                {
-                    dgvLineItem.Rows.Add();
-                }
+                //else if ((e.KeyCode == Keys.Tab || e.KeyCode == Keys.Enter) && dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "Rate")
+                //{
+                //    dgvLineItem.Rows.Add();
+                //}
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                throw;
+                MessageBox.Show(ex.Message);                
             }
             
         }
@@ -1023,6 +1113,72 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message);
             }
             
+        }
+
+        private void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox txt = (TextBox)sender;
+
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (!string.IsNullOrEmpty(txt.Text))
+                    {
+                        this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                    }
+                    else
+                    {
+                        if (txt.Name == "txtSupplierCode")
+                        {
+                            frmSupplierLedger ledger = new frmSupplierLedger(true);
+                            //Set Child UI
+
+                            ExtensionMethods.AddChildFormToPanel(this, ledger, ExtensionMethods.MainPanel);
+                            ledger.WindowState = FormWindowState.Maximized;
+
+                            ledger.FormClosed += Ledger_FormClosed;
+                            ledger.Show();
+
+                        }
+                    }
+                }
+            }
+
+            else if (sender is MaskedTextBox)
+            {
+                MaskedTextBox txt = (MaskedTextBox)sender;
+
+                if (e.KeyCode == Keys.Enter && txt.Text != "  /  /")
+                {
+                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                }
+            }
+            else if (sender is ComboBox)
+            {
+                ComboBox box = (ComboBox)sender;
+
+                if (e.KeyCode == Keys.Enter)
+                {
+                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                }
+            }
         }
     }
 }

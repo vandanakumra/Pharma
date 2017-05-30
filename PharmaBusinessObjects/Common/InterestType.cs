@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace PharmaBusinessObjects.Common
 {
-    public class InterestType
+    public class RateType
     {
 
-        public int InterestTypeId { get; set; }
-        public string InterestTypeName { get; set; }
+        public int RateTypeId { get; set; }
+        public string RateTypeName { get; set; }
         public string SystemName { get; set; }
         public bool Status { get; set; }
     }

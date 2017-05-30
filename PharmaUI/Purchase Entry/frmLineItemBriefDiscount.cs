@@ -15,11 +15,11 @@ namespace PharmaUI
     public partial class frmLineItemBriefDiscount : Form
     {
         IApplicationFacade applicationFacade;
-        PurchaseBookLineItem purchaseBookLineItem;
+        PurchaseSaleBookLineItem purchaseBookLineItem;
 
-        public PurchaseBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
+        public PurchaseSaleBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
 
-        public frmLineItemBriefDiscount(PurchaseBookLineItem lineItem)
+        public frmLineItemBriefDiscount(PurchaseSaleBookLineItem lineItem)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
@@ -33,7 +33,7 @@ namespace PharmaUI
             ExtensionMethods.FormLoad(this, string.Format("Item {0} {1}", purchaseBookLineItem.ItemCode, purchaseBookLineItem.ItemName));
 
             GotFocusEventRaised(this);
-            ExtensionMethods.EnterKeyDownForTabEvents(this);
+            EnterKeyDownForTabEvents(this);
             FillFormForUpdate();
 
             txtDiscount.Focus();
@@ -42,12 +42,12 @@ namespace PharmaUI
 
         private void FillFormForUpdate()
         {
-            txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
+           // txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
             txtMRP.Text = Convert.ToString(purchaseBookLineItem.MRP);
             txtSpecialDiscount.Text = Convert.ToString(purchaseBookLineItem.SpecialDiscount);
             txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
             txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);
-            dtExpiry.Value = purchaseBookLineItem.Expiry == DateTime.MinValue ? dtExpiry.MinDate : purchaseBookLineItem.Expiry;
+            dtExpiry.Value = purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? (DateTime)dtExpiry.MinDate : (DateTime)purchaseBookLineItem.ExpiryDate;
         }
 
         public void GotFocusEventRaised(Control control)
@@ -82,15 +82,15 @@ namespace PharmaUI
             return;
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Escape || keyData == Keys.End)
-            {
-                this.Close();
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (keyData == Keys.Escape || keyData == Keys.End)
+        //    {
+        //        this.Close();
 
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
+        //    }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
 
         private void frmPurchaseBookLineItemUpdate_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -107,10 +107,43 @@ namespace PharmaUI
             double.TryParse(txtMRP.Text, out value);
             purchaseBookLineItem.MRP = value;
 
-            double.TryParse(txtExcise.Text, out value);
-            purchaseBookLineItem.Excise = value;
+            //double.TryParse(txtExcise.Text, out value);
+            //purchaseBookLineItem.Excise = value;
 
-            purchaseBookLineItem.Expiry = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
+            purchaseBookLineItem.ExpiryDate = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
         }
+
+        private void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Control ctl = sender as Control;
+                if (ctl.Name == "dtExpiry")
+                {
+                    this.Close();
+                }
+                else
+                {
+                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                }
+            }
+        }
+
     }
 }

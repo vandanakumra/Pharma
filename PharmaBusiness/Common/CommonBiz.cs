@@ -47,7 +47,7 @@ namespace PharmaBusiness.Common
             return new CommonDao().GetCustomerTypes();
         }
 
-        public List<PharmaBusinessObjects.Common.InterestType> GetInterestTypes()
+        public List<PharmaBusinessObjects.Common.RateType> GetInterestTypes()
         {
             return new CommonDao().GetInterestTypes();
         }

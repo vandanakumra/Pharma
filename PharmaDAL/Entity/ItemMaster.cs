@@ -18,6 +18,7 @@ namespace PharmaDAL.Entity
         public ItemMaster()
         {
             this.CustomerCompanyDiscountRef = new HashSet<CustomerCompanyDiscountRef>();
+            this.SupplierCompanyDiscountRef = new HashSet<SupplierCompanyDiscountRef>();
         }
     
         public int ItemID { get; set; }
@@ -62,11 +63,19 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public string BATCH { get; set; }
+        public Nullable<System.DateTime> ExpiryDate { get; set; }
+        public Nullable<double> OpeningQty { get; set; }
+        public Nullable<double> ClosingQty { get; set; }
+        public string SaltCode { get; set; }
+        public string SaltName { get; set; }
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
         public virtual AccountLedgerMaster AccountLedgerMaster1 { get; set; }
         public virtual CompanyMaster CompanyMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SupplierCompanyDiscountRef> SupplierCompanyDiscountRef { get; set; }
     }
 }

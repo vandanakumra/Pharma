@@ -27,14 +27,14 @@ namespace PharmaBusinessObjects
         PharmaBusinessObjects.Master.CompanyMaster GetCompanyById(int companyId);
         int AddCompany(PharmaBusinessObjects.Master.CompanyMaster company);
         int UpdateCompany(PharmaBusinessObjects.Master.CompanyMaster company);
-        int DeleteCompany(int companyId);        
+        int DeleteCompany(int companyId);
         #endregion
 
         #region  Account Ledger Master
 
         List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgers();
         PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerById(int accountLedgerID);
-        List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int LedgerTypeID,string searchString = null);
+        List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerByLedgerTypeIdAndSearch(int LedgerTypeID, string searchString = null);
         int AddAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
         int UpdateAccountLedger(PharmaBusinessObjects.Master.AccountLedgerMaster p);
         List<PharmaBusinessObjects.Master.AccountLedgerMaster> GetAccountLedgerBySystemName(string systemName);
@@ -47,7 +47,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Common.AccountType> GetAccountTypes();
         List<PharmaBusinessObjects.Common.AccountLedgerType> GetAccountLedgerTypes();
         List<PharmaBusinessObjects.Common.CustomerType> GetCustomerTypes();
-        List<PharmaBusinessObjects.Common.InterestType> GetInterestTypes();
+        List<PharmaBusinessObjects.Common.RateType> GetInterestTypes();
         List<PharmaBusinessObjects.Common.PersonLedgerType> GetPersonLedgerTypes();
         List<PharmaBusinessObjects.Common.RecordType> GetRecordTypes();
         List<PharmaBusinessObjects.Common.RecordType> GetRecordTypesWithAll();
@@ -116,15 +116,20 @@ namespace PharmaBusinessObjects
         #endregion
 
         #region Transaction
-        int InsertTempPurchaseHeader(PurchaseBookHeader header);
-        int UpdateTempPurchaseHeader(PurchaseBookHeader header);
+        //long InsertTempPurchaseHeader(PurchaseSaleBookHeader header);
+        //long UpdateTempPurchaseHeader(PurchaseSaleBookHeader header);
+        long InsertUpdateTempPurchaseBookHeader(PurchaseSaleBookHeader header);
         List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes();
         List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);
-        int InsertTempPurchaseLineItem(PurchaseBookLineItem lineItem);
-        int UpdateTempPurchaseLineItem(PurchaseBookLineItem lineItem);
-        List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
-        bool SavePurchaseData(int purchaseBookHeaderID);
-        PharmaBusinessObjects.Transaction.PurchaseBookHeader GetFinalAmountWithTaxForPurchase(int purchaseBookHeaderID);
+        //long InsertTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem);
+        //long UpdateTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem);
+        long InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem);
+
+        
+
+        List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
+        bool SavePurchaseData(long purchaseBookHeaderID);
+        PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID);
         #endregion
     }
 

@@ -12,19 +12,19 @@ namespace PharmaDAL.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class PurchaseEntryType
+    public partial class PurchaseSaleEntryType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PurchaseEntryType()
+        public PurchaseSaleEntryType()
         {
-            this.PurchaseEntryForm = new HashSet<PurchaseEntryForm>();
+            this.PurchaseSaleEntryForm = new HashSet<PurchaseSaleEntryForm>();
         }
     
-        public int ID { get; set; }
-        public string PurchaseTypeCode { get; set; }
-        public string PurchaseTypeName { get; set; }
+        public int PurchaseSaleEntryTypeID { get; set; }
+        public string PurchaseSaleTypeCode { get; set; }
+        public string PurchaseSaleTypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseEntryForm> PurchaseEntryForm { get; set; }
+        public virtual ICollection<PurchaseSaleEntryForm> PurchaseSaleEntryForm { get; set; }
     }
 }

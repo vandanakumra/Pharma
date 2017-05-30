@@ -50,14 +50,14 @@ namespace PharmaDAL.Common
             }
         }
         
-        public List<PharmaBusinessObjects.Common.InterestType> GetInterestTypes()
+        public List<PharmaBusinessObjects.Common.RateType> GetInterestTypes()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.InterestType.Where(p => p.Status).Select(p => new PharmaBusinessObjects.Common.InterestType()
+                return context.RateType.Where(p => p.Status).Select(p => new PharmaBusinessObjects.Common.RateType()
                 {
-                    InterestTypeId = p.InterestTypeId,
-                    InterestTypeName = p.InterestType1,  
+                    RateTypeId = p.RateTypeId,
+                    RateTypeName = p.RateTypeName,  
                     SystemName = p.SystemName   ,              
                     Status = p.Status
                 }).ToList();
