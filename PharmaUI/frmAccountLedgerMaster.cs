@@ -384,6 +384,10 @@ namespace PharmaUI
             {
                 EditLedger();
             }
+            else if (keyData == Keys.Down)
+            {
+                dgvAccountLedger.Focus();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }

@@ -189,6 +189,10 @@ namespace PharmaUI
             {
                 EditCompany();
             }
+            else if (keyData == Keys.Down)
+            {
+                dgvCompanyList.Focus();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }       

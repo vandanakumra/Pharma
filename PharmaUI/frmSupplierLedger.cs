@@ -193,6 +193,10 @@ namespace PharmaUI
             {
                 EditLedger();
             }
+            else if (keyData == Keys.Down)
+            {
+                dgvSupplier.Focus();
+            }
             //else if (keyData == Keys.Escape || keyData == Keys.End)
             //{
             //    this.Close();

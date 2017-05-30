@@ -244,6 +244,10 @@ namespace PharmaUI
                 }
                 return true;
             }
+            else if (keyData == Keys.Down)
+            {
+                dgvCustomerLedger.Focus();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
