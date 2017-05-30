@@ -58,7 +58,7 @@ namespace PharmaBusinessObjects.Master
             PurchaseSaleBookLineItem lineItem = new PurchaseSaleBookLineItem();
             lineItem.ItemCode = this.ItemCode;
             lineItem.ItemName = this.ItemName;
-            lineItem.Quantity = this.QtyPerCase == null ? 0 : Convert.ToInt32(this.QtyPerCase);
+            lineItem.Quantity = 0;
             lineItem.IsHalfScheme = this.IsHalfScheme;
             lineItem.MRP = this.MRP;
             lineItem.Scheme1 = this.Scheme1 == null ? 0 : Convert.ToInt32(this.Scheme1);

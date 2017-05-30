@@ -221,19 +221,33 @@ namespace PharmaUI
                     {
                         e.Handled = true;
                     }
+
+                    if(e.KeyChar == (char)Keys.Enter)
+                    {
+                        if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "FreeQuantity")
+                        {
+                            PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                            OpenSchemeDialog(lineItem);
+                        }
+                        else if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "PurchaseSaleRate")
+                        {
+                            PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                            OpenRateDialog(dgvLineItem.CurrentCell.RowIndex, lineItem);
+                        }
+                    }
                 }
-                if(!string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
-                {
-                    dgvLineItem.EndEdit();
-                    e.Handled = true;
-                }
-                if (string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
-                {
-                    e.Handled = true;
-                    int rowIndex = dgvLineItem.CurrentCell.RowIndex;
-                    int colIndex = dgvLineItem.CurrentCell.ColumnIndex;
-                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex + 1];
-                }
+                //if(!string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
+                //{
+                //    dgvLineItem.EndEdit();
+                //    e.Handled = true;
+                //}
+                //if (string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
+                //{
+                //    e.Handled = true;
+                //    int rowIndex = dgvLineItem.CurrentCell.RowIndex;
+                //    int colIndex = dgvLineItem.CurrentCell.ColumnIndex;
+                //    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex + 1];
+                //}
             }
             catch (Exception ex)
             {
@@ -281,40 +295,7 @@ namespace PharmaUI
                     }
                 }
 
-                if (columnName == "FreeQuantity")
-                {
-                    PharmaUI.Purchase_Entry.frmLineItemScheme updateForm = new PharmaUI.Purchase_Entry.frmLineItemScheme(lineItem);
-                    updateForm.FormClosed += frmLineItemScheme_FormClosed;
-                    updateForm.ShowDialog();
-                }
-                else if (dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name == "PurchaseSaleRate")
-                {
-                    double newRate = 0L;
-                    double oldRate = 0L;
-
-                    double.TryParse(Convert.ToString(dgvLineItem["OldPurchaseSaleRate", e.RowIndex].Value), out oldRate);
-                    double.TryParse(Convert.ToString(dgvLineItem["PurchaseSaleRate", e.RowIndex].Value), out newRate);
-
-                    if (oldRate != newRate)
-                    {
-                        frmLineItemDiscount updateForm = new frmLineItemDiscount(lineItem);
-                        updateForm.FormClosed += frmLineItemDiscount_FormClosed;
-                        updateForm.ShowDialog();
-
-                }
-                else
-                {
-                    frmLineItemBriefDiscount updateForm = new frmLineItemBriefDiscount(lineItem);
-                    updateForm.FormClosed += frmLineItemBriefDiscount_FormClosed;
-                    updateForm.ShowDialog();
-                    
-                }
-
-                    //if (e.RowIndex == 0 && dgvLineItem.Rows.Count == (e.RowIndex + 1))
-                    //{
-                    //    dgvLineItem.Rows.Add();
-                    //}
-                }
+                OpenDialogAndMoveToNextControl(columnName);
 
 
             }
@@ -322,6 +303,37 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void OpenRateDialog(int rowIndex, PurchaseSaleBookLineItem lineItem)
+        {
+            double newRate = 0L;
+            double oldRate = 0L;
+
+            double.TryParse(Convert.ToString(dgvLineItem["OldPurchaseSaleRate", rowIndex].Value), out oldRate);
+            double.TryParse(Convert.ToString(dgvLineItem["PurchaseSaleRate", rowIndex].Value), out newRate);
+
+            if (oldRate != newRate)
+            {
+                frmLineItemDiscount updateForm = new frmLineItemDiscount(lineItem);
+                updateForm.FormClosed += frmLineItemDiscount_FormClosed;
+                updateForm.ShowDialog();
+
+            }
+            else
+            {
+                frmLineItemBriefDiscount updateForm = new frmLineItemBriefDiscount(lineItem);
+                updateForm.FormClosed += frmLineItemBriefDiscount_FormClosed;
+                updateForm.ShowDialog();
+
+            }
+        }
+
+        private void OpenSchemeDialog(PurchaseSaleBookLineItem lineItem)
+        {
+            PharmaUI.Purchase_Entry.frmLineItemScheme updateForm = new PharmaUI.Purchase_Entry.frmLineItemScheme(lineItem);
+            updateForm.FormClosed += frmLineItemScheme_FormClosed;
+            updateForm.ShowDialog();
         }
 
         private void DgvLineItem_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -481,6 +493,7 @@ namespace PharmaUI
                                 }
 
                                 dgvLineItem.Rows.Add();
+                                dgvLineItem.CurrentCell = null;
                                 cbxPurchaseType.Focus();
                             }
 
@@ -707,6 +720,16 @@ namespace PharmaUI
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                int qty = 0;
+                Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out qty);
+                if (qty == 0)
+                {
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"];
+                }
+                else
+                {
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"];
+                }
             }
             catch (Exception ex)
             {
@@ -837,7 +860,17 @@ namespace PharmaUI
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Amount"];
+                int rate = 0;
+                Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
+                if (rate == 0)
+                {
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"];
+                }
+                else
+                {
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Amount"];
+                }
+
 
             }
             catch (Exception ex)
@@ -896,7 +929,16 @@ namespace PharmaUI
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Amount"];
+                int rate = 0;
+                Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
+                if (rate == 0)
+                {
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"];
+                }
+                else
+                {
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Amount"];
+                }
 
             }
             catch (Exception ex)
@@ -1026,37 +1068,15 @@ namespace PharmaUI
                         double val = 0L;
                         double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out val);
 
-                        if ((columnName != "Quantity" && columnName != "PurchaseSaleRate") || (val != 0 && (columnName == "Quantity" || columnName == "PurchaseSaleRate")))
-                        {
-                            int colIndex = dgvLineItem.CurrentCell.ColumnIndex + 1;
-                            int rowIndex = dgvLineItem.CurrentCell.RowIndex;
+                        OpenDialogAndMoveToNextControl(columnName);                     
+                        //else {
+                        //    dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
+                        //}
 
-                            if (colIndex <= 8)
-                            {
-                                dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells[colIndex];
-                            }
-                            else
-                            {
-                                if (rowIndex == dgvLineItem.Rows.Count - 1)
-                                {
-                                    dgvLineItem.Rows.Add();
-                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells[1];
-                                }
-                                else
-                                {
-                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells[1];
-                                }
-                            }
-
-                        }
-                        else {
-                            dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
-                        }
+                        
                     }
                     else
                     {
-                       
-
                         if (columnName == "ItemCode")
                         {
                             e.SuppressKeyPress = true;
@@ -1095,6 +1115,50 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message);                
             }
             
+        }
+
+        private void OpenDialogAndMoveToNextControl(string columnName)
+        {
+            if (columnName == "FreeQuantity")
+            {
+                PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                OpenSchemeDialog(lineItem);
+            }
+            else if (columnName == "PurchaseSaleRate")
+            {
+                PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                OpenRateDialog(dgvLineItem.CurrentCell.RowIndex, lineItem);
+                //if (e.RowIndex == 0 && dgvLineItem.Rows.Count == (e.RowIndex + 1))
+                //{
+                //    dgvLineItem.Rows.Add();
+                //}
+            }
+            else //if ((columnName != "Quantity" && columnName != "PurchaseSaleRate") || (val != 0 && (columnName == "Quantity" || columnName == "PurchaseSaleRate")))
+            {
+                int colIndex = dgvLineItem.CurrentCell.ColumnIndex + 1;
+                int rowIndex = dgvLineItem.CurrentCell.RowIndex;
+
+                if (colIndex <= 8)
+                {
+                    dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells[colIndex];
+                }
+                else
+                {
+                    if (rowIndex == dgvLineItem.Rows.Count - 1)
+                    {
+                        dgvLineItem.Rows.Add();
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells[2];
+                    }
+                    else
+                    {
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells[2];
+                    }
+                }
+
+
+
+
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -1172,13 +1236,16 @@ namespace PharmaUI
             }
             else if (sender is ComboBox)
             {
-                ComboBox box = (ComboBox)sender;
+                ComboBox bx = sender as ComboBox;
 
-                if (e.KeyCode == Keys.Enter)
+                if (bx.Name == "cbxPurchaseFormType" || (cbxPurchaseFormType.Visible == false && bx.Name== "cbxPurchaseType"))
                 {
-                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                    if (dgvLineItem.Rows.Count > 0)
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells[2];
                 }
+                this.SelectNextControl(this.ActiveControl, true, true, true, true);
             }
+           
         }
     }
 }
