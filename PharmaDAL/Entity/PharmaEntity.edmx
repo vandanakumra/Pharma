@@ -438,7 +438,6 @@
           <Property Name="Scheme2" Type="float" />
           <Property Name="IsHalfScheme" Type="bit" Nullable="false" />
           <Property Name="HalfSchemeRate" Type="float" />
-          <Property Name="BillAmount" Type="float" />
           <Property Name="CostAmount" Type="float" />
           <Property Name="GrossAmount" Type="float" />
           <Property Name="SchemeAmount" Type="float" />
@@ -454,6 +453,10 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="TaxAmount" Type="float" />
+          <Property Name="SpecialDiscountAmount" Type="float" />
+          <Property Name="VolumeDiscountAmount" Type="float" />
+          <Property Name="TotalDiscountAmount" Type="float" />
         </EntityType>
         <EntityType Name="PurchaseSaleEntryForm">
           <Key>
@@ -607,7 +610,6 @@
           <Property Name="FreshBreakageExcess" Type="nvarchar" MaxLength="1" />
           <Property Name="ReturnBillNo" Type="nvarchar" MaxLength="20" />
           <Property Name="ReturBillDate" Type="datetime" />
-          <Property Name="CustomerTypeId" Type="int" />
           <Property Name="LocalCentral" Type="nvarchar" MaxLength="1" />
           <Property Name="OrderNumber" Type="nvarchar" MaxLength="500" />
           <Property Name="ChallanNumber" Type="nvarchar" MaxLength="500" />
@@ -657,12 +659,6 @@
           <Property Name="Scheme2" Type="float" />
           <Property Name="IsHalfScheme" Type="bit" Nullable="false" />
           <Property Name="HalfSchemeRate" Type="float" />
-          <Property Name="BillAmount" Type="float" />
-          <Property Name="CostAmount" Type="float" />
-          <Property Name="GrossAmount" Type="float" />
-          <Property Name="SchemeAmount" Type="float" />
-          <Property Name="DiscountAmount" Type="float" />
-          <Property Name="SurchargeAmount" Type="float" />
           <Property Name="ConversionRate" Type="float" />
           <Property Name="MRP" Type="float" />
           <Property Name="ExpiryDate" Type="datetime" />
@@ -1018,30 +1014,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PurchaseSaleBookLineItem_FIFO">
-          <End Role="FIFO" Type="Self.FIFO" Multiplicity="0..1" />
-          <End Role="PurchaseSaleBookLineItem" Type="Self.PurchaseSaleBookLineItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FIFO">
-              <PropertyRef Name="FifoID" />
-            </Principal>
-            <Dependent Role="PurchaseSaleBookLineItem">
-              <PropertyRef Name="FifoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader">
-          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
-          <End Role="PurchaseSaleBookLineItem" Type="Self.PurchaseSaleBookLineItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseSaleBookHeader">
-              <PropertyRef Name="PurchaseSaleBookHeaderID" />
-            </Principal>
-            <Dependent Role="PurchaseSaleBookLineItem">
-              <PropertyRef Name="PurchaseSaleBookHeaderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PurchaseSaleEntryForm_PurchaseSaleEntryType">
           <End Role="PurchaseSaleEntryType" Type="Self.PurchaseSaleEntryType" Multiplicity="1" />
           <End Role="PurchaseSaleEntryForm" Type="Self.PurchaseSaleEntryForm" Multiplicity="*" />
@@ -1139,30 +1111,6 @@
             </Principal>
             <Dependent Role="SupplierLedger">
               <PropertyRef Name="AreaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TempPurchaseSaleBookLineItem_FIFO">
-          <End Role="FIFO" Type="Self.FIFO" Multiplicity="0..1" />
-          <End Role="TempPurchaseSaleBookLineItem" Type="Self.TempPurchaseSaleBookLineItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FIFO">
-              <PropertyRef Name="FifoID" />
-            </Principal>
-            <Dependent Role="TempPurchaseSaleBookLineItem">
-              <PropertyRef Name="FifoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader">
-          <End Role="TempPurchaseSaleBookHeader" Type="Self.TempPurchaseSaleBookHeader" Multiplicity="1" />
-          <End Role="TempPurchaseSaleBookLineItem" Type="Self.TempPurchaseSaleBookLineItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TempPurchaseSaleBookHeader">
-              <PropertyRef Name="PurchaseSaleBookHeaderID" />
-            </Principal>
-            <Dependent Role="TempPurchaseSaleBookLineItem">
-              <PropertyRef Name="PurchaseSaleBookHeaderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1311,14 +1259,6 @@
             <End Role="RecordType" EntitySet="RecordType" />
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
           </AssociationSet>
-          <AssociationSet Name="FK_PurchaseSaleBookLineItem_FIFO" Association="Self.FK_PurchaseSaleBookLineItem_FIFO">
-            <End Role="FIFO" EntitySet="FIFO" />
-            <End Role="PurchaseSaleBookLineItem" EntitySet="PurchaseSaleBookLineItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" Association="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader">
-            <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
-            <End Role="PurchaseSaleBookLineItem" EntitySet="PurchaseSaleBookLineItem" />
-          </AssociationSet>
           <AssociationSet Name="FK_PurchaseSaleEntryForm_PurchaseSaleEntryType" Association="Self.FK_PurchaseSaleEntryForm_PurchaseSaleEntryType">
             <End Role="PurchaseSaleEntryType" EntitySet="PurchaseSaleEntryType" />
             <End Role="PurchaseSaleEntryForm" EntitySet="PurchaseSaleEntryForm" />
@@ -1350,14 +1290,6 @@
           <AssociationSet Name="FK_SupplierLedger_SalesPersonMaster" Association="Self.FK_SupplierLedger_SalesPersonMaster">
             <End Role="PersonRouteMaster" EntitySet="PersonRouteMaster" />
             <End Role="SupplierLedger" EntitySet="SupplierLedger" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TempPurchaseSaleBookLineItem_FIFO" Association="Self.FK_TempPurchaseSaleBookLineItem_FIFO">
-            <End Role="FIFO" EntitySet="FIFO" />
-            <End Role="TempPurchaseSaleBookLineItem" EntitySet="TempPurchaseSaleBookLineItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" Association="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader">
-            <End Role="TempPurchaseSaleBookHeader" EntitySet="TempPurchaseSaleBookHeader" />
-            <End Role="TempPurchaseSaleBookLineItem" EntitySet="TempPurchaseSaleBookLineItem" />
           </AssociationSet>
           <AssociationSet Name="FK_TRN_PurchaseSaleBookHeader" Association="Self.FK_TRN_PurchaseSaleBookHeader">
             <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
@@ -1604,8 +1536,6 @@
           <Property Name="MfgDate" Type="DateTime" Precision="3" />
           <Property Name="UPC" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_FIFO_PurchaseSaleBookHeader" FromRole="FIFO" ToRole="PurchaseSaleBookHeader" />
-          <NavigationProperty Name="PurchaseSaleBookLineItem" Relationship="Self.FK_PurchaseSaleBookLineItem_FIFO" FromRole="FIFO" ToRole="PurchaseSaleBookLineItem" />
-          <NavigationProperty Name="TempPurchaseSaleBookLineItem" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="FIFO" ToRole="TempPurchaseSaleBookLineItem" />
         </EntityType>
         <EntityType Name="ItemMaster">
           <Key>
@@ -1821,7 +1751,6 @@
           <NavigationProperty Name="BillOutStandings" Relationship="Self.FK_BillOutStandings_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="BillOutStandings" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="BillOutStandingsAudjustment" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_FIFO_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="FIFO" />
-          <NavigationProperty Name="PurchaseSaleBookLineItem" Relationship="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="PurchaseSaleBookLineItem" />
           <NavigationProperty Name="TRN" Relationship="Self.FK_TRN_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="TRN" />
         </EntityType>
         <EntityType Name="PurchaseSaleBookLineItem">
@@ -1857,7 +1786,6 @@
           <Property Name="Scheme2" Type="Double" />
           <Property Name="IsHalfScheme" Type="Boolean" Nullable="false" />
           <Property Name="HalfSchemeRate" Type="Double" />
-          <Property Name="BillAmount" Type="Double" />
           <Property Name="CostAmount" Type="Double" />
           <Property Name="GrossAmount" Type="Double" />
           <Property Name="SchemeAmount" Type="Double" />
@@ -1873,8 +1801,10 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="FIFO" Relationship="Self.FK_PurchaseSaleBookLineItem_FIFO" FromRole="PurchaseSaleBookLineItem" ToRole="FIFO" />
-          <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookLineItem" ToRole="PurchaseSaleBookHeader" />
+          <Property Name="TaxAmount" Type="Double" />
+          <Property Name="SpecialDiscountAmount" Type="Double" />
+          <Property Name="VolumeDiscountAmount" Type="Double" />
+          <Property Name="TotalDiscountAmount" Type="Double" />
         </EntityType>
         <EntityType Name="PurchaseSaleEntryForm">
           <Key>
@@ -2042,7 +1972,6 @@
           <Property Name="FreshBreakageExcess" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="ReturnBillNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ReturBillDate" Type="DateTime" Precision="3" />
-          <Property Name="CustomerTypeId" Type="Int32" />
           <Property Name="LocalCentral" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="OrderNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ChallanNumber" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -2058,7 +1987,6 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TempPurchaseSaleBookLineItem" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookHeader" ToRole="TempPurchaseSaleBookLineItem" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookLineItem">
           <Key>
@@ -2093,12 +2021,6 @@
           <Property Name="Scheme2" Type="Double" />
           <Property Name="IsHalfScheme" Type="Boolean" Nullable="false" />
           <Property Name="HalfSchemeRate" Type="Double" />
-          <Property Name="BillAmount" Type="Double" />
-          <Property Name="CostAmount" Type="Double" />
-          <Property Name="GrossAmount" Type="Double" />
-          <Property Name="SchemeAmount" Type="Double" />
-          <Property Name="DiscountAmount" Type="Double" />
-          <Property Name="SurchargeAmount" Type="Double" />
           <Property Name="ConversionRate" Type="Double" />
           <Property Name="MRP" Type="Double" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
@@ -2109,8 +2031,6 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="FIFO" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="TempPurchaseSaleBookLineItem" ToRole="FIFO" />
-          <NavigationProperty Name="TempPurchaseSaleBookHeader" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookLineItem" ToRole="TempPurchaseSaleBookHeader" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -2446,30 +2366,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PurchaseSaleBookLineItem_FIFO">
-          <End Role="FIFO" Type="Self.FIFO" Multiplicity="0..1" />
-          <End Role="PurchaseSaleBookLineItem" Type="Self.PurchaseSaleBookLineItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FIFO">
-              <PropertyRef Name="FifoID" />
-            </Principal>
-            <Dependent Role="PurchaseSaleBookLineItem">
-              <PropertyRef Name="FifoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TempPurchaseSaleBookLineItem_FIFO">
-          <End Role="FIFO" Type="Self.FIFO" Multiplicity="0..1" />
-          <End Role="TempPurchaseSaleBookLineItem" Type="Self.TempPurchaseSaleBookLineItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FIFO">
-              <PropertyRef Name="FifoID" />
-            </Principal>
-            <Dependent Role="TempPurchaseSaleBookLineItem">
-              <PropertyRef Name="FifoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SupplierCompanyDiscountRef_ItemMaster">
           <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
           <End Role="SupplierCompanyDiscountRef" Type="Self.SupplierCompanyDiscountRef" Multiplicity="*" />
@@ -2532,18 +2428,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader">
-          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
-          <End Role="PurchaseSaleBookLineItem" Type="Self.PurchaseSaleBookLineItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseSaleBookHeader">
-              <PropertyRef Name="PurchaseSaleBookHeaderID" />
-            </Principal>
-            <Dependent Role="PurchaseSaleBookLineItem">
-              <PropertyRef Name="PurchaseSaleBookHeaderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TRN_PurchaseSaleBookHeader">
           <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
           <End Role="TRN" Type="Self.TRN" Multiplicity="*" />
@@ -2603,18 +2487,6 @@
             </Principal>
             <Dependent Role="SupplierCompanyDiscountRef">
               <PropertyRef Name="SupplierLedgerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader">
-          <End Role="TempPurchaseSaleBookHeader" Type="Self.TempPurchaseSaleBookHeader" Multiplicity="1" />
-          <End Role="TempPurchaseSaleBookLineItem" Type="Self.TempPurchaseSaleBookLineItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TempPurchaseSaleBookHeader">
-              <PropertyRef Name="PurchaseSaleBookHeaderID" />
-            </Principal>
-            <Dependent Role="TempPurchaseSaleBookLineItem">
-              <PropertyRef Name="PurchaseSaleBookHeaderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2747,14 +2619,6 @@
             <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
             <End Role="FIFO" EntitySet="FIFO" />
           </AssociationSet>
-          <AssociationSet Name="FK_PurchaseSaleBookLineItem_FIFO" Association="Self.FK_PurchaseSaleBookLineItem_FIFO">
-            <End Role="FIFO" EntitySet="FIFO" />
-            <End Role="PurchaseSaleBookLineItem" EntitySet="PurchaseSaleBookLineItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TempPurchaseSaleBookLineItem_FIFO" Association="Self.FK_TempPurchaseSaleBookLineItem_FIFO">
-            <End Role="FIFO" EntitySet="FIFO" />
-            <End Role="TempPurchaseSaleBookLineItem" EntitySet="TempPurchaseSaleBookLineItem" />
-          </AssociationSet>
           <AssociationSet Name="FK_SupplierCompanyDiscountRef_ItemMaster" Association="Self.FK_SupplierCompanyDiscountRef_ItemMaster">
             <End Role="ItemMaster" EntitySet="ItemMaster" />
             <End Role="SupplierCompanyDiscountRef" EntitySet="SupplierCompanyDiscountRef" />
@@ -2775,10 +2639,6 @@
             <End Role="Privledges" EntitySet="Privledges" />
             <End Role="RolePrivledges" EntitySet="RolePrivledges" />
           </AssociationSet>
-          <AssociationSet Name="FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" Association="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader">
-            <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
-            <End Role="PurchaseSaleBookLineItem" EntitySet="PurchaseSaleBookLineItem" />
-          </AssociationSet>
           <AssociationSet Name="FK_TRN_PurchaseSaleBookHeader" Association="Self.FK_TRN_PurchaseSaleBookHeader">
             <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
             <End Role="TRN" EntitySet="TRN" />
@@ -2798,10 +2658,6 @@
           <AssociationSet Name="FK_SupplierCompanyDiscountRef_SupplierLedger" Association="Self.FK_SupplierCompanyDiscountRef_SupplierLedger">
             <End Role="SupplierLedger" EntitySet="SupplierLedger" />
             <End Role="SupplierCompanyDiscountRef" EntitySet="SupplierCompanyDiscountRef" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" Association="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader">
-            <End Role="TempPurchaseSaleBookHeader" EntitySet="TempPurchaseSaleBookHeader" />
-            <End Role="TempPurchaseSaleBookLineItem" EntitySet="TempPurchaseSaleBookLineItem" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -3260,7 +3116,6 @@
                 <ScalarProperty Name="Scheme2" ColumnName="Scheme2" />
                 <ScalarProperty Name="IsHalfScheme" ColumnName="IsHalfScheme" />
                 <ScalarProperty Name="HalfSchemeRate" ColumnName="HalfSchemeRate" />
-                <ScalarProperty Name="BillAmount" ColumnName="BillAmount" />
                 <ScalarProperty Name="CostAmount" ColumnName="CostAmount" />
                 <ScalarProperty Name="GrossAmount" ColumnName="GrossAmount" />
                 <ScalarProperty Name="SchemeAmount" ColumnName="SchemeAmount" />
@@ -3276,6 +3131,10 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="SpecialDiscountAmount" ColumnName="SpecialDiscountAmount" />
+                <ScalarProperty Name="VolumeDiscountAmount" ColumnName="VolumeDiscountAmount" />
+                <ScalarProperty Name="TotalDiscountAmount" ColumnName="TotalDiscountAmount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3438,7 +3297,6 @@
                 <ScalarProperty Name="FreshBreakageExcess" ColumnName="FreshBreakageExcess" />
                 <ScalarProperty Name="ReturnBillNo" ColumnName="ReturnBillNo" />
                 <ScalarProperty Name="ReturBillDate" ColumnName="ReturBillDate" />
-                <ScalarProperty Name="CustomerTypeId" ColumnName="CustomerTypeId" />
                 <ScalarProperty Name="LocalCentral" ColumnName="LocalCentral" />
                 <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
                 <ScalarProperty Name="ChallanNumber" ColumnName="ChallanNumber" />
@@ -3489,12 +3347,6 @@
                 <ScalarProperty Name="Scheme2" ColumnName="Scheme2" />
                 <ScalarProperty Name="IsHalfScheme" ColumnName="IsHalfScheme" />
                 <ScalarProperty Name="HalfSchemeRate" ColumnName="HalfSchemeRate" />
-                <ScalarProperty Name="BillAmount" ColumnName="BillAmount" />
-                <ScalarProperty Name="CostAmount" ColumnName="CostAmount" />
-                <ScalarProperty Name="GrossAmount" ColumnName="GrossAmount" />
-                <ScalarProperty Name="SchemeAmount" ColumnName="SchemeAmount" />
-                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
-                <ScalarProperty Name="SurchargeAmount" ColumnName="SurchargeAmount" />
                 <ScalarProperty Name="ConversionRate" ColumnName="ConversionRate" />
                 <ScalarProperty Name="MRP" ColumnName="MRP" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />

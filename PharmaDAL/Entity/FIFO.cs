@@ -14,13 +14,6 @@ namespace PharmaDAL.Entity
     
     public partial class FIFO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FIFO()
-        {
-            this.PurchaseSaleBookLineItem = new HashSet<PurchaseSaleBookLineItem>();
-            this.TempPurchaseSaleBookLineItem = new HashSet<TempPurchaseSaleBookLineItem>();
-        }
-    
         public long FifoID { get; set; }
         public long PurchaseSaleBookHeaderID { get; set; }
         public string VoucherNumber { get; set; }
@@ -47,9 +40,5 @@ namespace PharmaDAL.Entity
         public string UPC { get; set; }
     
         public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseSaleBookLineItem> PurchaseSaleBookLineItem { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TempPurchaseSaleBookLineItem> TempPurchaseSaleBookLineItem { get; set; }
     }
 }

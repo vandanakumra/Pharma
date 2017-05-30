@@ -43,7 +43,6 @@ namespace PharmaDAL.Entity
         public Nullable<double> Scheme2 { get; set; }
         public bool IsHalfScheme { get; set; }
         public Nullable<double> HalfSchemeRate { get; set; }
-        public Nullable<double> BillAmount { get; set; }
         public Nullable<double> CostAmount { get; set; }
         public Nullable<double> GrossAmount { get; set; }
         public Nullable<double> SchemeAmount { get; set; }
@@ -59,8 +58,9 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-    
-        public virtual FIFO FIFO { get; set; }
-        public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }
+        public Nullable<double> TaxAmount { get; set; }
+        public Nullable<double> SpecialDiscountAmount { get; set; }
+        public Nullable<double> VolumeDiscountAmount { get; set; }
+        public Nullable<double> TotalDiscountAmount { get; set; }
     }
 }

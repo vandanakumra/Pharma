@@ -37,13 +37,7 @@ namespace PharmaBusinessObjects.Transaction
         public Nullable<double> Scheme1 { get; set; }
         public Nullable<double> Scheme2 { get; set; }
         public bool IsHalfScheme { get; set; }
-        public Nullable<double> HalfSchemeRate { get; set; }
-        public Nullable<double> BillAmount { get; set; }
-        public Nullable<double> CostAmount { get; set; }
-        public Nullable<double> GrossAmount { get; set; }
-        public Nullable<double> SchemeAmount { get; set; }
-        public Nullable<double> DiscountAmount { get; set; }
-        public Nullable<double> SurchargeAmount { get; set; }
+        public Nullable<double> HalfSchemeRate { get; set; }       
         public Nullable<double> ConversionRate { get; set; }
         public Nullable<double> MRP { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
