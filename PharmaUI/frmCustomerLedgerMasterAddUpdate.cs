@@ -248,7 +248,7 @@ namespace PharmaUI
                 Enum.TryParse<Choice>(cbxLessExcise.SelectedValue.ToString(), out choice);
                 customerLedgerMaster.IsLessExcise = choice == Choice.Yes;
 
-                customerLedgerMaster.InterestTypeID = (cbxRateType.SelectedItem as InterestType).InterestTypeId;
+                customerLedgerMaster.InterestTypeID = (cbxRateType.SelectedItem as RateType).RateTypeId;
 
                 customerLedgerMaster.SaleBillFormat = tbxSaleBillFormat.Text;
 

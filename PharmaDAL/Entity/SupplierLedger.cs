@@ -14,6 +14,12 @@ namespace PharmaDAL.Entity
     
     public partial class SupplierLedger
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SupplierLedger()
+        {
+            this.SupplierCompanyDiscountRef = new HashSet<SupplierCompanyDiscountRef>();
+        }
+    
         public int SupplierLedgerId { get; set; }
         public string SupplierLedgerCode { get; set; }
         public string SupplierLedgerName { get; set; }
@@ -42,5 +48,7 @@ namespace PharmaDAL.Entity
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SupplierCompanyDiscountRef> SupplierCompanyDiscountRef { get; set; }
     }
 }

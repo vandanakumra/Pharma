@@ -20,9 +20,9 @@ namespace PharmaUI
         public string ItemCode { get; set; }
         public string BatchNumber { get; set; }
 
-        private List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> list;
+        private List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> list;
 
-        public frmLastNBatchNo(List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> _list)
+        public frmLastNBatchNo(List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> _list)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);

@@ -17,11 +17,11 @@ namespace PharmaUI.Purchase_Entry
     public partial class frmLineItemScheme : Form
     {
         IApplicationFacade applicationFacade;
-        PurchaseBookLineItem purchaseBookLineItem;
+        PurchaseSaleBookLineItem purchaseBookLineItem;
 
-        public PurchaseBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
+        public PurchaseSaleBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
 
-        public frmLineItemScheme(PurchaseBookLineItem lineItem)
+        public frmLineItemScheme(PurchaseSaleBookLineItem lineItem)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);

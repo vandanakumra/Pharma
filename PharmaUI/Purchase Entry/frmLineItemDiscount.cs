@@ -17,11 +17,11 @@ namespace PharmaUI
     public partial class frmLineItemDiscount : Form
     {
         IApplicationFacade applicationFacade;
-        PurchaseBookLineItem purchaseBookLineItem;
+        PurchaseSaleBookLineItem purchaseBookLineItem;
 
-        public PurchaseBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
+        public PurchaseSaleBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
 
-        public frmLineItemDiscount(PurchaseBookLineItem lineItem)
+        public frmLineItemDiscount(PurchaseSaleBookLineItem lineItem)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
@@ -46,8 +46,8 @@ namespace PharmaUI
 
         private void FillFormForUpdate()
         {
-            dtLIDate.Value = purchaseBookLineItem.PurchaseDate == DateTime.MinValue ? dtLIDate.MinDate : purchaseBookLineItem.PurchaseDate;
-            txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
+            dtLIDate.Value = purchaseBookLineItem.PurchaseBillDate == (DateTime) DateTime.MinValue ? dtLIDate.MinDate : (DateTime)purchaseBookLineItem.PurchaseBillDate;
+           // txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
             txtSpecialRate.Text = Convert.ToString(purchaseBookLineItem.SpecialRate);
             txtWholeSaleRate.Text = Convert.ToString(purchaseBookLineItem.WholeSaleRate);
             txtSaleRate.Text = Convert.ToString(purchaseBookLineItem.SaleRate);
@@ -55,9 +55,9 @@ namespace PharmaUI
             txtSpecialDiscount.Text = Convert.ToString(purchaseBookLineItem.SpecialDiscount);
             txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
             txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);
-            dtLIDate.Value = purchaseBookLineItem.PurchaseDate == DateTime.MinValue ? dtLIDate.MinDate : purchaseBookLineItem.PurchaseDate;
-            dtExpiry.Value = purchaseBookLineItem.Expiry == DateTime.MinValue ? dtExpiry.MinDate : purchaseBookLineItem.Expiry;           
-            cbxNewRate.SelectedItem = purchaseBookLineItem.IsNewRate ? Choice.Yes : Choice.No;
+           // dtLIDate.Value = purchaseBookLineItem.PurchaseDate == DateTime.MinValue ? dtLIDate.MinDate : purchaseBookLineItem.PurchaseDate;
+            dtExpiry.Value = purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? (DateTime)dtExpiry.MinDate : (DateTime)purchaseBookLineItem.ExpiryDate;           
+           // cbxNewRate.SelectedItem = purchaseBookLineItem.IsNewRate ? Choice.Yes : Choice.No;
         }
 
         public void GotFocusEventRaised(Control control)
@@ -117,8 +117,8 @@ namespace PharmaUI
             double.TryParse(txtMRP.Text, out value);
             purchaseBookLineItem.MRP = value;
 
-            double.TryParse(txtExcise.Text, out value);
-            purchaseBookLineItem.Excise = value;
+            //double.TryParse(txtExcise.Text, out value);
+            //purchaseBookLineItem.Excise = value;
 
             double.TryParse(txtSaleRate.Text, out value);
             purchaseBookLineItem.SaleRate = value;
@@ -132,10 +132,10 @@ namespace PharmaUI
             Choice choice;
             Enum.TryParse<Choice>(cbxNewRate.SelectedValue.ToString(), out choice);
 
-            purchaseBookLineItem.IsNewRate = choice == Choice.Yes;
+           // purchaseBookLineItem.IsNewRate = choice == Choice.Yes;
 
-            purchaseBookLineItem.Expiry = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
-            purchaseBookLineItem.PurchaseDate = dtLIDate.Value.Date == dtLIDate.MinDate ? DateTime.MinValue : dtLIDate.Value.Date;
+            purchaseBookLineItem.ExpiryDate = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
+            purchaseBookLineItem.PurchaseBillDate = dtLIDate.Value.Date == dtLIDate.MinDate ? DateTime.MinValue : dtLIDate.Value.Date;
         }
 
         private void tblDiscount_Paint(object sender, PaintEventArgs e)

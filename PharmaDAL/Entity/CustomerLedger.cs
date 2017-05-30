@@ -70,7 +70,7 @@ namespace PharmaDAL.Entity
         public virtual ICollection<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }
         public virtual CustomerType CustomerType { get; set; }
-        public virtual InterestType InterestType { get; set; }
+        public virtual RateType RateType { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster1 { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster2 { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster3 { get; set; }

@@ -12,16 +12,16 @@ namespace PharmaDAL.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class InterestType
+    public partial class RateType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InterestType()
+        public RateType()
         {
             this.CustomerLedger = new HashSet<CustomerLedger>();
         }
     
-        public int InterestTypeId { get; set; }
-        public string InterestType1 { get; set; }
+        public int RateTypeId { get; set; }
+        public string RateTypeName { get; set; }
         public string SystemName { get; set; }
         public bool Status { get; set; }
     

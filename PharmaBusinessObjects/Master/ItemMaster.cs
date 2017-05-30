@@ -53,9 +53,9 @@ namespace PharmaBusinessObjects.Master
         public string PurchaseTypeName { get; set; }
         public decimal? PurchaseTypeRate { get; set; }
 
-        public PurchaseBookLineItem ToPurchaseBookLineItem()
+        public PurchaseSaleBookLineItem ToPurchaseBookLineItem()
         {
-            PurchaseBookLineItem lineItem = new PurchaseBookLineItem();
+            PurchaseSaleBookLineItem lineItem = new PurchaseSaleBookLineItem();
             lineItem.ItemCode = this.ItemCode;
             lineItem.ItemName = this.ItemName;
             lineItem.Quantity = this.QtyPerCase == null ? 0 : Convert.ToInt32(this.QtyPerCase);
@@ -67,15 +67,16 @@ namespace PharmaBusinessObjects.Master
             lineItem.SpecialDiscount = this.SpecialDiscountRecieved ?? 0L;
             lineItem.VolumeDiscount = 0L;
             lineItem.MRP = this.MRP;
-            lineItem.Excise = this.PurchaseExcise ?? 0L;
-            lineItem.FreeQty = 0;
+           // lineItem.Excise = this.PurchaseExcise ?? 0L;
+            lineItem.FreeQuantity = 0;
             lineItem.SpecialRate = this.SpecialRate ?? 0L;
             lineItem.WholeSaleRate = this.WholeSaleRate ?? 0L;
             lineItem.SaleRate = this.SaleRate ?? 0L;
-            lineItem.PurchaseTaxType = this.PurchaseTypeCode;
+            lineItem.PurchaseSaleTypeCode = this.PurchaseTypeCode;
             double val = 0L;
             double.TryParse(Convert.ToString(this.PurchaseTypeRate), out val);
-            lineItem.TaxOnPurchase = val;
+            lineItem.PurchaseSaleTax = val;
+            lineItem.PurchaseSaleRate = (double)this.PurchaseRate;
             return lineItem;
         }
     }

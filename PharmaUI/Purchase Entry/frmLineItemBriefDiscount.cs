@@ -15,11 +15,11 @@ namespace PharmaUI
     public partial class frmLineItemBriefDiscount : Form
     {
         IApplicationFacade applicationFacade;
-        PurchaseBookLineItem purchaseBookLineItem;
+        PurchaseSaleBookLineItem purchaseBookLineItem;
 
-        public PurchaseBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
+        public PurchaseSaleBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
 
-        public frmLineItemBriefDiscount(PurchaseBookLineItem lineItem)
+        public frmLineItemBriefDiscount(PurchaseSaleBookLineItem lineItem)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
@@ -42,12 +42,12 @@ namespace PharmaUI
 
         private void FillFormForUpdate()
         {
-            txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
+           // txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
             txtMRP.Text = Convert.ToString(purchaseBookLineItem.MRP);
             txtSpecialDiscount.Text = Convert.ToString(purchaseBookLineItem.SpecialDiscount);
             txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
             txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);
-            dtExpiry.Value = purchaseBookLineItem.Expiry == DateTime.MinValue ? dtExpiry.MinDate : purchaseBookLineItem.Expiry;
+            dtExpiry.Value = purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? (DateTime)dtExpiry.MinDate : (DateTime)purchaseBookLineItem.ExpiryDate;
         }
 
         public void GotFocusEventRaised(Control control)
@@ -107,10 +107,10 @@ namespace PharmaUI
             double.TryParse(txtMRP.Text, out value);
             purchaseBookLineItem.MRP = value;
 
-            double.TryParse(txtExcise.Text, out value);
-            purchaseBookLineItem.Excise = value;
+            //double.TryParse(txtExcise.Text, out value);
+            //purchaseBookLineItem.Excise = value;
 
-            purchaseBookLineItem.Expiry = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
+            purchaseBookLineItem.ExpiryDate = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
         }
 
         private void EnterKeyDownForTabEvents(Control control)

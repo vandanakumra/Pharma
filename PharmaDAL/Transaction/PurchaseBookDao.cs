@@ -17,137 +17,239 @@ namespace PharmaDAL.Transaction
 
         }
 
-        public int InsertTempPurchaseBookHeader(PharmaBusinessObjects.Transaction.PurchaseBookHeader header)
+
+        public long InsertUpdateTempPurchaseBookHeader(PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader header)
         {
-            using (PharmaDBEntities context = new PharmaDBEntities())
+            try
             {
-                TempPurchaseBookHeader h = new TempPurchaseBookHeader();
-                h.InvoiceNumber = header.InvoiceNumber;
-                h.PurchaseDate = header.PurchaseDate;
-                h.SupplierCode = header.SupplierCode;
-                //h.AccountLedgerCode = header.PurchaseTypeCode;
+                long PurchaseSaleBookHeaderID = 0;
 
-                context.TempPurchaseBookHeader.Add(h);
-                context.SaveChanges();
-
-                return h.ID;
-            }
-        }
-
-        public int UpdateTempPurchaseBookHeader(PharmaBusinessObjects.Transaction.PurchaseBookHeader header)
-        {
-            using (PharmaDBEntities context = new PharmaDBEntities())
-            {
-                TempPurchaseBookHeader h = context.TempPurchaseBookHeader.Where(p => p.ID == header.InvoiceID).FirstOrDefault();
-                h.InvoiceNumber = header.InvoiceNumber;
-                h.PurchaseDate = header.PurchaseDate;
-                h.SupplierCode = header.SupplierCode;
-                h.PurchaseEntryFormID = header.PurchaseFormTypeID == 0 ? (int?)null : header.PurchaseFormTypeID;
-                h.OtherAmount = header.OtherAmount;
-                h.InvoiceAmount = header.InvoiceAmount;
-                h.Narration1 = header.Narration1;
-                h.Narration2 = header.Narration2;
-                h.ExemptedAmount = header.ExemptedAmount;
-                h.PurAmount1 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().Amount : 0L;
-                h.PurAmount2 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().Amount : 0L;
-                h.VAT1 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().TaxOnPurchase : 0L;
-                h.VAT2 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().TaxOnPurchase : 0L;
-                
-                context.SaveChanges();
-
-                return h.ID;
-            }
-        }
-
-        public int InsertTempLineItem(PharmaBusinessObjects.Transaction.PurchaseBookLineItem lineItem)
-        {
-            using (PharmaDBEntities context = new PharmaDBEntities())
-            {
-                Entity.TempPurchaseBookLineItem item = new Entity.TempPurchaseBookLineItem();
-                item.PurchaseBookHeaderID = lineItem.InvoiceID;
-                item.ItemCode = lineItem.ItemCode;
-                item.BatchNo = string.Empty;
-                item.Quantity = lineItem.Quantity;
-                item.Rate = lineItem.Rate;
-                item.Amount = lineItem.Amount;
-                item.FreeQuantity = lineItem.FreeQty;
-                item.Discount = lineItem.Discount;
-                item.SpecialDiscount = lineItem.SpecialDiscount;
-                item.MRP = lineItem.MRP;
-                item.Excise = lineItem.Excise;
-                if (lineItem.Expiry == DateTime.MinValue)
-                    item.Expiry = null;
-                else
-                    item.Expiry = lineItem.Expiry;
-                item.Scheme1 = lineItem.Scheme1;
-                item.Scheme2 = lineItem.Scheme2;
-                item.IsHalfScheme = lineItem.IsHalfScheme;
-                item.VolumeDiscount = lineItem.VolumeDiscount;
-                item.SpecialRate = lineItem.SpecialRate;
-                item.WholeSaleRate = lineItem.WholeSaleRate;
-                item.SaleRate = lineItem.SaleRate;
-                item.PurchaseTaxType = lineItem.PurchaseTaxType;
-                item.TaxOnPurchase = (double)lineItem.TaxOnPurchase;
-                item.CreatedBy = this.LoggedInUser.Username;
-                item.CreatedOn = DateTime.Now;
-
-                context.TempPurchaseBookLineItem.Add(item);
-                context.SaveChanges();
-
-                return item.ID;
-            }
-        }
-
-        public int UpdateTempLineItem(PharmaBusinessObjects.Transaction.PurchaseBookLineItem lineItem)
-        {
-            using (PharmaDBEntities context = new PharmaDBEntities())
-            {
-                Entity.TempPurchaseBookLineItem item = context.TempPurchaseBookLineItem.FirstOrDefault(p => p.ID == lineItem.ID);
-
-                if (item != null)
+                using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    item.PurchaseBookHeaderID = lineItem.InvoiceID;
-                    item.ItemCode = lineItem.ItemCode;
-                    item.BatchNo = lineItem.BatchNumber;
-                    item.Quantity = lineItem.Quantity;
-                    item.Rate = lineItem.Rate;
-                    item.Amount = lineItem.Amount;
-                    item.FreeQuantity = lineItem.FreeQty;
-                    item.Discount = lineItem.Discount;
-                    item.VolumeDiscount = lineItem.VolumeDiscount;
-                    item.SpecialDiscount = lineItem.SpecialDiscount;
-                    item.MRP = lineItem.MRP;
-                    item.Excise = lineItem.Excise;
-                    if (lineItem.Expiry == DateTime.MinValue)
-                        item.Expiry = null;
-                    else
-                        item.Expiry = lineItem.Expiry;
-                    item.Scheme1 = lineItem.Scheme1;
-                    item.Scheme2 = lineItem.Scheme2;
-                    item.IsHalfScheme = lineItem.IsHalfScheme;
-                    item.SpecialRate = lineItem.SpecialRate;
-                    item.WholeSaleRate = lineItem.WholeSaleRate;
-                    item.SaleRate = lineItem.SaleRate;
-                    item.PurchaseTaxType = lineItem.PurchaseTaxType;
-                    item.TaxOnPurchase = (double)lineItem.TaxOnPurchase;
-                    item.ModifiedBy = this.LoggedInUser.Username;
-                    item.ModifiedOn = DateTime.Now;
-                    //IsNewRate and Purchase Rate
-                    //context.TempPurchaseBookLineItem.Add(item);
-                    context.SaveChanges();
+                    SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                    SqlCommand cmd = new SqlCommand("InsertUpdateInvetoryHeadersInTempTable", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    List<PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader> list = new List<PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader>();
+                    list.Add(header);
+
+                    SqlParameter parameter = new SqlParameter();
+                    parameter.SqlDbType = SqlDbType.Structured;
+                    parameter.TypeName = "dbo.TableTypePurchaseSaleBookHeader";
+                    parameter.ParameterName = "@TableTypePurchaseSaleBookHeader";
+                    parameter.Value = CommonDaoMethods.CreateDataTable<PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader>(list);
+
+                    cmd.Parameters.Add(parameter);
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    sda.Fill(dt);
+
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        PurchaseSaleBookHeaderID = Convert.ToInt64(dt.Rows[0]["PurchaseSaleBookHeaderID"]);
+                    }
                 }
 
-                return item.ID;
+                return PurchaseSaleBookHeaderID;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
+
+        public long InsertUpdateTempPurchaseBookLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        {
+            try
+            {
+                long PurchaseSaleBookLineItemID = 0;
+
+                lineItem.ExpiryDate = DateTime.Now;
+
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                    SqlCommand cmd = new SqlCommand("InsertUpdateInvetoryLineItemInTempTable", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> list = new List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem>();
+                    list.Add(lineItem);
+
+                    SqlParameter parameter = new SqlParameter();
+                    parameter.SqlDbType = SqlDbType.Structured;
+                    parameter.TypeName = "dbo.TableTypePurchaseSaleBookLineItem";
+                    parameter.ParameterName = "@TableTypePurchaseSaleBookLineItem";
+                    parameter.Value = CommonDaoMethods.CreateDataTable<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem>(list);
+
+                    cmd.Parameters.Add(parameter);
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    sda.Fill(dt);
+
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        PurchaseSaleBookLineItemID = Convert.ToInt64(dt.Rows[0]["PurchaseSaleBookLineItemID"]);
+                    }
+                }
+
+                return PurchaseSaleBookLineItemID;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        //public long InsertTempPurchaseBookHeader(PharmaBusinessObjects.Transaction.PurchaseBookHeader header)
+        //{
+        //    using (PharmaDBEntities context = new PharmaDBEntities())
+        //    {
+        //        TempPurchaseSaleBookHeader h = new TempPurchaseSaleBookHeader();
+        //        h.PurchaseBillNo = header.PurchaseBillNo;
+        //        h.VoucherDate = header.VoucherDate;
+        //        h.LedgerTypeCode = header.LedgerTypeCode;
+        //        //h.AccountLedgerCode = header.PurchaseTypeCode;
+
+        //        context.TempPurchaseSaleBookHeader.Add(h);
+        //        context.SaveChanges();
+
+        //        return h.PurchaseSaleBookHeaderID;
+        //    }
+        //}
+
+        //public long UpdateTempPurchaseBookHeader(PharmaBusinessObjects.Transaction.PurchaseBookHeader header)
+        //{
+        //    using (PharmaDBEntities context = new PharmaDBEntities())
+        //    {
+        //        TempPurchaseSaleBookHeader h = context.TempPurchaseSaleBookHeader.Where(p => p.PurchaseSaleBookHeaderID == header.PurchaseSaleBookHeaderID).FirstOrDefault();
+        //        h.PurchaseBillNo = header.PurchaseBillNo;
+        //        h.VoucherDate = header.VoucherDate;
+        //        h.LedgerTypeCode = header.LedgerTypeCode;
+        //        h.PurchaseEntryFormID = header.PurchaseEntryFormID;
+        //        h.OtherAmount = header.OtherAmount;
+        //        h.TotalBillAmount = header.TotalBillAmount;
+
+
+
+
+
+
+        //        //h = header.Narration1;
+        //        //h.Narration2 = header.Narration2;
+
+        //        //h.ExemptedAmount = header.ExemptedAmount;
+        //        //h.PurAmount1 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().Amount : 0L;
+        //        //h.PurAmount2 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().Amount : 0L;
+        //        //h.VAT1 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 0 ? header.PurchaseAmountList.FirstOrDefault().TaxOnPurchase : 0L;
+        //        //h.VAT2 = header.PurchaseAmountList == null ? 0L : header.PurchaseAmountList.Count > 1 ? header.PurchaseAmountList.Skip(1).Take(1).FirstOrDefault().TaxOnPurchase : 0L;
+
+        //        context.SaveChanges();
+
+        //        return h.PurchaseSaleBookHeaderID;
+        //    }
+        //}
+
+        //public long InsertTempLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        //{
+        //    using (PharmaDBEntities context = new PharmaDBEntities())
+        //    {
+        //        Entity.TempPurchaseSaleBookLineItem item = new Entity.TempPurchaseSaleBookLineItem();
+        //        item.PurchaseSaleBookHeaderID = lineItem.InvoiceID;
+        //        item.ItemCode = lineItem.ItemCode;
+        //        item.Batch = string.Empty;
+        //        item.Quantity = lineItem.Quantity;
+        //        item.PurchaseSaleRate = lineItem.Rate;
+        //        item.Amount = lineItem.Amount;
+        //        item.FreeQuantity = lineItem.FreeQty;
+        //        item.Discount = lineItem.Discount;
+        //        item.SpecialDiscount = lineItem.SpecialDiscount;
+        //        item.MRP = lineItem.MRP;
+        //       // item.Excise = lineItem.Excise;
+
+        //        if (lineItem.Expiry == DateTime.MinValue)
+        //            item.ExpiryDate = null;
+        //        else
+        //            item.ExpiryDate = lineItem.Expiry;
+
+        //        item.Scheme1 = lineItem.Scheme1;
+        //        item.Scheme2 = lineItem.Scheme2;
+        //        item.IsHalfScheme = lineItem.IsHalfScheme;
+        //        item.VolumeDiscount = lineItem.VolumeDiscount;
+        //        item.SpecialRate = lineItem.SpecialRate;
+        //        item.WholeSaleRate = lineItem.WholeSaleRate;
+        //        item.SaleRate = lineItem.SaleRate;
+        //        item.PurchaseSaleTypeCode = lineItem.PurchaseTaxType;
+        //        item.PurchaseSaleTax = (double)lineItem.TaxOnPurchase;
+        //        item.CreatedBy = this.LoggedInUser.Username;
+        //        item.CreatedOn = DateTime.Now;
+
+        //        context.TempPurchaseSaleBookLineItem.Add(item);
+        //        context.SaveChanges();
+
+        //        return item.PurchaseSaleBookLineItemID;
+        //    }
+        //}
+
+        //public long UpdateTempLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        //{
+        //    using (PharmaDBEntities context = new PharmaDBEntities())
+        //    {
+        //        Entity.TempPurchaseSaleBookLineItem item = context.TempPurchaseSaleBookLineItem.FirstOrDefault(p => p.PurchaseSaleBookLineItemID == lineItem.ID);
+
+        //        if (item != null)
+        //        {
+        //            item.PurchaseSaleBookHeaderID = lineItem.InvoiceID;
+        //            item.ItemCode = lineItem.ItemCode;
+        //            item.Batch = lineItem.BatchNumber;
+        //            item.Quantity = lineItem.Quantity;
+        //            item.PurchaseSaleRate = lineItem.Rate;
+        //            item.Amount = lineItem.Amount;
+        //            item.FreeQuantity = lineItem.FreeQty;
+        //            item.Discount = lineItem.Discount;
+        //            item.VolumeDiscount = lineItem.VolumeDiscount;
+        //            item.SpecialDiscount = lineItem.SpecialDiscount;
+        //            item.MRP = lineItem.MRP;
+        //           // item.e = lineItem.Excise;
+
+        //            if (lineItem.Expiry == DateTime.MinValue)
+        //                item.ExpiryDate = null;
+        //            else
+        //                item.ExpiryDate = lineItem.Expiry;
+
+        //            item.Scheme1 = lineItem.Scheme1;
+        //            item.Scheme2 = lineItem.Scheme2;
+        //            item.IsHalfScheme = lineItem.IsHalfScheme;
+        //            item.SpecialRate = lineItem.SpecialRate;
+        //            item.WholeSaleRate = lineItem.WholeSaleRate;
+        //            item.SaleRate = lineItem.SaleRate;
+        //            item.PurchaseSaleTypeCode = lineItem.PurchaseTaxType;
+        //            item.PurchaseSaleTax = (double)lineItem.TaxOnPurchase;
+        //            item.ModifiedBy = this.LoggedInUser.Username;
+        //            item.ModifiedOn = DateTime.Now;
+        //            //IsNewRate and Purchase Rate
+        //            //context.TempPurchaseBookLineItem.Add(item);
+        //            context.SaveChanges();
+        //        }
+
+        //        return item.PurchaseSaleBookLineItemID;
+        //    }
+        //}
 
         public List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.PurchaseEntryType.Select(p => new PharmaBusinessObjects.Transaction.PurchaseType() {
-                        ID = p.ID,
-                        PurchaseTypeName = p.PurchaseTypeName
+                return context.PurchaseSaleEntryType.Select(p => new PharmaBusinessObjects.Transaction.PurchaseType() {
+                        ID = p.PurchaseSaleEntryTypeID,
+                        PurchaseTypeName = p.PurchaseSaleTypeName
                 }).ToList();
             }
         }
@@ -156,37 +258,39 @@ namespace PharmaDAL.Transaction
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.PurchaseEntryForm.Where(p=>p.Status && p.PurchaseTypeID == purchaseTypeID).Select(p => new PharmaBusinessObjects.Transaction.PurchaseFormType()
+                return context.PurchaseSaleEntryForm.Where(p=>p.Status && p.PurchaseSaleEntryTypeID == purchaseTypeID).Select(p => new PharmaBusinessObjects.Transaction.PurchaseFormType()
                 {
-                    ID = p.ID,
-                    FormTypeName = p.PurchaseFormName
+                    ID = p.PurchaseSaleEntryFormID,
+                    FormTypeName = p.PurchaseSaleFormName
                 }).ToList();
             }
         }
 
 
-        public List<PharmaBusinessObjects.Transaction.PurchaseBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
+        public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.PurchaseBookLineItem.Where(p => p.PurchaseBookHeader.SupplierCode == supplierCode & p.ItemCode == itemCode)
-                    .Select(p => new PharmaBusinessObjects.Transaction.PurchaseBookLineItem()
-                    {
-                        ID = p.ID,
-                        ItemCode = p.ItemCode,
-                        Rate = p.Rate,
-                        Discount = p.Discount,
-                        SpecialDiscount = p.SpecialDiscount,
-                        VolumeDiscount = p.VolumeDiscount,
-                        TaxOnPurchase = p.TaxOnPurchase,
-                        PurchaseDate = p.PurchaseBookHeader.PurchaseDate,
-                        BatchNumber = p.BatchNo
-                    }).OrderByDescending(p => p.ID).Take(5).ToList();
+                //return context.PurchaseSaleBookLineItem.Where(p => p.PurchaseSaleBookHeader.LedgerTypeCode == supplierCode & p.ItemCode == itemCode)
+                //    .Select(p => new PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem()
+                //    {
+                //        ID = p.PurchaseSaleBookLineItemID,
+                //        ItemCode = p.ItemCode,
+                //        Rate = p.PurchaseSaleRate,
+                //        Discount = p.Discount,
+                //        SpecialDiscount = p.SpecialDiscount,
+                //        VolumeDiscount = p.VolumeDiscount,
+                //        TaxOnPurchase = p.SalePurchaseTax,
+                //        PurchaseDate = p.PurchaseSaleBookHeader.VoucherDate,
+                //        BatchNumber = p.Batch
+                //    }).OrderByDescending(p => p.ID).Take(5).ToList();
+
+                return new List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem>();
             }
         }
 
 
-        public bool SavePurchaseData(int purchaseBookHeaderID)
+        public bool SavePurchaseData(long purchaseBookHeaderID)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -211,12 +315,12 @@ namespace PharmaDAL.Transaction
                 return true;
         }
 
-        public PharmaBusinessObjects.Transaction.PurchaseBookHeader GetFinalAmountWithTaxForPurchase(int purchaseBookHeaderID)
+        public PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
         {
-            PharmaBusinessObjects.Transaction.PurchaseBookHeader header = new PharmaBusinessObjects.Transaction.PurchaseBookHeader();
-            header.InvoiceID = purchaseBookHeaderID;
+            PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader header = new PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader();
+            header.PurchaseSaleBookHeaderID = purchaseBookHeaderID;
 
-            header.PurchaseAmountList = new List<PharmaBusinessObjects.Transaction.PurchaseBookAmount>();
+           // header.PurchaseAmountList = new List<PharmaBusinessObjects.Transaction.PurchaseBookAmount>();
 
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -231,23 +335,23 @@ namespace PharmaDAL.Transaction
 
                 sda.Fill(dt);
 
-                if(dt != null && dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        PharmaBusinessObjects.Transaction.PurchaseBookAmount obj = new PharmaBusinessObjects.Transaction.PurchaseBookAmount();
+                //if(dt != null && dt.Rows.Count > 0)
+                //{
+                //    foreach (DataRow row in dt.Rows)
+                //    {
+                //        PharmaBusinessObjects.Transaction.PurchaseBookAmount obj = new PharmaBusinessObjects.Transaction.PurchaseBookAmount();
                     
-                        obj.PurchaseTaxType = Convert.ToString(row["PurchaseTaxType"]);
-                        obj.Amount = Convert.IsDBNull(row["Amount"]) ? 0L :  Convert.ToDouble(row["Amount"]);
-                        obj.TaxOnPurchase = Convert.IsDBNull(row["TaxOnPurchase"]) ? 0L :  Convert.ToDouble(row["TaxOnPurchase"]);
+                //        obj.PurchaseTaxType = Convert.ToString(row["PurchaseTaxType"]);
+                //        obj.Amount = Convert.IsDBNull(row["Amount"]) ? 0L :  Convert.ToDouble(row["Amount"]);
+                //        obj.TaxOnPurchase = Convert.IsDBNull(row["TaxOnPurchase"]) ? 0L :  Convert.ToDouble(row["TaxOnPurchase"]);
 
-                        header.PurchaseAmountList.Add(obj);
-                    }
-                }
+                //        //header.PurchaseAmountList.Add(obj);
+                //    }
+                //}
             }
 
-            double totalAmount = header.PurchaseAmountList.Sum(p => p.Amount) + header.PurchaseAmountList.Sum(p => p.TaxOnPurchase);
-            header.InvoiceAmount = totalAmount;
+            //double totalAmount = header.PurchaseAmountList.Sum(p => p.Amount) + header.PurchaseAmountList.Sum(p => p.TaxOnPurchase);
+            //header.InvoiceAmount = totalAmount;
 
             return header;
         }
