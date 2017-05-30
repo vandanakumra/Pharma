@@ -505,6 +505,7 @@ namespace PharmaUI
             dgv.ReadOnly = true;
             dgv.DefaultCellStyle.SelectionBackColor = Color.Pink;
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             for (int i = 0; i < dgv.Columns.Count; i++)
             {

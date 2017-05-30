@@ -119,8 +119,7 @@ namespace PharmaUI
                     dgvAccountLedger.CellDoubleClick += DgvAccountLedger_CellDoubleClick;
                     dgvAccountLedger.KeyDown += DgvAccountLedger_KeyDown;
                 }
-                dgvAccountLedger.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
+                
                 txtSearch.Focus();
             }
             catch (Exception ex)
@@ -296,7 +295,7 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.GridSelectionOnSearch(dgvAccountLedger, "AccountLedgerName",txtSearch.Text);
+                ExtensionMethods.GridSelectionOnSearch(dgvAccountLedger,"AccountLedgerName",txtSearch.Text);
             }
             catch (Exception ex)
             {
