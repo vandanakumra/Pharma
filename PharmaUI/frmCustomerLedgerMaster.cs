@@ -147,7 +147,7 @@ namespace PharmaUI
         {
             try
             {
-                var form = new frmCustomerLedgerMasterAddUpdate();
+                frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(false);
                 ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 form.WindowState = FormWindowState.Maximized;
                 form.FormClosed += Form_FormClosed;
@@ -170,7 +170,6 @@ namespace PharmaUI
                 if (dgvCustomerLedger.SelectedRows[0] != null)
                 {
                     frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(true);
-
                     ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                     form.WindowState = FormWindowState.Maximized;
 
@@ -244,6 +243,10 @@ namespace PharmaUI
 
                 }
                 return true;
+            }
+            else if (keyData == Keys.Down)
+            {
+                dgvCustomerLedger.Focus();
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

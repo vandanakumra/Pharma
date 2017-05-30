@@ -823,7 +823,7 @@
             this.gbCustomerSupplierInfo.Location = new System.Drawing.Point(18, 67);
             this.gbCustomerSupplierInfo.Name = "gbCustomerSupplierInfo";
             this.gbCustomerSupplierInfo.Size = new System.Drawing.Size(1102, 129);
-            this.gbCustomerSupplierInfo.TabIndex = 803;
+            this.gbCustomerSupplierInfo.TabIndex = 98;
             this.gbCustomerSupplierInfo.TabStop = false;
             this.gbCustomerSupplierInfo.Text = "Customer Info";
             // 
@@ -877,7 +877,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1096, 110);
-            this.tableLayoutPanel6.TabIndex = 0;
+            this.tableLayoutPanel6.TabIndex = 99;
             // 
             // cbxCreditDebit
             // 
@@ -1050,7 +1050,7 @@
             this.txtCustSupplierName.Location = new System.Drawing.Point(331, 13);
             this.txtCustSupplierName.Name = "txtCustSupplierName";
             this.txtCustSupplierName.Size = new System.Drawing.Size(172, 20);
-            this.txtCustSupplierName.TabIndex = 0;
+            this.txtCustSupplierName.TabIndex = 102;
             this.txtCustSupplierName.Tag = "";
             // 
             // label31

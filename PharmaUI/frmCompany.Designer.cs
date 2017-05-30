@@ -124,6 +124,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmCompany";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCompany_FormClosing);
             this.Load += new System.EventHandler(this.frmCompany_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompanyList)).EndInit();
             this.ResumeLayout(false);

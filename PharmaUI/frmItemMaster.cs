@@ -245,6 +245,10 @@ namespace PharmaUI
                 EditItem();
 
             }
+            else if(keyData == Keys.Down)
+            {
+                dgvItemList.Focus();
+            }
             //else if (keyData == Keys.Escape || keyData == Keys.End)
             //{
             //    this.Close();

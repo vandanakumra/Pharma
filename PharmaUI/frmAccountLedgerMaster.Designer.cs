@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvAccountLedger = new System.Windows.Forms.DataGridView();
             this.cbLedgerType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,21 +35,9 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.dgvAccountLedger = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccountLedger)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvAccountLedger
-            // 
-            this.dgvAccountLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvAccountLedger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAccountLedger.Location = new System.Drawing.Point(12, 125);
-            this.dgvAccountLedger.Name = "dgvAccountLedger";
-            this.dgvAccountLedger.ReadOnly = true;
-            this.dgvAccountLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccountLedger.Size = new System.Drawing.Size(833, 290);
-            this.dgvAccountLedger.TabIndex = 101;
             // 
             // cbLedgerType
             // 
@@ -130,6 +117,20 @@
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
+            // dgvAccountLedger
+            // 
+            this.dgvAccountLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvAccountLedger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccountLedger.Location = new System.Drawing.Point(12, 125);
+            this.dgvAccountLedger.MultiSelect = false;
+            this.dgvAccountLedger.Name = "dgvAccountLedger";
+            this.dgvAccountLedger.ReadOnly = true;
+            this.dgvAccountLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAccountLedger.Size = new System.Drawing.Size(829, 290);
+            this.dgvAccountLedger.TabIndex = 3;
+            // 
             // frmAccountLedgerMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -137,10 +138,10 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(857, 427);
             this.ControlBox = false;
+            this.Controls.Add(this.dgvAccountLedger);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAddNew);
-            this.Controls.Add(this.dgvAccountLedger);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label2);
@@ -156,8 +157,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvAccountLedger;
         private System.Windows.Forms.ComboBox cbLedgerType;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -165,5 +164,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAddNew;
+        private System.Windows.Forms.DataGridView dgvAccountLedger;
     }
 }

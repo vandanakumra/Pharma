@@ -129,7 +129,7 @@ namespace PharmaBusinessObjects
 
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
         bool SavePurchaseData(long purchaseBookHeaderID);
-        PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID);
+        List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID);
         #endregion
     }
 

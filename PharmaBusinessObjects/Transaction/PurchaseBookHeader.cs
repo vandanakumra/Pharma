@@ -15,9 +15,9 @@ namespace PharmaBusinessObjects.Transaction
         //public int PurchaseFormTypeID { get; set; }
         //public List<PurchaseBookAmount> PurchaseAmountList { get; set; }
         //public double ExemptedAmount { get; set; }
+        ////public string Narration1 { get; set; }
         //public double OtherAmount { get; set; }
         //public double InvoiceAmount { get; set; }
-        ////public string Narration1 { get; set; }
         ////public string Narration2 { get; set; }
 
 
@@ -84,11 +84,17 @@ namespace PharmaBusinessObjects.Transaction
 
     }
 
-    //public class PurchaseBookAmount : BaseBusinessObjects
-    //{
-    //    public long PurchaseBookHeaderID { get; set; }
-    //    public string PurchaseTaxType { get; set; }
-    //    public double Amount { get; set; }
-    //    public double TaxOnPurchase { get; set; }
-    //}
+    public class PurchaseBookAmount : BaseBusinessObjects
+    {
+        public long PurchaseBookHeaderID { get; set; }
+        public string PurchaseSaleTypeCode { get; set; }
+        public string PurchaseSaleTypeName { get; set; }
+        public double Amount { get; set; }
+        public double IGST { get; set; }
+        public double SGST { get; set; }
+        public double CGST { get; set; }
+
+       
+
+    }
 }

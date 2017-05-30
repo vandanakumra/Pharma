@@ -67,8 +67,8 @@ namespace PharmaUI
 
             ////Fill Rate Type options
             cbxRateType.DataSource = applicationFacade.GetInterestTypes();
-            cbxRateType.DisplayMember = "InterestTypeName";
-            cbxRateType.ValueMember = "InterestTypeId";
+            cbxRateType.DisplayMember = "RateTypeName";
+            cbxRateType.ValueMember = "RateTypeId";
 
             ////Fill Less Excise options
             cbxLessExcise.DataSource = Enum.GetValues(typeof(Enums.Choice));
@@ -134,7 +134,6 @@ namespace PharmaUI
             {
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
-                txtCustSupplierName.Focus();
             }
             catch (Exception ex)
             {

@@ -10,12 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PharmaBusinessObjects.Common;
+using PharmaBusinessObjects.Master;
 
 namespace PharmaUI
 {
     public partial class frmCompany : Form
     {
         IApplicationFacade applicationFacade;
+        public bool IsInChildMode = false;
+        public CompanyMaster LastSelectedCompany { get; set; }
 
         public frmCompany()
         {
@@ -42,7 +45,7 @@ namespace PharmaUI
                 LoadDataGrid();
 
                 dgvCompanyList.CellDoubleClick += DgvCompanyList_DoubleClick;
-                dgvCompanyList.KeyDown += DgvCompanyList_KeyDown; ;
+                dgvCompanyList.KeyDown += DgvCompanyList_KeyDown;
             }
             catch (Exception ex)
             {
@@ -100,7 +103,15 @@ namespace PharmaUI
                 }
                 else if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
                 {
-                    e.SuppressKeyPress = true;
+                    if (IsInChildMode)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        e.SuppressKeyPress = true;
+                    }
+                    
                 }
                 else
                     base.OnKeyDown(e);
@@ -177,6 +188,10 @@ namespace PharmaUI
             else if (keyData == Keys.F3)
             {
                 EditCompany();
+            }
+            else if (keyData == Keys.Down)
+            {
+                dgvCompanyList.Focus();
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -274,6 +289,21 @@ namespace PharmaUI
         {
             ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
+        }
+
+        private void frmCompany_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (dgvCompanyList.CurrentRow != null)
+                {
+                    this.LastSelectedCompany = dgvCompanyList.CurrentRow.DataBoundItem as CompanyMaster;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

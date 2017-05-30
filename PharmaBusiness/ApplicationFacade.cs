@@ -718,7 +718,7 @@ namespace PharmaBusiness
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).SavePurchaseData(purchaseBookHeaderID);
         }
 
-        public PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
+        public List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetFinalAmountWithTaxForPurchase(purchaseBookHeaderID);
         }

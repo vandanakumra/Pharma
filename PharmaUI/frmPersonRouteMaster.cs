@@ -199,6 +199,10 @@ namespace PharmaUI
             {
                 EditPersonRoute();
             }
+            else if (keyData == Keys.Down)
+            {
+                dgvPersonRoute.Focus();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }

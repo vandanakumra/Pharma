@@ -31,8 +31,6 @@ namespace PharmaUI
                 ExtensionMethods.SetFormProperties(this);
                 _itemId = itemId;
                 _itemName = itemName;
-
-                cbxComanyCode.KeyDown += CbxComanyCode_KeyDown;
                 LoadCombo();
             }
             catch (Exception ex)
@@ -41,64 +39,8 @@ namespace PharmaUI
             }
         }
 
-        private void CbxComanyCode_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    int index = cbxComanyCode.FindString(cbxComanyCode.Text);
-                    if (index < 0)
-                    {
-                        DialogResult result = MessageBox.Show("Comany does not exist. Do you want to add new company ?", Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                        if (result == DialogResult.Yes)
-                        {
-                            frmCompanyAddUpdate form = new frmCompanyAddUpdate(0, cbxComanyCode.Text);
-                            form.FormClosing += Form_FormClosing;
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            cbxComanyCode.SelectedIndex = 0;
-                            return;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Form_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            int companyID = ((frmCompanyAddUpdate)sender).CompanyId;
-
-            cbxComanyCode.SelectedIndexChanged -= CbxComanyCode_SelectedIndexChanged;
-
-            //Fill the company list
-            cbxComanyCode.DataSource = applicationFacade.GetCompanies(String.Empty);
-            cbxComanyCode.DisplayMember = "CompanyName";
-            cbxComanyCode.ValueMember = "CompanyCode";
-
-            if (companyID > 0)
-            {
-                var comp = applicationFacade.GetCompanyById(companyID);
-                cbxComanyCode.SelectedValue = comp.CompanyCode;
-            }
-            else
-            {
-                cbxComanyCode.SelectedIndex = 0;
-            }
-
-            cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
-        }
-
         private void LoadCombo()
         {
-            cbxComanyCode.SelectedIndexChanged += CbxComanyCode_SelectedIndexChanged;
             cbxFixedDiscount.SelectedIndexChanged += CbxFixedDiscount_SelectedIndexChanged;
 
             //Fill half Scheme options
@@ -116,11 +58,6 @@ namespace PharmaUI
             //Fill status options
             cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
             cbxStatus.SelectedItem = Status.Active;
-
-            //Fill the company list
-            cbxComanyCode.DataSource = applicationFacade.GetCompanies(String.Empty);
-            cbxComanyCode.DisplayMember = "CompanyName";
-            cbxComanyCode.ValueMember = "CompanyId";
 
             //Fill sale type list
             cbxSaleType.DataSource = applicationFacade.GetAccountLedgerBySystemName("SaleLedger");
@@ -151,7 +88,7 @@ namespace PharmaUI
                 ItemMaster item = new ItemMaster();
                 item.ItemCode = tbxItemCode.Text;
                 item.ItemName = tbxItemName.Text;
-                item.CompanyID = (cbxComanyCode.SelectedItem as CompanyMaster).CompanyId;
+                item.CompanyID =(int)tbxCompany.Tag;
                 item.ConversionRate = ExtensionMethods.SafeConversionDouble(tbxConvRate.Text);
                 item.ShortName = tbxShortName.Text;
                 item.Packing = tbxPacking.Text;
@@ -223,19 +160,15 @@ namespace PharmaUI
 
                 ExtensionMethods.FormLoad(this, _itemId > 0 ? "Item Master - Update" : "Item Master - Add");
                 GotFocusEventRaised(this);
-                ExtensionMethods.EnterKeyDownForTabEvents(this);
+                EnterKeyDownForTabEvents(this);
 
                 if (_itemId == 0)
                 {
-                    cbxComanyCode.AutoCompleteSource = AutoCompleteSource.ListItems;
-                    cbxComanyCode.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    cbxComanyCode.Enabled = true;
-
                     tbxItemName.Text = _itemName;
                 }
                 else
                 {
-                    cbxComanyCode.Enabled = false;
+                    tbxCompany.Enabled = false;
                 }
 
                 tbxItemName.Focus();
@@ -382,7 +315,10 @@ namespace PharmaUI
             {
                 tbxItemCode.Text = existingItem.ItemCode;
                 tbxItemName.Text = existingItem.ItemName;
-                cbxComanyCode.SelectedValue = existingItem.CompanyID;
+
+                tbxCompany.Text = existingItem.CompanyName;
+                tbxCompany.Tag = existingItem.CompanyID;
+
                 tbxConvRate.Text = Convert.ToString(existingItem.ConversionRate);
                 tbxShortName.Text = existingItem.ShortName;
                 tbxPacking.Text = existingItem.Packing;
@@ -451,6 +387,75 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }       
+        }
+
+        private void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if ((sender is TextBox) && (sender as TextBox).Name == "tbxCompanyCode")
+                {
+                    TextBox activeCompanyControl = sender as TextBox;
+                  
+                    if (String.IsNullOrWhiteSpace(activeCompanyControl.Text))
+                    {
+                        frmCompany frmCompanyMaster = new frmCompany();
+                        frmCompanyMaster.IsInChildMode = true;
+                        //Set Child UI
+                        ExtensionMethods.AddChildFormToPanel(this, frmCompanyMaster, ExtensionMethods.MainPanel);
+                        frmCompanyMaster.WindowState = FormWindowState.Maximized;
+                        frmCompanyMaster.Show();
+                        frmCompanyMaster.FormClosed += FrmCompanyMaster_FormClosed;
+                    }
+                    else
+                    {
+                        SendKeys.Send("{TAB}");
+                    }
+                }
+                else
+                {
+                    SendKeys.Send("{TAB}");
+                }
+            }
+        }
+
+        private void FrmCompanyMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                CompanyMaster lastSelectedCompany = (sender as frmCompany).LastSelectedCompany;
+                if (lastSelectedCompany != null)
+                {
+                    if (lastSelectedCompany.CompanyId > 0)
+                    {
+                        tbxCompany.Text = lastSelectedCompany.CompanyName;
+                        tbxCompany.Tag = lastSelectedCompany.CompanyId;
+
+                        tbxShortName.Focus();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
