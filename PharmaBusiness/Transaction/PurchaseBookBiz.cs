@@ -76,7 +76,7 @@ namespace PharmaBusiness.Transaction
             return new PurchaseBookDao(this.LoggedInUser).SavePurchaseData(purchaseBookHeaderID);
         }
 
-        internal PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
+        internal List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
         {
             return new PurchaseBookDao(this.LoggedInUser).GetFinalAmountWithTaxForPurchase(purchaseBookHeaderID);
         }

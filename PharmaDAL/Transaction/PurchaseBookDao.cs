@@ -314,12 +314,10 @@ namespace PharmaDAL.Transaction
                 return true;
         }
 
-        public PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
-        {
-            PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader header = new PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader();
-            header.PurchaseSaleBookHeaderID = purchaseBookHeaderID;
+        public List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
+        { 
 
-           // header.PurchaseAmountList = new List<PharmaBusinessObjects.Transaction.PurchaseBookAmount>();
+            List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> PurchaseAmountList = new List<PharmaBusinessObjects.Transaction.PurchaseBookAmount>();
 
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -327,32 +325,38 @@ namespace PharmaDAL.Transaction
 
                 SqlCommand cmd = new SqlCommand("GetFinalAmountWithTaxForPurchase", connection);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@ID", purchaseBookHeaderID));
+                cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookHeaderID", purchaseBookHeaderID));
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
 
                 sda.Fill(dt);
+  
 
-                //if(dt != null && dt.Rows.Count > 0)
-                //{
-                //    foreach (DataRow row in dt.Rows)
-                //    {
-                //        PharmaBusinessObjects.Transaction.PurchaseBookAmount obj = new PharmaBusinessObjects.Transaction.PurchaseBookAmount();
-                    
-                //        obj.PurchaseTaxType = Convert.ToString(row["PurchaseTaxType"]);
-                //        obj.Amount = Convert.IsDBNull(row["Amount"]) ? 0L :  Convert.ToDouble(row["Amount"]);
-                //        obj.TaxOnPurchase = Convert.IsDBNull(row["TaxOnPurchase"]) ? 0L :  Convert.ToDouble(row["TaxOnPurchase"]);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        PharmaBusinessObjects.Transaction.PurchaseBookAmount obj = new PharmaBusinessObjects.Transaction.PurchaseBookAmount()
+                        {
+                            PurchaseBookHeaderID = Convert.ToInt64(row["PurchaseBookHeaderID"]),
+                            PurchaseSaleTypeCode = Convert.ToString(row["PurchaseSaleTypeCode"]),
+                            PurchaseSaleTypeName = Convert.ToString(row["PurchaseSaleTypeName"]),
+                            Amount = Convert.IsDBNull(row["Amount"]) ? 0L : Convert.ToDouble(row["Amount"]),
+                            IGST = Convert.IsDBNull(row["IGST"]) ? 0L : Convert.ToDouble(row["IGST"]),
+                            SGST = Convert.IsDBNull(row["SGST"]) ? 0L : Convert.ToDouble(row["SGST"]),
+                            CGST = Convert.IsDBNull(row["CGST"]) ? 0L : Convert.ToDouble(row["CGST"]),
+                        };
 
-                //        //header.PurchaseAmountList.Add(obj);
-                //    }
-                //}
+                        PurchaseAmountList.Add(obj);
+                    }
+                }
             }
 
             //double totalAmount = header.PurchaseAmountList.Sum(p => p.Amount) + header.PurchaseAmountList.Sum(p => p.TaxOnPurchase);
             //header.InvoiceAmount = totalAmount;
 
-            return header;
+            return PurchaseAmountList;
         }
 
     }
