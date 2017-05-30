@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbxCompany = new System.Windows.Forms.TextBox();
             this.cbxStatus = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblMaxStock = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.lblShortName = new System.Windows.Forms.Label();
             this.tbxItemName = new System.Windows.Forms.TextBox();
             this.lblCompanyCode = new System.Windows.Forms.Label();
-            this.cbxComanyCode = new System.Windows.Forms.ComboBox();
             this.lblItemCode = new System.Windows.Forms.Label();
             this.tbxItemCode = new System.Windows.Forms.TextBox();
             this.tbxShortName = new System.Windows.Forms.TextBox();
@@ -142,6 +142,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.Controls.Add(this.tbxCompany, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 5, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblStatus, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblMaxStock, 2, 3);
@@ -153,7 +154,6 @@
             this.tableLayoutPanel1.Controls.Add(this.lblShortName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbxItemName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblCompanyCode, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cbxComanyCode, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblItemCode, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbxItemCode, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbxShortName, 1, 1);
@@ -176,6 +176,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1040, 109);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tbxCompanyCode
+            // 
+            this.tbxCompany.Location = new System.Drawing.Point(522, 3);
+            this.tbxCompany.Name = "tbxCompanyCode";
+            this.tbxCompany.Size = new System.Drawing.Size(142, 20);
+            this.tbxCompany.TabIndex = 102;
             // 
             // cbxStatus
             // 
@@ -275,14 +282,6 @@
             this.lblCompanyCode.Size = new System.Drawing.Size(82, 13);
             this.lblCompanyCode.TabIndex = 43;
             this.lblCompanyCode.Text = "Company Name";
-            // 
-            // cbxComanyCode
-            // 
-            this.cbxComanyCode.FormattingEnabled = true;
-            this.cbxComanyCode.Location = new System.Drawing.Point(522, 3);
-            this.cbxComanyCode.Name = "cbxComanyCode";
-            this.cbxComanyCode.Size = new System.Drawing.Size(142, 21);
-            this.cbxComanyCode.TabIndex = 102;
             // 
             // lblItemCode
             // 
@@ -1027,7 +1026,6 @@
         private System.Windows.Forms.Label lblItemName;
         private System.Windows.Forms.TextBox tbxItemName;
         private System.Windows.Forms.Label lblCompanyCode;
-        private System.Windows.Forms.ComboBox cbxComanyCode;
         private System.Windows.Forms.Label lblItemCode;
         private System.Windows.Forms.TextBox tbxItemCode;
         private System.Windows.Forms.Label lblShortName;
@@ -1104,5 +1102,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cbxPurchaseType;
         private System.Windows.Forms.Label lblPurchaseType;
+        private System.Windows.Forms.TextBox tbxCompany;
     }
 }
