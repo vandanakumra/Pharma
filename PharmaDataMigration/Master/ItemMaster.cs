@@ -6,6 +6,7 @@ using PharmaDAL.Entity;
 using PharmaDAL.Master;
 using System.Data.Entity.Validation;
 using System.Windows.Forms;
+using PharmaBusinessObjects.Common;
 
 namespace PharmaDataMigration.Master
 {
@@ -38,11 +39,16 @@ namespace PharmaDataMigration.Master
                 {
                     if (dtItemMaster != null && dtItemMaster.Rows.Count > 0)
                     {
+                        var companyMaster = context.CompanyMaster.Select(p => p).ToList();
+                        var accountLedgerMaster = context.AccountLedgerMaster.Select(p => p).ToList();
+
+
+
                         foreach (DataRow dr in dtItemMaster.Rows)
                         {
                             string originalItemCompanyCode = Convert.ToString(dr["CompCD"]).TrimEnd();
                             string companyCode = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == originalItemCompanyCode).FirstOrDefault().MappedCompanyCode;
-                            int companyID = context.CompanyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
+                            int companyID = companyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
                             int totalItemsFromSameCompany = companyCodeCounts.Where(p => p.CompanyCode == companyCode).Select(p => p.CompanyCodeCount).FirstOrDefault();
 
                             totalItemsFromSameCompany++;
@@ -64,7 +70,23 @@ namespace PharmaDataMigration.Master
                             Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = originalItemCode, MappedItemCode = itemCode });
 
                             string saleLedgerCode = Common.accountLedgerCodeMap.Where(q => q.OriginalAccountLedgerCode == Convert.ToString(dr["SType"]).TrimEnd()).FirstOrDefault().MappedAccountLedgerCode;
-                            int saleTypeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == saleLedgerCode).FirstOrDefault().AccountLedgerID;
+                            var saleType = accountLedgerMaster.Where(p => p.AccountLedgerCode == saleLedgerCode).FirstOrDefault();
+
+                            PharmaDAL.Entity.AccountLedgerMaster purchaseType = null;
+
+                            if (saleType.AccountLedgerName.Contains("5%"))
+                            {
+                                purchaseType = accountLedgerMaster.Where(p => p.AccountLedgerName.Contains("5%") && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                            }
+                            else if (saleType.AccountLedgerName.Contains("12.5%"))
+                            {
+                                purchaseType = accountLedgerMaster.Where(p => p.AccountLedgerName.Contains("12.5%") && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                            }
+                            else if (saleType.AccountLedgerName.Contains("EXEMPTED"))
+                            {
+                                purchaseType = accountLedgerMaster.Where(p => p.AccountLedgerName.Contains("EXEMPTED") && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                            }
+                            
 
                             PharmaDAL.Entity.ItemMaster newItemMaster = new PharmaDAL.Entity.ItemMaster()
                             {
@@ -102,8 +124,8 @@ namespace PharmaDataMigration.Master
                                 Location = Convert.ToString(dr["location"]).TrimEnd(),
                                 //MinimumStock = Convert.ToInt32(dr["min"]),
                                 //MaximumStock = Convert.ToInt32(dr["max"]),
-                                SaleTypeId = saleTypeID,
-                                PurchaseTypeId = saleTypeID,
+                                SaleTypeId = saleType.AccountLedgerID,
+                                PurchaseTypeId = purchaseType.AccountLedgerID,
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
                                 CreatedBy = "admin",
                                 CreatedOn = DateTime.Now
