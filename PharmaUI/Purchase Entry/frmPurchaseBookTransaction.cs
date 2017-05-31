@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,11 @@ namespace PharmaUI
                 FillCombo();
                 InitializeGrid();
                 dtPurchaseDate.Focus();
+                string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
+                format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
+                format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
+                //format = format.IndexOf("yyyy") < 0 ? format.Replace("d", "dd") : format;
+                dtPurchaseDate.Text = DateTime.Now.ToString(format);
             }
             catch (Exception ex)
             {
@@ -641,7 +647,8 @@ namespace PharmaUI
 
             PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
             header.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
-           
+
+
 
 
             Int32.TryParse(Convert.ToString(cbxPurchaseFormType.SelectedValue), out purchaseFormTypeID);
@@ -733,16 +740,16 @@ namespace PharmaUI
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                int qty = 0;
-                Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out qty);
-                if (qty == 0)
-                {
-                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"];
-                }
-                else
-                {
+                //int qty = 0;
+                //Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out qty);
+                //if (qty == 0)
+                //{
+                //    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"];
+                //}
+                //else
+                //{
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"];
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -1134,17 +1141,22 @@ namespace PharmaUI
         {
             if (columnName == "FreeQuantity")
             {
-                PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
-                OpenSchemeDialog(lineItem);
+                int qty = 0;
+                Int32.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out qty);
+
+                if (qty > 0)
+                {
+                    PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                    OpenSchemeDialog(lineItem);
+                }
+                else {
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.CurrentCell.RowIndex].Cells["PurchaseSaleRate"];
+                }
             }
             else if (columnName == "PurchaseSaleRate")
             {
                 PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
                 OpenRateDialog(dgvLineItem.CurrentCell.RowIndex, lineItem);
-                //if (e.RowIndex == 0 && dgvLineItem.Rows.Count == (e.RowIndex + 1))
-                //{
-                //    dgvLineItem.Rows.Add();
-                //}
             }
             else //if ((columnName != "Quantity" && columnName != "PurchaseSaleRate") || (val != 0 && (columnName == "Quantity" || columnName == "PurchaseSaleRate")))
             {
@@ -1168,7 +1180,14 @@ namespace PharmaUI
                     }
                 }
 
+                if (columnName == "Quantity")
+                {
+                    int val = 0;
+                    Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value), out val);
 
+                    if(val == 0)
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
+                }
 
 
             }
