@@ -27,7 +27,11 @@ namespace PharmaBusinessObjects.Master
         public int AreaId { get; set; }
         public string AreaName { get; set; }
         public string DLNo { get; set; }
-        public string TINNo { get; set; }
+        public string GSTNo { get; set; }
+        public string CINNo { get; set; }
+        public string LINNo { get; set; }
+        public string ServiceTaxNo { get; set; }
+        public string PANNo { get; set; }
         public int PurchaseTypeId { get; set; }
     }
 }

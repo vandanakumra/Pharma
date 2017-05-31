@@ -37,14 +37,18 @@ namespace PharmaDAL.Entity
         public string TaxRetail { get; set; }
         public bool Status { get; set; }
         public int AreaId { get; set; }
-        public string DLNo { get; set; }
-        public string TINNo { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string SupplierLedgerShortDesc { get; set; }
         public int PurchaseTypeID { get; set; }
+        public string DLNo { get; set; }
+        public string GSTNo { get; set; }
+        public string CINNo { get; set; }
+        public string LINNo { get; set; }
+        public string ServiceTaxNo { get; set; }
+        public string PANNo { get; set; }
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
         public virtual PersonRouteMaster PersonRouteMaster { get; set; }

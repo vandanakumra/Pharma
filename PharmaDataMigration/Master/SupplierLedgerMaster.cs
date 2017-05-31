@@ -65,7 +65,6 @@ namespace PharmaDataMigration.Master
                                 DLNo = Convert.ToString(dr["Stnol"]).TrimEnd(),
                                 OpeningBal = Convert.ToDecimal(dr["Abop"]),
                                 TaxRetail = Convert.ToString(dr["Vat"]).TrimEnd(),
-                                TINNo = Convert.ToString(dr["Drno"]).TrimEnd(),
                                 Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
                                 PurchaseTypeID = purchaseTypeID,
                                 CreatedBy = "admin",
