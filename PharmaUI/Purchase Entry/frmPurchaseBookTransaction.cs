@@ -572,15 +572,28 @@ namespace PharmaUI
         {
             try
             {
+                TextBox tb;
+
                 frmSupplierLedger ledger = (frmSupplierLedger)sender;
+
                 if (ledger.LastSelectedSupplier != null)
                 {
                     lblSupplierName.Text = ledger.LastSelectedSupplier.SupplierLedgerName;
                     txtSupplierCode.Text = ledger.LastSelectedSupplier.SupplierLedgerCode;
+                    tb = txtInvoiceNumber;
+                }
+                else
+                {
+                    tb = txtSupplierCode;
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                txtSupplierCode.Focus();
+
+                if(tb != null)
+                {
+                    tb.Focus();
+                }
+                
             }
             catch (Exception ex)
             {

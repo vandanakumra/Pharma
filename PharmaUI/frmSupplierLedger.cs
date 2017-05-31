@@ -48,11 +48,13 @@ namespace PharmaUI
                 dgvSupplier.CellDoubleClick += dgvSupplier_DoubleClick;
                 dgvSupplier.KeyDown += DgvSupplier_KeyDown;
 
-                if(isOpenAsChild && dgvSupplier.Rows.Count > 0)
-                {
-                    dgvSupplier.Focus();
-                    dgvSupplier.CurrentCell = dgvSupplier.Rows[0].Cells[1];
-                }
+                //if(isOpenAsChild && dgvSupplier.Rows.Count > 0)
+                //{
+                //    dgvSupplier.Focus();
+                //    dgvSupplier.CurrentCell = dgvSupplier.Rows[0].Cells[1];
+                //}
+
+                txtSearch.Focus();
 
             }
             catch (Exception ex)
@@ -196,6 +198,11 @@ namespace PharmaUI
             else if (keyData == Keys.Down)
             {
                 dgvSupplier.Focus();
+            }
+
+            if (keyData == Keys.Enter && isOpenAsChild && dgvSupplier.SelectedRows.Count > 0)
+            {
+                this.Close();
             }
             //else if (keyData == Keys.Escape || keyData == Keys.End)
             //{
