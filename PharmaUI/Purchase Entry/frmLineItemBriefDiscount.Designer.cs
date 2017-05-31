@@ -37,10 +37,10 @@
             this.lblVolumeDiscount = new System.Windows.Forms.Label();
             this.lblMRP = new System.Windows.Forms.Label();
             this.lblExpiry = new System.Windows.Forms.Label();
-            this.dtExpiry = new System.Windows.Forms.DateTimePicker();
             this.lblExcise = new System.Windows.Forms.Label();
             this.txtMRP = new System.Windows.Forms.TextBox();
             this.txtExcise = new System.Windows.Forms.TextBox();
+            this.dtExpiry = new System.Windows.Forms.MaskedTextBox();
             this.tblDiscount.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,42 +66,42 @@
             this.tblDiscount.Controls.Add(this.lblVolumeDiscount, 4, 0);
             this.tblDiscount.Controls.Add(this.lblMRP, 0, 1);
             this.tblDiscount.Controls.Add(this.lblExpiry, 4, 1);
-            this.tblDiscount.Controls.Add(this.dtExpiry, 5, 1);
             this.tblDiscount.Controls.Add(this.lblExcise, 2, 1);
             this.tblDiscount.Controls.Add(this.txtMRP, 1, 1);
             this.tblDiscount.Controls.Add(this.txtExcise, 3, 1);
+            this.tblDiscount.Controls.Add(this.dtExpiry, 5, 1);
             this.tblDiscount.Location = new System.Drawing.Point(12, 69);
             this.tblDiscount.Name = "tblDiscount";
             this.tblDiscount.RowCount = 2;
             this.tblDiscount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblDiscount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblDiscount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblDiscount.Size = new System.Drawing.Size(594, 58);
+            this.tblDiscount.Size = new System.Drawing.Size(588, 58);
             this.tblDiscount.TabIndex = 2;
             // 
             // txtVolDiscount
             // 
             this.txtVolDiscount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtVolDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtVolDiscount.Location = new System.Drawing.Point(493, 4);
+            this.txtVolDiscount.Location = new System.Drawing.Point(488, 4);
             this.txtVolDiscount.Name = "txtVolDiscount";
-            this.txtVolDiscount.Size = new System.Drawing.Size(98, 20);
+            this.txtVolDiscount.Size = new System.Drawing.Size(97, 20);
             this.txtVolDiscount.TabIndex = 19;
             // 
             // txtSpecialDiscount
             // 
             this.txtSpecialDiscount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtSpecialDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSpecialDiscount.Location = new System.Drawing.Point(297, 4);
+            this.txtSpecialDiscount.Location = new System.Drawing.Point(294, 4);
             this.txtSpecialDiscount.Name = "txtSpecialDiscount";
-            this.txtSpecialDiscount.Size = new System.Drawing.Size(92, 20);
+            this.txtSpecialDiscount.Size = new System.Drawing.Size(91, 20);
             this.txtSpecialDiscount.TabIndex = 18;
             // 
             // lblSpecialDiscount
             // 
             this.lblSpecialDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblSpecialDiscount.AutoSize = true;
-            this.lblSpecialDiscount.Location = new System.Drawing.Point(199, 8);
+            this.lblSpecialDiscount.Location = new System.Drawing.Point(197, 8);
             this.lblSpecialDiscount.Name = "lblSpecialDiscount";
             this.lblSpecialDiscount.Size = new System.Drawing.Size(87, 13);
             this.lblSpecialDiscount.TabIndex = 5;
@@ -111,9 +111,9 @@
             // 
             this.txtDiscount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDiscount.Location = new System.Drawing.Point(101, 4);
+            this.txtDiscount.Location = new System.Drawing.Point(100, 4);
             this.txtDiscount.Name = "txtDiscount";
-            this.txtDiscount.Size = new System.Drawing.Size(92, 20);
+            this.txtDiscount.Size = new System.Drawing.Size(91, 20);
             this.txtDiscount.TabIndex = 17;
             // 
             // lblDiscount
@@ -130,7 +130,7 @@
             // 
             this.lblVolumeDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblVolumeDiscount.AutoSize = true;
-            this.lblVolumeDiscount.Location = new System.Drawing.Point(395, 8);
+            this.lblVolumeDiscount.Location = new System.Drawing.Point(391, 8);
             this.lblVolumeDiscount.Name = "lblVolumeDiscount";
             this.lblVolumeDiscount.Size = new System.Drawing.Size(87, 13);
             this.lblVolumeDiscount.TabIndex = 6;
@@ -150,27 +150,17 @@
             // 
             this.lblExpiry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExpiry.AutoSize = true;
-            this.lblExpiry.Location = new System.Drawing.Point(395, 37);
+            this.lblExpiry.Location = new System.Drawing.Point(391, 37);
             this.lblExpiry.Name = "lblExpiry";
             this.lblExpiry.Size = new System.Drawing.Size(35, 13);
             this.lblExpiry.TabIndex = 9;
             this.lblExpiry.Text = "Expiry";
             // 
-            // dtExpiry
-            // 
-            this.dtExpiry.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dtExpiry.CustomFormat = "MM/yyyy";
-            this.dtExpiry.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtExpiry.Location = new System.Drawing.Point(493, 33);
-            this.dtExpiry.Name = "dtExpiry";
-            this.dtExpiry.Size = new System.Drawing.Size(98, 20);
-            this.dtExpiry.TabIndex = 22;
-            // 
             // lblExcise
             // 
             this.lblExcise.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExcise.AutoSize = true;
-            this.lblExcise.Location = new System.Drawing.Point(199, 37);
+            this.lblExcise.Location = new System.Drawing.Point(197, 37);
             this.lblExcise.Name = "lblExcise";
             this.lblExcise.Size = new System.Drawing.Size(38, 13);
             this.lblExcise.TabIndex = 23;
@@ -180,19 +170,29 @@
             // 
             this.txtMRP.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtMRP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMRP.Location = new System.Drawing.Point(101, 33);
+            this.txtMRP.Location = new System.Drawing.Point(100, 33);
             this.txtMRP.Name = "txtMRP";
-            this.txtMRP.Size = new System.Drawing.Size(92, 20);
+            this.txtMRP.Size = new System.Drawing.Size(91, 20);
             this.txtMRP.TabIndex = 20;
             // 
             // txtExcise
             // 
             this.txtExcise.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtExcise.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtExcise.Location = new System.Drawing.Point(297, 33);
+            this.txtExcise.Location = new System.Drawing.Point(294, 33);
             this.txtExcise.Name = "txtExcise";
-            this.txtExcise.Size = new System.Drawing.Size(92, 20);
+            this.txtExcise.Size = new System.Drawing.Size(91, 20);
             this.txtExcise.TabIndex = 21;
+            // 
+            // dtExpiry
+            // 
+            this.dtExpiry.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dtExpiry.Location = new System.Drawing.Point(488, 33);
+            this.dtExpiry.Mask = "00/00/0000";
+            this.dtExpiry.Name = "dtExpiry";
+            this.dtExpiry.Size = new System.Drawing.Size(97, 20);
+            this.dtExpiry.TabIndex = 24;
+            this.dtExpiry.ValidatingType = typeof(System.DateTime);
             // 
             // frmLineItemBriefDiscount
             // 
@@ -222,8 +222,8 @@
         private System.Windows.Forms.Label lblVolumeDiscount;
         private System.Windows.Forms.Label lblMRP;
         private System.Windows.Forms.Label lblExpiry;
-        private System.Windows.Forms.DateTimePicker dtExpiry;
         private System.Windows.Forms.Label lblExcise;
         private System.Windows.Forms.TextBox txtExcise;
+        private System.Windows.Forms.MaskedTextBox dtExpiry;
     }
 }

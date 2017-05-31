@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -551,14 +551,18 @@
           <Property Name="TaxRetail" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="AreaId" Type="int" Nullable="false" />
-          <Property Name="DLNo" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="TINNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="SupplierLedgerShortDesc" Type="nvarchar" MaxLength="20" />
           <Property Name="PurchaseTypeID" Type="int" Nullable="false" />
+          <Property Name="DLNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="GSTNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="CINNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="LINNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="ServiceTaxNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="PANNo" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookHeader">
           <Key>
@@ -1979,14 +1983,18 @@
           <Property Name="TaxRetail" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="AreaId" Type="Int32" Nullable="false" />
-          <Property Name="DLNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="SupplierLedgerShortDesc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="PurchaseTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DLNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GSTNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CINNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LINNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceTaxNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PANNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_SupplierLedger_PurchaseLedger" FromRole="SupplierLedger" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="PersonRouteMaster" Relationship="Self.FK_SupplierLedger_SalesPersonMaster" FromRole="SupplierLedger" ToRole="PersonRouteMaster" />
           <NavigationProperty Name="SupplierCompanyDiscountRef" Relationship="Self.FK_SupplierCompanyDiscountRef_SupplierLedger" FromRole="SupplierLedger" ToRole="SupplierCompanyDiscountRef" />
@@ -3373,14 +3381,18 @@
                 <ScalarProperty Name="TaxRetail" ColumnName="TaxRetail" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="AreaId" ColumnName="AreaId" />
-                <ScalarProperty Name="DLNo" ColumnName="DLNo" />
-                <ScalarProperty Name="TINNo" ColumnName="TINNo" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="SupplierLedgerShortDesc" ColumnName="SupplierLedgerShortDesc" />
                 <ScalarProperty Name="PurchaseTypeID" ColumnName="PurchaseTypeID" />
+                <ScalarProperty Name="DLNo" ColumnName="DLNo" />
+                <ScalarProperty Name="GSTNo" ColumnName="GSTNo" />
+                <ScalarProperty Name="CINNo" ColumnName="CINNo" />
+                <ScalarProperty Name="LINNo" ColumnName="LINNo" />
+                <ScalarProperty Name="ServiceTaxNo" ColumnName="ServiceTaxNo" />
+                <ScalarProperty Name="PANNo" ColumnName="PANNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

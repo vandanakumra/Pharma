@@ -117,8 +117,6 @@ namespace PharmaUI
                 this.ucSupplierCustomerInfo.Status = supplier.Status ? Enums.Status.Active : Enums.Status.Inactive;
                 this.ucSupplierCustomerInfo.CreditDebit = supplier.CreditDebit =="C" ? Enums.TransType.C : Enums.TransType.D;
                 this.ucSupplierCustomerInfo.OpeningBal = supplier.OpeningBal.ToString();
-                txtDLNo.Text = supplier.DLNo;
-                txtTin.Text = supplier.TINNo;
                 cbxArea.SelectedValue = supplier.AreaId;
                 
                 //todo ADD SUPPLIER PURCHASE TYPE iD
@@ -178,7 +176,6 @@ namespace PharmaUI
                 decimal.TryParse(this.ucSupplierCustomerInfo.OpeningBal, out openingBal);
                 supplier.OpeningBal = openingBal;
                 supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
-                supplier.TINNo = txtTin.Text;
                 supplier.TaxRetail = this.ucSupplierCustomerInfo.TaxRetail == TaxRetail.R ? "R" : "T";
                 supplier.SupplierLedgerId = SupplierId;
 
