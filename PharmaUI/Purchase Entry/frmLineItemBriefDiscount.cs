@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +48,10 @@ namespace PharmaUI
             txtSpecialDiscount.Text = Convert.ToString(purchaseBookLineItem.SpecialDiscount);
             txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
             txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);
-            dtExpiry.Value = purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? (DateTime)dtExpiry.MinDate : (DateTime)purchaseBookLineItem.ExpiryDate;
+            string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
+            format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
+            format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
+            dtExpiry.Text = purchaseBookLineItem.ExpiryDate== null || purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? string.Empty: ((DateTime)purchaseBookLineItem.ExpiryDate).ToString(format);
         }
 
         public void GotFocusEventRaised(Control control)
@@ -109,8 +113,9 @@ namespace PharmaUI
 
             //double.TryParse(txtExcise.Text, out value);
             //purchaseBookLineItem.Excise = value;
-
-            purchaseBookLineItem.ExpiryDate = dtExpiry.Value.Date == dtExpiry.MinDate ? DateTime.MinValue : dtExpiry.Value.Date;
+            DateTime dt = new DateTime();
+            DateTime.TryParse(dtExpiry.Text, out dt);
+            purchaseBookLineItem.ExpiryDate = dt;
         }
 
         private void EnterKeyDownForTabEvents(Control control)
