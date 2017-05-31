@@ -69,6 +69,7 @@
     <Compile Include="Common\RecordType.cs" />
     <Compile Include="IApplicationFacade.cs" />
     <Compile Include="Master\AccountLedgerMaster.cs" />
+    <Compile Include="Master\CompanyItemDiscountBase.cs" />
     <Compile Include="Master\CompanyMaster.cs" />
     <Compile Include="Master\CustomerCopanyDiscount.cs" />
     <Compile Include="Master\CustomerLedgerMaster.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Master\PersonalLedgerMaster.cs" />
     <Compile Include="Master\PersonRouteMaster.cs" />
     <Compile Include="Master\Role.cs" />
+    <Compile Include="Master\SupplierCompanyDiscount.cs" />
     <Compile Include="Master\SupplierLedgerMaster.cs" />
     <Compile Include="Master\UserMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

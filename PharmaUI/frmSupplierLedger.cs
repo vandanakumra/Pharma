@@ -214,10 +214,12 @@ namespace PharmaUI
 
         void AddEditSupplierLedger(int supplierId)
         {
-            frmSupplierLedgerAddUpdate form = new frmSupplierLedgerAddUpdate(supplierId,txtSearch.Text);
-            form.FormClosed -= FormSupplierLedgerAddUpdate_FormClosed;
-            form.FormClosed += FormSupplierLedgerAddUpdate_FormClosed;
-            form.ShowDialog();
+            frmSupplierLedgerAddUpdate frmSupplierAddUpdate = new frmSupplierLedgerAddUpdate(supplierId,txtSearch.Text);
+            ExtensionMethods.AddChildFormToPanel(this, frmSupplierAddUpdate, ExtensionMethods.MainPanel);
+            frmSupplierAddUpdate.WindowState = FormWindowState.Maximized;
+
+            frmSupplierAddUpdate.FormClosed += FormSupplierLedgerAddUpdate_FormClosed;
+            frmSupplierAddUpdate.Show();
         }
 
         private void frmSupplierLedger_FormClosing(object sender, FormClosingEventArgs e)

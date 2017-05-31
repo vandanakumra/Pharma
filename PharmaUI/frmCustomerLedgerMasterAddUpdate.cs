@@ -92,7 +92,7 @@ namespace PharmaUI
         public void LoadCustomerCompanyDiscountGrid()
         {
 
-            List<CustomerCopanyDiscount> customerCopanyDiscountList = applicationFacade.GetCompleteCompanyDiscountList(customerLedgerID);
+            List<CustomerCopanyDiscount> customerCopanyDiscountList = applicationFacade.GetCompleteCompanyDiscountListByCustomerID(customerLedgerID);
             dgvCompanyDiscount.DataSource = customerCopanyDiscountList;
 
             for (int i = 0; i < dgvCompanyDiscount.Columns.Count; i++)
@@ -116,11 +116,6 @@ namespace PharmaUI
             dgvCompanyDiscount.Columns["Expired"].Visible = true;
             dgvCompanyDiscount.Columns["Expired"].DisplayIndex = 3;
             dgvCompanyDiscount.Columns["Expired"].HeaderText = "Expired";
-
-
-            dgvCompanyDiscount.Columns["IsLessEcise"].Visible = true;
-            dgvCompanyDiscount.Columns["IsLessEcise"].DisplayIndex = 4;
-            dgvCompanyDiscount.Columns["IsLessEcise"].HeaderText = "LessEcise";
 
             dgvCompanyDiscount.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCompanyDiscount.AllowUserToAddRows = false;
@@ -283,14 +278,12 @@ namespace PharmaUI
                                                                                     .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
                                                                                                 || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
                                                                                                 || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Expired"].Value))
-                                                                                                || Convert.ToBoolean(r.Cells["IsLessEcise"].Value)
                                                                                     ).Select(x => new CustomerCopanyDiscount()
                                                                                     {
                                                                                         CompanyID = (x.DataBoundItem as CustomerCopanyDiscount).CompanyID,
                                                                                         Normal = (x.DataBoundItem as CustomerCopanyDiscount).Normal,
                                                                                         Breakage = (x.DataBoundItem as CustomerCopanyDiscount).Breakage,
                                                                                         Expired = (x.DataBoundItem as CustomerCopanyDiscount).Expired,
-                                                                                        IsLessEcise = (x.DataBoundItem as CustomerCopanyDiscount).IsLessEcise,
                                                                                         CustomerItemDiscountMapping = (x.DataBoundItem as CustomerCopanyDiscount).CustomerItemDiscountMapping
 
                                                                                     }).ToList();
@@ -436,7 +429,6 @@ namespace PharmaUI
                                                                                                     String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Normal"].Value)))
                                                                                                     && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Breakage"].Value)))
                                                                                                     && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Expired"].Value)))
-                                                                                                    && !Convert.ToBoolean(dgvCompanyDiscount.CurrentRow.Cells["IsLessEcise"].Value)
                                                                                                     );
 
                         ///OPen item discount mapping screen only if company discount existing 
@@ -643,7 +635,7 @@ namespace PharmaUI
             {
                 string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
 
-                if (columnName.Equals("CompanyName") || columnName.Equals("IsLessEcise")) return;
+                if (columnName.Equals("CompanyName")) return;
 
                 e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
                 TextBox tb = e.Control as TextBox;
@@ -747,12 +739,12 @@ namespace PharmaUI
                         }
                     }
 
-                    if (rowIndex == (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
+                    if (rowIndex == (dgvCompanyDiscount.Rows.Count - 1) && columnName == "Expired")
                     {
                         btnSave.Focus();
 
                     }
-                    else if (rowIndex < (dgvCompanyDiscount.Rows.Count - 1) && columnName == "IsLessEcise")
+                    else if (rowIndex < (dgvCompanyDiscount.Rows.Count - 1) && columnName == "Expired")
                     {
                         for (int i = 0; i < dgvCompanyDiscount.Columns.Count - 1; i++)
                         {

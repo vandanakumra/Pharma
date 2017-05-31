@@ -122,23 +122,6 @@ namespace PharmaBusiness
             }
         }
 
-        /// <summary>
-        /// Get default item discount for company
-        /// </summary>
-        /// <param name="CompanyID"></param>
-        /// <returns></returns>
-        public List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyID(int CompanyID)
-        {
-            try
-            {
-                return new ItemMasterBiz(this.LoggedInUser).GetAllCompanyItemDiscountByCompanyID(CompanyID);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         #endregion
 
         #region Company Master
@@ -210,6 +193,41 @@ namespace PharmaBusiness
                 throw;
             }
         }
+
+        /// <summary>
+        /// Get default item discount for company
+        /// </summary>
+        /// <param name="CompanyID"></param>
+        /// <returns></returns>
+        public List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyIDForCustomer(int CompanyID)
+        {
+            try
+            {
+                return new ItemMasterBiz(this.LoggedInUser).GetAllCompanyItemDiscountByCompanyIDForCustomer(CompanyID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get default item discount for company
+        /// </summary>
+        /// <param name="CompanyID"></param>
+        /// <returns></returns>
+        public List<SupplierCompanyDiscount> GetAllCompanyItemDiscountByCompanyIDForSupplier(int CompanyID)
+        {
+            try
+            {
+                return new ItemMasterBiz(this.LoggedInUser).GetAllCompanyItemDiscountByCompanyIDForSupplier(CompanyID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Account Ledger Master
@@ -458,6 +476,21 @@ namespace PharmaBusiness
             }
         }
 
+
+        public List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> GetCompleteCompanyDiscountListBySupplierID(int supplierLedgerID)
+        {
+            try
+            {
+                return new SupplierLedgerMasterBiz(this.LoggedInUser).GetCompleteCompanyDiscountListBySupplierID(supplierLedgerID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         #endregion
 
         #region Person Route Master
@@ -566,7 +599,7 @@ namespace PharmaBusiness
         }
 
 
-        public List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountList(int customerLedgerID)
+        public List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountListByCustomerID(int customerLedgerID)
         {
             try
             {

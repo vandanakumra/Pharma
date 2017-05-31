@@ -48,7 +48,7 @@ namespace PharmaBusiness.Master
             return getNextItemCode;
         }
 
-        internal List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyID(int CompanyID)
+        internal List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyIDForCustomer(int CompanyID)
         {
             List<CustomerCopanyDiscount> defaultItemDiscountByCompanyID = new List<CustomerCopanyDiscount>();
             List<ItemMaster> itemListByCompanyID = new ItemDaoMaster(this.LoggedInUser).GetAllItemByCompanyID(CompanyID);
@@ -61,6 +61,25 @@ namespace PharmaBusiness.Master
                     CompanyName=item.CompanyName,
                     ItemID=item.ItemID,
                     ItemName=item.ItemName
+
+                }).ToList();
+            }
+            return defaultItemDiscountByCompanyID;
+        }
+
+        internal List<SupplierCompanyDiscount> GetAllCompanyItemDiscountByCompanyIDForSupplier(int CompanyID)
+        {
+            List<SupplierCompanyDiscount> defaultItemDiscountByCompanyID = new List<SupplierCompanyDiscount>();
+            List<ItemMaster> itemListByCompanyID = new ItemDaoMaster(this.LoggedInUser).GetAllItemByCompanyID(CompanyID);
+
+            if (itemListByCompanyID != null)
+            {
+                defaultItemDiscountByCompanyID = itemListByCompanyID.Select(item => new SupplierCompanyDiscount()
+                {
+                    CompanyID = item.CompanyID,
+                    CompanyName = item.CompanyName,
+                    ItemID = item.ItemID,
+                    ItemName = item.ItemName
 
                 }).ToList();
             }

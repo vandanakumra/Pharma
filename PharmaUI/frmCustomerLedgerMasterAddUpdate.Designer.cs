@@ -139,7 +139,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(295, 495);
+            this.btnSave.Location = new System.Drawing.Point(293, 508);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(134, 30);
             this.btnSave.TabIndex = 801;
@@ -151,7 +151,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(435, 495);
+            this.btnCancel.Location = new System.Drawing.Point(433, 508);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(134, 30);
             this.btnCancel.TabIndex = 802;
@@ -171,7 +171,7 @@
             this.gbDiscountDetails.Controls.Add(this.dgvCompanyDiscount);
             this.gbDiscountDetails.Location = new System.Drawing.Point(649, 201);
             this.gbDiscountDetails.Name = "gbDiscountDetails";
-            this.gbDiscountDetails.Size = new System.Drawing.Size(471, 286);
+            this.gbDiscountDetails.Size = new System.Drawing.Size(471, 340);
             this.gbDiscountDetails.TabIndex = 599;
             this.gbDiscountDetails.TabStop = false;
             this.gbDiscountDetails.Text = "Company Discount Details";
@@ -183,7 +183,7 @@
             this.dgvCompanyDiscount.Location = new System.Drawing.Point(3, 16);
             this.dgvCompanyDiscount.MultiSelect = false;
             this.dgvCompanyDiscount.Name = "dgvCompanyDiscount";
-            this.dgvCompanyDiscount.Size = new System.Drawing.Size(465, 267);
+            this.dgvCompanyDiscount.Size = new System.Drawing.Size(465, 321);
             this.dgvCompanyDiscount.TabIndex = 600;
             this.dgvCompanyDiscount.Tag = "";
             this.dgvCompanyDiscount.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCompanyDiscount_CellEnter);

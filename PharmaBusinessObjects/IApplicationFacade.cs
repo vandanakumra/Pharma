@@ -19,7 +19,8 @@ namespace PharmaBusinessObjects
         bool DeleteItem(ItemMaster existingItem);
         string GetNextItemCode(string companyCode);
         List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy);
-        List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyID(int CompanyID);
+        List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyIDForCustomer(int CompanyID);
+        List<SupplierCompanyDiscount> GetAllCompanyItemDiscountByCompanyIDForSupplier(int CompanyID);
         #endregion
 
         #region Company Master
@@ -69,7 +70,7 @@ namespace PharmaBusinessObjects
         SupplierLedgerMaster GetSupplierLedgerById(int supplierId);
         int AddSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
         int UpdateSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
-
+        List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> GetCompleteCompanyDiscountListBySupplierID(int supplierLedgerID);
         #endregion
 
         #region Person Route Master
@@ -90,7 +91,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Master.CustomerLedgerMaster> GetCustomerLedgers(string searchString = null);
         int AddCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
         int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
-        List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountList(int customerLedgerID);
+        List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountListByCustomerID(int customerLedgerID);
         int DeleteCustomerLedger(int customerLedgerID);
 
         #endregion

@@ -88,10 +88,7 @@ namespace PharmaDAL.Master
             {
                 try
                 {
-
-
                     var maxSupplierLedgerID = context.SupplierLedger.Count() + 1;
-
                     var supplierLedgerCode = "S" + maxSupplierLedgerID.ToString().PadLeft(6, '0');
 
                     Entity.SupplierLedger table = new Entity.SupplierLedger()
@@ -122,6 +119,44 @@ namespace PharmaDAL.Master
                     };
 
                     context.SupplierLedger.Add(table);
+
+
+                    ///Add Supplier Company discount data
+                    ///
+                    var previousMappings = context.SupplierCompanyDiscountRef.Where(x => x.SupplierLedgerID == p.SupplierLedgerId).ToList();
+                    context.SupplierCompanyDiscountRef.RemoveRange(previousMappings);
+
+                    foreach (var newEntry in p.SupplierCompanyDiscountList)
+                    {
+                        context.SupplierCompanyDiscountRef.Add(new Entity.SupplierCompanyDiscountRef()
+                        {
+                            SupplierLedgerID = p.SupplierLedgerId,
+                            CompanyID = newEntry.CompanyID,
+                            Normal = newEntry.Normal,
+                            Breakage = newEntry.Breakage,
+                            Expired = newEntry.Expired
+                        });
+
+                        ///All entry for item mappings
+                        ///
+
+                        if (newEntry.SupplierItemDiscountMapping != null)
+                        {
+                            foreach (var newItem in newEntry.SupplierItemDiscountMapping)
+                            {
+                                context.SupplierCompanyDiscountRef.Add(new Entity.SupplierCompanyDiscountRef()
+                                {
+                                    SupplierLedgerID = table.SupplierLedgerId,
+                                    CompanyID = newEntry.CompanyID,
+                                    ItemID = newItem.ItemID,
+                                    Normal = newItem.Normal,
+                                    Breakage = newItem.Breakage,
+                                    Expired = newItem.Expired
+                                });
+                            }
+                        }
+                    }
+
                     return context.SaveChanges();
                 }
                 catch (DbEntityValidationException ex)
@@ -164,6 +199,42 @@ namespace PharmaDAL.Master
                         supplierLedgerMaster.ModifiedOn = System.DateTime.Now;
                     }
 
+                    ///Add Supplier Company discount data
+                    ///
+                    var previousMappings = context.SupplierCompanyDiscountRef.Where(x => x.SupplierLedgerID == p.SupplierLedgerId).ToList();
+                    context.SupplierCompanyDiscountRef.RemoveRange(previousMappings);
+
+                    foreach (var newEntry in p.SupplierCompanyDiscountList)
+                    {
+                        context.SupplierCompanyDiscountRef.Add(new Entity.SupplierCompanyDiscountRef()
+                        {
+                            SupplierLedgerID = p.SupplierLedgerId,
+                            CompanyID = newEntry.CompanyID,
+                            Normal = newEntry.Normal,
+                            Breakage = newEntry.Breakage,
+                            Expired = newEntry.Expired
+                        });
+
+                        ///All entry for item mappings
+                        ///
+
+                        if (newEntry.SupplierItemDiscountMapping != null)
+                        {
+                            foreach (var newItem in newEntry.SupplierItemDiscountMapping)
+                            {
+                                context.SupplierCompanyDiscountRef.Add(new Entity.SupplierCompanyDiscountRef()
+                                {
+                                    SupplierLedgerID = p.SupplierLedgerId,
+                                    CompanyID = newEntry.CompanyID,
+                                    ItemID = newItem.ItemID,
+                                    Normal = newItem.Normal,
+                                    Breakage = newItem.Breakage,
+                                    Expired = newItem.Expired
+                                });
+                            }
+                        }
+                    }
+
                     return context.SaveChanges();
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
@@ -174,5 +245,77 @@ namespace PharmaDAL.Master
 
         }
 
+        public List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> GetExistigCompanyDiscountMappingBySupplierID(int supplierLedgerID)
+        {
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> existingDiscountMapping = new List<PharmaBusinessObjects.Master.SupplierCompanyDiscount>();
+
+                    existingDiscountMapping = context.SupplierCompanyDiscountRef.Where(q => q.SupplierLedgerID == supplierLedgerID && q.CompanyMaster.Status && q.ItemID == null)
+                                                      .Select(x => new PharmaBusinessObjects.Master.SupplierCompanyDiscount()
+                                                      {
+                                                          CompanyID = x.CompanyMaster.CompanyId,
+                                                          CompanyName = x.CompanyMaster.CompanyName,
+                                                          Normal = x.Normal,
+                                                          Breakage = x.Breakage,
+                                                          Expired = x.Expired
+                                                      }).ToList();
+
+                    ///Isssue in a single linq
+                    foreach (var item in existingDiscountMapping)
+                    {
+                        item.SupplierItemDiscountMapping = context.SupplierCompanyDiscountRef.Where(y => y.CompanyID == item.CompanyID && y.ItemID != null)
+                                                                                                                        .Select(o => new PharmaBusinessObjects.Master.SupplierCompanyDiscount()
+                                                                                                                        {
+                                                                                                                            CompanyID = o.CompanyID,
+                                                                                                                            CompanyName = o.CompanyMaster.CompanyName,
+                                                                                                                            ItemID = o.ItemID,
+                                                                                                                            ItemName = o.ItemMaster.ItemName,
+                                                                                                                            Normal = o.Normal,
+                                                                                                                            Breakage = o.Breakage,
+                                                                                                                            Expired = o.Expired
+
+                                                                                                                        }).ToList();
+                    }
+
+                    return existingDiscountMapping;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+
+        public List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> GetCompleteCompanyDiscountListBySupplierID(int supplierLedgerID)
+        {
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> mappedDiscount = GetExistigCompanyDiscountMappingBySupplierID(supplierLedgerID);
+                    List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> allCompanyDiscountMapping = context.CompanyMaster.Where(q => q.Status)
+                                                      .Select(x => new PharmaBusinessObjects.Master.SupplierCompanyDiscount()
+                                                      {
+                                                          CompanyID = x.CompanyId,
+                                                          CompanyName = x.CompanyName
+
+                                                      }).ToList();
+
+                    allCompanyDiscountMapping.RemoveAll(x => mappedDiscount.Any(y => y.CompanyID == x.CompanyID));
+                    allCompanyDiscountMapping.AddRange(mappedDiscount);
+
+                    return allCompanyDiscountMapping.OrderBy(x => x.CompanyName).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
     }
 }

@@ -27,10 +27,12 @@ namespace PharmaUI
             {
 
                 InitializeComponent();
-                ExtensionMethods.SetChildFormProperties(this);
+                ExtensionMethods.SetFormProperties(this);
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
                 this.SupplierId = supplierId;
                 SupplierNameNew = supplierName;
+
+                LoadSupplierCompanyDiscountGrid();
 
             }
             catch (Exception ex)
@@ -38,6 +40,40 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        public void LoadSupplierCompanyDiscountGrid()
+        {
+
+            List<SupplierCompanyDiscount> supplierCopanyDiscountList = applicationFacade.GetCompleteCompanyDiscountListBySupplierID(SupplierId);
+            dgvCompanyDiscount.DataSource = supplierCopanyDiscountList;
+
+            for (int i = 0; i < dgvCompanyDiscount.Columns.Count; i++)
+            {
+                dgvCompanyDiscount.Columns[i].Visible = false;
+            }
+
+            dgvCompanyDiscount.Columns["CompanyName"].Visible = true;
+            dgvCompanyDiscount.Columns["CompanyName"].HeaderText = "Company Name";
+            dgvCompanyDiscount.Columns["CompanyName"].ReadOnly = true;
+            dgvCompanyDiscount.Columns["CompanyName"].DisplayIndex = 0;
+
+            dgvCompanyDiscount.Columns["Normal"].Visible = true;
+            dgvCompanyDiscount.Columns["Normal"].HeaderText = "Normal";
+            dgvCompanyDiscount.Columns["Normal"].DisplayIndex = 1;
+
+            dgvCompanyDiscount.Columns["Breakage"].Visible = true;
+            dgvCompanyDiscount.Columns["Breakage"].DisplayIndex = 2;
+            dgvCompanyDiscount.Columns["Breakage"].HeaderText = "Breakage";
+
+            dgvCompanyDiscount.Columns["Expired"].Visible = true;
+            dgvCompanyDiscount.Columns["Expired"].DisplayIndex = 3;
+            dgvCompanyDiscount.Columns["Expired"].HeaderText = "Expired";
+
+            dgvCompanyDiscount.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCompanyDiscount.AllowUserToAddRows = false;
+            dgvCompanyDiscount.AllowUserToDeleteRows = false;
+            dgvCompanyDiscount.ReadOnly = false;
         }
 
         private void frmSupplierLedgerAddUpdate_Load(object sender, EventArgs e)
@@ -55,7 +91,7 @@ namespace PharmaUI
                 }
                 else
                 {
-                    ucSupplierCustomerInfo.CustomerSupplierName = SupplierNameNew;
+                    txtCustSupplierName.Text = SupplierNameNew;
                 }
             }
             catch (Exception ex)
@@ -104,21 +140,28 @@ namespace PharmaUI
 
             if (supplier != null)
             {
-                this.ucSupplierCustomerInfo.Code = supplier.SupplierLedgerCode;
-                this.ucSupplierCustomerInfo.CustomerSupplierName = supplier.SupplierLedgerName;
-                this.ucSupplierCustomerInfo.ShortName = supplier.SupplierLedgerShortName;
-                this.ucSupplierCustomerInfo.Address = supplier.Address;
-                this.ucSupplierCustomerInfo.ContactPerson = supplier.ContactPerson;
-                this.ucSupplierCustomerInfo.EmailAddress = supplier.EmailAddress;
-                this.ucSupplierCustomerInfo.Mobile = supplier.Mobile;
-                this.ucSupplierCustomerInfo.OfficePhone = supplier.OfficePhone;
-                this.ucSupplierCustomerInfo.ResidentPhone = supplier.ResidentPhone;
-                this.ucSupplierCustomerInfo.TaxRetail = supplier.TaxRetail =="R" ? Enums.TaxRetail.R : Enums.TaxRetail.T;
-                this.ucSupplierCustomerInfo.Status = supplier.Status ? Enums.Status.Active : Enums.Status.Inactive;
-                this.ucSupplierCustomerInfo.CreditDebit = supplier.CreditDebit =="C" ? Enums.TransType.C : Enums.TransType.D;
-                this.ucSupplierCustomerInfo.OpeningBal = supplier.OpeningBal.ToString();
+                txtCode.Text = supplier.SupplierLedgerCode;
+                txtCustSupplierName.Text = supplier.SupplierLedgerName;
+                txtShortName.Text = supplier.SupplierLedgerShortName;
+                txtAddress.Text = supplier.Address;
+                txtContactPerson.Text = supplier.ContactPerson;
+                txtEmailAddress.Text = supplier.EmailAddress;
+                txtMobile.Text = supplier.Mobile;
+                txtPhoneO.Text = supplier.OfficePhone;
+                txtPhoneR.Text = supplier.ResidentPhone;
+                cbxTaxRetail.SelectedItem = supplier.TaxRetail == "R" ? Enums.TaxRetail.R : Enums.TaxRetail.T;
+                cbxStatus.SelectedItem = supplier.Status ? Enums.Status.Active : Enums.Status.Inactive;
+                cbxCreditDebit.SelectedItem = supplier.CreditDebit == "C" ? Enums.TransType.C : Enums.TransType.D;
+                txtOpeningBal.Text = supplier.OpeningBal.ToString();
                 cbxArea.SelectedValue = supplier.AreaId;
-                
+
+                tbxDL.Text = supplier.DLNo;
+                tbxGST.Text = supplier.GSTNo;
+                tbxCIN.Text = supplier.CINNo;
+                tbxLIN.Text = supplier.LINNo;
+                tbxServiceTax.Text = supplier.ServiceTaxNo;
+                tbxPAN.Text = supplier.PANNo;
+
                 //todo ADD SUPPLIER PURCHASE TYPE iD
                 //cbxPurchaseType.SelectedValue = supplier.
             }
@@ -126,6 +169,18 @@ namespace PharmaUI
 
         private void FillCombo()
         {
+            ////Fill Credit/Debit options
+            cbxCreditDebit.DataSource = Enum.GetValues(typeof(Enums.TransType));
+            cbxCreditDebit.SelectedItem = TransType.C;
+
+            ////Fill Credit/Debit options
+            cbxTaxRetail.DataSource = Enum.GetValues(typeof(Enums.TaxRetail));
+            cbxTaxRetail.SelectedItem = Enums.TaxRetail.R;
+
+            ////Fill Status options
+            cbxStatus.DataSource = Enum.GetValues(typeof(Enums.Status));
+            cbxStatus.SelectedItem = Enums.Status.Active;
+
             //Fill Purchase type option
             cbxPurchaseType.DataSource = applicationFacade.GetAccountLedgerBySystemName("PurchaseLedger");
             cbxPurchaseType.DisplayMember = "AccountLedgerName";
@@ -136,15 +191,13 @@ namespace PharmaUI
             cbxArea.DisplayMember = "PersonRouteName";
             cbxArea.ValueMember = "PersonRouteID";
 
-
-            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(this.ucSupplierCustomerInfo.CustomerSupplierName))
+                if (string.IsNullOrEmpty(txtCustSupplierName.Text))
                 {
                     throw new Exception("Supplier Name can not be blank");
                 }
@@ -154,30 +207,54 @@ namespace PharmaUI
                 decimal openingBal = 0.00M;
 
                 SupplierLedgerMaster supplier = new SupplierLedgerMaster();
-                supplier.SupplierLedgerCode = this.ucSupplierCustomerInfo.Code;
-                supplier.SupplierLedgerName = this.ucSupplierCustomerInfo.CustomerSupplierName;
-                supplier.SupplierLedgerShortName = this.ucSupplierCustomerInfo.ShortName;
-                supplier.Address = this.ucSupplierCustomerInfo.Address;
-                supplier.ContactPerson = this.ucSupplierCustomerInfo.ContactPerson;
-                Enum.TryParse<Status>(this.ucSupplierCustomerInfo.Status.ToString(), out status);
+                supplier.SupplierLedgerCode = txtCode.Text;
+                supplier.SupplierLedgerName = txtCustSupplierName.Text;
+                supplier.SupplierLedgerShortName = txtShortName.Text;
+                supplier.Address = txtAddress.Text;
+                supplier.ContactPerson = txtContactPerson.Text;
+                Enum.TryParse<Status>(cbxStatus.SelectedItem.ToString(), out status);
                 supplier.Status = status == Status.Active;
-                supplier.CreditDebit = this.ucSupplierCustomerInfo.CreditDebit == Enums.TransType.C ? "C" : "D";
+                supplier.CreditDebit =(Enums.TransType)cbxCreditDebit.SelectedItem == Enums.TransType.C ? "C" : "D";
                 Int32.TryParse(cbxArea.SelectedValue.ToString(), out areaId);
                 supplier.AreaId = areaId;
-                supplier.DLNo = txtDLNo.Text;
-                supplier.EmailAddress = this.ucSupplierCustomerInfo.EmailAddress;
-                supplier.Mobile = this.ucSupplierCustomerInfo.Mobile;
-                supplier.OfficePhone = this.ucSupplierCustomerInfo.OfficePhone;
+                supplier.EmailAddress = txtEmailAddress.Text;
+                supplier.Mobile = txtMobile.Text;
+                supplier.OfficePhone = txtPhoneO.Text;
 
                 int purchaseTypeId = 0;
                 Int32.TryParse(Convert.ToString(cbxPurchaseType.SelectedValue), out purchaseTypeId);
                 supplier.PurchaseTypeId = purchaseTypeId;
 
-                decimal.TryParse(this.ucSupplierCustomerInfo.OpeningBal, out openingBal);
+                decimal.TryParse(txtOpeningBal.Text , out openingBal);
                 supplier.OpeningBal = openingBal;
-                supplier.ResidentPhone = this.ucSupplierCustomerInfo.ResidentPhone;
-                supplier.TaxRetail = this.ucSupplierCustomerInfo.TaxRetail == TaxRetail.R ? "R" : "T";
+                supplier.ResidentPhone = txtPhoneR.Text;
+                supplier.TaxRetail =(Enums.TaxRetail)cbxTaxRetail.SelectedItem == TaxRetail.R ? "R" : "T";
                 supplier.SupplierLedgerId = SupplierId;
+
+                supplier.DLNo = tbxDL.Text;
+                supplier.GSTNo = tbxGST.Text;
+                supplier.CINNo = tbxCIN.Text;
+                supplier.LINNo = tbxLIN.Text;
+                supplier.ServiceTaxNo = tbxServiceTax.Text;
+                supplier.PANNo = tbxPAN.Text;
+
+                ///Get All the mapping for Company discount 
+                ///
+                supplier.SupplierCompanyDiscountList = dgvCompanyDiscount.Rows
+                                                                        .Cast<DataGridViewRow>()
+                                                                        .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Normal"].Value))
+                                                                                    || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Breakage"].Value))
+                                                                                    || !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Expired"].Value))
+                                                                        ).Select(x => new SupplierCompanyDiscount()
+                                                                        {
+                                                                            CompanyID = (x.DataBoundItem as SupplierCompanyDiscount).CompanyID,
+                                                                            Normal = (x.DataBoundItem as SupplierCompanyDiscount).Normal,
+                                                                            Breakage = (x.DataBoundItem as SupplierCompanyDiscount).Breakage,
+                                                                            Expired = (x.DataBoundItem as SupplierCompanyDiscount).Expired,
+                                                                            SupplierItemDiscountMapping = (x.DataBoundItem as SupplierCompanyDiscount).SupplierItemDiscountMapping
+
+                                                                        }).ToList();
+
 
                 int result = SupplierId > 0 ? applicationFacade.UpdateSupplierLedger(supplier) : applicationFacade.AddSupplierLedger(supplier);
 
@@ -232,5 +309,52 @@ namespace PharmaUI
            
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == (Keys.F9))
+            {
+
+            }
+            else if (keyData == (Keys.F3))
+            {
+                if (dgvCompanyDiscount.SelectedCells.Count > 0)
+                {
+                    bool DoesCompanyHaveDiscountMapping = dgvCompanyDiscount.CurrentRow != null && !(
+                                                                                                String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Normal"].Value)))
+                                                                                                && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Breakage"].Value)))
+                                                                                                && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Expired"].Value)))
+                                                                                                );
+
+                    ///OPen item discount mapping screen only if company discount existing 
+                    if (DoesCompanyHaveDiscountMapping)
+                    {
+                        SupplierCompanyDiscount existingItem = (SupplierCompanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
+                        frmSupplierItemDiscountMaster formSupplierItemDiscountMaster = new frmSupplierItemDiscountMaster(existingItem);
+                        formSupplierItemDiscountMaster.FormClosed += FormSupplierItemDiscountMaster_FormClosed;
+                        formSupplierItemDiscountMaster.Show();
+                    }
+                }
+            }
+            else if (keyData == Keys.F1)
+            {
+              
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void FormSupplierItemDiscountMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                SupplierCompanyDiscount updatedSupplierCopanyDiscount = (sender as frmSupplierItemDiscountMaster).retSupplierCopanyDiscount;
+                (dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem as SupplierCompanyDiscount).SupplierItemDiscountMapping = updatedSupplierCopanyDiscount.SupplierItemDiscountMapping;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

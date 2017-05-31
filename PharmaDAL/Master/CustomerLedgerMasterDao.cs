@@ -148,7 +148,7 @@ namespace PharmaDAL.Master
                             Normal = newEntry.Normal,
                             Breakage = newEntry.Breakage,
                             Expired = newEntry.Expired,
-                            IsLessEcise = newEntry.IsLessEcise
+                            IsLessEcise = false
                         });
 
                         ///All entry for item mappings
@@ -166,7 +166,7 @@ namespace PharmaDAL.Master
                                     Normal = newItem.Normal,
                                     Breakage = newItem.Breakage,
                                     Expired = newItem.Expired,
-                                    IsLessEcise = newItem.IsLessEcise
+                                    IsLessEcise = false
                                 });
                             }
                         }
@@ -247,7 +247,7 @@ namespace PharmaDAL.Master
                                 Normal = newEntry.Normal,
                                 Breakage = newEntry.Breakage,
                                 Expired = newEntry.Expired,
-                                IsLessEcise = newEntry.IsLessEcise
+                                IsLessEcise = false
                             });
 
                             ///All entry for item mappings
@@ -264,7 +264,7 @@ namespace PharmaDAL.Master
                                         Normal = newItem.Normal,
                                         Breakage = newItem.Breakage,
                                         Expired = newItem.Expired,
-                                        IsLessEcise = newItem.IsLessEcise
+                                        IsLessEcise = false
                                     });
                                 }
                             }
@@ -296,8 +296,7 @@ namespace PharmaDAL.Master
                                                           CompanyName = x.CompanyMaster.CompanyName,
                                                           Normal = x.Normal,
                                                           Breakage = x.Breakage,
-                                                          Expired = x.Expired,
-                                                          IsLessEcise = x.IsLessEcise,
+                                                          Expired = x.Expired
                                                       }).ToList();
 
                     ///Isssue in a single linq
@@ -312,8 +311,7 @@ namespace PharmaDAL.Master
                                                                                                                             ItemName = o.ItemMaster.ItemName,
                                                                                                                             Normal = o.Normal,
                                                                                                                             Breakage = o.Breakage,
-                                                                                                                            Expired = o.Expired,
-                                                                                                                            IsLessEcise = o.IsLessEcise
+                                                                                                                            Expired = o.Expired
 
                                                                                                                         }).ToList();
                     }
