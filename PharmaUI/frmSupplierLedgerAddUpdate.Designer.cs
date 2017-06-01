@@ -697,6 +697,8 @@
             this.dgvCompanyDiscount.Size = new System.Drawing.Size(465, 264);
             this.dgvCompanyDiscount.TabIndex = 301;
             this.dgvCompanyDiscount.Tag = "";
+            this.dgvCompanyDiscount.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCompanyDiscount_EditingControlShowing);
+            this.dgvCompanyDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCompanyDiscount_KeyDown);
             // 
             // frmSupplierLedgerAddUpdate
             // 

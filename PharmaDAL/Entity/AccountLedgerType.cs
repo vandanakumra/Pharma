@@ -24,6 +24,8 @@ namespace PharmaDAL.Entity
         public string AccountLedgerTypeName { get; set; }
         public string SystemName { get; set; }
         public bool Status { get; set; }
+        public string CodeStartWith { get; set; }
+        public bool IsUsedInAccountLedgerMasterForm { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountLedgerMaster> AccountLedgerMaster { get; set; }

@@ -207,6 +207,9 @@ namespace PharmaUI
         {
             try
             {
+                //Set the cursor to appear as busy
+                Cursor.Current = Cursors.WaitCursor;
+
                 Choice choice;
                 LocalCentral localCentral;
                 CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
@@ -298,6 +301,9 @@ namespace PharmaUI
                 {
                     _result = applicationFacade.AddCustomerLedger(customerLedgerMaster);
                 }
+
+                //Make the Cursor to default
+                Cursor.Current = Cursors.Default;
 
                 if (_result > 0)
                 {
