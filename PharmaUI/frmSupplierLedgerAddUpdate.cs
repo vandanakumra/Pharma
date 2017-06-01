@@ -197,10 +197,15 @@ namespace PharmaUI
         {
             try
             {
+
+
                 if (string.IsNullOrEmpty(txtCustSupplierName.Text))
                 {
                     throw new Exception("Supplier Name can not be blank");
                 }
+
+                //Set the cursor to appear as busy
+                Cursor.Current = Cursors.WaitCursor;
 
                 Status status;
                 int areaId = 0;
@@ -257,6 +262,9 @@ namespace PharmaUI
 
 
                 int result = SupplierId > 0 ? applicationFacade.UpdateSupplierLedger(supplier) : applicationFacade.AddSupplierLedger(supplier);
+
+                //Make the Cursor to default
+                Cursor.Current = Cursors.Default;
 
                 //Close this form if operation is successful
                 if (result > 0)
@@ -354,6 +362,96 @@ namespace PharmaUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvCompanyDiscount_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyData == Keys.Up || e.KeyData == Keys.Left || e.KeyData == Keys.Right || e.KeyData == Keys.Down || e.KeyData == Keys.Tab)
+                {
+                    return;
+                }
+
+                e.SuppressKeyPress = true;
+
+                if (e.KeyData == Keys.Enter)
+                {
+                    int rowIndex = dgvCompanyDiscount.CurrentCell.RowIndex;
+                    int columnIndex = 0;
+                    string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
+
+                    int columnDisplayIndex = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].DisplayIndex;
+
+                    for (int i = 0; i < dgvCompanyDiscount.ColumnCount; i++)
+                    {
+                        if (dgvCompanyDiscount.Columns[i].DisplayIndex == columnDisplayIndex + 1)
+                        {
+                            columnIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (rowIndex == (dgvCompanyDiscount.Rows.Count - 1) && columnName == "Expired")
+                    {
+                        btnSave.Focus();
+
+                    }
+                    else if (rowIndex < (dgvCompanyDiscount.Rows.Count - 1) && columnName == "Expired")
+                    {
+                        for (int i = 0; i < dgvCompanyDiscount.Columns.Count - 1; i++)
+                        {
+                            if (dgvCompanyDiscount.Columns[i].DisplayIndex == 0)
+                            {
+                                dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[i, rowIndex + 1];
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        dgvCompanyDiscount.CurrentCell = dgvCompanyDiscount[columnIndex, rowIndex];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvCompanyDiscount_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            try
+            {
+                string columnName = dgvCompanyDiscount.Columns[dgvCompanyDiscount.CurrentCell.ColumnIndex].Name;
+
+                if (columnName.Equals("CompanyName")) return;
+
+                e.Control.KeyPress -= new KeyPressEventHandler(Column_KeyPress);
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column_KeyPress);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Column_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
     }
