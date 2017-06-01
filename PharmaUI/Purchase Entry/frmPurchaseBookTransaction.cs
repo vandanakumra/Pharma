@@ -667,9 +667,18 @@ namespace PharmaUI
                     {
                         PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
                         GetPurchaseBookHeader(ref header);
-                        frmPurchaseHeaderAmount amount = new frmPurchaseHeaderAmount(header);
-                        amount.FormClosed += Amount_FormClosed;
-                        amount.ShowDialog();
+
+                        if (header.LocalCentral == "L")
+                        {
+                            frmPurchaseHeaderAmount amount = new frmPurchaseHeaderAmount(header);
+                            amount.FormClosed += Amount_FormClosed;
+                            amount.ShowDialog();
+                        }
+                        else {
+                            frmPurchaseHeaderCentralAmount amount = new frmPurchaseHeaderCentralAmount(header);
+                            amount.FormClosed += Amount_FormClosed;
+                            amount.ShowDialog();
+                        }
                     }
 
                 }
@@ -694,8 +703,8 @@ namespace PharmaUI
         {
             try
             {
-                frmPurchaseHeaderAmount amount = (frmPurchaseHeaderAmount)sender;
-
+                //frmPurchaseHeaderAmount amount = (frmPurchaseHeaderAmount)sender;
+                dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
                 var result = MessageBox.Show("Are you sure you want to save the purchase entry", "Confirmation", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.OK)
                 {
@@ -880,9 +889,9 @@ namespace PharmaUI
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                int rate = 0;
-                Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
-                if (rate == 0)
+                double rate = 0;
+                double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
+                if (rate == 0L)
                 {
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"];
                 }

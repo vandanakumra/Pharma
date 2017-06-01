@@ -296,9 +296,9 @@ namespace PharmaDAL.Transaction
                 SqlConnection connection = (SqlConnection)context.Database.Connection; ;
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("SavePurchaseData", connection);
+                    SqlCommand cmd = new SqlCommand("SavePurchaseEntryData", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@ID", purchaseBookHeaderID));
+                    cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookHeaderID", purchaseBookHeaderID));
                     connection.Open();
                     cmd.ExecuteNonQuery();
 
@@ -339,13 +339,14 @@ namespace PharmaDAL.Transaction
                     {
                         PharmaBusinessObjects.Transaction.PurchaseBookAmount obj = new PharmaBusinessObjects.Transaction.PurchaseBookAmount()
                         {
-                            PurchaseBookHeaderID = Convert.ToInt64(row["PurchaseBookHeaderID"]),
+                            PurchaseBookHeaderID = Convert.ToInt64(row["PurchaseSaleBookHeaderID"]),
                             PurchaseSaleTypeCode = Convert.ToString(row["PurchaseSaleTypeCode"]),
                             PurchaseSaleTypeName = Convert.ToString(row["PurchaseSaleTypeName"]),
                             Amount = Convert.IsDBNull(row["Amount"]) ? 0L : Convert.ToDouble(row["Amount"]),
                             IGST = Convert.IsDBNull(row["IGST"]) ? 0L : Convert.ToDouble(row["IGST"]),
                             SGST = Convert.IsDBNull(row["SGST"]) ? 0L : Convert.ToDouble(row["SGST"]),
                             CGST = Convert.IsDBNull(row["CGST"]) ? 0L : Convert.ToDouble(row["CGST"]),
+                            TaxApplicable = Convert.IsDBNull(row["TaxApplicable"]) ? 0L : Convert.ToDouble(row["TaxApplicable"])
                         };
 
                         PurchaseAmountList.Add(obj);

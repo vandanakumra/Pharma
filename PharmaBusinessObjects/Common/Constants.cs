@@ -49,5 +49,17 @@ namespace PharmaBusinessObjects.Common
             public const string SaleLedger = "SaleLedger";
             public const string ControlCodes = "ControlCodes";
         }
+
+        public static class PurchaseTypeCode
+        {
+            public const string PurchaseType1 = "PUR0000001";
+            public const string PurchaseType2 = "PUR0000002";
+            public const string PurchaseType3 = "PUR0000003";
+            public const string PurchaseType4 = "PUR0000004";
+            public const string PurchaseType5 = "PUR0000005";
+            public const string PurchaseType6 = "PUR0000006";
+            public const string PurchaseType7 = "PUR0000007";
         }
-}
+
+        }
+    }
