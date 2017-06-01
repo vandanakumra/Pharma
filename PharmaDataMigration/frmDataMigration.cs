@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using PharmaDataMigration.Master;
+using System.Data.Entity.Validation;
 
 namespace PharmaDataMigration
 {
@@ -53,7 +54,21 @@ namespace PharmaDataMigration
                 Common.DataDirectory = txtDataDirectory.Text;
             }
 
-            StartMigration();
+            try
+            {
+                StartMigration();
+            }
+            catch (DbEntityValidationException ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+           
         }
 
         private void StartMigration()

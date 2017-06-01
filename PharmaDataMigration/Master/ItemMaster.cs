@@ -74,17 +74,17 @@ namespace PharmaDataMigration.Master
 
                             PharmaDAL.Entity.AccountLedgerMaster purchaseType = null;
 
-                            if (saleType.AccountLedgerName.Contains("5%"))
+                            if (saleType.SalePurchaseTaxType == 5)
                             {
-                                purchaseType = accountLedgerMaster.Where(p => p.AccountLedgerName.Contains("5%") && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                                purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 5 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
                             }
-                            else if (saleType.AccountLedgerName.Contains("12.5%"))
+                            else if (saleType.SalePurchaseTaxType == 12)
                             {
-                                purchaseType = accountLedgerMaster.Where(p => p.AccountLedgerName.Contains("12.5%") && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                                purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 12 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
                             }
-                            else if (saleType.AccountLedgerName.Contains("EXEMPTED"))
+                            else if (saleType.SalePurchaseTaxType == 0)
                             {
-                                purchaseType = accountLedgerMaster.Where(p => p.AccountLedgerName.Contains("EXEMPTED") && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                                purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 0 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
                             }
                             
 
