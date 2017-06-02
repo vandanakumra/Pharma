@@ -264,5 +264,19 @@ namespace PharmaUI
 
            
         }
+
+        private void receiptFromCustTransactionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmReceiptFromCustomer form = new frmReceiptFromCustomer();
+                ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
