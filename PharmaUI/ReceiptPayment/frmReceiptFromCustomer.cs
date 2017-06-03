@@ -52,8 +52,27 @@ namespace PharmaUI
         ///
         private void LoadGridReceiptFromCustomer()
         {
-           
-            dgvReceiptFromCust.DataSource = new List<ReceiptPayment>();
+
+            dgvReceiptFromCust.Columns.Add("ReceiptPaymentID", "ReceiptPaymentID");
+            dgvReceiptFromCust.Columns.Add("VoucherNumber", "VoucherNumber");
+            dgvReceiptFromCust.Columns.Add("VoucherTypeCode", "VoucherTypeCode");
+            dgvReceiptFromCust.Columns.Add("VoucherDate", "VoucherDate");
+            dgvReceiptFromCust.Columns.Add("LedgerType", "LedgerType");
+            dgvReceiptFromCust.Columns.Add("LedgerTypeCode", "LedgerTypeCode");
+            dgvReceiptFromCust.Columns.Add("LedgerTypeName", "LedgerTypeName");
+            dgvReceiptFromCust.Columns.Add("PaymentMode", "PaymentMode");
+            dgvReceiptFromCust.Columns.Add("Amount", "Amount");
+            dgvReceiptFromCust.Columns.Add("ChequeNumber", "ChequeNumber");
+            dgvReceiptFromCust.Columns.Add("BankAccountLedgerTypeCode", "BankAccountLedgerTypeCode");
+            dgvReceiptFromCust.Columns.Add("BankAccountLedgerTypeName", "BankAccountLedgerTypeName");
+            dgvReceiptFromCust.Columns.Add("ChequeDate", "ChequeDate");
+            dgvReceiptFromCust.Columns.Add("ChequeClearDate", "ChequeClearDate");
+            dgvReceiptFromCust.Columns.Add("IsChequeCleared", "IsChequeCleared");
+            dgvReceiptFromCust.Columns.Add("POST", "POST");
+            dgvReceiptFromCust.Columns.Add("PISNumber", "PISNumber");
+            dgvReceiptFromCust.Columns.Add("UnadjustedAmount", "UnadjustedAmount");
+
+
             ExtensionMethods.SetGridDefaultProperty(dgvReceiptFromCust);
 
             dgvReceiptFromCust.Columns["LedgerTypeCode"].Visible = true;
@@ -148,14 +167,40 @@ namespace PharmaUI
             return;
         }
 
-        private void dtReceiptPayment_Validating(object sender, CancelEventArgs e)
-        {
-
-        }
-
         private void dtReceiptPayment_Validated(object sender, EventArgs e)
         {
+            try
+            {
+               if(dgvReceiptFromCust.Rows.Count == 0)
+                {
+                    dgvReceiptFromCust.Rows.Add();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+        private void dtReceiptPayment_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime Test;
+                if (!DateTime.TryParseExact(dtReceiptPayment.Text, "dd/mm/yyyy", null, DateTimeStyles.None, out Test))
+                {
+                    dtReceiptPayment.Focus();
+                    errorProviderReceiptPayment.SetError(dtReceiptPayment, "Please enter correct date");
+                }
+                else
+                {
+                    errorProviderReceiptPayment.SetError(dtReceiptPayment, String.Empty);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }         
         }
     }
 }
