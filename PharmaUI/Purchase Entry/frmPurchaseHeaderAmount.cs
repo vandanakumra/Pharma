@@ -351,6 +351,7 @@ namespace PharmaUI
             double.TryParse(Convert.ToString(txt.Tag), out tax);
 
             double amount = 0;
+
             double.TryParse(txt.Text, out amount);
 
             if (isDirty)

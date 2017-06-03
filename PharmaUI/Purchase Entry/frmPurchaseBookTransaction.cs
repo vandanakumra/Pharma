@@ -401,8 +401,9 @@ namespace PharmaUI
                     rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
                     colIndex = dgvLineItem.SelectedCells[0].ColumnIndex;
 
+                    PurchaseSaleBookLineItem item = batch.PurchaseBookLineItem;
                     // dgvLineItem.CurrentRow.Cells[dgvLineItem.CurrentRow.Cells["Batch"].ColumnIndex].Value = batch.BatchNumber;
-                    dgvLineItem.Rows[rowIndex].Cells["Batch"].Value = batch.BatchNumber;
+                    InsertUpdateLineItemAndsetToGrid(item, 0);
 
                 }
                 isBatchUpdate = false;
@@ -1131,7 +1132,8 @@ namespace PharmaUI
 
             if (list != null && list.Count > 0)
             {
-                frmLastNBatchNo batch = new frmLastNBatchNo(list);
+                PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                frmLastNBatchNo batch = new frmLastNBatchNo(list, lineItem);
                 batch.FormClosed += Batch_FormClosed;
                 batch.ShowDialog();
             }

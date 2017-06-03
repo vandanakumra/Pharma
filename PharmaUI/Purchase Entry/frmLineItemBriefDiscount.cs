@@ -51,7 +51,7 @@ namespace PharmaUI
             string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
             format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
             format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
-            dtExpiry.Text = purchaseBookLineItem.ExpiryDate== null || purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? string.Empty: ((DateTime)purchaseBookLineItem.ExpiryDate).ToString(format);
+            dtExpiry.Text = purchaseBookLineItem.ExpiryDate== null || purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? DateTime.Now.ToString(format) : ((DateTime)purchaseBookLineItem.ExpiryDate).ToString(format);
         }
 
         public void GotFocusEventRaised(Control control)

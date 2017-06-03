@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Transaction;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,17 +18,16 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
 
         public string SupplierCode { get; set; }
-        public string ItemCode { get; set; }
-        public string BatchNumber { get; set; }
-
+        public PurchaseSaleBookLineItem PurchaseBookLineItem { get; set; }
         private List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> list;
 
-        public frmLastNBatchNo(List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> _list)
+        public frmLastNBatchNo(List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> _list, PurchaseSaleBookLineItem item)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             list = _list;
+            PurchaseBookLineItem = item;
         }
 
         private void frmLastNBatchNo_Load(object sender, EventArgs e)
@@ -131,7 +131,13 @@ namespace PharmaUI
         {
             if (dgvLastBatch.Rows.Count > 0)
             {
-                BatchNumber = Convert.ToString(dgvLastBatch.Rows[0].Cells["Batch"].Value);
+                PurchaseSaleBookLineItem item = (PurchaseSaleBookLineItem)dgvLastBatch.CurrentRow.DataBoundItem;
+                PurchaseBookLineItem.Batch = item.Batch;
+                PurchaseBookLineItem.Discount = item.Discount;
+                PurchaseBookLineItem.SpecialDiscount = item.SpecialDiscount;
+                PurchaseBookLineItem.VolumeDiscount = item.VolumeDiscount;
+                PurchaseBookLineItem.ExpiryDate = item.ExpiryDate;
+                
             }
             
         }

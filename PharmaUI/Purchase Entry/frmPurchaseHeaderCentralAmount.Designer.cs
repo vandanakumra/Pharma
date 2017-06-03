@@ -123,6 +123,7 @@
             // txtOtherAmt
             // 
             this.txtOtherAmt.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtOtherAmt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtOtherAmt.Location = new System.Drawing.Point(203, 215);
             this.txtOtherAmt.Name = "txtOtherAmt";
             this.txtOtherAmt.Size = new System.Drawing.Size(100, 20);
@@ -131,6 +132,7 @@
             // txtCGST1
             // 
             this.txtCGST1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCGST1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCGST1.Location = new System.Drawing.Point(463, 5);
             this.txtCGST1.Name = "txtCGST1";
             this.txtCGST1.Size = new System.Drawing.Size(100, 20);
@@ -299,6 +301,7 @@
             // txtAmount1
             // 
             this.txtAmount1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAmount1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmount1.Location = new System.Drawing.Point(203, 5);
             this.txtAmount1.Name = "txtAmount1";
             this.txtAmount1.Size = new System.Drawing.Size(100, 20);
@@ -307,6 +310,7 @@
             // txtAmount2
             // 
             this.txtAmount2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAmount2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmount2.Location = new System.Drawing.Point(203, 35);
             this.txtAmount2.Name = "txtAmount2";
             this.txtAmount2.Size = new System.Drawing.Size(100, 20);
@@ -315,6 +319,7 @@
             // txtAmount3
             // 
             this.txtAmount3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAmount3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmount3.Location = new System.Drawing.Point(203, 65);
             this.txtAmount3.Name = "txtAmount3";
             this.txtAmount3.Size = new System.Drawing.Size(100, 20);
@@ -323,6 +328,7 @@
             // txtAmount4
             // 
             this.txtAmount4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAmount4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmount4.Location = new System.Drawing.Point(203, 95);
             this.txtAmount4.Name = "txtAmount4";
             this.txtAmount4.Size = new System.Drawing.Size(100, 20);
@@ -331,6 +337,7 @@
             // txtAmount5
             // 
             this.txtAmount5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAmount5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmount5.Location = new System.Drawing.Point(203, 125);
             this.txtAmount5.Name = "txtAmount5";
             this.txtAmount5.Size = new System.Drawing.Size(100, 20);
@@ -339,6 +346,7 @@
             // txtAmount6
             // 
             this.txtAmount6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAmount6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmount6.Location = new System.Drawing.Point(203, 155);
             this.txtAmount6.Name = "txtAmount6";
             this.txtAmount6.Size = new System.Drawing.Size(100, 20);
@@ -347,6 +355,7 @@
             // txtAmount7
             // 
             this.txtAmount7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAmount7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAmount7.Location = new System.Drawing.Point(203, 185);
             this.txtAmount7.Name = "txtAmount7";
             this.txtAmount7.Size = new System.Drawing.Size(100, 20);
@@ -355,6 +364,7 @@
             // txtCGST2
             // 
             this.txtCGST2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCGST2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCGST2.Location = new System.Drawing.Point(463, 35);
             this.txtCGST2.Name = "txtCGST2";
             this.txtCGST2.Size = new System.Drawing.Size(100, 20);
@@ -363,6 +373,7 @@
             // txtCGST3
             // 
             this.txtCGST3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCGST3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCGST3.Location = new System.Drawing.Point(463, 65);
             this.txtCGST3.Name = "txtCGST3";
             this.txtCGST3.Size = new System.Drawing.Size(100, 20);
@@ -371,6 +382,7 @@
             // txtCGST4
             // 
             this.txtCGST4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCGST4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCGST4.Location = new System.Drawing.Point(463, 95);
             this.txtCGST4.Name = "txtCGST4";
             this.txtCGST4.Size = new System.Drawing.Size(100, 20);
@@ -379,6 +391,7 @@
             // txtCGST5
             // 
             this.txtCGST5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCGST5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCGST5.Location = new System.Drawing.Point(463, 125);
             this.txtCGST5.Name = "txtCGST5";
             this.txtCGST5.Size = new System.Drawing.Size(100, 20);
@@ -387,6 +400,7 @@
             // txtCGST6
             // 
             this.txtCGST6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCGST6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCGST6.Location = new System.Drawing.Point(463, 155);
             this.txtCGST6.Name = "txtCGST6";
             this.txtCGST6.Size = new System.Drawing.Size(100, 20);
@@ -395,6 +409,7 @@
             // txtCGST7
             // 
             this.txtCGST7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCGST7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCGST7.Location = new System.Drawing.Point(463, 185);
             this.txtCGST7.Name = "txtCGST7";
             this.txtCGST7.Size = new System.Drawing.Size(100, 20);
@@ -403,6 +418,7 @@
             // txtTotalBillAmount
             // 
             this.txtTotalBillAmount.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtTotalBillAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotalBillAmount.Location = new System.Drawing.Point(203, 245);
             this.txtTotalBillAmount.Name = "txtTotalBillAmount";
             this.txtTotalBillAmount.Size = new System.Drawing.Size(100, 20);

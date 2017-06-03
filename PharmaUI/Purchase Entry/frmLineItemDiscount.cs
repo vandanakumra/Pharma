@@ -46,7 +46,7 @@ namespace PharmaUI
             format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
             format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
 
-            dtMfgDate.Text = purchaseBookLineItem.PurchaseBillDate == null || purchaseBookLineItem.PurchaseBillDate == (DateTime) DateTime.MinValue ? string.Empty : ((DateTime)purchaseBookLineItem.PurchaseBillDate).ToString(format);
+            dtMfgDate.Text = purchaseBookLineItem.PurchaseBillDate == null || purchaseBookLineItem.PurchaseBillDate == (DateTime)DateTime.MinValue ? DateTime.Now.ToString(format) : ((DateTime)purchaseBookLineItem.PurchaseBillDate).ToString(format);
             txtSpecialRate.Text = Convert.ToString(purchaseBookLineItem.SpecialRate);
             txtWholeSaleRate.Text = Convert.ToString(purchaseBookLineItem.WholeSaleRate);
             txtSaleRate.Text = Convert.ToString(purchaseBookLineItem.SaleRate);
@@ -54,7 +54,7 @@ namespace PharmaUI
             txtSpecialDiscount.Text = Convert.ToString(purchaseBookLineItem.SpecialDiscount);
             txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
             txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);          
-            dtExpiry.Text = purchaseBookLineItem.ExpiryDate == null || purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? string.Empty : ((DateTime)purchaseBookLineItem.ExpiryDate).ToString(format);        
+            dtExpiry.Text = purchaseBookLineItem.ExpiryDate == null || purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? DateTime.Now.ToString(format) : ((DateTime)purchaseBookLineItem.ExpiryDate).ToString(format);        
         }
 
         public void GotFocusEventRaised(Control control)

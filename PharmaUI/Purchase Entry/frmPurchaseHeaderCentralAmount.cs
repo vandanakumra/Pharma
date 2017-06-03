@@ -257,7 +257,7 @@ namespace PharmaUI
             Double.TryParse(txtOtherAmt.Text, out otherAmount);
 
             txtTotalBillAmount.Text = (amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + cgst1 + cgst2 + cgst3
-                + cgst3 + cgst4 + cgst5 + cgst6 + cgst7).ToString("#.##");
+                + cgst3 + cgst4 + cgst5 + cgst6 + cgst7 + otherAmount).ToString("#.##");
         }
 
         public void GotFocusEventRaised(Control control)
