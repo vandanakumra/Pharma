@@ -45,8 +45,8 @@
             this.lblSpecialRate = new System.Windows.Forms.Label();
             this.txtSpecialRate = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.dtMfgDate = new System.Windows.Forms.MaskedTextBox();
             this.dtExpiry = new System.Windows.Forms.MaskedTextBox();
+            this.dtMfgDate = new System.Windows.Forms.MaskedTextBox();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +54,7 @@
             // 
             this.txtMRP.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtMRP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMRP.Location = new System.Drawing.Point(120, 95);
+            this.txtMRP.Location = new System.Drawing.Point(123, 89);
             this.txtMRP.Name = "txtMRP";
             this.txtMRP.Size = new System.Drawing.Size(111, 20);
             this.txtMRP.TabIndex = 20;
@@ -63,7 +63,7 @@
             // 
             this.txtVolDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtVolDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtVolDiscount.Location = new System.Drawing.Point(588, 65);
+            this.txtVolDiscount.Location = new System.Drawing.Point(603, 60);
             this.txtVolDiscount.Name = "txtVolDiscount";
             this.txtVolDiscount.Size = new System.Drawing.Size(112, 20);
             this.txtVolDiscount.TabIndex = 19;
@@ -72,7 +72,7 @@
             // 
             this.txtSpecialDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtSpecialDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSpecialDiscount.Location = new System.Drawing.Point(354, 65);
+            this.txtSpecialDiscount.Location = new System.Drawing.Point(363, 60);
             this.txtSpecialDiscount.Name = "txtSpecialDiscount";
             this.txtSpecialDiscount.Size = new System.Drawing.Size(111, 20);
             this.txtSpecialDiscount.TabIndex = 18;
@@ -81,7 +81,7 @@
             // 
             this.lblSpecialDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblSpecialDiscount.AutoSize = true;
-            this.lblSpecialDiscount.Location = new System.Drawing.Point(237, 68);
+            this.lblSpecialDiscount.Location = new System.Drawing.Point(243, 63);
             this.lblSpecialDiscount.Name = "lblSpecialDiscount";
             this.lblSpecialDiscount.Size = new System.Drawing.Size(87, 13);
             this.lblSpecialDiscount.TabIndex = 5;
@@ -91,7 +91,7 @@
             // 
             this.txtDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDiscount.Location = new System.Drawing.Point(120, 65);
+            this.txtDiscount.Location = new System.Drawing.Point(123, 60);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(111, 20);
             this.txtDiscount.TabIndex = 17;
@@ -100,7 +100,7 @@
             // 
             this.lblDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblDiscount.AutoSize = true;
-            this.lblDiscount.Location = new System.Drawing.Point(3, 68);
+            this.lblDiscount.Location = new System.Drawing.Point(3, 63);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(49, 13);
             this.lblDiscount.TabIndex = 1;
@@ -110,7 +110,7 @@
             // 
             this.lblVolumeDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblVolumeDiscount.AutoSize = true;
-            this.lblVolumeDiscount.Location = new System.Drawing.Point(471, 68);
+            this.lblVolumeDiscount.Location = new System.Drawing.Point(483, 63);
             this.lblVolumeDiscount.Name = "lblVolumeDiscount";
             this.lblVolumeDiscount.Size = new System.Drawing.Size(87, 13);
             this.lblVolumeDiscount.TabIndex = 6;
@@ -120,7 +120,7 @@
             // 
             this.lblMRP.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblMRP.AutoSize = true;
-            this.lblMRP.Location = new System.Drawing.Point(3, 98);
+            this.lblMRP.Location = new System.Drawing.Point(3, 93);
             this.lblMRP.Name = "lblMRP";
             this.lblMRP.Size = new System.Drawing.Size(31, 13);
             this.lblMRP.TabIndex = 7;
@@ -130,7 +130,7 @@
             // 
             this.lblExpiry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExpiry.AutoSize = true;
-            this.lblExpiry.Location = new System.Drawing.Point(237, 98);
+            this.lblExpiry.Location = new System.Drawing.Point(243, 93);
             this.lblExpiry.Name = "lblExpiry";
             this.lblExpiry.Size = new System.Drawing.Size(35, 13);
             this.lblExpiry.TabIndex = 9;
@@ -140,7 +140,7 @@
             // 
             this.txtWholeSaleRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtWholeSaleRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtWholeSaleRate.Location = new System.Drawing.Point(354, 35);
+            this.txtWholeSaleRate.Location = new System.Drawing.Point(363, 32);
             this.txtWholeSaleRate.Name = "txtWholeSaleRate";
             this.txtWholeSaleRate.Size = new System.Drawing.Size(111, 20);
             this.txtWholeSaleRate.TabIndex = 15;
@@ -149,7 +149,7 @@
             // 
             this.txtSaleRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtSaleRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSaleRate.Location = new System.Drawing.Point(120, 35);
+            this.txtSaleRate.Location = new System.Drawing.Point(123, 32);
             this.txtSaleRate.Name = "txtSaleRate";
             this.txtSaleRate.Size = new System.Drawing.Size(111, 20);
             this.txtSaleRate.TabIndex = 14;
@@ -158,7 +158,7 @@
             // 
             this.lblLineItemDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblLineItemDate.AutoSize = true;
-            this.lblLineItemDate.Location = new System.Drawing.Point(3, 8);
+            this.lblLineItemDate.Location = new System.Drawing.Point(3, 7);
             this.lblLineItemDate.Name = "lblLineItemDate";
             this.lblLineItemDate.Size = new System.Drawing.Size(51, 13);
             this.lblLineItemDate.TabIndex = 1;
@@ -168,7 +168,7 @@
             // 
             this.lblSaleRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblSaleRate.AutoSize = true;
-            this.lblSaleRate.Location = new System.Drawing.Point(3, 38);
+            this.lblSaleRate.Location = new System.Drawing.Point(3, 35);
             this.lblSaleRate.Name = "lblSaleRate";
             this.lblSaleRate.Size = new System.Drawing.Size(54, 13);
             this.lblSaleRate.TabIndex = 7;
@@ -178,7 +178,7 @@
             // 
             this.lblWholeSaleRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblWholeSaleRate.AutoSize = true;
-            this.lblWholeSaleRate.Location = new System.Drawing.Point(237, 38);
+            this.lblWholeSaleRate.Location = new System.Drawing.Point(243, 35);
             this.lblWholeSaleRate.Name = "lblWholeSaleRate";
             this.lblWholeSaleRate.Size = new System.Drawing.Size(88, 13);
             this.lblWholeSaleRate.TabIndex = 8;
@@ -188,7 +188,7 @@
             // 
             this.lblSpecialRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblSpecialRate.AutoSize = true;
-            this.lblSpecialRate.Location = new System.Drawing.Point(471, 38);
+            this.lblSpecialRate.Location = new System.Drawing.Point(483, 35);
             this.lblSpecialRate.Name = "lblSpecialRate";
             this.lblSpecialRate.Size = new System.Drawing.Size(68, 13);
             this.lblSpecialRate.TabIndex = 9;
@@ -198,7 +198,7 @@
             // 
             this.txtSpecialRate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtSpecialRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSpecialRate.Location = new System.Drawing.Point(588, 35);
+            this.txtSpecialRate.Location = new System.Drawing.Point(603, 32);
             this.txtSpecialRate.Name = "txtSpecialRate";
             this.txtSpecialRate.Size = new System.Drawing.Size(112, 20);
             this.txtSpecialRate.TabIndex = 16;
@@ -234,42 +234,42 @@
             this.tableLayoutPanel2.Controls.Add(this.lblLineItemDate, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtSaleRate, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.dtMfgDate, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(15, 71);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(14, 47);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(703, 120);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(724, 115);
             this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // dtMfgDate
-            // 
-            this.dtMfgDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dtMfgDate.Location = new System.Drawing.Point(120, 5);
-            this.dtMfgDate.Mask = "00/00/0000";
-            this.dtMfgDate.Name = "dtMfgDate";
-            this.dtMfgDate.Size = new System.Drawing.Size(111, 20);
-            this.dtMfgDate.TabIndex = 11;
-            this.dtMfgDate.ValidatingType = typeof(System.DateTime);
             // 
             // dtExpiry
             // 
             this.dtExpiry.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dtExpiry.Location = new System.Drawing.Point(354, 95);
+            this.dtExpiry.Location = new System.Drawing.Point(363, 89);
             this.dtExpiry.Mask = "00/00/0000";
             this.dtExpiry.Name = "dtExpiry";
             this.dtExpiry.Size = new System.Drawing.Size(111, 20);
             this.dtExpiry.TabIndex = 23;
             this.dtExpiry.ValidatingType = typeof(System.DateTime);
             // 
+            // dtMfgDate
+            // 
+            this.dtMfgDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.dtMfgDate.Location = new System.Drawing.Point(123, 4);
+            this.dtMfgDate.Mask = "00/00/0000";
+            this.dtMfgDate.Name = "dtMfgDate";
+            this.dtMfgDate.Size = new System.Drawing.Size(111, 20);
+            this.dtMfgDate.TabIndex = 11;
+            this.dtMfgDate.ValidatingType = typeof(System.DateTime);
+            // 
             // frmLineItemDiscount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(730, 230);
+            this.ClientSize = new System.Drawing.Size(751, 169);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "frmLineItemDiscount";
             this.Text = "frmPurchaseBookLineItemUpdate";

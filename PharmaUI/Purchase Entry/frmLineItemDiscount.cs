@@ -35,12 +35,7 @@ namespace PharmaUI
             ExtensionMethods.FormLoad(this, string.Format("Item {0} {1}", purchaseBookLineItem.ItemCode, purchaseBookLineItem.ItemName));
 
             GotFocusEventRaised(this);
-            EnterKeyDownForTabEvents(this);
-
-            //Fill half Scheme options
-            //cbxNewRate.DataSource = Enum.GetValues(typeof(Enums.Choice));
-            //cbxNewRate.SelectedItem = Choice.No;
-
+            EnterKeyDownForTabEvents(this);           
             FillFormForUpdate();
 
         }
@@ -51,18 +46,15 @@ namespace PharmaUI
             format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
             format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
 
-            dtMfgDate.Text = purchaseBookLineItem.PurchaseBillDate == (DateTime) DateTime.MinValue ? string.Empty : ((DateTime)purchaseBookLineItem.PurchaseBillDate).ToString(format);
-           // txtExcise.Text = Convert.ToString(purchaseBookLineItem.Excise);
+           // dtMfgDate.Text = purchaseBookLineItem.PurchaseBillDate == (DateTime) DateTime.MinValue ? string.Empty : ((DateTime)purchaseBookLineItem.PurchaseBillDate).ToString(format);
             txtSpecialRate.Text = Convert.ToString(purchaseBookLineItem.SpecialRate);
             txtWholeSaleRate.Text = Convert.ToString(purchaseBookLineItem.WholeSaleRate);
             txtSaleRate.Text = Convert.ToString(purchaseBookLineItem.SaleRate);
             txtMRP.Text = Convert.ToString(purchaseBookLineItem.MRP);
             txtSpecialDiscount.Text = Convert.ToString(purchaseBookLineItem.SpecialDiscount);
             txtDiscount.Text = Convert.ToString(purchaseBookLineItem.Discount);
-            txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);
-           // dtLIDate.Value = purchaseBookLineItem.PurchaseDate == DateTime.MinValue ? dtLIDate.MinDate : purchaseBookLineItem.PurchaseDate;
-            dtExpiry.Text = purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? string.Empty : ((DateTime)purchaseBookLineItem.ExpiryDate).ToString(format);           
-           // cbxNewRate.SelectedItem = purchaseBookLineItem.IsNewRate ? Choice.Yes : Choice.No;
+            txtVolDiscount.Text = Convert.ToString(purchaseBookLineItem.VolumeDiscount);          
+            dtExpiry.Text = purchaseBookLineItem.ExpiryDate == DateTime.MinValue ? string.Empty : ((DateTime)purchaseBookLineItem.ExpiryDate).ToString(format);        
         }
 
         public void GotFocusEventRaised(Control control)
@@ -95,17 +87,7 @@ namespace PharmaUI
         {
             ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
-        }
-
-        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        //{
-        //    if (keyData == Keys.Escape || keyData == Keys.End)
-        //    {
-        //        this.Close();
-
-        //    }
-        //    return base.ProcessCmdKey(ref msg, keyData);
-        //}
+        }      
 
         private void frmLineItemDiscount_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -130,8 +112,7 @@ namespace PharmaUI
 
             double.TryParse(txtWholeSaleRate.Text, out value);
             purchaseBookLineItem.WholeSaleRate = value;
-
-            // purchaseBookLineItem.IsNewRate = choice == Choice.Yes;
+          
             DateTime date = new DateTime();
             DateTime.TryParse(dtMfgDate.Text, out date);
             purchaseBookLineItem.PurchaseBillDate = date;

@@ -55,6 +55,8 @@ namespace PharmaBusinessObjects.Transaction
             Quantity = 0;
             FreeQuantity = 0;
             Scheme1 = Scheme1 = 0;
+            IsHalfScheme = false;
+            Amount = 0;
             PurchaseSaleBookLineItemID = 0;
             PurchaseSaleRate = 0;
             SpecialRate = WholeSaleRate = SaleRate = Amount = 0;
@@ -62,7 +64,7 @@ namespace PharmaBusinessObjects.Transaction
             VolumeDiscount = SpecialDiscount = Discount = 0;
             PurchaseSaleTax = 0;
             IGST = SGST = CGST = 0;
-            ExpiryDate = DateTime.MinValue;
+           // ExpiryDate = DateTime.MinValue;
         }
     }
 }

@@ -37,9 +37,7 @@
             this.lblVolumeDiscount = new System.Windows.Forms.Label();
             this.lblMRP = new System.Windows.Forms.Label();
             this.lblExpiry = new System.Windows.Forms.Label();
-            this.lblExcise = new System.Windows.Forms.Label();
             this.txtMRP = new System.Windows.Forms.TextBox();
-            this.txtExcise = new System.Windows.Forms.TextBox();
             this.dtExpiry = new System.Windows.Forms.MaskedTextBox();
             this.tblDiscount.SuspendLayout();
             this.SuspendLayout();
@@ -65,25 +63,23 @@
             this.tblDiscount.Controls.Add(this.lblDiscount, 0, 0);
             this.tblDiscount.Controls.Add(this.lblVolumeDiscount, 4, 0);
             this.tblDiscount.Controls.Add(this.lblMRP, 0, 1);
-            this.tblDiscount.Controls.Add(this.lblExpiry, 4, 1);
-            this.tblDiscount.Controls.Add(this.lblExcise, 2, 1);
             this.tblDiscount.Controls.Add(this.txtMRP, 1, 1);
-            this.tblDiscount.Controls.Add(this.txtExcise, 3, 1);
-            this.tblDiscount.Controls.Add(this.dtExpiry, 5, 1);
+            this.tblDiscount.Controls.Add(this.lblExpiry, 2, 1);
+            this.tblDiscount.Controls.Add(this.dtExpiry, 3, 1);
             this.tblDiscount.Location = new System.Drawing.Point(12, 69);
             this.tblDiscount.Name = "tblDiscount";
             this.tblDiscount.RowCount = 2;
-            this.tblDiscount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblDiscount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblDiscount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.63158F));
+            this.tblDiscount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.36842F));
             this.tblDiscount.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblDiscount.Size = new System.Drawing.Size(588, 58);
+            this.tblDiscount.Size = new System.Drawing.Size(678, 64);
             this.tblDiscount.TabIndex = 2;
             // 
             // txtVolDiscount
             // 
             this.txtVolDiscount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtVolDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtVolDiscount.Location = new System.Drawing.Point(488, 4);
+            this.txtVolDiscount.Location = new System.Drawing.Point(570, 6);
             this.txtVolDiscount.Name = "txtVolDiscount";
             this.txtVolDiscount.Size = new System.Drawing.Size(97, 20);
             this.txtVolDiscount.TabIndex = 19;
@@ -92,7 +88,7 @@
             // 
             this.txtSpecialDiscount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtSpecialDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSpecialDiscount.Location = new System.Drawing.Point(294, 4);
+            this.txtSpecialDiscount.Location = new System.Drawing.Point(346, 6);
             this.txtSpecialDiscount.Name = "txtSpecialDiscount";
             this.txtSpecialDiscount.Size = new System.Drawing.Size(91, 20);
             this.txtSpecialDiscount.TabIndex = 18;
@@ -101,7 +97,7 @@
             // 
             this.lblSpecialDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblSpecialDiscount.AutoSize = true;
-            this.lblSpecialDiscount.Location = new System.Drawing.Point(197, 8);
+            this.lblSpecialDiscount.Location = new System.Drawing.Point(227, 10);
             this.lblSpecialDiscount.Name = "lblSpecialDiscount";
             this.lblSpecialDiscount.Size = new System.Drawing.Size(87, 13);
             this.lblSpecialDiscount.TabIndex = 5;
@@ -111,7 +107,7 @@
             // 
             this.txtDiscount.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDiscount.Location = new System.Drawing.Point(100, 4);
+            this.txtDiscount.Location = new System.Drawing.Point(122, 6);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(91, 20);
             this.txtDiscount.TabIndex = 17;
@@ -120,7 +116,7 @@
             // 
             this.lblDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblDiscount.AutoSize = true;
-            this.lblDiscount.Location = new System.Drawing.Point(3, 8);
+            this.lblDiscount.Location = new System.Drawing.Point(3, 10);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(49, 13);
             this.lblDiscount.TabIndex = 1;
@@ -130,7 +126,7 @@
             // 
             this.lblVolumeDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblVolumeDiscount.AutoSize = true;
-            this.lblVolumeDiscount.Location = new System.Drawing.Point(391, 8);
+            this.lblVolumeDiscount.Location = new System.Drawing.Point(451, 10);
             this.lblVolumeDiscount.Name = "lblVolumeDiscount";
             this.lblVolumeDiscount.Size = new System.Drawing.Size(87, 13);
             this.lblVolumeDiscount.TabIndex = 6;
@@ -140,7 +136,7 @@
             // 
             this.lblMRP.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblMRP.AutoSize = true;
-            this.lblMRP.Location = new System.Drawing.Point(3, 37);
+            this.lblMRP.Location = new System.Drawing.Point(3, 42);
             this.lblMRP.Name = "lblMRP";
             this.lblMRP.Size = new System.Drawing.Size(31, 13);
             this.lblMRP.TabIndex = 7;
@@ -150,44 +146,25 @@
             // 
             this.lblExpiry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExpiry.AutoSize = true;
-            this.lblExpiry.Location = new System.Drawing.Point(391, 37);
+            this.lblExpiry.Location = new System.Drawing.Point(227, 42);
             this.lblExpiry.Name = "lblExpiry";
             this.lblExpiry.Size = new System.Drawing.Size(35, 13);
             this.lblExpiry.TabIndex = 9;
             this.lblExpiry.Text = "Expiry";
             // 
-            // lblExcise
-            // 
-            this.lblExcise.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblExcise.AutoSize = true;
-            this.lblExcise.Location = new System.Drawing.Point(197, 37);
-            this.lblExcise.Name = "lblExcise";
-            this.lblExcise.Size = new System.Drawing.Size(38, 13);
-            this.lblExcise.TabIndex = 23;
-            this.lblExcise.Text = "Excise";
-            // 
             // txtMRP
             // 
             this.txtMRP.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtMRP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMRP.Location = new System.Drawing.Point(100, 33);
+            this.txtMRP.Location = new System.Drawing.Point(122, 38);
             this.txtMRP.Name = "txtMRP";
             this.txtMRP.Size = new System.Drawing.Size(91, 20);
             this.txtMRP.TabIndex = 20;
             // 
-            // txtExcise
-            // 
-            this.txtExcise.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtExcise.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtExcise.Location = new System.Drawing.Point(294, 33);
-            this.txtExcise.Name = "txtExcise";
-            this.txtExcise.Size = new System.Drawing.Size(91, 20);
-            this.txtExcise.TabIndex = 21;
-            // 
             // dtExpiry
             // 
             this.dtExpiry.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dtExpiry.Location = new System.Drawing.Point(488, 33);
+            this.dtExpiry.Location = new System.Drawing.Point(343, 38);
             this.dtExpiry.Mask = "00/00/0000";
             this.dtExpiry.Name = "dtExpiry";
             this.dtExpiry.Size = new System.Drawing.Size(97, 20);
@@ -198,10 +175,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 150);
+            this.ClientSize = new System.Drawing.Size(700, 150);
             this.Controls.Add(this.tblDiscount);
             this.Name = "frmLineItemBriefDiscount";
             this.Text = "frmLineItemBriefDiscount";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPurchaseBookLineItemUpdate_FormClosing);
             this.Load += new System.EventHandler(this.frmLineItemBriefDiscount_Load);
             this.tblDiscount.ResumeLayout(false);
             this.tblDiscount.PerformLayout();
@@ -222,8 +200,6 @@
         private System.Windows.Forms.Label lblVolumeDiscount;
         private System.Windows.Forms.Label lblMRP;
         private System.Windows.Forms.Label lblExpiry;
-        private System.Windows.Forms.Label lblExcise;
-        private System.Windows.Forms.TextBox txtExcise;
         private System.Windows.Forms.MaskedTextBox dtExpiry;
     }
 }

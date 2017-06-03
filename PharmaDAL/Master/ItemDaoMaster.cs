@@ -62,7 +62,8 @@ namespace PharmaDAL.Master
                     PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
                     PurchaseTypeName=  p.AccountLedgerMaster1.AccountLedgerName,
                     PurchaseTypeRate= p.AccountLedgerMaster1.SalePurchaseTaxType,
-                    Status = p.Status
+                    Status = p.Status,
+                    
 
                 }).ToList();
             }

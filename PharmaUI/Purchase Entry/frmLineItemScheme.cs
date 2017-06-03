@@ -51,7 +51,7 @@ namespace PharmaUI.Purchase_Entry
             if (purchaseBookLineItem != null)
             {
                 txtScheme1.Text = Convert.ToString(purchaseBookLineItem.Scheme1);
-                txtScheme2.Text = Convert.ToString(purchaseBookLineItem.Scheme1);
+                txtScheme2.Text = Convert.ToString(purchaseBookLineItem.Scheme2);
                 cbxHalfScheme.SelectedItem = purchaseBookLineItem.IsHalfScheme ? Choice.Yes : Choice.No;
             }
         }

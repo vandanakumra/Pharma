@@ -52,6 +52,7 @@ namespace PharmaBusinessObjects.Master
         public string PurchaseTypeCode { get; set; }
         public string PurchaseTypeName { get; set; }
         public decimal? PurchaseTypeRate { get; set; }
+        
 
         public PurchaseSaleBookLineItem ToPurchaseBookLineItem()
         {
@@ -66,8 +67,7 @@ namespace PharmaBusinessObjects.Master
             lineItem.Discount = this.DiscountRecieved ?? 0L;
             lineItem.SpecialDiscount = this.SpecialDiscountRecieved ?? 0L;
             lineItem.VolumeDiscount = 0L;
-            lineItem.MRP = this.MRP;
-           // lineItem.Excise = this.PurchaseExcise ?? 0L;
+            lineItem.MRP = this.MRP;          
             lineItem.FreeQuantity = 0;
             lineItem.SpecialRate = this.SpecialRate ?? 0L;
             lineItem.WholeSaleRate = this.WholeSaleRate ?? 0L;
