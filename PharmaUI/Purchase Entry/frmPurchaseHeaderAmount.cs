@@ -424,6 +424,10 @@ namespace PharmaUI
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-        
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

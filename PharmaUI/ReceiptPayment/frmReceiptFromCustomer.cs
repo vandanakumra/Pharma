@@ -92,9 +92,9 @@ namespace PharmaUI
             CustomerLedgerMaster SelectedCustomerLedger = (sender as frmCustomerLedgerMaster).LastSelectedCustomerLedger;
             if (SelectedCustomerLedger != null)
             {
-                ReceiptPayment receiptPaymentForSelectedCust = new ReceiptPayment()
+                ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
                 {
-                    LedgerType = Constants.TransactionLedgerType.SupplierLedger,
+                    LedgerType = Constants.TransactionLedgerType.CustomerLedger,
                     LedgerTypeCode= SelectedCustomerLedger.CustomerLedgerCode,
                     LedgerTypeName=SelectedCustomerLedger.CustomerLedgerName
                 };
@@ -271,7 +271,7 @@ namespace PharmaUI
         }
 
 
-        private void UpdateReceiptPaymentRow(ReceiptPayment receiptPayment)
+        private void UpdateReceiptPaymentRow(ReceiptPaymentItem receiptPayment)
         {
             int rowIndex = -1;
             int colIndex = -1;

@@ -43,11 +43,13 @@
             this.inventoryMaintenanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionCtrlPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptPaymentBooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptFromCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptFromCustTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.paymentToCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,18 +185,11 @@
             this.transactionCtrlPToolStripMenuItem.Text = "Transaction";
             this.transactionCtrlPToolStripMenuItem.Click += new System.EventHandler(this.purchaseTransactionToolStripMenuItem_Click);
             // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
             // receiptPaymentBooksToolStripMenuItem
             // 
             this.receiptPaymentBooksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.receiptFromCustomerToolStripMenuItem});
+            this.receiptFromCustomerToolStripMenuItem,
+            this.paymentToCustomerToolStripMenuItem});
             this.receiptPaymentBooksToolStripMenuItem.Name = "receiptPaymentBooksToolStripMenuItem";
             this.receiptPaymentBooksToolStripMenuItem.Size = new System.Drawing.Size(145, 20);
             this.receiptPaymentBooksToolStripMenuItem.Text = "Receipt/Payment Books";
@@ -214,12 +209,35 @@
             this.receiptFromCustTransactionToolStripMenuItem.Text = "Transaction";
             this.receiptFromCustTransactionToolStripMenuItem.Click += new System.EventHandler(this.receiptFromCustTransactionToolStripMenuItem_Click);
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // pnlMain
             // 
             this.pnlMain.Location = new System.Drawing.Point(0, 27);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(756, 31);
             this.pnlMain.TabIndex = 1;
+            // 
+            // paymentToCustomerToolStripMenuItem
+            // 
+            this.paymentToCustomerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.transactionToolStripMenuItem});
+            this.paymentToCustomerToolStripMenuItem.Name = "paymentToCustomerToolStripMenuItem";
+            this.paymentToCustomerToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.paymentToCustomerToolStripMenuItem.Text = "Payment To Customer";
+            // 
+            // transactionToolStripMenuItem
+            // 
+            this.transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
+            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.transactionToolStripMenuItem.Text = "Transaction";
+            this.transactionToolStripMenuItem.Click += new System.EventHandler(this.transactionToolStripMenuItem_Click);
             // 
             // frmMainForm
             // 
@@ -264,5 +282,7 @@
         private System.Windows.Forms.ToolStripMenuItem receiptPaymentBooksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem receiptFromCustomerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem receiptFromCustTransactionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paymentToCustomerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem;
     }
 }

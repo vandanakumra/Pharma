@@ -1304,6 +1304,8 @@ namespace PharmaUI
             lblSplDisAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.SpecialDiscountAmount)));
             lblVolumeDis.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.VolumeDiscount)));
             lblVolumeDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.VolumeDiscountAmount)));
+            lblSchemeAmount.Text= Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.SchemeAmount)));
+
         }
 
         private void InsertUpdateLineItemAndsetToGrid(PurchaseSaleBookLineItem lineItem,int srno, bool setSrNo = false)

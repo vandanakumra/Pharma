@@ -14,7 +14,7 @@ namespace PharmaDAL.Transaction
 
         }
 
-        public long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPayment receiptPayment)
+        public long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment)
         {
             try
             {
@@ -55,6 +55,28 @@ namespace PharmaDAL.Transaction
             {
 
                 throw ex;
+            }
+        }
+
+
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(string ledgerType, string ledgerTypeCode)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.BillOutStandings.Where(q=>q.LedgerType== ledgerType && q.LedgerTypeCode == ledgerTypeCode).Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
+                {
+                                BillOutStandingsID = p.BillOutStandingsID,
+                                PurchaseSaleBookHeaderID = p.PurchaseSaleBookHeaderID,
+                                VoucherNumber = p.VoucherNumber,
+                                VoucherTypeCode = p.VoucherTypeCode,
+                                VoucherDate = p.VoucherDate,
+                                LedgerType = p.LedgerType,
+                                LedgerTypeCode = p.LedgerTypeCode,
+                                BillAmount = p.BillAmount,
+                                OSAmount = p.OSAmount,
+                                IsHold = p.IsHold,
+                                HOLDRemarks = p.HOLDRemarks
+                }).ToList();
             }
         }
 

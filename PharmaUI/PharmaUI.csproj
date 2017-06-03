@@ -175,6 +175,12 @@
     <Compile Include="frmPrivledgeAddUpdate.Designer.cs">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReceiptPayment\frmPaymentToSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReceiptPayment\frmPaymentToSupplier.Designer.cs">
+      <DependentUpon>frmPaymentToSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReceiptPayment\frmReceiptFromCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrivledgeAddUpdate.resx">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReceiptPayment\frmPaymentToSupplier.resx">
+      <DependentUpon>frmPaymentToSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReceiptPayment\frmReceiptFromCustomer.resx">
       <DependentUpon>frmReceiptFromCustomer.cs</DependentUpon>

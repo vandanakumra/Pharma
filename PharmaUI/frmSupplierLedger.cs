@@ -15,6 +15,8 @@ namespace PharmaUI
     public partial class frmSupplierLedger : Form
     {
         public PharmaBusinessObjects.Master.SupplierLedgerMaster LastSelectedSupplier { get; set; }
+        public bool IsInChildMode = false;
+
         IApplicationFacade applicationFacade;
         private bool isOpenAsChild;
 
@@ -204,10 +206,10 @@ namespace PharmaUI
             {
                 this.Close();
             }
-            //else if (keyData == Keys.Escape || keyData == Keys.End)
-            //{
-            //    this.Close();
-            //}
+            else if (keyData == Keys.Escape)
+            {
+                this.Close();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -244,10 +246,16 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyCode == Keys.Escape)
+                if (e.KeyCode == Keys.Enter && IsInChildMode)
                 {
                     this.Close();
                 }
+                if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
             }
             catch (Exception ex)
             {
