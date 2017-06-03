@@ -172,6 +172,9 @@
     <Compile Include="Entity\SupplierLedger.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\TempBillOutStandingsAudjustment.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\TempPurchaseSaleBookHeader.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>

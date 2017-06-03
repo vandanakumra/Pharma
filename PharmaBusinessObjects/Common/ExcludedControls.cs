@@ -66,6 +66,12 @@ namespace PharmaBusinessObjects.Common
             {
                 Name = "lblAmtAdjVal"
             });
+            excludeControlsList.Add(new ExcludedControls()
+            {
+                Name = "dtReceiptPayment"
+            });
+
+            
 
             return excludeControlsList;
         }

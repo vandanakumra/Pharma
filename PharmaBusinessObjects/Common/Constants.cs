@@ -61,5 +61,19 @@ namespace PharmaBusinessObjects.Common
             public const string PurchaseType7 = "PUR0000007";
         }
 
+        public static class VoucherTypeCode
+        {
+            public const string CREDITNOTE = "CREDITNOTE";
+            public const string DEBITNOTE = "DEBITNOTE";
+            public const string PURCHASEENTRY = "PURCHASEENTRY";
+            public const string PURCHASERETURN = "PURCHASERETURN";
+            public const string SALEENTRY = "SALEENTRY";
+            public const string SALERETURN = "SALERETURN";
+            public const string STOCKADUSTMENT = "STOCKADUSTMENT";
+            public const string VOUCHERENTRY = "VOUCHERENTRY";
+            public const string RECEIPTFROMCUSTOMER = "RECEIPTFROMCUSTOMER";
+            public const string PAYMENTTOSUPPLIER = "PAYMENTTOSUPPLIER";
         }
+
     }
+}

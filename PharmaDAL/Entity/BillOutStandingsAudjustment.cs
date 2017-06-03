@@ -15,10 +15,11 @@ namespace PharmaDAL.Entity
     public partial class BillOutStandingsAudjustment
     {
         public long BillOutStandingsAudjustmentID { get; set; }
-        public long PurchaseSaleBookHeaderID { get; set; }
+        public Nullable<long> PurchaseSaleBookHeaderID { get; set; }
         public string VoucherNumber { get; set; }
         public string VoucherTypeCode { get; set; }
         public System.DateTime VoucherDate { get; set; }
+        public Nullable<long> ReceiptPaymentID { get; set; }
         public long BillOutStandingsID { get; set; }
         public string AdjustmentVoucherNumber { get; set; }
         public string AdjustmentVoucherTypeCode { get; set; }
@@ -29,6 +30,10 @@ namespace PharmaDAL.Entity
         public string ChequeNumber { get; set; }
     
         public virtual BillOutStandings BillOutStandings { get; set; }
+        public virtual BillOutStandings BillOutStandings1 { get; set; }
         public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }
+        public virtual ReceiptPayment ReceiptPayment { get; set; }
+        public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader1 { get; set; }
+        public virtual ReceiptPayment ReceiptPayment1 { get; set; }
     }
 }
