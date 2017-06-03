@@ -12,7 +12,7 @@ namespace PharmaDAL.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class BillOutStandingsAudjustment
+    public partial class TempBillOutStandingsAudjustment
     {
         public long BillOutStandingsAudjustmentID { get; set; }
         public Nullable<long> PurchaseSaleBookHeaderID { get; set; }
@@ -28,12 +28,5 @@ namespace PharmaDAL.Entity
         public string LedgerTypeCode { get; set; }
         public double Amount { get; set; }
         public string ChequeNumber { get; set; }
-    
-        public virtual BillOutStandings BillOutStandings { get; set; }
-        public virtual BillOutStandings BillOutStandings1 { get; set; }
-        public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }
-        public virtual ReceiptPayment ReceiptPayment { get; set; }
-        public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader1 { get; set; }
-        public virtual ReceiptPayment ReceiptPayment1 { get; set; }
     }
 }

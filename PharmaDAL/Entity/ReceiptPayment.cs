@@ -12,28 +12,31 @@ namespace PharmaDAL.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class BillOutStandings
+    public partial class ReceiptPayment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BillOutStandings()
+        public ReceiptPayment()
         {
             this.BillOutStandingsAudjustment = new HashSet<BillOutStandingsAudjustment>();
             this.BillOutStandingsAudjustment1 = new HashSet<BillOutStandingsAudjustment>();
         }
     
-        public long BillOutStandingsID { get; set; }
-        public long PurchaseSaleBookHeaderID { get; set; }
+        public long ReceiptPaymentID { get; set; }
         public string VoucherNumber { get; set; }
         public string VoucherTypeCode { get; set; }
         public System.DateTime VoucherDate { get; set; }
         public string LedgerType { get; set; }
         public string LedgerTypeCode { get; set; }
-        public double BillAmount { get; set; }
-        public double OSAmount { get; set; }
-        public bool IsHold { get; set; }
-        public string HOLDRemarks { get; set; }
+        public string PaymentMode { get; set; }
+        public Nullable<double> Amount { get; set; }
+        public string BankAccountLedgerTypeCode { get; set; }
+        public Nullable<System.DateTime> ChequeDate { get; set; }
+        public Nullable<System.DateTime> ChequeClearDate { get; set; }
+        public Nullable<bool> IsChequeCleared { get; set; }
+        public string POST { get; set; }
+        public string PISNumber { get; set; }
+        public string ChequeNumber { get; set; }
     
-        public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillOutStandingsAudjustment> BillOutStandingsAudjustment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
