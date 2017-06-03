@@ -55,11 +55,11 @@ namespace PharmaUI
             dgvLastBatch.Columns["ItemCode"].Visible = true;
             dgvLastBatch.Columns["ItemCode"].HeaderText = "Item";
 
-            dgvLastBatch.Columns["Rate"].Visible = true;
-            dgvLastBatch.Columns["Rate"].HeaderText = "Rate";
+            dgvLastBatch.Columns["PurchaseSaleRate"].Visible = true;
+            dgvLastBatch.Columns["PurchaseSaleRate"].HeaderText = "Rate";
 
-            dgvLastBatch.Columns["BatchNumber"].Visible = true;
-            dgvLastBatch.Columns["BatchNumber"].HeaderText = "Batch No";
+            dgvLastBatch.Columns["Batch"].Visible = true;
+            dgvLastBatch.Columns["Batch"].HeaderText = "Batch No";
 
 
             dgvLastBatch.Columns["Discount"].Visible = true;
@@ -124,9 +124,9 @@ namespace PharmaUI
 
         private void FrmLastNBatchNo_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (dgvLastBatch.SelectedCells.Count > 0)
+            if (dgvLastBatch.Rows.Count > 0)
             {
-                BatchNumber = Convert.ToString(dgvLastBatch.CurrentRow.Cells["BatchNumber"].Value);
+                BatchNumber = Convert.ToString(dgvLastBatch.Rows[0].Cells["Batch"].Value);
             }
             
         }

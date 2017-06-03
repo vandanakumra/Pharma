@@ -147,9 +147,9 @@ namespace PharmaUI
             dgvLineItem.Columns["ExpiryDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["ExpiryDate"].Visible = false;
 
-            dgvLineItem.Columns.Add("PurchaseBillDate", "PurchaseBillDate");
-            dgvLineItem.Columns["PurchaseBillDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["PurchaseBillDate"].Visible = false;
+            //dgvLineItem.Columns.Add("PurchaseBillDate", "PurchaseBillDate");
+            //dgvLineItem.Columns["PurchaseBillDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dgvLineItem.Columns["PurchaseBillDate"].Visible = false;
 
             //dgvLineItem.Columns.Add("IsNewRate", "IsNewRate");
             //dgvLineItem.Columns["IsNewRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -352,9 +352,8 @@ namespace PharmaUI
                 {
                     MessageBox.Show("Please enter invoice number before adding the items");
                     dgvLineItem.CancelEdit();
-                }
+                }               
 
-                
             }
             catch (Exception ex)
             {
@@ -366,15 +365,30 @@ namespace PharmaUI
         {
             try
             {
-                frmLastNBatchNo batch = (frmLastNBatchNo)sender;
+                frmLastNBatchNo batch = (frmLastNBatchNo)sender;               
 
-                if (dgvLineItem.SelectedCells.Count > 0 && !string.IsNullOrEmpty(batch.BatchNumber))
+                int rowIndex = -1;
+                int colIndex = -1;
+
+                if (dgvLineItem.SelectedCells.Count > 0)
                 {
-                    dgvLineItem.CurrentRow.Cells[dgvLineItem.SelectedCells[0].ColumnIndex].Value = batch.BatchNumber;
-                    dgvLineItem.Focus();
-                    dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Quantity"];
-                  //  dgvLineItem.BeginEdit(false);
+                    isBatchUpdate = true;
+                    rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
+                    colIndex = dgvLineItem.SelectedCells[0].ColumnIndex;
+
+                   // dgvLineItem.CurrentRow.Cells[dgvLineItem.CurrentRow.Cells["Batch"].ColumnIndex].Value = batch.BatchNumber;
+                    dgvLineItem.Rows[rowIndex].Cells["Batch"].Value = batch.BatchNumber;
+
                 }
+                isBatchUpdate = false;
+
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
+
+
+                //dgvLineItem.Focus();
+                //dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Quantity"];
+
             }
             catch (Exception ex)
             {
@@ -792,7 +806,7 @@ namespace PharmaUI
                         DateTime purchaseDate = new DateTime();
                         DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
 
-                        lineItem.PurchaseBillDate = purchaseDate;
+                       // lineItem.PurchaseBillDate = purchaseDate;
 
                         PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
                         lineItem.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
@@ -825,7 +839,7 @@ namespace PharmaUI
                         dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
                         dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;                        
                        
-                        dgvLineItem.Rows[rowIndex].Cells["PurchaseBillDate"].Value = purchaseDate;
+                      //  dgvLineItem.Rows[rowIndex].Cells["PurchaseBillDate"].Value = purchaseDate;
                         dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTypeCode"].Value = lineItem.PurchaseSaleTypeCode;
                         dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTax"].Value = lineItem.PurchaseSaleTax;
                         dgvLineItem.Rows[rowIndex].Cells["LocalCentral"].Value = lineItem.LocalCentral;
@@ -835,12 +849,11 @@ namespace PharmaUI
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+
                 if (rowIndex != -1 && colIndex != -1)
                 {
                     dgvLineItem.Focus();
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Batch"];
-                    //dgvLineItem.BeginEdit(false);
-
                 }
 
 
@@ -932,10 +945,10 @@ namespace PharmaUI
                         double amt = GetLineItemAmount(lineItem);
                         lineItem.Amount = amt;
 
-                        DateTime purchaseDate = new DateTime();
-                        DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+                        //DateTime purchaseDate = new DateTime();
+                        //DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
 
-                        lineItem.PurchaseBillDate = purchaseDate;
+                        //lineItem.PurchaseBillDate = purchaseDate;
 
 
                         lineItem.PurchaseSaleBookLineItemID = applicationFacade.InsertUpdateTempPurchaseBookLineItem(lineItem);
@@ -951,7 +964,7 @@ namespace PharmaUI
                         dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value = lineItem.SaleRate;
                         dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
                       //  dgvLineItem.Rows[rowIndex].Cells["IsNewRate"].Value = lineItem.IsNewRate;
-                        dgvLineItem.Rows[rowIndex].Cells["PurchaseBillDate"].Value = purchaseDate;
+                      //  dgvLineItem.Rows[rowIndex].Cells["PurchaseBillDate"].Value = purchaseDate;
 
                     }
                     isBatchUpdate = false;
@@ -1053,10 +1066,10 @@ namespace PharmaUI
                 item.SaleRate = dValue;
                 
                
-                DateTime purchaseDate = new DateTime();
-                DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+                //DateTime purchaseDate = new DateTime();
+                //DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
 
-                item.PurchaseBillDate = purchaseDate;
+              //  item.PurchaseBillDate = purchaseDate;
 
                 item.PurchaseSaleTypeCode = Convert.ToString(row.Cells["PurchaseSaleTypeCode"].Value);
 
