@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgvReceiptFromCust = new System.Windows.Forms.DataGridView();
             this.lblSearch = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -42,10 +43,12 @@
             this.lblAmtOSVal = new System.Windows.Forms.Label();
             this.lblAmtOS = new System.Windows.Forms.Label();
             this.dtReceiptPayment = new System.Windows.Forms.MaskedTextBox();
+            this.errorProviderReceiptPayment = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReceiptFromCust)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustBillAdjusted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustBillOS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderReceiptPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvReceiptFromCust
@@ -238,8 +241,12 @@
             this.dtReceiptPayment.Size = new System.Drawing.Size(119, 26);
             this.dtReceiptPayment.TabIndex = 1;
             this.dtReceiptPayment.ValidatingType = typeof(System.DateTime);
-            this.dtReceiptPayment.Validating += new System.ComponentModel.CancelEventHandler(this.dtReceiptPayment_Validating);
+            this.dtReceiptPayment.Leave += new System.EventHandler(this.dtReceiptPayment_Leave);
             this.dtReceiptPayment.Validated += new System.EventHandler(this.dtReceiptPayment_Validated);
+            // 
+            // errorProviderReceiptPayment
+            // 
+            this.errorProviderReceiptPayment.ContainerControl = this;
             // 
             // frmReceiptFromCustomer
             // 
@@ -260,6 +267,7 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustBillAdjusted)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustBillOS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderReceiptPayment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,5 +288,6 @@
         private System.Windows.Forms.Label lblCashVal;
         private System.Windows.Forms.Label lblTotalCash;
         private System.Windows.Forms.MaskedTextBox dtReceiptPayment;
+        private System.Windows.Forms.ErrorProvider errorProviderReceiptPayment;
     }
 }
