@@ -695,8 +695,8 @@ namespace PharmaUI
             header.VoucherDate = purchaseDate;
             header.PurchaseBillNo = txtInvoiceNumber.Text;
             header.LedgerTypeCode = txtSupplierCode.Text;
-            header.LedgerType = "SUPPLIERLEDGER";
-            header.VoucherTypeCode = "PURCHASEENTRY";
+            header.LedgerType = Constants.TransactionLedgerType.SupplierLedger;
+            header.VoucherTypeCode = Constants.VoucherTypeCode.PURCHASEENTRY;
             header.TotalTaxAmount = 0;
 
             PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
@@ -1032,9 +1032,37 @@ namespace PharmaUI
                 item.PurchaseSaleTypeCode = Convert.ToString(row.Cells["PurchaseSaleTypeCode"].Value);
 
                 double.TryParse(Convert.ToString(row.Cells["PurchaseSaleTax"].Value), out dValue);
-
                 item.PurchaseSaleTax = dValue;
 
+                //---------------------------------------
+                double.TryParse(Convert.ToString(row.Cells["CostAmount"].Value), out dValue);
+                item.CostAmount = dValue;
+
+                double.TryParse(Convert.ToString(row.Cells["DiscountAmount"].Value), out dValue);
+                item.DiscountAmount = dValue;
+
+                double.TryParse(Convert.ToString(row.Cells["SpecialDiscountAmount"].Value), out dValue);
+                item.SpecialDiscountAmount = dValue;
+                
+                double.TryParse(Convert.ToString(row.Cells["VolumeDiscountAmount"].Value), out dValue);
+                item.VolumeDiscountAmount = dValue;
+                
+                double.TryParse(Convert.ToString(row.Cells["GrossAmount"].Value), out dValue);
+                item.GrossAmount = dValue;
+                
+                double.TryParse(Convert.ToString(row.Cells["TaxAmount"].Value), out dValue);
+                item.TaxAmount = dValue;
+                
+                double.TryParse(Convert.ToString(row.Cells["SchemeAmount"].Value), out dValue);
+                item.SchemeAmount = dValue;
+                
+                double.TryParse(Convert.ToString(row.Cells["TotalDiscountAmount"].Value), out dValue);
+                item.TotalDiscountAmount = dValue;
+
+                double.TryParse(Convert.ToString(row.Cells["SurchargeAmount"].Value), out dValue);
+                item.SurchargeAmount = dValue;
+
+                
                 PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
                 item.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
 

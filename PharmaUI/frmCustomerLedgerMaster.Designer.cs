@@ -125,6 +125,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmCustomerLedgerMaster";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCustomerLedgerMaster_FormClosing);
             this.Load += new System.EventHandler(this.frmCustomerLedgerMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerLedger)).EndInit();
             this.ResumeLayout(false);
