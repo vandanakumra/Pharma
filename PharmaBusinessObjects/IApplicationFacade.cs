@@ -126,8 +126,9 @@ namespace PharmaBusinessObjects
         //long InsertTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem);
         //long UpdateTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem);
         List<PurchaseBookAmount> InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem);
+        bool IsTempPurchaseHeaderExists(long purchaseBookHeaderID);
 
-        
+
 
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
         bool SavePurchaseData(long purchaseBookHeaderID);

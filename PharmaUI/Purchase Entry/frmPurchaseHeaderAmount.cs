@@ -360,8 +360,8 @@ namespace PharmaUI
                 {
                     case "txtAmount1":
                         {
-                            txtIGST1.Text = tax == 0L ? "0.00" : (amount * tax * .01 * 0.5).ToString("#.##");
-                            txtSGST1.Text = tax == 0L ? "0.00" : (amount * tax * .01 * 0.5).ToString("#.##");
+                            txtIGST1.Text = tax == 0L && amount != 0L ? "0.00" : (amount * tax * .01 * 0.5).ToString("#.##");
+                            txtSGST1.Text = tax == 0L && amount != 0L ? "0.00" : (amount * tax * .01 * 0.5).ToString("#.##");
                         }
                         break;
                     case "txtAmount2":

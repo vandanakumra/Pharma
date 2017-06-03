@@ -750,8 +750,10 @@ namespace PharmaBusiness
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertUpdateTempPurchaseBookLineItem(lineItem);
         }
 
-
-        
+        public bool IsTempPurchaseHeaderExists(long purchaseBookHeaderID)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).IsTempPurchaseHeaderExists(purchaseBookHeaderID);
+        }
 
         public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
         {

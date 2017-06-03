@@ -308,7 +308,7 @@ namespace PharmaUI
                 {
                     case "txtAmount1":
                         {
-                            txtCGST1.Text = (amount * tax * .01 ).ToString("#.##");
+                            txtCGST1.Text = amount != 0L && tax == 0L ? "0.00" : (amount * tax * .01 ).ToString("#.##");
                         }
                         break;
                     case "txtAmount2":

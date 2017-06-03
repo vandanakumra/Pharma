@@ -66,6 +66,7 @@ namespace PharmaDAL.Transaction
         {
             try
             {
+
                 List<PurchaseBookAmount> purchaseBookAmounts = new List<PurchaseBookAmount>();
 
               // lineItem.ExpiryDate = DateTime.Now;
@@ -379,6 +380,14 @@ namespace PharmaDAL.Transaction
             //header.InvoiceAmount = totalAmount;
 
             return PurchaseAmountList;
+        }
+
+        public bool IsTempPurchaseHeaderExists(long purchaseBookHeaderID)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.TempPurchaseSaleBookHeader.Any(p => p.PurchaseSaleBookHeaderID == purchaseBookHeaderID);
+            }
         }
 
     }

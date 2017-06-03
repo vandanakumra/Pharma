@@ -1389,6 +1389,24 @@ namespace PharmaUI
 
             }
         }
-        
+
+        private void frmPurchaseBookTransaction_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (purchaseSaleBookHeaderID > 0)
+            {
+                bool result = applicationFacade.IsTempPurchaseHeaderExists(purchaseSaleBookHeaderID);
+
+                if (result)
+                {
+                    DialogResult isConfirm = MessageBox.Show("There are some unsaved changes. Do you want to close the screen", "Warning", MessageBoxButtons.YesNo);
+
+                    if (isConfirm == DialogResult.No)
+                    {
+                        e.Cancel = true;
+                    }
+                }
+            
+            }
+        }
     }
 }

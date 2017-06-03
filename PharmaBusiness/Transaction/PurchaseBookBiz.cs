@@ -81,5 +81,9 @@ namespace PharmaBusiness.Transaction
             return new PurchaseBookDao(this.LoggedInUser).GetFinalAmountWithTaxForPurchase(purchaseBookHeaderID);
         }
 
+        internal bool IsTempPurchaseHeaderExists(long purchaseBookHeaderID)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).IsTempPurchaseHeaderExists(purchaseBookHeaderID);
+        }
     }
 }
