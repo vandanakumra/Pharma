@@ -64,7 +64,7 @@
             this.label23 = new System.Windows.Forms.Label();
             this.lblBonus = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lblSchemeAmount = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.lblTaxPercent = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -257,13 +257,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel2.ColumnCount = 8;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.Controls.Add(this.label17, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblSaleRate, 1, 0);
@@ -282,7 +282,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label23, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblBonus, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.label10, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 5, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblSchemeAmount, 5, 1);
             this.tableLayoutPanel2.Controls.Add(this.label29, 6, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblTaxPercent, 7, 1);
             this.tableLayoutPanel2.Controls.Add(this.label37, 6, 2);
@@ -317,7 +317,7 @@
             this.lblSaleRate.AutoSize = true;
             this.lblSaleRate.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSaleRate.ForeColor = System.Drawing.Color.Blue;
-            this.lblSaleRate.Location = new System.Drawing.Point(105, 4);
+            this.lblSaleRate.Location = new System.Drawing.Point(155, 4);
             this.lblSaleRate.Margin = new System.Windows.Forms.Padding(3);
             this.lblSaleRate.Name = "lblSaleRate";
             this.lblSaleRate.Size = new System.Drawing.Size(32, 16);
@@ -340,7 +340,7 @@
             this.lblMRP.AutoSize = true;
             this.lblMRP.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMRP.ForeColor = System.Drawing.Color.Blue;
-            this.lblMRP.Location = new System.Drawing.Point(328, 4);
+            this.lblMRP.Location = new System.Drawing.Point(378, 4);
             this.lblMRP.Margin = new System.Windows.Forms.Padding(3);
             this.lblMRP.Name = "lblMRP";
             this.lblMRP.Size = new System.Drawing.Size(32, 16);
@@ -354,7 +354,7 @@
             this.label25.Location = new System.Drawing.Point(4, 27);
             this.label25.Margin = new System.Windows.Forms.Padding(3);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(75, 16);
+            this.label25.Size = new System.Drawing.Size(103, 16);
             this.label25.TabIndex = 154;
             this.label25.Text = "Discount (%)";
             // 
@@ -363,7 +363,7 @@
             this.lblDiscountPercente.AutoSize = true;
             this.lblDiscountPercente.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDiscountPercente.ForeColor = System.Drawing.Color.Blue;
-            this.lblDiscountPercente.Location = new System.Drawing.Point(105, 27);
+            this.lblDiscountPercente.Location = new System.Drawing.Point(155, 27);
             this.lblDiscountPercente.Margin = new System.Windows.Forms.Padding(3);
             this.lblDiscountPercente.Name = "lblDiscountPercente";
             this.lblDiscountPercente.Size = new System.Drawing.Size(32, 16);
@@ -377,7 +377,7 @@
             this.label33.Location = new System.Drawing.Point(4, 50);
             this.label33.Margin = new System.Windows.Forms.Padding(3);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(75, 16);
+            this.label33.Size = new System.Drawing.Size(132, 16);
             this.label33.TabIndex = 158;
             this.label33.Text = "Discount Amount";
             // 
@@ -386,7 +386,7 @@
             this.lblDiscountAmount.AutoSize = true;
             this.lblDiscountAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDiscountAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblDiscountAmount.Location = new System.Drawing.Point(105, 50);
+            this.lblDiscountAmount.Location = new System.Drawing.Point(155, 50);
             this.lblDiscountAmount.Margin = new System.Windows.Forms.Padding(3);
             this.lblDiscountAmount.Name = "lblDiscountAmount";
             this.lblDiscountAmount.Size = new System.Drawing.Size(32, 16);
@@ -400,7 +400,7 @@
             this.label15.Location = new System.Drawing.Point(673, 4);
             this.label15.Margin = new System.Windows.Forms.Padding(3);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(66, 16);
+            this.label15.Size = new System.Drawing.Size(122, 16);
             this.label15.TabIndex = 149;
             this.label15.Text = "Invoice Amount";
             // 
@@ -409,7 +409,7 @@
             this.lblInvoiceAmount.AutoSize = true;
             this.lblInvoiceAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInvoiceAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblInvoiceAmount.Location = new System.Drawing.Point(774, 4);
+            this.lblInvoiceAmount.Location = new System.Drawing.Point(824, 4);
             this.lblInvoiceAmount.Margin = new System.Windows.Forms.Padding(3);
             this.lblInvoiceAmount.Name = "lblInvoiceAmount";
             this.lblInvoiceAmount.Size = new System.Drawing.Size(32, 16);
@@ -423,7 +423,7 @@
             this.label3.Location = new System.Drawing.Point(227, 27);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 16);
+            this.label3.Size = new System.Drawing.Size(134, 16);
             this.label3.TabIndex = 161;
             this.label3.Text = "SPL Discount (%)";
             // 
@@ -432,7 +432,7 @@
             this.lblSplDiscountPercent.AutoSize = true;
             this.lblSplDiscountPercent.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSplDiscountPercent.ForeColor = System.Drawing.Color.Blue;
-            this.lblSplDiscountPercent.Location = new System.Drawing.Point(328, 27);
+            this.lblSplDiscountPercent.Location = new System.Drawing.Point(378, 27);
             this.lblSplDiscountPercent.Margin = new System.Windows.Forms.Padding(3);
             this.lblSplDiscountPercent.Name = "lblSplDiscountPercent";
             this.lblSplDiscountPercent.Size = new System.Drawing.Size(32, 16);
@@ -446,7 +446,7 @@
             this.label7.Location = new System.Drawing.Point(227, 50);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 16);
+            this.label7.Size = new System.Drawing.Size(106, 16);
             this.label7.TabIndex = 163;
             this.label7.Text = "SPL Discount Amount";
             // 
@@ -455,7 +455,7 @@
             this.lblSplDisAmount.AutoSize = true;
             this.lblSplDisAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSplDisAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblSplDisAmount.Location = new System.Drawing.Point(328, 50);
+            this.lblSplDisAmount.Location = new System.Drawing.Point(378, 50);
             this.lblSplDisAmount.Margin = new System.Windows.Forms.Padding(3);
             this.lblSplDisAmount.Name = "lblSplDisAmount";
             this.lblSplDisAmount.Size = new System.Drawing.Size(32, 16);
@@ -478,7 +478,7 @@
             this.lblBonus.AutoSize = true;
             this.lblBonus.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBonus.ForeColor = System.Drawing.Color.Blue;
-            this.lblBonus.Location = new System.Drawing.Point(551, 4);
+            this.lblBonus.Location = new System.Drawing.Point(601, 4);
             this.lblBonus.Margin = new System.Windows.Forms.Padding(3);
             this.lblBonus.Name = "lblBonus";
             this.lblBonus.Size = new System.Drawing.Size(18, 16);
@@ -492,21 +492,21 @@
             this.label10.Location = new System.Drawing.Point(450, 27);
             this.label10.Margin = new System.Windows.Forms.Padding(3);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 16);
+            this.label10.Size = new System.Drawing.Size(135, 16);
             this.label10.TabIndex = 165;
             this.label10.Text = "Scheme Discount (%)";
             // 
-            // label11
+            // lblSchemeAmount
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Blue;
-            this.label11.Location = new System.Drawing.Point(551, 27);
-            this.label11.Margin = new System.Windows.Forms.Padding(3);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(32, 16);
-            this.label11.TabIndex = 166;
-            this.label11.Text = "0.0";
+            this.lblSchemeAmount.AutoSize = true;
+            this.lblSchemeAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSchemeAmount.ForeColor = System.Drawing.Color.Blue;
+            this.lblSchemeAmount.Location = new System.Drawing.Point(601, 27);
+            this.lblSchemeAmount.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSchemeAmount.Name = "lblSchemeAmount";
+            this.lblSchemeAmount.Size = new System.Drawing.Size(32, 16);
+            this.lblSchemeAmount.TabIndex = 166;
+            this.lblSchemeAmount.Text = "0.0";
             // 
             // label29
             // 
@@ -515,7 +515,7 @@
             this.label29.Location = new System.Drawing.Point(673, 27);
             this.label29.Margin = new System.Windows.Forms.Padding(3);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(76, 16);
+            this.label29.Size = new System.Drawing.Size(104, 16);
             this.label29.TabIndex = 156;
             this.label29.Text = "Tax Rate (%)";
             // 
@@ -524,7 +524,7 @@
             this.lblTaxPercent.AutoSize = true;
             this.lblTaxPercent.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaxPercent.ForeColor = System.Drawing.Color.Blue;
-            this.lblTaxPercent.Location = new System.Drawing.Point(774, 27);
+            this.lblTaxPercent.Location = new System.Drawing.Point(824, 27);
             this.lblTaxPercent.Margin = new System.Windows.Forms.Padding(3);
             this.lblTaxPercent.Name = "lblTaxPercent";
             this.lblTaxPercent.Size = new System.Drawing.Size(32, 16);
@@ -538,7 +538,7 @@
             this.label37.Location = new System.Drawing.Point(673, 50);
             this.label37.Margin = new System.Windows.Forms.Padding(3);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(66, 16);
+            this.label37.Size = new System.Drawing.Size(97, 16);
             this.label37.TabIndex = 160;
             this.label37.Text = "Tax Amount";
             // 
@@ -547,7 +547,7 @@
             this.lblTaxAmount.AutoSize = true;
             this.lblTaxAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTaxAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblTaxAmount.Location = new System.Drawing.Point(774, 50);
+            this.lblTaxAmount.Location = new System.Drawing.Point(824, 50);
             this.lblTaxAmount.Margin = new System.Windows.Forms.Padding(3);
             this.lblTaxAmount.Name = "lblTaxAmount";
             this.lblTaxAmount.Size = new System.Drawing.Size(32, 16);
@@ -561,7 +561,7 @@
             this.label12.Location = new System.Drawing.Point(4, 73);
             this.label12.Margin = new System.Windows.Forms.Padding(3);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(70, 19);
+            this.label12.Size = new System.Drawing.Size(129, 19);
             this.label12.TabIndex = 167;
             this.label12.Text = "Volume Discount";
             // 
@@ -570,7 +570,7 @@
             this.lblVolumeDis.AutoSize = true;
             this.lblVolumeDis.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVolumeDis.ForeColor = System.Drawing.Color.Blue;
-            this.lblVolumeDis.Location = new System.Drawing.Point(105, 73);
+            this.lblVolumeDis.Location = new System.Drawing.Point(155, 73);
             this.lblVolumeDis.Margin = new System.Windows.Forms.Padding(3);
             this.lblVolumeDis.Name = "lblVolumeDis";
             this.lblVolumeDis.Size = new System.Drawing.Size(32, 19);
@@ -584,7 +584,7 @@
             this.label14.Location = new System.Drawing.Point(227, 73);
             this.label14.Margin = new System.Windows.Forms.Padding(3);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(75, 19);
+            this.label14.Size = new System.Drawing.Size(134, 19);
             this.label14.TabIndex = 169;
             this.label14.Text = "Volume Discount Amount";
             // 
@@ -593,7 +593,7 @@
             this.lblVolumeDiscountAmount.AutoSize = true;
             this.lblVolumeDiscountAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVolumeDiscountAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblVolumeDiscountAmount.Location = new System.Drawing.Point(328, 73);
+            this.lblVolumeDiscountAmount.Location = new System.Drawing.Point(378, 73);
             this.lblVolumeDiscountAmount.Margin = new System.Windows.Forms.Padding(3);
             this.lblVolumeDiscountAmount.Name = "lblVolumeDiscountAmount";
             this.lblVolumeDiscountAmount.Size = new System.Drawing.Size(32, 19);
@@ -619,7 +619,7 @@
             this.label2.Location = new System.Drawing.Point(4, 4);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 23);
+            this.label2.Size = new System.Drawing.Size(69, 24);
             this.label2.TabIndex = 124;
             this.label2.Text = "Scheme Amount";
             // 
@@ -630,7 +630,7 @@
             this.label4.Location = new System.Drawing.Point(182, 4);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 23);
+            this.label4.Size = new System.Drawing.Size(75, 24);
             this.label4.TabIndex = 125;
             this.label4.Text = "Discount Amount";
             // 
@@ -641,7 +641,7 @@
             this.label6.Location = new System.Drawing.Point(360, 4);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 23);
+            this.label6.Size = new System.Drawing.Size(66, 24);
             this.label6.TabIndex = 126;
             this.label6.Text = "Tax Amount";
             // 
@@ -652,7 +652,7 @@
             this.label8.Location = new System.Drawing.Point(538, 4);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 23);
+            this.label8.Size = new System.Drawing.Size(66, 24);
             this.label8.TabIndex = 127;
             this.label8.Text = "Net Amount";
             // 
@@ -663,7 +663,7 @@
             this.label42.Location = new System.Drawing.Point(716, 4);
             this.label42.Margin = new System.Windows.Forms.Padding(3);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 23);
+            this.label42.Size = new System.Drawing.Size(66, 24);
             this.label42.TabIndex = 128;
             this.label42.Text = "Total Amount";
             // 
@@ -696,7 +696,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 312);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 30);
             this.tableLayoutPanel1.TabIndex = 129;
             // 
@@ -786,7 +786,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblSplDisAmount;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblSchemeAmount;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblVolumeDis;
         private System.Windows.Forms.Label label14;
