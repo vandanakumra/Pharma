@@ -203,6 +203,7 @@
     <Compile Include="Master\UserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transaction\PurchaseBookDao.cs" />
+    <Compile Include="Transaction\ReceiptPaymentDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Entity\PharmaEntity.edmx">

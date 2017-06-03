@@ -17,6 +17,8 @@ namespace PharmaUI
     public partial class frmCustomerLedgerMaster : Form
     {
         IApplicationFacade applicationFacade;
+        public CustomerLedgerMaster LastSelectedCustomerLedger { get; set; }
+        public bool IsInChildMode = false;
 
         public frmCustomerLedgerMaster()
         {
@@ -248,6 +250,10 @@ namespace PharmaUI
             {
                 dgvCustomerLedger.Focus();
             }
+            else if (keyData == Keys.Escape)
+            {
+                this.Close();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -290,6 +296,10 @@ namespace PharmaUI
         {
             try
             {
+                if (e.KeyCode == Keys.Enter && IsInChildMode)
+                {
+                    this.Close();
+                }
                 if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
                 {
                     e.SuppressKeyPress = true;
@@ -334,6 +344,21 @@ namespace PharmaUI
         {
             ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
+        }
+
+        private void frmCustomerLedgerMaster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (dgvCustomerLedger.CurrentRow != null)
+                {
+                    this.LastSelectedCustomerLedger = dgvCustomerLedger.CurrentRow.DataBoundItem as CustomerLedgerMaster;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

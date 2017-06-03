@@ -680,8 +680,8 @@ namespace PharmaUI
             header.VoucherDate = purchaseDate;
             header.PurchaseBillNo = txtInvoiceNumber.Text;
             header.LedgerTypeCode = txtSupplierCode.Text;
-            header.LedgerType = "SUPPLIERLEDGER";
-            header.VoucherTypeCode = "PURCHASEENTRY";
+            header.LedgerType = Constants.TransactionLedgerType.SupplierLedger;
+            header.VoucherTypeCode = Constants.VoucherTypeCode.PURCHASEENTRY;
             header.TotalTaxAmount = 0;
 
             PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;

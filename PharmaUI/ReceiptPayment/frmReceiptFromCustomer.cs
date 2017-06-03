@@ -1,4 +1,6 @@
-﻿using PharmaBusinessObjects.Transaction.ReceiptPayment;
+﻿using PharmaBusinessObjects.Common;
+using PharmaBusinessObjects.Master;
+using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,9 +33,10 @@ namespace PharmaUI
                 ///Load all the grid 
                 ///
                 LoadGridReceiptFromCustomer();
-                LoadGridBillOutstanding();
-                LoadGridBillAdjusted();
 
+                ///Grid events
+                ///
+                dgvReceiptFromCust.KeyDown += DgvReceiptFromCust_KeyDown;
 
                 string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
                 format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
@@ -46,6 +49,61 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void DgvReceiptFromCust_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyData == Keys.Enter)
+                {
+                    string columnName = dgvReceiptFromCust.Columns[dgvReceiptFromCust.SelectedCells[0].ColumnIndex].Name;
+
+                    if (!string.IsNullOrEmpty(Convert.ToString(dgvReceiptFromCust.CurrentCell.Value)))
+                    {
+                        e.Handled = true;                       
+                    }
+                    else
+                    {
+                        if (columnName == "LedgerTypeCode")
+                        {
+                            e.SuppressKeyPress = true;
+                            frmCustomerLedgerMaster formCustomerLedgerMaster = new frmCustomerLedgerMaster();
+                            formCustomerLedgerMaster.IsInChildMode = true;
+                            //Set Child UI
+                            ExtensionMethods.AddChildFormToPanel(this, formCustomerLedgerMaster, ExtensionMethods.MainPanel);
+                            formCustomerLedgerMaster.WindowState = FormWindowState.Maximized;
+
+                            formCustomerLedgerMaster.FormClosed += FormCustomerLedgerMaster_FormClosed;
+                            formCustomerLedgerMaster.Show();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void FormCustomerLedgerMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+            CustomerLedgerMaster SelectedCustomerLedger = (sender as frmCustomerLedgerMaster).LastSelectedCustomerLedger;
+            if (SelectedCustomerLedger != null)
+            {
+                ReceiptPayment receiptPaymentForSelectedCust = new ReceiptPayment()
+                {
+                    LedgerType = Constants.TransactionLedgerType.SupplierLedger,
+                    LedgerTypeCode= SelectedCustomerLedger.CustomerLedgerCode,
+                    LedgerTypeName=SelectedCustomerLedger.CustomerLedgerName
+                };
+
+                UpdateReceiptPaymentRow(receiptPaymentForSelectedCust);
+                LoadGridBillOutstanding();
+                LoadGridBillAdjusted();
+            }
+
         }
 
         ///Load all the Grid data
@@ -72,8 +130,14 @@ namespace PharmaUI
             dgvReceiptFromCust.Columns.Add("PISNumber", "PISNumber");
             dgvReceiptFromCust.Columns.Add("UnadjustedAmount", "UnadjustedAmount");
 
+            dgvReceiptFromCust.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvReceiptFromCust.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgvReceiptFromCust.AllowUserToAddRows = false;
 
-            ExtensionMethods.SetGridDefaultProperty(dgvReceiptFromCust);
+            for (int i = 0; i < dgvReceiptFromCust.Columns.Count; i++)
+            {
+                dgvReceiptFromCust.Columns[i].Visible = false;
+            }
 
             dgvReceiptFromCust.Columns["LedgerTypeCode"].Visible = true;
             dgvReceiptFromCust.Columns["LedgerTypeCode"].HeaderText = "Party Code";
@@ -171,10 +235,13 @@ namespace PharmaUI
         {
             try
             {
-               if(dgvReceiptFromCust.Rows.Count == 0)
+                if(dgvReceiptFromCust.Rows.Count == 0)
                 {
                     dgvReceiptFromCust.Rows.Add();
                 }
+
+                dgvReceiptFromCust.CurrentCell = dgvReceiptFromCust.Rows[0].Cells["LedgerTypeCode"];
+                dgvReceiptFromCust.BeginEdit(true);
             }
             catch (Exception ex)
             {
@@ -201,6 +268,28 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }         
+        }
+
+
+        private void UpdateReceiptPaymentRow(ReceiptPayment receiptPayment)
+        {
+            int rowIndex = -1;
+            int colIndex = -1;
+
+            if (dgvReceiptFromCust.SelectedCells.Count > 0)
+            {
+                rowIndex = dgvReceiptFromCust.SelectedCells[0].RowIndex;
+                colIndex = dgvReceiptFromCust.SelectedCells[0].ColumnIndex;
+
+                dgvReceiptFromCust.Rows[rowIndex].Cells["LedgerTypeCode"].Value = receiptPayment.LedgerTypeCode;
+                dgvReceiptFromCust.Rows[rowIndex].Cells["LedgerTypeName"].Value = receiptPayment.LedgerTypeName;
+                dgvReceiptFromCust.Rows[rowIndex].Cells["PaymentMode"].Value = receiptPayment.PaymentMode;
+                dgvReceiptFromCust.Rows[rowIndex].Cells["ChequeNumber"].Value = receiptPayment.ChequeNumber;
+                dgvReceiptFromCust.Rows[rowIndex].Cells["BankAccountLedgerTypeName"].Value = receiptPayment.BankAccountLedgerTypeName;
+                dgvReceiptFromCust.Rows[rowIndex].Cells["ChequeDate"].Value = receiptPayment.ChequeDate;
+                dgvReceiptFromCust.Rows[rowIndex].Cells["Amount"].Value = receiptPayment.Amount;
+                dgvReceiptFromCust.Rows[rowIndex].Cells["UnadjustedAmount"].Value = receiptPayment.UnadjustedAmount;
+            }
         }
     }
 }
