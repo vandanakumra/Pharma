@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PharmaBusinessObjects.Transaction.ReceiptPayment
 {
-    public class ReceiptPayment : BaseBusinessObjects
+    public class ReceiptPaymentItem : BaseBusinessObjects
     {
         public long ReceiptPaymentID { get; set; }
         public string VoucherNumber { get; set; }
