@@ -62,13 +62,13 @@ namespace PharmaDAL.Transaction
             }
         }
 
-        public long InsertUpdateTempPurchaseBookLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        public List<PurchaseBookAmount> InsertUpdateTempPurchaseBookLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
         {
             try
             {
-                long PurchaseSaleBookLineItemID = 0;
+                List<PurchaseBookAmount> purchaseBookAmounts = new List<PurchaseBookAmount>();
 
-                lineItem.ExpiryDate = DateTime.Now;
+               lineItem.ExpiryDate = DateTime.Now;
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
@@ -95,11 +95,30 @@ namespace PharmaDAL.Transaction
 
                     if (dt != null && dt.Rows.Count > 0)
                     {
-                        PurchaseSaleBookLineItemID = Convert.ToInt64(dt.Rows[0]["PurchaseSaleBookLineItemID"]);
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            PurchaseBookAmount obj = new PurchaseBookAmount()
+                            {
+                                PurchaseSaleBookLineItemID = row["PurchaseSaleBookLineItemID"] == null ? 0 : Convert.ToInt64(row["PurchaseSaleBookLineItemID"]) ,
+                                PurchaseBookHeaderID = Convert.ToInt64(row["PurchaseSaleBookHeaderID"]),
+                                BillAmount = Convert.ToInt64(row["BillAmount"]),
+                                TaxAmount = Convert.ToInt64(row["TaxAmount"]),
+                                CostAmount = Convert.ToInt64(row["CostAmount"]),
+                                GrossAmount = Convert.ToInt64(row["GrossAmount"]),
+                                SchemeAmount = Convert.ToInt64(row["SchemeAmount"]),
+                                DiscountAmount = Convert.ToInt64(row["DiscountAmount"]),
+                                SpecialDiscountAmount = Convert.ToInt64(row["SpecialDiscountAmount"]),
+                                VolumeDiscountAmount = Convert.ToInt64(row["VolumeDiscountAmount"]),
+                                TotalDiscountAmount = Convert.ToInt64(row["TotalDiscountAmount"])
+                            };
+
+                            purchaseBookAmounts.Add(obj);
+                        }
+                       
                     }
                 }
 
-                return PurchaseSaleBookLineItemID;
+                return purchaseBookAmounts;
             }
             catch (Exception ex)
             {

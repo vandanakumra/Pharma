@@ -124,7 +124,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);
         //long InsertTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem);
         //long UpdateTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem);
-        long InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem);
+        List<PurchaseBookAmount> InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem);
 
         
 

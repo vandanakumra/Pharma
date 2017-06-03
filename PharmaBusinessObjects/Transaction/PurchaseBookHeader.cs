@@ -94,8 +94,18 @@ namespace PharmaBusinessObjects.Transaction
         public double SGST { get; set; }
         public double CGST { get; set; }
         public double TaxApplicable { get; set; }
-
-       
-
+        public long PurchaseSaleBookLineItemID { get; set; }
+        public double BillAmount { get; set; }
+        public double TaxAmount { get; set; }
+        public double CostAmount { get; set; }
+        public double GrossAmount { get; set; }
+        public double SchemeAmount { get; set; }
+        public double DiscountAmount { get; set; }
+        public double SpecialDiscountAmount { get; set; }
+        public double VolumeDiscountAmount { get; set; }
+        public double TotalDiscountAmount { get; set; }       
     }
+
+
+
 }

@@ -274,6 +274,14 @@
           <Property Name="PrivledgeId" Type="int" />
           <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="PaymentMode">
+          <Key>
+            <PropertyRef Name="PaymentModeID" />
+          </Key>
+          <Property Name="PaymentModeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentModeSymbol" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="PaymentModeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="PersonalLedger">
           <Key>
             <PropertyRef Name="PersonalLedgerId" />
@@ -490,6 +498,27 @@
           <Property Name="SystemName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ReceiptPayment">
+          <Key>
+            <PropertyRef Name="ReceiptPaymentID" />
+          </Key>
+          <Property Name="ReceiptPaymentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" Nullable="false" />
+          <Property Name="VoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="VoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VoucherDate" Type="datetime" Nullable="false" />
+          <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
+          <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="PaymentMode" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="Ammount" Type="float" />
+          <Property Name="BillAmmount" Type="float" />
+          <Property Name="BankAccountLedgerTypeCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="ChequeDate" Type="datetime" />
+          <Property Name="ChequeClearDate" Type="datetime" />
+          <Property Name="IsChequeCleared" Type="bit" />
+          <Property Name="POST" Type="nvarchar" MaxLength="50" />
+          <Property Name="PISNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="RecordType">
           <Key>
             <PropertyRef Name="RecordTypeId" />
@@ -671,10 +700,40 @@
           <Property Name="SaleRate" Type="float" />
           <Property Name="WholeSaleRate" Type="float" />
           <Property Name="SpecialRate" Type="float" />
+          <Property Name="CostAmount" Type="float" />
+          <Property Name="GrossAmount" Type="float" />
+          <Property Name="SchemeAmount" Type="float" />
+          <Property Name="DiscountAmount" Type="float" />
+          <Property Name="SurchargeAmount" Type="float" />
+          <Property Name="TaxAmount" Type="float" />
+          <Property Name="SpecialDiscountAmount" Type="float" />
+          <Property Name="VolumeDiscountAmount" Type="float" />
+          <Property Name="TotalDiscountAmount" Type="float" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TempReceiptPayment">
+          <Key>
+            <PropertyRef Name="ReceiptPaymentID" />
+          </Key>
+          <Property Name="ReceiptPaymentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" Nullable="false" />
+          <Property Name="VoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="VoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VoucherDate" Type="datetime" Nullable="false" />
+          <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
+          <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="PaymentMode" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="Ammount" Type="float" />
+          <Property Name="BillAmmount" Type="float" />
+          <Property Name="BankAccountLedgerTypeCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="ChequeDate" Type="datetime" />
+          <Property Name="ChequeClearDate" Type="datetime" />
+          <Property Name="IsChequeCleared" Type="bit" />
+          <Property Name="POST" Type="nvarchar" MaxLength="50" />
+          <Property Name="PISNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -1194,6 +1253,7 @@
           <EntitySet Name="FIFO" EntityType="Self.FIFO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonalLedger" EntityType="Self.PersonalLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonLedgerType" EntityType="Self.PersonLedgerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" Schema="dbo" store:Type="Tables" />
@@ -1203,6 +1263,7 @@
           <EntitySet Name="PurchaseSaleEntryForm" EntityType="Self.PurchaseSaleEntryForm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseSaleEntryType" EntityType="Self.PurchaseSaleEntryType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RateType" EntityType="Self.RateType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptPayment" EntityType="Self.ReceiptPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolePrivledges" EntityType="Self.RolePrivledges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -1210,6 +1271,7 @@
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TempPurchaseSaleBookHeader" EntityType="Self.TempPurchaseSaleBookHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TempPurchaseSaleBookLineItem" EntityType="Self.TempPurchaseSaleBookLineItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempReceiptPayment" EntityType="Self.TempReceiptPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRN" EntityType="Self.TRN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VoucherType" EntityType="Self.VoucherType" Schema="dbo" store:Type="Tables" />
@@ -1680,6 +1742,14 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Privledges" Relationship="Self.FK_Menu_Privledges" FromRole="Menu" ToRole="Privledges" />
         </EntityType>
+        <EntityType Name="PaymentMode">
+          <Key>
+            <PropertyRef Name="PaymentModeID" />
+          </Key>
+          <Property Name="PaymentModeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentModeSymbol" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PaymentModeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="PersonalLedger">
           <Key>
             <PropertyRef Name="PersonalLedgerId" />
@@ -1916,6 +1986,27 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CustomerLedger" Relationship="Self.FK_CustomerLedger_InterestType" FromRole="RateType" ToRole="CustomerLedger" />
         </EntityType>
+        <EntityType Name="ReceiptPayment">
+          <Key>
+            <PropertyRef Name="ReceiptPaymentID" />
+          </Key>
+          <Property Name="ReceiptPaymentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" Nullable="false" />
+          <Property Name="VoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMode" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Ammount" Type="Double" />
+          <Property Name="BillAmmount" Type="Double" />
+          <Property Name="BankAccountLedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeDate" Type="DateTime" Precision="3" />
+          <Property Name="ChequeClearDate" Type="DateTime" Precision="3" />
+          <Property Name="IsChequeCleared" Type="Boolean" />
+          <Property Name="POST" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PISNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="RecordType">
           <Key>
             <PropertyRef Name="RecordTypeId" />
@@ -2109,12 +2200,42 @@
           <Property Name="SaleRate" Type="Double" />
           <Property Name="WholeSaleRate" Type="Double" />
           <Property Name="SpecialRate" Type="Double" />
+          <Property Name="CostAmount" Type="Double" />
+          <Property Name="GrossAmount" Type="Double" />
+          <Property Name="SchemeAmount" Type="Double" />
+          <Property Name="DiscountAmount" Type="Double" />
+          <Property Name="SurchargeAmount" Type="Double" />
+          <Property Name="TaxAmount" Type="Double" />
+          <Property Name="SpecialDiscountAmount" Type="Double" />
+          <Property Name="VolumeDiscountAmount" Type="Double" />
+          <Property Name="TotalDiscountAmount" Type="Double" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="TempPurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="TempPurchaseSaleBookHeader" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookLineItem" ToRole="TempPurchaseSaleBookHeader" />
+        </EntityType>
+        <EntityType Name="TempReceiptPayment">
+          <Key>
+            <PropertyRef Name="ReceiptPaymentID" />
+          </Key>
+          <Property Name="ReceiptPaymentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" Nullable="false" />
+          <Property Name="VoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMode" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Ammount" Type="Double" />
+          <Property Name="BillAmmount" Type="Double" />
+          <Property Name="BankAccountLedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeDate" Type="DateTime" Precision="3" />
+          <Property Name="ChequeClearDate" Type="DateTime" Precision="3" />
+          <Property Name="IsChequeCleared" Type="Boolean" />
+          <Property Name="POST" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PISNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -2636,6 +2757,7 @@
           <EntitySet Name="FIFO" EntityType="Self.FIFO" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" />
           <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" />
           <EntitySet Name="PersonalLedger" EntityType="Self.PersonalLedger" />
           <EntitySet Name="PersonLedgerType" EntityType="Self.PersonLedgerType" />
           <EntitySet Name="PersonRouteMaster" EntityType="Self.PersonRouteMaster" />
@@ -2645,6 +2767,7 @@
           <EntitySet Name="PurchaseSaleEntryForm" EntityType="Self.PurchaseSaleEntryForm" />
           <EntitySet Name="PurchaseSaleEntryType" EntityType="Self.PurchaseSaleEntryType" />
           <EntitySet Name="RateType" EntityType="Self.RateType" />
+          <EntitySet Name="ReceiptPayment" EntityType="Self.ReceiptPayment" />
           <EntitySet Name="RecordType" EntityType="Self.RecordType" />
           <EntitySet Name="RolePrivledges" EntityType="Self.RolePrivledges" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
@@ -2652,6 +2775,7 @@
           <EntitySet Name="SupplierLedger" EntityType="Self.SupplierLedger" />
           <EntitySet Name="TempPurchaseSaleBookHeader" EntityType="Self.TempPurchaseSaleBookHeader" />
           <EntitySet Name="TempPurchaseSaleBookLineItem" EntityType="Self.TempPurchaseSaleBookLineItem" />
+          <EntitySet Name="TempReceiptPayment" EntityType="Self.TempReceiptPayment" />
           <EntitySet Name="TRN" EntityType="Self.TRN" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="VoucherType" EntityType="Self.VoucherType" />
@@ -3096,6 +3220,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMode">
+            <EntityTypeMapping TypeName="PharmaDBModel.PaymentMode">
+              <MappingFragment StoreEntitySet="PaymentMode">
+                <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+                <ScalarProperty Name="PaymentModeSymbol" ColumnName="PaymentModeSymbol" />
+                <ScalarProperty Name="PaymentModeName" ColumnName="PaymentModeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PersonalLedger">
             <EntityTypeMapping TypeName="PharmaDBModel.PersonalLedger">
               <MappingFragment StoreEntitySet="PersonalLedger">
@@ -3321,6 +3454,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptPayment">
+            <EntityTypeMapping TypeName="PharmaDBModel.ReceiptPayment">
+              <MappingFragment StoreEntitySet="ReceiptPayment">
+                <ScalarProperty Name="ReceiptPaymentID" ColumnName="ReceiptPaymentID" />
+                <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
+                <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
+                <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
+                <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+                <ScalarProperty Name="LedgerType" ColumnName="LedgerType" />
+                <ScalarProperty Name="LedgerTypeCode" ColumnName="LedgerTypeCode" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+                <ScalarProperty Name="BillAmmount" ColumnName="BillAmmount" />
+                <ScalarProperty Name="BankAccountLedgerTypeCode" ColumnName="BankAccountLedgerTypeCode" />
+                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+                <ScalarProperty Name="ChequeClearDate" ColumnName="ChequeClearDate" />
+                <ScalarProperty Name="IsChequeCleared" ColumnName="IsChequeCleared" />
+                <ScalarProperty Name="POST" ColumnName="POST" />
+                <ScalarProperty Name="PISNumber" ColumnName="PISNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RecordType">
             <EntityTypeMapping TypeName="PharmaDBModel.RecordType">
               <MappingFragment StoreEntitySet="RecordType">
@@ -3507,10 +3662,41 @@
                 <ScalarProperty Name="SaleRate" ColumnName="SaleRate" />
                 <ScalarProperty Name="WholeSaleRate" ColumnName="WholeSaleRate" />
                 <ScalarProperty Name="SpecialRate" ColumnName="SpecialRate" />
+                <ScalarProperty Name="CostAmount" ColumnName="CostAmount" />
+                <ScalarProperty Name="GrossAmount" ColumnName="GrossAmount" />
+                <ScalarProperty Name="SchemeAmount" ColumnName="SchemeAmount" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="SurchargeAmount" ColumnName="SurchargeAmount" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="SpecialDiscountAmount" ColumnName="SpecialDiscountAmount" />
+                <ScalarProperty Name="VolumeDiscountAmount" ColumnName="VolumeDiscountAmount" />
+                <ScalarProperty Name="TotalDiscountAmount" ColumnName="TotalDiscountAmount" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempReceiptPayment">
+            <EntityTypeMapping TypeName="PharmaDBModel.TempReceiptPayment">
+              <MappingFragment StoreEntitySet="TempReceiptPayment">
+                <ScalarProperty Name="ReceiptPaymentID" ColumnName="ReceiptPaymentID" />
+                <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
+                <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
+                <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
+                <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
+                <ScalarProperty Name="LedgerType" ColumnName="LedgerType" />
+                <ScalarProperty Name="LedgerTypeCode" ColumnName="LedgerTypeCode" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+                <ScalarProperty Name="BillAmmount" ColumnName="BillAmmount" />
+                <ScalarProperty Name="BankAccountLedgerTypeCode" ColumnName="BankAccountLedgerTypeCode" />
+                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+                <ScalarProperty Name="ChequeClearDate" ColumnName="ChequeClearDate" />
+                <ScalarProperty Name="IsChequeCleared" ColumnName="IsChequeCleared" />
+                <ScalarProperty Name="POST" ColumnName="POST" />
+                <ScalarProperty Name="PISNumber" ColumnName="PISNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

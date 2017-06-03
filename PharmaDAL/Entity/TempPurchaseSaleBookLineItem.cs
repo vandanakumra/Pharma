@@ -49,6 +49,15 @@ namespace PharmaDAL.Entity
         public Nullable<double> SaleRate { get; set; }
         public Nullable<double> WholeSaleRate { get; set; }
         public Nullable<double> SpecialRate { get; set; }
+        public Nullable<double> CostAmount { get; set; }
+        public Nullable<double> GrossAmount { get; set; }
+        public Nullable<double> SchemeAmount { get; set; }
+        public Nullable<double> DiscountAmount { get; set; }
+        public Nullable<double> SurchargeAmount { get; set; }
+        public Nullable<double> TaxAmount { get; set; }
+        public Nullable<double> SpecialDiscountAmount { get; set; }
+        public Nullable<double> VolumeDiscountAmount { get; set; }
+        public Nullable<double> TotalDiscountAmount { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }

@@ -732,7 +732,7 @@ namespace PharmaBusiness
         //    return new Transaction.PurchaseBookBiz(this.LoggedInUser).UpdateTempLineItem(lineItem);
         //}
 
-        public long InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem)
+        public List<PurchaseBookAmount> InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem)
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertUpdateTempPurchaseBookLineItem(lineItem);
         }

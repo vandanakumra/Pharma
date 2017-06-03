@@ -38,6 +38,7 @@ namespace PharmaDAL.Entity
         public virtual DbSet<FIFO> FIFO { get; set; }
         public virtual DbSet<ItemMaster> ItemMaster { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
+        public virtual DbSet<PaymentMode> PaymentMode { get; set; }
         public virtual DbSet<PersonalLedger> PersonalLedger { get; set; }
         public virtual DbSet<PersonLedgerType> PersonLedgerType { get; set; }
         public virtual DbSet<PersonRouteMaster> PersonRouteMaster { get; set; }
@@ -47,6 +48,7 @@ namespace PharmaDAL.Entity
         public virtual DbSet<PurchaseSaleEntryForm> PurchaseSaleEntryForm { get; set; }
         public virtual DbSet<PurchaseSaleEntryType> PurchaseSaleEntryType { get; set; }
         public virtual DbSet<RateType> RateType { get; set; }
+        public virtual DbSet<ReceiptPayment> ReceiptPayment { get; set; }
         public virtual DbSet<RecordType> RecordType { get; set; }
         public virtual DbSet<RolePrivledges> RolePrivledges { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
@@ -54,6 +56,7 @@ namespace PharmaDAL.Entity
         public virtual DbSet<SupplierLedger> SupplierLedger { get; set; }
         public virtual DbSet<TempPurchaseSaleBookHeader> TempPurchaseSaleBookHeader { get; set; }
         public virtual DbSet<TempPurchaseSaleBookLineItem> TempPurchaseSaleBookLineItem { get; set; }
+        public virtual DbSet<TempReceiptPayment> TempReceiptPayment { get; set; }
         public virtual DbSet<TRN> TRN { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<VoucherType> VoucherType { get; set; }

@@ -54,7 +54,7 @@ namespace PharmaBusiness.Transaction
         //    return new PurchaseBookDao(this.LoggedInUser).UpdateTempLineItem(lineItem);
         //}
 
-        public long InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem)
+        public List<PurchaseBookAmount> InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem)
         {
             lineItem.CreatedBy = this.LoggedInUser.Username;
             lineItem.CreatedOn = DateTime.Now;

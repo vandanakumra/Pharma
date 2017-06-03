@@ -109,6 +109,9 @@
     <Compile Include="Entity\Menu.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\PaymentMode.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\PersonalLedger.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
@@ -151,6 +154,9 @@
     <Compile Include="Entity\RateType.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\ReceiptPayment.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\RecordType.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
@@ -170,6 +176,9 @@
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\TempPurchaseSaleBookLineItem.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TempReceiptPayment.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\TRN.cs">
@@ -212,7 +221,6 @@
       <Name>PharmaBusinessObjects</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Entity\PharmaEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
