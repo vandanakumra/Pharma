@@ -21,7 +21,6 @@ namespace PharmaUI
         private bool isBatchUpdate = false;
         private bool isDirty = false;
         private bool isCellEdit = true;
-       
       
         IApplicationFacade applicationFacade;
         public frmPurchaseBookTransaction()
@@ -341,6 +340,7 @@ namespace PharmaUI
             double newRate = 0L;
             double oldRate = 0L;
 
+
             double.TryParse(Convert.ToString(dgvLineItem["OldPurchaseSaleRate", rowIndex].Value), out oldRate);
             double.TryParse(Convert.ToString(dgvLineItem["PurchaseSaleRate", rowIndex].Value), out newRate);
 
@@ -546,15 +546,30 @@ namespace PharmaUI
                             break;
                         case "txtSupplierCode":
                             {
-                                if (purchaseSaleBookHeaderID > 0 && isDirty)
+                                if (isDirty && !string.IsNullOrEmpty(txtSupplierCode.Text))
                                 {
-                                    PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
-                                    bool result = GetPurchaseBookHeader(ref header);
+                                    PharmaBusinessObjects.Master.SupplierLedgerMaster master = applicationFacade.GetSupplierLedgerByName(txtSupplierCode.Text);
 
-                                    if (result)
+                                    if (master == null)
                                     {
-                                        applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
+                                        lblSupplierName.Text = "**No Such Code**";
+                                        txtSupplierCode.Focus();
+                                    }
+                                    else
+                                    {
+                                        lblSupplierName.Text = master.SupplierLedgerName;
 
+                                        if (purchaseSaleBookHeaderID > 0)
+                                        {
+                                            PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
+                                            bool result = GetPurchaseBookHeader(ref header);
+
+                                            if (result)
+                                            {
+                                                applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
+
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -832,6 +847,7 @@ namespace PharmaUI
                 {
                     dgvLineItem.Focus();
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Batch"];
+                    OpenBatchDialog();
                 }
 
 
@@ -909,15 +925,15 @@ namespace PharmaUI
                         PurchaseSaleBookLineItem lineItem = lineItemUpdate.PurchaseBookLinetem;
 
                         InsertUpdateLineItemAndsetToGrid(lineItem, 0);
-                     
 
+                        dgvLineItem.CurrentRow.Cells["OldPurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
                     }
                     isBatchUpdate = false;
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                int rate = 0;
-                Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
+                double rate = 0;
+                double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
                 if (rate == 0)
                 {
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"];
@@ -971,6 +987,9 @@ namespace PharmaUI
                 double.TryParse(Convert.ToString(row.Cells["PurchaseSaleRate"].Value), out dValue);
                 item.PurchaseSaleRate = dValue;
 
+                double.TryParse(Convert.ToString(row.Cells["OldPurchaseSaleRate"].Value), out dValue);
+                item.OldPurchaseSaleRate = dValue;
+
                 double.TryParse(Convert.ToString(row.Cells["Amount"].Value), out dValue);
                 item.Amount = dValue;
 
@@ -996,7 +1015,10 @@ namespace PharmaUI
 
                 DateTime date = DateTime.MinValue;
                 DateTime.TryParse(Convert.ToString(row.Cells["ExpiryDate"].Value), out date);
-                item.ExpiryDate = date;
+                if (date == DateTime.MinValue)
+                    item.ExpiryDate = null;
+                else
+                    item.ExpiryDate = date;
 
                 double.TryParse(Convert.ToString(row.Cells["WholeSaleRate"].Value), out dValue);
                 item.WholeSaleRate = dValue;
@@ -1062,14 +1084,7 @@ namespace PharmaUI
                         else if (columnName == "Batch")
                         {
                             e.SuppressKeyPress = true;
-                            var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
-
-                                if (list != null && list.Count > 0)
-                                {
-                                    frmLastNBatchNo batch = new frmLastNBatchNo(list);
-                                    batch.FormClosed += Batch_FormClosed;
-                                    batch.ShowDialog();
-                                }
+                            OpenBatchDialog();
                             
                         }
                     }
@@ -1080,6 +1095,18 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message);                
             }
             
+        }
+
+        private void OpenBatchDialog()
+        {
+            var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
+
+            if (list != null && list.Count > 0)
+            {
+                frmLastNBatchNo batch = new frmLastNBatchNo(list);
+                batch.FormClosed += Batch_FormClosed;
+                batch.ShowDialog();
+            }
         }
 
         private void OpenDialogAndMoveToNextControl(string columnName)
@@ -1102,6 +1129,10 @@ namespace PharmaUI
             {
                 PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
                 OpenRateDialog(dgvLineItem.CurrentCell.RowIndex, lineItem);
+            }
+            else if (columnName == "ItemCode")
+            {
+                OpenBatchDialog();
             }
             else //if ((columnName != "Quantity" && columnName != "PurchaseSaleRate") || (val != 0 && (columnName == "Quantity" || columnName == "PurchaseSaleRate")))
             {
@@ -1278,8 +1309,6 @@ namespace PharmaUI
                         amountLineItem = new PurchaseBookAmount();
                     }
 
-
-
                     dgvLineItem.Rows[rowIndex].Cells["CostAmount"].Value = amountLineItem.CostAmount;
                     dgvLineItem.Rows[rowIndex].Cells["DiscountAmount"].Value = amountLineItem.DiscountAmount;
                     dgvLineItem.Rows[rowIndex].Cells["SpecialDiscountAmount"].Value = amountLineItem.SpecialDiscountAmount;
@@ -1310,7 +1339,7 @@ namespace PharmaUI
                 dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = lineItem.FreeQuantity;
                 dgvLineItem.Rows[rowIndex].Cells["Batch"].Value = lineItem.Batch;
                 dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
-                dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
+                dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleRate"].Value = lineItem.OldPurchaseSaleRate;
                 dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = amt;
                 dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
                 dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
@@ -1330,7 +1359,6 @@ namespace PharmaUI
 
             }
         }
-
-
+        
     }
 }

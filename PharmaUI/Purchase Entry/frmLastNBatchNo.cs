@@ -69,6 +69,11 @@ namespace PharmaUI
             dgvLastBatch.Columns["SpecialDiscount"].Visible = true;
             dgvLastBatch.Columns["SpecialDiscount"].HeaderText = "Spl Discount";
 
+            dgvLastBatch.Columns["VolumeDiscount"].Visible = true;
+            dgvLastBatch.Columns["VolumeDiscount"].HeaderText = "Volume Discount";
+
+            dgvLastBatch.Columns["ExpiryDate"].Visible = true;
+            dgvLastBatch.Columns["ExpiryDate"].HeaderText = "Expiry Date";
 
             dgvLastBatch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLastBatch.AllowUserToAddRows = false;

@@ -14,6 +14,7 @@ namespace PharmaDAL
         {
             Type type = typeof(T);
             var properties = type.GetProperties();
+            properties = properties.Where(p => p.Name != "OldPurchaseSaleRate").ToArray();
 
             DataTable dataTable = new DataTable();
 

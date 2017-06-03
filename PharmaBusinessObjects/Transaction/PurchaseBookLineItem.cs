@@ -21,6 +21,7 @@ namespace PharmaBusinessObjects.Transaction
         public int Quantity { get; set; }
         public Nullable<int> FreeQuantity { get; set; }
         public double PurchaseSaleRate { get; set; }
+        public double OldPurchaseSaleRate { get; set; }
         public Nullable<double> EffecivePurchaseSaleRate { get; set; }
         public string PurchaseSaleTypeCode { get; set; }
         public Nullable<double> SurCharge { get; set; }
@@ -70,7 +71,7 @@ namespace PharmaBusinessObjects.Transaction
             IsHalfScheme = false;
             Amount = 0;
             PurchaseSaleBookLineItemID = 0;
-            PurchaseSaleRate = 0;
+            PurchaseSaleRate = OldPurchaseSaleRate = 0;
             SpecialRate = WholeSaleRate = SaleRate = Amount = 0;
             MRP = 0L;
             VolumeDiscount = SpecialDiscount = Discount = 0;

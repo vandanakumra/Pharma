@@ -450,6 +450,19 @@ namespace PharmaBusiness
 
         }
 
+        public SupplierLedgerMaster GetSupplierLedgerByName(string name)
+        {
+            try
+            {
+                return new SupplierLedgerMasterBiz(this.LoggedInUser).GetSupplierLedgerByName(name);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public int AddSupplierLedger(SupplierLedgerMaster p)
         {
             try

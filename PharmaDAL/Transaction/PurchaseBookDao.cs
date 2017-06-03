@@ -68,7 +68,7 @@ namespace PharmaDAL.Transaction
             {
                 List<PurchaseBookAmount> purchaseBookAmounts = new List<PurchaseBookAmount>();
 
-               lineItem.ExpiryDate = DateTime.Now;
+              // lineItem.ExpiryDate = DateTime.Now;
 
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
@@ -296,12 +296,14 @@ namespace PharmaDAL.Transaction
                         PurchaseSaleBookLineItemID = p.PurchaseSaleBookLineItemID,
                         ItemCode = p.ItemCode,
                         PurchaseSaleRate = p.PurchaseSaleRate,
+                        OldPurchaseSaleRate = p.PurchaseSaleRate,
                         Discount = p.Discount,
                         SpecialDiscount = p.SpecialDiscount,
                         VolumeDiscount = p.VolumeDiscount,
                         PurchaseSaleTax = p.SalePurchaseTax,
                         PurchaseBillDate = p.PurchaseSaleBookHeader.VoucherDate,
-                        Batch = p.Batch
+                        Batch = p.Batch,
+                        ExpiryDate = p.ExpiryDate
                     }).OrderByDescending(p => p.PurchaseSaleBookLineItemID).Take(5).ToList();
                 
             }

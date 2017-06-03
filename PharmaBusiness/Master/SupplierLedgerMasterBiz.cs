@@ -35,6 +35,14 @@ namespace PharmaBusiness.Master
             return new SupplierLedgerMasterDao(this.LoggedInUser).GetSupplierLedgerById(supplierId);
         }
 
+        internal SupplierLedgerMaster GetSupplierLedgerByName(string name)
+        {
+            SupplierLedgerMaster master = GetSupplierLedgers(string.Empty).Where(p => p.SupplierLedgerName.ToLower() == name.ToLower()).FirstOrDefault();
+
+            return master;
+
+        }
+
         internal List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> GetCompleteCompanyDiscountListBySupplierID(int supplierLedgerID)
         {
             return new SupplierLedgerMasterDao(this.LoggedInUser).GetCompleteCompanyDiscountListBySupplierID(supplierLedgerID);

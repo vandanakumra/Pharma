@@ -77,6 +77,7 @@ namespace PharmaBusinessObjects.Master
             double.TryParse(Convert.ToString(this.PurchaseTypeRate), out val);
             lineItem.PurchaseSaleTax = val;
             lineItem.PurchaseSaleRate = (double)this.PurchaseRate;
+            lineItem.OldPurchaseSaleRate = lineItem.PurchaseSaleRate;
             return lineItem;
         }
     }

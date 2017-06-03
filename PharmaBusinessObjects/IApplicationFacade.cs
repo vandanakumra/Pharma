@@ -71,6 +71,7 @@ namespace PharmaBusinessObjects
         int AddSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
         int UpdateSupplierLedger(PharmaBusinessObjects.Master.SupplierLedgerMaster p);
         List<PharmaBusinessObjects.Master.SupplierCompanyDiscount> GetCompleteCompanyDiscountListBySupplierID(int supplierLedgerID);
+        SupplierLedgerMaster GetSupplierLedgerByName(string name);
         #endregion
 
         #region Person Route Master

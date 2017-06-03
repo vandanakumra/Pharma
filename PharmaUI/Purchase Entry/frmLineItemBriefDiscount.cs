@@ -115,7 +115,10 @@ namespace PharmaUI
             //purchaseBookLineItem.Excise = value;
             DateTime dt = new DateTime();
             DateTime.TryParse(dtExpiry.Text, out dt);
-            purchaseBookLineItem.ExpiryDate = dt;
+            if (dt == DateTime.MinValue)
+                purchaseBookLineItem.ExpiryDate = null; 
+            else
+                purchaseBookLineItem.ExpiryDate = dt;
         }
 
         private void EnterKeyDownForTabEvents(Control control)
