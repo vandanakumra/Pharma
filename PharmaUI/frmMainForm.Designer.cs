@@ -44,6 +44,9 @@
             this.purchaseBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionCtrlPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.receiptPaymentBooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.receiptFromCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.receiptFromCustTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +57,7 @@
             this.homeToolStripMenuItem,
             this.masterMaintenanceToolStripMenuItem,
             this.inventoryMaintenanceToolStripMenuItem,
+            this.receiptPaymentBooksToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -175,7 +179,7 @@
             // 
             this.transactionCtrlPToolStripMenuItem.Name = "transactionCtrlPToolStripMenuItem";
             this.transactionCtrlPToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.transactionCtrlPToolStripMenuItem.Text = "Transaction";
             this.transactionCtrlPToolStripMenuItem.Click += new System.EventHandler(this.purchaseTransactionToolStripMenuItem_Click);
             // 
@@ -186,6 +190,29 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // receiptPaymentBooksToolStripMenuItem
+            // 
+            this.receiptPaymentBooksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.receiptFromCustomerToolStripMenuItem});
+            this.receiptPaymentBooksToolStripMenuItem.Name = "receiptPaymentBooksToolStripMenuItem";
+            this.receiptPaymentBooksToolStripMenuItem.Size = new System.Drawing.Size(145, 20);
+            this.receiptPaymentBooksToolStripMenuItem.Text = "Receipt/Payment Books";
+            // 
+            // receiptFromCustomerToolStripMenuItem
+            // 
+            this.receiptFromCustomerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.receiptFromCustTransactionToolStripMenuItem});
+            this.receiptFromCustomerToolStripMenuItem.Name = "receiptFromCustomerToolStripMenuItem";
+            this.receiptFromCustomerToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.receiptFromCustomerToolStripMenuItem.Text = "Receipt From Customer";
+            // 
+            // receiptFromCustTransactionToolStripMenuItem
+            // 
+            this.receiptFromCustTransactionToolStripMenuItem.Name = "receiptFromCustTransactionToolStripMenuItem";
+            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.receiptFromCustTransactionToolStripMenuItem.Text = "Transaction";
+            this.receiptFromCustTransactionToolStripMenuItem.Click += new System.EventHandler(this.receiptFromCustTransactionToolStripMenuItem_Click);
             // 
             // pnlMain
             // 
@@ -234,5 +261,8 @@
         private System.Windows.Forms.ToolStripMenuItem inventoryMaintenanceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionCtrlPToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem receiptPaymentBooksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem receiptFromCustomerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem receiptFromCustTransactionToolStripMenuItem;
     }
 }

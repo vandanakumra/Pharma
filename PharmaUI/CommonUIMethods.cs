@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmaBusinessObjects.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -135,7 +136,14 @@ namespace PharmaUI
         {
 
             List<Control> allControls = ExtensionMethods.GetAllControls(form);
-            allControls.ForEach(k =>{ if (k.Name != "lblSearch" && k.Name != "txtSearch" && k.Name != "lblPersonRouteType") { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); } });
+
+            // Exclude.GetExcludedControls(
+            allControls = allControls.Where(x => !Exclude.GetExcludedControls().Where(p => p.Name == x.Name).Any()).ToList();
+
+
+            //allControls.ForEach(k =>{ if (k.Name != "lblSearch" && k.Name != "txtSearch" && k.Name != "lblPersonRouteType") { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); } });
+
+            allControls.ForEach(k => { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); });
 
             Panel panel1 = new Panel();
             panel1.Location = new Point(0, 0);

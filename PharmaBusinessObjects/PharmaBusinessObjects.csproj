@@ -64,6 +64,7 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\CustomerType.cs" />
     <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\ExcludedControls.cs" />
     <Compile Include="Common\InterestType.cs" />
     <Compile Include="Common\PersonLedgerType.cs" />
     <Compile Include="Common\RecordType.cs" />
