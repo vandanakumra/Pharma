@@ -246,16 +246,10 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyCode == Keys.Enter && IsInChildMode)
+                if (e.KeyCode == Keys.Escape)
                 {
                     this.Close();
                 }
-                if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
-                {
-                    e.SuppressKeyPress = true;
-                }
-                else
-                    base.OnKeyDown(e);
             }
             catch (Exception ex)
             {
@@ -375,6 +369,10 @@ namespace PharmaUI
         {
             try
             {
+                if (e.KeyCode == Keys.Enter && IsInChildMode)
+                {
+                    this.Close();
+                }
                 if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
                 {
                     e.SuppressKeyPress = true;
