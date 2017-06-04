@@ -517,10 +517,14 @@ namespace PharmaUI
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+
             for (int i = 0; i < dgv.Columns.Count; i++)
             {
                 dgv.Columns[i].Visible = false;
             }
+
+            //if (!dgv.ColumnHeadersVisible)
+            //    dgv.ColumnHeadersVisible = true;
         }
     }
 }

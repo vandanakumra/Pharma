@@ -1184,6 +1184,18 @@ namespace PharmaUI
                         MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                else if(e.KeyData == Keys.Insert)
+                {
+                    int rindex = dgvLineItem.CurrentRow.Index;
+
+                    if(rindex >=0)
+                    {
+                        dgvLineItem.Rows.Insert(rindex, 1);
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rindex].Cells["ItemCode"];
+                    }
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -1409,7 +1421,7 @@ namespace PharmaUI
             lblMRP.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.MRP)));           
             lblTaxPercent.Text = lineItem.PurchaseSaleTax.ToString();
             lblTaxAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.TaxAmount)));
-            lblInvoiceAmount.Text = lineItem.Amount.ToString();
+            lblInvoiceAmount.Text = (lineItem.Amount + lineItem.TaxAmount - lineItem.TotalDiscountAmount).ToString();
             lblBonus.Text = lineItem.Scheme1.ToString() + " + " + lineItem.Scheme2.ToString();
             lblSplDiscountPercent.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.SpecialDiscount)));
             lblSplDisAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.SpecialDiscountAmount)));
@@ -1505,7 +1517,7 @@ namespace PharmaUI
             lblTotalSchemeAmt.Text = Convert.ToString(amountTotal.SchemeAmount);
             lblTotalTaxAmount.Text = Convert.ToString(amountTotal.TaxAmount);
             lblTotalAmount.Text = Convert.ToString(amountTotal.GrossAmount);
-            lblTotalNetAmount.Text = Convert.ToString(amountTotal.BillAmount);
+            lblTotalNetAmount.Text = Convert.ToString(amountTotal.BillAmount + amountTotal.TaxAmount);
         }
 
         private void frmPurchaseBookTransaction_FormClosing(object sender, FormClosingEventArgs e)
