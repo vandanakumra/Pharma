@@ -1,6 +1,7 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
 using PharmaBusinessObjects.Common;
+using PharmaBusinessObjects.Master;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,11 @@ namespace PharmaUI
         private string accountLedgerName = string.Empty;
         private bool isOpenAsDialog = false;
         private string ledgerType = string.Empty;
+
+
+        public bool IsInChildMode = false;
+        public AccountLedgerMaster LastSelectedAccountLedger { get; set; }
+        public AccountLedgerMaster NextAccountLedger { get; set; }
 
         public string AccountLedgerID { get { return accountLedgerCode; } }
         public string AccountLedgerName { get { return accountLedgerName; } }
@@ -155,15 +161,16 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyCode == Keys.Delete && dgvAccountLedger.SelectedRows.Count > 0)
+                if (e.KeyCode == Keys.Enter && IsInChildMode)
                 {
-                    if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        //PharmaBusinessObjects.Master.AccountLedgerMaster itemToBeRemoved = (PharmaBusinessObjects.Master.AccountLedgerMaster)dgvAccountLedger.SelectedRows[0].DataBoundItem;
-                        //applicationFacade.DeleteItem(itemToBeRemoved);
-                        //LoadDataGrid(0);
-                    }
+                    this.Close();
                 }
+                if ((e.KeyData & Keys.KeyCode) == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                }
+                else
+                    base.OnKeyDown(e);
             }
             catch (Exception ex)
             {
@@ -372,6 +379,15 @@ namespace PharmaUI
            
         }
 
+        public void ConfigureAccountLedger(AccountLedgerType model)
+        {
+            if (model != null)
+            {
+                this.cbLedgerType.Text = model.AccountLedgerTypeName;
+                this.cbLedgerType.Enabled = false;
+            }
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //Add
@@ -387,6 +403,10 @@ namespace PharmaUI
             else if (keyData == Keys.Down)
             {
                 dgvAccountLedger.Focus();
+            }
+            else if (keyData == Keys.Escape)
+            {
+                this.Close();
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -404,6 +424,21 @@ namespace PharmaUI
             }
 
             
+        }
+
+        private void frmAccountLedgerMaster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (dgvAccountLedger.CurrentRow != null)
+                {
+                    this.LastSelectedAccountLedger = dgvAccountLedger.CurrentRow.DataBoundItem as AccountLedgerMaster;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

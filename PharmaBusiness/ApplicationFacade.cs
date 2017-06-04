@@ -8,6 +8,7 @@ using PharmaBusinessObjects.Master;
 using PharmaBusiness.Master;
 using PharmaBusiness.Common;
 using PharmaBusinessObjects.Transaction;
+using PharmaBusiness.Transaction;
 
 namespace PharmaBusiness
 {
@@ -773,7 +774,22 @@ namespace PharmaBusiness
 
         #endregion
 
+        #region ReceiptPayment 
 
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllBillOutstandingForLedger(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        #endregion
 
     }
 }

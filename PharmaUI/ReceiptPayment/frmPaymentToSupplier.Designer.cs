@@ -44,6 +44,8 @@
             this.lblSearch = new System.Windows.Forms.Label();
             this.dgvPaymentToSupplier = new System.Windows.Forms.DataGridView();
             this.errorProviderPaymentToSupplier = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtTransactAccount = new System.Windows.Forms.TextBox();
+            this.lblTransAccount = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupplierBillAdjusted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupplierBillOS)).BeginInit();
@@ -58,7 +60,7 @@
             this.dtReceiptPayment.Mask = "00/00/0000";
             this.dtReceiptPayment.Name = "dtReceiptPayment";
             this.dtReceiptPayment.Size = new System.Drawing.Size(119, 26);
-            this.dtReceiptPayment.TabIndex = 201;
+            this.dtReceiptPayment.TabIndex = 102;
             this.dtReceiptPayment.ValidatingType = typeof(System.DateTime);
             // 
             // tableLayoutPanel1
@@ -226,7 +228,7 @@
             this.lblSearch.Location = new System.Drawing.Point(12, 62);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(41, 19);
-            this.lblSearch.TabIndex = 202;
+            this.lblSearch.TabIndex = 101;
             this.lblSearch.Text = "Date";
             // 
             // dgvPaymentToSupplier
@@ -240,11 +242,29 @@
             this.dgvPaymentToSupplier.Name = "dgvPaymentToSupplier";
             this.dgvPaymentToSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPaymentToSupplier.Size = new System.Drawing.Size(1028, 188);
-            this.dgvPaymentToSupplier.TabIndex = 204;
+            this.dgvPaymentToSupplier.TabIndex = 201;
             // 
             // errorProviderPaymentToSupplier
             // 
             this.errorProviderPaymentToSupplier.ContainerControl = this;
+            // 
+            // txtTransactAccount
+            // 
+            this.txtTransactAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTransactAccount.Location = new System.Drawing.Point(350, 59);
+            this.txtTransactAccount.Name = "txtTransactAccount";
+            this.txtTransactAccount.Size = new System.Drawing.Size(294, 26);
+            this.txtTransactAccount.TabIndex = 104;
+            // 
+            // lblTransAccount
+            // 
+            this.lblTransAccount.AutoSize = true;
+            this.lblTransAccount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTransAccount.Location = new System.Drawing.Point(192, 62);
+            this.lblTransAccount.Name = "lblTransAccount";
+            this.lblTransAccount.Size = new System.Drawing.Size(153, 19);
+            this.lblTransAccount.TabIndex = 103;
+            this.lblTransAccount.Text = "Transaction Account";
             // 
             // frmPaymentToSupplier
             // 
@@ -252,6 +272,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 537);
             this.ControlBox = false;
+            this.Controls.Add(this.lblTransAccount);
+            this.Controls.Add(this.txtTransactAccount);
             this.Controls.Add(this.dtReceiptPayment);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.lblSearch);
@@ -288,5 +310,7 @@
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.DataGridView dgvPaymentToSupplier;
         private System.Windows.Forms.ErrorProvider errorProviderPaymentToSupplier;
+        private System.Windows.Forms.Label lblTransAccount;
+        private System.Windows.Forms.TextBox txtTransactAccount;
     }
 }

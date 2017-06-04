@@ -13,11 +13,13 @@ namespace PharmaBusinessObjects.Transaction.ReceiptPayment
         public string VoucherNumber { get; set; }
         public string VoucherTypeCode { get; set; }
         public System.DateTime VoucherDate { get; set; }
+        public string InvoiceNumber { get; set; }
+        public System.DateTime InvoiceDate { get; set; }
         public string LedgerType { get; set; }
         public string LedgerTypeCode { get; set; }
         public double BillAmount { get; set; }
         public double OSAmount { get; set; }
-        public bool IsHold { get; set; }
+        public bool ? IsHold { get; set; }
         public string HOLDRemarks { get; set; }
     }
 }

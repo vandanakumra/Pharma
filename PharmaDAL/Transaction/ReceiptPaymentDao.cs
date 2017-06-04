@@ -9,7 +9,7 @@ namespace PharmaDAL.Transaction
 {
     public class ReceiptPaymentDao : BaseDao
     {
-        ReceiptPaymentDao(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        public ReceiptPaymentDao(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
         {
 
         }
@@ -59,17 +59,22 @@ namespace PharmaDAL.Transaction
         }
 
 
-        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(string ledgerType, string ledgerTypeCode)
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(PharmaBusinessObjects.Transaction.TransactionEntity entity)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.BillOutStandings.Where(q=>q.LedgerType== ledgerType && q.LedgerTypeCode == ledgerTypeCode).Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
+                return context.BillOutStandings.Where(q=>q.LedgerType== entity.EntityType 
+                                                            && q.LedgerTypeCode == entity.EntityCode
+                                                            && q.OSAmount > 0)
+                .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
                 {
                                 BillOutStandingsID = p.BillOutStandingsID,
                                 PurchaseSaleBookHeaderID = p.PurchaseSaleBookHeaderID,
                                 VoucherNumber = p.VoucherNumber,
                                 VoucherTypeCode = p.VoucherTypeCode,
                                 VoucherDate = p.VoucherDate,
+                                InvoiceNumber=p.PurchaseSaleBookHeader.PurchaseBillNo,
+                                InvoiceDate=p.PurchaseSaleBookHeader.VoucherDate,
                                 LedgerType = p.LedgerType,
                                 LedgerTypeCode = p.LedgerTypeCode,
                                 BillAmount = p.BillAmount,

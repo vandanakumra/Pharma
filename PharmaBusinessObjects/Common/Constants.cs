@@ -47,7 +47,18 @@ namespace PharmaBusinessObjects.Common
             public const string GeneralLedger = "GeneralLedger";
             public const string PurchaseLedger = "PurchaseLedger";
             public const string SaleLedger = "SaleLedger";
-            public const string ControlCodes = "ControlCodes";          
+            public const string ControlCodes = "ControlCodes";
+        }
+
+        public static class AccountLedgerTypeText
+        {
+            public const string IncomeLedger = "Income Ledger";
+            public const string ExpenditureLedger = "Expenditure Ledger";
+            public const string TransactionBooks = "Transaction Books";
+            public const string GeneralLedger = "General Ledger";
+            public const string PurchaseLedger = "Purchase Ledger";
+            public const string SaleLedger = "Sale Ledger";
+            public const string ControlCodes = "Control Codes";
         }
 
         public static class TransactionLedgerType

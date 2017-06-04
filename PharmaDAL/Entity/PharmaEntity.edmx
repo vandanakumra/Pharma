@@ -72,7 +72,7 @@
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="BillAmount" Type="float" Nullable="false" />
           <Property Name="OSAmount" Type="float" Nullable="false" />
-          <Property Name="IsHold" Type="bit" Nullable="false" />
+          <Property Name="IsHold" Type="bit" />
           <Property Name="HOLDRemarks" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="BillOutStandingsAudjustment">
@@ -719,6 +719,15 @@
           <Property Name="SaleRate" Type="float" />
           <Property Name="WholeSaleRate" Type="float" />
           <Property Name="SpecialRate" Type="float" />
+          <Property Name="CostAmount" Type="float" />
+          <Property Name="GrossAmount" Type="float" />
+          <Property Name="SchemeAmount" Type="float" />
+          <Property Name="DiscountAmount" Type="float" />
+          <Property Name="SurchargeAmount" Type="float" />
+          <Property Name="TaxAmount" Type="float" />
+          <Property Name="SpecialDiscountAmount" Type="float" />
+          <Property Name="VolumeDiscountAmount" Type="float" />
+          <Property Name="TotalDiscountAmount" Type="float" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
@@ -1587,7 +1596,7 @@
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BillAmount" Type="Double" Nullable="false" />
           <Property Name="OSAmount" Type="Double" Nullable="false" />
-          <Property Name="IsHold" Type="Boolean" Nullable="false" />
+          <Property Name="IsHold" Type="Boolean" />
           <Property Name="HOLDRemarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_BillOutStandings_PurchaseSaleBookHeader" FromRole="BillOutStandings" ToRole="PurchaseSaleBookHeader" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_BillOutStandings" FromRole="BillOutStandings" ToRole="BillOutStandingsAudjustment" />
@@ -2303,6 +2312,15 @@
           <Property Name="SaleRate" Type="Double" />
           <Property Name="WholeSaleRate" Type="Double" />
           <Property Name="SpecialRate" Type="Double" />
+          <Property Name="CostAmount" Type="Double" />
+          <Property Name="GrossAmount" Type="Double" />
+          <Property Name="SchemeAmount" Type="Double" />
+          <Property Name="DiscountAmount" Type="Double" />
+          <Property Name="SurchargeAmount" Type="Double" />
+          <Property Name="TaxAmount" Type="Double" />
+          <Property Name="SpecialDiscountAmount" Type="Double" />
+          <Property Name="VolumeDiscountAmount" Type="Double" />
+          <Property Name="TotalDiscountAmount" Type="Double" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -3842,6 +3860,15 @@
                 <ScalarProperty Name="SaleRate" ColumnName="SaleRate" />
                 <ScalarProperty Name="WholeSaleRate" ColumnName="WholeSaleRate" />
                 <ScalarProperty Name="SpecialRate" ColumnName="SpecialRate" />
+                <ScalarProperty Name="CostAmount" ColumnName="CostAmount" />
+                <ScalarProperty Name="GrossAmount" ColumnName="GrossAmount" />
+                <ScalarProperty Name="SchemeAmount" ColumnName="SchemeAmount" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="SurchargeAmount" ColumnName="SurchargeAmount" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="SpecialDiscountAmount" ColumnName="SpecialDiscountAmount" />
+                <ScalarProperty Name="VolumeDiscountAmount" ColumnName="VolumeDiscountAmount" />
+                <ScalarProperty Name="TotalDiscountAmount" ColumnName="TotalDiscountAmount" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
