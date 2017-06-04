@@ -130,7 +130,7 @@ namespace PharmaUI.ReceiptPayment
                         {
                             e.SuppressKeyPress = true;
                             frmSupplierLedger formSupplierLedgerMaster = new frmSupplierLedger();
-                          //  formSupplierLedgerMaster.IsInChildMode = true;
+                            formSupplierLedgerMaster.IsInChildMode = true;
                             //Set Child UI
                             ExtensionMethods.AddChildFormToPanel(this, formSupplierLedgerMaster, ExtensionMethods.MainPanel);
                             formSupplierLedgerMaster.WindowState = FormWindowState.Maximized;
