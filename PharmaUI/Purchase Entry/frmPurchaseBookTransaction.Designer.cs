@@ -277,12 +277,8 @@
             this.tableLayoutPanel2.Controls.Add(this.lblMRP, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.label25, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblDiscountPercente, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label33, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblDiscountAmount, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label15, 6, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblInvoiceAmount, 7, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblSplDiscountPercent, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.label7, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblSplDisAmount, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.label23, 4, 0);
@@ -293,10 +289,14 @@
             this.tableLayoutPanel2.Controls.Add(this.lblTaxPercent, 7, 1);
             this.tableLayoutPanel2.Controls.Add(this.label37, 6, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblTaxAmount, 7, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblVolumeDiscountAmount, 3, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblSplDiscountPercent, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label14, 2, 3);
             this.tableLayoutPanel2.Controls.Add(this.label12, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.lblVolumeDis, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label14, 2, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblVolumeDiscountAmount, 3, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label33, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblDiscountAmount, 3, 1);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 344);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
@@ -380,7 +380,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(4, 50);
+            this.label33.Location = new System.Drawing.Point(227, 27);
             this.label33.Margin = new System.Windows.Forms.Padding(3);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(132, 16);
@@ -392,7 +392,7 @@
             this.lblDiscountAmount.AutoSize = true;
             this.lblDiscountAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDiscountAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblDiscountAmount.Location = new System.Drawing.Point(155, 50);
+            this.lblDiscountAmount.Location = new System.Drawing.Point(378, 27);
             this.lblDiscountAmount.Margin = new System.Windows.Forms.Padding(3);
             this.lblDiscountAmount.Name = "lblDiscountAmount";
             this.lblDiscountAmount.Size = new System.Drawing.Size(32, 16);
@@ -406,9 +406,9 @@
             this.label15.Location = new System.Drawing.Point(673, 4);
             this.label15.Margin = new System.Windows.Forms.Padding(3);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(122, 16);
+            this.label15.Size = new System.Drawing.Size(104, 16);
             this.label15.TabIndex = 149;
-            this.label15.Text = "Invoice Amount";
+            this.label15.Text = "Item Amount";
             // 
             // lblInvoiceAmount
             // 
@@ -426,7 +426,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(227, 27);
+            this.label3.Location = new System.Drawing.Point(4, 50);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 16);
@@ -438,7 +438,7 @@
             this.lblSplDiscountPercent.AutoSize = true;
             this.lblSplDiscountPercent.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSplDiscountPercent.ForeColor = System.Drawing.Color.Blue;
-            this.lblSplDiscountPercent.Location = new System.Drawing.Point(378, 27);
+            this.lblSplDiscountPercent.Location = new System.Drawing.Point(155, 50);
             this.lblSplDiscountPercent.Margin = new System.Windows.Forms.Padding(3);
             this.lblSplDiscountPercent.Name = "lblSplDiscountPercent";
             this.lblSplDiscountPercent.Size = new System.Drawing.Size(32, 16);
@@ -500,7 +500,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(135, 16);
             this.label10.TabIndex = 165;
-            this.label10.Text = "Scheme Discount (%)";
+            this.label10.Text = "Scheme Discount Amount";
             // 
             // lblSchemeAmount
             // 
@@ -625,7 +625,7 @@
             this.label2.Location = new System.Drawing.Point(4, 4);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 25);
+            this.label2.Size = new System.Drawing.Size(69, 26);
             this.label2.TabIndex = 124;
             this.label2.Text = "Scheme Amount";
             // 
@@ -636,7 +636,7 @@
             this.label4.Location = new System.Drawing.Point(182, 4);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 25);
+            this.label4.Size = new System.Drawing.Size(75, 26);
             this.label4.TabIndex = 125;
             this.label4.Text = "Discount Amount";
             // 
@@ -647,7 +647,7 @@
             this.label6.Location = new System.Drawing.Point(360, 4);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 25);
+            this.label6.Size = new System.Drawing.Size(66, 26);
             this.label6.TabIndex = 126;
             this.label6.Text = "Tax Amount";
             // 
@@ -658,9 +658,9 @@
             this.label8.Location = new System.Drawing.Point(538, 4);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 25);
+            this.label8.Size = new System.Drawing.Size(66, 26);
             this.label8.TabIndex = 127;
-            this.label8.Text = "Net Amount";
+            this.label8.Text = "Invoice Amount";
             // 
             // label42
             // 
@@ -669,7 +669,7 @@
             this.label42.Location = new System.Drawing.Point(716, 4);
             this.label42.Margin = new System.Windows.Forms.Padding(3);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 25);
+            this.label42.Size = new System.Drawing.Size(66, 26);
             this.label42.TabIndex = 128;
             this.label42.Text = "Total Amount";
             // 
@@ -702,7 +702,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 312);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 30);
             this.tableLayoutPanel1.TabIndex = 129;
             // 
