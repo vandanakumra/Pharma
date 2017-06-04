@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace PharmaUI
 {
 
-    public class TransctionForm
+    public class TransactionForm
     {
         public int FormNo { get; set; }
         public string FormName { get; set; }
@@ -24,7 +24,7 @@ namespace PharmaUI
 
     public static class ExtensionMethods
     {
-        private static List<TransctionForm> TransactionForms = new List<TransctionForm>(); 
+        private static List<TransactionForm> TransactionForms = new List<TransactionForm>(); 
 
         public static PharmaBusinessObjects.Master.UserMaster LoggedInUser { get; set; }
         public static string FontFamily = "Microsoft Sans Serif";
@@ -144,6 +144,8 @@ namespace PharmaUI
             //allControls.ForEach(k =>{ if (k.Name != "lblSearch" && k.Name != "txtSearch" && k.Name != "lblPersonRouteType") { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); } });
 
             allControls.ForEach(k => { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); });
+            
+            allControls.ForEach(k => { if (k is ComboBox) { ((ComboBox)k).FlatStyle = FlatStyle.Flat; } });
 
             Panel panel1 = new Panel();
             panel1.Location = new Point(0, 0);
@@ -302,7 +304,7 @@ namespace PharmaUI
 
             childFrm.Name = max.ToString() + "_" + childFrm.Name;
 
-            TransactionForms.Add(new TransctionForm() { FormNo = max, FormName = childFrm.Name,  Visible = true });
+            TransactionForms.Add(new TransactionForm() { FormNo = max, FormName = childFrm.Name,  Visible = true });
 
             if (max > 1)
             {
@@ -327,7 +329,7 @@ namespace PharmaUI
 
             if(form[0] == "1")
             {
-                TransctionForm tform = TransactionForms.Where(p => p.FormName == childFrm.Name).FirstOrDefault();
+                TransactionForm tform = TransactionForms.Where(p => p.FormName == childFrm.Name).FirstOrDefault();
                 TransactionForms.Remove(tform);
 
                 pnl.Controls.Remove(childFrm);
@@ -339,7 +341,7 @@ namespace PharmaUI
             }
             else
             {
-                TransctionForm tform = TransactionForms.Where(p => p.FormName == childFrm.Name).FirstOrDefault();
+                TransactionForm tform = TransactionForms.Where(p => p.FormName == childFrm.Name).FirstOrDefault();
                 TransactionForms.Remove(tform);
                 pnl.Controls.Remove(childFrm);
 
@@ -487,7 +489,7 @@ namespace PharmaUI
             int rowIndex1 = 0;
             foreach (DataGridViewRow row in dgv.Rows)
             {
-                if (row.Cells[searchColumnName].Value.ToString().ToLower().StartsWith(searchString.ToLower()))
+                if (row.Cells[searchColumnName].Value.ToString().Replace(" ","").ToLower().StartsWith(searchString.ToLower().Replace(" ","")))
                 {
                     int row2 = row.Index;
                     if (flag)

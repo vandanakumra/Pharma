@@ -136,6 +136,7 @@
             this.txtCGST1.Name = "txtCGST1";
             this.txtCGST1.Size = new System.Drawing.Size(112, 20);
             this.txtCGST1.TabIndex = 2;
+            this.txtCGST1.Visible = false;
             // 
             // lblAmount1
             // 
@@ -156,6 +157,7 @@
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "CGST";
+            this.label2.Visible = false;
             // 
             // lblAmount2
             // 

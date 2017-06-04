@@ -139,6 +139,10 @@
             // dgvLineItem
             // 
             this.dgvLineItem.AllowUserToAddRows = false;
+            this.dgvLineItem.AllowUserToDeleteRows = false;
+            this.dgvLineItem.AllowUserToOrderColumns = true;
+            this.dgvLineItem.AllowUserToResizeColumns = false;
+            this.dgvLineItem.AllowUserToResizeRows = false;
             this.dgvLineItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -153,6 +157,7 @@
             // cbxPurchaseType
             // 
             this.cbxPurchaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPurchaseType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxPurchaseType.FormattingEnabled = true;
             this.cbxPurchaseType.Location = new System.Drawing.Point(373, 81);
             this.cbxPurchaseType.Name = "cbxPurchaseType";
@@ -162,6 +167,7 @@
             // cbxPurchaseFormType
             // 
             this.cbxPurchaseFormType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPurchaseFormType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxPurchaseFormType.FormattingEnabled = true;
             this.cbxPurchaseFormType.Location = new System.Drawing.Point(525, 81);
             this.cbxPurchaseFormType.Name = "cbxPurchaseFormType";
@@ -619,7 +625,7 @@
             this.label2.Location = new System.Drawing.Point(4, 4);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 24);
+            this.label2.Size = new System.Drawing.Size(69, 25);
             this.label2.TabIndex = 124;
             this.label2.Text = "Scheme Amount";
             // 
@@ -630,7 +636,7 @@
             this.label4.Location = new System.Drawing.Point(182, 4);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 24);
+            this.label4.Size = new System.Drawing.Size(75, 25);
             this.label4.TabIndex = 125;
             this.label4.Text = "Discount Amount";
             // 
@@ -641,7 +647,7 @@
             this.label6.Location = new System.Drawing.Point(360, 4);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 24);
+            this.label6.Size = new System.Drawing.Size(66, 25);
             this.label6.TabIndex = 126;
             this.label6.Text = "Tax Amount";
             // 
@@ -652,7 +658,7 @@
             this.label8.Location = new System.Drawing.Point(538, 4);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 24);
+            this.label8.Size = new System.Drawing.Size(66, 25);
             this.label8.TabIndex = 127;
             this.label8.Text = "Net Amount";
             // 
@@ -663,7 +669,7 @@
             this.label42.Location = new System.Drawing.Point(716, 4);
             this.label42.Margin = new System.Windows.Forms.Padding(3);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 24);
+            this.label42.Size = new System.Drawing.Size(66, 25);
             this.label42.TabIndex = 128;
             this.label42.Text = "Total Amount";
             // 
@@ -696,7 +702,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 312);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 30);
             this.tableLayoutPanel1.TabIndex = 129;
             // 

@@ -118,18 +118,13 @@ namespace PharmaBusinessObjects
         #endregion
 
         #region Transaction
-        //long InsertTempPurchaseHeader(PurchaseSaleBookHeader header);
-        //long UpdateTempPurchaseHeader(PurchaseSaleBookHeader header);
+       
         long InsertUpdateTempPurchaseBookHeader(PurchaseSaleBookHeader header);
         List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes();
-        List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);
-        //long InsertTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem);
-        //long UpdateTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem);
+        List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);      
         List<PurchaseBookAmount> InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem);
         bool IsTempPurchaseHeaderExists(long purchaseBookHeaderID);
-
-
-
+        List<PurchaseBookAmount> DeleteTempPurchaseBookLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem);
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
         bool SavePurchaseData(long purchaseBookHeaderID);
         List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID);

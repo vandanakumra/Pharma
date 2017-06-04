@@ -14,16 +14,7 @@ namespace PharmaBusiness.Transaction
         {
 
         }
-
-        //internal long InsertTempPurchaseHeader(PurchaseSaleBookHeader header)
-        //{
-        //    return new PurchaseBookDao(this.LoggedInUser).InsertTempPurchaseBookHeader(header);
-        //}
-
-        //internal long UpdateTempPurchaseHeader(PurchaseSaleBookHeader header)
-        //{
-        //    return new PurchaseBookDao(this.LoggedInUser).UpdateTempPurchaseBookHeader(header);
-        //}
+             
 
         internal long InsertUpdateTempPurchaseBookHeader(PurchaseSaleBookHeader header)
         {
@@ -43,16 +34,7 @@ namespace PharmaBusiness.Transaction
         {
             return new PurchaseBookDao(this.LoggedInUser).GetPurchaseFormTypes(purchaseTypeID);
         }
-
-        //public long InsertTempLineItem(PurchaseSaleBookLineItem lineItem)
-        //{
-        //    return new PurchaseBookDao(this.LoggedInUser).InsertTempLineItem(lineItem);
-        //}
-
-        //public long UpdateTempLineItem(PurchaseSaleBookLineItem lineItem)
-        //{
-        //    return new PurchaseBookDao(this.LoggedInUser).UpdateTempLineItem(lineItem);
-        //}
+        
 
         public List<PurchaseBookAmount> InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem)
         {
@@ -64,7 +46,12 @@ namespace PharmaBusiness.Transaction
             return new PurchaseBookDao(this.LoggedInUser).InsertUpdateTempPurchaseBookLineItem(lineItem);
         }
 
-        
+        public List<PurchaseBookAmount> DeleteTempPurchaseBookLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).DeleteTempPurchaseBookLineItem(lineItem);
+        }
+
+
 
         internal List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
         {
