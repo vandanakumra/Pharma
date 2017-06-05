@@ -11,6 +11,8 @@ using PharmaBusiness;
 using PharmaBusinessObjects;
 using PharmaBusinessObjects.Master;
 using PharmaBusinessObjects.Common;
+using System.Reflection;
+
 namespace PharmaUI
 {
     public partial class frmItemMaster : Form
@@ -178,7 +180,13 @@ namespace PharmaUI
 
         private void LoadDataGrid()
         {
-            string searchBy = "Name";            
+            string searchBy = "Name";
+
+            if (isOpenAsChild)
+            {
+                dgvItemList.ColumnHeadersVisible = false;
+            }
+
             dgvItemList.DataSource = applicationFacade.GetAllItemsBySearch(null, searchBy).OrderBy(p=>p.ItemName).ToList();
             ExtensionMethods.SetGridDefaultProperty(dgvItemList);
 

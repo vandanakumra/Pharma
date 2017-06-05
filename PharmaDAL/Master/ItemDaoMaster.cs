@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using PharmaDAL.Entity;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace PharmaDAL.Master
 {
@@ -234,6 +236,78 @@ namespace PharmaDAL.Master
 
         public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null, string searchBy = "Name")
         {
+
+            //using (PharmaDBEntities context = new PharmaDBEntities())
+            //{
+            //    List<PharmaBusinessObjects.Master.ItemMaster> itemList = new List<PharmaBusinessObjects.Master.ItemMaster>();
+
+            //    SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+            //    SqlCommand cmd = new SqlCommand("Select * from ItemMaster", connection);
+            //    cmd.CommandType = System.Data.CommandType.Text;               
+
+            //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            //    DataTable dt = new DataTable();
+
+            //    sda.Fill(dt);
+
+
+            //    if(dt != null && dt.Rows.Count > 0)
+            //    {
+            //        foreach (DataRow row in dt.Rows)
+            //        {
+            //            PharmaBusinessObjects.Master.ItemMaster item = new PharmaBusinessObjects.Master.ItemMaster()
+            //            {
+
+            //                ItemID = Convert.ToInt32(row["ItemID"]),
+            //                ItemCode = Convert.ToString(row["ItemCode"]),
+            //                ItemName = Convert.ToString(row["ItemName"]),
+            //                CompanyID = Convert.ToInt32(row["CompanyID"]),
+            //                ConversionRate = Convert.ToDouble(row["ConversionRate"]),
+            //               // CompanyName = Convert.ToString(row["CompanyMaster.CompanyName"]),
+            //                ShortName = Convert.ToString(row["ShortName"]),
+            //                Packing = Convert.ToString(row["Packing"]),
+            //                PurchaseRate = Convert.ToDouble(row["PurchaseRate"]),
+            //                MRP = Convert.ToDouble(row["MRP"]),
+            //                SaleRate = Convert.ToDouble(row["SaleRate"]),
+            //                SpecialRate = Convert.ToDouble(row["SpecialRate"]),
+            //                WholeSaleRate = Convert.ToDouble(row["WholeSaleRate"]),
+            //                SaleExcise = Convert.ToDouble(row["SaleExcise"]),
+            //                SurchargeOnSale = Convert.ToDouble(row["SurchargeOnSale"]),
+            //                TaxOnSale = Convert.ToDouble(row["TaxOnSale"]),
+            //                Scheme1 = Convert.ToDouble(row["Scheme1"]),
+            //                Scheme2 = Convert.ToDouble(row["Scheme2"]),
+            //                PurchaseExcise = Convert.ToDouble(row["PurchaseExcise"]),
+            //                UPC = Convert.ToString(row["UPC"]),
+            //                IsHalfScheme = Convert.ToBoolean(row["IsHalfScheme"]),
+            //                IsQTRScheme = Convert.ToBoolean(row["IsQTRScheme"]),
+            //                SpecialDiscount = Convert.ToDouble(row["SpecialDiscount"]),
+            //                SpecialDiscountOnQty = Convert.ToDouble(row["SpecialDiscountOnQty"]),
+            //                IsFixedDiscount = Convert.ToBoolean(row["IsFixedDiscount"]),
+            //                FixedDiscountRate = Convert.ToDouble(row["FixedDiscountRate"]),
+            //                SurchargeOnPurchase = Convert.ToDouble(row["SurchargeOnPurchase"]),
+            //                TaxOnPurchase = Convert.ToDouble(row["TaxOnPurchase"]),
+            //                DiscountRecieved = Convert.ToDouble(row["DiscountRecieved"]),
+            //                SpecialDiscountRecieved = Convert.ToDouble(row["SpecialDiscountRecieved"]),
+            //                QtyPerCase = Convert.ToDouble(row["QtyPerCase"]),
+            //                Location = Convert.ToString(row["Location"]),
+            //                SaleTypeId = Convert.ToInt32(row["SaleTypeId"]),
+            //                PurchaseTypeId = Convert.ToInt32(row["PurchaseTypeId"]),
+            //                //PurchaseTypeCode = Convert.ToDouble(row["AccountLedgerMaster1.AccountLedgerCode,
+            //                //PurchaseTypeName = Convert.ToDouble(row["AccountLedgerMaster1.AccountLedgerName,
+            //                //PurchaseTypeRate = Convert.ToDouble(row["AccountLedgerMaster1.SalePurchaseTaxType,
+            //                Status = Convert.ToBoolean(row["Status"])
+            //            };
+
+            //            itemList.Add(item);
+
+            //        }
+            //    }
+            //    return itemList;              
+            //}
+
+
+
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 return context.ItemMaster.Where(p => p.Status
@@ -266,16 +340,12 @@ namespace PharmaDAL.Master
                                                     SpecialDiscountOnQty = p.SpecialDiscountOnQty,
                                                     IsFixedDiscount = p.IsFixedDiscount,
                                                     FixedDiscountRate = p.FixedDiscountRate,
-                                                    //MaximumQty = p.MaximumQty,
-                                                    //MaximumDiscount = p.MaximumDiscount,
                                                     SurchargeOnPurchase = p.SurchargeOnPurchase,
                                                     TaxOnPurchase = p.TaxOnPurchase,
                                                     DiscountRecieved = p.DiscountRecieved,
                                                     SpecialDiscountRecieved = p.SpecialDiscountRecieved,
                                                     QtyPerCase = p.QtyPerCase,
                                                     Location = p.Location,
-                                                    //MinimumStock = p.MinimumStock,
-                                                    //MaximumStock = p.MaximumStock,
                                                     SaleTypeId = p.SaleTypeId,
                                                     PurchaseTypeId = p.PurchaseTypeId,
                                                     PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
