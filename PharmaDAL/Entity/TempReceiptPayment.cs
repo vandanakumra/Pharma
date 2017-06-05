@@ -15,7 +15,6 @@ namespace PharmaDAL.Entity
     public partial class TempReceiptPayment
     {
         public long ReceiptPaymentID { get; set; }
-        public long PurchaseSaleBookHeaderID { get; set; }
         public string VoucherNumber { get; set; }
         public string VoucherTypeCode { get; set; }
         public System.DateTime VoucherDate { get; set; }

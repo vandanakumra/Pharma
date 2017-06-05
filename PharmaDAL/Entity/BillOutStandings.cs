@@ -30,7 +30,7 @@ namespace PharmaDAL.Entity
         public string LedgerTypeCode { get; set; }
         public double BillAmount { get; set; }
         public double OSAmount { get; set; }
-        public Nullable<bool> IsHold { get; set; }
+        public bool IsHold { get; set; }
         public string HOLDRemarks { get; set; }
     
         public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }

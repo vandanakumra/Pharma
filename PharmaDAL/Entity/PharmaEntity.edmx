@@ -72,7 +72,7 @@
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="BillAmount" Type="float" Nullable="false" />
           <Property Name="OSAmount" Type="float" Nullable="false" />
-          <Property Name="IsHold" Type="bit" />
+          <Property Name="IsHold" Type="bit" Nullable="false" />
           <Property Name="HOLDRemarks" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="BillOutStandingsAudjustment">
@@ -429,8 +429,8 @@
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="Batch" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="BatchNew" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="FreeQuantity" Type="int" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="FreeQuantity" Type="float" />
           <Property Name="PurchaseSaleRate" Type="float" Nullable="false" />
           <Property Name="EffecivePurchaseSaleRate" Type="float" />
           <Property Name="PurchaseSaleTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -693,8 +693,8 @@
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="Batch" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="BatchNew" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="FreeQuantity" Type="int" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="FreeQuantity" Type="float" />
           <Property Name="PurchaseSaleRate" Type="float" Nullable="false" />
           <Property Name="EffecivePurchaseSaleRate" Type="float" />
           <Property Name="PurchaseSaleTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -738,7 +738,6 @@
             <PropertyRef Name="ReceiptPaymentID" />
           </Key>
           <Property Name="ReceiptPaymentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" Nullable="false" />
           <Property Name="VoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VoucherDate" Type="datetime" Nullable="false" />
@@ -1596,7 +1595,7 @@
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="BillAmount" Type="Double" Nullable="false" />
           <Property Name="OSAmount" Type="Double" Nullable="false" />
-          <Property Name="IsHold" Type="Boolean" />
+          <Property Name="IsHold" Type="Boolean" Nullable="false" />
           <Property Name="HOLDRemarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_BillOutStandings_PurchaseSaleBookHeader" FromRole="BillOutStandings" ToRole="PurchaseSaleBookHeader" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_BillOutStandings" FromRole="BillOutStandings" ToRole="BillOutStandingsAudjustment" />
@@ -2003,8 +2002,8 @@
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Batch" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BatchNew" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="FreeQuantity" Type="Int32" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="FreeQuantity" Type="Double" />
           <Property Name="PurchaseSaleRate" Type="Double" Nullable="false" />
           <Property Name="EffecivePurchaseSaleRate" Type="Double" />
           <Property Name="PurchaseSaleTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
@@ -2286,8 +2285,8 @@
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Batch" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BatchNew" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="FreeQuantity" Type="Int32" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="FreeQuantity" Type="Double" />
           <Property Name="PurchaseSaleRate" Type="Double" Nullable="false" />
           <Property Name="EffecivePurchaseSaleRate" Type="Double" />
           <Property Name="PurchaseSaleTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
@@ -2333,7 +2332,6 @@
             <PropertyRef Name="ReceiptPaymentID" />
           </Key>
           <Property Name="ReceiptPaymentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" Nullable="false" />
           <Property Name="VoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -3880,7 +3878,6 @@
             <EntityTypeMapping TypeName="PharmaDBModel.TempReceiptPayment">
               <MappingFragment StoreEntitySet="TempReceiptPayment">
                 <ScalarProperty Name="ReceiptPaymentID" ColumnName="ReceiptPaymentID" />
-                <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
                 <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
