@@ -128,7 +128,65 @@ namespace PharmaDAL.Transaction
             }
         }
 
-        
+
+
+
+        public List<PurchaseBookAmount> DeleteTempPurchaseBookLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        {
+            try
+            {
+                List<PurchaseBookAmount> purchaseBookAmounts = new List<PurchaseBookAmount>();              
+
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                    SqlCommand cmd = new SqlCommand("DeleteInvetoryLineItemInTempTable", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;                  
+                
+                    cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PurchaseSaleBookHeaderID", Value = lineItem.PurchaseSaleBookHeaderID});
+                    cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PurchaseSaleBookLineItemID", Value = lineItem.PurchaseSaleBookLineItemID});
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    sda.Fill(dt);
+
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            PurchaseBookAmount obj = new PurchaseBookAmount()
+                            {
+                                PurchaseSaleBookLineItemID = row["PurchaseSaleBookLineItemID"] == null ? 0 : Convert.ToInt64(row["PurchaseSaleBookLineItemID"]),
+                                PurchaseBookHeaderID = Convert.ToInt64(row["PurchaseSaleBookHeaderID"]),
+                                BillAmount = Convert.ToInt64(row["BillAmount"]),
+                                TaxAmount = Convert.ToInt64(row["TaxAmount"]),
+                                CostAmount = Convert.ToInt64(row["CostAmount"]),
+                                GrossAmount = Convert.ToInt64(row["GrossAmount"]),
+                                SchemeAmount = Convert.ToInt64(row["SchemeAmount"]),
+                                DiscountAmount = Convert.ToInt64(row["DiscountAmount"]),
+                                SpecialDiscountAmount = Convert.ToInt64(row["SpecialDiscountAmount"]),
+                                VolumeDiscountAmount = Convert.ToInt64(row["VolumeDiscountAmount"]),
+                                TotalDiscountAmount = Convert.ToInt64(row["TotalDiscountAmount"])
+                            };
+
+                            purchaseBookAmounts.Add(obj);
+                        }
+
+                    }
+                }
+
+                return purchaseBookAmounts;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+
         public List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes()
         {
             using (PharmaDBEntities context = new PharmaDBEntities())

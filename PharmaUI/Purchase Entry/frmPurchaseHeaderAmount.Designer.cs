@@ -167,6 +167,7 @@
             this.txtSGST1.Name = "txtSGST1";
             this.txtSGST1.Size = new System.Drawing.Size(100, 20);
             this.txtSGST1.TabIndex = 3;
+            this.txtSGST1.Visible = false;
             // 
             // txtSGST2
             // 
@@ -230,6 +231,7 @@
             this.txtIGST1.Name = "txtIGST1";
             this.txtIGST1.Size = new System.Drawing.Size(100, 20);
             this.txtIGST1.TabIndex = 2;
+            this.txtIGST1.Visible = false;
             // 
             // lblAmount1
             // 
@@ -250,6 +252,7 @@
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "IGST";
+            this.label2.Visible = false;
             // 
             // label3
             // 
@@ -260,6 +263,7 @@
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "SGST";
+            this.label3.Visible = false;
             // 
             // lblAmount2
             // 

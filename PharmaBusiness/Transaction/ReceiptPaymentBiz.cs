@@ -1,5 +1,6 @@
 ﻿using PharmaBusinessObjects.Master;
 using PharmaBusinessObjects.Transaction;
+using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using PharmaDAL.Transaction;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,16 @@ namespace PharmaBusiness.Transaction
         internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(TransactionEntity transactionEntity)
         {
             return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillOutstandingForLedger(transactionEntity);
+        }
+
+        internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        {
+            return new ReceiptPaymentDao(this.LoggedInUser).GetAllInitialBillAdjustmentForLedger(transactionEntity);
+        }
+
+        internal long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment)
+        {
+            return new ReceiptPaymentDao(this.LoggedInUser).InsertUpdateTempReceiptPayment(receiptPayment);
         }
     }
 }

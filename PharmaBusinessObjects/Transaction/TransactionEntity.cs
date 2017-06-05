@@ -8,6 +8,7 @@ namespace PharmaBusinessObjects.Transaction
 {
     public class TransactionEntity : BaseBusinessObjects
     {
+        public long   ReceiptPaymentID { get; set; }
         public string EntityType { get; set; }
         public string EntityCode { get; set; }
         public string EntityName { get; set; }

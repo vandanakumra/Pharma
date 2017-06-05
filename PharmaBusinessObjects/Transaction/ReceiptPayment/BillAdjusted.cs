@@ -20,7 +20,10 @@ namespace PharmaBusinessObjects.Transaction.ReceiptPayment
         public System.DateTime AdjustmentVoucherDate { get; set; }
         public string LedgerType { get; set; }
         public string LedgerTypeCode { get; set; }
+        public string InvoiceNumber { get; set; }
+        public System.DateTime InvoiceDate { get; set; }
         public double Amount { get; set; }
+        public double OSAmount { get; set; }
         public string ChequeNumber { get; set; }
     }
 }

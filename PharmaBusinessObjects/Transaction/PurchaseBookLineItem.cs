@@ -18,8 +18,8 @@ namespace PharmaBusinessObjects.Transaction
         public string ItemName { get; set; }
         public string Batch { get; set; }
         public string BatchNew { get; set; }
-        public int Quantity { get; set; }
-        public Nullable<int> FreeQuantity { get; set; }
+        public double Quantity { get; set; }
+        public Nullable<double> FreeQuantity { get; set; }
         public double PurchaseSaleRate { get; set; }
         public double OldPurchaseSaleRate { get; set; }
         public Nullable<double> EffecivePurchaseSaleRate { get; set; }

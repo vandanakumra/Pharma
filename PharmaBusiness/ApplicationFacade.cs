@@ -706,25 +706,13 @@ namespace PharmaBusiness
 
         #endregion
 
-        #region Purchase Entry
-
-        //public long InsertTempPurchaseHeader(PurchaseSaleBookHeader header)
-        //{
-        //    return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertTempPurchaseHeader(header);
-        //}
-
-        //public long UpdateTempPurchaseHeader(PurchaseSaleBookHeader header)
-        //{
-        //    return new Transaction.PurchaseBookBiz(this.LoggedInUser).UpdateTempPurchaseHeader(header);
-        //}
+        #region Purchase Entry     
 
 
         public long InsertUpdateTempPurchaseBookHeader(PurchaseSaleBookHeader header)
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertUpdateTempPurchaseBookHeader(header);
-        }
-
-        
+        }        
 
         public List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes()
         {
@@ -735,17 +723,7 @@ namespace PharmaBusiness
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseFormTypes(purchaseTypeID);
         }
-
-        //public long InsertTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem)
-        //{
-        //    return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertTempLineItem(lineItem);
-        //}
-
-        //public long UpdateTempPurchaseLineItem(PurchaseSaleBookLineItem lineItem)
-        //{
-        //    return new Transaction.PurchaseBookBiz(this.LoggedInUser).UpdateTempLineItem(lineItem);
-        //}
-
+               
         public List<PurchaseBookAmount> InsertUpdateTempPurchaseBookLineItem(PurchaseSaleBookLineItem lineItem)
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertUpdateTempPurchaseBookLineItem(lineItem);
@@ -761,7 +739,6 @@ namespace PharmaBusiness
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetLastNBatchNoForSupplierItem(supplierCode,itemCode);
         }
 
-
         public bool SavePurchaseData(long purchaseBookHeaderID)
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).SavePurchaseData(purchaseBookHeaderID);
@@ -770,6 +747,11 @@ namespace PharmaBusiness
         public List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID)
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetFinalAmountWithTaxForPurchase(purchaseBookHeaderID);
+        }
+
+        public List<PurchaseBookAmount> DeleteTempPurchaseBookLineItem(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).DeleteTempPurchaseBookLineItem(lineItem);
         }
 
         #endregion
@@ -788,6 +770,29 @@ namespace PharmaBusiness
             }
         }
 
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllInitialBillAdjustmentForLedger(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).InsertUpdateTempReceiptPayment(receiptPayment);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 

@@ -45,8 +45,6 @@ namespace PharmaUI.ReceiptPayment
                 ///
                 dgvPaymentToSupplier.KeyDown += dgvPaymentToSupplier_KeyDown;
                 dgvPaymentToSupplier.EditingControlShowing += dgvCustomerItemDiscount_EditingControlShowing;
-                dgvPaymentToSupplier.CellValidating += DgvPaymentToSupplier_CellValidating;
-                dgvPaymentToSupplier.CellValidated += DgvPaymentToSupplier_CellValidated;
 
                 string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
                 format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
@@ -54,35 +52,6 @@ namespace PharmaUI.ReceiptPayment
                 dtReceiptPayment.Text = DateTime.Now.ToString(format);
                 dtReceiptPayment.Focus();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void DgvPaymentToSupplier_CellValidated(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void DgvPaymentToSupplier_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            try
-            {
-                string columnName = dgvPaymentToSupplier.Columns[e.ColumnIndex].Name;
-
-                if (columnName == "PaymentMode")
-                {
-                   
-                }
             }
             catch (Exception ex)
             {
@@ -127,28 +96,27 @@ namespace PharmaUI.ReceiptPayment
 
             dgvPaymentToSupplier.Columns["LedgerTypeCode"].Visible = true;
             dgvPaymentToSupplier.Columns["LedgerTypeCode"].HeaderText = "Party Code";
+            dgvPaymentToSupplier.Columns["LedgerTypeCode"].DisplayIndex = 0;
 
             dgvPaymentToSupplier.Columns["LedgerTypeName"].Visible = true;
             dgvPaymentToSupplier.Columns["LedgerTypeName"].HeaderText = "Party Name";
-
-            dgvPaymentToSupplier.Columns["PaymentMode"].Visible = true;
-            dgvPaymentToSupplier.Columns["PaymentMode"].HeaderText = "Payment Mode";
+            dgvPaymentToSupplier.Columns["LedgerTypeName"].DisplayIndex = 1;
 
             dgvPaymentToSupplier.Columns["ChequeNumber"].Visible = true;
             dgvPaymentToSupplier.Columns["ChequeNumber"].HeaderText = "Cheque Number";
-            dgvPaymentToSupplier.Columns["ChequeNumber"].ReadOnly = true;
-            dgvPaymentToSupplier.Columns["ChequeNumber"].DefaultCellStyle.BackColor = Color.LightGray;
+            dgvPaymentToSupplier.Columns["ChequeNumber"].DisplayIndex = 2;
 
             dgvPaymentToSupplier.Columns["ChequeDate"].Visible = true;
             dgvPaymentToSupplier.Columns["ChequeDate"].HeaderText = "Cheque Date";
-            dgvPaymentToSupplier.Columns["ChequeDate"].ReadOnly = true;
-            dgvPaymentToSupplier.Columns["ChequeDate"].DefaultCellStyle.BackColor = Color.LightGray;
+            dgvPaymentToSupplier.Columns["ChequeDate"].DisplayIndex = 3;
 
             dgvPaymentToSupplier.Columns["Amount"].Visible = true;
             dgvPaymentToSupplier.Columns["Amount"].HeaderText = "Amount";
+            dgvPaymentToSupplier.Columns["Amount"].DisplayIndex = 4;
 
             dgvPaymentToSupplier.Columns["UnadjustedAmount"].Visible = true;
             dgvPaymentToSupplier.Columns["UnadjustedAmount"].HeaderText = "Unadjusted Amount";
+            dgvPaymentToSupplier.Columns["UnadjustedAmount"].DisplayIndex = 5;
 
         }
 
@@ -177,8 +145,27 @@ namespace PharmaUI.ReceiptPayment
 
                             formSupplierLedgerMaster.FormClosed += FormSupplierLedgerMaster_FormClosed;
                             formSupplierLedgerMaster.Show();
+
+                            return;
+                        }
+                        else if (columnName == "Amount")
+                        {
+                            frmReceiptPaymentAdjustment formReceiptPaymentAdjustment = new frmReceiptPaymentAdjustment();
+                            
+
+                            TransactionEntity transactionEntity = new TransactionEntity()
+                            {
+                                EntityType = Constants.TransactionEntityType.SupplierLedger,
+                                EntityCode = Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["LedgerTypeCode"].Value),
+                                EntityName = Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["LedgerTypeName"].Value),
+                            };
+
+                            formReceiptPaymentAdjustment.ConfigureReceiptPaymentAdjustment(transactionEntity);
+                            formReceiptPaymentAdjustment.Show();
                         }
                     }
+
+                    SendKeys.Send("{tab}");
                 }
             }
             catch (Exception ex)
@@ -195,14 +182,15 @@ namespace PharmaUI.ReceiptPayment
             {
                 ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
                 {
-                    LedgerType = Constants.TransactionLedgerType.SupplierLedger,
+                    LedgerType = Constants.TransactionEntityType.SupplierLedger,
                     LedgerTypeCode = selectedSupplier.SupplierLedgerCode,
-                    LedgerTypeName = selectedSupplier.SupplierLedgerName
+                    LedgerTypeName = selectedSupplier.SupplierLedgerName,
+                    BankAccountLedgerTypeCode=Convert.ToString(txtTransactAccount.Tag)
                 };
 
                 TransactionEntity transactionEntity = new TransactionEntity()
                 {
-                    EntityType= Constants.TransactionLedgerType.SupplierLedger,
+                    EntityType= Constants.TransactionEntityType.SupplierLedger,
                     EntityCode= selectedSupplier.SupplierLedgerCode
                 };
 
@@ -287,7 +275,9 @@ namespace PharmaUI.ReceiptPayment
             {
                 rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;
                 colIndex = dgvPaymentToSupplier.SelectedCells[0].ColumnIndex;
+               // receiptPayment.ReceiptPaymentID= applicationFacade.InsertUpdateTempReceiptPayment(receiptPayment);
 
+                dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value = receiptPayment.ReceiptPaymentID;
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeCode"].Value = receiptPayment.LedgerTypeCode;
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeName"].Value = receiptPayment.LedgerTypeName;
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["PaymentMode"].Value = receiptPayment.PaymentMode;
