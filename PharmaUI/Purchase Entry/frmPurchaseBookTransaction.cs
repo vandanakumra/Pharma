@@ -700,7 +700,7 @@ namespace PharmaUI
             header.VoucherDate = purchaseDate;
             header.PurchaseBillNo = txtInvoiceNumber.Text;
             header.LedgerTypeCode = txtSupplierCode.Text;
-            header.LedgerType = Constants.TransactionLedgerType.SupplierLedger;
+            header.LedgerType = Constants.TransactionEntityType.SupplierLedger;
             header.VoucherTypeCode = Constants.VoucherTypeCode.PURCHASEENTRY;
             header.TotalTaxAmount = 0;
 

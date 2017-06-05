@@ -94,7 +94,7 @@ namespace PharmaUI
             {
                 ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
                 {
-                    LedgerType = Constants.TransactionLedgerType.CustomerLedger,
+                    LedgerType = Constants.TransactionEntityType.CustomerLedger,
                     LedgerTypeCode= SelectedCustomerLedger.CustomerLedgerCode,
                     LedgerTypeName=SelectedCustomerLedger.CustomerLedgerName
                 };

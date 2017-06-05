@@ -89,6 +89,7 @@
     <Compile Include="Transaction\ReceiptPayment\BillAdjusted.cs" />
     <Compile Include="Transaction\ReceiptPayment\BillOutstanding.cs" />
     <Compile Include="Transaction\ReceiptPayment\ReceiptPayment.cs" />
+    <Compile Include="Transaction\TransactionEntity.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -71,7 +71,18 @@ namespace PharmaBusinessObjects.Common
                 Name = "dtReceiptPayment"
             });
 
+            excludeControlsList.Add(new ExcludedControls()
+            {
+                Name = "lblTransAccount"
+            });
+
+            excludeControlsList.Add(new ExcludedControls()
+            {
+                Name = "txtTransactAccount"
+            });
             
+
+
 
             return excludeControlsList;
         }

@@ -8,6 +8,7 @@ using PharmaBusinessObjects.Master;
 using PharmaBusiness.Master;
 using PharmaBusiness.Common;
 using PharmaBusinessObjects.Transaction;
+using PharmaBusiness.Transaction;
 
 namespace PharmaBusiness
 {
@@ -755,7 +756,45 @@ namespace PharmaBusiness
 
         #endregion
 
+        #region ReceiptPayment 
 
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllBillOutstandingForLedger(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllInitialBillAdjustmentForLedger(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).InsertUpdateTempReceiptPayment(receiptPayment);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #endregion
 
     }
 }

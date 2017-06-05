@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -738,7 +738,6 @@
             <PropertyRef Name="ReceiptPaymentID" />
           </Key>
           <Property Name="ReceiptPaymentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" Nullable="false" />
           <Property Name="VoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VoucherDate" Type="datetime" Nullable="false" />
@@ -2333,7 +2332,6 @@
             <PropertyRef Name="ReceiptPaymentID" />
           </Key>
           <Property Name="ReceiptPaymentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" Nullable="false" />
           <Property Name="VoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -3880,7 +3878,6 @@
             <EntityTypeMapping TypeName="PharmaDBModel.TempReceiptPayment">
               <MappingFragment StoreEntitySet="TempReceiptPayment">
                 <ScalarProperty Name="ReceiptPaymentID" ColumnName="ReceiptPaymentID" />
-                <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
                 <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />

@@ -149,6 +149,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAccountLedgerMaster";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAccountLedgerMaster_FormClosing);
             this.Load += new System.EventHandler(this.frmAccountLedgerMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccountLedger)).EndInit();
             this.ResumeLayout(false);

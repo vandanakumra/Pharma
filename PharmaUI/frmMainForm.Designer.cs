@@ -230,7 +230,7 @@
             this.transactionToolStripMenuItem});
             this.paymentToCustomerToolStripMenuItem.Name = "paymentToCustomerToolStripMenuItem";
             this.paymentToCustomerToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.paymentToCustomerToolStripMenuItem.Text = "Payment To Customer";
+            this.paymentToCustomerToolStripMenuItem.Text = "Payment To Supplier";
             // 
             // transactionToolStripMenuItem
             // 

@@ -47,10 +47,21 @@ namespace PharmaBusinessObjects.Common
             public const string GeneralLedger = "GeneralLedger";
             public const string PurchaseLedger = "PurchaseLedger";
             public const string SaleLedger = "SaleLedger";
-            public const string ControlCodes = "ControlCodes";          
+            public const string ControlCodes = "ControlCodes";
         }
 
-        public static class TransactionLedgerType
+        public static class AccountLedgerTypeText
+        {
+            public const string IncomeLedger = "Income Ledger";
+            public const string ExpenditureLedger = "Expenditure Ledger";
+            public const string TransactionBooks = "Transaction Books";
+            public const string GeneralLedger = "General Ledger";
+            public const string PurchaseLedger = "Purchase Ledger";
+            public const string SaleLedger = "Sale Ledger";
+            public const string ControlCodes = "Control Codes";
+        }
+
+        public static class TransactionEntityType
         {
             public const string CustomerLedger = "CUSTOMERLEDGER";
             public const string SupplierLedger = "SUPPLIERLEDGER";
@@ -79,6 +90,13 @@ namespace PharmaBusinessObjects.Common
             public const string VOUCHERENTRY = "VOUCHERENTRY";
             public const string RECEIPTFROMCUSTOMER = "RECEIPTFROMCUSTOMER";
             public const string PAYMENTTOSUPPLIER = "PAYMENTTOSUPPLIER";
+        }
+
+        public static class PaymentMode
+        {
+            public const string CASH = "C";
+            public const string CHEQUE = "Q";
+            public const string ADJUST = "A";
         }
 
     }
