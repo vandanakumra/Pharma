@@ -31,5 +31,12 @@ namespace PharmaBusiness.Transaction
         {
             return new ReceiptPaymentDao(this.LoggedInUser).InsertUpdateTempReceiptPayment(receiptPayment);
         }
+
+        internal void MakeBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
+        {
+             new ReceiptPaymentDao(this.LoggedInUser).MakeBillAdjustment(billAdjustmentList);
+        }
+
+       
     }
 }

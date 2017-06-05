@@ -174,6 +174,7 @@ namespace PharmaUI.ReceiptPayment
                             frmReceiptPaymentAdjustment formReceiptPaymentAdjustment = new frmReceiptPaymentAdjustment();
                             TransactionEntity transactionEntity = new TransactionEntity()
                             {
+                                ReceiptPaymentID=(long)dgvPaymentToSupplier.CurrentRow.Cells["ReceiptPaymentID"].Value,
                                 EntityType = Constants.TransactionEntityType.SupplierLedger,
                                 EntityCode = Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["LedgerTypeCode"].Value),
                                 EntityName = Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["LedgerTypeName"].Value),
@@ -204,7 +205,11 @@ namespace PharmaUI.ReceiptPayment
 
         private void FormReceiptPaymentAdjustment_FormClosed(object sender, FormClosedEventArgs e)
         {
+            TransactionEntity currentTransactionEntity =(sender as frmReceiptPaymentAdjustment).CurrentTransactionEntity;
+
             dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"];
+            dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"].Value = currentTransactionEntity.EntityBalAmount;
+
         }
 
         private void FormSupplierLedgerMaster_FormClosed(object sender, FormClosedEventArgs e)
@@ -215,9 +220,12 @@ namespace PharmaUI.ReceiptPayment
             {
                 ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
                 {
+                    VoucherTypeCode=Constants.VoucherTypeCode.PAYMENTTOSUPPLIER,
+                    VoucherDate=Convert.ToDateTime(dtReceiptPayment.Text),
                     LedgerType = Constants.TransactionEntityType.SupplierLedger,
                     LedgerTypeCode = selectedSupplier.SupplierLedgerCode,
                     LedgerTypeName = selectedSupplier.SupplierLedgerName,
+                    PaymentMode=Constants.PaymentMode.CASH,
                     BankAccountLedgerTypeCode=Convert.ToString(txtTransactAccount.Tag)
                 };
 
@@ -311,7 +319,7 @@ namespace PharmaUI.ReceiptPayment
             {
                 rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;
                 colIndex = dgvPaymentToSupplier.SelectedCells[0].ColumnIndex;
-               // receiptPayment.ReceiptPaymentID= applicationFacade.InsertUpdateTempReceiptPayment(receiptPayment);
+                receiptPayment.ReceiptPaymentID= applicationFacade.InsertUpdateTempReceiptPayment(receiptPayment);
 
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value = receiptPayment.ReceiptPaymentID;
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeCode"].Value = receiptPayment.LedgerTypeCode;

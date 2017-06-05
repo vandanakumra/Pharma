@@ -16,7 +16,7 @@ namespace PharmaUI.ReceiptPayment
     public partial class frmReceiptPaymentAdjustment : Form
     {
         IApplicationFacade applicationFacade;
-        TransactionEntity CurrentTransactionEntity;
+       public TransactionEntity CurrentTransactionEntity;
 
         public frmReceiptPaymentAdjustment()
         {
@@ -30,12 +30,75 @@ namespace PharmaUI.ReceiptPayment
             try
             {
                 ExtensionMethods.FormLoad(this, "Receipt Payment Adjustment");
+
+                dgvReceiptPaymentAdjustment.CellEndEdit += DgvReceiptPaymentAdjustment_CellEndEdit;
                 LoadGridBillAdjustment();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void DgvReceiptPaymentAdjustment_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dgvReceiptPaymentAdjustment.Rows.Count > 0)
+                {
+                    string columnName = dgvReceiptPaymentAdjustment.Columns[dgvReceiptPaymentAdjustment.SelectedCells[0].ColumnIndex].Name;
+
+                    if (columnName == "Amount")
+                    {
+
+                        double enteredAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value)) ?? default(double);
+                        double correspondingOSAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(double);
+
+                        double utilizedAmount = GetTotallUtilizedAmount();
+                        double tempBalance= CurrentTransactionEntity.EntityTotalAmount - utilizedAmount;
+                
+                        if (enteredAmount > tempBalance)
+                        {
+                            MessageBox.Show("Balance amount is less !");
+                            dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = 0;
+
+                        }
+                        else if (enteredAmount > correspondingOSAmount)
+                        {
+                            MessageBox.Show("Entered amount is greater than OS amount !");
+                            dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = 0;
+                        }
+                        else if (enteredAmount > 0)
+                        {
+                            CurrentTransactionEntity.EntityBalAmount = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount - enteredAmount;
+                            lblBalAmountVal.Text = Convert.ToString(this.CurrentTransactionEntity.EntityBalAmount);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DgvReceiptPaymentAdjustment_KeyDown(object sender, KeyEventArgs e)
+        {
+           
+        }
+
+        private double GetTotallUtilizedAmount()
+        {
+            double utilizedAmount = 0;
+            for (int i = 0; i < dgvReceiptPaymentAdjustment.Rows.Count; ++i)
+            {
+                if (i == dgvReceiptPaymentAdjustment.CurrentRow.Index)
+                    continue;
+
+                utilizedAmount += Convert.ToDouble(dgvReceiptPaymentAdjustment.Rows[i].Cells["Amount"].Value);
+            }
+            return utilizedAmount;
         }
 
         private void LoadGridBillAdjustment()
@@ -53,16 +116,22 @@ namespace PharmaUI.ReceiptPayment
 
             dgvReceiptPaymentAdjustment.Columns["InvoiceNumber"].Visible = true;
             dgvReceiptPaymentAdjustment.Columns["InvoiceNumber"].HeaderText = "Bill Number";
+            dgvReceiptPaymentAdjustment.Columns["InvoiceNumber"].ReadOnly = true;
+            dgvReceiptPaymentAdjustment.Columns["InvoiceNumber"].DisplayIndex = 0;
 
             dgvReceiptPaymentAdjustment.Columns["InvoiceDate"].Visible = true;
             dgvReceiptPaymentAdjustment.Columns["InvoiceDate"].HeaderText = "Bill Date";
+            dgvReceiptPaymentAdjustment.Columns["InvoiceDate"].ReadOnly = true;
+            dgvReceiptPaymentAdjustment.Columns["InvoiceDate"].DisplayIndex = 1;
 
             dgvReceiptPaymentAdjustment.Columns["OSAmount"].Visible = true;
             dgvReceiptPaymentAdjustment.Columns["OSAmount"].HeaderText = "Outstanding Amount";
+            dgvReceiptPaymentAdjustment.Columns["OSAmount"].ReadOnly = true;
+            dgvReceiptPaymentAdjustment.Columns["OSAmount"].DisplayIndex = 2;
 
             dgvReceiptPaymentAdjustment.Columns["Amount"].Visible = true;
             dgvReceiptPaymentAdjustment.Columns["Amount"].HeaderText = "Amount";
-
+            dgvReceiptPaymentAdjustment.Columns["Amount"].DisplayIndex = 3;
         }
 
         public void ConfigureReceiptPaymentAdjustment(TransactionEntity transactionEntity)
@@ -74,21 +143,34 @@ namespace PharmaUI.ReceiptPayment
             this.lblTotalAmountVal.Text = Convert.ToString(transactionEntity.EntityTotalAmount);
             this.lblBalAmountVal.Text = Convert.ToString(transactionEntity.EntityBalAmount);          
         }
-
-      
+    
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == (Keys.F9))
-            {
 
-            }
-            else if (keyData == (Keys.F3))
+            if(keyData == Keys.End)
             {
-              
-            }
-            else if (keyData == Keys.F1)
-            {
+                if (dgvReceiptPaymentAdjustment.Rows.Count > 0)
+                {
+                    List<BillAdjusted> listBillAdjustment = dgvReceiptPaymentAdjustment.Rows
+                                                                             .Cast<DataGridViewRow>()
+                                                                             .Select(x => new BillAdjusted()
+                                                                             {
+                                                                                 ReceiptPaymentID = CurrentTransactionEntity.ReceiptPaymentID,
+                                                                                 PurchaseSaleBookHeaderID = (x.DataBoundItem as BillAdjusted).PurchaseSaleBookHeaderID,
+                                                                                 BillOutStandingsID = (x.DataBoundItem as BillAdjusted).BillOutStandingsID,
+                                                                                 AdjustmentVoucherNumber = (x.DataBoundItem as BillAdjusted).VoucherNumber,
+                                                                                 AdjustmentVoucherTypeCode = (x.DataBoundItem as BillAdjusted).VoucherTypeCode,
+                                                                                 AdjustmentVoucherDate = (x.DataBoundItem as BillAdjusted).VoucherDate,
+                                                                                 LedgerType = (x.DataBoundItem as BillAdjusted).LedgerType,
+                                                                                 LedgerTypeCode = (x.DataBoundItem as BillAdjusted).LedgerTypeCode,
+                                                                                 Amount = (x.DataBoundItem as BillAdjusted).Amount,
 
+                                                                             }).ToList();
+
+                    applicationFacade.MakeBillAdjustment(listBillAdjustment);
+                }
+
+                this.Close();
             }
             else if (keyData == Keys.Escape)
             {

@@ -794,6 +794,20 @@ namespace PharmaBusiness
             }
         }
 
+        public void MakeBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
+        {
+            try
+            {
+                 new ReceiptPaymentBiz(this.LoggedInUser).MakeBillAdjustment(billAdjustmentList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+       
+
         #endregion
 
     }
