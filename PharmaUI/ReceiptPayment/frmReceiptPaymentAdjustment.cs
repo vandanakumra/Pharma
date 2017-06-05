@@ -68,34 +68,14 @@ namespace PharmaUI.ReceiptPayment
         public void ConfigureReceiptPaymentAdjustment(TransactionEntity transactionEntity)
         {
             this.CurrentTransactionEntity = transactionEntity;
+
+            this.lblPartyCodeVal.Text = transactionEntity.EntityCode;
             this.lblPartyNameVal.Text = transactionEntity.EntityName;
+            this.lblTotalAmountVal.Text = Convert.ToString(transactionEntity.EntityTotalAmount);
+            this.lblBalAmountVal.Text = Convert.ToString(transactionEntity.EntityBalAmount);          
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+      
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.F9))

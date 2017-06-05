@@ -97,6 +97,10 @@ namespace PharmaBusinessObjects.Common
             public const string CASH = "C";
             public const string CHEQUE = "Q";
             public const string ADJUST = "A";
+
+            public const string CASHTEXT = "CASH";
+            public const string CHEQUETEXT = "CHEQUE";
+            public const string ADJUSTTEXT = "ADJUSTED";
         }
 
     }

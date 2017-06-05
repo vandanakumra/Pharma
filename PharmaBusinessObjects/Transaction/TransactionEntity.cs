@@ -12,5 +12,7 @@ namespace PharmaBusinessObjects.Transaction
         public string EntityType { get; set; }
         public string EntityCode { get; set; }
         public string EntityName { get; set; }
+        public double EntityTotalAmount { get; set; }
+        public double EntityBalAmount { get; set; }
     }
 }
