@@ -1184,17 +1184,17 @@ namespace PharmaUI
                         MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else if(e.KeyData == Keys.Insert)
-                {
-                    int rindex = dgvLineItem.CurrentRow.Index;
+                //else if(e.KeyData == Keys.Insert)
+                //{
+                //    int rindex = dgvLineItem.CurrentRow.Index;
 
-                    if(rindex >=0)
-                    {
-                        dgvLineItem.Rows.Insert(rindex, 1);
-                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rindex].Cells["ItemCode"];
-                    }
+                //    if(rindex >=0)
+                //    {
+                //        dgvLineItem.Rows.Insert(rindex, 1);
+                //        dgvLineItem.CurrentCell = dgvLineItem.Rows[rindex].Cells["ItemCode"];
+                //    }
 
-                }
+                //}
 
             }
             catch (Exception ex)
