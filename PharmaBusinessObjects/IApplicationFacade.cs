@@ -1,5 +1,6 @@
 ﻿using PharmaBusinessObjects.Master;
 using PharmaBusinessObjects.Transaction;
+using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,8 +129,10 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
         bool SavePurchaseData(long purchaseBookHeaderID);
         List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID);
+        List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode);
+        List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetPurchaseSaleBookLineItemForModify(long purchaseSaleBookHeaderID);
+        PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID);
 
-      
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity);
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(TransactionEntity transactionEntity);
         long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment);

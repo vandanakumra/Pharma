@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PharmaBusinessObjects.Transaction;
 using PharmaDAL.Transaction;
+using PharmaBusinessObjects.Transaction.ReceiptPayment;
 
 namespace PharmaBusiness.Transaction
 {
@@ -72,5 +73,25 @@ namespace PharmaBusiness.Transaction
         {
             return new PurchaseBookDao(this.LoggedInUser).IsTempPurchaseHeaderExists(purchaseBookHeaderID);
         }
+
+        internal List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).GetAllPurchaseInvoiceForSuppier(supplierCode);
+        }
+
+        internal List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetPurchaseSaleBookLineItemForModify(long purchaseSaleBookHeaderID)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).GetPurchaseSaleBookLineItemForModify(purchaseSaleBookHeaderID);
+        }
+
+        internal PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).GetPurchaseSaleBookHeaderForModify(purchaseSaleBookHeaderID);
+        }
+
+
+
+
+
     }
 }

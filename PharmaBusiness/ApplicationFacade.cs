@@ -9,6 +9,7 @@ using PharmaBusiness.Master;
 using PharmaBusiness.Common;
 using PharmaBusinessObjects.Transaction;
 using PharmaBusiness.Transaction;
+using PharmaBusinessObjects.Transaction.ReceiptPayment;
 
 namespace PharmaBusiness
 {
@@ -641,7 +642,6 @@ namespace PharmaBusiness
 
         #endregion
 
-
         #region User Master
 
         public List<PharmaBusinessObjects.Master.UserMaster> GetUsers(string searchText)        {
@@ -708,7 +708,6 @@ namespace PharmaBusiness
 
         #region Purchase Entry     
 
-
         public long InsertUpdateTempPurchaseBookHeader(PurchaseSaleBookHeader header)
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).InsertUpdateTempPurchaseBookHeader(header);
@@ -753,6 +752,23 @@ namespace PharmaBusiness
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).DeleteTempPurchaseBookLineItem(lineItem);
         }
+
+        public List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetAllPurchaseInvoiceForSuppier(supplierCode);
+        }
+
+
+        public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetPurchaseSaleBookLineItemForModify(long purchaseSaleBookHeaderID)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseSaleBookLineItemForModify(purchaseSaleBookHeaderID);
+        }
+
+        public PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseSaleBookHeaderForModify(purchaseSaleBookHeaderID);
+        }
+
 
         #endregion
 

@@ -8,18 +8,6 @@ namespace PharmaBusinessObjects.Transaction
 {
     public class PurchaseSaleBookHeader : BaseBusinessObjects
     {
-        //public long InvoiceID { get; set; }
-        //public string InvoiceNumber { get; set; }
-        //public DateTime PurchaseDate { get; set; }
-        //public string SupplierCode { get; set; }
-        //public int PurchaseFormTypeID { get; set; }
-        //public List<PurchaseBookAmount> PurchaseAmountList { get; set; }
-        //public double ExemptedAmount { get; set; }
-        ////public string Narration1 { get; set; }
-        //public double OtherAmount { get; set; }
-        //public double InvoiceAmount { get; set; }
-        ////public string Narration2 { get; set; }
-
 
         public long PurchaseSaleBookHeaderID { get; set; }
         public string VoucherTypeCode { get; set; }
@@ -80,7 +68,7 @@ namespace PharmaBusinessObjects.Transaction
         public Nullable<int> PurchaseEntryFormID { get; set; }
         public double? LastBalance { get; set; }
 
-
+        public Nullable<long> OldPurchaseSaleBookHeaderID { get; set; }
 
     }
 

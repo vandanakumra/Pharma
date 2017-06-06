@@ -34,23 +34,10 @@ namespace PharmaUI
         {
             ExtensionMethods.FormLoad(this, "Last 5 Batch No.");      
             
-            dgvLastBatch.DataSource = list;
+            dgvLastBatch.DataSource = list.OrderByDescending(p=>p.PurchaseBillDate).ToList();
 
-            for (int i = 0; i < dgvLastBatch.Columns.Count; i++)
-            {
-                dgvLastBatch.Columns[i].Visible = false;
-            }
+            ExtensionMethods.SetGridDefaultProperty(dgvLastBatch);
 
-
-
-            //ItemCode = p.ItemCode,
-            //             = p.Rate,
-            //             = p.Discount,
-            //             = p.SpecialDiscount,
-            //            VolumeDiscount = p.VolumeDiscount,
-            //            TaxOnPurchase = p.TaxOnPurchase,
-            //            PurchaseDate = p.PurchaseBookHeader.PurchaseDate,
-            //             = p.BatchNo
 
             dgvLastBatch.Columns["ItemCode"].Visible = true;
             dgvLastBatch.Columns["ItemCode"].HeaderText = "Item";
@@ -61,10 +48,8 @@ namespace PharmaUI
             dgvLastBatch.Columns["Batch"].Visible = true;
             dgvLastBatch.Columns["Batch"].HeaderText = "Batch No";
 
-
             dgvLastBatch.Columns["Discount"].Visible = true;
             dgvLastBatch.Columns["Discount"].HeaderText = "Discount";
-
 
             dgvLastBatch.Columns["SpecialDiscount"].Visible = true;
             dgvLastBatch.Columns["SpecialDiscount"].HeaderText = "Spl Discount";
@@ -74,13 +59,8 @@ namespace PharmaUI
 
             dgvLastBatch.Columns["ExpiryDate"].Visible = true;
             dgvLastBatch.Columns["ExpiryDate"].HeaderText = "Expiry Date";
-
-            dgvLastBatch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvLastBatch.AllowUserToAddRows = false;
-            dgvLastBatch.AllowUserToDeleteRows = false;
-            dgvLastBatch.ReadOnly = true;
+    
             dgvLastBatch.KeyDown += DgvLastBatch_KeyDown;
-
 
             if (list.Count == 0)
             {
@@ -131,7 +111,7 @@ namespace PharmaUI
         {
             if (dgvLastBatch.Rows.Count > 0)
             {
-                PurchaseSaleBookLineItem item = (PurchaseSaleBookLineItem)dgvLastBatch.CurrentRow.DataBoundItem;
+                PurchaseSaleBookLineItem item = (PurchaseSaleBookLineItem)dgvLastBatch.Rows[0].DataBoundItem;
                 PurchaseBookLineItem.Batch = item.Batch;
                 PurchaseBookLineItem.Discount = item.Discount;
                 PurchaseBookLineItem.SpecialDiscount = item.SpecialDiscount;

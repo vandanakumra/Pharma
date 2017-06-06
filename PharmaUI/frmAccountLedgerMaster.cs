@@ -112,7 +112,6 @@ namespace PharmaUI
 
                 LoadCombo();
 
-
                 if (isOpenAsDialog)
                 {
                     dgvAccountLedger.SelectionChanged += DgvAccountLedger_SelectionChanged;

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -679,6 +679,7 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="OldPurchaseSaleBookHeaderID" Type="bigint" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookLineItem">
           <Key>
@@ -732,6 +733,9 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="UsedQuantity" Type="float" />
+          <Property Name="BalanceQuantity" Type="float" />
+          <Property Name="OldPurchaseSaleBookLineItemID" Type="bigint" />
         </EntityType>
         <EntityType Name="TempReceiptPayment">
           <Key>
@@ -1512,8 +1516,7 @@
             <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2270,6 +2273,7 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="OldPurchaseSaleBookHeaderID" Type="Int64" />
           <NavigationProperty Name="TempPurchaseSaleBookLineItem" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookHeader" ToRole="TempPurchaseSaleBookLineItem" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookLineItem">
@@ -2324,8 +2328,11 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="UsedQuantity" Type="Double" />
+          <Property Name="BalanceQuantity" Type="Double" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="TempPurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="TempPurchaseSaleBookHeader" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookLineItem" ToRole="TempPurchaseSaleBookHeader" />
+          <Property Name="OldPurchaseSaleBookLineItemID" Type="Int64" />
         </EntityType>
         <EntityType Name="TempReceiptPayment">
           <Key>
@@ -3817,12 +3824,14 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="OldPurchaseSaleBookHeaderID" ColumnName="OldPurchaseSaleBookHeaderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TempPurchaseSaleBookLineItem">
             <EntityTypeMapping TypeName="PharmaDBModel.TempPurchaseSaleBookLineItem">
               <MappingFragment StoreEntitySet="TempPurchaseSaleBookLineItem">
+                <ScalarProperty Name="OldPurchaseSaleBookLineItemID" ColumnName="OldPurchaseSaleBookLineItemID" />
                 <ScalarProperty Name="PurchaseSaleBookLineItemID" ColumnName="PurchaseSaleBookLineItemID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="FifoID" ColumnName="FifoID" />
@@ -3871,6 +3880,8 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="UsedQuantity" ColumnName="UsedQuantity" />
+                <ScalarProperty Name="BalanceQuantity" ColumnName="BalanceQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

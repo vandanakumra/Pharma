@@ -46,10 +46,11 @@
             this.receiptPaymentBooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptFromCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptFromCustTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlMain = new System.Windows.Forms.Panel();
             this.paymentToCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlMain = new System.Windows.Forms.Panel();
+            this.modificationPurchaseEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,7 +173,8 @@
             // purchaseBookToolStripMenuItem
             // 
             this.purchaseBookToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.transactionCtrlPToolStripMenuItem});
+            this.transactionCtrlPToolStripMenuItem,
+            this.modificationPurchaseEntryToolStripMenuItem});
             this.purchaseBookToolStripMenuItem.Name = "purchaseBookToolStripMenuItem";
             this.purchaseBookToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.purchaseBookToolStripMenuItem.Text = "Purchase Book";
@@ -181,7 +183,7 @@
             // 
             this.transactionCtrlPToolStripMenuItem.Name = "transactionCtrlPToolStripMenuItem";
             this.transactionCtrlPToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.transactionCtrlPToolStripMenuItem.Text = "Transaction";
             this.transactionCtrlPToolStripMenuItem.Click += new System.EventHandler(this.purchaseTransactionToolStripMenuItem_Click);
             // 
@@ -205,9 +207,24 @@
             // receiptFromCustTransactionToolStripMenuItem
             // 
             this.receiptFromCustTransactionToolStripMenuItem.Name = "receiptFromCustTransactionToolStripMenuItem";
-            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.receiptFromCustTransactionToolStripMenuItem.Text = "Transaction";
             this.receiptFromCustTransactionToolStripMenuItem.Click += new System.EventHandler(this.receiptFromCustTransactionToolStripMenuItem_Click);
+            // 
+            // paymentToCustomerToolStripMenuItem
+            // 
+            this.paymentToCustomerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.transactionToolStripMenuItem});
+            this.paymentToCustomerToolStripMenuItem.Name = "paymentToCustomerToolStripMenuItem";
+            this.paymentToCustomerToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.paymentToCustomerToolStripMenuItem.Text = "Payment To Supplier";
+            // 
+            // transactionToolStripMenuItem
+            // 
+            this.transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
+            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.transactionToolStripMenuItem.Text = "Transaction";
+            this.transactionToolStripMenuItem.Click += new System.EventHandler(this.transactionToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -224,20 +241,12 @@
             this.pnlMain.Size = new System.Drawing.Size(756, 31);
             this.pnlMain.TabIndex = 1;
             // 
-            // paymentToCustomerToolStripMenuItem
+            // modificationPurchaseEntryToolStripMenuItem
             // 
-            this.paymentToCustomerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.transactionToolStripMenuItem});
-            this.paymentToCustomerToolStripMenuItem.Name = "paymentToCustomerToolStripMenuItem";
-            this.paymentToCustomerToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.paymentToCustomerToolStripMenuItem.Text = "Payment To Supplier";
-            // 
-            // transactionToolStripMenuItem
-            // 
-            this.transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
-            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.transactionToolStripMenuItem.Text = "Transaction";
-            this.transactionToolStripMenuItem.Click += new System.EventHandler(this.transactionToolStripMenuItem_Click);
+            this.modificationPurchaseEntryToolStripMenuItem.Name = "modificationPurchaseEntryToolStripMenuItem";
+            this.modificationPurchaseEntryToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.modificationPurchaseEntryToolStripMenuItem.Text = "Modification";
+            this.modificationPurchaseEntryToolStripMenuItem.Click += new System.EventHandler(this.modificationPurchaseEntryToolStripMenuItem_Click);
             // 
             // frmMainForm
             // 
@@ -284,5 +293,6 @@
         private System.Windows.Forms.ToolStripMenuItem receiptFromCustTransactionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentToCustomerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificationPurchaseEntryToolStripMenuItem;
     }
 }

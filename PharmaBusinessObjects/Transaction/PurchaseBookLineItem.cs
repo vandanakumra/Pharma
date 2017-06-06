@@ -45,8 +45,6 @@ namespace PharmaBusinessObjects.Transaction
         public Nullable<double> SaleRate { get; set; }
         public Nullable<double> WholeSaleRate { get; set; }
         public Nullable<double> SpecialRate { get; set; }
-
-
         public Nullable<double> CostAmount { get; set; }
         public Nullable<double> GrossAmount { get; set; }
         public Nullable<double> SchemeAmount { get; set; }
@@ -56,7 +54,9 @@ namespace PharmaBusinessObjects.Transaction
         public Nullable<double> SpecialDiscountAmount { get; set; }
         public Nullable<double> VolumeDiscountAmount { get; set; }
         public Nullable<double> TotalDiscountAmount { get; set; }
-
+        public Nullable<double> UsedQuantity { get; set; }
+        public Nullable<double> BalanceQuantity { get; set; }
+        public Nullable<long> OldPurchaseSaleBookLineItemID { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
@@ -78,8 +78,7 @@ namespace PharmaBusinessObjects.Transaction
             PurchaseSaleTax = 0;
             IGST = SGST = CGST = 0;
             CostAmount = DiscountAmount = SpecialDiscountAmount = VolumeDiscountAmount = GrossAmount = TaxAmount = 0.0;
-            SchemeAmount = SurchargeAmount = TotalDiscountAmount = 0.0;
-           // ExpiryDate = DateTime.MinValue;
+            SchemeAmount = SurchargeAmount = TotalDiscountAmount = 0.0;           
         }
     }
 }

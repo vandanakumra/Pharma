@@ -175,6 +175,12 @@
     <Compile Include="frmPrivledgeAddUpdate.Designer.cs">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchase Entry\frmAllBillForSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchase Entry\frmAllBillForSupplier.Designer.cs">
+      <DependentUpon>frmAllBillForSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReceiptPayment\frmPaymentToSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrivledgeAddUpdate.resx">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchase Entry\frmAllBillForSupplier.resx">
+      <DependentUpon>frmAllBillForSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReceiptPayment\frmPaymentToSupplier.resx">
       <DependentUpon>frmPaymentToSupplier.cs</DependentUpon>

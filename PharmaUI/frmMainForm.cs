@@ -254,7 +254,7 @@ namespace PharmaUI
         {
             try
             {
-                frmPurchaseBookTransaction form = new frmPurchaseBookTransaction();
+                frmPurchaseBookTransaction form = new frmPurchaseBookTransaction(false);
                 ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
                 form.Show();
             }
@@ -285,6 +285,20 @@ namespace PharmaUI
             try
             {
                 frmPaymentToSupplier form = new frmPaymentToSupplier();
+                ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void modificationPurchaseEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmPurchaseBookTransaction form = new frmPurchaseBookTransaction(true);
                 ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
                 form.Show();
             }
