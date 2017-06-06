@@ -91,7 +91,7 @@ namespace PharmaDAL.Transaction
                                 LedgerType = p.LedgerType,
                                 LedgerTypeCode = p.LedgerTypeCode,
                                 BillAmount = p.BillAmount,
-                                OSAmount = p.OSAmount,
+                                OSAmount = p.OSAmount- context.TempBillOutStandingsAudjustment.Where(x=>x.BillOutStandingsID == p.BillOutStandingsID).Select(x=>x.Amount).FirstOrDefault(),
                                 IsHold = p.IsHold,
                                 HOLDRemarks = p.HOLDRemarks
                 }).ToList();
@@ -100,22 +100,28 @@ namespace PharmaDAL.Transaction
 
         public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(PharmaBusinessObjects.Transaction.TransactionEntity entity)
         {
-            using (PharmaDBEntities context = new PharmaDBEntities())
+            try
             {
-                return context.TempBillOutStandingsAudjustment.Where(q => q.LedgerType == entity.EntityType
-                                                            && q.LedgerTypeCode == entity.EntityCode)
-                .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
-                {                  
-                    //VoucherNumber = p.VoucherNumber,
-                    //VoucherTypeCode = p.VoucherTypeCode,
-                    //VoucherDate = p.VoucherDate,
-                    //InvoiceNumber = p.PurchaseSaleBookHeader.PurchaseBillNo,
-                    //InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
-                    //LedgerType = p.LedgerType,
-                    //LedgerTypeCode = p.LedgerTypeCode,
-                    //OSAmount = p.OSAmount,
-                    //Amount=p.
-                }).ToList();
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    return context.TempBillOutStandingsAudjustment.Where(q => q.LedgerType == entity.EntityType
+                                                                && q.LedgerTypeCode == entity.EntityCode)
+                    .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
+                    {
+                        BillOutStandingsAudjustmentID = p.BillOutStandingsAudjustmentID,
+                        InvoiceNumber = p.PurchaseSaleBookHeader.PurchaseBillNo,
+                        InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
+                        LedgerType = p.LedgerType,
+                        LedgerTypeCode = p.LedgerTypeCode,
+                        OSAmount = p.BillOutStandings.OSAmount,
+                        Amount = p.Amount
+
+                    }).ToList();
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                throw;
             }
         }
 
@@ -139,7 +145,7 @@ namespace PharmaDAL.Transaction
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
-                        OSAmount = p.OSAmount
+                        OSAmount = p.OSAmount - context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
                     }).ToList();
                 }
             }
