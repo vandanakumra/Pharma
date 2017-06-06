@@ -167,7 +167,7 @@ namespace PharmaUI.ReceiptPayment
 
                                                                              }).ToList();
 
-                    applicationFacade.MakeBillAdjustment(listBillAdjustment);
+                    applicationFacade.InsertTempBillAdjustment(listBillAdjustment);
                 }
 
                 this.Close();

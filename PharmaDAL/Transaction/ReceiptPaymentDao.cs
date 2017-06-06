@@ -20,12 +20,13 @@ namespace PharmaDAL.Transaction
             try
             {
                 long receiptPaymentID = 0;
+
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    if (receiptPayment.ReceiptPaymentID > 0)
-                    {
-                        var receiptPaymentDB=context.TempReceiptPayment.Where(x => x.ReceiptPaymentID == receiptPayment.ReceiptPaymentID).FirstOrDefault();
+                    var receiptPaymentDB = context.TempReceiptPayment.Where(x => x.ReceiptPaymentID == receiptPayment.ReceiptPaymentID).FirstOrDefault();
 
+                    if (receiptPaymentDB != null)
+                    {
                         receiptPaymentDB.VoucherNumber = receiptPayment.VoucherNumber;
                         receiptPaymentDB.VoucherTypeCode = receiptPayment.VoucherTypeCode;
                         receiptPaymentDB.VoucherDate = receiptPayment.VoucherDate;
@@ -98,7 +99,7 @@ namespace PharmaDAL.Transaction
             }
         }
 
-        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(PharmaBusinessObjects.Transaction.TransactionEntity entity)
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllTempBillAdjustmentForLedger(PharmaBusinessObjects.Transaction.TransactionEntity entity)
         {
             try
             {
@@ -115,7 +116,6 @@ namespace PharmaDAL.Transaction
                         LedgerTypeCode = p.LedgerTypeCode,
                         OSAmount = p.BillOutStandings.OSAmount,
                         Amount = p.Amount
-
                     }).ToList();
                 }
             }
@@ -131,6 +131,7 @@ namespace PharmaDAL.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
+                    
                     return context.BillOutStandings.Where(q => q.LedgerType == entity.EntityType
                                                                 && q.LedgerTypeCode == entity.EntityCode
                                                                 && q.OSAmount > 0)
@@ -145,7 +146,9 @@ namespace PharmaDAL.Transaction
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
-                        OSAmount = p.OSAmount - context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
+                        Amount= context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
+                        OSAmount = p.OSAmount
+
                     }).ToList();
                 }
             }
@@ -156,7 +159,7 @@ namespace PharmaDAL.Transaction
         }
 
 
-        public void MakeBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
+        public void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
         {
             try
             {
@@ -164,6 +167,9 @@ namespace PharmaDAL.Transaction
                 {
                     long receiptPaymentID = billAdjustmentList.FirstOrDefault().ReceiptPaymentID ?? default(long);
                     var receiptPaymentEntity = context.TempReceiptPayment.Where(q => q.ReceiptPaymentID == receiptPaymentID).Select(q => q).ToList().FirstOrDefault();
+                    var previousAdjustments = context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == receiptPaymentID && x.LedgerTypeCode == receiptPaymentEntity.LedgerTypeCode).ToList();
+                    context.TempBillOutStandingsAudjustment.RemoveRange(previousAdjustments);
+                   
                     foreach (var billAdjust in billAdjustmentList)
                     {
                         Entity.TempBillOutStandingsAudjustment billAdjustmentDBEntry = new Entity.TempBillOutStandingsAudjustment()

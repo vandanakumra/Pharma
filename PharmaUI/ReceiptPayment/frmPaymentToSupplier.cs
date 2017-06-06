@@ -277,7 +277,7 @@ namespace PharmaUI.ReceiptPayment
 
         private void LoadGridBillAdjusted(TransactionEntity currentTransactionEntity)
         {
-            List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> allAdjustment= applicationFacade.GetAllBillAdjustmentForLedger(currentTransactionEntity);
+            List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> allAdjustment= applicationFacade.GetAllTempBillAdjustmentForLedger(currentTransactionEntity);
             dgvSupplierBillAdjusted.DataSource = allAdjustment;
             ExtensionMethods.SetGridDefaultProperty(dgvSupplierBillAdjusted);
 
@@ -356,7 +356,6 @@ namespace PharmaUI.ReceiptPayment
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"].Value = receiptPayment.UnadjustedAmount;
             }
         }
-
 
         private void EnterKeyDownForTabEvents(Control control)
         {
@@ -443,8 +442,6 @@ namespace PharmaUI.ReceiptPayment
             }
         }
 
-        ///Checks for Ammount entered
-        ///
         private void dgvCustomerItemDiscount_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             try
@@ -477,6 +474,20 @@ namespace PharmaUI.ReceiptPayment
             {
                 e.Handled = true;
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.End)
+            {
+
+            }
+            else if (keyData == Keys.Escape)
+            {
+                
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

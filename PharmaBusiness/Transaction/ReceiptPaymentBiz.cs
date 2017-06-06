@@ -24,12 +24,12 @@ namespace PharmaBusiness.Transaction
 
         
 
-        internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllTempBillAdjustmentForLedger(TransactionEntity transactionEntity)
         {
-            return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillAdjustmentForLedger(transactionEntity);
+            return new ReceiptPaymentDao(this.LoggedInUser).GetAllTempBillAdjustmentForLedger(transactionEntity);
         }
 
-        internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        internal List<BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
         {
             return new ReceiptPaymentDao(this.LoggedInUser).GetAllInitialBillAdjustmentForLedger(transactionEntity);
         }
@@ -39,9 +39,9 @@ namespace PharmaBusiness.Transaction
             return new ReceiptPaymentDao(this.LoggedInUser).InsertUpdateTempReceiptPayment(receiptPayment);
         }
 
-        internal void MakeBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
+        internal void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
         {
-             new ReceiptPaymentDao(this.LoggedInUser).MakeBillAdjustment(billAdjustmentList);
+             new ReceiptPaymentDao(this.LoggedInUser).InsertTempBillAdjustment(billAdjustmentList);
         }
 
        
