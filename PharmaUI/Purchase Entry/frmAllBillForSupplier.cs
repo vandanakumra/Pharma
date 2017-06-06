@@ -51,8 +51,12 @@ namespace PharmaUI.Purchase_Entry
             dgvPurchaseBill.DataSource = list.OrderByDescending(p => p.VoucherDate).ToList();
 
             ExtensionMethods.SetGridDefaultProperty(dgvPurchaseBill);
-            
-            
+
+
+            dgvPurchaseBill.Columns["PurchaseSaleBookHeaderID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPurchaseBill.Columns["PurchaseSaleBookHeaderID"].Visible = true;
+            dgvPurchaseBill.Columns["PurchaseSaleBookHeaderID"].HeaderText = "PurchaseSaleBookHeaderID";
+
             dgvPurchaseBill.Columns["InvoiceNumber"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPurchaseBill.Columns["InvoiceNumber"].Visible = true;
             dgvPurchaseBill.Columns["InvoiceNumber"].HeaderText = "Purchase Bill No.";

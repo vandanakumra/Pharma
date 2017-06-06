@@ -769,6 +769,11 @@ namespace PharmaBusiness
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseSaleBookHeaderForModify(purchaseSaleBookHeaderID);
         }
 
+        public bool DeleteUnSavedData(long purchaseSaleBookHeaderID)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).DeleteUnSavedData(purchaseSaleBookHeaderID);
+        }
+
 
         #endregion
 
