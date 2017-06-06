@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -89,7 +89,7 @@
           <Property Name="AdjustmentVoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="AdjustmentVoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdjustmentVoucherDate" Type="datetime" Nullable="false" />
-          <Property Name="LedgerType" Type="nvarchar" MaxLength="2" />
+          <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="Amount" Type="float" Nullable="false" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
@@ -609,7 +609,7 @@
           <Property Name="AdjustmentVoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="AdjustmentVoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdjustmentVoucherDate" Type="datetime" Nullable="false" />
-          <Property Name="LedgerType" Type="nvarchar" MaxLength="2" />
+          <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="Amount" Type="float" Nullable="false" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
@@ -1516,7 +1516,8 @@
             <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1618,7 +1619,7 @@
           <Property Name="AdjustmentVoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdjustmentVoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdjustmentVoucherDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LedgerType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -2203,7 +2204,7 @@
           <Property Name="AdjustmentVoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdjustmentVoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdjustmentVoucherDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LedgerType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -2330,9 +2331,9 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="UsedQuantity" Type="Double" />
           <Property Name="BalanceQuantity" Type="Double" />
+          <Property Name="OldPurchaseSaleBookLineItemID" Type="Int64" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="TempPurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="TempPurchaseSaleBookHeader" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookLineItem" ToRole="TempPurchaseSaleBookHeader" />
-          <Property Name="OldPurchaseSaleBookLineItemID" Type="Int64" />
         </EntityType>
         <EntityType Name="TempReceiptPayment">
           <Key>
@@ -3831,7 +3832,6 @@
           <EntitySetMapping Name="TempPurchaseSaleBookLineItem">
             <EntityTypeMapping TypeName="PharmaDBModel.TempPurchaseSaleBookLineItem">
               <MappingFragment StoreEntitySet="TempPurchaseSaleBookLineItem">
-                <ScalarProperty Name="OldPurchaseSaleBookLineItemID" ColumnName="OldPurchaseSaleBookLineItemID" />
                 <ScalarProperty Name="PurchaseSaleBookLineItemID" ColumnName="PurchaseSaleBookLineItemID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="FifoID" ColumnName="FifoID" />
@@ -3882,6 +3882,7 @@
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="UsedQuantity" ColumnName="UsedQuantity" />
                 <ScalarProperty Name="BalanceQuantity" ColumnName="BalanceQuantity" />
+                <ScalarProperty Name="OldPurchaseSaleBookLineItemID" ColumnName="OldPurchaseSaleBookLineItemID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

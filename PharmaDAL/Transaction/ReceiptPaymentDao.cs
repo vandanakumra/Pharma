@@ -1,6 +1,7 @@
 ﻿using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -167,9 +168,9 @@ namespace PharmaDAL.Transaction
                             VoucherDate = receiptPaymentEntity.VoucherDate,
                             ReceiptPaymentID = receiptPaymentEntity.ReceiptPaymentID,
                             BillOutStandingsID = billAdjust.BillOutStandingsID,
-                            AdjustmentVoucherNumber = billAdjust.VoucherNumber,
-                            AdjustmentVoucherTypeCode = billAdjust.VoucherTypeCode,
-                            AdjustmentVoucherDate = billAdjust.VoucherDate,
+                            AdjustmentVoucherNumber = billAdjust.AdjustmentVoucherNumber,
+                            AdjustmentVoucherTypeCode = billAdjust.AdjustmentVoucherTypeCode,
+                            AdjustmentVoucherDate = billAdjust.AdjustmentVoucherDate,
                             LedgerType = billAdjust.LedgerType,
                             LedgerTypeCode = billAdjust.LedgerTypeCode,
                             Amount = billAdjust.Amount,
@@ -180,7 +181,7 @@ namespace PharmaDAL.Transaction
                     }                
                   }
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException ex)
             {
                 throw ex;
             }
