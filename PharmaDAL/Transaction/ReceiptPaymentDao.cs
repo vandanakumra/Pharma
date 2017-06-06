@@ -155,7 +155,8 @@ namespace PharmaDAL.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var receiptPaymentEntity = context.TempReceiptPayment.Where(q => q.ReceiptPaymentID == billAdjustmentList.FirstOrDefault().ReceiptPaymentID).Select(q => q).ToList().FirstOrDefault();
+                    long receiptPaymentID = billAdjustmentList.FirstOrDefault().ReceiptPaymentID ?? default(long);
+                    var receiptPaymentEntity = context.TempReceiptPayment.Where(q => q.ReceiptPaymentID == receiptPaymentID).Select(q => q).ToList().FirstOrDefault();
                     foreach (var billAdjust in billAdjustmentList)
                     {
                         Entity.TempBillOutStandingsAudjustment billAdjustmentDBEntry = new Entity.TempBillOutStandingsAudjustment()
