@@ -14,6 +14,12 @@ namespace PharmaDAL.Entity
     
     public partial class TempReceiptPayment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TempReceiptPayment()
+        {
+            this.TempBillOutStandingsAudjustment = new HashSet<TempBillOutStandingsAudjustment>();
+        }
+    
         public long ReceiptPaymentID { get; set; }
         public string VoucherNumber { get; set; }
         public string VoucherTypeCode { get; set; }
@@ -30,5 +36,8 @@ namespace PharmaDAL.Entity
         public string POST { get; set; }
         public string PISNumber { get; set; }
         public string ChequeNumber { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TempBillOutStandingsAudjustment> TempBillOutStandingsAudjustment { get; set; }
     }
 }
