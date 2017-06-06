@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Master;
+﻿using PharmaBusinessObjects.Master;
+using PharmaDAL.Master;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,11 @@ namespace PharmaBusiness.Master
         internal int DeleteCustomerLedger(int customerLedgerID)
         {
             return new CustomerLedgerMasterDao(this.LoggedInUser).DeleteCustomerLedger(customerLedgerID);
+        }
+
+        internal CustomerLedgerMaster GetCustomerLedgerByName(string name)
+        {
+            return GetCustomerLedgers().FirstOrDefault(p=>p.CustomerLedgerName.ToLower() == name.ToLower());
         }
     }
 }

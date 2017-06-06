@@ -50,5 +50,12 @@ namespace PharmaBusinessObjects.Common
             Scheme,
             Discount
         };
+
+        public enum SaleEntryChangeType
+        {
+            TemporaryChange,
+            CompanyWiseChange,
+            ItemWiseChange
+        };
     }
 }
