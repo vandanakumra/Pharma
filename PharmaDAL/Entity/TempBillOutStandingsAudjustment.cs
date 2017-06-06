@@ -28,5 +28,9 @@ namespace PharmaDAL.Entity
         public string LedgerTypeCode { get; set; }
         public double Amount { get; set; }
         public string ChequeNumber { get; set; }
+    
+        public virtual BillOutStandings BillOutStandings { get; set; }
+        public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }
+        public virtual TempReceiptPayment TempReceiptPayment { get; set; }
     }
 }

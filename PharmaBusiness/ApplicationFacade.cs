@@ -800,6 +800,20 @@ namespace PharmaBusiness
             }
         }
 
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllBillAdjustmentForLedger(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        
+
         public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
         {
             try

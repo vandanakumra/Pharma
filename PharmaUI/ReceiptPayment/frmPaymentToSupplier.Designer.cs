@@ -83,75 +83,82 @@
             this.tableLayoutPanel1.Controls.Add(this.dgvSupplierBillOS, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblAmtOSVal, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblAmtOS, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 279);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 285);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1028, 248);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1028, 242);
             this.tableLayoutPanel1.TabIndex = 203;
             // 
             // lblCQVal
             // 
             this.lblCQVal.AutoSize = true;
-            this.lblCQVal.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCQVal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCQVal.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCQVal.ForeColor = System.Drawing.Color.Blue;
             this.lblCQVal.Location = new System.Drawing.Point(688, 4);
             this.lblCQVal.Margin = new System.Windows.Forms.Padding(3);
             this.lblCQVal.Name = "lblCQVal";
-            this.lblCQVal.Size = new System.Drawing.Size(45, 19);
+            this.lblCQVal.Padding = new System.Windows.Forms.Padding(1);
+            this.lblCQVal.Size = new System.Drawing.Size(336, 17);
             this.lblCQVal.TabIndex = 115;
-            this.lblCQVal.Text = "4500";
+            this.lblCQVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTotalCQ
             // 
             this.lblTotalCQ.AutoSize = true;
-            this.lblTotalCQ.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalCQ.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTotalCQ.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalCQ.Location = new System.Drawing.Point(522, 4);
             this.lblTotalCQ.Margin = new System.Windows.Forms.Padding(3);
             this.lblTotalCQ.Name = "lblTotalCQ";
-            this.lblTotalCQ.Size = new System.Drawing.Size(127, 19);
+            this.lblTotalCQ.Padding = new System.Windows.Forms.Padding(1);
+            this.lblTotalCQ.Size = new System.Drawing.Size(159, 17);
             this.lblTotalCQ.TabIndex = 115;
-            this.lblTotalCQ.Text = "TOTAL CHEQUE";
+            this.lblTotalCQ.Text = "Total Cheque";
             // 
             // lblCashVal
             // 
             this.lblCashVal.AutoSize = true;
-            this.lblCashVal.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCashVal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCashVal.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCashVal.ForeColor = System.Drawing.Color.Blue;
             this.lblCashVal.Location = new System.Drawing.Point(180, 4);
             this.lblCashVal.Margin = new System.Windows.Forms.Padding(3);
             this.lblCashVal.Name = "lblCashVal";
-            this.lblCashVal.Size = new System.Drawing.Size(45, 19);
+            this.lblCashVal.Padding = new System.Windows.Forms.Padding(1);
+            this.lblCashVal.Size = new System.Drawing.Size(335, 17);
             this.lblCashVal.TabIndex = 113;
-            this.lblCashVal.Text = "3500";
+            this.lblCashVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTotalCash
             // 
             this.lblTotalCash.AutoSize = true;
-            this.lblTotalCash.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalCash.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTotalCash.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalCash.Location = new System.Drawing.Point(4, 4);
             this.lblTotalCash.Margin = new System.Windows.Forms.Padding(3);
             this.lblTotalCash.Name = "lblTotalCash";
-            this.lblTotalCash.Size = new System.Drawing.Size(106, 19);
+            this.lblTotalCash.Padding = new System.Windows.Forms.Padding(1);
+            this.lblTotalCash.Size = new System.Drawing.Size(169, 17);
             this.lblTotalCash.TabIndex = 112;
-            this.lblTotalCash.Text = "TOTAL CASH";
+            this.lblTotalCash.Text = "Total Cash";
             // 
             // lblAmtAdjVal
             // 
-            this.lblAmtAdjVal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAmtAdjVal.AutoSize = true;
-            this.lblAmtAdjVal.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmtAdjVal.ForeColor = System.Drawing.Color.Blue;
-            this.lblAmtAdjVal.Location = new System.Drawing.Point(688, 30);
+            this.lblAmtAdjVal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAmtAdjVal.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmtAdjVal.ForeColor = System.Drawing.Color.Green;
+            this.lblAmtAdjVal.Location = new System.Drawing.Point(688, 28);
             this.lblAmtAdjVal.Margin = new System.Windows.Forms.Padding(3);
             this.lblAmtAdjVal.Name = "lblAmtAdjVal";
-            this.lblAmtAdjVal.Size = new System.Drawing.Size(45, 19);
+            this.lblAmtAdjVal.Padding = new System.Windows.Forms.Padding(1);
+            this.lblAmtAdjVal.Size = new System.Drawing.Size(336, 17);
             this.lblAmtAdjVal.TabIndex = 114;
-            this.lblAmtAdjVal.Text = "4500";
-            this.lblAmtAdjVal.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lblAmtAdjVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dgvSupplierBillAdjusted
             // 
@@ -160,22 +167,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSupplierBillAdjusted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.dgvSupplierBillAdjusted, 2);
-            this.dgvSupplierBillAdjusted.Location = new System.Drawing.Point(522, 56);
+            this.dgvSupplierBillAdjusted.Location = new System.Drawing.Point(522, 52);
             this.dgvSupplierBillAdjusted.MultiSelect = false;
             this.dgvSupplierBillAdjusted.Name = "dgvSupplierBillAdjusted";
             this.dgvSupplierBillAdjusted.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSupplierBillAdjusted.Size = new System.Drawing.Size(502, 188);
+            this.dgvSupplierBillAdjusted.Size = new System.Drawing.Size(502, 186);
             this.dgvSupplierBillAdjusted.TabIndex = 400;
             // 
             // lblAmtAdj
             // 
-            this.lblAmtAdj.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAmtAdj.AutoSize = true;
-            this.lblAmtAdj.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmtAdj.Location = new System.Drawing.Point(522, 30);
+            this.lblAmtAdj.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAmtAdj.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmtAdj.Location = new System.Drawing.Point(522, 28);
             this.lblAmtAdj.Margin = new System.Windows.Forms.Padding(3);
             this.lblAmtAdj.Name = "lblAmtAdj";
-            this.lblAmtAdj.Size = new System.Drawing.Size(139, 19);
+            this.lblAmtAdj.Padding = new System.Windows.Forms.Padding(1);
+            this.lblAmtAdj.Size = new System.Drawing.Size(159, 17);
             this.lblAmtAdj.TabIndex = 113;
             this.lblAmtAdj.Text = "Amount Adjusted ";
             this.lblAmtAdj.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -187,36 +195,37 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSupplierBillOS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.dgvSupplierBillOS, 2);
-            this.dgvSupplierBillOS.Location = new System.Drawing.Point(4, 56);
+            this.dgvSupplierBillOS.Location = new System.Drawing.Point(4, 52);
             this.dgvSupplierBillOS.MultiSelect = false;
             this.dgvSupplierBillOS.Name = "dgvSupplierBillOS";
             this.dgvSupplierBillOS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSupplierBillOS.Size = new System.Drawing.Size(511, 188);
+            this.dgvSupplierBillOS.Size = new System.Drawing.Size(511, 186);
             this.dgvSupplierBillOS.TabIndex = 300;
             // 
             // lblAmtOSVal
             // 
-            this.lblAmtOSVal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAmtOSVal.AutoSize = true;
-            this.lblAmtOSVal.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmtOSVal.ForeColor = System.Drawing.Color.Blue;
-            this.lblAmtOSVal.Location = new System.Drawing.Point(180, 30);
+            this.lblAmtOSVal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAmtOSVal.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmtOSVal.ForeColor = System.Drawing.Color.Red;
+            this.lblAmtOSVal.Location = new System.Drawing.Point(180, 28);
             this.lblAmtOSVal.Margin = new System.Windows.Forms.Padding(3);
             this.lblAmtOSVal.Name = "lblAmtOSVal";
-            this.lblAmtOSVal.Size = new System.Drawing.Size(45, 19);
+            this.lblAmtOSVal.Padding = new System.Windows.Forms.Padding(1);
+            this.lblAmtOSVal.Size = new System.Drawing.Size(335, 17);
             this.lblAmtOSVal.TabIndex = 112;
-            this.lblAmtOSVal.Text = "3500";
-            this.lblAmtOSVal.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lblAmtOSVal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblAmtOS
             // 
-            this.lblAmtOS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAmtOS.AutoSize = true;
-            this.lblAmtOS.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmtOS.Location = new System.Drawing.Point(4, 30);
+            this.lblAmtOS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAmtOS.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmtOS.Location = new System.Drawing.Point(4, 28);
             this.lblAmtOS.Margin = new System.Windows.Forms.Padding(3);
             this.lblAmtOS.Name = "lblAmtOS";
-            this.lblAmtOS.Size = new System.Drawing.Size(162, 19);
+            this.lblAmtOS.Padding = new System.Windows.Forms.Padding(1);
+            this.lblAmtOS.Size = new System.Drawing.Size(169, 17);
             this.lblAmtOS.TabIndex = 111;
             this.lblAmtOS.Text = "Amount Outstanding ";
             this.lblAmtOS.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -241,7 +250,7 @@
             this.dgvPaymentToSupplier.MultiSelect = false;
             this.dgvPaymentToSupplier.Name = "dgvPaymentToSupplier";
             this.dgvPaymentToSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPaymentToSupplier.Size = new System.Drawing.Size(1028, 188);
+            this.dgvPaymentToSupplier.Size = new System.Drawing.Size(1028, 192);
             this.dgvPaymentToSupplier.TabIndex = 201;
             // 
             // errorProviderPaymentToSupplier

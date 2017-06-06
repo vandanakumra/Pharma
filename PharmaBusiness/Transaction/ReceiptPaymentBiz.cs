@@ -22,6 +22,13 @@ namespace PharmaBusiness.Transaction
             return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillOutstandingForLedger(transactionEntity);
         }
 
+        
+
+        internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        {
+            return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillAdjustmentForLedger(transactionEntity);
+        }
+
         internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
         {
             return new ReceiptPaymentDao(this.LoggedInUser).GetAllInitialBillAdjustmentForLedger(transactionEntity);
