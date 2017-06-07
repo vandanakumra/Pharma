@@ -210,6 +210,8 @@ namespace PharmaUI.ReceiptPayment
             dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"];
             dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"].Value = currentTransactionEntity.EntityBalAmount;
 
+            LoadGridBillAdjusted(currentTransactionEntity);
+
         }
 
         private void FormSupplierLedgerMaster_FormClosed(object sender, FormClosedEventArgs e)
@@ -237,7 +239,6 @@ namespace PharmaUI.ReceiptPayment
 
                 UpdateReceiptPaymentRow(receiptPaymentForSelectedCust);
                 LoadGridBillOutstanding(transactionEntity);
-                LoadGridBillAdjusted();
 
                 dgvPaymentToSupplier.Focus();
                 dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
@@ -246,37 +247,60 @@ namespace PharmaUI.ReceiptPayment
 
         private void LoadGridBillOutstanding(TransactionEntity transactionEntity)
         {
-            dgvSupplierBillOS.DataSource = applicationFacade.GetAllBillOutstandingForLedger(transactionEntity);
+            List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> allOutstandings= applicationFacade.GetAllBillOutstandingForLedger(transactionEntity);
+            dgvSupplierBillOS.DataSource = allOutstandings;
             ExtensionMethods.SetGridDefaultProperty(dgvSupplierBillOS);
 
             dgvSupplierBillOS.Columns["InvoiceNumber"].Visible = true;
             dgvSupplierBillOS.Columns["InvoiceNumber"].HeaderText = "Bill Number";
+            dgvSupplierBillOS.Columns["InvoiceNumber"].DisplayIndex = 0;
 
             dgvSupplierBillOS.Columns["InvoiceDate"].Visible = true;
             dgvSupplierBillOS.Columns["InvoiceDate"].HeaderText = "Bill Date";
+            dgvSupplierBillOS.Columns["InvoiceDate"].DisplayIndex = 1;
 
             dgvSupplierBillOS.Columns["BillAmount"].Visible = true;
             dgvSupplierBillOS.Columns["BillAmount"].HeaderText = "Bill Amount";
+            dgvSupplierBillOS.Columns["BillAmount"].DisplayIndex = 2;
 
             dgvSupplierBillOS.Columns["OSAmount"].Visible = true;
             dgvSupplierBillOS.Columns["OSAmount"].HeaderText = "Outstanding Amount";
+            dgvSupplierBillOS.Columns["OSAmount"].DisplayIndex = 3;
+
+            //Display totall of outstanding amount
+            double totallOutstanding = 0;
+            allOutstandings.ForEach(x => totallOutstanding += x.OSAmount);
+            lblAmtOSVal.Text =Convert.ToString(totallOutstanding);
+
 
         }
 
-        private void LoadGridBillAdjusted()
+        private void LoadGridBillAdjusted(TransactionEntity currentTransactionEntity)
         {
-
-            dgvSupplierBillAdjusted.DataSource = new List<BillAdjusted>();
+            List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> allAdjustment= applicationFacade.GetAllBillAdjustmentForLedger(currentTransactionEntity);
+            dgvSupplierBillAdjusted.DataSource = allAdjustment;
             ExtensionMethods.SetGridDefaultProperty(dgvSupplierBillAdjusted);
 
-            dgvSupplierBillAdjusted.Columns["VoucherNumber"].Visible = true;
-            dgvSupplierBillAdjusted.Columns["VoucherNumber"].HeaderText = "Bill Number";
+            dgvSupplierBillAdjusted.Columns["InvoiceNumber"].Visible = true;
+            dgvSupplierBillAdjusted.Columns["InvoiceNumber"].HeaderText = "Bill Number";
+            dgvSupplierBillAdjusted.Columns["InvoiceNumber"].DisplayIndex = 0;
 
-            dgvSupplierBillAdjusted.Columns["VoucherDate"].Visible = true;
-            dgvSupplierBillAdjusted.Columns["VoucherDate"].HeaderText = "Bill Date";
+            dgvSupplierBillAdjusted.Columns["InvoiceDate"].Visible = true;
+            dgvSupplierBillAdjusted.Columns["InvoiceDate"].HeaderText = "Bill Date";
+            dgvSupplierBillAdjusted.Columns["InvoiceDate"].DisplayIndex = 1;
+
+            dgvSupplierBillAdjusted.Columns["OSAmount"].Visible = true;
+            dgvSupplierBillAdjusted.Columns["OSAmount"].HeaderText = "Outstanding Amount";
+            dgvSupplierBillAdjusted.Columns["OSAmount"].DisplayIndex = 2;
 
             dgvSupplierBillAdjusted.Columns["Amount"].Visible = true;
             dgvSupplierBillAdjusted.Columns["Amount"].HeaderText = "Adjusted Amount";
+            dgvSupplierBillAdjusted.Columns["Amount"].DisplayIndex = 3;
+
+            //Display totall of adjusted amount
+            double totallAdjusted = 0;
+            allAdjustment.ForEach(x => totallAdjusted += x.Amount);
+            lblAmtAdjVal.Text = Convert.ToString(totallAdjusted);
         }
 
         public void GotFocusEventRaised(Control control)

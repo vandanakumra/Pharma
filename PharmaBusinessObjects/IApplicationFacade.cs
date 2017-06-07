@@ -1,6 +1,7 @@
 ﻿using PharmaBusinessObjects.Master;
 using PharmaBusinessObjects.Transaction;
 using PharmaBusinessObjects.Transaction.ReceiptPayment;
+using PharmaBusinessObjects.Transaction.SaleEntry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,7 +96,7 @@ namespace PharmaBusinessObjects
         int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
         List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountListByCustomerID(int customerLedgerID);
         int DeleteCustomerLedger(int customerLedgerID);
-
+        CustomerLedgerMaster GetCustomerLedgerByName(string name);
         #endregion
 
         #region User Master
@@ -134,6 +135,7 @@ namespace PharmaBusinessObjects
         PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID);
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity);
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(TransactionEntity transactionEntity);
+        List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(TransactionEntity transactionEntity);
         long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment);
         void MakeBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList);
         bool DeleteUnSavedData(long purchaseSaleBookHeaderID);

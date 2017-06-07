@@ -19,6 +19,7 @@ namespace PharmaDAL.Entity
         {
             this.BillOutStandingsAudjustment = new HashSet<BillOutStandingsAudjustment>();
             this.BillOutStandingsAudjustment1 = new HashSet<BillOutStandingsAudjustment>();
+            this.TempBillOutStandingsAudjustment = new HashSet<TempBillOutStandingsAudjustment>();
         }
     
         public long BillOutStandingsID { get; set; }
@@ -38,5 +39,7 @@ namespace PharmaDAL.Entity
         public virtual ICollection<BillOutStandingsAudjustment> BillOutStandingsAudjustment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillOutStandingsAudjustment> BillOutStandingsAudjustment1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TempBillOutStandingsAudjustment> TempBillOutStandingsAudjustment { get; set; }
     }
 }

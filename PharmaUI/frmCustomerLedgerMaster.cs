@@ -19,6 +19,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         public CustomerLedgerMaster LastSelectedCustomerLedger { get; set; }
         public bool IsInChildMode = false;
+        
 
         public frmCustomerLedgerMaster()
         {
@@ -249,6 +250,10 @@ namespace PharmaUI
             else if (keyData == Keys.Down)
             {
                 dgvCustomerLedger.Focus();
+            }
+            else if (keyData == Keys.Enter && IsInChildMode && dgvCustomerLedger.SelectedRows.Count > 0)
+            {
+                this.Close();
             }
             else if (keyData == Keys.Escape)
             {

@@ -10,6 +10,7 @@ using PharmaBusiness.Common;
 using PharmaBusinessObjects.Transaction;
 using PharmaBusiness.Transaction;
 using PharmaBusinessObjects.Transaction.ReceiptPayment;
+using PharmaBusinessObjects.Transaction.SaleEntry;
 
 namespace PharmaBusiness
 {
@@ -640,6 +641,19 @@ namespace PharmaBusiness
             }
         }
 
+        public CustomerLedgerMaster GetCustomerLedgerByName(string name)
+        {
+            try
+            {
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCustomerLedgerByName(name);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
         #region User Master
@@ -791,6 +805,20 @@ namespace PharmaBusiness
             }
         }
 
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllBillAdjustmentForLedger(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        
+
         public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
         {
             try
@@ -827,7 +855,25 @@ namespace PharmaBusiness
             }
         }
 
-       
+
+
+        #endregion
+
+        #region Sale Entry
+
+        public List<SaleChangeType> GetSaleEntryChangeTypes()
+        {
+            try
+            {
+                return new SaleBiz().GetTypeOfChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
 
         #endregion
 

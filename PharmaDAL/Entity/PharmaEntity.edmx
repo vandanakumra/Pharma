@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -89,7 +89,7 @@
           <Property Name="AdjustmentVoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="AdjustmentVoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdjustmentVoucherDate" Type="datetime" Nullable="false" />
-          <Property Name="LedgerType" Type="nvarchar" MaxLength="2" />
+          <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="Amount" Type="float" Nullable="false" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
@@ -609,7 +609,7 @@
           <Property Name="AdjustmentVoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="AdjustmentVoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdjustmentVoucherDate" Type="datetime" Nullable="false" />
-          <Property Name="LedgerType" Type="nvarchar" MaxLength="2" />
+          <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="Amount" Type="float" Nullable="false" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
@@ -1250,6 +1250,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TempBillOutStandingsAudjustment_BillOutStandings1">
+          <End Role="BillOutStandings" Type="Self.BillOutStandings" Multiplicity="1" />
+          <End Role="TempBillOutStandingsAudjustment" Type="Self.TempBillOutStandingsAudjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillOutStandings">
+              <PropertyRef Name="BillOutStandingsID" />
+            </Principal>
+            <Dependent Role="TempBillOutStandingsAudjustment">
+              <PropertyRef Name="BillOutStandingsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader">
           <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
           <End Role="BillOutStandingsAudjustment" Type="Self.BillOutStandingsAudjustment" Multiplicity="*" />
@@ -1262,6 +1274,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1">
+          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
+          <End Role="TempBillOutStandingsAudjustment" Type="Self.TempBillOutStandingsAudjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseSaleBookHeader">
+              <PropertyRef Name="PurchaseSaleBookHeaderID" />
+            </Principal>
+            <Dependent Role="TempBillOutStandingsAudjustment">
+              <PropertyRef Name="PurchaseSaleBookHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TempBillOutStandingsAudjustment_ReceiptPayment">
           <End Role="ReceiptPayment" Type="Self.ReceiptPayment" Multiplicity="0..1" />
           <End Role="BillOutStandingsAudjustment" Type="Self.BillOutStandingsAudjustment" Multiplicity="*" />
@@ -1270,6 +1294,18 @@
               <PropertyRef Name="ReceiptPaymentID" />
             </Principal>
             <Dependent Role="BillOutStandingsAudjustment">
+              <PropertyRef Name="ReceiptPaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TempBillOutStandingsAudjustment_TempReceiptPayment">
+          <End Role="TempReceiptPayment" Type="Self.TempReceiptPayment" Multiplicity="0..1" />
+          <End Role="TempBillOutStandingsAudjustment" Type="Self.TempBillOutStandingsAudjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TempReceiptPayment">
+              <PropertyRef Name="ReceiptPaymentID" />
+            </Principal>
+            <Dependent Role="TempBillOutStandingsAudjustment">
               <PropertyRef Name="ReceiptPaymentID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1495,13 +1531,25 @@
             <End Role="BillOutStandings" EntitySet="BillOutStandings" />
             <End Role="BillOutStandingsAudjustment" EntitySet="BillOutStandingsAudjustment" />
           </AssociationSet>
+          <AssociationSet Name="FK_TempBillOutStandingsAudjustment_BillOutStandings1" Association="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings1">
+            <End Role="BillOutStandings" EntitySet="BillOutStandings" />
+            <End Role="TempBillOutStandingsAudjustment" EntitySet="TempBillOutStandingsAudjustment" />
+          </AssociationSet>
           <AssociationSet Name="FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader" Association="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader">
             <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
             <End Role="BillOutStandingsAudjustment" EntitySet="BillOutStandingsAudjustment" />
           </AssociationSet>
+          <AssociationSet Name="FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" Association="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1">
+            <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
+            <End Role="TempBillOutStandingsAudjustment" EntitySet="TempBillOutStandingsAudjustment" />
+          </AssociationSet>
           <AssociationSet Name="FK_TempBillOutStandingsAudjustment_ReceiptPayment" Association="Self.FK_TempBillOutStandingsAudjustment_ReceiptPayment">
             <End Role="ReceiptPayment" EntitySet="ReceiptPayment" />
             <End Role="BillOutStandingsAudjustment" EntitySet="BillOutStandingsAudjustment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempBillOutStandingsAudjustment_TempReceiptPayment" Association="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment">
+            <End Role="TempReceiptPayment" EntitySet="TempReceiptPayment" />
+            <End Role="TempBillOutStandingsAudjustment" EntitySet="TempBillOutStandingsAudjustment" />
           </AssociationSet>
           <AssociationSet Name="FK_TempPurchaseSaleBookLineItem_FIFO" Association="Self.FK_TempPurchaseSaleBookLineItem_FIFO">
             <End Role="FIFO" EntitySet="FIFO" />
@@ -1516,7 +1564,8 @@
             <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1603,6 +1652,7 @@
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_BillOutStandings_PurchaseSaleBookHeader" FromRole="BillOutStandings" ToRole="PurchaseSaleBookHeader" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_BillOutStandings" FromRole="BillOutStandings" ToRole="BillOutStandingsAudjustment" />
           <NavigationProperty Name="BillOutStandingsAudjustment1" Relationship="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings" FromRole="BillOutStandings" ToRole="BillOutStandingsAudjustment" />
+          <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings1" FromRole="BillOutStandings" ToRole="TempBillOutStandingsAudjustment" />
         </EntityType>
         <EntityType Name="BillOutStandingsAudjustment">
           <Key>
@@ -1618,7 +1668,7 @@
           <Property Name="AdjustmentVoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdjustmentVoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdjustmentVoucherDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LedgerType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
@@ -1990,6 +2040,7 @@
           <NavigationProperty Name="BillOutStandingsAudjustment1" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="BillOutStandingsAudjustment" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_FIFO_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="FIFO" />
           <NavigationProperty Name="PurchaseSaleBookLineItem" Relationship="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="PurchaseSaleBookLineItem" />
+          <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" FromRole="PurchaseSaleBookHeader" ToRole="TempBillOutStandingsAudjustment" />
           <NavigationProperty Name="TRN" Relationship="Self.FK_TRN_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="TRN" />
         </EntityType>
         <EntityType Name="PurchaseSaleBookLineItem">
@@ -2203,10 +2254,13 @@
           <Property Name="AdjustmentVoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdjustmentVoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdjustmentVoucherDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LedgerType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BillOutStandings" Relationship="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings1" FromRole="TempBillOutStandingsAudjustment" ToRole="BillOutStandings" />
+          <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" FromRole="TempBillOutStandingsAudjustment" ToRole="PurchaseSaleBookHeader" />
+          <NavigationProperty Name="TempReceiptPayment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempBillOutStandingsAudjustment" ToRole="TempReceiptPayment" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookHeader">
           <Key>
@@ -2330,9 +2384,9 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="UsedQuantity" Type="Double" />
           <Property Name="BalanceQuantity" Type="Double" />
+          <Property Name="OldPurchaseSaleBookLineItemID" Type="Int64" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="TempPurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="TempPurchaseSaleBookHeader" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookLineItem" ToRole="TempPurchaseSaleBookHeader" />
-          <Property Name="OldPurchaseSaleBookLineItemID" Type="Int64" />
         </EntityType>
         <EntityType Name="TempReceiptPayment">
           <Key>
@@ -2354,6 +2408,7 @@
           <Property Name="POST" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PISNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempReceiptPayment" ToRole="TempBillOutStandingsAudjustment" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -2517,6 +2572,18 @@
               <PropertyRef Name="BillOutStandingsID" />
             </Principal>
             <Dependent Role="BillOutStandingsAudjustment">
+              <PropertyRef Name="BillOutStandingsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TempBillOutStandingsAudjustment_BillOutStandings1">
+          <End Role="BillOutStandings" Type="Self.BillOutStandings" Multiplicity="1" />
+          <End Role="TempBillOutStandingsAudjustment" Type="Self.TempBillOutStandingsAudjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillOutStandings">
+              <PropertyRef Name="BillOutStandingsID" />
+            </Principal>
+            <Dependent Role="TempBillOutStandingsAudjustment">
               <PropertyRef Name="BillOutStandingsID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2835,6 +2902,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1">
+          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
+          <End Role="TempBillOutStandingsAudjustment" Type="Self.TempBillOutStandingsAudjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseSaleBookHeader">
+              <PropertyRef Name="PurchaseSaleBookHeaderID" />
+            </Principal>
+            <Dependent Role="TempBillOutStandingsAudjustment">
+              <PropertyRef Name="PurchaseSaleBookHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TRN_PurchaseSaleBookHeader">
           <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
           <End Role="TRN" Type="Self.TRN" Multiplicity="*" />
@@ -2894,6 +2973,18 @@
             </Principal>
             <Dependent Role="SupplierCompanyDiscountRef">
               <PropertyRef Name="SupplierLedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TempBillOutStandingsAudjustment_TempReceiptPayment">
+          <End Role="TempReceiptPayment" Type="Self.TempReceiptPayment" Multiplicity="0..1" />
+          <End Role="TempBillOutStandingsAudjustment" Type="Self.TempBillOutStandingsAudjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TempReceiptPayment">
+              <PropertyRef Name="ReceiptPaymentID" />
+            </Principal>
+            <Dependent Role="TempBillOutStandingsAudjustment">
+              <PropertyRef Name="ReceiptPaymentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2985,6 +3076,10 @@
           <AssociationSet Name="FK_TempBillOutStandingsAudjustment_BillOutStandings" Association="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings">
             <End Role="BillOutStandings" EntitySet="BillOutStandings" />
             <End Role="BillOutStandingsAudjustment" EntitySet="BillOutStandingsAudjustment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempBillOutStandingsAudjustment_BillOutStandings1" Association="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings1">
+            <End Role="BillOutStandings" EntitySet="BillOutStandings" />
+            <End Role="TempBillOutStandingsAudjustment" EntitySet="TempBillOutStandingsAudjustment" />
           </AssociationSet>
           <AssociationSet Name="FK_BillOutStandingsAudjustment_PurchaseSaleBookHeader" Association="Self.FK_BillOutStandingsAudjustment_PurchaseSaleBookHeader">
             <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
@@ -3090,6 +3185,10 @@
             <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
             <End Role="PurchaseSaleBookLineItem" EntitySet="PurchaseSaleBookLineItem" />
           </AssociationSet>
+          <AssociationSet Name="FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" Association="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1">
+            <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
+            <End Role="TempBillOutStandingsAudjustment" EntitySet="TempBillOutStandingsAudjustment" />
+          </AssociationSet>
           <AssociationSet Name="FK_TRN_PurchaseSaleBookHeader" Association="Self.FK_TRN_PurchaseSaleBookHeader">
             <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
             <End Role="TRN" EntitySet="TRN" />
@@ -3109,6 +3208,10 @@
           <AssociationSet Name="FK_SupplierCompanyDiscountRef_SupplierLedger" Association="Self.FK_SupplierCompanyDiscountRef_SupplierLedger">
             <End Role="SupplierLedger" EntitySet="SupplierLedger" />
             <End Role="SupplierCompanyDiscountRef" EntitySet="SupplierCompanyDiscountRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempBillOutStandingsAudjustment_TempReceiptPayment" Association="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment">
+            <End Role="TempReceiptPayment" EntitySet="TempReceiptPayment" />
+            <End Role="TempBillOutStandingsAudjustment" EntitySet="TempBillOutStandingsAudjustment" />
           </AssociationSet>
           <AssociationSet Name="FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" Association="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader">
             <End Role="TempPurchaseSaleBookHeader" EntitySet="TempPurchaseSaleBookHeader" />
@@ -3831,7 +3934,6 @@
           <EntitySetMapping Name="TempPurchaseSaleBookLineItem">
             <EntityTypeMapping TypeName="PharmaDBModel.TempPurchaseSaleBookLineItem">
               <MappingFragment StoreEntitySet="TempPurchaseSaleBookLineItem">
-                <ScalarProperty Name="OldPurchaseSaleBookLineItemID" ColumnName="OldPurchaseSaleBookLineItemID" />
                 <ScalarProperty Name="PurchaseSaleBookLineItemID" ColumnName="PurchaseSaleBookLineItemID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="FifoID" ColumnName="FifoID" />
@@ -3882,6 +3984,7 @@
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="UsedQuantity" ColumnName="UsedQuantity" />
                 <ScalarProperty Name="BalanceQuantity" ColumnName="BalanceQuantity" />
+                <ScalarProperty Name="OldPurchaseSaleBookLineItemID" ColumnName="OldPurchaseSaleBookLineItemID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
