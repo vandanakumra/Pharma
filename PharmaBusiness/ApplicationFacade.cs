@@ -644,7 +644,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetSECustomerLedgerByCode(code);
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCustomerLedgerByCode(code);
             }
             catch (Exception)
             {

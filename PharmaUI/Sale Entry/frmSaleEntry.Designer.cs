@@ -169,7 +169,7 @@
             // lblSaleManName
             // 
             this.lblSaleManName.AutoSize = true;
-            this.lblSaleManName.Location = new System.Drawing.Point(505, 98);
+            this.lblSaleManName.Location = new System.Drawing.Point(510, 86);
             this.lblSaleManName.Name = "lblSaleManName";
             this.lblSaleManName.Size = new System.Drawing.Size(0, 13);
             this.lblSaleManName.TabIndex = 18;
@@ -184,6 +184,7 @@
             this.btnCancel.TabIndex = 24;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // label3
             // 
@@ -259,8 +260,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 321);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 30);
             this.tableLayoutPanel1.TabIndex = 130;
             // 
@@ -271,7 +272,7 @@
             this.label5.Location = new System.Drawing.Point(4, 4);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 30);
+            this.label5.Size = new System.Drawing.Size(69, 31);
             this.label5.TabIndex = 124;
             this.label5.Text = "Scheme Amount";
             // 
@@ -282,7 +283,7 @@
             this.label42.Location = new System.Drawing.Point(716, 4);
             this.label42.Margin = new System.Windows.Forms.Padding(3);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 30);
+            this.label42.Size = new System.Drawing.Size(66, 31);
             this.label42.TabIndex = 128;
             this.label42.Text = "Total Amount";
             // 
@@ -305,7 +306,7 @@
             this.label6.Location = new System.Drawing.Point(182, 4);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 30);
+            this.label6.Size = new System.Drawing.Size(75, 31);
             this.label6.TabIndex = 125;
             this.label6.Text = "Discount Amount";
             // 
@@ -316,7 +317,7 @@
             this.label8.Location = new System.Drawing.Point(538, 4);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 30);
+            this.label8.Size = new System.Drawing.Size(66, 31);
             this.label8.TabIndex = 127;
             this.label8.Text = "Invoice Amount";
             // 
@@ -351,7 +352,7 @@
             this.label7.Location = new System.Drawing.Point(360, 4);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 30);
+            this.label7.Size = new System.Drawing.Size(66, 31);
             this.label7.TabIndex = 126;
             this.label7.Text = "Tax Amount";
             // 
@@ -796,6 +797,7 @@
             this.Name = "frmSaleEntry";
             this.Text = "frmSaleEntry";
             this.Load += new System.EventHandler(this.frmSaleEntry_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmSaleEntry_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

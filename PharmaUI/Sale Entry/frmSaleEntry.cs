@@ -452,5 +452,18 @@ namespace PharmaUI
                 lblDueBillAmount.Text = (customer.DueBillAmount ?? 0).ToString("#.##");
             }
         }
+
+        private void frmSaleEntry_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close()
+        }
     }
 }

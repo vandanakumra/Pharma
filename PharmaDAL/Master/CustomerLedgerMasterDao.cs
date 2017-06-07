@@ -394,7 +394,7 @@ namespace PharmaDAL.Master
                 {
                     customer.CustomerLedgerId = Convert.ToInt32(dt.Rows[0]["CustomerLedgerId"]);
                     customer.CustomerLedgerCode = Convert.ToString(dt.Rows[0]["CustomerLedgerCode"]);
-                    customer.CustomerLedgerName = Convert.ToString(dt.Rows[0]["p.CustomerLedgerName"]);
+                    customer.CustomerLedgerName = Convert.ToString(dt.Rows[0]["CustomerLedgerName"]);
                     customer.CustomerLedgerShortName = Convert.ToString(dt.Rows[0]["CustomerLedgerShortName"]);
                     customer.Address = Convert.ToString(dt.Rows[0]["Address"]);
                     customer.ContactPerson = Convert.ToString(dt.Rows[0]["ContactPerson"]);
