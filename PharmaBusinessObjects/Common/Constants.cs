@@ -18,6 +18,7 @@ namespace PharmaBusinessObjects.Common
             public const string PersonRouteCreate = "{0} does not exist. Do you want to add new {0} ?";
             public const string NotFound = "* Not Found ";
             public const string NotExists = "{0} does not exists. Do you want to add new?";
+            public const string UnsavedDataWarning = "Unsaved data will be lost";
         }
 
         public static class RecordType

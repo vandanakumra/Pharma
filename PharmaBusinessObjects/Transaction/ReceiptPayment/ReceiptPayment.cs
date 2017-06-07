@@ -26,5 +26,6 @@ namespace PharmaBusinessObjects.Transaction.ReceiptPayment
         public string POST { get; set; }
         public string PISNumber { get; set; }
         public double? UnadjustedAmount { get; set; }
+        public double? ConsumedAmount { get; set; }
     }
 }

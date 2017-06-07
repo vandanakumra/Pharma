@@ -57,5 +57,11 @@ namespace PharmaBusinessObjects.Common
             CompanyWiseChange,
             ItemWiseChange
         };
+
+        public enum ReceiptPaymentState
+        {
+            Save,
+            Cancel
+        };
     }
 }

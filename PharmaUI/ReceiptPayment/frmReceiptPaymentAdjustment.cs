@@ -1,4 +1,5 @@
 ﻿using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Transaction;
 using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using System;
@@ -10,13 +11,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PharmaBusinessObjects.Common.Enums;
 
 namespace PharmaUI.ReceiptPayment
 {
     public partial class frmReceiptPaymentAdjustment : Form
     {
         IApplicationFacade applicationFacade;
-       public TransactionEntity CurrentTransactionEntity;
+        public TransactionEntity CurrentTransactionEntity;
+        public ReceiptPaymentState ReceiptPaymentState;
+
 
         public frmReceiptPaymentAdjustment()
         {
@@ -153,6 +157,7 @@ namespace PharmaUI.ReceiptPayment
                 {
                     List<BillAdjusted> listBillAdjustment = dgvReceiptPaymentAdjustment.Rows
                                                                              .Cast<DataGridViewRow>()
+                                                                             .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Amount"].Value)) && Convert.ToDouble(r.Cells["Amount"].Value) > 0)
                                                                              .Select(x => new BillAdjusted()
                                                                              {
                                                                                  ReceiptPaymentID = CurrentTransactionEntity.ReceiptPaymentID,
@@ -167,14 +172,20 @@ namespace PharmaUI.ReceiptPayment
 
                                                                              }).ToList();
 
-                    applicationFacade.MakeBillAdjustment(listBillAdjustment);
-                }
+                    applicationFacade.InsertTempBillAdjustment(listBillAdjustment);
 
-                this.Close();
+                    ReceiptPaymentState = ReceiptPaymentState.Save;
+                    this.Close();
+                }            
             }
             else if (keyData == Keys.Escape)
             {
-                this.Close();
+                if (DialogResult.Yes == MessageBox.Show(Constants.Messages.UnsavedDataWarning, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    ReceiptPaymentState = ReceiptPaymentState.Cancel;
+                    applicationFacade.ClearTempBillAdjustment(CurrentTransactionEntity);
+                    this.Close();
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

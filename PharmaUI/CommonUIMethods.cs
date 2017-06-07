@@ -89,6 +89,13 @@ namespace PharmaUI
                             c.BackColor = Color.White;
                         }
                     }
+                    else if (c is MaskedTextBox)
+                    {
+                        if (c.Enabled == true)
+                        {
+                            c.BackColor = Color.White;
+                        }
+                    }
                 }
             }
 

@@ -805,11 +805,11 @@ namespace PharmaBusiness
             }
         }
 
-        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllTempBillAdjustmentForLedger(TransactionEntity transactionEntity)
         {
             try
             {
-                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllBillAdjustmentForLedger(transactionEntity);
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllTempBillAdjustmentForLedger(transactionEntity);
             }
             catch (Exception)
             {
@@ -843,11 +843,11 @@ namespace PharmaBusiness
             }
         }
 
-        public void MakeBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
+        public void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
         {
             try
             {
-                 new ReceiptPaymentBiz(this.LoggedInUser).MakeBillAdjustment(billAdjustmentList);
+                 new ReceiptPaymentBiz(this.LoggedInUser).InsertTempBillAdjustment(billAdjustmentList);
             }
             catch (Exception)
             {
@@ -855,6 +855,17 @@ namespace PharmaBusiness
             }
         }
 
+        public void ClearTempBillAdjustment(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                new ReceiptPaymentBiz(this.LoggedInUser).ClearTempBillAdjustment(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
         #endregion

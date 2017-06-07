@@ -19,17 +19,17 @@ namespace PharmaBusiness.Transaction
 
         internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(TransactionEntity transactionEntity)
         {
-            return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillOutstandingForLedger(transactionEntity);
+            return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillOutstandingForLedger(transactionEntity).Where(x=>x.OSAmount > 0).ToList();
         }
 
         
 
-        internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllTempBillAdjustmentForLedger(TransactionEntity transactionEntity)
         {
-            return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillAdjustmentForLedger(transactionEntity);
+            return new ReceiptPaymentDao(this.LoggedInUser).GetAllTempBillAdjustmentForLedger(transactionEntity);
         }
 
-        internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
+        internal List<BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity)
         {
             return new ReceiptPaymentDao(this.LoggedInUser).GetAllInitialBillAdjustmentForLedger(transactionEntity);
         }
@@ -39,11 +39,15 @@ namespace PharmaBusiness.Transaction
             return new ReceiptPaymentDao(this.LoggedInUser).InsertUpdateTempReceiptPayment(receiptPayment);
         }
 
-        internal void MakeBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
+        internal void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
         {
-             new ReceiptPaymentDao(this.LoggedInUser).MakeBillAdjustment(billAdjustmentList);
+             new ReceiptPaymentDao(this.LoggedInUser).InsertTempBillAdjustment(billAdjustmentList);
         }
 
-       
+        internal void ClearTempBillAdjustment(TransactionEntity transactionEntity)
+        {
+            new ReceiptPaymentDao(this.LoggedInUser).ClearTempBillAdjustment(transactionEntity);
+        }
+        
     }
 }
