@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PharmaUI.Sale_Entry
+namespace PharmaUI
 {
     public partial class frmItemDiscount : Form
     {

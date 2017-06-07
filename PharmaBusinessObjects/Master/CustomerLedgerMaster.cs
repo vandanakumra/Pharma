@@ -59,5 +59,14 @@ namespace PharmaBusinessObjects.Master
         public double ?  Discount { get; set; }
         public string CentralLocal { get; set; }
         public List<CustomerCopanyDiscount> CustomerCopanyDiscountList { get; set; }
+
+        #region SaleEntry
+        public string SalesManCode { get; set; }
+        public double? DueBillAmount { get; set; }
+        public int DueBillCount { get; set; }
+        
+
+        #endregion
+
     }
 }

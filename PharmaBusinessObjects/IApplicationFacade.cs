@@ -96,7 +96,7 @@ namespace PharmaBusinessObjects
         int UpdateCustomerLedger(PharmaBusinessObjects.Master.CustomerLedgerMaster p);
         List<PharmaBusinessObjects.Master.CustomerCopanyDiscount> GetCompleteCompanyDiscountListByCustomerID(int customerLedgerID);
         int DeleteCustomerLedger(int customerLedgerID);
-        CustomerLedgerMaster GetCustomerLedgerByName(string name);
+        CustomerLedgerMaster GetCustomerLedgerByCode(string code);
         #endregion
 
         #region User Master
