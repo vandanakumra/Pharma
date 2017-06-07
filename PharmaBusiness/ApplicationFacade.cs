@@ -640,12 +640,11 @@ namespace PharmaBusiness
                 throw;
             }
         }
-
-        public CustomerLedgerMaster GetCustomerLedgerByName(string name)
+        public CustomerLedgerMaster GetCustomerLedgerByCode(string code)
         {
             try
             {
-                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCustomerLedgerByName(name);
+                return new CustomerLedgerMasterBiz(this.LoggedInUser).GetCustomerLedgerByCode(code);
             }
             catch (Exception)
             {

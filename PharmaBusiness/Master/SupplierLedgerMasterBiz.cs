@@ -37,7 +37,7 @@ namespace PharmaBusiness.Master
 
         internal SupplierLedgerMaster GetSupplierLedgerByName(string name)
         {
-            SupplierLedgerMaster master = GetSupplierLedgers(string.Empty).Where(p => p.SupplierLedgerName.ToLower() == name.ToLower()).FirstOrDefault();
+            SupplierLedgerMaster master = GetSupplierLedgers(string.Empty).Where(p => p.SupplierLedgerCode.ToLower() == name.ToLower()).FirstOrDefault();
 
             return master;
 

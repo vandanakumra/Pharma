@@ -1,4 +1,4 @@
-﻿namespace PharmaUI.Sale_Entry
+﻿namespace PharmaUI
 {
     partial class frmSaleEntry
     {
@@ -72,19 +72,20 @@
             this.lblIsHalf = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.lblTaxRate = new System.Windows.Forms.Label();
-            this.lblVolumeDiscountAmount = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.lblDiscount = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.lblVolumeDis = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.lblScheme = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lblHalf = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.lblVolumeDiscountAmount = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.lblVolumeDis = new System.Windows.Forms.Label();
             this.errFrmSaleEntry = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblDueBillAmount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -147,14 +148,14 @@
             this.txtInvoiceNumber.Location = new System.Drawing.Point(97, 83);
             this.txtInvoiceNumber.Name = "txtInvoiceNumber";
             this.txtInvoiceNumber.Size = new System.Drawing.Size(146, 20);
-            this.txtInvoiceNumber.TabIndex = 15;
+            this.txtInvoiceNumber.TabIndex = 9;
             // 
             // txtSalesManCode
             // 
             this.txtSalesManCode.Location = new System.Drawing.Point(349, 83);
             this.txtSalesManCode.Name = "txtSalesManCode";
             this.txtSalesManCode.Size = new System.Drawing.Size(146, 20);
-            this.txtSalesManCode.TabIndex = 17;
+            this.txtSalesManCode.TabIndex = 10;
             // 
             // label2
             // 
@@ -168,7 +169,7 @@
             // lblSaleManName
             // 
             this.lblSaleManName.AutoSize = true;
-            this.lblSaleManName.Location = new System.Drawing.Point(505, 98);
+            this.lblSaleManName.Location = new System.Drawing.Point(510, 86);
             this.lblSaleManName.Name = "lblSaleManName";
             this.lblSaleManName.Size = new System.Drawing.Size(0, 13);
             this.lblSaleManName.TabIndex = 18;
@@ -183,11 +184,12 @@
             this.btnCancel.TabIndex = 24;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(531, 86);
+            this.label3.Location = new System.Drawing.Point(622, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 25;
@@ -196,7 +198,7 @@
             // lblDueBills
             // 
             this.lblDueBills.AutoSize = true;
-            this.lblDueBills.Location = new System.Drawing.Point(594, 86);
+            this.lblDueBills.Location = new System.Drawing.Point(691, 86);
             this.lblDueBills.Name = "lblDueBills";
             this.lblDueBills.Size = new System.Drawing.Size(48, 13);
             this.lblDueBills.TabIndex = 26;
@@ -206,7 +208,7 @@
             // 
             this.lblFRate.AutoSize = true;
             this.lblFRate.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.lblFRate.Location = new System.Drawing.Point(531, 60);
+            this.lblFRate.Location = new System.Drawing.Point(628, 60);
             this.lblFRate.Name = "lblFRate";
             this.lblFRate.Size = new System.Drawing.Size(39, 13);
             this.lblFRate.TabIndex = 27;
@@ -227,7 +229,7 @@
             this.dgvLineItem.Location = new System.Drawing.Point(8, 116);
             this.dgvLineItem.Name = "dgvLineItem";
             this.dgvLineItem.Size = new System.Drawing.Size(894, 202);
-            this.dgvLineItem.TabIndex = 28;
+            this.dgvLineItem.TabIndex = 11;
             // 
             // tableLayoutPanel1
             // 
@@ -258,8 +260,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 321);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 30);
             this.tableLayoutPanel1.TabIndex = 130;
             // 
@@ -270,7 +272,7 @@
             this.label5.Location = new System.Drawing.Point(4, 4);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 28);
+            this.label5.Size = new System.Drawing.Size(69, 31);
             this.label5.TabIndex = 124;
             this.label5.Text = "Scheme Amount";
             // 
@@ -281,7 +283,7 @@
             this.label42.Location = new System.Drawing.Point(716, 4);
             this.label42.Margin = new System.Windows.Forms.Padding(3);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 28);
+            this.label42.Size = new System.Drawing.Size(66, 31);
             this.label42.TabIndex = 128;
             this.label42.Text = "Total Amount";
             // 
@@ -304,7 +306,7 @@
             this.label6.Location = new System.Drawing.Point(182, 4);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 28);
+            this.label6.Size = new System.Drawing.Size(75, 31);
             this.label6.TabIndex = 125;
             this.label6.Text = "Discount Amount";
             // 
@@ -315,7 +317,7 @@
             this.label8.Location = new System.Drawing.Point(538, 4);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 28);
+            this.label8.Size = new System.Drawing.Size(66, 31);
             this.label8.TabIndex = 127;
             this.label8.Text = "Invoice Amount";
             // 
@@ -350,7 +352,7 @@
             this.label7.Location = new System.Drawing.Point(360, 4);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 28);
+            this.label7.Size = new System.Drawing.Size(66, 31);
             this.label7.TabIndex = 126;
             this.label7.Text = "Tax Amount";
             // 
@@ -614,18 +616,6 @@
             this.lblTaxRate.TabIndex = 144;
             this.lblTaxRate.Text = "0.0";
             // 
-            // lblVolumeDiscountAmount
-            // 
-            this.lblVolumeDiscountAmount.AutoSize = true;
-            this.lblVolumeDiscountAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVolumeDiscountAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblVolumeDiscountAmount.Location = new System.Drawing.Point(601, 73);
-            this.lblVolumeDiscountAmount.Margin = new System.Windows.Forms.Padding(3);
-            this.lblVolumeDiscountAmount.Name = "lblVolumeDiscountAmount";
-            this.lblVolumeDiscountAmount.Size = new System.Drawing.Size(32, 19);
-            this.lblVolumeDiscountAmount.TabIndex = 170;
-            this.lblVolumeDiscountAmount.Text = "0.0";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -670,18 +660,6 @@
             this.label12.Size = new System.Drawing.Size(63, 19);
             this.label12.TabIndex = 167;
             this.label12.Text = "Last Bill";
-            // 
-            // lblVolumeDis
-            // 
-            this.lblVolumeDis.AutoSize = true;
-            this.lblVolumeDis.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVolumeDis.ForeColor = System.Drawing.Color.Blue;
-            this.lblVolumeDis.Location = new System.Drawing.Point(155, 73);
-            this.lblVolumeDis.Margin = new System.Windows.Forms.Padding(3);
-            this.lblVolumeDis.Name = "lblVolumeDis";
-            this.lblVolumeDis.Size = new System.Drawing.Size(32, 19);
-            this.lblVolumeDis.TabIndex = 168;
-            this.lblVolumeDis.Text = "0.0";
             // 
             // label33
             // 
@@ -740,6 +718,18 @@
             this.label18.TabIndex = 173;
             this.label18.Text = "Amt";
             // 
+            // lblVolumeDiscountAmount
+            // 
+            this.lblVolumeDiscountAmount.AutoSize = true;
+            this.lblVolumeDiscountAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVolumeDiscountAmount.ForeColor = System.Drawing.Color.Blue;
+            this.lblVolumeDiscountAmount.Location = new System.Drawing.Point(601, 73);
+            this.lblVolumeDiscountAmount.Margin = new System.Windows.Forms.Padding(3);
+            this.lblVolumeDiscountAmount.Name = "lblVolumeDiscountAmount";
+            this.lblVolumeDiscountAmount.Size = new System.Drawing.Size(32, 19);
+            this.lblVolumeDiscountAmount.TabIndex = 170;
+            this.lblVolumeDiscountAmount.Text = "0.0";
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -752,9 +742,30 @@
             this.label20.TabIndex = 174;
             this.label20.Text = "0.0";
             // 
+            // lblVolumeDis
+            // 
+            this.lblVolumeDis.AutoSize = true;
+            this.lblVolumeDis.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVolumeDis.ForeColor = System.Drawing.Color.Blue;
+            this.lblVolumeDis.Location = new System.Drawing.Point(155, 73);
+            this.lblVolumeDis.Margin = new System.Windows.Forms.Padding(3);
+            this.lblVolumeDis.Name = "lblVolumeDis";
+            this.lblVolumeDis.Size = new System.Drawing.Size(32, 19);
+            this.lblVolumeDis.TabIndex = 168;
+            this.lblVolumeDis.Text = "0.0";
+            // 
             // errFrmSaleEntry
             // 
             this.errFrmSaleEntry.ContainerControl = this;
+            // 
+            // lblDueBillAmount
+            // 
+            this.lblDueBillAmount.AutoSize = true;
+            this.lblDueBillAmount.Location = new System.Drawing.Point(745, 86);
+            this.lblDueBillAmount.Name = "lblDueBillAmount";
+            this.lblDueBillAmount.Size = new System.Drawing.Size(48, 13);
+            this.lblDueBillAmount.TabIndex = 132;
+            this.lblDueBillAmount.Text = "Due Bills";
             // 
             // frmSaleEntry
             // 
@@ -762,6 +773,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(910, 449);
             this.ControlBox = false;
+            this.Controls.Add(this.lblDueBillAmount);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.dgvLineItem);
@@ -784,6 +796,8 @@
             this.MinimizeBox = false;
             this.Name = "frmSaleEntry";
             this.Text = "frmSaleEntry";
+            this.Load += new System.EventHandler(this.frmSaleEntry_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmSaleEntry_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -853,5 +867,6 @@
         private System.Windows.Forms.Label lblHalf;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ErrorProvider errFrmSaleEntry;
+        private System.Windows.Forms.Label lblDueBillAmount;
     }
 }
