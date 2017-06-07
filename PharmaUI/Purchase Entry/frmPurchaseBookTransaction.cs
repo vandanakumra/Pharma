@@ -107,7 +107,6 @@ namespace PharmaUI
             dgvLineItem.Columns["Amount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["Amount"].FillWeight = 5;
 
-
             dgvLineItem.Columns.Add("OldPurchaseSaleRate", "OldPurchaseSaleRate");
             dgvLineItem.Columns["OldPurchaseSaleRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["OldPurchaseSaleRate"].Visible = false;
@@ -172,7 +171,6 @@ namespace PharmaUI
             dgvLineItem.Columns["LocalCentral"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["LocalCentral"].Visible = false;
 
-
             dgvLineItem.Columns.Add("ConversionRate", "ConversionRate");
             dgvLineItem.Columns["ConversionRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["ConversionRate"].Visible = false;
@@ -213,12 +211,29 @@ namespace PharmaUI
             dgvLineItem.Columns["CostAmount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["CostAmount"].Visible = false;
 
-         
+            dgvLineItem.Columns.Add("UsedQuantity", "UsedQuantity");
+            dgvLineItem.Columns["UsedQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["UsedQuantity"].Visible = false;
+
+            dgvLineItem.Columns.Add("BalanceQuantity", "BalanceQuantity");
+            dgvLineItem.Columns["BalanceQuantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["BalanceQuantity"].Visible = false;
+
+            dgvLineItem.Columns.Add("OldPurchaseSaleBookLineItemID", "OldPurchaseSaleBookLineItemID");
+            dgvLineItem.Columns["OldPurchaseSaleBookLineItemID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["OldPurchaseSaleBookLineItemID"].Visible = false;
+
+            dgvLineItem.Columns.Add("FifoID", "FifoID");
+            dgvLineItem.Columns["FifoID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["FifoID"].Visible = false;          
+
+
             dgvLineItem.CellBeginEdit += DgvLineItem_CellBeginEdit;
             dgvLineItem.CellEndEdit += DgvLineItem_CellEndEdit;
-            dgvLineItem.CellValueChanged += DgvLineItem_CellValueChanged;            
+            dgvLineItem.CellValueChanged += DgvLineItem_CellValueChanged;
             dgvLineItem.EditingControlShowing += DgvLineItem_EditingControlShowing;
             dgvLineItem.SelectionChanged += DgvLineItem_SelectionChanged;
+
         }
 
         private void DgvLineItem_SelectionChanged(object sender, EventArgs e)
@@ -313,15 +328,36 @@ namespace PharmaUI
 
                 if (isCellEdit && !isBatchUpdate && lineItem.PurchaseSaleBookLineItemID > 0)
                 {
-                    if (columnName == "Quantity" || columnName == "PurchaseSaleRate")
+                    double value = 0L;
+                    double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out value);
+
+                    if (columnName == "Quantity" && IsModify)
+                    {
+                        double usedQuantity = 0;
+                        double.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["UsedQuantity"].Value), out usedQuantity);
+
+                        double balanceQuantity = 0;
+                        double.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["BalanceQuantity"].Value), out balanceQuantity);
+
+
+                        if (value < usedQuantity)
+                        {
+                            MessageBox.Show("Quantity can not be less than used quantity. Used Quantity is --> " + usedQuantity);
+
+                            dgvLineItem.CurrentCell.Value = usedQuantity + balanceQuantity;
+                            dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
+                            dgvLineItem.BeginEdit(true);
+                            return;
+                        }
+
+                        
+                    }
+                    else if (columnName == "Quantity" || columnName == "PurchaseSaleRate")
                     {
                         double amount = GetLineItemAmount(lineItem);
                         dgvLineItem.CurrentRow.Cells["Amount"].Value = amount;
                         lineItem.Amount = amount;
                     }
-
-                    double value = 0L;
-                    double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out value);
 
                     if (value == 0 && (columnName == "Quantity" || columnName == "PurchaseSaleRate"))
                     {
@@ -699,8 +735,7 @@ namespace PharmaUI
             int purchaseFormTypeID = 0;
 
             header = new PurchaseSaleBookHeader();
-            header.PurchaseSaleBookHeaderID = purchaseSaleBookHeaderID;
-            
+            header.PurchaseSaleBookHeaderID = purchaseSaleBookHeaderID;          
 
             header.VoucherDate = purchaseDate;
             header.PurchaseBillNo = txtInvoiceNumber.Text;
@@ -858,7 +893,7 @@ namespace PharmaUI
                     
                     var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
 
-                    if (list != null && list.Count > 0)
+                    if (list != null && list.Count > 0 && !IsModify)
                     {
                         OpenBatchDialog(list);
                     }
@@ -1084,9 +1119,20 @@ namespace PharmaUI
                 PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
                 item.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
 
-               
+                double.TryParse(Convert.ToString(row.Cells["UsedQuantity"].Value), out dValue);
+                item.UsedQuantity = dValue;
 
-            }
+                double.TryParse(Convert.ToString(row.Cells["BalanceQuantity"].Value), out dValue);
+                item.BalanceQuantity = dValue;
+
+                int.TryParse(Convert.ToString(row.Cells["OldPurchaseSaleBookLineItemID"].Value), out id);
+                item.OldPurchaseSaleBookLineItemID = id;
+
+
+                int.TryParse(Convert.ToString(row.Cells["FifoID"].Value), out id);
+                item.FifoID = id;
+
+               }
 
             return item;
         }
@@ -1133,7 +1179,7 @@ namespace PharmaUI
 
                             var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
 
-                            if (list != null && list.Count > 0)
+                            if (list != null && list.Count > 0 && !IsModify)
                             {
                                 OpenBatchDialog(list);
                             }
@@ -1151,6 +1197,16 @@ namespace PharmaUI
                     {
                         if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                         {
+
+                            double usedQuantity = 0;
+                            double.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["UsedQuantity"].Value), out usedQuantity);
+
+                            if (usedQuantity > 0)
+                            {
+                                MessageBox.Show("Item can not be delete as it is already used.");
+                                return;
+                            }
+
 
                             PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
                             int rowIndex = dgvLineItem.CurrentRow.Index;
@@ -1244,7 +1300,7 @@ namespace PharmaUI
             {
                 var list = applicationFacade.GetLastNBatchNoForSupplierItem(txtSupplierCode.Text, Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value));
 
-                if (list != null && list.Count > 0)
+                if (list != null && list.Count > 0 && !IsModify)
                 {
                     OpenBatchDialog(list);
                 }
@@ -1362,7 +1418,6 @@ namespace PharmaUI
                     }
                 }
             }
-
             else if (sender is MaskedTextBox)
             {
                 MaskedTextBox txt = (MaskedTextBox)sender;
@@ -1423,15 +1478,29 @@ namespace PharmaUI
 
                 long PurchaseSaleBookHeaderID = frm.PurchaseSaleBookHeaderID;
 
-                InitializeGrid();
-
                 PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader header = applicationFacade.GetPurchaseSaleBookHeaderForModify(PurchaseSaleBookHeaderID);
 
                 if(header !=null)
                 {
+                    txtInvoiceNumber.Text = header.PurchaseBillNo;
+                    cbxPurchaseType.SelectedItem = header.LocalCentral == "L" ? "Local" : "Central";
+                    purchaseSaleBookHeaderID = header.PurchaseSaleBookHeaderID;
+                    oldPurchaseSaleBookHeaderID = header.OldPurchaseSaleBookHeaderID;
+
                     List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID);
 
                     FillGridWithLineItems(lineitems);
+
+                    if(dgvLineItem.Rows.Count > 0)
+                    {
+                        dgvLineItem.Focus();
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                    }
+                    else
+                    {
+                        txtInvoiceNumber.Focus();
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -1447,45 +1516,53 @@ namespace PharmaUI
                 int rowIndex = 0;
 
                 foreach (var lineItem in lineitems)
-                {
+                {                    
                     dgvLineItem.Rows.Add();
 
                     rowIndex = dgvLineItem.Rows.Count - 1;
 
-                    dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value = lineItem.PurchaseSaleBookLineItemID;
-                    dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookHeaderID"].Value = purchaseSaleBookHeaderID;
-                    dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value = lineItem.ItemCode;
-                    dgvLineItem.Rows[rowIndex].Cells["ItemName"].Value = lineItem.ItemName;
-                    dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value = lineItem.Quantity;
-                    dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = lineItem.FreeQuantity;
-                    dgvLineItem.Rows[rowIndex].Cells["Batch"].Value = lineItem.Batch;
-                    dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
-                    dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
-                    dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = lineItem.Amount;
-                    dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
-                    dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
-                    dgvLineItem.Rows[rowIndex].Cells["IsHalfScheme"].Value = lineItem.IsHalfScheme;
-                    dgvLineItem.Rows[rowIndex].Cells["Discount"].Value = lineItem.Discount;
-                    dgvLineItem.Rows[rowIndex].Cells["SpecialDiscount"].Value = lineItem.SpecialDiscount;
-                    dgvLineItem.Rows[rowIndex].Cells["VolumeDiscount"].Value = lineItem.VolumeDiscount;
-                    dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
-                    dgvLineItem.Rows[rowIndex].Cells["ExpiryDate"].Value = lineItem.ExpiryDate;
-                    dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value = lineItem.SaleRate;
-                    dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
-                    dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;
-                    dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTypeCode"].Value = lineItem.PurchaseSaleTypeCode;
-                    dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTax"].Value = lineItem.PurchaseSaleTax;
-                    dgvLineItem.Rows[rowIndex].Cells["LocalCentral"].Value = lineItem.LocalCentral;
-                    dgvLineItem.Rows[rowIndex].Cells["CostAmount"].Value = lineItem.CostAmount;
-                    dgvLineItem.Rows[rowIndex].Cells["DiscountAmount"].Value = lineItem.DiscountAmount;
-                    dgvLineItem.Rows[rowIndex].Cells["SpecialDiscountAmount"].Value = lineItem.SpecialDiscountAmount;
-                    dgvLineItem.Rows[rowIndex].Cells["VolumeDiscountAmount"].Value = lineItem.VolumeDiscountAmount;
-                    dgvLineItem.Rows[rowIndex].Cells["GrossAmount"].Value = lineItem.GrossAmount;
-                    dgvLineItem.Rows[rowIndex].Cells["TaxAmount"].Value = lineItem.TaxAmount;
-                    dgvLineItem.Rows[rowIndex].Cells["SchemeAmount"].Value = lineItem.SchemeAmount;
-                    dgvLineItem.Rows[rowIndex].Cells["SurchargeAmount"].Value = lineItem.SurchargeAmount;
-                    dgvLineItem.Rows[rowIndex].Cells["TotalDiscountAmount"].Value = lineItem.TotalDiscountAmount;
-                   
+                    dgvLineItem.Rows[rowIndex].Selected = true;
+
+                    InsertUpdateLineItemAndsetToGrid(lineItem);
+
+                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value = lineItem.PurchaseSaleBookLineItemID;
+                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookHeaderID"].Value = purchaseSaleBookHeaderID;
+                    //dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value = lineItem.ItemCode;
+                    //dgvLineItem.Rows[rowIndex].Cells["ItemName"].Value = lineItem.ItemName;
+                    //dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value = lineItem.Quantity;
+                    //dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = lineItem.FreeQuantity;
+                    //dgvLineItem.Rows[rowIndex].Cells["Batch"].Value = lineItem.Batch;
+                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
+                    //dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
+                    //dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = lineItem.Amount;
+                    //dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
+                    //dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
+                    //dgvLineItem.Rows[rowIndex].Cells["IsHalfScheme"].Value = lineItem.IsHalfScheme;
+                    //dgvLineItem.Rows[rowIndex].Cells["Discount"].Value = lineItem.Discount;
+                    //dgvLineItem.Rows[rowIndex].Cells["SpecialDiscount"].Value = lineItem.SpecialDiscount;
+                    //dgvLineItem.Rows[rowIndex].Cells["VolumeDiscount"].Value = lineItem.VolumeDiscount;
+                    //dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
+                    //dgvLineItem.Rows[rowIndex].Cells["ExpiryDate"].Value = lineItem.ExpiryDate;
+                    //dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value = lineItem.SaleRate;
+                    //dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
+                    //dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;
+                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTypeCode"].Value = lineItem.PurchaseSaleTypeCode;
+                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTax"].Value = lineItem.PurchaseSaleTax;
+                    //dgvLineItem.Rows[rowIndex].Cells["LocalCentral"].Value = lineItem.LocalCentral;
+                    //dgvLineItem.Rows[rowIndex].Cells["CostAmount"].Value = lineItem.CostAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["DiscountAmount"].Value = lineItem.DiscountAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["SpecialDiscountAmount"].Value = lineItem.SpecialDiscountAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["VolumeDiscountAmount"].Value = lineItem.VolumeDiscountAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["GrossAmount"].Value = lineItem.GrossAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["TaxAmount"].Value = lineItem.TaxAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["SchemeAmount"].Value = lineItem.SchemeAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["SurchargeAmount"].Value = lineItem.SurchargeAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["TotalDiscountAmount"].Value = lineItem.TotalDiscountAmount;
+                    //dgvLineItem.Rows[rowIndex].Cells["UsedQuantity"].Value = lineItem.UsedQuantity;
+                    //dgvLineItem.Rows[rowIndex].Cells["BalanceQuantity"].Value = lineItem.BalanceQuantity;
+                    //dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleBookLineItemID"].Value = lineItem.OldPurchaseSaleBookLineItemID;
+                    //dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value = lineItem.FifoID;
+
                 }
             }
 
@@ -1587,7 +1664,11 @@ namespace PharmaUI
                 dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTypeCode"].Value = lineItem.PurchaseSaleTypeCode;
                 dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTax"].Value = lineItem.PurchaseSaleTax;
                 dgvLineItem.Rows[rowIndex].Cells["LocalCentral"].Value = lineItem.LocalCentral;
-                
+                dgvLineItem.Rows[rowIndex].Cells["UsedQuantity"].Value = lineItem.UsedQuantity;
+                dgvLineItem.Rows[rowIndex].Cells["BalanceQuantity"].Value = lineItem.BalanceQuantity;
+                dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleBookLineItemID"].Value = lineItem.OldPurchaseSaleBookLineItemID;
+                dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value = lineItem.FifoID;
+
 
             }
         }
@@ -1614,6 +1695,10 @@ namespace PharmaUI
                     if (isConfirm == DialogResult.No)
                     {
                         e.Cancel = true;
+                    }
+                    else
+                    {
+                        applicationFacade.DeleteUnSavedData(purchaseSaleBookHeaderID);
                     }
                 }
             

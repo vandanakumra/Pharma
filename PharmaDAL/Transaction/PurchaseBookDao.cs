@@ -5,6 +5,7 @@ using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -340,36 +341,45 @@ namespace PharmaDAL.Transaction
 
         public PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID)
         {
-            PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader header = new PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader();
-
-            using (PharmaDBEntities context = new PharmaDBEntities())
+            try
             {
-                SqlConnection connection = (SqlConnection)context.Database.Connection;
 
-                SqlCommand cmd = new SqlCommand("GetPurchaseSaleBookHeaderForModify", connection);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PurchaseSaleBookHeaderID", Value = purchaseSaleBookHeaderID });             
+                PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader header = new PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader();
 
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-                sda.Fill(dt);
-
-                if (dt != null && dt.Rows.Count > 0)
+                using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    header.PurchaseSaleBookHeaderID = Convert.ToInt64(dt.Rows[0]["PurchaseSaleBookHeaderID"]);
-                    header.VoucherTypeCode = Convert.ToString(dt.Rows[0]["VoucherTypeCode"]);
-                    header.VoucherDate = Convert.ToDateTime(dt.Rows[0]["VoucherDate"]);
-                    header.PurchaseBillNo = Convert.ToString(dt.Rows[0]["PurchaseBillNo"]);
-                    header.LedgerType = Convert.ToString(dt.Rows[0]["LedgerType"]);
-                    header.LedgerTypeCode = Convert.ToString(dt.Rows[0]["LedgerTypeCode"]);
-                    header.LocalCentral = Convert.ToString(dt.Rows[0]["LocalCentral"]);
-                    header.OldPurchaseSaleBookHeaderID = Convert.ToInt64(dt.Rows[0]["OldPurchaseSaleBookHeaderID"]);
-                    
+                    SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                    SqlCommand cmd = new SqlCommand("GetPurchaseSaleBookHeaderForModify", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PurchaseSaleBookHeaderID", Value = purchaseSaleBookHeaderID });
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    sda.Fill(dt);
+
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        header.PurchaseSaleBookHeaderID = Convert.ToInt64(dt.Rows[0]["PurchaseSaleBookHeaderID"]);
+                        header.VoucherTypeCode = Convert.ToString(dt.Rows[0]["VoucherTypeCode"]);
+                        header.VoucherDate = Convert.ToDateTime(dt.Rows[0]["VoucherDate"]);
+                        header.PurchaseBillNo = Convert.ToString(dt.Rows[0]["PurchaseBillNo"]);
+                        header.LedgerType = Convert.ToString(dt.Rows[0]["LedgerType"]);
+                        header.LedgerTypeCode = Convert.ToString(dt.Rows[0]["LedgerTypeCode"]);
+                        header.LocalCentral = Convert.ToString(dt.Rows[0]["LocalCentral"]);
+                        header.OldPurchaseSaleBookHeaderID = Convert.ToInt64(dt.Rows[0]["OldPurchaseSaleBookHeaderID"]);
+
+                    }
                 }
+                return header;
             }
-            return header;
+            catch (DbEntityValidationException ex)
+            {
+                throw ex;
+            }
         }
 
 
@@ -399,13 +409,15 @@ namespace PharmaDAL.Transaction
                         PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem obj = new PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem()
                         {
                             PurchaseSaleBookHeaderID = Convert.ToInt64(row["PurchaseSaleBookHeaderID"]),
-                            PurchaseSaleBookLineItemID = Convert.ToInt64(row["PurchaseSaleBookHeaderID"]),
-                            FifoID = Convert.ToInt64(row["FifoID"] == DBNull.Value ? 0 : row["Quantity"]),
+                            PurchaseSaleBookLineItemID = Convert.ToInt64(row["PurchaseSaleBookLineItemID"]),
+                            FifoID = Convert.ToInt64(row["FifoID"] == DBNull.Value ? 0 : row["FifoID"]),
                             ItemCode = Convert.ToString(row["ItemCode"]),
+                            ItemName = Convert.ToString(row["ItemName"]),
                             Batch = Convert.ToString(row["Batch"]),
                             Quantity = Convert.ToDouble(row["Quantity"] == DBNull.Value ? 0 : row["Quantity"]),
                             FreeQuantity = Convert.ToDouble(row["FreeQuantity"] == DBNull.Value ? 0 : row["FreeQuantity"]),
                             PurchaseSaleRate = Convert.ToDouble(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
+                            OldPurchaseSaleRate = Convert.ToDouble(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
                             EffecivePurchaseSaleRate = Convert.ToDouble(row["EffecivePurchaseSaleRate"] == DBNull.Value ? 0 : row["EffecivePurchaseSaleRate"]),
                             PurchaseSaleTypeCode = Convert.ToString(row["PurchaseSaleTypeCode"]),
                             SurCharge = Convert.ToDouble(row["SurCharge"] == DBNull.Value ? 0 : row["SurCharge"]),
@@ -451,7 +463,35 @@ namespace PharmaDAL.Transaction
             return lineitems;
         }
 
+        public bool DeleteUnSavedData(long purchaseSaleBookHeaderID)
+        {
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    var lineItems = context.TempPurchaseSaleBookLineItem.Where(p => p.PurchaseSaleBookHeaderID == purchaseSaleBookHeaderID).ToList();
+                    var header = context.TempPurchaseSaleBookHeader.Where(p => p.PurchaseSaleBookHeaderID == purchaseSaleBookHeaderID).FirstOrDefault();
 
+                    if(lineItems != null && lineItems.Count > 0)
+                    {
+                        context.TempPurchaseSaleBookLineItem.RemoveRange(lineItems);
+                    }
 
+                    if(header != null)
+                    {
+                        context.TempPurchaseSaleBookHeader.Remove(header);
+                    }
+                    
+                    context.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return true;
+        }
     }
 }

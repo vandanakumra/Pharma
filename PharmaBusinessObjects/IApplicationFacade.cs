@@ -133,13 +133,13 @@ namespace PharmaBusinessObjects
         List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode);
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetPurchaseSaleBookLineItemForModify(long purchaseSaleBookHeaderID);
         PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID);
-
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity);
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(TransactionEntity transactionEntity);
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllTempBillAdjustmentForLedger(TransactionEntity transactionEntity);
         long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment);
         void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList);
-
+        void ClearTempBillAdjustment(TransactionEntity transactionEntity);
+        bool DeleteUnSavedData(long purchaseSaleBookHeaderID);
         List<SaleChangeType> GetSaleEntryChangeTypes();
         #endregion
     }

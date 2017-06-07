@@ -52,8 +52,6 @@ namespace PharmaBusiness.Transaction
             return new PurchaseBookDao(this.LoggedInUser).DeleteTempPurchaseBookLineItem(lineItem);
         }
 
-
-
         internal List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode)
         {
             return new PurchaseBookDao(this.LoggedInUser).GetLastNBatchNoForSupplierItem(supplierCode,itemCode);
@@ -90,7 +88,10 @@ namespace PharmaBusiness.Transaction
         }
 
 
-
+        internal bool DeleteUnSavedData(long purchaseSaleBookHeaderID)
+        {
+            return new PurchaseBookDao(this.LoggedInUser).DeleteUnSavedData(purchaseSaleBookHeaderID);
+        }
 
 
     }

@@ -782,6 +782,11 @@ namespace PharmaBusiness
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseSaleBookHeaderForModify(purchaseSaleBookHeaderID);
         }
 
+        public bool DeleteUnSavedData(long purchaseSaleBookHeaderID)
+        {
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).DeleteUnSavedData(purchaseSaleBookHeaderID);
+        }
+
 
         #endregion
 
@@ -849,6 +854,17 @@ namespace PharmaBusiness
             }
         }
 
+        public void ClearTempBillAdjustment(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                new ReceiptPaymentBiz(this.LoggedInUser).ClearTempBillAdjustment(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
         #endregion

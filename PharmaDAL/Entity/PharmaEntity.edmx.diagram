@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c66f9c683b4349a4a17dcbc69b0ea08a" Name="Diagram1">
+      <Diagram DiagramId="f7d57f5712a6430aa0b21172e58cc823" Name="Diagram1">
         <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerMaster" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="3.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.AccountType" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
