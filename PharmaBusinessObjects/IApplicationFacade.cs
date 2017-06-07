@@ -139,6 +139,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllTempBillAdjustmentForLedger(TransactionEntity transactionEntity);
         long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment);
         void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList);
+        void ClearTempBillAdjustment(TransactionEntity transactionEntity);
 
         List<SaleChangeType> GetSaleEntryChangeTypes();
         #endregion

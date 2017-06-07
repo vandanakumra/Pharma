@@ -158,7 +158,6 @@ namespace PharmaDAL.Transaction
             }         
         }
 
-
         public void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
         {
             try
@@ -199,5 +198,24 @@ namespace PharmaDAL.Transaction
             }
         }
 
+        public void ClearTempBillAdjustment(PharmaBusinessObjects.Transaction.TransactionEntity entity)
+        {
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                  var tempBillAdjustmentForEntity =  context.TempBillOutStandingsAudjustment.Where(q => q.ReceiptPaymentID == entity.ReceiptPaymentID
+                                                                && q.LedgerTypeCode == entity.EntityCode)
+                                                                .Select(q => q).ToList();
+
+                    context.TempBillOutStandingsAudjustment.RemoveRange(tempBillAdjustmentForEntity);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

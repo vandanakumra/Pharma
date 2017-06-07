@@ -850,6 +850,17 @@ namespace PharmaBusiness
             }
         }
 
+        public void ClearTempBillAdjustment(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                new ReceiptPaymentBiz(this.LoggedInUser).ClearTempBillAdjustment(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
         #endregion
