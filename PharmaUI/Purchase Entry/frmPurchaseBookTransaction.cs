@@ -107,7 +107,6 @@ namespace PharmaUI
             dgvLineItem.Columns["Amount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["Amount"].FillWeight = 5;
 
-
             dgvLineItem.Columns.Add("OldPurchaseSaleRate", "OldPurchaseSaleRate");
             dgvLineItem.Columns["OldPurchaseSaleRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["OldPurchaseSaleRate"].Visible = false;
@@ -172,7 +171,6 @@ namespace PharmaUI
             dgvLineItem.Columns["LocalCentral"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["LocalCentral"].Visible = false;
 
-
             dgvLineItem.Columns.Add("ConversionRate", "ConversionRate");
             dgvLineItem.Columns["ConversionRate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["ConversionRate"].Visible = false;
@@ -227,7 +225,7 @@ namespace PharmaUI
 
             dgvLineItem.Columns.Add("FifoID", "FifoID");
             dgvLineItem.Columns["FifoID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["FifoID"].Visible = false;            
+            dgvLineItem.Columns["FifoID"].Visible = false;          
 
 
             dgvLineItem.CellBeginEdit += DgvLineItem_CellBeginEdit;
