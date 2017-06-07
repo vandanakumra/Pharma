@@ -147,7 +147,7 @@ namespace PharmaDAL.Transaction
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
                         Amount= context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
-                        OSAmount = p.OSAmount
+                        OSAmount = p.OSAmount- context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
 
                     }).ToList();
                 }
