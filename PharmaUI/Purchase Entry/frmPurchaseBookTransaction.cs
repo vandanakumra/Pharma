@@ -1396,6 +1396,18 @@ namespace PharmaUI
                         frm.FormClosed += AllBillForSuppier_FormClosed;
                         frm.ShowDialog();
 
+                        if (dgvLineItem.Rows.Count > 0)
+                        {
+                            dgvLineItem.Rows[0].Selected = false;
+
+                            dgvLineItem.Focus();
+                            dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                        }
+                        else
+                        {
+                            txtInvoiceNumber.Focus();
+                        }
+
                     }
                     else if (!string.IsNullOrEmpty(txt.Text))
                     {
@@ -1483,23 +1495,38 @@ namespace PharmaUI
                 if(header !=null)
                 {
                     txtInvoiceNumber.Text = header.PurchaseBillNo;
-                    cbxPurchaseType.SelectedItem = header.LocalCentral == "L" ? "Local" : "Central";
+                    string localCentral = header.LocalCentral == "L" ? "Local" : "Central";
+
+                    int id = applicationFacade.GetPurchaseEntryTypes().Where(p => p.PurchaseTypeName.ToLower().Equals(localCentral.ToLower())).FirstOrDefault().ID;
+
+                    cbxPurchaseType.SelectedValue = id;
                     purchaseSaleBookHeaderID = header.PurchaseSaleBookHeaderID;
                     oldPurchaseSaleBookHeaderID = header.OldPurchaseSaleBookHeaderID;
+
+                    if(header.LocalCentral == "C")
+                    {
+
+                        cbxPurchaseFormType.DataSource = applicationFacade.GetPurchaseFormTypes(id);
+                        cbxPurchaseFormType.DisplayMember = "FormTypeName";
+                        cbxPurchaseFormType.ValueMember = "ID";
+
+                        cbxPurchaseFormType.Visible = true;
+                        cbxPurchaseFormType.SelectedValue = header.PurchaseEntryFormID;
+                    }
 
                     List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID);
 
                     FillGridWithLineItems(lineitems);
 
-                    if(dgvLineItem.Rows.Count > 0)
-                    {
-                        dgvLineItem.Focus();
-                        dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
-                    }
-                    else
-                    {
-                        txtInvoiceNumber.Focus();
-                    }
+                    //if(dgvLineItem.Rows.Count > 0)
+                    //{
+                    //    dgvLineItem.Focus();
+                    //    dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                    //}
+                    //else
+                    //{
+                    //    txtInvoiceNumber.Focus();
+                    //}
 
                 }
             }
