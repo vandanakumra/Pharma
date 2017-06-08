@@ -17,8 +17,8 @@ namespace PharmaBusinessObjects.Transaction.ReceiptPayment
         public System.DateTime InvoiceDate { get; set; }
         public string LedgerType { get; set; }
         public string LedgerTypeCode { get; set; }
-        public double BillAmount { get; set; }
-        public double OSAmount { get; set; }
+        public decimal BillAmount { get; set; }
+        public decimal OSAmount { get; set; }
         public bool ? IsHold { get; set; }
         public string HOLDRemarks { get; set; }
     }

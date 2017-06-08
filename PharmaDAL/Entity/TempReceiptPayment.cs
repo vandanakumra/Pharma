@@ -27,8 +27,8 @@ namespace PharmaDAL.Entity
         public string LedgerType { get; set; }
         public string LedgerTypeCode { get; set; }
         public string PaymentMode { get; set; }
-        public Nullable<double> Ammount { get; set; }
-        public Nullable<double> BillAmmount { get; set; }
+        public Nullable<decimal> Ammount { get; set; }
+        public Nullable<decimal> BillAmmount { get; set; }
         public string BankAccountLedgerTypeCode { get; set; }
         public Nullable<System.DateTime> ChequeDate { get; set; }
         public Nullable<System.DateTime> ChequeClearDate { get; set; }

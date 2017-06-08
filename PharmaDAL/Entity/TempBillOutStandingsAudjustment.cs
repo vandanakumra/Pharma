@@ -26,7 +26,7 @@ namespace PharmaDAL.Entity
         public System.DateTime AdjustmentVoucherDate { get; set; }
         public string LedgerType { get; set; }
         public string LedgerTypeCode { get; set; }
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         public string ChequeNumber { get; set; }
     
         public virtual BillOutStandings BillOutStandings { get; set; }

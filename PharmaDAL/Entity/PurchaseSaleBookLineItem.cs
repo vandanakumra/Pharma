@@ -23,45 +23,45 @@ namespace PharmaDAL.Entity
         public string ItemCode { get; set; }
         public string Batch { get; set; }
         public string BatchNew { get; set; }
-        public double Quantity { get; set; }
-        public Nullable<double> FreeQuantity { get; set; }
-        public double PurchaseSaleRate { get; set; }
-        public Nullable<double> EffecivePurchaseSaleRate { get; set; }
+        public decimal Quantity { get; set; }
+        public Nullable<decimal> FreeQuantity { get; set; }
+        public decimal PurchaseSaleRate { get; set; }
+        public Nullable<decimal> EffecivePurchaseSaleRate { get; set; }
         public string PurchaseSaleTypeCode { get; set; }
-        public Nullable<double> SurCharge { get; set; }
-        public Nullable<double> SalePurchaseTax { get; set; }
+        public Nullable<decimal> SurCharge { get; set; }
+        public Nullable<decimal> SalePurchaseTax { get; set; }
         public string LocalCentral { get; set; }
-        public Nullable<double> SGST { get; set; }
-        public Nullable<double> IGST { get; set; }
-        public Nullable<double> CGST { get; set; }
-        public double Amount { get; set; }
-        public Nullable<double> Discount { get; set; }
-        public Nullable<double> SpecialDiscount { get; set; }
-        public Nullable<double> DiscountQuantity { get; set; }
-        public Nullable<double> VolumeDiscount { get; set; }
-        public Nullable<double> Scheme1 { get; set; }
-        public Nullable<double> Scheme2 { get; set; }
+        public Nullable<decimal> SGST { get; set; }
+        public Nullable<decimal> IGST { get; set; }
+        public Nullable<decimal> CGST { get; set; }
+        public decimal Amount { get; set; }
+        public Nullable<decimal> Discount { get; set; }
+        public Nullable<decimal> SpecialDiscount { get; set; }
+        public Nullable<decimal> DiscountQuantity { get; set; }
+        public Nullable<decimal> VolumeDiscount { get; set; }
+        public Nullable<decimal> Scheme1 { get; set; }
+        public Nullable<decimal> Scheme2 { get; set; }
         public bool IsHalfScheme { get; set; }
-        public Nullable<double> HalfSchemeRate { get; set; }
-        public Nullable<double> CostAmount { get; set; }
-        public Nullable<double> GrossAmount { get; set; }
-        public Nullable<double> SchemeAmount { get; set; }
-        public Nullable<double> DiscountAmount { get; set; }
-        public Nullable<double> SurchargeAmount { get; set; }
-        public Nullable<double> ConversionRate { get; set; }
-        public Nullable<double> MRP { get; set; }
+        public Nullable<decimal> HalfSchemeRate { get; set; }
+        public Nullable<decimal> CostAmount { get; set; }
+        public Nullable<decimal> GrossAmount { get; set; }
+        public Nullable<decimal> SchemeAmount { get; set; }
+        public Nullable<decimal> DiscountAmount { get; set; }
+        public Nullable<decimal> SurchargeAmount { get; set; }
+        public Nullable<decimal> ConversionRate { get; set; }
+        public Nullable<decimal> MRP { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
-        public Nullable<double> SaleRate { get; set; }
-        public Nullable<double> WholeSaleRate { get; set; }
-        public Nullable<double> SpecialRate { get; set; }
+        public Nullable<decimal> SaleRate { get; set; }
+        public Nullable<decimal> WholeSaleRate { get; set; }
+        public Nullable<decimal> SpecialRate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-        public Nullable<double> TaxAmount { get; set; }
-        public Nullable<double> SpecialDiscountAmount { get; set; }
-        public Nullable<double> VolumeDiscountAmount { get; set; }
-        public Nullable<double> TotalDiscountAmount { get; set; }
+        public Nullable<decimal> TaxAmount { get; set; }
+        public Nullable<decimal> SpecialDiscountAmount { get; set; }
+        public Nullable<decimal> VolumeDiscountAmount { get; set; }
+        public Nullable<decimal> TotalDiscountAmount { get; set; }
     
         public virtual FIFO FIFO { get; set; }
         public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }

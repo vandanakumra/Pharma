@@ -113,10 +113,10 @@ namespace PharmaUI
             return (T)property.GetCustomAttributes(attrType, false).First();
         }
 
-        public static double? SafeConversionDouble(string inputVal)
+        public static decimal? SafeConversiondecimal(string inputVal)
         {
-            double outputVal;
-            if (!double.TryParse(inputVal, out outputVal))
+            decimal outputVal;
+            if (!decimal.TryParse(inputVal, out outputVal))
             {
                 return null;
             }

@@ -50,13 +50,13 @@ namespace PharmaBusinessObjects.Master
         public bool IsLessExcise { get; set; }
         public int CustomerTypeID { get; set; }
         public int InterestTypeID { get; set; }
-        public double ?  MaxOSAmount { get; set; }
+        public decimal ?  MaxOSAmount { get; set; }
         public  int ? MaxNumOfOSBill { get; set; }
-        public double ?  MaxBillAmount { get; set; }
+        public decimal ?  MaxBillAmount { get; set; }
         public  int ? MaxGracePeriod { get; set; }
         public string SaleBillFormat { get; set; }
         public bool IsFollowConditionStrictly { get; set; }
-        public double ?  Discount { get; set; }
+        public decimal ?  Discount { get; set; }
         public string CentralLocal { get; set; }
         public List<CustomerCopanyDiscount> CustomerCopanyDiscountList { get; set; }
     }

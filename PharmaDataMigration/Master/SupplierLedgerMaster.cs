@@ -61,7 +61,7 @@ namespace PharmaDataMigration.Master
                                 ResidentPhone = Convert.ToString(dr["Telr"]).TrimEnd(),
                                 EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
                                 AreaId = areaID,
-                                CreditDebit = Convert.ToDouble(dr["Abop"]) > 0 ? Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.D) : Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.C),
+                                CreditDebit = Convert.ToDecimal(dr["Abop"]) > 0 ? Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.D) : Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.C),
                                 DLNo = Convert.ToString(dr["Stnol"]).TrimEnd(),
                                 OpeningBal = Convert.ToDecimal(dr["Abop"]),
                                 TaxRetail = Convert.ToString(dr["Vat"]).TrimEnd(),

@@ -22,7 +22,7 @@ namespace PharmaDAL.Entity
         public string LedgerType { get; set; }
         public string LedgerTypeCode { get; set; }
         public string NARRATION { get; set; }
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         public string DebitCredit { get; set; }
         public string Status { get; set; }
         public bool IsChequeClear { get; set; }
