@@ -13,7 +13,7 @@
           <Property Name="AccountLedgerCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="AccountLedgerName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="AccountLedgerTypeId" Type="int" Nullable="false" />
-          <Property Name="OpeningBalance" Type="float" Nullable="false" />
+          <Property Name="OpeningBalance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CreditDebit" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="AccountTypeId" Type="int" Nullable="false" />
           <Property Name="DebitControlCodeID" Type="int" />
@@ -70,8 +70,8 @@
           <Property Name="VoucherDate" Type="datetime" Nullable="false" />
           <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
-          <Property Name="BillAmount" Type="float" Nullable="false" />
-          <Property Name="OSAmount" Type="float" Nullable="false" />
+          <Property Name="BillAmount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OSAmount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IsHold" Type="bit" Nullable="false" />
           <Property Name="HOLDRemarks" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -91,7 +91,7 @@
           <Property Name="AdjustmentVoucherDate" Type="datetime" Nullable="false" />
           <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
-          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="CompanyMaster">
@@ -119,9 +119,9 @@
           <Property Name="CustomerLedgerID" Type="int" Nullable="false" />
           <Property Name="CompanyID" Type="int" Nullable="false" />
           <Property Name="ItemID" Type="int" />
-          <Property Name="Normal" Type="float" />
-          <Property Name="Breakage" Type="float" />
-          <Property Name="Expired" Type="float" />
+          <Property Name="Normal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Breakage" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Expired" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IsLessEcise" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerLedger">
@@ -159,13 +159,13 @@
           <Property Name="IsLessExcise" Type="bit" Nullable="false" />
           <Property Name="CustomerTypeID" Type="int" Nullable="false" />
           <Property Name="InterestTypeID" Type="int" Nullable="false" />
-          <Property Name="MaxOSAmount" Type="float" />
+          <Property Name="MaxOSAmount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="MaxNumOfOSBill" Type="int" />
-          <Property Name="MaxBillAmount" Type="float" />
+          <Property Name="MaxBillAmount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="MaxGracePeriod" Type="int" />
           <Property Name="SaleBillFormat" Type="nvarchar" MaxLength="10" />
           <Property Name="IsFollowConditionStrictly" Type="bit" Nullable="false" />
-          <Property Name="Discount" Type="float" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CentralLocal" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -196,17 +196,17 @@
           <Property Name="PurchaseBillNo" Type="nvarchar" MaxLength="20" />
           <Property Name="Batch" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="ExpiryDate" Type="datetime" />
-          <Property Name="Quantity" Type="float" Nullable="false" />
-          <Property Name="BalanceQuanity" Type="float" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="BalanceQuanity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PurchaseTypeId" Type="int" />
-          <Property Name="PurchaseRate" Type="float" Nullable="false" />
-          <Property Name="EffectivePurchaseRate" Type="float" />
-          <Property Name="SaleRate" Type="float" Nullable="false" />
-          <Property Name="WholeSaleRate" Type="float" />
-          <Property Name="SpecialRate" Type="float" />
-          <Property Name="MRP" Type="float" Nullable="false" />
-          <Property Name="Scheme1" Type="float" />
-          <Property Name="Scheme2" Type="float" />
+          <Property Name="PurchaseRate" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="EffectivePurchaseRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SaleRate" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="WholeSaleRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MRP" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Scheme1" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme2" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IsOnHold" Type="bit" />
           <Property Name="OnHoldRemarks" Type="nvarchar" MaxLength="200" />
           <Property Name="MfgDate" Type="datetime" />
@@ -220,34 +220,34 @@
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="ItemName" Type="nvarchar" MaxLength="30" />
           <Property Name="CompanyID" Type="int" Nullable="false" />
-          <Property Name="ConversionRate" Type="float" />
+          <Property Name="ConversionRate" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ShortName" Type="nvarchar" MaxLength="10" />
           <Property Name="Packing" Type="nvarchar" MaxLength="10" />
-          <Property Name="PurchaseRate" Type="float" />
-          <Property Name="MRP" Type="float" Nullable="false" />
-          <Property Name="SaleRate" Type="float" />
-          <Property Name="SpecialRate" Type="float" />
-          <Property Name="WholeSaleRate" Type="float" />
-          <Property Name="SaleExcise" Type="float" />
-          <Property Name="SurchargeOnSale" Type="float" />
-          <Property Name="TaxOnSale" Type="float" />
-          <Property Name="Scheme1" Type="float" />
-          <Property Name="Scheme2" Type="float" />
-          <Property Name="PurchaseExcise" Type="float" />
+          <Property Name="PurchaseRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MRP" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SaleRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="WholeSaleRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SaleExcise" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SurchargeOnSale" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TaxOnSale" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme1" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme2" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PurchaseExcise" Type="decimal" Precision="18" Scale="0" />
           <Property Name="UPC" Type="nvarchar" MaxLength="16" />
           <Property Name="IsHalfScheme" Type="bit" Nullable="false" />
           <Property Name="IsQTRScheme" Type="bit" Nullable="false" />
-          <Property Name="SpecialDiscount" Type="float" />
-          <Property Name="SpecialDiscountOnQty" Type="float" />
+          <Property Name="SpecialDiscount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscountOnQty" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IsFixedDiscount" Type="bit" Nullable="false" />
-          <Property Name="FixedDiscountRate" Type="float" />
-          <Property Name="MaximumQty" Type="float" />
-          <Property Name="MaximumDiscount" Type="float" />
-          <Property Name="SurchargeOnPurchase" Type="float" />
-          <Property Name="TaxOnPurchase" Type="float" />
-          <Property Name="DiscountRecieved" Type="float" />
-          <Property Name="SpecialDiscountRecieved" Type="float" />
-          <Property Name="QtyPerCase" Type="float" />
+          <Property Name="FixedDiscountRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MaximumQty" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MaximumDiscount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SurchargeOnPurchase" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TaxOnPurchase" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountRecieved" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscountRecieved" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="QtyPerCase" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Location" Type="nvarchar" MaxLength="5" />
           <Property Name="MinimumStock" Type="int" />
           <Property Name="MaximumStock" Type="int" />
@@ -260,8 +260,8 @@
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="BATCH" Type="nvarchar" MaxLength="20" />
           <Property Name="ExpiryDate" Type="datetime" />
-          <Property Name="OpeningQty" Type="float" />
-          <Property Name="ClosingQty" Type="float" />
+          <Property Name="OpeningQty" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ClosingQty" Type="decimal" Precision="18" Scale="0" />
           <Property Name="SaltCode" Type="nvarchar" MaxLength="50" />
           <Property Name="SaltName" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -353,42 +353,42 @@
           <Property Name="PurchaseBillNo" Type="nvarchar" MaxLength="20" />
           <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
-          <Property Name="Amount01" Type="float" />
-          <Property Name="Amount02" Type="float" />
-          <Property Name="Amount03" Type="float" />
-          <Property Name="Amount04" Type="float" />
-          <Property Name="Amount05" Type="float" />
-          <Property Name="Amount06" Type="float" />
-          <Property Name="Amount07" Type="float" />
-          <Property Name="SGST01" Type="float" />
-          <Property Name="SGST02" Type="float" />
-          <Property Name="SGST03" Type="float" />
-          <Property Name="SGST04" Type="float" />
-          <Property Name="SGST05" Type="float" />
-          <Property Name="SGST06" Type="float" />
-          <Property Name="SGST07" Type="float" />
-          <Property Name="IGST01" Type="float" />
-          <Property Name="IGST02" Type="float" />
-          <Property Name="IGST03" Type="float" />
-          <Property Name="IGST04" Type="float" />
-          <Property Name="IGST05" Type="float" />
-          <Property Name="IGST06" Type="float" />
-          <Property Name="IGST07" Type="float" />
-          <Property Name="CGST01" Type="float" />
-          <Property Name="CGST02" Type="float" />
-          <Property Name="CGST03" Type="float" />
-          <Property Name="CGST04" Type="float" />
-          <Property Name="CGST05" Type="float" />
-          <Property Name="CGST06" Type="float" />
-          <Property Name="CGST07" Type="float" />
-          <Property Name="TotalTaxAmount" Type="float" Nullable="false" />
-          <Property Name="SurchargeAmount" Type="float" />
-          <Property Name="TotalBillAmount" Type="float" />
-          <Property Name="TotalCostAmount" Type="float" />
-          <Property Name="TotalGrossAmount" Type="float" />
-          <Property Name="TotalSchemeAmount" Type="float" />
-          <Property Name="TotalDiscountAmount" Type="float" />
-          <Property Name="OtherAmount" Type="float" />
+          <Property Name="Amount01" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount02" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount03" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount04" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount05" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount06" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount07" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST01" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST02" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST03" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST04" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST05" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST06" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST07" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST01" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST02" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST03" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST04" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST05" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST06" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST07" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST01" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST02" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST03" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST04" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST05" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST06" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST07" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalTaxAmount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SurchargeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalBillAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalCostAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalGrossAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalSchemeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalDiscountAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="OtherAmount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ZSMId" Type="int" />
           <Property Name="ASMId" Type="int" />
           <Property Name="RSMId" Type="int" />
@@ -408,9 +408,9 @@
           <Property Name="DeliveredBy" Type="nvarchar" MaxLength="150" />
           <Property Name="CourierName" Type="nvarchar" MaxLength="150" />
           <Property Name="CourierDate" Type="datetime" />
-          <Property Name="CourierWeight" Type="float" />
+          <Property Name="CourierWeight" Type="decimal" Precision="18" Scale="0" />
           <Property Name="PurchaseSaleEntryFormID" Type="int" />
-          <Property Name="LastBalance" Type="float" />
+          <Property Name="LastBalance" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
@@ -429,45 +429,45 @@
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="Batch" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="BatchNew" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Quantity" Type="float" Nullable="false" />
-          <Property Name="FreeQuantity" Type="float" />
-          <Property Name="PurchaseSaleRate" Type="float" Nullable="false" />
-          <Property Name="EffecivePurchaseSaleRate" Type="float" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FreeQuantity" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PurchaseSaleRate" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="EffecivePurchaseSaleRate" Type="decimal" Precision="18" Scale="0" />
           <Property Name="PurchaseSaleTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="SurCharge" Type="float" />
-          <Property Name="SalePurchaseTax" Type="float" />
+          <Property Name="SurCharge" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SalePurchaseTax" Type="decimal" Precision="18" Scale="0" />
           <Property Name="LocalCentral" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="SGST" Type="float" />
-          <Property Name="IGST" Type="float" />
-          <Property Name="CGST" Type="float" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Discount" Type="float" />
-          <Property Name="SpecialDiscount" Type="float" />
-          <Property Name="DiscountQuantity" Type="float" />
-          <Property Name="VolumeDiscount" Type="float" />
-          <Property Name="Scheme1" Type="float" />
-          <Property Name="Scheme2" Type="float" />
+          <Property Name="SGST" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountQuantity" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="VolumeDiscount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme1" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme2" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IsHalfScheme" Type="bit" Nullable="false" />
-          <Property Name="HalfSchemeRate" Type="float" />
-          <Property Name="CostAmount" Type="float" />
-          <Property Name="GrossAmount" Type="float" />
-          <Property Name="SchemeAmount" Type="float" />
-          <Property Name="DiscountAmount" Type="float" />
-          <Property Name="SurchargeAmount" Type="float" />
-          <Property Name="ConversionRate" Type="float" />
-          <Property Name="MRP" Type="float" />
+          <Property Name="HalfSchemeRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CostAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="GrossAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SchemeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SurchargeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ConversionRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MRP" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ExpiryDate" Type="datetime" />
-          <Property Name="SaleRate" Type="float" />
-          <Property Name="WholeSaleRate" Type="float" />
-          <Property Name="SpecialRate" Type="float" />
+          <Property Name="SaleRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="WholeSaleRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialRate" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
-          <Property Name="TaxAmount" Type="float" />
-          <Property Name="SpecialDiscountAmount" Type="float" />
-          <Property Name="VolumeDiscountAmount" Type="float" />
-          <Property Name="TotalDiscountAmount" Type="float" />
+          <Property Name="TaxAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscountAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="VolumeDiscountAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalDiscountAmount" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="PurchaseSaleEntryForm">
           <Key>
@@ -510,7 +510,7 @@
           <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="PaymentMode" Type="nchar" MaxLength="1" Nullable="false" />
-          <Property Name="Amount" Type="float" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="BankAccountLedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="ChequeDate" Type="datetime" />
           <Property Name="ChequeClearDate" Type="datetime" />
@@ -556,9 +556,9 @@
           <Property Name="SupplierLedgerID" Type="int" Nullable="false" />
           <Property Name="CompanyID" Type="int" Nullable="false" />
           <Property Name="ItemID" Type="int" />
-          <Property Name="Normal" Type="float" />
-          <Property Name="Breakage" Type="float" />
-          <Property Name="Expired" Type="float" />
+          <Property Name="Normal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Breakage" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Expired" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IsLessEcise" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SupplierLedger">
@@ -611,7 +611,7 @@
           <Property Name="AdjustmentVoucherDate" Type="datetime" Nullable="false" />
           <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
-          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookHeader">
@@ -625,42 +625,42 @@
           <Property Name="PurchaseBillNo" Type="nvarchar" MaxLength="20" />
           <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
-          <Property Name="Amount01" Type="float" />
-          <Property Name="Amount02" Type="float" />
-          <Property Name="Amount03" Type="float" />
-          <Property Name="Amount04" Type="float" />
-          <Property Name="Amount05" Type="float" />
-          <Property Name="Amount06" Type="float" />
-          <Property Name="Amount07" Type="float" />
-          <Property Name="SGST01" Type="float" />
-          <Property Name="SGST02" Type="float" />
-          <Property Name="SGST03" Type="float" />
-          <Property Name="SGST04" Type="float" />
-          <Property Name="SGST05" Type="float" />
-          <Property Name="SGST06" Type="float" />
-          <Property Name="SGST07" Type="float" />
-          <Property Name="IGST01" Type="float" />
-          <Property Name="IGST02" Type="float" />
-          <Property Name="IGST03" Type="float" />
-          <Property Name="IGST04" Type="float" />
-          <Property Name="IGST05" Type="float" />
-          <Property Name="IGST06" Type="float" />
-          <Property Name="IGST07" Type="float" />
-          <Property Name="CGST01" Type="float" />
-          <Property Name="CGST02" Type="float" />
-          <Property Name="CGST03" Type="float" />
-          <Property Name="CGST04" Type="float" />
-          <Property Name="CGST05" Type="float" />
-          <Property Name="CGST06" Type="float" />
-          <Property Name="CGST07" Type="float" />
-          <Property Name="TotalTaxAmount" Type="float" Nullable="false" />
-          <Property Name="SurchargeAmount" Type="float" />
-          <Property Name="TotalBillAmount" Type="float" />
-          <Property Name="TotalCostAmount" Type="float" />
-          <Property Name="TotalGrossAmount" Type="float" />
-          <Property Name="TotalSchemeAmount" Type="float" />
-          <Property Name="TotalDiscountAmount" Type="float" />
-          <Property Name="OtherAmount" Type="float" />
+          <Property Name="Amount01" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount02" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount03" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount04" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount05" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount06" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount07" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST01" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST02" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST03" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST04" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST05" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST06" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SGST07" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST01" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST02" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST03" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST04" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST05" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST06" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST07" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST01" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST02" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST03" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST04" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST05" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST06" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST07" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalTaxAmount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SurchargeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalBillAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalCostAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalGrossAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalSchemeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalDiscountAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="OtherAmount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="FreshBreakageExcess" Type="nvarchar" MaxLength="1" />
           <Property Name="ReturnBillNo" Type="nvarchar" MaxLength="20" />
           <Property Name="ReturBillDate" Type="datetime" />
@@ -672,9 +672,9 @@
           <Property Name="DeliveredBy" Type="nvarchar" MaxLength="150" />
           <Property Name="CourierName" Type="nvarchar" MaxLength="150" />
           <Property Name="CourierDate" Type="datetime" />
-          <Property Name="CourierWeight" Type="float" />
+          <Property Name="CourierWeight" Type="decimal" Precision="18" Scale="0" />
           <Property Name="PurchaseEntryFormID" Type="int" />
-          <Property Name="LastBalance" Type="float" />
+          <Property Name="LastBalance" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
@@ -694,47 +694,47 @@
           <Property Name="ItemCode" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="Batch" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="BatchNew" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Quantity" Type="float" Nullable="false" />
-          <Property Name="FreeQuantity" Type="float" />
-          <Property Name="PurchaseSaleRate" Type="float" Nullable="false" />
-          <Property Name="EffecivePurchaseSaleRate" Type="float" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FreeQuantity" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PurchaseSaleRate" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="EffecivePurchaseSaleRate" Type="decimal" Precision="18" Scale="0" />
           <Property Name="PurchaseSaleTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="SurCharge" Type="float" />
-          <Property Name="PurchaseSaleTax" Type="float" />
+          <Property Name="SurCharge" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PurchaseSaleTax" Type="decimal" Precision="18" Scale="0" />
           <Property Name="LocalCentral" Type="nvarchar" MaxLength="1" Nullable="false" />
-          <Property Name="SGST" Type="float" />
-          <Property Name="IGST" Type="float" />
-          <Property Name="CGST" Type="float" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Discount" Type="float" />
-          <Property Name="SpecialDiscount" Type="float" />
-          <Property Name="DiscountQuantity" Type="float" />
-          <Property Name="VolumeDiscount" Type="float" />
-          <Property Name="Scheme1" Type="float" />
-          <Property Name="Scheme2" Type="float" />
+          <Property Name="SGST" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IGST" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CGST" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountQuantity" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="VolumeDiscount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme1" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme2" Type="decimal" Precision="18" Scale="0" />
           <Property Name="IsHalfScheme" Type="bit" Nullable="false" />
-          <Property Name="HalfSchemeRate" Type="float" />
-          <Property Name="ConversionRate" Type="float" />
-          <Property Name="MRP" Type="float" />
+          <Property Name="HalfSchemeRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ConversionRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MRP" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ExpiryDate" Type="datetime" />
-          <Property Name="SaleRate" Type="float" />
-          <Property Name="WholeSaleRate" Type="float" />
-          <Property Name="SpecialRate" Type="float" />
-          <Property Name="CostAmount" Type="float" />
-          <Property Name="GrossAmount" Type="float" />
-          <Property Name="SchemeAmount" Type="float" />
-          <Property Name="DiscountAmount" Type="float" />
-          <Property Name="SurchargeAmount" Type="float" />
-          <Property Name="TaxAmount" Type="float" />
-          <Property Name="SpecialDiscountAmount" Type="float" />
-          <Property Name="VolumeDiscountAmount" Type="float" />
-          <Property Name="TotalDiscountAmount" Type="float" />
+          <Property Name="SaleRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="WholeSaleRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialRate" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CostAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="GrossAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SchemeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SurchargeAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TaxAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscountAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="VolumeDiscountAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalDiscountAmount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
-          <Property Name="UsedQuantity" Type="float" />
-          <Property Name="BalanceQuantity" Type="float" />
+          <Property Name="UsedQuantity" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="BalanceQuantity" Type="decimal" Precision="18" Scale="0" />
           <Property Name="OldPurchaseSaleBookLineItemID" Type="bigint" />
         </EntityType>
         <EntityType Name="TempReceiptPayment">
@@ -748,8 +748,8 @@
           <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="PaymentMode" Type="nchar" MaxLength="1" Nullable="false" />
-          <Property Name="Ammount" Type="float" />
-          <Property Name="BillAmmount" Type="float" />
+          <Property Name="Ammount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="BillAmmount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="BankAccountLedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="ChequeDate" Type="datetime" />
           <Property Name="ChequeClearDate" Type="datetime" />
@@ -770,7 +770,7 @@
           <Property Name="LedgerType" Type="nvarchar" MaxLength="50" />
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="NARRATION" Type="nvarchar" MaxLength="200" />
-          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DebitCredit" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="1" />
           <Property Name="IsChequeClear" Type="bit" Nullable="false" />
@@ -1577,7 +1577,7 @@
           <Property Name="AccountLedgerCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccountLedgerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccountLedgerTypeId" Type="Int32" Nullable="false" />
-          <Property Name="OpeningBalance" Type="Double" Nullable="false" />
+          <Property Name="OpeningBalance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CreditDebit" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="AccountTypeId" Type="Int32" Nullable="false" />
           <Property Name="DebitControlCodeID" Type="Int32" />
@@ -1645,8 +1645,8 @@
           <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="BillAmount" Type="Double" Nullable="false" />
-          <Property Name="OSAmount" Type="Double" Nullable="false" />
+          <Property Name="BillAmount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OSAmount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IsHold" Type="Boolean" Nullable="false" />
           <Property Name="HOLDRemarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_BillOutStandings_PurchaseSaleBookHeader" FromRole="BillOutStandings" ToRole="PurchaseSaleBookHeader" />
@@ -1670,7 +1670,7 @@
           <Property Name="AdjustmentVoucherDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BillOutStandings" Relationship="Self.FK_BillOutStandingsAudjustment_BillOutStandings" FromRole="BillOutStandingsAudjustment" ToRole="BillOutStandings" />
           <NavigationProperty Name="BillOutStandings1" Relationship="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings" FromRole="BillOutStandingsAudjustment" ToRole="BillOutStandings" />
@@ -1707,9 +1707,9 @@
           <Property Name="CustomerLedgerID" Type="Int32" Nullable="false" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
           <Property Name="ItemID" Type="Int32" />
-          <Property Name="Normal" Type="Double" />
-          <Property Name="Breakage" Type="Double" />
-          <Property Name="Expired" Type="Double" />
+          <Property Name="Normal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Breakage" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Expired" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IsLessEcise" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_CustomerCompanyDiscountRef_CompanyMaster" FromRole="CustomerCompanyDiscountRef" ToRole="CompanyMaster" />
           <NavigationProperty Name="CustomerLedger" Relationship="Self.FK_CustomerCompanyDiscountRef_CustomerLedger" FromRole="CustomerCompanyDiscountRef" ToRole="CustomerLedger" />
@@ -1750,13 +1750,13 @@
           <Property Name="IsLessExcise" Type="Boolean" Nullable="false" />
           <Property Name="CustomerTypeID" Type="Int32" Nullable="false" />
           <Property Name="InterestTypeID" Type="Int32" Nullable="false" />
-          <Property Name="MaxOSAmount" Type="Double" />
+          <Property Name="MaxOSAmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="MaxNumOfOSBill" Type="Int32" />
-          <Property Name="MaxBillAmount" Type="Double" />
+          <Property Name="MaxBillAmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="MaxGracePeriod" Type="Int32" />
           <Property Name="SaleBillFormat" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IsFollowConditionStrictly" Type="Boolean" Nullable="false" />
-          <Property Name="Discount" Type="Double" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CentralLocal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
@@ -1797,17 +1797,17 @@
           <Property Name="PurchaseBillNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Batch" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
-          <Property Name="BalanceQuanity" Type="Double" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="BalanceQuanity" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PurchaseTypeId" Type="Int32" />
-          <Property Name="PurchaseRate" Type="Double" Nullable="false" />
-          <Property Name="EffectivePurchaseRate" Type="Double" />
-          <Property Name="SaleRate" Type="Double" Nullable="false" />
-          <Property Name="WholeSaleRate" Type="Double" />
-          <Property Name="SpecialRate" Type="Double" />
-          <Property Name="MRP" Type="Double" Nullable="false" />
-          <Property Name="Scheme1" Type="Double" />
-          <Property Name="Scheme2" Type="Double" />
+          <Property Name="PurchaseRate" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="EffectivePurchaseRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SaleRate" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="WholeSaleRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MRP" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Scheme1" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme2" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IsOnHold" Type="Boolean" />
           <Property Name="OnHoldRemarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="MfgDate" Type="DateTime" Precision="3" />
@@ -1824,34 +1824,34 @@
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ItemName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
-          <Property Name="ConversionRate" Type="Double" />
+          <Property Name="ConversionRate" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ShortName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Packing" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="PurchaseRate" Type="Double" />
-          <Property Name="MRP" Type="Double" Nullable="false" />
-          <Property Name="SaleRate" Type="Double" />
-          <Property Name="SpecialRate" Type="Double" />
-          <Property Name="WholeSaleRate" Type="Double" />
-          <Property Name="SaleExcise" Type="Double" />
-          <Property Name="SurchargeOnSale" Type="Double" />
-          <Property Name="TaxOnSale" Type="Double" />
-          <Property Name="Scheme1" Type="Double" />
-          <Property Name="Scheme2" Type="Double" />
-          <Property Name="PurchaseExcise" Type="Double" />
+          <Property Name="PurchaseRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MRP" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SaleRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="WholeSaleRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SaleExcise" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SurchargeOnSale" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TaxOnSale" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme1" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme2" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PurchaseExcise" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="UPC" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="IsHalfScheme" Type="Boolean" Nullable="false" />
           <Property Name="IsQTRScheme" Type="Boolean" Nullable="false" />
-          <Property Name="SpecialDiscount" Type="Double" />
-          <Property Name="SpecialDiscountOnQty" Type="Double" />
+          <Property Name="SpecialDiscount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscountOnQty" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IsFixedDiscount" Type="Boolean" Nullable="false" />
-          <Property Name="FixedDiscountRate" Type="Double" />
-          <Property Name="MaximumQty" Type="Double" />
-          <Property Name="MaximumDiscount" Type="Double" />
-          <Property Name="SurchargeOnPurchase" Type="Double" />
-          <Property Name="TaxOnPurchase" Type="Double" />
-          <Property Name="DiscountRecieved" Type="Double" />
-          <Property Name="SpecialDiscountRecieved" Type="Double" />
-          <Property Name="QtyPerCase" Type="Double" />
+          <Property Name="FixedDiscountRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MaximumQty" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MaximumDiscount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SurchargeOnPurchase" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TaxOnPurchase" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountRecieved" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscountRecieved" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="QtyPerCase" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Location" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="MinimumStock" Type="Int32" />
           <Property Name="MaximumStock" Type="Int32" />
@@ -1864,8 +1864,8 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="BATCH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
-          <Property Name="OpeningQty" Type="Double" />
-          <Property Name="ClosingQty" Type="Double" />
+          <Property Name="OpeningQty" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ClosingQty" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="SaltCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SaltName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
@@ -1973,42 +1973,42 @@
           <Property Name="PurchaseBillNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Amount01" Type="Double" />
-          <Property Name="Amount02" Type="Double" />
-          <Property Name="Amount03" Type="Double" />
-          <Property Name="Amount04" Type="Double" />
-          <Property Name="Amount05" Type="Double" />
-          <Property Name="Amount06" Type="Double" />
-          <Property Name="Amount07" Type="Double" />
-          <Property Name="SGST01" Type="Double" />
-          <Property Name="SGST02" Type="Double" />
-          <Property Name="SGST03" Type="Double" />
-          <Property Name="SGST04" Type="Double" />
-          <Property Name="SGST05" Type="Double" />
-          <Property Name="SGST06" Type="Double" />
-          <Property Name="SGST07" Type="Double" />
-          <Property Name="IGST01" Type="Double" />
-          <Property Name="IGST02" Type="Double" />
-          <Property Name="IGST03" Type="Double" />
-          <Property Name="IGST04" Type="Double" />
-          <Property Name="IGST05" Type="Double" />
-          <Property Name="IGST06" Type="Double" />
-          <Property Name="IGST07" Type="Double" />
-          <Property Name="CGST01" Type="Double" />
-          <Property Name="CGST02" Type="Double" />
-          <Property Name="CGST03" Type="Double" />
-          <Property Name="CGST04" Type="Double" />
-          <Property Name="CGST05" Type="Double" />
-          <Property Name="CGST06" Type="Double" />
-          <Property Name="CGST07" Type="Double" />
-          <Property Name="TotalTaxAmount" Type="Double" Nullable="false" />
-          <Property Name="SurchargeAmount" Type="Double" />
-          <Property Name="TotalBillAmount" Type="Double" />
-          <Property Name="TotalCostAmount" Type="Double" />
-          <Property Name="TotalGrossAmount" Type="Double" />
-          <Property Name="TotalSchemeAmount" Type="Double" />
-          <Property Name="TotalDiscountAmount" Type="Double" />
-          <Property Name="OtherAmount" Type="Double" />
+          <Property Name="Amount01" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount02" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount03" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount04" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount05" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount06" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount07" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST01" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST02" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST03" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST04" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST05" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST06" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST07" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST01" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST02" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST03" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST04" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST05" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST06" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST07" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST01" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST02" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST03" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST04" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST05" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST06" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST07" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalTaxAmount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SurchargeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalBillAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalCostAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalGrossAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalSchemeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalDiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OtherAmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ZSMId" Type="Int32" />
           <Property Name="ASMId" Type="Int32" />
           <Property Name="RSMId" Type="Int32" />
@@ -2028,9 +2028,9 @@
           <Property Name="DeliveredBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CourierName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CourierDate" Type="DateTime" Precision="3" />
-          <Property Name="CourierWeight" Type="Double" />
+          <Property Name="CourierWeight" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PurchaseSaleEntryFormID" Type="Int32" />
-          <Property Name="LastBalance" Type="Double" />
+          <Property Name="LastBalance" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -2056,45 +2056,45 @@
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Batch" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BatchNew" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
-          <Property Name="FreeQuantity" Type="Double" />
-          <Property Name="PurchaseSaleRate" Type="Double" Nullable="false" />
-          <Property Name="EffecivePurchaseSaleRate" Type="Double" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FreeQuantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PurchaseSaleRate" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="EffecivePurchaseSaleRate" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PurchaseSaleTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SurCharge" Type="Double" />
-          <Property Name="SalePurchaseTax" Type="Double" />
+          <Property Name="SurCharge" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SalePurchaseTax" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="LocalCentral" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SGST" Type="Double" />
-          <Property Name="IGST" Type="Double" />
-          <Property Name="CGST" Type="Double" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
-          <Property Name="Discount" Type="Double" />
-          <Property Name="SpecialDiscount" Type="Double" />
-          <Property Name="DiscountQuantity" Type="Double" />
-          <Property Name="VolumeDiscount" Type="Double" />
-          <Property Name="Scheme1" Type="Double" />
-          <Property Name="Scheme2" Type="Double" />
+          <Property Name="SGST" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountQuantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="VolumeDiscount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme1" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme2" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IsHalfScheme" Type="Boolean" Nullable="false" />
-          <Property Name="HalfSchemeRate" Type="Double" />
-          <Property Name="CostAmount" Type="Double" />
-          <Property Name="GrossAmount" Type="Double" />
-          <Property Name="SchemeAmount" Type="Double" />
-          <Property Name="DiscountAmount" Type="Double" />
-          <Property Name="SurchargeAmount" Type="Double" />
-          <Property Name="ConversionRate" Type="Double" />
-          <Property Name="MRP" Type="Double" />
+          <Property Name="HalfSchemeRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CostAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GrossAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SchemeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SurchargeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ConversionRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MRP" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
-          <Property Name="SaleRate" Type="Double" />
-          <Property Name="WholeSaleRate" Type="Double" />
-          <Property Name="SpecialRate" Type="Double" />
+          <Property Name="SaleRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="WholeSaleRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialRate" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <Property Name="TaxAmount" Type="Double" />
-          <Property Name="SpecialDiscountAmount" Type="Double" />
-          <Property Name="VolumeDiscountAmount" Type="Double" />
-          <Property Name="TotalDiscountAmount" Type="Double" />
+          <Property Name="TaxAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="VolumeDiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalDiscountAmount" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_PurchaseSaleBookLineItem_FIFO" FromRole="PurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookLineItem" ToRole="PurchaseSaleBookHeader" />
         </EntityType>
@@ -2142,7 +2142,7 @@
           <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="PaymentMode" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Amount" Type="Double" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="BankAccountLedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ChequeDate" Type="DateTime" Precision="3" />
           <Property Name="ChequeClearDate" Type="DateTime" Precision="3" />
@@ -2195,9 +2195,9 @@
           <Property Name="SupplierLedgerID" Type="Int32" Nullable="false" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
           <Property Name="ItemID" Type="Int32" />
-          <Property Name="Normal" Type="Double" />
-          <Property Name="Breakage" Type="Double" />
-          <Property Name="Expired" Type="Double" />
+          <Property Name="Normal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Breakage" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Expired" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IsLessEcise" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_SupplierCompanyDiscountRef_CompanyMaster" FromRole="SupplierCompanyDiscountRef" ToRole="CompanyMaster" />
           <NavigationProperty Name="ItemMaster" Relationship="Self.FK_SupplierCompanyDiscountRef_ItemMaster" FromRole="SupplierCompanyDiscountRef" ToRole="ItemMaster" />
@@ -2256,7 +2256,7 @@
           <Property Name="AdjustmentVoucherDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BillOutStandings" Relationship="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings1" FromRole="TempBillOutStandingsAudjustment" ToRole="BillOutStandings" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" FromRole="TempBillOutStandingsAudjustment" ToRole="PurchaseSaleBookHeader" />
@@ -2273,42 +2273,42 @@
           <Property Name="PurchaseBillNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Amount01" Type="Double" />
-          <Property Name="Amount02" Type="Double" />
-          <Property Name="Amount03" Type="Double" />
-          <Property Name="Amount04" Type="Double" />
-          <Property Name="Amount05" Type="Double" />
-          <Property Name="Amount06" Type="Double" />
-          <Property Name="Amount07" Type="Double" />
-          <Property Name="SGST01" Type="Double" />
-          <Property Name="SGST02" Type="Double" />
-          <Property Name="SGST03" Type="Double" />
-          <Property Name="SGST04" Type="Double" />
-          <Property Name="SGST05" Type="Double" />
-          <Property Name="SGST06" Type="Double" />
-          <Property Name="SGST07" Type="Double" />
-          <Property Name="IGST01" Type="Double" />
-          <Property Name="IGST02" Type="Double" />
-          <Property Name="IGST03" Type="Double" />
-          <Property Name="IGST04" Type="Double" />
-          <Property Name="IGST05" Type="Double" />
-          <Property Name="IGST06" Type="Double" />
-          <Property Name="IGST07" Type="Double" />
-          <Property Name="CGST01" Type="Double" />
-          <Property Name="CGST02" Type="Double" />
-          <Property Name="CGST03" Type="Double" />
-          <Property Name="CGST04" Type="Double" />
-          <Property Name="CGST05" Type="Double" />
-          <Property Name="CGST06" Type="Double" />
-          <Property Name="CGST07" Type="Double" />
-          <Property Name="TotalTaxAmount" Type="Double" Nullable="false" />
-          <Property Name="SurchargeAmount" Type="Double" />
-          <Property Name="TotalBillAmount" Type="Double" />
-          <Property Name="TotalCostAmount" Type="Double" />
-          <Property Name="TotalGrossAmount" Type="Double" />
-          <Property Name="TotalSchemeAmount" Type="Double" />
-          <Property Name="TotalDiscountAmount" Type="Double" />
-          <Property Name="OtherAmount" Type="Double" />
+          <Property Name="Amount01" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount02" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount03" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount04" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount05" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount06" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount07" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST01" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST02" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST03" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST04" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST05" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST06" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SGST07" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST01" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST02" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST03" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST04" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST05" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST06" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST07" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST01" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST02" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST03" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST04" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST05" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST06" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST07" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalTaxAmount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SurchargeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalBillAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalCostAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalGrossAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalSchemeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalDiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OtherAmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="FreshBreakageExcess" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="ReturnBillNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ReturBillDate" Type="DateTime" Precision="3" />
@@ -2320,9 +2320,9 @@
           <Property Name="DeliveredBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CourierName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CourierDate" Type="DateTime" Precision="3" />
-          <Property Name="CourierWeight" Type="Double" />
+          <Property Name="CourierWeight" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PurchaseEntryFormID" Type="Int32" />
-          <Property Name="LastBalance" Type="Double" />
+          <Property Name="LastBalance" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -2343,47 +2343,47 @@
           <Property Name="ItemCode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Batch" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BatchNew" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
-          <Property Name="FreeQuantity" Type="Double" />
-          <Property Name="PurchaseSaleRate" Type="Double" Nullable="false" />
-          <Property Name="EffecivePurchaseSaleRate" Type="Double" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FreeQuantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PurchaseSaleRate" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="EffecivePurchaseSaleRate" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PurchaseSaleTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SurCharge" Type="Double" />
-          <Property Name="PurchaseSaleTax" Type="Double" />
+          <Property Name="SurCharge" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PurchaseSaleTax" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="LocalCentral" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SGST" Type="Double" />
-          <Property Name="IGST" Type="Double" />
-          <Property Name="CGST" Type="Double" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
-          <Property Name="Discount" Type="Double" />
-          <Property Name="SpecialDiscount" Type="Double" />
-          <Property Name="DiscountQuantity" Type="Double" />
-          <Property Name="VolumeDiscount" Type="Double" />
-          <Property Name="Scheme1" Type="Double" />
-          <Property Name="Scheme2" Type="Double" />
+          <Property Name="SGST" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IGST" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CGST" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountQuantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="VolumeDiscount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme1" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Scheme2" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IsHalfScheme" Type="Boolean" Nullable="false" />
-          <Property Name="HalfSchemeRate" Type="Double" />
-          <Property Name="ConversionRate" Type="Double" />
-          <Property Name="MRP" Type="Double" />
+          <Property Name="HalfSchemeRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ConversionRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MRP" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
-          <Property Name="SaleRate" Type="Double" />
-          <Property Name="WholeSaleRate" Type="Double" />
-          <Property Name="SpecialRate" Type="Double" />
-          <Property Name="CostAmount" Type="Double" />
-          <Property Name="GrossAmount" Type="Double" />
-          <Property Name="SchemeAmount" Type="Double" />
-          <Property Name="DiscountAmount" Type="Double" />
-          <Property Name="SurchargeAmount" Type="Double" />
-          <Property Name="TaxAmount" Type="Double" />
-          <Property Name="SpecialDiscountAmount" Type="Double" />
-          <Property Name="VolumeDiscountAmount" Type="Double" />
-          <Property Name="TotalDiscountAmount" Type="Double" />
+          <Property Name="SaleRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="WholeSaleRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialRate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CostAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GrossAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SchemeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SurchargeAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TaxAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SpecialDiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="VolumeDiscountAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalDiscountAmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <Property Name="UsedQuantity" Type="Double" />
-          <Property Name="BalanceQuantity" Type="Double" />
+          <Property Name="UsedQuantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="BalanceQuantity" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="OldPurchaseSaleBookLineItemID" Type="Int64" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="TempPurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="TempPurchaseSaleBookHeader" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookLineItem" ToRole="TempPurchaseSaleBookHeader" />
@@ -2399,8 +2399,8 @@
           <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="PaymentMode" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Ammount" Type="Double" />
-          <Property Name="BillAmmount" Type="Double" />
+          <Property Name="Ammount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="BillAmmount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="BankAccountLedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ChequeDate" Type="DateTime" Precision="3" />
           <Property Name="ChequeClearDate" Type="DateTime" Precision="3" />
@@ -2422,7 +2422,7 @@
           <Property Name="LedgerType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="NARRATION" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DebitCredit" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="IsChequeClear" Type="Boolean" Nullable="false" />

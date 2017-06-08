@@ -28,7 +28,7 @@ namespace PharmaDAL.Entity
         public string AccountLedgerCode { get; set; }
         public string AccountLedgerName { get; set; }
         public int AccountLedgerTypeId { get; set; }
-        public double OpeningBalance { get; set; }
+        public decimal OpeningBalance { get; set; }
         public string CreditDebit { get; set; }
         public int AccountTypeId { get; set; }
         public Nullable<int> DebitControlCodeID { get; set; }

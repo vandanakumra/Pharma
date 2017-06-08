@@ -14,7 +14,7 @@ namespace PharmaBusinessObjects.Master
         public int AccountLedgerTypeId { get; set; }
         public string AccountLedgerType { get; set; }
         public string AccountLedgerTypeSystemName { get; set; }
-        public double OpeningBalance { get; set; }
+        public decimal OpeningBalance { get; set; }
         public string CreditDebit { get; set; }
         public int AccountTypeId { get; set; }
         public string AccountType { get; set; }

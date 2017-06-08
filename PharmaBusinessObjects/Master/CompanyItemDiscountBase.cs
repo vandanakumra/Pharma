@@ -12,8 +12,8 @@ namespace PharmaBusinessObjects.Master
         public int CompanyID { get; set; }
         public string ItemName { get; set; }
         public int? ItemID { get; set; }
-        public double? Normal { get; set; }
-        public double? Breakage { get; set; }
-        public double? Expired { get; set; }
+        public decimal? Normal { get; set; }
+        public decimal? Breakage { get; set; }
+        public decimal? Expired { get; set; }
     }
 }

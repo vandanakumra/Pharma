@@ -16,7 +16,7 @@ namespace PharmaBusinessObjects.Transaction.ReceiptPayment
         public string LedgerTypeCode { get; set; }
         public string LedgerTypeName { get; set; }
         public string PaymentMode { get; set; }
-        public double ? Amount { get; set; }
+        public decimal ? Amount { get; set; }
         public string ChequeNumber { get; set; }
         public string BankAccountLedgerTypeCode { get; set; }
         public string BankAccountLedgerTypeName { get; set; }
@@ -25,7 +25,7 @@ namespace PharmaBusinessObjects.Transaction.ReceiptPayment
         public bool ? IsChequeCleared { get; set; }
         public string POST { get; set; }
         public string PISNumber { get; set; }
-        public double? UnadjustedAmount { get; set; }
-        public double? ConsumedAmount { get; set; }
+        public decimal? UnadjustedAmount { get; set; }
+        public decimal? ConsumedAmount { get; set; }
     }
 }

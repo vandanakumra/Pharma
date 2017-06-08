@@ -89,7 +89,7 @@ namespace PharmaDataMigration.Master
                                 ResidentPhone = Convert.ToString(dr["Telr"]).TrimEnd(),
                                 EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
                                 AreaId = areaID,
-                                CreditDebit = Convert.ToDouble(dr["Abop"]) > 0 ? Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.D) : Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.C),
+                                CreditDebit = Convert.ToDecimal(dr["Abop"]) > 0 ? Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.D) : Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.C),
                                 DLNo = "test", //Convert.ToString(dr["DRNO"]).TrimEnd(), //confirm -> increase size more than 20
                                 GSTNo = "test", //Convert.ToString(dr["Stnoc"]).TrimEnd() -> confirm
                                 CINNo = "test", //Convert.ToString(dr["Stnoc"]).TrimEnd() -> confirm
@@ -190,9 +190,9 @@ namespace PharmaDataMigration.Master
                                     CustomerLedgerID = customerLedgerID,
                                     CompanyID = companyID,
                                     ItemID = itemID,
-                                    Normal = Convert.ToDouble(dr["Disamt"]),
-                                    Breakage = Convert.ToDouble(dr["Disamtbe"]),
-                                    Expired = Convert.ToDouble(dr["Disamtex"]),
+                                    Normal = Convert.ToDecimal(dr["Disamt"]),
+                                    Breakage = Convert.ToDecimal(dr["Disamtbe"]),
+                                    Expired = Convert.ToDecimal(dr["Disamtex"]),
                                     IsLessEcise = Convert.ToString(dr["Less_ex"]) == "Y" ? true : false
                                 };
 

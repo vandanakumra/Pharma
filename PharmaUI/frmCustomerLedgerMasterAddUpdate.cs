@@ -261,15 +261,15 @@ namespace PharmaUI
 
                 customerLedgerMaster.SaleBillFormat = tbxSaleBillFormat.Text;
 
-                customerLedgerMaster.MaxOSAmount = ExtensionMethods.SafeConversionDouble(tbxMaxOSAmount.Text);
-                customerLedgerMaster.MaxBillAmount = ExtensionMethods.SafeConversionDouble(tbxMaxBillAmmount.Text);
+                customerLedgerMaster.MaxOSAmount = ExtensionMethods.SafeConversionDecimal(tbxMaxOSAmount.Text);
+                customerLedgerMaster.MaxBillAmount = ExtensionMethods.SafeConversionDecimal(tbxMaxBillAmmount.Text);
                 customerLedgerMaster.MaxNumOfOSBill = ExtensionMethods.SafeConversionInt(tbxMaxNumberOfOSBill.Text);
                 customerLedgerMaster.MaxGracePeriod = ExtensionMethods.SafeConversionInt(tbxMaxGracePeriod.Text);
 
                 Enum.TryParse<Choice>(cbxFollowConditionStrictly.SelectedValue.ToString(), out choice);
                 customerLedgerMaster.IsFollowConditionStrictly = choice == Choice.Yes;
 
-                customerLedgerMaster.Discount = ExtensionMethods.SafeConversionDouble(tbxDiscount.Text);
+                customerLedgerMaster.Discount = ExtensionMethods.SafeConversionDecimal(tbxDiscount.Text);
 
                 Enum.TryParse<LocalCentral>(cbxLocaLCentral.SelectedValue.ToString(), out localCentral);
                 customerLedgerMaster.CentralLocal = localCentral == LocalCentral.L ? "L" : "C";

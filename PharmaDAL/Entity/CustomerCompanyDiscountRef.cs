@@ -18,9 +18,9 @@ namespace PharmaDAL.Entity
         public int CustomerLedgerID { get; set; }
         public int CompanyID { get; set; }
         public Nullable<int> ItemID { get; set; }
-        public Nullable<double> Normal { get; set; }
-        public Nullable<double> Breakage { get; set; }
-        public Nullable<double> Expired { get; set; }
+        public Nullable<decimal> Normal { get; set; }
+        public Nullable<decimal> Breakage { get; set; }
+        public Nullable<decimal> Expired { get; set; }
         public bool IsLessEcise { get; set; }
     
         public virtual CompanyMaster CompanyMaster { get; set; }

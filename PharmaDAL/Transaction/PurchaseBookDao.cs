@@ -122,6 +122,7 @@ namespace PharmaDAL.Transaction
                     }
                 }
 
+
                 return purchaseBookAmounts;
             }
             catch (Exception ex)
@@ -288,11 +289,11 @@ namespace PharmaDAL.Transaction
                             PurchaseBookHeaderID = Convert.ToInt64(row["PurchaseSaleBookHeaderID"]),
                             PurchaseSaleTypeCode = Convert.ToString(row["PurchaseSaleTypeCode"]),
                             PurchaseSaleTypeName = Convert.ToString(row["PurchaseSaleTypeName"]),
-                            Amount = Convert.IsDBNull(row["Amount"]) ? 0L : Convert.ToDouble(row["Amount"]),
-                            IGST = Convert.IsDBNull(row["IGST"]) ? 0L : Convert.ToDouble(row["IGST"]),
-                            SGST = Convert.IsDBNull(row["SGST"]) ? 0L : Convert.ToDouble(row["SGST"]),
-                            CGST = Convert.IsDBNull(row["CGST"]) ? 0L : Convert.ToDouble(row["CGST"]),
-                            TaxApplicable = Convert.IsDBNull(row["TaxApplicable"]) ? 0L : Convert.ToDouble(row["TaxApplicable"])
+                            Amount = Convert.IsDBNull(row["Amount"]) ? 0L : Convert.ToDecimal(row["Amount"]),
+                            IGST = Convert.IsDBNull(row["IGST"]) ? 0L : Convert.ToDecimal(row["IGST"]),
+                            SGST = Convert.IsDBNull(row["SGST"]) ? 0L : Convert.ToDecimal(row["SGST"]),
+                            CGST = Convert.IsDBNull(row["CGST"]) ? 0L : Convert.ToDecimal(row["CGST"]),
+                            TaxApplicable = Convert.IsDBNull(row["TaxApplicable"]) ? 0L : Convert.ToDecimal(row["TaxApplicable"])
                         };
 
                         PurchaseAmountList.Add(obj);
@@ -300,7 +301,7 @@ namespace PharmaDAL.Transaction
                 }
             }
 
-            //double totalAmount = header.PurchaseAmountList.Sum(p => p.Amount) + header.PurchaseAmountList.Sum(p => p.TaxOnPurchase);
+            //decimal totalAmount = header.PurchaseAmountList.Sum(p => p.Amount) + header.PurchaseAmountList.Sum(p => p.TaxOnPurchase);
             //header.InvoiceAmount = totalAmount;
 
             return PurchaseAmountList;
@@ -371,6 +372,9 @@ namespace PharmaDAL.Transaction
                         header.LedgerTypeCode = Convert.ToString(dt.Rows[0]["LedgerTypeCode"]);
                         header.LocalCentral = Convert.ToString(dt.Rows[0]["LocalCentral"]);
                         header.OldPurchaseSaleBookHeaderID = Convert.ToInt64(dt.Rows[0]["OldPurchaseSaleBookHeaderID"]);
+                        header.PurchaseEntryFormID = Convert.ToInt32(dt.Rows[0]["PurchaseEntryFormID"]);
+
+                        
 
                     }
                 }
@@ -414,44 +418,44 @@ namespace PharmaDAL.Transaction
                             ItemCode = Convert.ToString(row["ItemCode"]),
                             ItemName = Convert.ToString(row["ItemName"]),
                             Batch = Convert.ToString(row["Batch"]),
-                            Quantity = Convert.ToDouble(row["Quantity"] == DBNull.Value ? 0 : row["Quantity"]),
-                            FreeQuantity = Convert.ToDouble(row["FreeQuantity"] == DBNull.Value ? 0 : row["FreeQuantity"]),
-                            PurchaseSaleRate = Convert.ToDouble(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
-                            OldPurchaseSaleRate = Convert.ToDouble(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
-                            EffecivePurchaseSaleRate = Convert.ToDouble(row["EffecivePurchaseSaleRate"] == DBNull.Value ? 0 : row["EffecivePurchaseSaleRate"]),
+                            Quantity = Convert.ToDecimal(row["Quantity"] == DBNull.Value ? 0 : row["Quantity"]),
+                            FreeQuantity = Convert.ToDecimal(row["FreeQuantity"] == DBNull.Value ? 0 : row["FreeQuantity"]),
+                            PurchaseSaleRate = Convert.ToDecimal(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
+                            OldPurchaseSaleRate = Convert.ToDecimal(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
+                            EffecivePurchaseSaleRate = Convert.ToDecimal(row["EffecivePurchaseSaleRate"] == DBNull.Value ? 0 : row["EffecivePurchaseSaleRate"]),
                             PurchaseSaleTypeCode = Convert.ToString(row["PurchaseSaleTypeCode"]),
-                            SurCharge = Convert.ToDouble(row["SurCharge"] == DBNull.Value ? 0 : row["SurCharge"]),
+                            SurCharge = Convert.ToDecimal(row["SurCharge"] == DBNull.Value ? 0 : row["SurCharge"]),
                             LocalCentral = Convert.ToString(row["LocalCentral"]),
-                            SGST = Convert.ToDouble(row["SGST"]== DBNull.Value ? 0 : row["SGST"]),
-                            IGST = Convert.ToDouble(row["IGST"]== DBNull.Value ? 0 : row["IGST"]),
-                            CGST = Convert.ToDouble(row["CGST"]== DBNull.Value ? 0 : row["CGST"]),
-                            Amount = Convert.ToDouble(row["Amount"]== DBNull.Value ? 0 : row["Amount"]),
-                            Discount = Convert.ToDouble(row["Discount"]== DBNull.Value ? 0 : row["Discount"]),
-                            SpecialDiscount = Convert.ToDouble(row["SpecialDiscount"]== DBNull.Value ? 0 : row["SpecialDiscount"]),
-                            DiscountQuantity = Convert.ToDouble(row["DiscountQuantity"]== DBNull.Value ? 0 : row["DiscountQuantity"]),
-                            VolumeDiscount = Convert.ToDouble(row["VolumeDiscount"]== DBNull.Value ? 0 : row["VolumeDiscount"]),
-                            Scheme1 = Convert.ToDouble(row["Scheme1"]== DBNull.Value ? 0 : row["Scheme1"]),
-                            Scheme2 = Convert.ToDouble(row["Scheme2"]== DBNull.Value ? 0 : row["Scheme2"]),
+                            SGST = Convert.ToDecimal(row["SGST"]== DBNull.Value ? 0 : row["SGST"]),
+                            IGST = Convert.ToDecimal(row["IGST"]== DBNull.Value ? 0 : row["IGST"]),
+                            CGST = Convert.ToDecimal(row["CGST"]== DBNull.Value ? 0 : row["CGST"]),
+                            Amount = Convert.ToDecimal(row["Amount"]== DBNull.Value ? 0 : row["Amount"]),
+                            Discount = Convert.ToDecimal(row["Discount"]== DBNull.Value ? 0 : row["Discount"]),
+                            SpecialDiscount = Convert.ToDecimal(row["SpecialDiscount"]== DBNull.Value ? 0 : row["SpecialDiscount"]),
+                            DiscountQuantity = Convert.ToDecimal(row["DiscountQuantity"]== DBNull.Value ? 0 : row["DiscountQuantity"]),
+                            VolumeDiscount = Convert.ToDecimal(row["VolumeDiscount"]== DBNull.Value ? 0 : row["VolumeDiscount"]),
+                            Scheme1 = Convert.ToDecimal(row["Scheme1"]== DBNull.Value ? 0 : row["Scheme1"]),
+                            Scheme2 = Convert.ToDecimal(row["Scheme2"]== DBNull.Value ? 0 : row["Scheme2"]),
                             IsHalfScheme = Convert.ToBoolean(row["IsHalfScheme"] == DBNull.Value ? false : row["IsHalfScheme"]),
-                            HalfSchemeRate = Convert.ToDouble(row["HalfSchemeRate"]== DBNull.Value ? 0 : row["HalfSchemeRate"]),
-                            CostAmount = Convert.ToDouble(row["CostAmount"]== DBNull.Value ? 0 : row["CostAmount"]),
-                            GrossAmount = Convert.ToDouble(row["GrossAmount"]== DBNull.Value ? 0 : row["GrossAmount"]),
-                            SchemeAmount = Convert.ToDouble(row["SchemeAmount"]== DBNull.Value ? 0 : row["SchemeAmount"]),
-                            DiscountAmount = Convert.ToDouble(row["DiscountAmount"]== DBNull.Value ? 0 : row["DiscountAmount"]),
-                            SurchargeAmount = Convert.ToDouble(row["SurchargeAmount"]== DBNull.Value ? 0 : row["SurchargeAmount"]),
-                            ConversionRate = Convert.ToDouble(row["ConversionRate"]== DBNull.Value ? 0 : row["ConversionRate"]),
-                            MRP = Convert.ToDouble(row["MRP"]== DBNull.Value ? 0 : row["MRP"]),
+                            HalfSchemeRate = Convert.ToDecimal(row["HalfSchemeRate"]== DBNull.Value ? 0 : row["HalfSchemeRate"]),
+                            CostAmount = Convert.ToDecimal(row["CostAmount"]== DBNull.Value ? 0 : row["CostAmount"]),
+                            GrossAmount = Convert.ToDecimal(row["GrossAmount"]== DBNull.Value ? 0 : row["GrossAmount"]),
+                            SchemeAmount = Convert.ToDecimal(row["SchemeAmount"]== DBNull.Value ? 0 : row["SchemeAmount"]),
+                            DiscountAmount = Convert.ToDecimal(row["DiscountAmount"]== DBNull.Value ? 0 : row["DiscountAmount"]),
+                            SurchargeAmount = Convert.ToDecimal(row["SurchargeAmount"]== DBNull.Value ? 0 : row["SurchargeAmount"]),
+                            ConversionRate = Convert.ToDecimal(row["ConversionRate"]== DBNull.Value ? 0 : row["ConversionRate"]),
+                            MRP = Convert.ToDecimal(row["MRP"]== DBNull.Value ? 0 : row["MRP"]),
                             ExpiryDate = Convert.ToDateTime(row["ExpiryDate"]),
-                            SaleRate = Convert.ToDouble(row["SaleRate"]== DBNull.Value ? 0 : row["SaleRate"]),
-                            WholeSaleRate = Convert.ToDouble(row["WholeSaleRate"]== DBNull.Value ? 0 : row["WholeSaleRate"]),
-                            SpecialRate = Convert.ToDouble(row["SpecialRate"]== DBNull.Value ? 0 : row["SpecialRate"]),
-                            TaxAmount = Convert.ToDouble(row["TaxAmount"]== DBNull.Value ? 0 : row["TaxAmount"]),
-                            SpecialDiscountAmount = Convert.ToDouble(row["SpecialDiscountAmount"]== DBNull.Value ? 0 : row["SpecialDiscountAmount"]),
-                            VolumeDiscountAmount = Convert.ToDouble(row["VolumeDiscountAmount"]== DBNull.Value ? 0 : row["VolumeDiscountAmount"]),
-                            TotalDiscountAmount = Convert.ToDouble(row["TotalDiscountAmount"]== DBNull.Value ? 0 : row["TotalDiscountAmount"]),
+                            SaleRate = Convert.ToDecimal(row["SaleRate"]== DBNull.Value ? 0 : row["SaleRate"]),
+                            WholeSaleRate = Convert.ToDecimal(row["WholeSaleRate"]== DBNull.Value ? 0 : row["WholeSaleRate"]),
+                            SpecialRate = Convert.ToDecimal(row["SpecialRate"]== DBNull.Value ? 0 : row["SpecialRate"]),
+                            TaxAmount = Convert.ToDecimal(row["TaxAmount"]== DBNull.Value ? 0 : row["TaxAmount"]),
+                            SpecialDiscountAmount = Convert.ToDecimal(row["SpecialDiscountAmount"]== DBNull.Value ? 0 : row["SpecialDiscountAmount"]),
+                            VolumeDiscountAmount = Convert.ToDecimal(row["VolumeDiscountAmount"]== DBNull.Value ? 0 : row["VolumeDiscountAmount"]),
+                            TotalDiscountAmount = Convert.ToDecimal(row["TotalDiscountAmount"]== DBNull.Value ? 0 : row["TotalDiscountAmount"]),
                             OldPurchaseSaleBookLineItemID = Convert.ToInt64(row["OldPurchaseSaleBookLineItemID"]== DBNull.Value ? 0 : row["OldPurchaseSaleBookLineItemID"]),
-                            BalanceQuantity = Convert.ToDouble(row["BalanceQuantity"]== DBNull.Value ? 0 : row["BalanceQuantity"]),
-                            UsedQuantity = Convert.ToDouble(row["UsedQuantity"]== DBNull.Value ? 0 : row["UsedQuantity"])
+                            BalanceQuantity = Convert.ToDecimal(row["BalanceQuantity"]== DBNull.Value ? 0 : row["BalanceQuantity"]),
+                            UsedQuantity = Convert.ToDecimal(row["UsedQuantity"]== DBNull.Value ? 0 : row["UsedQuantity"])
                        };
 
                         lineitems.Add(obj);

@@ -34,42 +34,42 @@ namespace PharmaDAL.Entity
         public string PurchaseBillNo { get; set; }
         public string LedgerType { get; set; }
         public string LedgerTypeCode { get; set; }
-        public Nullable<double> Amount01 { get; set; }
-        public Nullable<double> Amount02 { get; set; }
-        public Nullable<double> Amount03 { get; set; }
-        public Nullable<double> Amount04 { get; set; }
-        public Nullable<double> Amount05 { get; set; }
-        public Nullable<double> Amount06 { get; set; }
-        public Nullable<double> Amount07 { get; set; }
-        public Nullable<double> SGST01 { get; set; }
-        public Nullable<double> SGST02 { get; set; }
-        public Nullable<double> SGST03 { get; set; }
-        public Nullable<double> SGST04 { get; set; }
-        public Nullable<double> SGST05 { get; set; }
-        public Nullable<double> SGST06 { get; set; }
-        public Nullable<double> SGST07 { get; set; }
-        public Nullable<double> IGST01 { get; set; }
-        public Nullable<double> IGST02 { get; set; }
-        public Nullable<double> IGST03 { get; set; }
-        public Nullable<double> IGST04 { get; set; }
-        public Nullable<double> IGST05 { get; set; }
-        public Nullable<double> IGST06 { get; set; }
-        public Nullable<double> IGST07 { get; set; }
-        public Nullable<double> CGST01 { get; set; }
-        public Nullable<double> CGST02 { get; set; }
-        public Nullable<double> CGST03 { get; set; }
-        public Nullable<double> CGST04 { get; set; }
-        public Nullable<double> CGST05 { get; set; }
-        public Nullable<double> CGST06 { get; set; }
-        public Nullable<double> CGST07 { get; set; }
-        public double TotalTaxAmount { get; set; }
-        public Nullable<double> SurchargeAmount { get; set; }
-        public Nullable<double> TotalBillAmount { get; set; }
-        public Nullable<double> TotalCostAmount { get; set; }
-        public Nullable<double> TotalGrossAmount { get; set; }
-        public Nullable<double> TotalSchemeAmount { get; set; }
-        public Nullable<double> TotalDiscountAmount { get; set; }
-        public Nullable<double> OtherAmount { get; set; }
+        public Nullable<decimal> Amount01 { get; set; }
+        public Nullable<decimal> Amount02 { get; set; }
+        public Nullable<decimal> Amount03 { get; set; }
+        public Nullable<decimal> Amount04 { get; set; }
+        public Nullable<decimal> Amount05 { get; set; }
+        public Nullable<decimal> Amount06 { get; set; }
+        public Nullable<decimal> Amount07 { get; set; }
+        public Nullable<decimal> SGST01 { get; set; }
+        public Nullable<decimal> SGST02 { get; set; }
+        public Nullable<decimal> SGST03 { get; set; }
+        public Nullable<decimal> SGST04 { get; set; }
+        public Nullable<decimal> SGST05 { get; set; }
+        public Nullable<decimal> SGST06 { get; set; }
+        public Nullable<decimal> SGST07 { get; set; }
+        public Nullable<decimal> IGST01 { get; set; }
+        public Nullable<decimal> IGST02 { get; set; }
+        public Nullable<decimal> IGST03 { get; set; }
+        public Nullable<decimal> IGST04 { get; set; }
+        public Nullable<decimal> IGST05 { get; set; }
+        public Nullable<decimal> IGST06 { get; set; }
+        public Nullable<decimal> IGST07 { get; set; }
+        public Nullable<decimal> CGST01 { get; set; }
+        public Nullable<decimal> CGST02 { get; set; }
+        public Nullable<decimal> CGST03 { get; set; }
+        public Nullable<decimal> CGST04 { get; set; }
+        public Nullable<decimal> CGST05 { get; set; }
+        public Nullable<decimal> CGST06 { get; set; }
+        public Nullable<decimal> CGST07 { get; set; }
+        public decimal TotalTaxAmount { get; set; }
+        public Nullable<decimal> SurchargeAmount { get; set; }
+        public Nullable<decimal> TotalBillAmount { get; set; }
+        public Nullable<decimal> TotalCostAmount { get; set; }
+        public Nullable<decimal> TotalGrossAmount { get; set; }
+        public Nullable<decimal> TotalSchemeAmount { get; set; }
+        public Nullable<decimal> TotalDiscountAmount { get; set; }
+        public Nullable<decimal> OtherAmount { get; set; }
         public Nullable<int> ZSMId { get; set; }
         public Nullable<int> ASMId { get; set; }
         public Nullable<int> RSMId { get; set; }
@@ -89,9 +89,9 @@ namespace PharmaDAL.Entity
         public string DeliveredBy { get; set; }
         public string CourierName { get; set; }
         public Nullable<System.DateTime> CourierDate { get; set; }
-        public Nullable<double> CourierWeight { get; set; }
+        public Nullable<decimal> CourierWeight { get; set; }
         public Nullable<int> PurchaseSaleEntryFormID { get; set; }
-        public Nullable<double> LastBalance { get; set; }
+        public Nullable<decimal> LastBalance { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string ModifiedBy { get; set; }

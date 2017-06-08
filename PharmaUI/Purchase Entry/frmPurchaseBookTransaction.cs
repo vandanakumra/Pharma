@@ -328,16 +328,16 @@ namespace PharmaUI
 
                 if (isCellEdit && !isBatchUpdate && lineItem.PurchaseSaleBookLineItemID > 0)
                 {
-                    double value = 0L;
-                    double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out value);
+                    decimal value = 0L;
+                    decimal.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out value);
 
                     if (columnName == "Quantity" && IsModify)
                     {
-                        double usedQuantity = 0;
-                        double.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["UsedQuantity"].Value), out usedQuantity);
+                        decimal usedQuantity = 0;
+                        decimal.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["UsedQuantity"].Value), out usedQuantity);
 
-                        double balanceQuantity = 0;
-                        double.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["BalanceQuantity"].Value), out balanceQuantity);
+                        decimal balanceQuantity = 0;
+                        decimal.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["BalanceQuantity"].Value), out balanceQuantity);
 
 
                         if (value < usedQuantity)
@@ -354,7 +354,7 @@ namespace PharmaUI
                     }
                     else if (columnName == "Quantity" || columnName == "PurchaseSaleRate")
                     {
-                        double amount = GetLineItemAmount(lineItem);
+                        decimal amount = GetLineItemAmount(lineItem);
                         dgvLineItem.CurrentRow.Cells["Amount"].Value = amount;
                         lineItem.Amount = amount;
                     }
@@ -382,12 +382,12 @@ namespace PharmaUI
 
         private void OpenRateDialog(int rowIndex, PurchaseSaleBookLineItem lineItem)
         {
-            double newRate = 0L;
-            double oldRate = 0L;
+            decimal newRate = 0L;
+            decimal oldRate = 0L;
 
 
-            double.TryParse(Convert.ToString(dgvLineItem["OldPurchaseSaleRate", rowIndex].Value), out oldRate);
-            double.TryParse(Convert.ToString(dgvLineItem["PurchaseSaleRate", rowIndex].Value), out newRate);
+            decimal.TryParse(Convert.ToString(dgvLineItem["OldPurchaseSaleRate", rowIndex].Value), out oldRate);
+            decimal.TryParse(Convert.ToString(dgvLineItem["PurchaseSaleRate", rowIndex].Value), out newRate);
 
             if (oldRate != newRate)
             {
@@ -939,8 +939,8 @@ namespace PharmaUI
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                double rate = 0;
-                double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
+                decimal rate = 0;
+                decimal.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
                 if (rate == 0L)
                 {
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"];
@@ -985,8 +985,8 @@ namespace PharmaUI
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                double rate = 0;
-                double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
+                decimal rate = 0;
+                decimal.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out rate);
                 if (rate == 0)
                 {
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"];
@@ -1017,7 +1017,7 @@ namespace PharmaUI
         {
             PurchaseSaleBookLineItem item = new PurchaseSaleBookLineItem();
             int id = 0;
-            double dValue = 0L;
+            decimal dValue = 0L;
 
             if (row != null)
             {
@@ -1031,19 +1031,19 @@ namespace PharmaUI
                 item.ItemName = Convert.ToString(row.Cells["ItemName"].Value);
                 item.Batch = Convert.ToString(row.Cells["Batch"].Value);
 
-                double.TryParse(Convert.ToString(row.Cells["Quantity"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["Quantity"].Value), out dValue);
                 item.Quantity = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["FreeQuantity"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["FreeQuantity"].Value), out dValue);
                 item.FreeQuantity = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["PurchaseSaleRate"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["PurchaseSaleRate"].Value), out dValue);
                 item.PurchaseSaleRate = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["OldPurchaseSaleRate"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["OldPurchaseSaleRate"].Value), out dValue);
                 item.OldPurchaseSaleRate = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["Amount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["Amount"].Value), out dValue);
                 item.Amount = dValue;
 
                 Int32.TryParse(Convert.ToString(row.Cells["Scheme1"].Value), out id);
@@ -1054,16 +1054,16 @@ namespace PharmaUI
 
                 item.IsHalfScheme = Convert.ToBoolean(row.Cells["IsHalfScheme"].Value);
 
-                double.TryParse(Convert.ToString(row.Cells["Discount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["Discount"].Value), out dValue);
                 item.Discount = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["SpecialDiscount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["SpecialDiscount"].Value), out dValue);
                 item.SpecialDiscount = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["VolumeDiscount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["VolumeDiscount"].Value), out dValue);
                 item.VolumeDiscount = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["MRP"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["MRP"].Value), out dValue);
                 item.MRP = dValue;
 
                 DateTime date = DateTime.MinValue;
@@ -1073,56 +1073,56 @@ namespace PharmaUI
                 else
                     item.ExpiryDate = date;
 
-                double.TryParse(Convert.ToString(row.Cells["WholeSaleRate"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["WholeSaleRate"].Value), out dValue);
                 item.WholeSaleRate = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["SpecialRate"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["SpecialRate"].Value), out dValue);
                 item.SpecialRate = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["SaleRate"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["SaleRate"].Value), out dValue);
                 item.SaleRate = dValue;
                 
                 item.PurchaseSaleTypeCode = Convert.ToString(row.Cells["PurchaseSaleTypeCode"].Value);
 
-                double.TryParse(Convert.ToString(row.Cells["PurchaseSaleTax"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["PurchaseSaleTax"].Value), out dValue);
                 item.PurchaseSaleTax = dValue;
 
                 //---------------------------------------
-                double.TryParse(Convert.ToString(row.Cells["CostAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["CostAmount"].Value), out dValue);
                 item.CostAmount = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["DiscountAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["DiscountAmount"].Value), out dValue);
                 item.DiscountAmount = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["SpecialDiscountAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["SpecialDiscountAmount"].Value), out dValue);
                 item.SpecialDiscountAmount = dValue;
                 
-                double.TryParse(Convert.ToString(row.Cells["VolumeDiscountAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["VolumeDiscountAmount"].Value), out dValue);
                 item.VolumeDiscountAmount = dValue;
                 
-                double.TryParse(Convert.ToString(row.Cells["GrossAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["GrossAmount"].Value), out dValue);
                 item.GrossAmount = dValue;
                 
-                double.TryParse(Convert.ToString(row.Cells["TaxAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["TaxAmount"].Value), out dValue);
                 item.TaxAmount = dValue;
                 
-                double.TryParse(Convert.ToString(row.Cells["SchemeAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["SchemeAmount"].Value), out dValue);
                 item.SchemeAmount = dValue;
                 
-                double.TryParse(Convert.ToString(row.Cells["TotalDiscountAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["TotalDiscountAmount"].Value), out dValue);
                 item.TotalDiscountAmount = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["SurchargeAmount"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["SurchargeAmount"].Value), out dValue);
                 item.SurchargeAmount = dValue;
 
                 
                 PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
                 item.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
 
-                double.TryParse(Convert.ToString(row.Cells["UsedQuantity"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["UsedQuantity"].Value), out dValue);
                 item.UsedQuantity = dValue;
 
-                double.TryParse(Convert.ToString(row.Cells["BalanceQuantity"].Value), out dValue);
+                decimal.TryParse(Convert.ToString(row.Cells["BalanceQuantity"].Value), out dValue);
                 item.BalanceQuantity = dValue;
 
                 int.TryParse(Convert.ToString(row.Cells["OldPurchaseSaleBookLineItemID"].Value), out id);
@@ -1137,9 +1137,9 @@ namespace PharmaUI
             return item;
         }
 
-        private double GetLineItemAmount(PurchaseSaleBookLineItem item)
+        private decimal GetLineItemAmount(PurchaseSaleBookLineItem item)
         {
-            double? amount = 0L;
+            decimal? amount = 0L;
             amount = item.Quantity * item.PurchaseSaleRate;
             return amount ?? 0;
         }
@@ -1155,8 +1155,8 @@ namespace PharmaUI
                     if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentCell.Value)))// || columnName == "SrNo")
                     {
                         e.Handled = true;
-                        double val = 0L;
-                        double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out val);
+                        decimal val = 0L;
+                        decimal.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out val);
 
                         OpenDialogAndMoveToNextControl(columnName);
                     }
@@ -1198,8 +1198,8 @@ namespace PharmaUI
                         if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                         {
 
-                            double usedQuantity = 0;
-                            double.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["UsedQuantity"].Value), out usedQuantity);
+                            decimal usedQuantity = 0;
+                            decimal.TryParse(Convert.ToString(dgvLineItem.CurrentRow.Cells["UsedQuantity"].Value), out usedQuantity);
 
                             if (usedQuantity > 0)
                             {
@@ -1279,8 +1279,8 @@ namespace PharmaUI
         {
             if (columnName == "FreeQuantity")
             {
-                double qty = 0;
-                double.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out qty);
+                decimal qty = 0;
+                decimal.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out qty);
 
                 if (qty > 0)
                 {
@@ -1333,8 +1333,8 @@ namespace PharmaUI
 
                 if (columnName == "Quantity")
                 {
-                    double val = 0;
-                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value), out val);
+                    decimal val = 0;
+                    decimal.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value), out val);
 
                     if(val == 0)
                         dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
@@ -1395,6 +1395,18 @@ namespace PharmaUI
                         Purchase_Entry.frmAllBillForSupplier frm = new Purchase_Entry.frmAllBillForSupplier(txtSupplierCode.Text);
                         frm.FormClosed += AllBillForSuppier_FormClosed;
                         frm.ShowDialog();
+
+                        if (dgvLineItem.Rows.Count > 0)
+                        {
+                            dgvLineItem.Rows[0].Selected = false;
+
+                            dgvLineItem.Focus();
+                            dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                        }
+                        else
+                        {
+                            txtInvoiceNumber.Focus();
+                        }
 
                     }
                     else if (!string.IsNullOrEmpty(txt.Text))
@@ -1483,23 +1495,38 @@ namespace PharmaUI
                 if(header !=null)
                 {
                     txtInvoiceNumber.Text = header.PurchaseBillNo;
-                    cbxPurchaseType.SelectedItem = header.LocalCentral == "L" ? "Local" : "Central";
+                    string localCentral = header.LocalCentral == "L" ? "Local" : "Central";
+
+                    int id = applicationFacade.GetPurchaseEntryTypes().Where(p => p.PurchaseTypeName.ToLower().Equals(localCentral.ToLower())).FirstOrDefault().ID;
+
+                    cbxPurchaseType.SelectedValue = id;
                     purchaseSaleBookHeaderID = header.PurchaseSaleBookHeaderID;
                     oldPurchaseSaleBookHeaderID = header.OldPurchaseSaleBookHeaderID;
+
+                    if(header.LocalCentral == "C")
+                    {
+
+                        cbxPurchaseFormType.DataSource = applicationFacade.GetPurchaseFormTypes(id);
+                        cbxPurchaseFormType.DisplayMember = "FormTypeName";
+                        cbxPurchaseFormType.ValueMember = "ID";
+
+                        cbxPurchaseFormType.Visible = true;
+                        cbxPurchaseFormType.SelectedValue = header.PurchaseEntryFormID;
+                    }
 
                     List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID);
 
                     FillGridWithLineItems(lineitems);
 
-                    if(dgvLineItem.Rows.Count > 0)
-                    {
-                        dgvLineItem.Focus();
-                        dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
-                    }
-                    else
-                    {
-                        txtInvoiceNumber.Focus();
-                    }
+                    //if(dgvLineItem.Rows.Count > 0)
+                    //{
+                    //    dgvLineItem.Focus();
+                    //    dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                    //}
+                    //else
+                    //{
+                    //    txtInvoiceNumber.Focus();
+                    //}
 
                 }
             }
@@ -1573,18 +1600,18 @@ namespace PharmaUI
             PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
 
             lblSaleRate.Text = lineItem.SaleRate.ToString();
-            lblDiscountPercente.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.Discount)));
-            lblDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.DiscountAmount)));
-            lblMRP.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.MRP)));           
+            lblDiscountPercente.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.Discount)));
+            lblDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.DiscountAmount)));
+            lblMRP.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.MRP)));           
             lblTaxPercent.Text = lineItem.PurchaseSaleTax.ToString();
-            lblTaxAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.TaxAmount)));
+            lblTaxAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.TaxAmount)));
             lblInvoiceAmount.Text = (lineItem.Amount + lineItem.TaxAmount - lineItem.TotalDiscountAmount).ToString();
             lblBonus.Text = lineItem.Scheme1.ToString() + " + " + lineItem.Scheme2.ToString();
-            lblSplDiscountPercent.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.SpecialDiscount)));
-            lblSplDisAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.SpecialDiscountAmount)));
-            lblVolumeDis.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.VolumeDiscount)));
-            lblVolumeDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.VolumeDiscountAmount)));
-            lblSchemeAmount.Text= Convert.ToString(ExtensionMethods.SafeConversionDouble(Convert.ToString(lineItem.SchemeAmount)));
+            lblSplDiscountPercent.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.SpecialDiscount)));
+            lblSplDisAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.SpecialDiscountAmount)));
+            lblVolumeDis.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.VolumeDiscount)));
+            lblVolumeDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.VolumeDiscountAmount)));
+            lblSchemeAmount.Text= Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.SchemeAmount)));
 
         }
 
@@ -1598,7 +1625,7 @@ namespace PharmaUI
                 rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
                 colIndex = dgvLineItem.SelectedCells[0].ColumnIndex;
 
-                double amt = GetLineItemAmount(lineItem);
+                decimal amt = GetLineItemAmount(lineItem);
                 lineItem.Amount = amt;
 
                 List<PurchaseBookAmount>  amounts = applicationFacade.InsertUpdateTempPurchaseBookLineItem(lineItem);

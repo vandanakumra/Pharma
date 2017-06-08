@@ -15,34 +15,34 @@ namespace PharmaBusinessObjects.Master
         public int CompanyID { get; set; }
         public string CompanyCode { get; set; }
         public string CompanyName { get; set; }
-        public double? ConversionRate { get; set; }
+        public decimal? ConversionRate { get; set; }
         public string ShortName { get; set; }
         public string Packing { get; set; }
-        public double? PurchaseRate { get; set; }
-        public double MRP { get; set; }
-        public double? SaleRate { get; set; }
-        public double? SpecialRate { get; set; }
-        public double? WholeSaleRate { get; set; }
-        public double? SaleExcise { get; set; }
-        public double? SurchargeOnSale { get; set; }
-        public double? TaxOnSale { get; set; }
-        public double? Scheme1 { get; set; }
-        public double? Scheme2 { get; set; }
-        public double? PurchaseExcise { get; set; }
+        public decimal? PurchaseRate { get; set; }
+        public decimal MRP { get; set; }
+        public decimal? SaleRate { get; set; }
+        public decimal? SpecialRate { get; set; }
+        public decimal? WholeSaleRate { get; set; }
+        public decimal? SaleExcise { get; set; }
+        public decimal? SurchargeOnSale { get; set; }
+        public decimal? TaxOnSale { get; set; }
+        public decimal? Scheme1 { get; set; }
+        public decimal? Scheme2 { get; set; }
+        public decimal? PurchaseExcise { get; set; }
         public string UPC { get; set; }
         public bool IsHalfScheme { get; set; }
         public bool IsQTRScheme { get; set; }
-        public double? SpecialDiscount { get; set; }
-        public double? SpecialDiscountOnQty { get; set; }
+        public decimal? SpecialDiscount { get; set; }
+        public decimal? SpecialDiscountOnQty { get; set; }
         public bool IsFixedDiscount { get; set; }
-        public double? FixedDiscountRate { get; set; }
-        public double? MaximumQty { get; set; }
-        public double? MaximumDiscount { get; set; }
-        public double? SurchargeOnPurchase { get; set; }
-        public double? TaxOnPurchase { get; set; }
-        public double? DiscountRecieved { get; set; }
-        public double? SpecialDiscountRecieved { get; set; }
-        public double? QtyPerCase { get; set; }
+        public decimal? FixedDiscountRate { get; set; }
+        public decimal? MaximumQty { get; set; }
+        public decimal? MaximumDiscount { get; set; }
+        public decimal? SurchargeOnPurchase { get; set; }
+        public decimal? TaxOnPurchase { get; set; }
+        public decimal? DiscountRecieved { get; set; }
+        public decimal? SpecialDiscountRecieved { get; set; }
+        public decimal? QtyPerCase { get; set; }
         public string Location { get; set; }
         public int? MinimumStock { get; set; }
         public int? MaximumStock { get; set; }
@@ -73,10 +73,10 @@ namespace PharmaBusinessObjects.Master
             lineItem.WholeSaleRate = this.WholeSaleRate ?? 0L;
             lineItem.SaleRate = this.SaleRate ?? 0L;
             lineItem.PurchaseSaleTypeCode = this.PurchaseTypeCode;
-            double val = 0L;
-            double.TryParse(Convert.ToString(this.PurchaseTypeRate), out val);
+            decimal val = 0L;
+            decimal.TryParse(Convert.ToString(this.PurchaseTypeRate), out val);
             lineItem.PurchaseSaleTax = val;
-            lineItem.PurchaseSaleRate = (double)this.PurchaseRate;
+            lineItem.PurchaseSaleRate = (decimal)this.PurchaseRate;
             lineItem.OldPurchaseSaleRate = lineItem.PurchaseSaleRate;
             return lineItem;
         }

@@ -300,7 +300,7 @@ namespace PharmaUI
                 model.AccountLedgerTypeId = (int)cbAccountLedgerType.SelectedValue;
                 model.AccountLedgerName = tbAccountName.Text;
                 model.AccountTypeId = (int)cbAccountType.SelectedValue;
-                model.OpeningBalance = (double)ExtensionMethods.SafeConversionDouble(tbOpeningBalance.Text);
+                model.OpeningBalance = (decimal)ExtensionMethods.SafeConversionDecimal(tbOpeningBalance.Text);
                 model.CreditDebit = cbDebitCredit.Text;
                 model.AccountLedgerCode = txtAccountLedgerCode.Text;
                 model.SalePurchaseTaxValue = ExtensionMethods.SafeConversionDecimal(txtSalePurchaseValue.Text);

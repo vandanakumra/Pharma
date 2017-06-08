@@ -242,7 +242,7 @@ namespace PharmaUI.ReceiptPayment
             dgvSupplierBillOS.Columns["OSAmount"].DisplayIndex = 3;
 
             //Display totall of outstanding amount
-            double totallOutstanding = 0;
+            decimal totallOutstanding = 0;
             allOutstandings.ForEach(x => totallOutstanding += x.OSAmount);
             lblAmtOSVal.Text = Convert.ToString(totallOutstanding);
 
@@ -272,7 +272,7 @@ namespace PharmaUI.ReceiptPayment
             dgvSupplierBillAdjusted.Columns["Amount"].DisplayIndex = 3;
 
             //Display totall of adjusted amount
-            double totallAdjusted = 0;
+            decimal totallAdjusted = 0;
             allAdjustment.ForEach(x => totallAdjusted += x.Amount);
             lblAmtAdjVal.Text = Convert.ToString(totallAdjusted);
         }
@@ -349,11 +349,11 @@ namespace PharmaUI.ReceiptPayment
                 receiptPaymentItem.LedgerType = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerType"].Value);
                 receiptPaymentItem.LedgerTypeCode = Convert.ToString (dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeCode"].Value);
                 receiptPaymentItem.PaymentMode = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["PaymentMode"].Value);
-                receiptPaymentItem.Amount =ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"].Value));
+                receiptPaymentItem.Amount =ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"].Value));
                 receiptPaymentItem.ChequeNumber = Convert.ToString (dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeNumber"].Value);
                 receiptPaymentItem.BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag);
                 receiptPaymentItem.ChequeDate = Convert.ToDateTime(dtReceiptPayment.Text);
-                receiptPaymentItem.UnadjustedAmount =ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"].Value));
+                receiptPaymentItem.UnadjustedAmount =ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"].Value));
             }
             return receiptPaymentItem;
         }
@@ -587,9 +587,9 @@ namespace PharmaUI.ReceiptPayment
             {
                 RaisePaymentModeCalculations();
 
-                double enteredAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["Amount"].Value)) ?? default(double);
-                double unadjustedAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["UnadjustedAmount"].Value)) ?? default(double);
-                double consumedAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(double);
+                decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
+                decimal unadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["UnadjustedAmount"].Value)) ?? default(decimal);
+                decimal consumedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
 
 
                 if (enteredAmount > 0)
