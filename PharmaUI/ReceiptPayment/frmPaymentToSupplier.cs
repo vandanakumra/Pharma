@@ -483,9 +483,30 @@ namespace PharmaUI.ReceiptPayment
             {
 
             }
-            else if (keyData == Keys.Escape)
+            else if (keyData == Keys.Escape || keyData == Keys.Delete)
             {
+                if (dgvPaymentToSupplier.SelectedCells.Count > 0)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        int rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;
+                        TransactionEntity tranEntity = new TransactionEntity();
+                        tranEntity.ReceiptPaymentID = (long)dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value;
+                        tranEntity.EntityCode = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeCode"].Value);
 
+                        applicationFacade.ClearTempTransaction(tranEntity);
+                        dgvPaymentToSupplier.Rows.RemoveAt(rowIndex);
+                        dgvPaymentToSupplier.Refresh();
+                        if (dgvPaymentToSupplier.Rows.Count == 0)
+                        {
+                            dgvPaymentToSupplier.Rows.Add();
+                            dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[0].Cells["LedgerTypeCode"];
+                            dgvPaymentToSupplier.BeginEdit(true);
+                        }
+                        dgvSupplierBillOS.DataSource = null;
+                        dgvSupplierBillAdjusted.DataSource = null;
+                    }
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

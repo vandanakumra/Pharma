@@ -159,7 +159,11 @@ namespace PharmaDAL.Transaction
                         try
                         {
                             if (billAdjustmentList.Count == 0)
+                            {
+                                transaction.Dispose();
                                 return;
+                            }
+                              
 
                             long receiptPaymentID = billAdjustmentList.FirstOrDefault().ReceiptPaymentID ?? default(long);
                             var receiptPaymentEntity = context.TempReceiptPayment.Where(q => q.ReceiptPaymentID == receiptPaymentID).Select(q => q).ToList().FirstOrDefault();
@@ -184,12 +188,12 @@ namespace PharmaDAL.Transaction
                                     Amount = billAdjust.Amount,
                                     ChequeNumber = receiptPaymentEntity.ChequeNumber
                                 };
-                                context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);
-                                context.SaveChanges();
-                                transaction.Commit();
+                                context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);                     
                             }
+                            context.SaveChanges();
+                            transaction.Commit();
                         }
-                        catch (Exception)
+                        catch (DbEntityValidationException)
                         {
                             transaction.Rollback();
                             throw;
@@ -222,5 +226,41 @@ namespace PharmaDAL.Transaction
                 throw ex;
             }
         }
+
+
+        public void ClearTempTransaction(PharmaBusinessObjects.Transaction.TransactionEntity entity)
+        {
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+
+                    using (var transaction = context.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            var tempAdjustments = context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID).ToList();
+                            context.TempBillOutStandingsAudjustment.RemoveRange(tempAdjustments);
+
+                            var tempReceipt = context.TempReceiptPayment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID).ToList();
+                            context.TempReceiptPayment.RemoveRange(tempReceipt);
+
+                            context.SaveChanges();
+                            transaction.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }                      
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

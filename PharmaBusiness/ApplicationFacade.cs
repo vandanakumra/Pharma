@@ -867,6 +867,19 @@ namespace PharmaBusiness
         }
 
 
+        public void ClearTempTransaction(TransactionEntity transactionEntity)
+        {
+            try
+            {
+                new ReceiptPaymentBiz(this.LoggedInUser).ClearTempTransaction(transactionEntity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+
         #endregion
 
         #region Sale Entry
