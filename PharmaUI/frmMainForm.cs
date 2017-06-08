@@ -266,6 +266,22 @@ namespace PharmaUI
            
         }
 
+        private void saleEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmSaleEntry form = new frmSaleEntry(false);
+                ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
         private void receiptFromCustTransactionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try

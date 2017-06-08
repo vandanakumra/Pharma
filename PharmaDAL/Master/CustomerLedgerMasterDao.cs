@@ -1,6 +1,8 @@
 ﻿using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -371,5 +373,75 @@ namespace PharmaDAL.Master
             }
         }
 
+        public PharmaBusinessObjects.Master.CustomerLedgerMaster GetCustomerLedgerByCode(string code)
+        {
+            PharmaBusinessObjects.Master.CustomerLedgerMaster customer = new PharmaBusinessObjects.Master.CustomerLedgerMaster();
+
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                SqlCommand cmd = new SqlCommand("GetCustomerLedgerByCode", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@customerCode", code));
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    customer.CustomerLedgerId = Convert.ToInt32(dt.Rows[0]["CustomerLedgerId"]);
+                    customer.CustomerLedgerCode = Convert.ToString(dt.Rows[0]["CustomerLedgerCode"]);
+                    customer.CustomerLedgerName = Convert.ToString(dt.Rows[0]["CustomerLedgerName"]);
+                    customer.CustomerLedgerShortName = Convert.ToString(dt.Rows[0]["CustomerLedgerShortName"]);
+                    customer.Address = Convert.ToString(dt.Rows[0]["Address"]);
+                    customer.ContactPerson = Convert.ToString(dt.Rows[0]["ContactPerson"]);
+                    customer.Telephone = Convert.ToString(dt.Rows[0]["Telephone"]);
+                    customer.Mobile = Convert.ToString(dt.Rows[0]["Mobile"]);
+                    customer.OfficePhone = Convert.ToString(dt.Rows[0]["OfficePhone"]);
+                    customer.ResidentPhone = Convert.ToString(dt.Rows[0]["ResidentPhone"]);
+                    customer.EmailAddress = Convert.ToString(dt.Rows[0]["EmailAddress"]);
+                    customer.ZSMId = Convert.IsDBNull(dt.Rows[0]["ZSMId"]) ? 0 : Convert.ToInt32(dt.Rows[0]["ZSMId"]);
+                    customer.RSMId = Convert.IsDBNull(dt.Rows[0]["RSMId"]) ? 0 : Convert.ToInt32(dt.Rows[0]["RSMId"]);
+                    customer.ASMId = Convert.IsDBNull(dt.Rows[0]["ASMId"]) ? 0 : Convert.ToInt32(dt.Rows[0]["ASMId"]);
+
+                    customer.SalesManId = Convert.IsDBNull(dt.Rows[0]["SalesManId"]) ? 0 : Convert.ToInt32(dt.Rows[0]["SalesManId"]);
+                    customer.SalesmanName = Convert.ToString(dt.Rows[0]["SaleManName"]);
+                    customer.AreaId = Convert.IsDBNull(dt.Rows[0]["AreaId"]) ? 0 : Convert.ToInt32(dt.Rows[0]["AreaId"]);
+                    customer.RouteId = Convert.IsDBNull(dt.Rows[0]["RouteId"]) ? 0 : Convert.ToInt32(dt.Rows[0]["RouteId"]);
+                    customer.CreditDebit = Convert.ToString(dt.Rows[0]["CreditDebit"]);
+                    customer.DLNo = Convert.ToString(dt.Rows[0]["DLNo"]);
+                    customer.GSTNo = Convert.ToString(dt.Rows[0]["GSTNo"]);
+                    customer.CINNo = Convert.ToString(dt.Rows[0]["CINNo"]);
+                    customer.LINNo = Convert.ToString(dt.Rows[0]["LINNo"]);
+                    customer.ServiceTaxNo = Convert.ToString(dt.Rows[0]["ServiceTaxNo"]);
+                    customer.PANNo = Convert.ToString(dt.Rows[0]["PANNo"]);
+                    customer.OpeningBal = Convert.IsDBNull(dt.Rows[0]["OpeningBal"]) ? 0L : Convert.ToDecimal(dt.Rows[0]["OpeningBal"]);
+                    customer.TaxRetail = Convert.ToString(dt.Rows[0]["TaxRetail"]);
+                    customer.Status = Convert.IsDBNull(dt.Rows[0]["Status"]) ? false : Convert.ToBoolean(dt.Rows[0]["Status"]);
+                    customer.CreditLimit = Convert.IsDBNull(dt.Rows[0]["CreditLimit"]) ? 0 : Convert.ToInt32(dt.Rows[0]["CreditLimit"]);
+                    customer.CustomerTypeID = Convert.IsDBNull(dt.Rows[0]["CustomerTypeID"]) ? 0 : Convert.ToInt32(dt.Rows[0]["CustomerTypeID"]);
+                    customer.InterestTypeID = Convert.IsDBNull(dt.Rows[0]["InterestTypeID"]) ? 0 : Convert.ToInt32(dt.Rows[0]["InterestTypeID"]);
+                    customer.IsLessExcise = Convert.IsDBNull(dt.Rows[0]["IsLessExcise"]) ? false : Convert.ToBoolean(dt.Rows[0]["IsLessExcise"]);
+                    customer.RateTypeID = Convert.IsDBNull(dt.Rows[0]["RateTypeID"]) ? 0 : Convert.ToInt32(dt.Rows[0]["RateTypeID"]);
+                    customer.RateTypeName = Convert.ToString(dt.Rows[0]["RateTypeName"]);
+                    customer.SaleBillFormat = Convert.ToString(dt.Rows[0]["SaleBillFormat"]);
+                    customer.MaxOSAmount = Convert.IsDBNull(dt.Rows[0]["MaxOSAmount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["MaxOSAmount"]);
+                    customer.MaxNumOfOSBill = Convert.IsDBNull(dt.Rows[0]["MaxNumOfOSBill"]) ? 0 : Convert.ToInt32(dt.Rows[0]["MaxNumOfOSBill"]);
+                    customer.MaxBillAmount = Convert.IsDBNull(dt.Rows[0]["MaxBillAmount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["MaxBillAmount"]);
+                    customer.MaxGracePeriod = Convert.IsDBNull(dt.Rows[0]["MaxGracePeriod"]) ? 0 : Convert.ToInt32(dt.Rows[0]["MaxGracePeriod"]);
+                    customer.IsFollowConditionStrictly = Convert.IsDBNull(dt.Rows[0]["IsFollowConditionStrictly"]) ? false : Convert.ToBoolean(dt.Rows[0]["IsFollowConditionStrictly"]);
+                    customer.Discount = Convert.IsDBNull(dt.Rows[0]["Discount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["Discount"]);
+                    customer.CentralLocal = Convert.ToString(dt.Rows[0]["CentralLocal"]);
+                    customer.DueBillCount = Convert.IsDBNull(dt.Rows[0]["DueCount"]) ? 0 : Convert.ToInt32(dt.Rows[0]["DueCount"]);
+                    customer.DueBillAmount = Convert.IsDBNull(dt.Rows[0]["DueAmount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["DueAmount"]);
+                    customer.SalesManCode = Convert.ToString(dt.Rows[0]["SaleManCode"]);
+                }
+
+                return customer;
+            }
+        }
     }
 }

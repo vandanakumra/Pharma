@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PharmaUI.Sale_Entry
+namespace PharmaUI
 {
     public partial class frmSaleEntry : Form
     {
@@ -269,29 +269,7 @@ namespace PharmaUI.Sale_Entry
                             {
                                 if (isDirty && !string.IsNullOrEmpty(txtCustomerCode.Text))
                                 {
-                                    PharmaBusinessObjects.Master.CustomerLedgerMaster master = applicationFacade.GetCustomerLedgerByName(txtCustomerCode.Text);
-
-                                    if (master == null)
-                                    {
-                                        lblCustomerName.Text = "**No Such Code**";
-                                        txtCustomerCode.Focus();
-                                    }
-                                    else
-                                    {
-                                        lblCustomerName.Text = master.CustomerLedgerName;
-
-                                        if (saleBookHeaderID > 0)
-                                        {
-                                            PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
-                                            /*bool result = GetPurchaseBookHeader(ref header);
-
-                                            if (result)
-                                            {
-                                                applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
-
-                                            }*/
-                                        }
-                                    }
+                                    SetCustomerCodeFields(txtCustomerCode.Text);
                                 }
                             }
 
@@ -433,12 +411,7 @@ namespace PharmaUI.Sale_Entry
 
                 if (ledger.LastSelectedCustomerLedger != null)
                 {
-                    lblCustomerName.Text = ledger.LastSelectedCustomerLedger.CustomerLedgerName;
-                    txtCustomerCode.Text = ledger.LastSelectedCustomerLedger.CustomerLedgerCode;
-                    lblSaleManName.Text = ledger.LastSelectedCustomerLedger.SalesmanName;
-                    //TODO
-                    txtSalesManCode.Text = ledger.LastSelectedCustomerLedger.SalesManId.ToString();
-
+                    SetCustomerCodeFields(ledger.LastSelectedCustomerLedger.CustomerLedgerCode);
                     tb = txtSalesManCode;
                 }
                 else
@@ -458,6 +431,39 @@ namespace PharmaUI.Sale_Entry
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void SetCustomerCodeFields(string code)
+        {
+            PharmaBusinessObjects.Master.CustomerLedgerMaster customer = applicationFacade.GetCustomerLedgerByCode(code);
+            if (customer == null)
+            {
+                lblCustomerName.Text = "**No Such Code**";
+                txtCustomerCode.Focus();
+            }
+            else
+            {
+                lblCustomerName.Text = customer.CustomerLedgerName;
+                txtCustomerCode.Text = customer.CustomerLedgerCode;
+                lblSaleManName.Text = customer.SalesmanName;
+                txtSalesManCode.Text = customer.SalesManCode.ToString();
+                lblFRate.Text = customer.RateTypeName;
+                lblDueBills.Text = customer.DueBillCount.ToString();
+                lblDueBillAmount.Text = (customer.DueBillAmount ?? 0).ToString("#.##");
+            }
+        }
+
+        private void frmSaleEntry_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

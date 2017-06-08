@@ -40,9 +40,9 @@ namespace PharmaBusiness.Master
             return new CustomerLedgerMasterDao(this.LoggedInUser).DeleteCustomerLedger(customerLedgerID);
         }
 
-        internal CustomerLedgerMaster GetCustomerLedgerByName(string name)
+        internal CustomerLedgerMaster GetCustomerLedgerByCode(string customerCode)
         {
-            return GetCustomerLedgers().FirstOrDefault(p=>p.CustomerLedgerName.ToLower() == name.ToLower());
+            return new CustomerLedgerMasterDao(this.LoggedInUser).GetCustomerLedgerByCode(customerCode);
         }
     }
 }

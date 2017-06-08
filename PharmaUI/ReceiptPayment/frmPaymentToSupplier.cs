@@ -220,6 +220,12 @@ namespace PharmaUI.ReceiptPayment
                     else if (columnName == "UnadjustedAmount")
                     {
                         dgvPaymentToSupplier.Rows.Add();
+
+                        dgvSupplierBillOS.DataSource = null;
+                        dgvSupplierBillAdjusted.DataSource = null;
+                        lblAmtOSVal.Text = String.Empty;
+                        lblAmtAdjVal.Text = String.Empty;
+
                         dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex + 1].Cells["LedgerTypeCode"];
                         dgvPaymentToSupplier.BeginEdit(true);
                     }

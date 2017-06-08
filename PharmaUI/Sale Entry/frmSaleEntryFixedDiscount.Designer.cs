@@ -1,5 +1,5 @@
-﻿namespace PharmaUI.Sale_Entry
-{
+﻿namespace PharmaUI
+{ 
     partial class cbxMasterDiscount
     {
         /// <summary>
