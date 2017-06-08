@@ -26,21 +26,12 @@ namespace PharmaDAL.Transaction
                     var receiptPaymentDB = context.TempReceiptPayment.Where(x => x.ReceiptPaymentID == receiptPayment.ReceiptPaymentID).FirstOrDefault();
 
                     if (receiptPaymentDB != null)
-                    {
-                        receiptPaymentDB.VoucherNumber = receiptPayment.VoucherNumber;
-                        receiptPaymentDB.VoucherTypeCode = receiptPayment.VoucherTypeCode;
-                        receiptPaymentDB.VoucherDate = receiptPayment.VoucherDate;
-                        receiptPaymentDB.LedgerType = receiptPayment.LedgerType;
-                        receiptPaymentDB.LedgerTypeCode = receiptPayment.LedgerTypeCode;
+                    {                       
                         receiptPaymentDB.PaymentMode = receiptPayment.PaymentMode;
                         receiptPaymentDB.Ammount = receiptPayment.Amount;
                         receiptPaymentDB.BankAccountLedgerTypeCode = receiptPayment.BankAccountLedgerTypeCode;
-                        receiptPaymentDB.ChequeDate = receiptPayment.ChequeDate;
-                        receiptPaymentDB.ChequeClearDate = receiptPayment.ChequeClearDate;
-                        receiptPaymentDB.IsChequeCleared = receiptPayment.IsChequeCleared;
-                        receiptPaymentDB.POST = receiptPayment.POST;
-                        receiptPaymentDB.PISNumber = receiptPayment.PISNumber;
                         receiptPaymentDB.ChequeNumber = receiptPayment.ChequeNumber;
+                        receiptPaymentDB.ChequeDate = receiptPayment.ChequeDate;
                         context.SaveChanges();
                         receiptPaymentID = receiptPaymentDB.ReceiptPaymentID;
                     }
@@ -62,10 +53,9 @@ namespace PharmaDAL.Transaction
                         receiptPaymentID = receiptPaymentDBEntry.ReceiptPaymentID;
                     }
                 }
-
                 return receiptPaymentID;
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException ex)
             {
 
                 throw ex;
@@ -164,35 +154,50 @@ namespace PharmaDAL.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    long receiptPaymentID = billAdjustmentList.FirstOrDefault().ReceiptPaymentID ?? default(long);
-                    var receiptPaymentEntity = context.TempReceiptPayment.Where(q => q.ReceiptPaymentID == receiptPaymentID).Select(q => q).ToList().FirstOrDefault();
-                    var previousAdjustments = context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == receiptPaymentID && x.LedgerTypeCode == receiptPaymentEntity.LedgerTypeCode).ToList();
-                    context.TempBillOutStandingsAudjustment.RemoveRange(previousAdjustments);
-                   
-                    foreach (var billAdjust in billAdjustmentList)
+                    using (var transaction = context.Database.BeginTransaction())
                     {
-                        Entity.TempBillOutStandingsAudjustment billAdjustmentDBEntry = new Entity.TempBillOutStandingsAudjustment()
+                        try
                         {
-                            PurchaseSaleBookHeaderID=billAdjust.PurchaseSaleBookHeaderID,
-                            VoucherNumber = receiptPaymentEntity.VoucherNumber,
-                            VoucherTypeCode = receiptPaymentEntity.VoucherTypeCode,
-                            VoucherDate = receiptPaymentEntity.VoucherDate,
-                            ReceiptPaymentID = receiptPaymentEntity.ReceiptPaymentID,
-                            BillOutStandingsID = billAdjust.BillOutStandingsID,
-                            AdjustmentVoucherNumber = billAdjust.AdjustmentVoucherNumber,
-                            AdjustmentVoucherTypeCode = billAdjust.AdjustmentVoucherTypeCode,
-                            AdjustmentVoucherDate = billAdjust.AdjustmentVoucherDate,
-                            LedgerType = billAdjust.LedgerType,
-                            LedgerTypeCode = billAdjust.LedgerTypeCode,
-                            Amount = billAdjust.Amount,
-                            ChequeNumber = receiptPaymentEntity.ChequeNumber
-                        };
-                        context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);
-                        context.SaveChanges();
-                    }                
-                  }
+                            if (billAdjustmentList.Count == 0)
+                                return;
+
+                            long receiptPaymentID = billAdjustmentList.FirstOrDefault().ReceiptPaymentID ?? default(long);
+                            var receiptPaymentEntity = context.TempReceiptPayment.Where(q => q.ReceiptPaymentID == receiptPaymentID).Select(q => q).ToList().FirstOrDefault();
+                            var previousAdjustments = context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == receiptPaymentID && x.LedgerTypeCode == receiptPaymentEntity.LedgerTypeCode).ToList();
+                            context.TempBillOutStandingsAudjustment.RemoveRange(previousAdjustments);
+
+                            foreach (var billAdjust in billAdjustmentList)
+                            {
+                                Entity.TempBillOutStandingsAudjustment billAdjustmentDBEntry = new Entity.TempBillOutStandingsAudjustment()
+                                {
+                                    PurchaseSaleBookHeaderID = billAdjust.PurchaseSaleBookHeaderID,
+                                    VoucherNumber = receiptPaymentEntity.VoucherNumber,
+                                    VoucherTypeCode = receiptPaymentEntity.VoucherTypeCode,
+                                    VoucherDate = receiptPaymentEntity.VoucherDate,
+                                    ReceiptPaymentID = receiptPaymentEntity.ReceiptPaymentID,
+                                    BillOutStandingsID = billAdjust.BillOutStandingsID,
+                                    AdjustmentVoucherNumber = billAdjust.AdjustmentVoucherNumber,
+                                    AdjustmentVoucherTypeCode = billAdjust.AdjustmentVoucherTypeCode,
+                                    AdjustmentVoucherDate = billAdjust.AdjustmentVoucherDate,
+                                    LedgerType = billAdjust.LedgerType,
+                                    LedgerTypeCode = billAdjust.LedgerTypeCode,
+                                    Amount = billAdjust.Amount,
+                                    ChequeNumber = receiptPaymentEntity.ChequeNumber
+                                };
+                                context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);
+                                context.SaveChanges();
+                                transaction.Commit();
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
             }
-            catch (DbEntityValidationException ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

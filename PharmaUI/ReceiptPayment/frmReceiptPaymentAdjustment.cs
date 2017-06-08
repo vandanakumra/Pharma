@@ -76,7 +76,7 @@ namespace PharmaUI.ReceiptPayment
                         else if (enteredAmount > 0)
                         {
                             CurrentTransactionEntity.EntityBalAmount = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount - enteredAmount;
-                            lblBalAmountVal.Text = this.CurrentTransactionEntity.EntityBalAmount.ToString("#.##");
+                            lblBalAmountVal.Text = this.CurrentTransactionEntity.EntityBalAmount.ToString();
                         }
                     }
                 }
