@@ -428,12 +428,12 @@ namespace PharmaDAL.Master
                     customer.RateTypeID = Convert.IsDBNull(dt.Rows[0]["RateTypeID"]) ? 0 : Convert.ToInt32(dt.Rows[0]["RateTypeID"]);
                     customer.RateTypeName = Convert.ToString(dt.Rows[0]["RateTypeName"]);
                     customer.SaleBillFormat = Convert.ToString(dt.Rows[0]["SaleBillFormat"]);
-                    customer.MaxOSAmount = Convert.IsDBNull(dt.Rows[0]["MaxOSAmount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["MaxOSAmount"]);
+                    customer.MaxOSAmount = Convert.IsDBNull(dt.Rows[0]["MaxOSAmount"]) ? 0L : Convert.ToDecimal(dt.Rows[0]["MaxOSAmount"]);
                     customer.MaxNumOfOSBill = Convert.IsDBNull(dt.Rows[0]["MaxNumOfOSBill"]) ? 0 : Convert.ToInt32(dt.Rows[0]["MaxNumOfOSBill"]);
-                    customer.MaxBillAmount = Convert.IsDBNull(dt.Rows[0]["MaxBillAmount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["MaxBillAmount"]);
+                    customer.MaxBillAmount = Convert.IsDBNull(dt.Rows[0]["MaxBillAmount"]) ? 0L : Convert.ToDecimal(dt.Rows[0]["MaxBillAmount"]);
                     customer.MaxGracePeriod = Convert.IsDBNull(dt.Rows[0]["MaxGracePeriod"]) ? 0 : Convert.ToInt32(dt.Rows[0]["MaxGracePeriod"]);
                     customer.IsFollowConditionStrictly = Convert.IsDBNull(dt.Rows[0]["IsFollowConditionStrictly"]) ? false : Convert.ToBoolean(dt.Rows[0]["IsFollowConditionStrictly"]);
-                    customer.Discount = Convert.IsDBNull(dt.Rows[0]["Discount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["Discount"]);
+                    customer.Discount = Convert.IsDBNull(dt.Rows[0]["Discount"]) ? 0L : Convert.ToDecimal(dt.Rows[0]["Discount"]);
                     customer.CentralLocal = Convert.ToString(dt.Rows[0]["CentralLocal"]);
                     customer.DueBillCount = Convert.IsDBNull(dt.Rows[0]["DueCount"]) ? 0 : Convert.ToInt32(dt.Rows[0]["DueCount"]);
                     customer.DueBillAmount = Convert.IsDBNull(dt.Rows[0]["DueAmount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["DueAmount"]);

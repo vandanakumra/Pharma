@@ -194,9 +194,9 @@ namespace PharmaUI.ReceiptPayment
                     }
                     else if (columnName == "Amount")
                     {
-                        decimal enteredAmount = ExtensionMethods.SafeConversiondecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
-                        decimal unadjustedAmount = ExtensionMethods.SafeConversiondecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["UnadjustedAmount"].Value)) ?? default(decimal);
-                        decimal consumedAmount = ExtensionMethods.SafeConversiondecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
+                        decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
+                        decimal unadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["UnadjustedAmount"].Value)) ?? default(decimal);
+                        decimal consumedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
 
 
                         if (enteredAmount > 0)
@@ -252,8 +252,8 @@ namespace PharmaUI.ReceiptPayment
             }
             else
             {
-                decimal enteredAmount = ExtensionMethods.SafeConversiondecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
-                decimal consumedAmount = ExtensionMethods.SafeConversiondecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
+                decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
+                decimal consumedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
                 dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"].Value = enteredAmount;
             }
 

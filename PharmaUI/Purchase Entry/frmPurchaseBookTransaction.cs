@@ -1600,18 +1600,18 @@ namespace PharmaUI
             PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
 
             lblSaleRate.Text = lineItem.SaleRate.ToString();
-            lblDiscountPercente.Text = Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.Discount)));
-            lblDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.DiscountAmount)));
-            lblMRP.Text = Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.MRP)));           
+            lblDiscountPercente.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.Discount)));
+            lblDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.DiscountAmount)));
+            lblMRP.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.MRP)));           
             lblTaxPercent.Text = lineItem.PurchaseSaleTax.ToString();
-            lblTaxAmount.Text = Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.TaxAmount)));
+            lblTaxAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.TaxAmount)));
             lblInvoiceAmount.Text = (lineItem.Amount + lineItem.TaxAmount - lineItem.TotalDiscountAmount).ToString();
             lblBonus.Text = lineItem.Scheme1.ToString() + " + " + lineItem.Scheme2.ToString();
-            lblSplDiscountPercent.Text = Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.SpecialDiscount)));
-            lblSplDisAmount.Text = Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.SpecialDiscountAmount)));
-            lblVolumeDis.Text = Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.VolumeDiscount)));
-            lblVolumeDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.VolumeDiscountAmount)));
-            lblSchemeAmount.Text= Convert.ToString(ExtensionMethods.SafeConversiondecimal(Convert.ToString(lineItem.SchemeAmount)));
+            lblSplDiscountPercent.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.SpecialDiscount)));
+            lblSplDisAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.SpecialDiscountAmount)));
+            lblVolumeDis.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.VolumeDiscount)));
+            lblVolumeDiscountAmount.Text = Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.VolumeDiscountAmount)));
+            lblSchemeAmount.Text= Convert.ToString(ExtensionMethods.SafeConversionDecimal(Convert.ToString(lineItem.SchemeAmount)));
 
         }
 

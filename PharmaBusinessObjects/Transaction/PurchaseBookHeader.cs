@@ -68,12 +68,12 @@ namespace PharmaBusinessObjects.Transaction
         public Nullable<int> PurchaseEntryFormID { get; set; }
         public decimal? LastBalance { get; set; }
 
-        public Nullable<int> ZSMId { get; set; }
-        public Nullable<int> ASMId { get; set; }
-        public Nullable<int> RSMId { get; set; }
-        public Nullable<int> AreaId { get; set; }
+        //public Nullable<int> ZSMId { get; set; }
+        //public Nullable<int> ASMId { get; set; }
+        //public Nullable<int> RSMId { get; set; }
+        //public Nullable<int> AreaId { get; set; }
         public Nullable<int> SalesManId { get; set; }
-        public Nullable<int> RouteId { get; set; }
+        //public Nullable<int> RouteId { get; set; }
 
         public Nullable<long> OldPurchaseSaleBookHeaderID { get; set; }
 

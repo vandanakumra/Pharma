@@ -56,8 +56,8 @@ namespace PharmaUI.ReceiptPayment
                     if (columnName == "Amount")
                     {
 
-                        decimal enteredAmount = ExtensionMethods.SafeConversiondecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
-                        decimal correspondingOSAmount = ExtensionMethods.SafeConversiondecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(decimal);
+                        decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
+                        decimal correspondingOSAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(decimal);
 
                         decimal utilizedAmount = GetTotallUtilizedAmount();
                         decimal tempBalance= CurrentTransactionEntity.EntityTotalAmount - utilizedAmount;
