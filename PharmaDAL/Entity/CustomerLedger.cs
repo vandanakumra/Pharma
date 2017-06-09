@@ -51,13 +51,13 @@ namespace PharmaDAL.Entity
         public bool IsLessExcise { get; set; }
         public int CustomerTypeID { get; set; }
         public int InterestTypeID { get; set; }
-        public Nullable<double> MaxOSAmount { get; set; }
+        public Nullable<decimal> MaxOSAmount { get; set; }
         public Nullable<int> MaxNumOfOSBill { get; set; }
-        public Nullable<double> MaxBillAmount { get; set; }
+        public Nullable<decimal> MaxBillAmount { get; set; }
         public Nullable<int> MaxGracePeriod { get; set; }
         public string SaleBillFormat { get; set; }
         public bool IsFollowConditionStrictly { get; set; }
-        public Nullable<double> Discount { get; set; }
+        public Nullable<decimal> Discount { get; set; }
         public string CentralLocal { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }

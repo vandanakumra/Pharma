@@ -56,11 +56,11 @@ namespace PharmaUI.ReceiptPayment
                     if (columnName == "Amount")
                     {
 
-                        double enteredAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value)) ?? default(double);
-                        double correspondingOSAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(double);
+                        decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
+                        decimal correspondingOSAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(decimal);
 
-                        double utilizedAmount = GetTotallUtilizedAmount();
-                        double tempBalance= CurrentTransactionEntity.EntityTotalAmount - utilizedAmount;
+                        decimal utilizedAmount = GetTotallUtilizedAmount();
+                        decimal tempBalance= CurrentTransactionEntity.EntityTotalAmount - utilizedAmount;
                 
                         if (enteredAmount > tempBalance)
                         {
@@ -76,7 +76,7 @@ namespace PharmaUI.ReceiptPayment
                         else if (enteredAmount > 0)
                         {
                             CurrentTransactionEntity.EntityBalAmount = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount - enteredAmount;
-                            lblBalAmountVal.Text = this.CurrentTransactionEntity.EntityBalAmount.ToString("#.##");
+                            lblBalAmountVal.Text = this.CurrentTransactionEntity.EntityBalAmount.ToString();
                         }
                     }
                 }
@@ -92,15 +92,15 @@ namespace PharmaUI.ReceiptPayment
            
         }
 
-        private double GetTotallUtilizedAmount()
+        private decimal GetTotallUtilizedAmount()
         {
-            double utilizedAmount = 0;
+            decimal utilizedAmount = 0;
             for (int i = 0; i < dgvReceiptPaymentAdjustment.Rows.Count; ++i)
             {
                 if (i == dgvReceiptPaymentAdjustment.CurrentRow.Index)
                     continue;
 
-                utilizedAmount += Convert.ToDouble(dgvReceiptPaymentAdjustment.Rows[i].Cells["Amount"].Value);
+                utilizedAmount += Convert.ToDecimal(dgvReceiptPaymentAdjustment.Rows[i].Cells["Amount"].Value);
             }
             return utilizedAmount;
         }
@@ -157,7 +157,7 @@ namespace PharmaUI.ReceiptPayment
                 {
                     List<BillAdjusted> listBillAdjustment = dgvReceiptPaymentAdjustment.Rows
                                                                              .Cast<DataGridViewRow>()
-                                                                             .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Amount"].Value)) && Convert.ToDouble(r.Cells["Amount"].Value) > 0)
+                                                                             .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Amount"].Value)) && Convert.ToDecimal(r.Cells["Amount"].Value) > 0)
                                                                              .Select(x => new BillAdjusted()
                                                                              {
                                                                                  ReceiptPaymentID = CurrentTransactionEntity.ReceiptPaymentID,

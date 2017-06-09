@@ -48,6 +48,12 @@ namespace PharmaBusiness.Transaction
         {
             new ReceiptPaymentDao(this.LoggedInUser).ClearTempBillAdjustment(transactionEntity);
         }
+
+
+        internal void ClearTempTransaction(TransactionEntity transactionEntity)
+        {
+            new ReceiptPaymentDao(this.LoggedInUser).ClearTempTransaction(transactionEntity);
+        }
         
     }
 }

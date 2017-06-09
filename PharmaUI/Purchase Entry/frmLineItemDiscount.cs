@@ -91,26 +91,26 @@ namespace PharmaUI
 
         private void frmLineItemDiscount_FormClosing(object sender, FormClosingEventArgs e)
         {
-            double value = 0L;
-            double.TryParse(txtDiscount.Text, out value);
+            decimal value = 0L;
+            decimal.TryParse(txtDiscount.Text, out value);
             purchaseBookLineItem.Discount = value;
 
-            double.TryParse(txtSpecialDiscount.Text, out value);
+            decimal.TryParse(txtSpecialDiscount.Text, out value);
             purchaseBookLineItem.SpecialDiscount = value;
 
-            double.TryParse(txtVolDiscount.Text, out value);
+            decimal.TryParse(txtVolDiscount.Text, out value);
             purchaseBookLineItem.VolumeDiscount = value;
 
-            double.TryParse(txtMRP.Text, out value);
+            decimal.TryParse(txtMRP.Text, out value);
             purchaseBookLineItem.MRP = value;
 
-            double.TryParse(txtSaleRate.Text, out value);
+            decimal.TryParse(txtSaleRate.Text, out value);
             purchaseBookLineItem.SaleRate = value;
 
-            double.TryParse(txtSpecialRate.Text, out value);
+            decimal.TryParse(txtSpecialRate.Text, out value);
             purchaseBookLineItem.SpecialRate = value;
 
-            double.TryParse(txtWholeSaleRate.Text, out value);
+            decimal.TryParse(txtWholeSaleRate.Text, out value);
             purchaseBookLineItem.WholeSaleRate = value;
           
             DateTime date = new DateTime();

@@ -25,34 +25,34 @@ namespace PharmaDAL.Entity
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
         public int CompanyID { get; set; }
-        public Nullable<double> ConversionRate { get; set; }
+        public Nullable<decimal> ConversionRate { get; set; }
         public string ShortName { get; set; }
         public string Packing { get; set; }
-        public Nullable<double> PurchaseRate { get; set; }
-        public double MRP { get; set; }
-        public Nullable<double> SaleRate { get; set; }
-        public Nullable<double> SpecialRate { get; set; }
-        public Nullable<double> WholeSaleRate { get; set; }
-        public Nullable<double> SaleExcise { get; set; }
-        public Nullable<double> SurchargeOnSale { get; set; }
-        public Nullable<double> TaxOnSale { get; set; }
-        public Nullable<double> Scheme1 { get; set; }
-        public Nullable<double> Scheme2 { get; set; }
-        public Nullable<double> PurchaseExcise { get; set; }
+        public Nullable<decimal> PurchaseRate { get; set; }
+        public decimal MRP { get; set; }
+        public Nullable<decimal> SaleRate { get; set; }
+        public Nullable<decimal> SpecialRate { get; set; }
+        public Nullable<decimal> WholeSaleRate { get; set; }
+        public Nullable<decimal> SaleExcise { get; set; }
+        public Nullable<decimal> SurchargeOnSale { get; set; }
+        public Nullable<decimal> TaxOnSale { get; set; }
+        public Nullable<decimal> Scheme1 { get; set; }
+        public Nullable<decimal> Scheme2 { get; set; }
+        public Nullable<decimal> PurchaseExcise { get; set; }
         public string UPC { get; set; }
         public bool IsHalfScheme { get; set; }
         public bool IsQTRScheme { get; set; }
-        public Nullable<double> SpecialDiscount { get; set; }
-        public Nullable<double> SpecialDiscountOnQty { get; set; }
+        public Nullable<decimal> SpecialDiscount { get; set; }
+        public Nullable<decimal> SpecialDiscountOnQty { get; set; }
         public bool IsFixedDiscount { get; set; }
-        public Nullable<double> FixedDiscountRate { get; set; }
-        public Nullable<double> MaximumQty { get; set; }
-        public Nullable<double> MaximumDiscount { get; set; }
-        public Nullable<double> SurchargeOnPurchase { get; set; }
-        public Nullable<double> TaxOnPurchase { get; set; }
-        public Nullable<double> DiscountRecieved { get; set; }
-        public Nullable<double> SpecialDiscountRecieved { get; set; }
-        public Nullable<double> QtyPerCase { get; set; }
+        public Nullable<decimal> FixedDiscountRate { get; set; }
+        public Nullable<decimal> MaximumQty { get; set; }
+        public Nullable<decimal> MaximumDiscount { get; set; }
+        public Nullable<decimal> SurchargeOnPurchase { get; set; }
+        public Nullable<decimal> TaxOnPurchase { get; set; }
+        public Nullable<decimal> DiscountRecieved { get; set; }
+        public Nullable<decimal> SpecialDiscountRecieved { get; set; }
+        public Nullable<decimal> QtyPerCase { get; set; }
         public string Location { get; set; }
         public Nullable<int> MinimumStock { get; set; }
         public Nullable<int> MaximumStock { get; set; }
@@ -65,8 +65,8 @@ namespace PharmaDAL.Entity
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string BATCH { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
-        public Nullable<double> OpeningQty { get; set; }
-        public Nullable<double> ClosingQty { get; set; }
+        public Nullable<decimal> OpeningQty { get; set; }
+        public Nullable<decimal> ClosingQty { get; set; }
         public string SaltCode { get; set; }
         public string SaltName { get; set; }
     

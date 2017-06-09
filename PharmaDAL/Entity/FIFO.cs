@@ -30,17 +30,17 @@ namespace PharmaDAL.Entity
         public string PurchaseBillNo { get; set; }
         public string Batch { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
-        public double Quantity { get; set; }
-        public double BalanceQuanity { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal BalanceQuanity { get; set; }
         public Nullable<int> PurchaseTypeId { get; set; }
-        public double PurchaseRate { get; set; }
-        public Nullable<double> EffectivePurchaseRate { get; set; }
-        public double SaleRate { get; set; }
-        public Nullable<double> WholeSaleRate { get; set; }
-        public Nullable<double> SpecialRate { get; set; }
-        public double MRP { get; set; }
-        public Nullable<double> Scheme1 { get; set; }
-        public Nullable<double> Scheme2 { get; set; }
+        public decimal PurchaseRate { get; set; }
+        public Nullable<decimal> EffectivePurchaseRate { get; set; }
+        public decimal SaleRate { get; set; }
+        public Nullable<decimal> WholeSaleRate { get; set; }
+        public Nullable<decimal> SpecialRate { get; set; }
+        public decimal MRP { get; set; }
+        public Nullable<decimal> Scheme1 { get; set; }
+        public Nullable<decimal> Scheme2 { get; set; }
         public Nullable<bool> IsOnHold { get; set; }
         public string OnHoldRemarks { get; set; }
         public Nullable<System.DateTime> MfgDate { get; set; }
