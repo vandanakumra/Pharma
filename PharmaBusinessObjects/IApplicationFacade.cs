@@ -141,6 +141,7 @@ namespace PharmaBusinessObjects
         void ClearTempBillAdjustment(TransactionEntity transactionEntity);
         bool DeleteUnSavedData(long purchaseSaleBookHeaderID);
         List<SaleChangeType> GetSaleEntryChangeTypes();
+        PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode);
         #endregion
     }
 

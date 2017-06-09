@@ -493,5 +493,55 @@ namespace PharmaDAL.Transaction
 
             return true;
         }
+
+        public PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode)
+        {
+            PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem master = new PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem();
+
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                SqlCommand cmd = new SqlCommand("GetSaleLineItemByCode", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@ItemCode", itemCode));
+                cmd.Parameters.Add(new SqlParameter("@CustomerCode", customerCode));
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    master.PurchaseSaleBookLineItemID = 0;
+                    master.ItemCode = Convert.ToString(dt.Rows[0]["ItemCode"]);
+                    master.ItemName = Convert.ToString(dt.Rows[0]["ItemName"]);
+                    master.SaleRate = Convert.IsDBNull(dt.Rows[0]["SaleRate"]) ? 0 : Convert.ToDouble(dt.Rows[0]["SaleRate"]);
+                    master.SpecialRate = Convert.IsDBNull(dt.Rows[0]["SpecialRate"]) ? 0 : Convert.ToDouble(dt.Rows[0]["SpecialRate"]);
+                    master.WholeSaleRate = Convert.IsDBNull(dt.Rows[0]["WholeSaleRate"]) ? 0 : Convert.ToDouble(dt.Rows[0]["WholeSaleRate"]);
+                    //master.SaleExcise = Convert.IsDBNull(dt.Rows[0]["SaleExcise"]) ? 0 : Convert.ToDouble(dt.Rows[0]["SaleExcise"]);
+                    //master.SurchargeOnSale = Convert.IsDBNull(dt.Rows[0]["SurchargeOnSale"]) ? 0 : Convert.ToDouble(dt.Rows[0]["SurchargeOnSale"]);
+                    //master.TaxOnSale = Convert.IsDBNull(dt.Rows[0]["TaxOnSale"]) ? 0 : Convert.ToDouble(dt.Rows[0]["TaxOnSale"]);
+                    master.Scheme1 = Convert.IsDBNull(dt.Rows[0]["Scheme1"]) ? 0 : Convert.ToDouble(dt.Rows[0]["Scheme1"]);
+                    master.Scheme2 = Convert.IsDBNull(dt.Rows[0]["Scheme2"]) ? 0 : Convert.ToDouble(dt.Rows[0]["Scheme2"]);
+                    master.IsHalfScheme = Convert.IsDBNull(dt.Rows[0]["IsHalfScheme"]) ? false : Convert.ToBoolean(dt.Rows[0]["IsHalfScheme"]);
+                    //master.IsQTRScheme = Convert.IsDBNull(dt.Rows[0]["IsQTRScheme"]) ? false : Convert.ToBoolean(dt.Rows[0]["IsQTRScheme"]);
+                    master.SpecialDiscount = Convert.IsDBNull(dt.Rows[0]["SpecialDiscount"]) ? 0 : Convert.ToDouble(dt.Rows[0]["SpecialDiscount"]);
+                    //master.SpecialDiscountOnQty = Convert.IsDBNull(dt.Rows[0]["SpecialDiscountOnQty"]) ? 0 : Convert.ToDouble(dt.Rows[0]["SpecialDiscountOnQty"]);
+                    //master.IsFixedDiscount = Convert.IsDBNull(dt.Rows[0]["IsFixedDiscount"]) ? false : Convert.ToBoolean(dt.Rows[0]["IsFixedDiscount"]);
+                    //master.FixedDiscountRate = Convert.IsDBNull(dt.Rows[0]["FixedDiscountRate"]) ? 0 : Convert.ToDouble(dt.Rows[0]["FixedDiscountRate"]);
+                    //master.QtyPerCase = Convert.IsDBNull(dt.Rows[0]["QtyPerCase"]) ? 0 : Convert.ToDouble(dt.Rows[0]["QtyPerCase"]);
+                    //master.Location = Convert.ToString(dt.Rows[0]["Location"]);
+                    //master.SaleTypeId = Convert.IsDBNull(dt.Rows[0]["SaleTypeId"]) ? 0 : Convert.ToInt32(dt.Rows[0]["SaleTypeId"]);
+                    master.Discount = Convert.IsDBNull(dt.Rows[0]["Discount"]) ? 0 : Convert.ToDouble(dt.Rows[0]["Discount"]);
+                    master.Batch = Convert.ToString(dt.Rows[0]["Batch"]);
+                    //master.Packing = Convert.ToString(dt.Rows[0]["Packing"]);
+                    master.PurchaseSaleRate = Convert.IsDBNull(dt.Rows[0]["PurchaseRate"]) ? 0 : Convert.ToDouble(dt.Rows[0]["PurchaseRate"]);
+                    master.FifoID = Convert.IsDBNull(dt.Rows[0]["FifoID"]) ? 0 : Convert.ToInt32(dt.Rows[0]["FifoID"]);
+                }
+            }
+            return master;
+        }
     }
 }

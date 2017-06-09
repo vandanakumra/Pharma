@@ -875,7 +875,7 @@ namespace PharmaBusiness
         {
             try
             {
-                return new SaleBiz().GetTypeOfChanges();
+                return new SaleBiz(this.LoggedInUser).GetTypeOfChanges();
             }
             catch (Exception)
             {
@@ -883,6 +883,19 @@ namespace PharmaBusiness
                 throw;
             }
             
+        }
+
+        public PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode)
+        {
+            try
+            {
+                return new SaleBiz(this.LoggedInUser).GetNewSaleLineItem(itemCode, customerCode);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         #endregion

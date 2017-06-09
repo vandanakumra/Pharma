@@ -147,6 +147,7 @@
             // 
             this.txtInvoiceNumber.Location = new System.Drawing.Point(97, 83);
             this.txtInvoiceNumber.Name = "txtInvoiceNumber";
+            this.txtInvoiceNumber.ReadOnly = true;
             this.txtInvoiceNumber.Size = new System.Drawing.Size(146, 20);
             this.txtInvoiceNumber.TabIndex = 9;
             // 

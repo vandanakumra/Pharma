@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmaBusinessObjects.Transaction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,8 +65,6 @@ namespace PharmaBusinessObjects.Master
         public string SalesManCode { get; set; }
         public double? DueBillAmount { get; set; }
         public int DueBillCount { get; set; }
-        
-
         #endregion
 
     }
