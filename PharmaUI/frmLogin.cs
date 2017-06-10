@@ -66,11 +66,9 @@ namespace PharmaUI
         {
             try
             {
-                PharmaBusinessObjects.Master.UserMaster loginUser = applicationFacade.GetUserByUserName(tbUserName.Text);
-
-                if (loginUser != null)
+                if (applicationFacade.ValidateUser(tbUserName.Text, tbPassword.Text))
                 {
-                    ExtensionMethods.LoggedInUser = loginUser;
+                    ExtensionMethods.LoggedInUser = applicationFacade.GetUserByUserName(tbUserName.Text);
                     DialogResult = DialogResult.OK;
                     
                 }

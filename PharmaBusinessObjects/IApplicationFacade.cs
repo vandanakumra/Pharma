@@ -116,11 +116,12 @@ namespace PharmaBusinessObjects
         PharmaBusinessObjects.Master.Privledge GetPrivledgeById(int userid);
         bool AddPrivledge(PharmaBusinessObjects.Master.Privledge p);
         bool UpdatePrivledge(PharmaBusinessObjects.Master.Privledge p);
+        bool ValidateUser(string userName, string password);
 
         #endregion
 
         #region Transaction
-       
+
         long InsertUpdateTempPurchaseBookHeader(PurchaseSaleBookHeader header);
         List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes();
         List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);      

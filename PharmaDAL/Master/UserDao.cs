@@ -390,5 +390,12 @@ namespace PharmaDAL.Master
 
         }
 
+        public bool ValidateUser(string userName, string password)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.Users.Where(p => p.Username == userName && p.Password == password && p.Status == true).Any();
+            }
+        }
     }
 }

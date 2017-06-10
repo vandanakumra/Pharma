@@ -51,6 +51,7 @@ namespace PharmaUI
                 FillCombo();
                 InitializeGrid();
                 dtPurchaseDate.Focus();
+                
                 string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
                 format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
                 format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;

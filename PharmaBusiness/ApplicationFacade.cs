@@ -717,6 +717,11 @@ namespace PharmaBusiness
             return new UserBiz(this.LoggedInUser).UpdatePrivledge(p);
         }
 
+        public bool ValidateUser(string userName, string password)
+        {
+            return new UserBiz(this.LoggedInUser).ValidateUser(userName, password);
+        }
+
         #endregion
 
         #region Purchase Entry     

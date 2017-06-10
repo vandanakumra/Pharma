@@ -35,7 +35,10 @@ namespace PharmaUI
             ExtensionMethods.FormLoad(this, string.Format("Item {0} {1}", purchaseBookLineItem.ItemCode, purchaseBookLineItem.ItemName));
 
             GotFocusEventRaised(this);
-            EnterKeyDownForTabEvents(this);           
+            EnterKeyDownForTabEvents(this);
+
+           
+                     
             FillFormForUpdate();
 
         }
