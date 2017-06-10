@@ -32,6 +32,7 @@ namespace PharmaDAL.Transaction
                         receiptPaymentDB.BankAccountLedgerTypeCode = receiptPayment.BankAccountLedgerTypeCode;
                         receiptPaymentDB.ChequeNumber = receiptPayment.ChequeNumber;
                         receiptPaymentDB.ChequeDate = receiptPayment.ChequeDate;
+                        receiptPaymentDB.UnadjustedAmount = receiptPayment.UnadjustedAmount;
                         context.SaveChanges();
                         receiptPaymentID = receiptPaymentDB.ReceiptPaymentID;
                     }

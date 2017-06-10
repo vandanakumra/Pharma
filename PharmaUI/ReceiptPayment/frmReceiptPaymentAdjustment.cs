@@ -203,10 +203,18 @@ namespace PharmaUI.ReceiptPayment
             }
             else if (keyData == Keys.Escape)
             {
-                if (DialogResult.Yes == MessageBox.Show(Constants.Messages.UnsavedDataWarning, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (dgvReceiptPaymentAdjustment.Rows.Count > 0)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.UnsavedDataWarning, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        ReceiptPaymentState = ReceiptPaymentState.Cancel;
+                        applicationFacade.ClearTempBillAdjustment(CurrentTransactionEntity);
+                        this.Close();
+                    }
+                }
+                else
                 {
                     ReceiptPaymentState = ReceiptPaymentState.Cancel;
-                    applicationFacade.ClearTempBillAdjustment(CurrentTransactionEntity);
                     this.Close();
                 }
             }
