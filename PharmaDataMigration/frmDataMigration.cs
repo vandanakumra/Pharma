@@ -235,6 +235,16 @@ namespace PharmaDataMigration
             grdDataMigration.Rows[18].Cells[1].Value = "Completed";
             grdDataMigration.Rows[18].Cells[2].Value = result;
 
+
+            //For below method check comments in CustomerLedgerMaster
+            grdDataMigration.Rows.Add("Supplier Company Discount", "Processing", 0);
+            result = 0;
+
+            result = supplierLedgerMaster.InsertSupplierCompanyReferenceData();
+
+            grdDataMigration.Rows[19].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[19].Cells[2].Value = result;
+
             MessageBox.Show("Process Completed");
         }
     }

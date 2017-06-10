@@ -71,6 +71,9 @@ namespace PharmaUI
             dgvCompanyDiscount.Columns["Expired"].HeaderText = "Expired";
 
             dgvCompanyDiscount.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+
             dgvCompanyDiscount.AllowUserToAddRows = false;
             dgvCompanyDiscount.AllowUserToDeleteRows = false;
             dgvCompanyDiscount.ReadOnly = false;
