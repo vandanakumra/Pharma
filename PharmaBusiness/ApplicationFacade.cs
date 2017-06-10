@@ -878,7 +878,18 @@ namespace PharmaBusiness
                 throw;
             }
         }
-        
+
+        public void SaveAllTempTransaction(List<long> tempReceiptPaymentList)
+        {
+            try
+            {
+                new ReceiptPaymentBiz(this.LoggedInUser).SaveAllTempTransaction(tempReceiptPaymentList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 

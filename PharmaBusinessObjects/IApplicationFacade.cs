@@ -142,6 +142,7 @@ namespace PharmaBusinessObjects
         void ClearTempTransaction(TransactionEntity transactionEntity);       
         bool DeleteUnSavedData(long purchaseSaleBookHeaderID);
         List<SaleChangeType> GetSaleEntryChangeTypes();
+        void SaveAllTempTransaction(List<long> tempReceiptPaymentList);
         #endregion
     }
 

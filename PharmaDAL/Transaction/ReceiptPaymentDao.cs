@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace PharmaDAL.Transaction
                     {
                         Entity.TempReceiptPayment receiptPaymentDBEntry = new Entity.TempReceiptPayment()
                         {
-                            VoucherNumber=(context.ReceiptPayment.Where(q=>q.VoucherTypeCode == receiptPayment.VoucherTypeCode).Count()+1).ToString("D8"),
+                            VoucherNumber="TPVOCHER",
                             VoucherTypeCode = receiptPayment.VoucherTypeCode,
                             VoucherDate = receiptPayment.VoucherDate,
                             LedgerType = receiptPayment.LedgerType,
@@ -62,7 +63,6 @@ namespace PharmaDAL.Transaction
                 throw ex;
             }
         }
-
 
         public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(PharmaBusinessObjects.Transaction.TransactionEntity entity)
         {
@@ -228,7 +228,6 @@ namespace PharmaDAL.Transaction
             }
         }
 
-
         public void ClearTempTransaction(PharmaBusinessObjects.Transaction.TransactionEntity entity)
         {
             try
@@ -255,6 +254,27 @@ namespace PharmaDAL.Transaction
                             throw;
                         }
                     }                      
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void SaveAllTempTransaction(List<long> tempReceiptPaymentList)
+        {
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+
+                    using (var transaction = context.Database.BeginTransaction())
+                    {
+                        SqlConnection connection = (SqlConnection)context.Database.Connection;
+                        SqlCommand cmd = new SqlCommand("InsertUpdateInvetoryHeadersInTempTable", connection);
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    }
                 }
             }
             catch (Exception ex)

@@ -624,30 +624,51 @@ namespace PharmaUI.ReceiptPayment
         {
             if (keyData == Keys.End)
             {
+                if (dgvPaymentToSupplier.SelectedCells.Count > 0)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.SaveDataPrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        List<long> listTempReceiptPaymentList = new List<long>();
+                        foreach (DataGridViewRow receiptPaymentRow in dgvPaymentToSupplier.Rows.Cast<DataGridViewRow>())
+                        {
+                            if (receiptPaymentRow.Cells["ReceiptPaymentID"].Value != null)
+                            {
+                                listTempReceiptPaymentList.Add((long)receiptPaymentRow.Cells["ReceiptPaymentID"].Value);
+                            }
+                        }
 
+                        if (listTempReceiptPaymentList.Count > 0)
+                        {
+                            applicationFacade.SaveAllTempTransaction(listTempReceiptPaymentList);
+                        }
+                    }
+                }
             }
             else if (keyData == Keys.Escape || keyData == Keys.Delete)
             {
                 if (dgvPaymentToSupplier.SelectedCells.Count > 0)
                 {
+                    int rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;
                     if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        int rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;
-                        TransactionEntity tranEntity = new TransactionEntity();
-                        tranEntity.ReceiptPaymentID = (long)dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value;
-                        tranEntity.EntityCode = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeCode"].Value);
-
-                        applicationFacade.ClearTempTransaction(tranEntity);
-                        dgvPaymentToSupplier.Rows.RemoveAt(rowIndex);
-                        dgvPaymentToSupplier.Refresh();
-                        if (dgvPaymentToSupplier.Rows.Count == 0)
+                        if (dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value != null)
                         {
-                            dgvPaymentToSupplier.Rows.Add();
-                            dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[0].Cells["LedgerTypeCode"];
-                            dgvPaymentToSupplier.BeginEdit(true);
+                            TransactionEntity tranEntity = new TransactionEntity();
+                            tranEntity.ReceiptPaymentID = (long)dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value;
+                            tranEntity.EntityCode = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeCode"].Value);
+
+                            applicationFacade.ClearTempTransaction(tranEntity);
+                            dgvPaymentToSupplier.Rows.RemoveAt(rowIndex);
+                            dgvPaymentToSupplier.Refresh();
+                            if (dgvPaymentToSupplier.Rows.Count == 0)
+                            {
+                                dgvPaymentToSupplier.Rows.Add();
+                                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[0].Cells["LedgerTypeCode"];
+                                dgvPaymentToSupplier.BeginEdit(true);
+                            }
+                            dgvSupplierBillOS.DataSource = null;
+                            dgvSupplierBillAdjusted.DataSource = null;
                         }
-                        dgvSupplierBillOS.DataSource = null;
-                        dgvSupplierBillAdjusted.DataSource = null;
                     }
                 }
             }

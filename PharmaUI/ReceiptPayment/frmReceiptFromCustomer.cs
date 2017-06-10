@@ -620,30 +620,51 @@ namespace PharmaUI.ReceiptPayment
         {
             if (keyData == Keys.End)
             {
+                if (dgvReceiptFromCustomer.SelectedCells.Count > 0)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.SaveDataPrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        List<long> listTempReceiptPaymentList = new List<long>();
+                        foreach (DataGridViewRow receiptPaymentRow in dgvReceiptFromCustomer.Rows.Cast<DataGridViewRow>())
+                        {
+                            if(receiptPaymentRow.Cells["ReceiptPaymentID"].Value != null)
+                            {
+                                listTempReceiptPaymentList.Add( (long)receiptPaymentRow.Cells["ReceiptPaymentID"].Value);
+                            }
+                        }
 
+                        if (listTempReceiptPaymentList.Count > 0)
+                        {
+                            applicationFacade.SaveAllTempTransaction(listTempReceiptPaymentList);
+                        }
+                    }
+                }
             }
             else if (keyData == Keys.Escape || keyData == Keys.Delete)
             {
                 if (dgvReceiptFromCustomer.SelectedCells.Count > 0)
                 {
+                    int rowIndex = dgvReceiptFromCustomer.SelectedCells[0].RowIndex;
                     if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        int rowIndex = dgvReceiptFromCustomer.SelectedCells[0].RowIndex;
-                        TransactionEntity tranEntity = new TransactionEntity();
-                        tranEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[rowIndex].Cells["ReceiptPaymentID"].Value;
-                        tranEntity.EntityCode = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["LedgerTypeCode"].Value);
-
-                        applicationFacade.ClearTempTransaction(tranEntity);
-                        dgvReceiptFromCustomer.Rows.RemoveAt(rowIndex);
-                        dgvReceiptFromCustomer.Refresh();
-                        if (dgvReceiptFromCustomer.Rows.Count == 0)
+                        if (dgvReceiptFromCustomer.Rows[rowIndex].Cells["ReceiptPaymentID"].Value != null)
                         {
-                            dgvReceiptFromCustomer.Rows.Add();
-                            dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
-                            dgvReceiptFromCustomer.BeginEdit(true);
+                            TransactionEntity tranEntity = new TransactionEntity();
+                            tranEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[rowIndex].Cells["ReceiptPaymentID"].Value;
+                            tranEntity.EntityCode = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["LedgerTypeCode"].Value);
+
+                            applicationFacade.ClearTempTransaction(tranEntity);
+                            dgvReceiptFromCustomer.Rows.RemoveAt(rowIndex);
+                            dgvReceiptFromCustomer.Refresh();
+                            if (dgvReceiptFromCustomer.Rows.Count == 0)
+                            {
+                                dgvReceiptFromCustomer.Rows.Add();
+                                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
+                                dgvReceiptFromCustomer.BeginEdit(true);
+                            }
+                            dgvCustomerBillOS.DataSource = null;
+                            dgvCustomerBillAdjusted.DataSource = null;
                         }
-                        dgvCustomerBillOS.DataSource = null;
-                        dgvCustomerBillAdjusted.DataSource = null;
                     }
                 }
             }
