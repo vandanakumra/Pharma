@@ -7,11 +7,15 @@ using PharmaDAL.Master;
 using System.Data.Entity.Validation;
 using System.Windows.Forms;
 using PharmaBusinessObjects.Common;
+using log4net;
+using System.Reflection;
 
 namespace PharmaDataMigration.Master
 {
     public class ItemMaster
     {
+        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private ItemDaoMaster itemMasterDao; 
         private DBFConnectionManager dbConnection;
         private List<CompanyCodeCounts> companyCodeCounts;
@@ -42,96 +46,102 @@ namespace PharmaDataMigration.Master
                         var companyMaster = context.CompanyMaster.Select(p => p).ToList();
                         var accountLedgerMaster = context.AccountLedgerMaster.Select(p => p).ToList();
 
-
-
                         foreach (DataRow dr in dtItemMaster.Rows)
                         {
-                            string originalItemCompanyCode = Convert.ToString(dr["CompCD"]).TrimEnd();
-                            string companyCode = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == originalItemCompanyCode).FirstOrDefault().MappedCompanyCode;
-                            int companyID = companyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
-                            int totalItemsFromSameCompany = companyCodeCounts.Where(p => p.CompanyCode == companyCode).Select(p => p.CompanyCodeCount).FirstOrDefault();
-
-                            totalItemsFromSameCompany++;
-
-                            if (totalItemsFromSameCompany > 1)
+                            try
                             {
-                                foreach (var item in companyCodeCounts.Where(p => p.CompanyCode == companyCode))
+                                string originalItemCompanyCode = Convert.ToString(dr["CompCD"]).TrimEnd();
+                                string companyCode = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == originalItemCompanyCode).FirstOrDefault().MappedCompanyCode;
+                                int companyID = companyMaster.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
+                                int totalItemsFromSameCompany = companyCodeCounts.Where(p => p.CompanyCode == companyCode).Select(p => p.CompanyCodeCount).FirstOrDefault();
+
+                                totalItemsFromSameCompany++;
+
+                                if (totalItemsFromSameCompany > 1)
                                 {
-                                    item.CompanyCodeCount = totalItemsFromSameCompany;
+                                    foreach (var item in companyCodeCounts.Where(p => p.CompanyCode == companyCode))
+                                    {
+                                        item.CompanyCodeCount = totalItemsFromSameCompany;
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                companyCodeCounts.Add(new CompanyCodeCounts() { CompanyCode = companyCode, CompanyCodeCount = totalItemsFromSameCompany });
-                            }
-                            
-                            string itemCode = string.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0'));
-                            string originalItemCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = originalItemCode, MappedItemCode = itemCode });
+                                else
+                                {
+                                    companyCodeCounts.Add(new CompanyCodeCounts() { CompanyCode = companyCode, CompanyCodeCount = totalItemsFromSameCompany });
+                                }
 
-                            string saleLedgerCode = Common.accountLedgerCodeMap.Where(q => q.OriginalAccountLedgerCode == Convert.ToString(dr["SType"]).TrimEnd()).FirstOrDefault().MappedAccountLedgerCode;
-                            var saleType = accountLedgerMaster.Where(p => p.AccountLedgerCode == saleLedgerCode).FirstOrDefault();
+                                string itemCode = string.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0'));
+                                string originalItemCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                                Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = originalItemCode, MappedItemCode = itemCode });
 
-                            PharmaDAL.Entity.AccountLedgerMaster purchaseType = null;
+                                string saleLedgerCode = Common.accountLedgerCodeMap.Where(q => q.OriginalAccountLedgerCode == Convert.ToString(dr["SType"]).TrimEnd()).FirstOrDefault().MappedAccountLedgerCode;
+                                var saleType = accountLedgerMaster.Where(p => p.AccountLedgerCode == saleLedgerCode).FirstOrDefault();
 
-                            if (saleType.SalePurchaseTaxType == 5)
-                            {
-                                purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 5 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                                PharmaDAL.Entity.AccountLedgerMaster purchaseType = null;
+
+                                if (saleType.SalePurchaseTaxType == 5)
+                                {
+                                    purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 5 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                                }
+                                else if (saleType.SalePurchaseTaxType == 12)
+                                {
+                                    purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 12 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                                }
+                                else if (saleType.SalePurchaseTaxType == 0)
+                                {
+                                    purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 0 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                                }
+
+
+                                PharmaDAL.Entity.ItemMaster newItemMaster = new PharmaDAL.Entity.ItemMaster()
+                                {
+                                    ItemCode = itemCode,
+                                    ItemName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                    CompanyID = companyID,
+                                    ConversionRate = Convert.ToDecimal(dr["ConvRate"]),
+                                    ShortName = Convert.ToString(dr["ALT_Name"]).TrimEnd(),
+                                    Packing = Convert.ToString(dr["Size"]).TrimEnd(),
+                                    PurchaseRate = Convert.ToDecimal(dr["PRate"]),
+                                    MRP = Convert.ToDecimal(dr["MRP"]),
+                                    SaleRate = Convert.ToDecimal(dr["SRate"]),
+                                    SpecialRate = Convert.ToDecimal(dr["SPLRate"]),
+                                    WholeSaleRate = Convert.ToDecimal(dr["WSRATE"]),
+                                    SaleExcise = Convert.ToDecimal(dr["EXCISES"]),
+                                    SurchargeOnSale = Convert.ToDecimal(dr["SC"]),
+                                    TaxOnSale = Convert.ToDecimal(dr["STax"]),
+                                    Scheme1 = Convert.ToDecimal(dr["Scheme1"]),
+                                    Scheme2 = Convert.ToDecimal(dr["Scheme2"]),
+                                    PurchaseExcise = Convert.ToDecimal(dr["ExciseP"]),
+                                    UPC = Convert.ToString(dr["UPC"]).TrimEnd(),
+                                    IsHalfScheme = Convert.ToChar(dr["half"]) == 'Y' ? true : false,
+                                    IsQTRScheme = Convert.ToChar(dr["qtr"]) == 'Y' ? true : false,
+                                    SpecialDiscount = Convert.ToDecimal(dr["SPLDIS"]),
+                                    SpecialDiscountOnQty = Convert.ToDecimal(dr["DISQTY"]),
+                                    IsFixedDiscount = Convert.ToChar(dr["check_dis"]) == 'Y' ? true : false,
+                                    FixedDiscountRate = Convert.ToDecimal(dr["drate1"]),
+                                    //MaximumQty = Convert.ToDecimal(dr["MAX_QTY"]),
+                                    //MaximumDiscount = Convert.ToDecimal(dr["max_dis"]),
+                                    SurchargeOnPurchase = Convert.ToDecimal(dr["PSC"]),
+                                    TaxOnPurchase = Convert.ToDecimal(dr["PTax"]),
+                                    DiscountRecieved = Convert.ToDecimal(dr["PDIS"]),
+                                    SpecialDiscountRecieved = Convert.ToDecimal(dr["PSPLDIS"]),
+                                    QtyPerCase = Convert.ToDecimal(dr["Case_Qty"]),
+                                    Location = Convert.ToString(dr["location"]).TrimEnd(),
+                                    //MinimumStock = Convert.ToInt32(dr["min"]),
+                                    //MaximumStock = Convert.ToInt32(dr["max"]),
+                                    SaleTypeId = saleType.AccountLedgerID,
+                                    PurchaseTypeId = purchaseType.AccountLedgerID,
+                                    Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
+                                    CreatedBy = "admin",
+                                    CreatedOn = DateTime.Now
+                                };
+
+                                listItemMaster.Add(newItemMaster);
+
                             }
-                            else if (saleType.SalePurchaseTaxType == 12)
+                            catch (Exception)
                             {
-                                purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 12 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
+                                log.Info("ITEM MASTER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
                             }
-                            else if (saleType.SalePurchaseTaxType == 0)
-                            {
-                                purchaseType = accountLedgerMaster.Where(p => p.SalePurchaseTaxType == 0 && p.AccountLedgerType.SystemName == Constants.AccountLedgerType.PurchaseLedger).FirstOrDefault();
-                            }
-                            
-
-                            PharmaDAL.Entity.ItemMaster newItemMaster = new PharmaDAL.Entity.ItemMaster()
-                            {
-                                ItemCode = itemCode,
-                                ItemName = Convert.ToString(dr["ACName"]).TrimEnd(),
-                                CompanyID = companyID,
-                                ConversionRate = Convert.ToDecimal(dr["ConvRate"]),
-                                ShortName = Convert.ToString(dr["ALT_Name"]).TrimEnd(),
-                                Packing = Convert.ToString(dr["Size"]).TrimEnd(),
-                                PurchaseRate = Convert.ToDecimal(dr["PRate"]),
-                                MRP = Convert.ToDecimal(dr["MRP"]),
-                                SaleRate = Convert.ToDecimal(dr["SRate"]),
-                                SpecialRate = Convert.ToDecimal(dr["SPLRate"]),
-                                WholeSaleRate = Convert.ToDecimal(dr["WSRATE"]),
-                                SaleExcise = Convert.ToDecimal(dr["EXCISES"]),
-                                SurchargeOnSale = Convert.ToDecimal(dr["SC"]),
-                                TaxOnSale = Convert.ToDecimal(dr["STax"]),
-                                Scheme1 = Convert.ToDecimal(dr["Scheme1"]),
-                                Scheme2 = Convert.ToDecimal(dr["Scheme2"]),
-                                PurchaseExcise = Convert.ToDecimal(dr["ExciseP"]),
-                                UPC = Convert.ToString(dr["UPC"]).TrimEnd(),
-                                IsHalfScheme = Convert.ToChar(dr["half"]) == 'Y' ? true : false,
-                                IsQTRScheme = Convert.ToChar(dr["qtr"]) == 'Y' ? true : false,
-                                SpecialDiscount = Convert.ToDecimal(dr["SPLDIS"]),
-                                SpecialDiscountOnQty = Convert.ToDecimal(dr["DISQTY"]),
-                                IsFixedDiscount = Convert.ToChar(dr["check_dis"]) == 'Y' ? true : false,
-                                FixedDiscountRate = Convert.ToDecimal(dr["drate1"]),
-                                //MaximumQty = Convert.ToDecimal(dr["MAX_QTY"]),
-                                //MaximumDiscount = Convert.ToDecimal(dr["max_dis"]),
-                                SurchargeOnPurchase = Convert.ToDecimal(dr["PSC"]),
-                                TaxOnPurchase = Convert.ToDecimal(dr["PTax"]),
-                                DiscountRecieved = Convert.ToDecimal(dr["PDIS"]),
-                                SpecialDiscountRecieved = Convert.ToDecimal(dr["PSPLDIS"]),
-                                QtyPerCase = Convert.ToDecimal(dr["Case_Qty"]),
-                                Location = Convert.ToString(dr["location"]).TrimEnd(),
-                                //MinimumStock = Convert.ToInt32(dr["min"]),
-                                //MaximumStock = Convert.ToInt32(dr["max"]),
-                                SaleTypeId = saleType.AccountLedgerID,
-                                PurchaseTypeId = purchaseType.AccountLedgerID,
-                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
-                                CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
-                            };
-
-                            listItemMaster.Add(newItemMaster);
                         }
                     }
 

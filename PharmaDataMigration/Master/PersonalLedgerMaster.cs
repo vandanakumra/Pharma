@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using PharmaDAL.Entity;
+using log4net;
+using System.Reflection;
 
 namespace PharmaDataMigration.Master
 {
     public class PersonalLedgerMaster
     {
+        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private DBFConnectionManager dbConnection;
 
         public PersonalLedgerMaster()
@@ -35,32 +39,39 @@ namespace PharmaDataMigration.Master
                     {
                         foreach (DataRow dr in dtPersonalLedgerMaster.Rows)
                         {
-                            maxPersonalLedgerID++;
-
-                            string personalLedgerCode = "P" + maxPersonalLedgerID.ToString().PadLeft(6, '0');
-                            string originalPersonalLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            Common.personalLedgerCodeMap.Add(new PersonalLedgerCodeMap() { OriginalPersonalLedgerCode = originalPersonalLedgerCode, MappedPersonalLedgerCode = personalLedgerCode });
-
-                            PharmaDAL.Entity.PersonalLedger newPersonalLedgerMaster = new PharmaDAL.Entity.PersonalLedger()
+                            try
                             {
-                                PersonalLedgerCode = personalLedgerCode,
-                                PersonalLedgerName = Convert.ToString(dr["ACName"]).TrimEnd(),
-                                PersonalLedgerShortName = Convert.ToString(dr["Alt_name_1"]).TrimEnd(),
-                                Address = string.Concat(Convert.ToString(dr["ACAD1"]).TrimEnd(), " ", Convert.ToString(dr["ACAD2"]).TrimEnd(), " ", Convert.ToString(dr["ACAD3"]).TrimEnd()),
-                                ContactPerson = Convert.ToString(dr["ACAD4"]).TrimEnd(),
-                                Mobile = Convert.ToString(dr["Mobile"]).TrimEnd(),
-                                //Pager = Convert.ToString(dr["Pager"]).TrimEnd(),
-                                //Fax = Convert.ToString(dr["Fax"]).TrimEnd(),
-                                OfficePhone = Convert.ToString(dr["Telo"]).TrimEnd(),
-                                ResidentPhone = Convert.ToString(dr["Telr"]).TrimEnd(),
-                                EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
-                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
-                                CreatedBy = "admin",
-                                CreatedOn = DateTime.Now,
-                                PersonalLedgerShortDesc = Convert.ToString(dr["Alt_name_2"]).TrimEnd()
-                            };
+                                maxPersonalLedgerID++;
 
-                            listPersonalLedgerMaster.Add(newPersonalLedgerMaster);
+                                string personalLedgerCode = "P" + maxPersonalLedgerID.ToString().PadLeft(6, '0');
+                                string originalPersonalLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                                Common.personalLedgerCodeMap.Add(new PersonalLedgerCodeMap() { OriginalPersonalLedgerCode = originalPersonalLedgerCode, MappedPersonalLedgerCode = personalLedgerCode });
+
+                                PharmaDAL.Entity.PersonalLedger newPersonalLedgerMaster = new PharmaDAL.Entity.PersonalLedger()
+                                {
+                                    PersonalLedgerCode = personalLedgerCode,
+                                    PersonalLedgerName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                    PersonalLedgerShortName = Convert.ToString(dr["Alt_name_1"]).TrimEnd(),
+                                    Address = string.Concat(Convert.ToString(dr["ACAD1"]).TrimEnd(), " ", Convert.ToString(dr["ACAD2"]).TrimEnd(), " ", Convert.ToString(dr["ACAD3"]).TrimEnd()),
+                                    ContactPerson = Convert.ToString(dr["ACAD4"]).TrimEnd(),
+                                    Mobile = Convert.ToString(dr["Mobile"]).TrimEnd(),
+                                    //Pager = Convert.ToString(dr["Pager"]).TrimEnd(),
+                                    //Fax = Convert.ToString(dr["Fax"]).TrimEnd(),
+                                    OfficePhone = Convert.ToString(dr["Telo"]).TrimEnd(),
+                                    ResidentPhone = Convert.ToString(dr["Telr"]).TrimEnd(),
+                                    EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
+                                    Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
+                                    CreatedBy = "admin",
+                                    CreatedOn = DateTime.Now,
+                                    PersonalLedgerShortDesc = Convert.ToString(dr["Alt_name_2"]).TrimEnd()
+                                };
+
+                                listPersonalLedgerMaster.Add(newPersonalLedgerMaster);
+                            }
+                            catch(Exception)
+                            {
+                                log.Info("PERSONAL LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                            }
                         }
                     }
 
