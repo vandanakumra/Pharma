@@ -69,12 +69,14 @@ namespace PharmaDAL.Entity
         public Nullable<decimal> ClosingQty { get; set; }
         public string SaltCode { get; set; }
         public string SaltName { get; set; }
+        public string HSNCode { get; set; }
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
         public virtual AccountLedgerMaster AccountLedgerMaster1 { get; set; }
         public virtual CompanyMaster CompanyMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerCompanyDiscountRef> CustomerCompanyDiscountRef { get; set; }
+        public virtual HSNCode HSNCode1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplierCompanyDiscountRef> SupplierCompanyDiscountRef { get; set; }
     }
