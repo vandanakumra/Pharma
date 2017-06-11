@@ -1,6 +1,7 @@
 ﻿using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
@@ -189,7 +190,10 @@ namespace PharmaDAL.Transaction
                                     Amount = billAdjust.Amount,
                                     ChequeNumber = receiptPaymentEntity.ChequeNumber
                                 };
-                                context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);                     
+                                context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);
+
+                                var billOSDB= context.BillOutStandings.Where(x => x.BillOutStandingsID == billAdjustmentDBEntry.BillOutStandingsID).FirstOrDefault();
+                                billOSDB.OSAmount -= billAdjustmentDBEntry.Amount;
                             }
                             context.SaveChanges();
                             transaction.Commit();
@@ -218,6 +222,13 @@ namespace PharmaDAL.Transaction
                                                                 && q.LedgerTypeCode == entity.EntityCode)
                                                                 .Select(q => q).ToList();
 
+                    ///Rollback all amount deducted amount from OS amount from Bill outstanding
+                    ///
+                    foreach (var tempAdj in tempBillAdjustmentForEntity)
+                    {
+                        tempAdj.BillOutStandings.OSAmount += tempAdj.Amount;
+                    }
+
                     context.TempBillOutStandingsAudjustment.RemoveRange(tempBillAdjustmentForEntity);
                     context.SaveChanges();
                 }
@@ -240,6 +251,13 @@ namespace PharmaDAL.Transaction
                         try
                         {
                             var tempAdjustments = context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID).ToList();
+                            ///Rollback all amount deducted amount from OS amount from Bill outstanding
+                            ///
+                            foreach (var tempAdj in tempAdjustments)
+                            {
+                                tempAdj.BillOutStandings.OSAmount += tempAdj.Amount;
+                            }
+
                             context.TempBillOutStandingsAudjustment.RemoveRange(tempAdjustments);
 
                             var tempReceipt = context.TempReceiptPayment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID).ToList();
@@ -262,20 +280,36 @@ namespace PharmaDAL.Transaction
             }
         }
 
-        public void SaveAllTempTransaction(List<long> tempReceiptPaymentList)
+        public void SaveAllTempTransaction(List<long> tempReceiptPaymentIds)
         {
             try
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
+                    SqlConnection connection = (SqlConnection)context.Database.Connection;
 
-                    using (var transaction = context.Database.BeginTransaction())
+                    SqlCommand cmd = new SqlCommand("SaveReceiptPaymentData", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    List<PharmaBusinessObjects.Transaction.ReceiptPayment.TempReceiptPayment> list = new List<PharmaBusinessObjects.Transaction.ReceiptPayment.TempReceiptPayment>();
+                    foreach (long id in tempReceiptPaymentIds)
                     {
-                        SqlConnection connection = (SqlConnection)context.Database.Connection;
-                        SqlCommand cmd = new SqlCommand("InsertUpdateInvetoryHeadersInTempTable", connection);
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        list.Add(new PharmaBusinessObjects.Transaction.ReceiptPayment.TempReceiptPayment() { ReceiptPaymentID = id });
                     }
-                }
+
+                    SqlParameter parameter = new SqlParameter();
+                    parameter.SqlDbType = SqlDbType.Structured;
+                    parameter.TypeName = "dbo.TableTypeIds";
+                    parameter.ParameterName = "@ReceiptPaymentIDs";
+                    parameter.Value = CommonDaoMethods.CreateDataTable<PharmaBusinessObjects.Transaction.ReceiptPayment.TempReceiptPayment>(list);
+
+                    cmd.Parameters.Add(parameter);
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    sda.Fill(dt);
+            }
             }
             catch (Exception ex)
             {
