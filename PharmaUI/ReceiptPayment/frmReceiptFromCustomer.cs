@@ -664,8 +664,12 @@ namespace PharmaUI.ReceiptPayment
                                 dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
                                 dgvReceiptFromCustomer.BeginEdit(true);
                             }
+
+                            RaisePaymentModeCalculations();
                             dgvCustomerBillOS.DataSource = null;
                             dgvCustomerBillAdjusted.DataSource = null;
+                            lblAmtOSVal.Text = String.Empty;
+                            lblAmtAdjVal.Text = String.Empty;
                         }
                     }
                 }
