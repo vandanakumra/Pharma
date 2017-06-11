@@ -219,6 +219,10 @@
           <Property Name="HSNID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HSNCode" Type="nvarchar" MaxLength="18" Nullable="false" />
           <Property Name="HSNDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="ItemMaster">
           <Key>
@@ -1850,6 +1854,10 @@
           <Property Name="HSNID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HSNCode1" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="HSNDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemMaster_HSNCode" FromRole="HSNCode" ToRole="ItemMaster" />
         </EntityType>
         <EntityType Name="ItemMaster">
@@ -3504,6 +3512,10 @@
                 <ScalarProperty Name="HSNID" ColumnName="HSNID" />
                 <ScalarProperty Name="HSNCode1" ColumnName="HSNCode" />
                 <ScalarProperty Name="HSNDescription" ColumnName="HSNDescription" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
