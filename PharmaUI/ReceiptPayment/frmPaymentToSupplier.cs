@@ -640,6 +640,7 @@ namespace PharmaUI.ReceiptPayment
                         if (listTempReceiptPaymentList.Count > 0)
                         {
                             applicationFacade.SaveAllTempTransaction(listTempReceiptPaymentList);
+                            this.Close();
                         }
                     }
                 }
@@ -676,5 +677,26 @@ namespace PharmaUI.ReceiptPayment
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void ClearScreen()
+        {
+            dtReceiptPayment.Focus();
+
+            txtTransactAccount.Text = String.Empty;
+            txtTransactAccount.Tag = null;
+
+            dgvPaymentToSupplier.DataSource = null;
+            dgvPaymentToSupplier.DataSource = null;
+            dgvPaymentToSupplier.DataSource = null;
+
+            lblTotalCQ.Text = "Total Cheque";
+            lblCQVal.Text = String.Empty;
+            lblTotalCash.Text = "Total Cash";
+            lblCashVal.Text = String.Empty;
+
+            lblAmtOS.Text = "Amount Outstanding";
+            lblAmtOSVal.Text = String.Empty;
+            lblAmtAdj.Text = "Amount Adjusted";
+            lblAmtAdjVal.Text = String.Empty;
+        }
     }
 }

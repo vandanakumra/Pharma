@@ -84,7 +84,7 @@ namespace PharmaDAL.Transaction
                                 LedgerType = p.LedgerType,
                                 LedgerTypeCode = p.LedgerTypeCode,
                                 BillAmount = p.BillAmount,
-                                OSAmount = p.OSAmount- context.TempBillOutStandingsAudjustment.Where(x=>x.BillOutStandingsID == p.BillOutStandingsID).Select(x=>x.Amount).FirstOrDefault(),
+                                OSAmount = p.OSAmount,
                                 IsHold = p.IsHold,
                                 HOLDRemarks = p.HOLDRemarks
                 }).ToList();
@@ -106,7 +106,7 @@ namespace PharmaDAL.Transaction
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
-                        OSAmount = p.BillOutStandings.OSAmount,
+                        OSAmount = p.BillOutStandings.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
                         Amount = p.Amount
                     }).ToList();
                 }
@@ -139,7 +139,7 @@ namespace PharmaDAL.Transaction
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
                         Amount= context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
-                        OSAmount = p.OSAmount- context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
+                        OSAmount = p.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
 
                     }).ToList();
                 }
@@ -170,6 +170,8 @@ namespace PharmaDAL.Transaction
                             long receiptPaymentID = billAdjustmentList.FirstOrDefault().ReceiptPaymentID ?? default(long);
                             var receiptPaymentEntity = context.TempReceiptPayment.Where(q => q.ReceiptPaymentID == receiptPaymentID).Select(q => q).ToList().FirstOrDefault();
                             var previousAdjustments = context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == receiptPaymentID && x.LedgerTypeCode == receiptPaymentEntity.LedgerTypeCode).ToList();
+                            //Recover bill outstanding before removing adjustments
+                            previousAdjustments.ForEach(x => x.BillOutStandings.OSAmount = x.BillOutStandings.OSAmount + x.Amount);
                             context.TempBillOutStandingsAudjustment.RemoveRange(previousAdjustments);
 
                             foreach (var billAdjust in billAdjustmentList)
@@ -192,8 +194,8 @@ namespace PharmaDAL.Transaction
                                 };
                                 context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);
 
-                                var billOSDB= context.BillOutStandings.Where(x => x.BillOutStandingsID == billAdjustmentDBEntry.BillOutStandingsID).FirstOrDefault();
-                                billOSDB.OSAmount -= billAdjustmentDBEntry.Amount;
+                                var billOSDB = context.BillOutStandings.Where(x => x.BillOutStandingsID == billAdjustmentDBEntry.BillOutStandingsID).FirstOrDefault();
+                                    billOSDB.OSAmount -= billAdjustmentDBEntry.Amount;
                             }
                             context.SaveChanges();
                             transaction.Commit();
