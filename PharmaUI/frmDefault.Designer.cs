@@ -46,6 +46,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -263,6 +267,10 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.35316F));
             this.tableLayoutPanel1.Controls.Add(this.label22, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label23, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label14, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label15, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label16, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -299,6 +307,54 @@
             this.label23.Size = new System.Drawing.Size(133, 15);
             this.label23.TabIndex = 0;
             this.label23.Text = "Purchase - Transaction";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(3, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(137, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Receipt From Customer";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(3, 51);
+            this.label14.Margin = new System.Windows.Forms.Padding(3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(121, 15);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Payment To Supplier";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(149, 28);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(72, 15);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "Ctrl+Shift+R";
+            // 
+            // label16
+            // 
+            this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Black;
+            this.label16.Location = new System.Drawing.Point(149, 52);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(71, 15);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "Ctrl+Shift+P";
             // 
             // frmDefault
             // 
@@ -339,5 +395,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }
