@@ -212,6 +212,18 @@
           <Property Name="MfgDate" Type="datetime" />
           <Property Name="UPC" Type="nvarchar" MaxLength="12" />
         </EntityType>
+        <EntityType Name="HSNCode">
+          <Key>
+            <PropertyRef Name="HSNCode" />
+          </Key>
+          <Property Name="HSNID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HSNCode" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="HSNDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="ItemMaster">
           <Key>
             <PropertyRef Name="ItemID" />
@@ -264,6 +276,7 @@
           <Property Name="ClosingQty" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SaltCode" Type="nvarchar" MaxLength="50" />
           <Property Name="SaltName" Type="nvarchar" MaxLength="100" />
+          <Property Name="HSNCode" Type="nvarchar" MaxLength="18" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -1091,6 +1104,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItemMaster_HSNCode">
+          <End Role="HSNCode" Type="Self.HSNCode" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HSNCode">
+              <PropertyRef Name="HSNCode" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="HSNCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Menu_Privledges">
           <End Role="Privledges" Type="Self.Privledges" Multiplicity="0..1" />
           <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
@@ -1359,6 +1384,7 @@
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FIFO" EntityType="Self.FIFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HSNCode" EntityType="Self.HSNCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
@@ -1478,6 +1504,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_ItemMaster_CompanyMaster" Association="Self.FK_ItemMaster_CompanyMaster">
             <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_HSNCode" Association="Self.FK_ItemMaster_HSNCode">
+            <End Role="HSNCode" EntitySet="HSNCode" />
             <End Role="ItemMaster" EntitySet="ItemMaster" />
           </AssociationSet>
           <AssociationSet Name="FK_Menu_Privledges" Association="Self.FK_Menu_Privledges">
@@ -1817,6 +1847,19 @@
           <NavigationProperty Name="PurchaseSaleBookLineItem" Relationship="Self.FK_PurchaseSaleBookLineItem_FIFO" FromRole="FIFO" ToRole="PurchaseSaleBookLineItem" />
           <NavigationProperty Name="TempPurchaseSaleBookLineItem" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="FIFO" ToRole="TempPurchaseSaleBookLineItem" />
         </EntityType>
+        <EntityType Name="HSNCode">
+          <Key>
+            <PropertyRef Name="HSNCode1" />
+          </Key>
+          <Property Name="HSNID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HSNCode1" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HSNDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemMaster_HSNCode" FromRole="HSNCode" ToRole="ItemMaster" />
+        </EntityType>
         <EntityType Name="ItemMaster">
           <Key>
             <PropertyRef Name="ItemID" />
@@ -1869,10 +1912,12 @@
           <Property Name="ClosingQty" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="SaltCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SaltName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HSNCode" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="AccountLedgerMaster1" Relationship="Self.FK_ItemMaster_AccountLedgerMasterPurchase" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ItemMaster_CompanyMaster" FromRole="ItemMaster" ToRole="CompanyMaster" />
           <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_ItemMaster" FromRole="ItemMaster" ToRole="CustomerCompanyDiscountRef" />
+          <NavigationProperty Name="HSNCode1" Relationship="Self.FK_ItemMaster_HSNCode" FromRole="ItemMaster" ToRole="HSNCode" />
           <NavigationProperty Name="SupplierCompanyDiscountRef" Relationship="Self.FK_SupplierCompanyDiscountRef_ItemMaster" FromRole="ItemMaster" ToRole="SupplierCompanyDiscountRef" />
         </EntityType>
         <EntityType Name="Menu">
@@ -2830,6 +2875,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItemMaster_HSNCode">
+          <End Role="HSNCode" Type="Self.HSNCode" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HSNCode">
+              <PropertyRef Name="HSNCode1" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="HSNCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SupplierCompanyDiscountRef_ItemMaster">
           <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
           <End Role="SupplierCompanyDiscountRef" Type="Self.SupplierCompanyDiscountRef" Multiplicity="*" />
@@ -3014,6 +3071,7 @@
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" />
           <EntitySet Name="FIFO" EntityType="Self.FIFO" />
+          <EntitySet Name="HSNCode" EntityType="Self.HSNCode" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" />
           <EntitySet Name="Menu" EntityType="Self.Menu" />
           <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" />
@@ -3162,6 +3220,10 @@
           <AssociationSet Name="FK_TempPurchaseSaleBookLineItem_FIFO" Association="Self.FK_TempPurchaseSaleBookLineItem_FIFO">
             <End Role="FIFO" EntitySet="FIFO" />
             <End Role="TempPurchaseSaleBookLineItem" EntitySet="TempPurchaseSaleBookLineItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_HSNCode" Association="Self.FK_ItemMaster_HSNCode">
+            <End Role="HSNCode" EntitySet="HSNCode" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
           </AssociationSet>
           <AssociationSet Name="FK_SupplierCompanyDiscountRef_ItemMaster" Association="Self.FK_SupplierCompanyDiscountRef_ItemMaster">
             <End Role="ItemMaster" EntitySet="ItemMaster" />
@@ -3444,6 +3506,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="HSNCode">
+            <EntityTypeMapping TypeName="PharmaDBModel.HSNCode">
+              <MappingFragment StoreEntitySet="HSNCode">
+                <ScalarProperty Name="HSNID" ColumnName="HSNID" />
+                <ScalarProperty Name="HSNCode1" ColumnName="HSNCode" />
+                <ScalarProperty Name="HSNDescription" ColumnName="HSNDescription" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ItemMaster">
             <EntityTypeMapping TypeName="PharmaDBModel.ItemMaster">
               <MappingFragment StoreEntitySet="ItemMaster">
@@ -3495,6 +3570,7 @@
                 <ScalarProperty Name="ClosingQty" ColumnName="ClosingQty" />
                 <ScalarProperty Name="SaltCode" ColumnName="SaltCode" />
                 <ScalarProperty Name="SaltName" ColumnName="SaltName" />
+                <ScalarProperty Name="HSNCode" ColumnName="HSNCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

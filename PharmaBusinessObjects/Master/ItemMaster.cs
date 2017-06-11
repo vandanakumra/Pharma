@@ -52,7 +52,8 @@ namespace PharmaBusinessObjects.Master
         public string PurchaseTypeCode { get; set; }
         public string PurchaseTypeName { get; set; }
         public decimal? PurchaseTypeRate { get; set; }
-        
+        public string HSNCode { get; set; }
+
 
         public PurchaseSaleBookLineItem ToPurchaseBookLineItem()
         {

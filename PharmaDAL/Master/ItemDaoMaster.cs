@@ -64,6 +64,7 @@ namespace PharmaDAL.Master
                     PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
                     PurchaseTypeName=  p.AccountLedgerMaster1.AccountLedgerName,
                     PurchaseTypeRate= p.AccountLedgerMaster1.SalePurchaseTaxType,
+                    HSNCode=p.HSNCode,
                     Status = p.Status,
                     
 
@@ -119,9 +120,11 @@ namespace PharmaDAL.Master
                         //MaximumStock = newItem.MaximumStock,
                         SaleTypeId = newItem.SaleTypeId,
                         PurchaseTypeId=newItem.PurchaseTypeId,
+                        HSNCode=newItem.HSNCode,
                         Status = newItem.Status,
                         CreatedBy = this.LoggedInUser.Username,
-                        CreatedOn = System.DateTime.Now
+                        CreatedOn = System.DateTime.Now,
+
                     };
 
                     context.ItemMaster.Add(newItemMasterDB);
@@ -185,6 +188,7 @@ namespace PharmaDAL.Master
                     //existingItemDB.MaximumStock = existingItem.MaximumStock;
                     existingItemDB.SaleTypeId = existingItem.SaleTypeId;
                     existingItemDB.PurchaseTypeId = existingItem.PurchaseTypeId;
+                    existingItemDB.HSNCode = existingItemDB.HSNCode;
                     existingItemDB.Status = existingItem.Status;
                     existingItemDB.ModifiedBy = this.LoggedInUser.Username;
                     existingItemDB.ModifiedOn = System.DateTime.Now;
@@ -351,6 +355,7 @@ namespace PharmaDAL.Master
                                                     PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
                                                     PurchaseTypeName = p.AccountLedgerMaster1.AccountLedgerName,
                                                     PurchaseTypeRate = p.AccountLedgerMaster1.SalePurchaseTaxType,
+                                                    HSNCode = p.HSNCode,
                                                     Status = p.Status
 
                                                 }).ToList();
@@ -374,6 +379,23 @@ namespace PharmaDAL.Master
                                                                  }).ToList();
 
                 return allItemByCompanyID;
+            }
+        }
+
+        public List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes()
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                List<PharmaBusinessObjects.Master.HSNCodes> allHSNCode = new List<PharmaBusinessObjects.Master.HSNCodes>();
+
+                allHSNCode = context.HSNCode.Select(hsn => new PharmaBusinessObjects.Master.HSNCodes()
+                                                                 {
+                                                                        HSNID= hsn.HSNID,
+                                                                        HSNCode = hsn.HSNCode1,
+                                                                        HSNDescription= hsn.HSNDescription
+
+                                                                 }).ToList();
+                return allHSNCode;
             }
         }
     }

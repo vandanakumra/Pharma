@@ -32,8 +32,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbxCompany = new System.Windows.Forms.TextBox();
-            this.cbxStatus = new System.Windows.Forms.ComboBox();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.lblMaxStock = new System.Windows.Forms.Label();
             this.tbxMaximumStock = new System.Windows.Forms.TextBox();
             this.lblMinStock = new System.Windows.Forms.Label();
@@ -55,6 +53,10 @@
             this.tbxUPC = new System.Windows.Forms.TextBox();
             this.lblQtyPerCase = new System.Windows.Forms.Label();
             this.tbxQtyPerCase = new System.Windows.Forms.TextBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.cbxStatus = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbxHSNCode = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
@@ -130,7 +132,7 @@
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(12, 56);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1042, 111);
+            this.panel1.Size = new System.Drawing.Size(1042, 119);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -143,8 +145,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.Controls.Add(this.tbxCompany, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblMaxStock, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.tbxMaximumStock, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblMinStock, 0, 3);
@@ -166,47 +166,33 @@
             this.tableLayoutPanel1.Controls.Add(this.tbxUPC, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblQtyPerCase, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.tbxQtyPerCase, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.cbxHSNCode, 5, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1040, 109);
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1040, 117);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // tbxCompanyCode
+            // tbxCompany
             // 
             this.tbxCompany.Location = new System.Drawing.Point(522, 3);
-            this.tbxCompany.Name = "tbxCompanyCode";
+            this.tbxCompany.Name = "tbxCompany";
             this.tbxCompany.Size = new System.Drawing.Size(142, 20);
             this.tbxCompany.TabIndex = 102;
-            // 
-            // cbxStatus
-            // 
-            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxStatus.FormattingEnabled = true;
-            this.cbxStatus.Location = new System.Drawing.Point(868, 84);
-            this.cbxStatus.Name = "cbxStatus";
-            this.cbxStatus.Size = new System.Drawing.Size(142, 21);
-            this.cbxStatus.TabIndex = 112;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(695, 84);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(3);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(37, 13);
-            this.lblStatus.TabIndex = 77;
-            this.lblStatus.Text = "Status";
             // 
             // lblMaxStock
             // 
             this.lblMaxStock.AutoSize = true;
-            this.lblMaxStock.Location = new System.Drawing.Point(349, 84);
+            this.lblMaxStock.Location = new System.Drawing.Point(349, 72);
             this.lblMaxStock.Margin = new System.Windows.Forms.Padding(3);
             this.lblMaxStock.Name = "lblMaxStock";
             this.lblMaxStock.Size = new System.Drawing.Size(82, 13);
@@ -215,7 +201,7 @@
             // 
             // tbxMaximumStock
             // 
-            this.tbxMaximumStock.Location = new System.Drawing.Point(522, 84);
+            this.tbxMaximumStock.Location = new System.Drawing.Point(522, 72);
             this.tbxMaximumStock.Name = "tbxMaximumStock";
             this.tbxMaximumStock.Size = new System.Drawing.Size(142, 20);
             this.tbxMaximumStock.TabIndex = 111;
@@ -224,7 +210,7 @@
             // lblMinStock
             // 
             this.lblMinStock.AutoSize = true;
-            this.lblMinStock.Location = new System.Drawing.Point(3, 84);
+            this.lblMinStock.Location = new System.Drawing.Point(3, 72);
             this.lblMinStock.Margin = new System.Windows.Forms.Padding(3);
             this.lblMinStock.Name = "lblMinStock";
             this.lblMinStock.Size = new System.Drawing.Size(79, 13);
@@ -233,7 +219,7 @@
             // 
             // tbxLocation
             // 
-            this.tbxLocation.Location = new System.Drawing.Point(868, 57);
+            this.tbxLocation.Location = new System.Drawing.Point(868, 49);
             this.tbxLocation.Name = "tbxLocation";
             this.tbxLocation.Size = new System.Drawing.Size(142, 20);
             this.tbxLocation.TabIndex = 109;
@@ -241,7 +227,7 @@
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(695, 57);
+            this.lblLocation.Location = new System.Drawing.Point(695, 49);
             this.lblLocation.Margin = new System.Windows.Forms.Padding(3);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(48, 13);
@@ -250,7 +236,7 @@
             // 
             // tbxMinimumStock
             // 
-            this.tbxMinimumStock.Location = new System.Drawing.Point(176, 84);
+            this.tbxMinimumStock.Location = new System.Drawing.Point(176, 72);
             this.tbxMinimumStock.Name = "tbxMinimumStock";
             this.tbxMinimumStock.Size = new System.Drawing.Size(142, 20);
             this.tbxMinimumStock.TabIndex = 110;
@@ -259,7 +245,7 @@
             // lblShortName
             // 
             this.lblShortName.AutoSize = true;
-            this.lblShortName.Location = new System.Drawing.Point(3, 30);
+            this.lblShortName.Location = new System.Drawing.Point(3, 26);
             this.lblShortName.Margin = new System.Windows.Forms.Padding(3);
             this.lblShortName.Name = "lblShortName";
             this.lblShortName.Size = new System.Drawing.Size(63, 13);
@@ -304,7 +290,7 @@
             // 
             // tbxShortName
             // 
-            this.tbxShortName.Location = new System.Drawing.Point(176, 30);
+            this.tbxShortName.Location = new System.Drawing.Point(176, 26);
             this.tbxShortName.Name = "tbxShortName";
             this.tbxShortName.Size = new System.Drawing.Size(142, 20);
             this.tbxShortName.TabIndex = 104;
@@ -312,7 +298,7 @@
             // lblPacking
             // 
             this.lblPacking.AutoSize = true;
-            this.lblPacking.Location = new System.Drawing.Point(349, 30);
+            this.lblPacking.Location = new System.Drawing.Point(349, 26);
             this.lblPacking.Margin = new System.Windows.Forms.Padding(3);
             this.lblPacking.Name = "lblPacking";
             this.lblPacking.Size = new System.Drawing.Size(46, 13);
@@ -321,7 +307,7 @@
             // 
             // tbxPacking
             // 
-            this.tbxPacking.Location = new System.Drawing.Point(522, 30);
+            this.tbxPacking.Location = new System.Drawing.Point(522, 26);
             this.tbxPacking.Name = "tbxPacking";
             this.tbxPacking.Size = new System.Drawing.Size(142, 20);
             this.tbxPacking.TabIndex = 105;
@@ -330,7 +316,7 @@
             // lblConvRate
             // 
             this.lblConvRate.AutoSize = true;
-            this.lblConvRate.Location = new System.Drawing.Point(695, 30);
+            this.lblConvRate.Location = new System.Drawing.Point(695, 26);
             this.lblConvRate.Margin = new System.Windows.Forms.Padding(3);
             this.lblConvRate.Name = "lblConvRate";
             this.lblConvRate.Size = new System.Drawing.Size(86, 13);
@@ -339,7 +325,7 @@
             // 
             // tbxConvRate
             // 
-            this.tbxConvRate.Location = new System.Drawing.Point(868, 30);
+            this.tbxConvRate.Location = new System.Drawing.Point(868, 26);
             this.tbxConvRate.Name = "tbxConvRate";
             this.tbxConvRate.Size = new System.Drawing.Size(142, 20);
             this.tbxConvRate.TabIndex = 106;
@@ -358,7 +344,7 @@
             // lblUPC
             // 
             this.lblUPC.AutoSize = true;
-            this.lblUPC.Location = new System.Drawing.Point(3, 57);
+            this.lblUPC.Location = new System.Drawing.Point(3, 49);
             this.lblUPC.Margin = new System.Windows.Forms.Padding(3);
             this.lblUPC.Name = "lblUPC";
             this.lblUPC.Size = new System.Drawing.Size(29, 13);
@@ -367,7 +353,7 @@
             // 
             // tbxUPC
             // 
-            this.tbxUPC.Location = new System.Drawing.Point(176, 57);
+            this.tbxUPC.Location = new System.Drawing.Point(176, 49);
             this.tbxUPC.Name = "tbxUPC";
             this.tbxUPC.Size = new System.Drawing.Size(142, 20);
             this.tbxUPC.TabIndex = 107;
@@ -375,7 +361,7 @@
             // lblQtyPerCase
             // 
             this.lblQtyPerCase.AutoSize = true;
-            this.lblQtyPerCase.Location = new System.Drawing.Point(349, 57);
+            this.lblQtyPerCase.Location = new System.Drawing.Point(349, 49);
             this.lblQtyPerCase.Margin = new System.Windows.Forms.Padding(3);
             this.lblQtyPerCase.Name = "lblQtyPerCase";
             this.lblQtyPerCase.Size = new System.Drawing.Size(92, 13);
@@ -384,17 +370,55 @@
             // 
             // tbxQtyPerCase
             // 
-            this.tbxQtyPerCase.Location = new System.Drawing.Point(522, 57);
+            this.tbxQtyPerCase.Location = new System.Drawing.Point(522, 49);
             this.tbxQtyPerCase.Name = "tbxQtyPerCase";
             this.tbxQtyPerCase.Size = new System.Drawing.Size(142, 20);
             this.tbxQtyPerCase.TabIndex = 108;
             this.tbxQtyPerCase.Text = "0";
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(3, 95);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(3);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblStatus.TabIndex = 77;
+            this.lblStatus.Text = "Status";
+            // 
+            // cbxStatus
+            // 
+            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxStatus.FormattingEnabled = true;
+            this.cbxStatus.Location = new System.Drawing.Point(176, 95);
+            this.cbxStatus.Name = "cbxStatus";
+            this.cbxStatus.Size = new System.Drawing.Size(142, 21);
+            this.cbxStatus.TabIndex = 113;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(695, 72);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 113;
+            this.label1.Text = "HSN Code";
+            // 
+            // cbxHSNCode
+            // 
+            this.cbxHSNCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxHSNCode.FormattingEnabled = true;
+            this.cbxHSNCode.Location = new System.Drawing.Point(868, 72);
+            this.cbxHSNCode.Name = "cbxHSNCode";
+            this.cbxHSNCode.Size = new System.Drawing.Size(142, 21);
+            this.cbxHSNCode.TabIndex = 112;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel2);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 183);
+            this.groupBox1.Location = new System.Drawing.Point(13, 190);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox1.Size = new System.Drawing.Size(345, 220);
@@ -568,7 +592,7 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(361, 183);
+            this.groupBox2.Location = new System.Drawing.Point(361, 190);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox2.Size = new System.Drawing.Size(338, 220);
@@ -763,7 +787,7 @@
             // 
             this.groupBox3.Controls.Add(this.tableLayoutPanel4);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(703, 183);
+            this.groupBox3.Location = new System.Drawing.Point(703, 190);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox3.Size = new System.Drawing.Size(358, 220);
@@ -1103,5 +1127,7 @@
         private System.Windows.Forms.ComboBox cbxPurchaseType;
         private System.Windows.Forms.Label lblPurchaseType;
         private System.Windows.Forms.TextBox tbxCompany;
+        private System.Windows.Forms.ComboBox cbxHSNCode;
+        private System.Windows.Forms.Label label1;
     }
 }

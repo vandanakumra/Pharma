@@ -36,6 +36,7 @@ namespace PharmaDAL.Entity
         public virtual DbSet<CustomerLedger> CustomerLedger { get; set; }
         public virtual DbSet<CustomerType> CustomerType { get; set; }
         public virtual DbSet<FIFO> FIFO { get; set; }
+        public virtual DbSet<HSNCode> HSNCode { get; set; }
         public virtual DbSet<ItemMaster> ItemMaster { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<PaymentMode> PaymentMode { get; set; }
