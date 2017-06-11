@@ -265,6 +265,7 @@ namespace PharmaUI.ReceiptPayment
                 double enteredAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["Amount"].Value)) ?? default(double);
                 double consumedAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(double);
                 dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"].Value = enteredAmount;
+                dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ConsumedAmount"].Value = default(double);
             }
 
             applicationFacade.InsertUpdateTempReceiptPayment(FillDataboundToCurrentRow());
