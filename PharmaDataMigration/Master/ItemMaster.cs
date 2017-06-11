@@ -132,7 +132,8 @@ namespace PharmaDataMigration.Master
                                     PurchaseTypeId = purchaseType.AccountLedgerID,
                                     Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
                                     CreatedBy = "admin",
-                                    CreatedOn = DateTime.Now
+                                    CreatedOn = DateTime.Now,
+                                    HSNCode = "HSNCODE001"
                                 };
 
                                 listItemMaster.Add(newItemMaster);
