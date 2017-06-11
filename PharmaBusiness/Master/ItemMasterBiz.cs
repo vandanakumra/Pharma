@@ -85,5 +85,12 @@ namespace PharmaBusiness.Master
             }
             return defaultItemDiscountByCompanyID;
         }
+
+
+        internal List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes()
+        {
+            return new ItemDaoMaster(this.LoggedInUser).GetAllHSNCodes();
+        }
+
     }
 }

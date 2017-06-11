@@ -68,6 +68,11 @@ namespace PharmaUI
             cbxPurchaseType.DataSource = applicationFacade.GetAccountLedgerBySystemName("PurchaseLedger");
             cbxPurchaseType.DisplayMember = "AccountLedgerName";
             cbxPurchaseType.ValueMember = "AccountLedgerID";
+
+            //Fill HSN Code list
+            cbxHSNCode.DataSource = applicationFacade.GetAllHSNCodes();
+            cbxHSNCode.DisplayMember = "HSNCode";
+            cbxHSNCode.ValueMember = "HSNCode";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -127,6 +132,7 @@ namespace PharmaUI
                 item.PurchaseTypeId = (cbxPurchaseType.SelectedItem as AccountLedgerMaster).AccountLedgerID;
                 Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
                 item.Status = status == Status.Active;
+                item.HSNCode = (cbxHSNCode.SelectedValue as HSNCodes).HSNCode;
 
                 bool actionResult = false;
                 // if form is in Edit mode then udate item , else add item 
@@ -352,6 +358,7 @@ namespace PharmaUI
                 tbxMaximumStock.Text = Convert.ToString(existingItem.MaximumStock);
                 cbxSaleType.SelectedValue = existingItem.SaleTypeId;
                 cbxPurchaseType.SelectedValue = existingItem.PurchaseTypeId;
+                cbxHSNCode.SelectedValue = existingItem.HSNCode;
                 cbxStatus.SelectedItem = existingItem.Status ? Status.Active : Status.Inactive;
             }
         }

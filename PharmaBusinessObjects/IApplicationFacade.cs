@@ -23,6 +23,7 @@ namespace PharmaBusinessObjects
         List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy);
         List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyIDForCustomer(int CompanyID);
         List<SupplierCompanyDiscount> GetAllCompanyItemDiscountByCompanyIDForSupplier(int CompanyID);
+        List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes();
         #endregion
 
         #region Company Master

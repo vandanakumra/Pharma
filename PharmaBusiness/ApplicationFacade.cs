@@ -58,6 +58,19 @@ namespace PharmaBusiness
             }
         }
 
+
+        public List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes()
+        {
+            try
+            {
+                return new ItemMasterBiz(this.LoggedInUser).GetAllHSNCodes();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// Update an existing item from ItemMaster
         /// </summary>
