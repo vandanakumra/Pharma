@@ -141,7 +141,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("ITEM MASTER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("ITEM MASTER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd() + "   ACNO -->" + Convert.ToString(dr["ACName"]).TrimEnd() + "  Comp Code -->" + Convert.ToString(dr["CompCD"]).TrimEnd());
                             }
                         }
                     }

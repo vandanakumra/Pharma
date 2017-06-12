@@ -344,7 +344,7 @@ namespace PharmaDataMigration.Master
                                 string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
                                 int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
 
-                                if (Convert.ToString(dr["ACName"]).TrimEnd().ToUpper().Contains("ZPURCHASE") || Convert.ToString(dr["ACName"]).TrimEnd().ToUpper().Contains("ZSALE"))
+                                if (Convert.ToString(dr["ACNO"]).TrimEnd().ToUpper().Contains("PTAX01") || Convert.ToString(dr["ACNO"]).TrimEnd().ToUpper().Contains("STAX01"))
                                 {
                                     debitCreditControlId = debitControlCodeID;
                                     continue;

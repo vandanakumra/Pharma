@@ -5,6 +5,7 @@ using System.Linq;
 using PharmaDAL.Entity;
 using log4net;
 using System.Reflection;
+using System.Data.Entity.Validation;
 
 namespace PharmaDataMigration.Master
 {
@@ -68,7 +69,7 @@ namespace PharmaDataMigration.Master
                                     EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
                                     AreaId = areaID,
                                     CreditDebit = Convert.ToDecimal(dr["Abop"]) > 0 ? Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.D) : Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.C),
-                                    DLNo = Convert.ToString(dr["Stnol"]).TrimEnd(),
+                                    DLNo ="test", // Convert.ToString(dr["Stnol"]).TrimEnd(),
                                     OpeningBal = Convert.ToDecimal(dr["Abop"]),
                                     TaxRetail = Convert.ToString(dr["Vat"]).TrimEnd(),
                                     Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
@@ -92,6 +93,10 @@ namespace PharmaDataMigration.Master
 
                     return _result;
                 }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
