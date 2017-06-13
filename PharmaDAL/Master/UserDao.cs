@@ -2,6 +2,8 @@
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -390,12 +392,72 @@ namespace PharmaDAL.Master
 
         }
 
-        public bool ValidateUser(string userName, string password)
+        public PharmaBusinessObjects.Master.UserMaster ValidateUser(string userName, string password)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.Users.Where(p => p.Username == userName && p.Password == password && p.Status == true).Any();
+
+                string query = "select * from users where Username = '"+userName + "' AND password = '"+password + "' AND Status =1";
+
+                SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = System.Data.CommandType.Text;
+
+             
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+              
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    PharmaBusinessObjects.Master.UserMaster obj = new UserMaster()
+                    {
+                        UserId =Convert.ToInt32(dt.Rows[0]["UserId"]),
+                        Username = Convert.ToString(dt.Rows[0]["Username"]),
+                        Password = Convert.ToString(dt.Rows[0]["Password"]),
+                        FirstName = Convert.ToString(dt.Rows[0]["FirstName"]),
+                        LastName = Convert.ToString(dt.Rows[0]["LastName"]),
+                        //RoleID = Convert.ToInt32(dt.Rows[0]["RoleID"]),
+                        //RoleName = Convert.ToString(dt.Rows[0]["RoleName"]),
+                        IsSystemAdmin = Convert.ToBoolean(dt.Rows[0]["IsSysAdmin"])
+                        //CreatedBy = Convert.ToInt32(dt.Rows[0]["UserId"]),
+                        //CreatedOn = p.CreatedOn,
+                        //ModifiedBy = p.ModifiedBy,
+                        //ModifiedOn = p.ModifiedOn,
+                        //Status = p.Status
+
+                    };
+
+                    return obj;
+                }
+
+
+                return null;
             }
+
+            //using (PharmaDBEntities context = new PharmaDBEntities())
+            //{
+            //    // return context.Users.Where(p => p.Username == userName && p.Password == password && p.Status == true).Any();
+            //    return context.Users.Where(p => p.Username == userName && p.Password == password && p.Status == true).Select(p => new PharmaBusinessObjects.Master.UserMaster()
+            //    {
+            //        UserId = p.UserId,
+            //        Username = p.Username,
+            //        Password = p.Password,
+            //        FirstName = p.FirstName,
+            //        LastName = p.LastName,
+            //        RoleID = p.RoleID ?? 0,
+            //        RoleName = p.Roles.RoleName,
+            //        IsSystemAdmin = p.IsSysAdmin,
+            //        CreatedBy = p.CreatedBy,
+            //        CreatedOn = p.CreatedOn,
+            //        ModifiedBy = p.ModifiedBy,
+            //        ModifiedOn = p.ModifiedOn,
+            //        Status = p.Status
+            //    }).FirstOrDefault();
+            //}
         }
     }
 }

@@ -516,6 +516,8 @@ namespace PharmaUI
 
         public static void SetGridDefaultProperty(DataGridView dgv)
         {
+
+
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;

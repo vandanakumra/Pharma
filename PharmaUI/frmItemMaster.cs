@@ -31,6 +31,8 @@ namespace PharmaUI
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
 
                 isOpenAsChild = _isOpenAsChild;
+
+                
             }
             catch (Exception ex)
             {
@@ -72,44 +74,47 @@ namespace PharmaUI
             {
                 if (dgvItemList.SelectedRows.Count > 0)
                 {
-                    ItemMaster selectedItem = (ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;
+
+                    DataGridViewRow row = dgvItemList.CurrentRow;
+
+                   // ItemMaster selectedItem = (ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;
                     //Display selected Item data
-                    lblCodeVal.Text = selectedItem.ItemCode;
-                    lblStatusVal.Text = selectedItem.Status ? "ACTIVE" : "INACTIVE";
-                    lblStatusVal.ForeColor = selectedItem.Status ? Color.MidnightBlue : Color.Red;
-                    lblPackVal.Text = selectedItem.Packing;
-                    lblLocationVal.Text = selectedItem.Location;
-                    lblUPCVal.Text = selectedItem.UPC;
+                    lblCodeVal.Text = row.Cells["ItemCode"].Value.ToString();
+                    lblStatusVal.Text = Convert.ToBoolean(row.Cells["Status"].Value) ? "ACTIVE" : "INACTIVE";
+                    lblStatusVal.ForeColor = Convert.ToBoolean(row.Cells["Status"].Value) ? Color.MidnightBlue : Color.Red;
+                    lblPackVal.Text = Convert.ToString(row.Cells["Packing"].Value);
+                    lblLocationVal.Text = Convert.ToString(row.Cells["Location"].Value);
+                    lblUPCVal.Text = Convert.ToString(row.Cells["UPC"].Value);
 
-                    lblMRPVal.Text = Convert.ToString(selectedItem.MRP);
-                    lblSchemeVal.Text = Convert.ToString(selectedItem.Scheme1) + " + " + Convert.ToString(selectedItem.Scheme2);
-                    lblHalfSchemeVal.Text = selectedItem.IsHalfScheme ? "Y" : "N";
-                    lblQtrSchemeVal.Text = selectedItem.IsQTRScheme ? "Y" : "N";
-                    lblMaxQtyVal.Text = Convert.ToString(selectedItem.MaximumQty);
-                    lblMaxDiscountVal.Text = Convert.ToString(selectedItem.MaximumDiscount);
+                    lblMRPVal.Text = Convert.ToString(row.Cells["MRP"].Value);
+                    lblSchemeVal.Text = Convert.ToString(row.Cells["Scheme1"].Value) + " + " + Convert.ToString(row.Cells["Scheme2"].Value);
+                    lblHalfSchemeVal.Text = Convert.ToBoolean(row.Cells["IsHalfScheme"].Value) ? "Y" : "N";
+                    lblQtrSchemeVal.Text = Convert.ToBoolean(row.Cells["IsQTRScheme"].Value) ? "Y" : "N";
+                    lblMaxQtyVal.Text = Convert.ToString(row.Cells["MaximumQty"].Value);
+                    lblMaxDiscountVal.Text = Convert.ToString(row.Cells["MaximumDiscount"].Value);
 
-                    lblSaleRateVal.Text = Convert.ToString(selectedItem.SaleRate);
-                    lblSpecialRateVal.Text = Convert.ToString(selectedItem.SpecialRate);
-                    lblWSRateVal.Text = Convert.ToString(selectedItem.WholeSaleRate);
-                    lblExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
-                    lblVATVal.Text = Convert.ToString(selectedItem.TaxOnSale);
-                    lblSpecialDiscountVal.Text = Convert.ToString(selectedItem.SpecialDiscountOnQty);
-                    lblFixedDiscountVal.Text = Convert.ToString(selectedItem.FixedDiscountRate);
-                    lblSurchargeVal.Text = Convert.ToString(selectedItem.SurchargeOnSale);
+                    lblSaleRateVal.Text = Convert.ToString(row.Cells["SaleRate"].Value);
+                    lblSpecialRateVal.Text = Convert.ToString(row.Cells["SpecialRate"].Value);
+                    lblWSRateVal.Text = Convert.ToString(row.Cells["WholeSaleRate"].Value);
+                    lblExciseVal.Text = Convert.ToString(row.Cells["SaleExcise"].Value);
+                    lblVATVal.Text = Convert.ToString(row.Cells["TaxOnSale"].Value);
+                    lblSpecialDiscountVal.Text = Convert.ToString(row.Cells["SpecialDiscountOnQty"].Value);
+                    lblFixedDiscountVal.Text = Convert.ToString(row.Cells["FixedDiscountRate"].Value);
+                    lblSurchargeVal.Text = Convert.ToString(row.Cells["SurchargeOnSale"].Value);
 
-                    lblPurchaseRateVal.Text = Convert.ToString(selectedItem.PurchaseRate);
-                    lblPExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
-                    lblPVATVal.Text = Convert.ToString(selectedItem.TaxOnPurchase);
-                    lblPDiscountVal.Text = Convert.ToString(selectedItem.DiscountRecieved);
-                    lblPSpecialDiscountVal.Text = Convert.ToString(selectedItem.SpecialDiscountRecieved);
-                    lblPSurchargeVal.Text = Convert.ToString(selectedItem.SurchargeOnPurchase);
+                    lblPurchaseRateVal.Text = Convert.ToString(row.Cells["PurchaseRate"].Value);
+                    lblPExciseVal.Text = Convert.ToString(row.Cells["SaleExcise"].Value);
+                    lblPVATVal.Text = Convert.ToString(row.Cells["TaxOnPurchase"].Value);
+                    lblPDiscountVal.Text = Convert.ToString(row.Cells["DiscountRecieved"].Value);
+                    lblPSpecialDiscountVal.Text = Convert.ToString(row.Cells["SpecialDiscountRecieved"].Value);
+                    lblPSurchargeVal.Text = Convert.ToString(row.Cells["SurchargeOnPurchase"].Value);
 
-                    //lblPurchaseRateVal.Text = Convert.ToString(selectedItem.PurchaseRate);
-                    //lblPExciseVal.Text = Convert.ToString(selectedItem.SaleExcise);
-                    //lblPVATVal.Text = Convert.ToString(selectedItem.TaxOnPurchase);
-                    //lblPDiscountVal.Text = Convert.ToString(selectedItem.DiscountRecieved);
-                    lblMaxStockVal.Text = Convert.ToString(selectedItem.MaximumStock);
-                    lblMinStockVal.Text = Convert.ToString(selectedItem.MinimumStock);
+                    //lblPurchaseRateVal.Text = Convert.ToString(row.Cells["PurchaseRate"].Value);
+                    //lblPExciseVal.Text = Convert.ToString(row.Cells["SaleExcise"].Value);
+                    //lblPVATVal.Text = Convert.ToString(row.Cells["TaxOnPurchase"].Value);
+                    //lblPDiscountVal.Text = Convert.ToString(row.Cells["DiscountRecieved"].Value);
+                    lblMaxStockVal.Text = Convert.ToString(row.Cells["MaximumStock"].Value);
+                    lblMinStockVal.Text = Convert.ToString(row.Cells["MinimumStock"].Value);
 
                 }
             }
@@ -152,13 +157,13 @@ namespace PharmaUI
         {
             frmItemMasterAddUpdated form = new frmItemMasterAddUpdated(itemId,txtSearch.Text);
             ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
-            form.WindowState = FormWindowState.Maximized; 
-            
+            form.WindowState = FormWindowState.Maximized;
+
 
             if (itemId > 0 && dgvItemList.SelectedRows[0] != null)
             {
-                ItemMaster existingItem = (ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;
-                form.frmItemMasterAddUpdate_Fill_UsingExistingItem(existingItem);
+              
+                form.frmItemMasterAddUpdate_Fill_UsingExistingItem(GetCurrentRowItem());
             }
 
             form.FormClosed += FormItemMasterAddUpdated_FormClosed;
@@ -178,6 +183,7 @@ namespace PharmaUI
             }
         }
 
+       
         private void LoadDataGrid()
         {
             string searchBy = "Name";
@@ -187,22 +193,24 @@ namespace PharmaUI
                 dgvItemList.ColumnHeadersVisible = false;
             }
 
-            dgvItemList.DataSource = applicationFacade.GetAllItemsBySearch(null, searchBy).OrderBy(p=>p.ItemName).ToList();
-            ExtensionMethods.SetGridDefaultProperty(dgvItemList);
+            dgvItemList.DataSource = applicationFacade.GetAllItemsBySearch();
+                
+           //applicationFacade.GetAllItemsBySearch(null, searchBy).OrderBy(p=>p.ItemName).ToList();
+           ExtensionMethods.SetGridDefaultProperty(dgvItemList);
 
-            dgvItemList.Columns["ItemName"].Visible = true;
-            dgvItemList.Columns["ItemName"].HeaderText = "Item";
+           dgvItemList.Columns["ItemName"].Visible = true;
+            //dgvItemList.Columns["ItemName"].HeaderText = "Item";
 
             dgvItemList.Columns["CompanyName"].Visible = true;
-            dgvItemList.Columns["CompanyName"].HeaderText = "Company";
+            ////dgvItemList.Columns["CompanyName"].HeaderText = "Company";
 
             dgvItemList.Columns["Packing"].Visible = true;
-            dgvItemList.Columns["Packing"].HeaderText = "Pack";
+            //dgvItemList.Columns["Packing"].HeaderText = "Pack";
 
             dgvItemList.Columns["QtyPerCase"].Visible = true;
-            dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
+            //dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
 
-            txtSearch_TextChanged(null, null);
+           
         }
 
         private void DgvItemList_KeyDown(object sender, KeyEventArgs e)
@@ -270,9 +278,11 @@ namespace PharmaUI
             if (dgvItemList.SelectedRows.Count == 0)
                 MessageBox.Show("Please select atleast one row to edit");
 
-            PharmaBusinessObjects.Master.ItemMaster model = (PharmaBusinessObjects.Master.ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;           
+            // PharmaBusinessObjects.Master.ItemMaster model = (PharmaBusinessObjects.Master.ItemMaster)dgvItemList.SelectedRows[0].DataBoundItem;           
 
-            OpenItemAddUpdateForm(model.ItemID);
+            DataGridViewRow row = dgvItemList.CurrentRow;
+
+            OpenItemAddUpdateForm(Convert.ToInt32(row.Cells["ItemID"].Value));
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -313,13 +323,71 @@ namespace PharmaUI
             {
                 if (dgvItemList.CurrentRow != null)
                 {
-                    this.LastSelectedItemMaster = dgvItemList.CurrentRow.DataBoundItem as PharmaBusinessObjects.Master.ItemMaster;
+                    this.LastSelectedItemMaster = GetCurrentRowItem();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        private ItemMaster GetCurrentRowItem()
+        {
+            DataGridViewRow row = dgvItemList.CurrentRow;
+
+            ItemMaster existingItem = new ItemMaster()
+            {
+                ItemID = Convert.ToInt32(row.Cells["ItemID"].Value),
+                ItemCode = Convert.ToString(row.Cells["ItemCode"].Value),
+                ItemName = Convert.ToString(row.Cells["ItemName"].Value),
+                CompanyName = Convert.ToString(row.Cells["CompanyName"].Value),
+                CompanyID = Convert.ToInt32(row.Cells["CompanyID"].Value),
+                ConversionRate = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["ConversionRate"].Value)),
+                ShortName = Convert.ToString(row.Cells["ShortName"].Value),
+                Packing = Convert.ToString(row.Cells["Packing"].Value),
+                PurchaseRate = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["PurchaseRate"].Value)) ?? 0,
+                MRP = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["MRP"].Value)) ?? 0,
+                SaleRate = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["SaleRate"].Value)) ?? 0,
+                SpecialRate = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["SpecialRate"].Value)) ?? 0,
+                WholeSaleRate = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["WholeSaleRate"].Value)) ?? 0,
+                SaleExcise = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["SaleExcise"].Value)) ?? 0,
+                SurchargeOnSale = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["SurchargeOnSale"].Value)) ?? 0,
+                TaxOnSale = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["TaxOnSale"].Value)) ?? 0,
+                Scheme1 = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["Scheme1"].Value)) ?? 0,
+                Scheme2 = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["Scheme2"].Value)) ?? 0,
+                PurchaseExcise = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["PurchaseExcise"].Value)) ?? 0,
+                UPC = Convert.ToString(row.Cells["UPC"].Value),
+                IsHalfScheme = Convert.ToBoolean(row.Cells["IsHalfScheme"].Value),
+                IsQTRScheme = Convert.ToBoolean(row.Cells["IsQTRScheme"].Value),
+                SpecialDiscount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["SpecialDiscount"].Value)) ?? 0,
+                SpecialDiscountOnQty = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["SpecialDiscountOnQty"].Value)) ?? 0,
+                IsFixedDiscount = Convert.ToBoolean(row.Cells["IsFixedDiscount"].Value),
+                FixedDiscountRate = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["FixedDiscountRate"].Value)) ?? 0,
+                MaximumQty = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["MaximumQty"].Value)) ?? 0,
+                MaximumDiscount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["MaximumDiscount"].Value)) ?? 0,
+                SurchargeOnPurchase = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["SurchargeOnPurchase"].Value)) ?? 0,
+                TaxOnPurchase = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["TaxOnPurchase"].Value)) ?? 0,
+                DiscountRecieved = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["DiscountRecieved"].Value)) ?? 0,
+                SpecialDiscountRecieved = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["SpecialDiscountRecieved"].Value)) ?? 0,
+                QtyPerCase = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["QtyPerCase"].Value)) ?? 0,
+                //  Location = Convert.ToString(row.Cells["Location"].Value),
+                MinimumStock = ExtensionMethods.SafeConversionInt(Convert.ToString(row.Cells["MinimumStock"].Value)),
+                MaximumStock = ExtensionMethods.SafeConversionInt(Convert.ToString(row.Cells["MaximumStock"].Value)),
+                SaleTypeId = Convert.ToInt32(row.Cells["SaleTypeId"].Value),
+                PurchaseTypeId = Convert.ToInt32(row.Cells["PurchaseTypeId"].Value),
+                HSNCode = Convert.ToString(row.Cells["HSNCode"].Value),
+                Status = Convert.ToBoolean(row.Cells["Status"].Value),
+                PurchaseTypeCode = Convert.ToString(row.Cells["PurchaseTypeCode"].Value),
+                PurchaseTypeName = Convert.ToString(row.Cells["PurchaseTypeName"].Value),
+                PurchaseTypeRate = ExtensionMethods.SafeConversionDecimal(Convert.ToString(row.Cells["PurchaseTypeRate"].Value))
+            };
+
+            return existingItem;
+
+
+
         }
 
         //Set focus for the controls

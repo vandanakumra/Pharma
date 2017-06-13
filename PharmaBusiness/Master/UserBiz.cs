@@ -90,7 +90,7 @@ namespace PharmaBusiness.Master
             return new UserDao(this.LoggedInUser).UpdatePrivledges(p);
         }
 
-        public bool ValidateUser(string userName, string password)
+        public PharmaBusinessObjects.Master.UserMaster ValidateUser(string userName, string password)
         {
             return new UserDao(this.LoggedInUser).ValidateUser(userName, password);
         }

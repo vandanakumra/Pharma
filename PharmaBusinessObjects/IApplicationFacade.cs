@@ -4,6 +4,7 @@ using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using PharmaBusinessObjects.Transaction.SaleEntry;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace PharmaBusinessObjects
         List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyIDForCustomer(int CompanyID);
         List<SupplierCompanyDiscount> GetAllCompanyItemDiscountByCompanyIDForSupplier(int CompanyID);
         List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes();
+        DataTable GetAllItemsBySearch();
         #endregion
 
         #region Company Master
@@ -117,7 +119,7 @@ namespace PharmaBusinessObjects
         PharmaBusinessObjects.Master.Privledge GetPrivledgeById(int userid);
         bool AddPrivledge(PharmaBusinessObjects.Master.Privledge p);
         bool UpdatePrivledge(PharmaBusinessObjects.Master.Privledge p);
-        bool ValidateUser(string userName, string password);
+        PharmaBusinessObjects.Master.UserMaster ValidateUser(string userName, string password);
 
         #endregion
 

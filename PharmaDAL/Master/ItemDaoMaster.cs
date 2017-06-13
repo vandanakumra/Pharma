@@ -283,7 +283,34 @@ namespace PharmaDAL.Master
             }
 
 
-            public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null, string searchBy = "Name")
+
+        public DataTable GetAllItemsBySearch()
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                List<PharmaBusinessObjects.Master.ItemMaster> itemList = new List<PharmaBusinessObjects.Master.ItemMaster>();
+
+                SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                SqlCommand cmd = new SqlCommand("SELECT * FROM CompanyItemMapping", connection);
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+
+                if (dt != null)
+                {
+                    return dt;
+                }
+                else
+                    return new DataTable();
+
+            }
+        }
+
+        public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null, string searchBy = "Name")
             {
 
                 //using (PharmaDBEntities context = new PharmaDBEntities())

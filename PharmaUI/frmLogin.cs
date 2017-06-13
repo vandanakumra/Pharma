@@ -66,11 +66,31 @@ namespace PharmaUI
         {
             try
             {
-                if (applicationFacade.ValidateUser(tbUserName.Text, tbPassword.Text))
+
+                if (string.IsNullOrWhiteSpace(tbUserName.Text))
                 {
-                    ExtensionMethods.LoggedInUser = applicationFacade.GetUserByUserName(tbUserName.Text);
-                    DialogResult = DialogResult.OK;
-                    
+                    MessageBox.Show("Please enter username !");
+                    tbUserName.Focus();
+                }
+                else if (string.IsNullOrWhiteSpace(tbPassword.Text))
+                {
+                    MessageBox.Show("Please enter password !");
+                    tbPassword.Focus();
+                }
+                else
+                {
+                    var user = applicationFacade.ValidateUser(tbUserName.Text, tbPassword.Text);
+
+                    if (user != null)
+                    {
+                        ExtensionMethods.LoggedInUser = user;
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        MessageBox.Show("User name or password is incorrect !!");
+                        tbUserName.Focus();
+                    }
                 }
             }
             catch (Exception ex)
