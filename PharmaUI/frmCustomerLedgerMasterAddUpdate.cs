@@ -134,7 +134,7 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+
         }
 
         public void frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(CustomerLedgerMaster customerLedgerMaster)
@@ -227,18 +227,18 @@ namespace PharmaUI
                 customerLedgerMaster.CustomerLedgerShortName = txtShortName.Text;
                 customerLedgerMaster.Address = txtAddress.Text;
                 customerLedgerMaster.ContactPerson = txtContactPerson.Text;
-                customerLedgerMaster.Telephone =txtTelephone.Text;
+                customerLedgerMaster.Telephone = txtTelephone.Text;
                 customerLedgerMaster.Mobile = txtMobile.Text;
                 customerLedgerMaster.OfficePhone = txtPhoneO.Text;
                 customerLedgerMaster.ResidentPhone = txtPhoneR.Text;
                 customerLedgerMaster.EmailAddress = txtEmailAddress.Text;
                 customerLedgerMaster.OpeningBal = ExtensionMethods.SafeConversionDecimal(txtOpeningBal.Text);
-                customerLedgerMaster.CreditDebit =Convert.ToString(cbxCreditDebit.SelectedItem) ;
+                customerLedgerMaster.CreditDebit = Convert.ToString(cbxCreditDebit.SelectedItem);
                 customerLedgerMaster.TaxRetail = Convert.ToString(cbxTaxRetail.SelectedItem);
                 customerLedgerMaster.Status = Convert.ToBoolean(cbxStatus.SelectedItem);
 
                 //values from User this form
-                customerLedgerMaster.ZSMId = String.IsNullOrWhiteSpace(tbxZSM.Text) ?null : (int?)tbxZSM.Tag;
+                customerLedgerMaster.ZSMId = String.IsNullOrWhiteSpace(tbxZSM.Text) ? null : (int?)tbxZSM.Tag;
                 customerLedgerMaster.RSMId = String.IsNullOrWhiteSpace(tbxRSM.Text) ? null : (int?)tbxRSM.Tag;
                 customerLedgerMaster.ASMId = String.IsNullOrWhiteSpace(tbxASM.Text) ? null : (int?)tbxASM.Tag;
                 customerLedgerMaster.AreaId = String.IsNullOrWhiteSpace(tbxSalesman.Text) ? null : (int?)tbxSalesman.Tag;
@@ -346,7 +346,7 @@ namespace PharmaUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }         
+            }
         }
 
         private void FrmPersonRouteMaster_FormClosed(object sender, FormClosedEventArgs e)
@@ -422,102 +422,109 @@ namespace PharmaUI
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-                //Add
-                if (keyData == (Keys.F9))
+            //Add
+            if (keyData == (Keys.Escape))
+            {
+                if(this.ActiveControl.Name == "dgvCompanyDiscount")
                 {
-
+                    btnSave.Focus();
                 }
-                else if (keyData == (Keys.F3))
-                {
-                    if (dgvCompanyDiscount.SelectedCells.Count > 0)
-                    {
-                        bool DoesCompanyHaveDiscountMapping = dgvCompanyDiscount.CurrentRow != null && !(
-                                                                                                    String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Normal"].Value)))
-                                                                                                    && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Breakage"].Value)))
-                                                                                                    && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Expired"].Value)))
-                                                                                                    );
+            }
+            else if (keyData == (Keys.F9))
+            {
 
-                        ///OPen item discount mapping screen only if company discount existing 
-                        if (DoesCompanyHaveDiscountMapping)
-                        {
-                            CustomerCopanyDiscount existingItem = (CustomerCopanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
-                            frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(existingItem);
-                            form.FormClosed += FormCustomerItemDiscount_FormClosed;
-                            form.Show();
-                        }
+            }
+            else if (keyData == (Keys.F3))
+            {
+                if (dgvCompanyDiscount.SelectedCells.Count > 0)
+                {
+                    bool DoesCompanyHaveDiscountMapping = dgvCompanyDiscount.CurrentRow != null && !(
+                                                                                                String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Normal"].Value)))
+                                                                                                && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Breakage"].Value)))
+                                                                                                && String.IsNullOrWhiteSpace(Convert.ToString((dgvCompanyDiscount.CurrentRow.Cells["Expired"].Value)))
+                                                                                                );
+
+                    ///OPen item discount mapping screen only if company discount existing 
+                    if (DoesCompanyHaveDiscountMapping)
+                    {
+                        CustomerCopanyDiscount existingItem = (CustomerCopanyDiscount)dgvCompanyDiscount.Rows[dgvCompanyDiscount.SelectedCells[0].RowIndex].DataBoundItem;
+                        frmCustomerItemDiscountMaster form = new frmCustomerItemDiscountMaster(existingItem);
+                        form.FormClosed += FormCustomerItemDiscount_FormClosed;
+                        form.Show();
                     }
                 }
-                else if (keyData == Keys.F1)
-                {
+            }
+            else if (keyData == Keys.F1)
+            {
                 ///DO NOT REMOVE BELOW CODE AS ITS WORKING FUNCTIONALITY
                 ///
 
-                    //TextBox activePersonRouteType = new TextBox();
-                    //string activePersonRouteTypeString = String.Empty;
+                //TextBox activePersonRouteType = new TextBox();
+                //string activePersonRouteTypeString = String.Empty;
 
-                    //switch (this.ActiveControl.Name)
-                    //{
-                    //    case "tbxZSM":
-                    //        {
-                    //            activePersonRouteType = tbxZSM;
-                    //            activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
-                    //        }
-                    //        break;
+                //switch (this.ActiveControl.Name)
+                //{
+                //    case "tbxZSM":
+                //        {
+                //            activePersonRouteType = tbxZSM;
+                //            activePersonRouteTypeString = Constants.RecordType.ZSMDISPLAYNAME;
+                //        }
+                //        break;
 
-                    //    case "tbxRSM":
-                    //        {
-                    //            activePersonRouteType = tbxRSM;
-                    //            activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
-                    //        }
-                    //        break;
+                //    case "tbxRSM":
+                //        {
+                //            activePersonRouteType = tbxRSM;
+                //            activePersonRouteTypeString = Constants.RecordType.RSMDISPLAYNAME;
+                //        }
+                //        break;
 
-                    //    case "tbxASM":
-                    //        {
-                    //            activePersonRouteType = tbxASM;
-                    //            activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
-                    //        }
-                    //        break;
-                    //    case "tbxSalesman":
-                    //        {
-                    //            activePersonRouteType = tbxSalesman;
-                    //            activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
-                    //        }
-                    //        break;
-                    //    case "tbxArea":
-                    //        {
-                    //            activePersonRouteType = tbxArea;
-                    //            activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
-                    //        }
-                    //        break;
-                    //    case "tbxRoute":
-                    //        {
-                    //            activePersonRouteType = tbxRoute;
-                    //            activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
-                    //        }
-                    //        break;
-                    //}
+                //    case "tbxASM":
+                //        {
+                //            activePersonRouteType = tbxASM;
+                //            activePersonRouteTypeString = Constants.RecordType.ASMDISPLAYNAME;
+                //        }
+                //        break;
+                //    case "tbxSalesman":
+                //        {
+                //            activePersonRouteType = tbxSalesman;
+                //            activePersonRouteTypeString = Constants.RecordType.SALESMANDISPLAYNAME;
+                //        }
+                //        break;
+                //    case "tbxArea":
+                //        {
+                //            activePersonRouteType = tbxArea;
+                //            activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
+                //        }
+                //        break;
+                //    case "tbxRoute":
+                //        {
+                //            activePersonRouteType = tbxRoute;
+                //            activePersonRouteTypeString = Constants.RecordType.ROUTEDISPLAYNAME;
+                //        }
+                //        break;
+                //}
 
-                    //if (!String.IsNullOrWhiteSpace(activePersonRouteTypeString))
-                    //{
-                    //    PersonRouteMaster personRouteMaster = new PersonRouteMaster()
-                    //    {
-                    //        RecordTypeNme = activePersonRouteTypeString,
-                    //        PersonRouteID = ExtensionMethods.SafeConversionInt(Convert.ToString(activePersonRouteType.Tag)) ?? 0,
-                    //        PersonRouteName = activePersonRouteType.Text
-                    //    };
+                //if (!String.IsNullOrWhiteSpace(activePersonRouteTypeString))
+                //{
+                //    PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                //    {
+                //        RecordTypeNme = activePersonRouteTypeString,
+                //        PersonRouteID = ExtensionMethods.SafeConversionInt(Convert.ToString(activePersonRouteType.Tag)) ?? 0,
+                //        PersonRouteName = activePersonRouteType.Text
+                //    };
 
-                    //    frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
-                    //    //Set Child UI
-                    //    ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
-                    //    frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+                //    frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                //    //Set Child UI
+                //    ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
+                //    frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
 
-                    //    frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
-                    //    frmPersonRouteMaster.Show();
-                    //    frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
-                    //}
-                }
+                //    frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
+                //    frmPersonRouteMaster.Show();
+                //    frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+                //}
+            }
 
-                return base.ProcessCmdKey(ref msg, keyData);         
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void EnterKeyDownForTabEvents(Control control)
@@ -536,7 +543,7 @@ namespace PharmaUI
             }
         }
 
-        private  void C_KeyDown(object sender, KeyEventArgs e)
+        private void C_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -603,6 +610,7 @@ namespace PharmaUI
                         };
 
                         frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                        frmPersonRouteMaster.IsInChildMode = true;
                         //Set Child UI
                         ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
                         frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
@@ -653,7 +661,7 @@ namespace PharmaUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }         
+            }
         }
 
         private void Column_KeyPress(object sender, KeyPressEventArgs e)
@@ -714,19 +722,19 @@ namespace PharmaUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }          
+            }
         }
 
         private void dgvCompanyDiscount_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
-                if(e.KeyData == Keys.Up || e.KeyData == Keys.Left || e.KeyData == Keys.Right || e.KeyData == Keys.Down || e.KeyData == Keys.Tab)
+                if (e.KeyData == Keys.Up || e.KeyData == Keys.Left || e.KeyData == Keys.Right || e.KeyData == Keys.Down || e.KeyData == Keys.Tab)
                 {
                     return;
                 }
 
-                  e.SuppressKeyPress = true;
+                e.SuppressKeyPress = true;
 
                 if (e.KeyData == Keys.Enter)
                 {
@@ -770,8 +778,14 @@ namespace PharmaUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }          
+            }
         }
-    }
 
+        public void ConfigureCustomerLedger(CustomerLedgerMaster model)
+        {
+            txtCustSupplierName.Text = model.CustomerLedgerName;
+        }
+
+
+    }
 }

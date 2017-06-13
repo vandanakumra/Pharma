@@ -18,6 +18,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         public PersonRouteMaster LastSelectedPersonRoute { get; set; }
         public PersonRouteMaster NextPersonRoute { get; set; }
+        public bool IsInChildMode = false;
 
         public frmPersonRouteMaster()
         {
@@ -74,7 +75,7 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyCode == Keys.Enter && NextPersonRoute != null)
+                if (e.KeyCode == Keys.Enter && IsInChildMode)
                 {
                     this.Close();
                 }
@@ -193,7 +194,20 @@ namespace PharmaUI
             //Add
             if (keyData == (Keys.F9))
             {
-                AddEditPersonRoute(NextPersonRoute);
+                if ((cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeId != 0)
+                {
+                    PersonRouteMaster pmNext = new PersonRouteMaster()
+                    {
+                        RecordTypeNme = (cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeName,
+                        RecordTypeId = (cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeId
+                    };
+
+                    AddEditPersonRoute(pmNext);
+                }
+                else
+                {
+                    AddEditPersonRoute(NextPersonRoute);
+                }
             }
             else if (keyData == Keys.F3)
             {
@@ -277,7 +291,20 @@ namespace PharmaUI
         {
             try
             {
-                AddEditPersonRoute(NextPersonRoute);
+                if((cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeId != 0)
+                {
+                    PersonRouteMaster pmNext = new PersonRouteMaster()
+                    {
+                        RecordTypeNme = (cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeName,
+                        RecordTypeId = (cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeId
+                    };
+
+                    AddEditPersonRoute(pmNext);
+                }
+                else
+                {
+                    AddEditPersonRoute(NextPersonRoute);
+                }
             }
             catch (Exception ex)
             {

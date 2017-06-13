@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbxArea = new System.Windows.Forms.ComboBox();
             this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
             this.gbCustomerSupplierInfo = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -81,6 +80,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.gbDiscountDetails = new System.Windows.Forms.GroupBox();
             this.dgvCompanyDiscount = new System.Windows.Forms.DataGridView();
+            this.tbxArea = new System.Windows.Forms.TextBox();
             this.gbCustomerSupplierInfo.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -88,17 +88,6 @@
             this.gbDiscountDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompanyDiscount)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cbxArea
-            // 
-            this.cbxArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxArea.FormattingEnabled = true;
-            this.cbxArea.Location = new System.Drawing.Point(86, 13);
-            this.cbxArea.Name = "cbxArea";
-            this.cbxArea.Size = new System.Drawing.Size(165, 21);
-            this.cbxArea.TabIndex = 201;
             // 
             // cbxPurchaseType
             // 
@@ -453,6 +442,7 @@
             this.label36.Size = new System.Drawing.Size(58, 13);
             this.label36.TabIndex = 117;
             this.label36.Text = "Telephone";
+            this.label36.Visible = false;
             // 
             // txtTelephone
             // 
@@ -463,6 +453,7 @@
             this.txtTelephone.Size = new System.Drawing.Size(256, 20);
             this.txtTelephone.TabIndex = 105;
             this.txtTelephone.Tag = "";
+            this.txtTelephone.Visible = false;
             // 
             // btnCancel
             // 
@@ -506,9 +497,9 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel2.Controls.Add(this.tbxArea, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label6, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.cbxPurchaseType, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.cbxArea, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label12, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.tbxServiceTax, 1, 3);
@@ -530,6 +521,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(509, 110);
             this.tableLayoutPanel2.TabIndex = 199;
@@ -700,6 +692,14 @@
             this.dgvCompanyDiscount.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCompanyDiscount_EditingControlShowing);
             this.dgvCompanyDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCompanyDiscount_KeyDown);
             // 
+            // tbxArea
+            // 
+            this.tbxArea.Location = new System.Drawing.Point(86, 13);
+            this.tbxArea.Name = "tbxArea";
+            this.tbxArea.Size = new System.Drawing.Size(165, 20);
+            this.tbxArea.TabIndex = 201;
+            this.tbxArea.Tag = "";
+            // 
             // frmSupplierLedgerAddUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -726,7 +726,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox cbxArea;
         private System.Windows.Forms.ComboBox cbxPurchaseType;
         private System.Windows.Forms.GroupBox gbCustomerSupplierInfo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
@@ -779,5 +778,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox gbDiscountDetails;
         private System.Windows.Forms.DataGridView dgvCompanyDiscount;
+        private System.Windows.Forms.TextBox tbxArea;
     }
 }
