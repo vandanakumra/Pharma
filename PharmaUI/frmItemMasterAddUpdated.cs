@@ -132,7 +132,9 @@ namespace PharmaUI
                 item.PurchaseTypeId = (cbxPurchaseType.SelectedItem as AccountLedgerMaster).AccountLedgerID;
                 Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
                 item.Status = status == Status.Active;
-                item.HSNCode = (cbxHSNCode.SelectedValue as HSNCodes).HSNCode;
+                item.HSNCode =Convert.ToString(cbxHSNCode.SelectedValue);
+                    
+                 //   (cbxHSNCode.SelectedValue as HSNCodes).HSNCode;
 
                 bool actionResult = false;
                 // if form is in Edit mode then udate item , else add item 
