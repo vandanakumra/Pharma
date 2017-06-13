@@ -610,6 +610,7 @@ namespace PharmaUI
                         };
 
                         frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                        frmPersonRouteMaster.IsInChildMode = true;
                         //Set Child UI
                         ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
                         frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
