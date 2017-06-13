@@ -155,6 +155,9 @@ namespace PharmaUI
                 form.WindowState = FormWindowState.Maximized;
                 form.FormClosed += Form_FormClosed;
                 form.Show();
+
+                CustomerLedgerMaster nextCust = new CustomerLedgerMaster() { CustomerLedgerName = txtSearch.Text };
+                form.ConfigureCustomerLedger(nextCust);
             }
             catch (Exception ex)
             {
@@ -279,6 +282,12 @@ namespace PharmaUI
                 }
                 form.FormClosed += Form_FormClosed;
                 form.Show();
+
+                if (!isEdit)
+                {
+                    CustomerLedgerMaster nextCust = new CustomerLedgerMaster() { CustomerLedgerName = txtSearch.Text };
+                    form.ConfigureCustomerLedger(nextCust);
+                }
             }
             catch (Exception ex)
             {
