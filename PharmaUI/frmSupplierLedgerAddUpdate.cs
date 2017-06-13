@@ -317,7 +317,14 @@ namespace PharmaUI
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //Add
-            if (keyData == (Keys.F9))
+            if (keyData == (Keys.Escape))
+            {
+                if (this.ActiveControl.Name == "dgvCompanyDiscount")
+                {
+                    btnSave.Focus();
+                }
+            }
+            else if (keyData == (Keys.F9))
             {
 
             }
