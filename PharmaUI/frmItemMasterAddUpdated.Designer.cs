@@ -56,7 +56,6 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.cbxStatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbxHSNCode = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
@@ -113,6 +112,7 @@
             this.errorProviderItem = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.tbxHSNCode = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -169,7 +169,7 @@
             this.tableLayoutPanel1.Controls.Add(this.lblStatus, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cbxHSNCode, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tbxHSNCode, 5, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -404,15 +404,6 @@
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 113;
             this.label1.Text = "HSN Code";
-            // 
-            // cbxHSNCode
-            // 
-            this.cbxHSNCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxHSNCode.FormattingEnabled = true;
-            this.cbxHSNCode.Location = new System.Drawing.Point(868, 72);
-            this.cbxHSNCode.Name = "cbxHSNCode";
-            this.cbxHSNCode.Size = new System.Drawing.Size(142, 21);
-            this.cbxHSNCode.TabIndex = 112;
             // 
             // groupBox1
             // 
@@ -1012,6 +1003,13 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // tbxHSNCode
+            // 
+            this.tbxHSNCode.Location = new System.Drawing.Point(868, 72);
+            this.tbxHSNCode.Name = "tbxHSNCode";
+            this.tbxHSNCode.Size = new System.Drawing.Size(142, 20);
+            this.tbxHSNCode.TabIndex = 112;
+            // 
             // frmItemMasterAddUpdated
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1127,7 +1125,7 @@
         private System.Windows.Forms.ComboBox cbxPurchaseType;
         private System.Windows.Forms.Label lblPurchaseType;
         private System.Windows.Forms.TextBox tbxCompany;
-        private System.Windows.Forms.ComboBox cbxHSNCode;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbxHSNCode;
     }
 }
