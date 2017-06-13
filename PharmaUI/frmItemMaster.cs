@@ -264,6 +264,10 @@ namespace PharmaUI
             {
                 dgvItemList.Focus();
             }
+            else if (keyData == Keys.Escape)
+            {
+                this.Close();
+            }
 
             if (keyData == Keys.Enter && isOpenAsChild && dgvItemList.SelectedRows.Count > 0)
             {
