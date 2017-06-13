@@ -319,6 +319,9 @@ namespace PharmaUI
 
         public void frmItemMasterAddUpdate_Fill_UsingExistingItem(ItemMaster existingItem)
         {
+
+           
+
             if (existingItem != null)
             {
                 tbxItemCode.Text = existingItem.ItemCode;

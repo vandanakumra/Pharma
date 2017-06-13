@@ -11,6 +11,7 @@ using PharmaBusinessObjects.Transaction;
 using PharmaBusiness.Transaction;
 using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using PharmaBusinessObjects.Transaction.SaleEntry;
+using System.Data;
 
 namespace PharmaBusiness
 {
@@ -136,6 +137,19 @@ namespace PharmaBusiness
             {
                 throw;
             }
+        }
+
+        public DataTable GetAllItemsBySearch()
+        {
+            try
+            {
+                return new ItemMasterBiz(this.LoggedInUser).GetAllItemsBySearch();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+           
         }
 
         #endregion
@@ -730,7 +744,7 @@ namespace PharmaBusiness
             return new UserBiz(this.LoggedInUser).UpdatePrivledge(p);
         }
 
-        public bool ValidateUser(string userName, string password)
+        public PharmaBusinessObjects.Master.UserMaster ValidateUser(string userName, string password)
         {
             return new UserBiz(this.LoggedInUser).ValidateUser(userName, password);
         }
