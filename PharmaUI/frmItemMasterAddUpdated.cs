@@ -418,7 +418,7 @@ namespace PharmaUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if ((sender is TextBox) && (sender as TextBox).Name == "tbxCompanyCode")
+                if ((sender is TextBox) && (sender as TextBox).Name == "tbxCompany")
                 {
                     TextBox activeCompanyControl = sender as TextBox;
                   
