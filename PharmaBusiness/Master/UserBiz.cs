@@ -72,7 +72,7 @@ namespace PharmaBusiness.Master
 
         public List<PharmaBusinessObjects.Master.Privledge> GetActivePrivledges()
         {
-            return new UserDao(this.LoggedInUser).GetPrivledges(string.Empty).Where(p=>p.Status).ToList();
+            return new UserDao(this.LoggedInUser).GetPrivledges(string.Empty).Where(p => p.Status).ToList();
         }
 
         public PharmaBusinessObjects.Master.Privledge GetPrivledgeById(int userid)
@@ -90,5 +90,10 @@ namespace PharmaBusiness.Master
             return new UserDao(this.LoggedInUser).UpdatePrivledges(p);
         }
 
-    }
+        public PharmaBusinessObjects.Master.UserMaster ValidateUser(string userName, string password)
+        {
+            return new UserDao(this.LoggedInUser).ValidateUser(userName, password);
+        }
+
+    } 
 }

@@ -26,7 +26,7 @@ namespace PharmaDAL.Master
                                                 OrderPreferenceRating = p.OrderPreferenceRating,
                                                 BillingPreferenceRating = p.BillingPreferenceRating,
                                                 CompanyCode = p.CompanyCode,                                               
-                                                //IsDirect = p.IsDirect,
+                                                IsDirect = p.IsDirect,
                                                 StockSummaryRequired = p.StockSummaryRequired,
                                                 Status = p.Status
 
@@ -53,7 +53,7 @@ namespace PharmaDAL.Master
                     BillingPreferenceRating = p.BillingPreferenceRating,
                     CompanyCode = p.CompanyCode,
                     Status = p.Status,
-                    //IsDirect = p.IsDirect,
+                    IsDirect = p.IsDirect,
                     StockSummaryRequired = p.StockSummaryRequired
                 }).FirstOrDefault();
             }
@@ -74,7 +74,7 @@ namespace PharmaDAL.Master
                     CompanyCode = companyCode,
                     Status = company.Status,
                     StockSummaryRequired = company.StockSummaryRequired,
-                    //IsDirect = company.IsDirect,
+                    IsDirect = company.IsDirect,
                     OrderPreferenceRating = company.OrderPreferenceRating,
                     BillingPreferenceRating = company.BillingPreferenceRating,
                     CompanyName = company.CompanyName,
@@ -101,7 +101,7 @@ namespace PharmaDAL.Master
                 {
                     companyMaster.Status = company.Status;
                     companyMaster.StockSummaryRequired = company.StockSummaryRequired;
-                    //companyMaster.IsDirect = company.IsDirect;
+                    companyMaster.IsDirect = company.IsDirect;
                     companyMaster.OrderPreferenceRating = company.OrderPreferenceRating;
                     companyMaster.BillingPreferenceRating = company.BillingPreferenceRating;
                     companyMaster.CompanyName = company.CompanyName;

@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using PharmaDAL.Entity;
+using log4net;
+using System.Reflection;
 
 namespace PharmaDataMigration.Master
 {
     public class CompanyMaster
     {
+        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private DBFConnectionManager dbConnection;
 
         public CompanyMaster()
@@ -36,26 +40,33 @@ namespace PharmaDataMigration.Master
                     {
                         foreach (DataRow dr in dtCompanyMaster.Rows)
                         {
-                            maxCompanyCode++;
-
-                            string companyCode = maxCompanyCode.ToString().PadLeft(3, '0');
-                            string originalCompanyCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            Common.companyCodeMap.Add(new CompanyCodeMap() { OriginalCompanyCode = originalCompanyCode, MappedCompanyCode = companyCode });
-
-                            PharmaDAL.Entity.CompanyMaster newCompanyMaster = new PharmaDAL.Entity.CompanyMaster()
+                            try
                             {
-                                CompanyCode = companyCode,
-                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
-                                StockSummaryRequired = Convert.ToChar(dr["SSR"]) == 'Y' ? true : false,
-                                //IsDirect = Convert.ToChar(dr["HALF"]) == 'D' ? true : false,
-                                OrderPreferenceRating = Convert.ToInt32(dr["CONVRATE"]),
-                                BillingPreferenceRating = Convert.ToInt32(dr["DISQTY"]),
-                                CompanyName = Convert.ToString(dr["ACNAME"]).TrimEnd(),
-                                CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
-                            };
+                                maxCompanyCode++;
 
-                            listCompanyMaster.Add(newCompanyMaster);
+                                string companyCode = maxCompanyCode.ToString().PadLeft(3, '0');
+                                string originalCompanyCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                                Common.companyCodeMap.Add(new CompanyCodeMap() { OriginalCompanyCode = originalCompanyCode, MappedCompanyCode = companyCode });
+
+                                PharmaDAL.Entity.CompanyMaster newCompanyMaster = new PharmaDAL.Entity.CompanyMaster()
+                                {
+                                    CompanyCode = companyCode,
+                                    Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
+                                    StockSummaryRequired = Convert.ToChar(dr["SSR"]) == 'Y' ? true : false,
+                                    //IsDirect = Convert.ToChar(dr["HALF"]) == 'D' ? true : false,
+                                    OrderPreferenceRating = Convert.ToInt32(dr["CONVRATE"]),
+                                    BillingPreferenceRating = Convert.ToInt32(dr["DISQTY"]),
+                                    CompanyName = Convert.ToString(dr["ACNAME"]).TrimEnd(),
+                                    CreatedBy = "admin",
+                                    CreatedOn = DateTime.Now
+                                };
+
+                                listCompanyMaster.Add(newCompanyMaster);
+                            }
+                            catch (Exception)
+                            {
+                                log.Info("COMPANY MASTER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                            }
                         }
                     }
 

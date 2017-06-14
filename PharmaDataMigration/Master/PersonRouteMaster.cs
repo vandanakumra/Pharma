@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using PharmaDAL.Entity;
+using log4net;
+using System.Reflection;
 
 namespace PharmaDataMigration.Master
 {
     public class PersonRouteMaster
     {
+
+        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private DBFConnectionManager dbConnection;
 
         public PersonRouteMaster()
@@ -21,7 +26,11 @@ namespace PharmaDataMigration.Master
             {
                 string query = "select * from MASTERS where slcd = 'AS'";
 
+                log.Info("ASM Data Insertion Start");
+
                 DataTable dtASMMaster = dbConnection.GetData(query);
+
+                log.Info("ASM Data Cout --> " + dtASMMaster.Rows.Count);
 
                 List<PharmaDAL.Entity.PersonRouteMaster> listASMMaster = new List<PharmaDAL.Entity.PersonRouteMaster>();
                 int _result = 0;
@@ -36,27 +45,38 @@ namespace PharmaDataMigration.Master
                     {
                         foreach (DataRow dr in dtASMMaster.Rows)
                         {
-                            maxASMID++;
-                            string originalPersonRouteCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            string mappedPersonRouteCode = systemName + maxASMID.ToString().PadLeft(3, '0');
-                            Common.asmCodeMap.Add(new ASMCodeMap() { OriginalASMCode = originalPersonRouteCode, MappedASMCode = mappedPersonRouteCode });
-
-                            PharmaDAL.Entity.PersonRouteMaster newASMMaster = new PharmaDAL.Entity.PersonRouteMaster()
+                            try
                             {
-                                PersonRouteCode = mappedPersonRouteCode,
-                                PersonRouteName = Convert.ToString(dr["ACName"]).TrimEnd(),
-                                RecordTypeId = recordTypeID,
-                                CreatedBy = "admin",
-                                CreatedOn = DateTime.Now,
-                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
-                            };
 
-                            listASMMaster.Add(newASMMaster);
+                                maxASMID++;
+                                string originalPersonRouteCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                                string mappedPersonRouteCode = systemName + maxASMID.ToString().PadLeft(3, '0');
+                                Common.asmCodeMap.Add(new ASMCodeMap() { OriginalASMCode = originalPersonRouteCode, MappedASMCode = mappedPersonRouteCode });
+
+                                PharmaDAL.Entity.PersonRouteMaster newASMMaster = new PharmaDAL.Entity.PersonRouteMaster()
+                                {
+                                    PersonRouteCode = mappedPersonRouteCode,
+                                    PersonRouteName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                    RecordTypeId = recordTypeID,
+                                    CreatedBy = "admin",
+                                    CreatedOn = DateTime.Now,
+                                    Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true
+                                };
+
+                                listASMMaster.Add(newASMMaster);
+                            }
+                            catch (Exception)
+                            {
+                                log.Info("ASM DATA : Error for Acno --> " + Convert.ToString(dr["ACNO"]).TrimEnd());
+                            }
                         }
                     }
 
                     context.PersonRouteMaster.AddRange(listASMMaster);
                     _result = context.SaveChanges();
+
+
+                    log.Info("ASM DATA Completed. !!!");
 
                     return _result;
                 }

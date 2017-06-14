@@ -229,11 +229,14 @@
             this.receiptFromCustomerToolStripMenuItem.Name = "receiptFromCustomerToolStripMenuItem";
             this.receiptFromCustomerToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.receiptFromCustomerToolStripMenuItem.Text = "Receipt From Customer";
+            this.receiptFromCustomerToolStripMenuItem.Click += new System.EventHandler(this.receiptFromCustomerToolStripMenuItem_Click);
             // 
             // receiptFromCustTransactionToolStripMenuItem
             // 
             this.receiptFromCustTransactionToolStripMenuItem.Name = "receiptFromCustTransactionToolStripMenuItem";
-            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.receiptFromCustTransactionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.R)));
+            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.receiptFromCustTransactionToolStripMenuItem.Text = "Transaction";
             this.receiptFromCustTransactionToolStripMenuItem.Click += new System.EventHandler(this.receiptFromCustTransactionToolStripMenuItem_Click);
             // 
@@ -248,7 +251,9 @@
             // transactionToolStripMenuItem
             // 
             this.transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
-            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.transactionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.P)));
+            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.transactionToolStripMenuItem.Text = "Transaction";
             this.transactionToolStripMenuItem.Click += new System.EventHandler(this.transactionToolStripMenuItem_Click);
             // 
@@ -272,7 +277,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 477);
-            this.ControlBox = false;
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

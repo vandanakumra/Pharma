@@ -20,6 +20,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         public int SupplierId { get; set; }
         private string SupplierNameNew { get; set; }
+        public bool IsInChildMode = false;
 
         public frmSupplierLedgerAddUpdate(int supplierId,string supplierName)
         {
@@ -31,7 +32,6 @@ namespace PharmaUI
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
                 this.SupplierId = supplierId;
                 SupplierNameNew = supplierName;
-
                 LoadSupplierCompanyDiscountGrid();
 
             }
@@ -71,6 +71,9 @@ namespace PharmaUI
             dgvCompanyDiscount.Columns["Expired"].HeaderText = "Expired";
 
             dgvCompanyDiscount.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+
             dgvCompanyDiscount.AllowUserToAddRows = false;
             dgvCompanyDiscount.AllowUserToDeleteRows = false;
             dgvCompanyDiscount.ReadOnly = false;
@@ -82,7 +85,8 @@ namespace PharmaUI
             {
                 ExtensionMethods.FormLoad(this, (this.SupplierId > 0) ? "Supplier Ledger Master - Update" : "Supplier Ledger Master - Add");
                 GotFocusEventRaised(this);
-                ExtensionMethods.EnterKeyDownForTabEvents(this);
+                EnterKeyDownForTabEvents(this);
+
                 FillCombo();
 
                 if (this.SupplierId > 0)
@@ -97,9 +101,7 @@ namespace PharmaUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-          
+            }      
         }
 
         public void GotFocusEventRaised(Control control)
@@ -153,8 +155,10 @@ namespace PharmaUI
                 cbxStatus.SelectedItem = supplier.Status ? Enums.Status.Active : Enums.Status.Inactive;
                 cbxCreditDebit.SelectedItem = supplier.CreditDebit == "C" ? Enums.TransType.C : Enums.TransType.D;
                 txtOpeningBal.Text = supplier.OpeningBal.ToString();
-                cbxArea.SelectedValue = supplier.AreaId;
 
+              
+                tbxArea.Tag = supplier.AreaId;
+                tbxArea.Text = supplier.AreaName;
                 tbxDL.Text = supplier.DLNo;
                 tbxGST.Text = supplier.GSTNo;
                 tbxCIN.Text = supplier.CINNo;
@@ -185,12 +189,6 @@ namespace PharmaUI
             cbxPurchaseType.DataSource = applicationFacade.GetAccountLedgerBySystemName("PurchaseLedger");
             cbxPurchaseType.DisplayMember = "AccountLedgerName";
             cbxPurchaseType.ValueMember = "AccountLedgerID";
-
-            //Fill area option
-            cbxArea.DataSource = applicationFacade.GetPersonRoutesBySystemName("AREA");
-            cbxArea.DisplayMember = "PersonRouteName";
-            cbxArea.ValueMember = "PersonRouteID";
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -220,8 +218,8 @@ namespace PharmaUI
                 Enum.TryParse<Status>(cbxStatus.SelectedItem.ToString(), out status);
                 supplier.Status = status == Status.Active;
                 supplier.CreditDebit =(Enums.TransType)cbxCreditDebit.SelectedItem == Enums.TransType.C ? "C" : "D";
-                Int32.TryParse(cbxArea.SelectedValue.ToString(), out areaId);
-                supplier.AreaId = areaId;
+
+                supplier.AreaId =Convert.ToInt32(tbxArea.Tag);
                 supplier.EmailAddress = txtEmailAddress.Text;
                 supplier.Mobile = txtMobile.Text;
                 supplier.OfficePhone = txtPhoneO.Text;
@@ -320,7 +318,25 @@ namespace PharmaUI
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //Add
-            if (keyData == (Keys.F9))
+            if (keyData == (Keys.Escape))
+            {
+                if (this.ActiveControl.Name == "dgvCompanyDiscount")
+                {
+                    btnSave.Focus();
+                }
+                else if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+            else if (keyData == (Keys.F9))
             {
 
             }
@@ -454,5 +470,104 @@ namespace PharmaUI
                 e.Handled = true;
             }
         }
+
+        private void EnterKeyDownForTabEvents(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyDownForTabEvents(c);
+                }
+                else
+                {
+                    c.KeyDown -= C_KeyDown;
+                    c.KeyDown += C_KeyDown;
+                }
+            }
+        }
+
+        private void C_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (sender is TextBox)
+                {
+                    TextBox activePersonRouteType = sender as TextBox;
+                    string activePersonRouteTypeString = String.Empty;
+                    bool isValidTextbox = false;
+
+                    switch (activePersonRouteType.Name)
+                    {                      
+                        case "tbxArea":
+                            {
+                                activePersonRouteType = tbxArea;
+                                activePersonRouteTypeString = Constants.RecordType.AREADISPLAYNAME;
+                                isValidTextbox = true;
+                            }
+                            break;
+                    }
+
+                    if (isValidTextbox && String.IsNullOrWhiteSpace(activePersonRouteType.Text))
+                    {
+                        PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                        {
+                            RecordTypeNme = activePersonRouteTypeString,
+                            PersonRouteID = ExtensionMethods.SafeConversionInt(Convert.ToString(activePersonRouteType.Tag)) ?? 0,
+                            PersonRouteName = activePersonRouteType.Text
+                        };
+
+                        frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                        frmPersonRouteMaster.IsInChildMode = true;
+                        //Set Child UI
+                        ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
+                        frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+                        frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
+                        frmPersonRouteMaster.Show();
+                        frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+                    }
+                    else
+                    {
+                        SendKeys.Send("{TAB}");
+                    }
+                }
+                else
+                {
+                    SendKeys.Send("{TAB}");
+                }
+            }
+        }
+
+        private void FrmPersonRouteMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            try
+            {
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+
+                PersonRouteMaster lastSelectedPersonRoute = (sender as frmPersonRouteMaster).LastSelectedPersonRoute;
+                if (lastSelectedPersonRoute != null)
+                {
+                    if (lastSelectedPersonRoute.PersonRouteID > 0)
+                    {
+                        switch (lastSelectedPersonRoute.RecordTypeNme)
+                        {
+                            case Constants.RecordType.AREADISPLAYNAME:
+                                {
+                                    tbxArea.Text = lastSelectedPersonRoute.PersonRouteName;
+                                    tbxArea.Tag = lastSelectedPersonRoute.PersonRouteID;
+                                    dgvCompanyDiscount.Focus();
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

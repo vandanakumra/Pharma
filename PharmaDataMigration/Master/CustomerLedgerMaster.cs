@@ -5,11 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PharmaDAL.Entity;
+using log4net;
+using System.Reflection;
 
 namespace PharmaDataMigration.Master
 {
     public class CustomerLedgerMaster
     {
+        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private DBFConnectionManager dbConnection;
 
         public CustomerLedgerMaster()
@@ -47,81 +51,89 @@ namespace PharmaDataMigration.Master
 
                         foreach (DataRow dr in dtCustomerLedgerMaster.Rows)
                         {
-                            maxCustomerLedgerID++;
-
-                            string customerLedgerCode = "C" + maxCustomerLedgerID.ToString().PadLeft(6, '0');
-                            string originalCustomerLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                            Common.customerLedgerCodeMap.Add(new CustomerLedgerCodeMap() { OriginalCustomerLedgerCode = originalCustomerLedgerCode, MappedCustomerLedgerCode = customerLedgerCode });
-
-                            string areaCode = string.IsNullOrEmpty(Convert.ToString(dr["Parea"]).TrimEnd()) ? null : Common.areaCodeMap.Where(p => p.OriginalAreaCode == Convert.ToString(dr["Parea"]).TrimEnd()).FirstOrDefault().MappedAreaCode;
-                            int? areaID = areaCode == null ? (int?)null : areaList.Where(q => q.PersonRouteCode == areaCode).FirstOrDefault().PersonRouteID;
-
-                            string salesmanCode = string.IsNullOrEmpty(Convert.ToString(dr["Sman"]).TrimEnd())
-                                                    || Convert.ToString(dr["Sman"]).TrimEnd() == "020" //this value is not present in MASTERS as Salesman Code
-                                                    ? null : Common.salesmanCodeMap.Where(p => p.OriginalSalesManCode == Convert.ToString(dr["Sman"]).TrimEnd()).FirstOrDefault().MappedSalesManCode;
-                            int? salesmanID = salesmanCode == null ? (int?)null : salesmanList.Where(q => q.PersonRouteCode == salesmanCode).FirstOrDefault().PersonRouteID;
-
-                            string routeCode = string.IsNullOrEmpty(Convert.ToString(dr["Route"]).TrimEnd()) ? null : Common.routeCodeMap.Where(p => p.OriginalRouteCode == Convert.ToString(dr["Route"]).TrimEnd()).FirstOrDefault().MappedRouteCode;
-                            int? routeID = routeCode == null ? (int?)null : routeList.Where(q => q.PersonRouteCode == routeCode).FirstOrDefault().PersonRouteID;
-
-                            string asmCode = string.IsNullOrEmpty(Convert.ToString(dr["Asm"]).TrimEnd()) ? null : Common.asmCodeMap.Where(p => p.OriginalASMCode == Convert.ToString(dr["Asm"]).TrimEnd()).FirstOrDefault().MappedASMCode;
-                            int? asmID = asmCode == null ? (int?)null : asmList.Where(q => q.PersonRouteCode == asmCode).FirstOrDefault().PersonRouteID;
-
-                            string rsmCode = string.IsNullOrEmpty(Convert.ToString(dr["Rsm"]).TrimEnd()) ? null : Common.rsmCodeMap.Where(p => p.OriginalRSMCode == Convert.ToString(dr["Rsm"]).TrimEnd()).FirstOrDefault().MappedRSMCode;
-                            int? rsmID = rsmCode == null ? (int?)null : rsmList.Where(q => q.PersonRouteCode == rsmCode).FirstOrDefault().PersonRouteID;
-
-                            string zsmCode = string.IsNullOrEmpty(Convert.ToString(dr["Zsm"]).TrimEnd()) ? null : Common.zsmCodeMap.Where(p => p.OriginalZSMCode == Convert.ToString(dr["Zsm"]).TrimEnd()).FirstOrDefault().MappedZSMCode;
-                            int? zsmID = zsmCode == null ? (int?)null : zsmList.Where(q => q.PersonRouteCode == zsmCode).FirstOrDefault().PersonRouteID;
-
-                            string customerType = Convert.ToString(dr["Wr"]).TrimEnd();
-                            int customerTypeID = customerTypeList.Where(p => p.CustomerTypeShortName == customerType).FirstOrDefault().CustomerTypeId;
-
-                            CustomerLedger newCustomerLedgerMaster = new CustomerLedger()
+                            try
                             {
-                                CustomerLedgerCode = customerLedgerCode,
-                                CustomerLedgerName = Convert.ToString(dr["ACNAME"]).TrimEnd(),
-                                CustomerLedgerShortName = Convert.ToString(dr["Alt_Name_1"]).TrimEnd(),
-                                CustomerLedgerShortDesc = Convert.ToString(dr["Alt_Name_2"]).TrimEnd(),
-                                Address = string.Concat(Convert.ToString(dr["ACAD1"]).TrimEnd(), " ", Convert.ToString(dr["ACAD2"]).TrimEnd(), " ", Convert.ToString(dr["ACAD3"]).TrimEnd()),
-                                ContactPerson = Convert.ToString(dr["ACAD4"]).TrimEnd(),
-                                Mobile = Convert.ToString(dr["Mobile"]).TrimEnd(),
-                                OfficePhone = Convert.ToString(dr["Telo"]).TrimEnd(),
-                                ResidentPhone = Convert.ToString(dr["Telr"]).TrimEnd(),
-                                EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
-                                AreaId = areaID,
-                                CreditDebit = Convert.ToDecimal(dr["Abop"]) > 0 ? Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.D) : Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.C),
-                                DLNo = "test", //Convert.ToString(dr["DRNO"]).TrimEnd(), //confirm -> increase size more than 20
-                                GSTNo = "test", //Convert.ToString(dr["Stnoc"]).TrimEnd() -> confirm
-                                CINNo = "test", //Convert.ToString(dr["Stnoc"]).TrimEnd() -> confirm
-                                LINNo = "test", //Convert.ToString(dr["Stnol"]).TrimEnd(), //confirm
-                                ServiceTaxNo = "test",//Convert.ToString(dr["Stnol"]).TrimEnd() -> //confirm
-                                PANNo = "test", //Convert.ToString(dr["Stnol"]).TrimEnd() -> confirm
-                                OpeningBal = Convert.ToDecimal(dr["Abop"]),
-                                TaxRetail = Convert.ToString(dr["Vat"]).TrimEnd(), // Remove
-                                Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
-                                ASMId = asmID,
-                                CreditLimit = Convert.ToInt32(dr["Cr_limit"]),
-                                CustomerTypeID = customerTypeID,
-                                InterestTypeID = 1, //Convert.ToString(dr["ACNO"]).TrimEnd(), confirm  SBType
-                                IsLessExcise = Convert.ToChar(dr["Less_ex"]) == 'Y' ? true : false,
-                                RateTypeID = 1, //Convert.ToString(dr["ACNO"]).TrimEnd(), confirm
-                                RouteId = routeID,
-                                RSMId = rsmID,
-                                SalesManId = salesmanID,
-                                ZSMId = zsmID,
-                                SaleBillFormat = Convert.ToString(dr["Sb_format"]).TrimEnd(),
-                                MaxOSAmount = Convert.ToInt32(dr["Max_os_a"]),
-                                MaxNumOfOSBill = Convert.ToInt32(dr["Max_os_n"]),
-                                MaxBillAmount = Convert.ToInt32(dr["Max_bill_a"]),
-                                MaxGracePeriod = Convert.ToInt32(dr["Grace_days"]),
-                                IsFollowConditionStrictly = Convert.ToChar(dr["Validate"]) == 'Y' ? true : false,
-                                Discount = 0,//Convert.ToString(dr["ACNO"]).TrimEnd(),
-                                CentralLocal = "C",//Convert.ToString(dr["ACNO"]).TrimEnd(), //LC
-                                CreatedBy = "admin",
-                                CreatedOn = DateTime.Now
-                            };
+                                maxCustomerLedgerID++;
 
-                            listCustomerLedgerMaster.Add(newCustomerLedgerMaster);
+                                string customerLedgerCode = "C" + maxCustomerLedgerID.ToString().PadLeft(6, '0');
+                                string originalCustomerLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                                Common.customerLedgerCodeMap.Add(new CustomerLedgerCodeMap() { OriginalCustomerLedgerCode = originalCustomerLedgerCode, MappedCustomerLedgerCode = customerLedgerCode });
+
+                                string areaCode = string.IsNullOrEmpty(Convert.ToString(dr["Parea"]).TrimEnd()) ? null : Common.areaCodeMap.Where(p => p.OriginalAreaCode == Convert.ToString(dr["Parea"]).TrimEnd()).FirstOrDefault().MappedAreaCode;
+                                int? areaID = areaCode == null ? (int?)null : areaList.Where(q => q.PersonRouteCode == areaCode).FirstOrDefault().PersonRouteID;
+
+                                string salesmanCode = string.IsNullOrEmpty(Convert.ToString(dr["Sman"]).TrimEnd())
+                                                        || Convert.ToString(dr["Sman"]).TrimEnd() == "020" //this value is not present in MASTERS as Salesman Code
+                                                        ? null : Common.salesmanCodeMap.Where(p => p.OriginalSalesManCode == Convert.ToString(dr["Sman"]).TrimEnd()).FirstOrDefault().MappedSalesManCode;
+                                int? salesmanID = salesmanCode == null ? (int?)null : salesmanList.Where(q => q.PersonRouteCode == salesmanCode).FirstOrDefault().PersonRouteID;
+
+                                string routeCode = string.IsNullOrEmpty(Convert.ToString(dr["Route"]).TrimEnd()) ? null : Common.routeCodeMap.Where(p => p.OriginalRouteCode == Convert.ToString(dr["Route"]).TrimEnd()).FirstOrDefault().MappedRouteCode;
+                                int? routeID = routeCode == null ? (int?)null : routeList.Where(q => q.PersonRouteCode == routeCode).FirstOrDefault().PersonRouteID;
+
+                                string asmCode = string.IsNullOrEmpty(Convert.ToString(dr["Asm"]).TrimEnd()) ? null : Common.asmCodeMap.Where(p => p.OriginalASMCode == Convert.ToString(dr["Asm"]).TrimEnd()).FirstOrDefault().MappedASMCode;
+                                int? asmID = asmCode == null ? (int?)null : asmList.Where(q => q.PersonRouteCode == asmCode).FirstOrDefault().PersonRouteID;
+
+                                string rsmCode = string.IsNullOrEmpty(Convert.ToString(dr["Rsm"]).TrimEnd()) ? null : Common.rsmCodeMap.Where(p => p.OriginalRSMCode == Convert.ToString(dr["Rsm"]).TrimEnd()).FirstOrDefault().MappedRSMCode;
+                                int? rsmID = rsmCode == null ? (int?)null : rsmList.Where(q => q.PersonRouteCode == rsmCode).FirstOrDefault().PersonRouteID;
+
+                                string zsmCode = string.IsNullOrEmpty(Convert.ToString(dr["Zsm"]).TrimEnd()) ? null : Common.zsmCodeMap.Where(p => p.OriginalZSMCode == Convert.ToString(dr["Zsm"]).TrimEnd()).FirstOrDefault().MappedZSMCode;
+                                int? zsmID = zsmCode == null ? (int?)null : zsmList.Where(q => q.PersonRouteCode == zsmCode).FirstOrDefault().PersonRouteID;
+
+                                string customerType = Convert.ToString(dr["Wr"]).TrimEnd();
+                                int customerTypeID = customerTypeList.Where(p => p.CustomerTypeShortName == customerType).FirstOrDefault().CustomerTypeId;
+
+                                CustomerLedger newCustomerLedgerMaster = new CustomerLedger()
+                                {
+                                    CustomerLedgerCode = customerLedgerCode,
+                                    CustomerLedgerName = Convert.ToString(dr["ACNAME"]).TrimEnd(),
+                                    CustomerLedgerShortName = Convert.ToString(dr["Alt_Name_1"]).TrimEnd(),
+                                    CustomerLedgerShortDesc = Convert.ToString(dr["Alt_Name_2"]).TrimEnd(),
+                                    Address = string.Concat(Convert.ToString(dr["ACAD1"]).TrimEnd(), " ", Convert.ToString(dr["ACAD2"]).TrimEnd(), " ", Convert.ToString(dr["ACAD3"]).TrimEnd()),
+                                    ContactPerson = Convert.ToString(dr["ACAD4"]).TrimEnd(),
+                                    Mobile = Convert.ToString(dr["Mobile"]).TrimEnd(),
+                                    OfficePhone = Convert.ToString(dr["Telo"]).TrimEnd(),
+                                    ResidentPhone = Convert.ToString(dr["Telr"]).TrimEnd(),
+                                    EmailAddress = Convert.ToString(dr["Email"]).TrimEnd(),
+                                    AreaId = areaID,
+                                    CreditDebit = Convert.ToDecimal(dr["Abop"]) > 0 ? Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.D) : Convert.ToString(PharmaBusinessObjects.Common.Enums.TransType.C),
+                                    DLNo = "test", //Convert.ToString(dr["DRNO"]).TrimEnd(), //confirm -> increase size more than 20
+                                    GSTNo = "test", //Convert.ToString(dr["Stnoc"]).TrimEnd() -> confirm
+                                    CINNo = "test", //Convert.ToString(dr["Stnoc"]).TrimEnd() -> confirm
+                                    LINNo = "test", //Convert.ToString(dr["Stnol"]).TrimEnd(), //confirm
+                                    ServiceTaxNo = "test",//Convert.ToString(dr["Stnol"]).TrimEnd() -> //confirm
+                                    PANNo = "test", //Convert.ToString(dr["Stnol"]).TrimEnd() -> confirm
+                                    OpeningBal = Convert.ToDecimal(dr["Abop"]),
+                                    TaxRetail = Convert.ToString(dr["Vat"]).TrimEnd(), // Remove
+                                    Status = Convert.ToChar(dr["ACSTS"]) == '*' ? false : true,
+                                    ASMId = asmID,
+                                    CreditLimit = Convert.ToInt32(dr["Cr_limit"]),
+                                    CustomerTypeID = customerTypeID,
+                                    InterestTypeID = 1, //Convert.ToString(dr["ACNO"]).TrimEnd(), confirm  SBType
+                                    IsLessExcise = Convert.ToChar(dr["Less_ex"]) == 'Y' ? true : false,
+                                    RateTypeID = 1, //Convert.ToString(dr["ACNO"]).TrimEnd(), confirm
+                                    RouteId = routeID,
+                                    RSMId = rsmID,
+                                    SalesManId = salesmanID,
+                                    ZSMId = zsmID,
+                                    SaleBillFormat = Convert.ToString(dr["Sb_format"]).TrimEnd(),
+                                    MaxOSAmount = Convert.ToInt32(dr["Max_os_a"]),
+                                    MaxNumOfOSBill = Convert.ToInt32(dr["Max_os_n"]),
+                                    MaxBillAmount = Convert.ToInt32(dr["Max_bill_a"]),
+                                    MaxGracePeriod = Convert.ToInt32(dr["Grace_days"]),
+                                    IsFollowConditionStrictly = Convert.ToChar(dr["Validate"]) == 'Y' ? true : false,
+                                    Discount = 0,//Convert.ToString(dr["ACNO"]).TrimEnd(),
+                                    CentralLocal = "C",//Convert.ToString(dr["ACNO"]).TrimEnd(), //LC
+                                    CreatedBy = "admin",
+                                    CreatedOn = DateTime.Now
+                                };
+
+                                listCustomerLedgerMaster.Add(newCustomerLedgerMaster);
+
+                            }
+                            catch (Exception)
+                            {
+                                log.Info("CUSTOMER LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                            }
                         }
                     }
 
@@ -200,7 +212,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                //throw ex;
+                                //log.Info("ITEM MASTER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
                             }
                         }
                     }

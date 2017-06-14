@@ -154,6 +154,11 @@ namespace PharmaUI
             
             allControls.ForEach(k => { if (k is ComboBox) { ((ComboBox)k).FlatStyle = FlatStyle.Flat; } });
 
+            LoadPanel(form, lblText);
+        }
+
+        public static void LoadPanel(Form form, string lblText)
+        {
             Panel panel1 = new Panel();
             panel1.Location = new Point(0, 0);
             panel1.BackColor = Color.Gray;
@@ -172,9 +177,9 @@ namespace PharmaUI
             lbl.Top = 10;
             lbl.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, 14, FontStyle.Bold);
             lbl.Text = lblText;
-            lbl.ForeColor =  Color.White;
+            lbl.ForeColor = Color.White;
             panel1.Controls.Add(lbl);
-            
+
             form.Controls.Add(panel1);
         }
 
@@ -296,11 +301,23 @@ namespace PharmaUI
 
         public static void RemoveChildFormToPanel(Control parentForm, Control childFrm, Panel pnl)
         {
-            pnl.Controls.Remove(childFrm);
-
-            if (parentForm != null && pnl.Controls[parentForm.Name] != null)
+            if (pnl.Controls.Count > 0)
             {
-                pnl.Controls[parentForm.Name].Visible = true;
+                pnl.Controls.Remove(childFrm);
+
+                if (pnl.Controls.Count > 0)
+                {
+                    if (parentForm != null && pnl.Controls[parentForm.Name] != null)
+                    {
+                        pnl.Controls[parentForm.Name].Visible = true;
+                    }
+                }
+                else
+                {
+                    frmDefault dform = new frmDefault();
+                    AddFormToPanel(dform, MainPanel);
+                    dform.Show();
+                }
             }
         }
 
@@ -310,8 +327,6 @@ namespace PharmaUI
             int max = TransactionForms.Count() + 1;
 
             childFrm.Name = max.ToString() + "_" + childFrm.Name;
-
-            TransactionForms.Add(new TransactionForm() { FormNo = max, FormName = childFrm.Name,  Visible = true });
 
             if (max > 1)
             {
@@ -326,6 +341,7 @@ namespace PharmaUI
                 }
             }
 
+            TransactionForms.Add(new TransactionForm() { FormNo = max, FormName = childFrm.Name, Visible = true });
             pnl.Controls.Add(childFrm);
         }
 
@@ -355,14 +371,6 @@ namespace PharmaUI
                 pnl.Controls[TransactionForms.Where(p=>p.FormNo == 1).FirstOrDefault().FormName].Visible = true;
 
             }
-
-
-            
-
-            //if (parentForm != null && pnl.Controls[parentForm.Name] != null)
-            //{
-            //    pnl.Controls[parentForm.Name].Visible = true;
-            //}
         }
 
 
@@ -494,6 +502,7 @@ namespace PharmaUI
                 return;
 
             int rowIndex1 = 0;
+            bool searchedTextFound = false;
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 if (row.Cells[searchColumnName].Value.ToString().Replace(" ","").ToLower().StartsWith(searchString.ToLower().Replace(" ","")))
@@ -501,6 +510,7 @@ namespace PharmaUI
                     int row2 = row.Index;
                     if (flag)
                     {
+                        searchedTextFound = true;
                         rowIndex1 = row.Index;
                         dgv.ClearSelection();
                         flag = false;
@@ -508,7 +518,12 @@ namespace PharmaUI
                     dgv.Rows[row2].DefaultCellStyle = new DataGridViewCellStyle { ForeColor = Color.DarkGreen, BackColor = Color.LightBlue };
                 }
             }
-           
+
+            if (!searchedTextFound)
+            {
+
+            }
+
             dgv.FirstDisplayedScrollingRowIndex = rowIndex1;
             dgv.Rows[rowIndex1].Selected = true;
             dgv.Rows[rowIndex1].Cells[searchColumnName].Selected = true;
@@ -516,6 +531,8 @@ namespace PharmaUI
 
         public static void SetGridDefaultProperty(DataGridView dgv)
         {
+
+
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;

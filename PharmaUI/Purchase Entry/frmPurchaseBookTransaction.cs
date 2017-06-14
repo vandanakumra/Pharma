@@ -44,13 +44,14 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.FormLoad(this, "Purchase Book Transaction");
-                ExtensionMethods.AddFooter(this);
+                ExtensionMethods.LoadPanel(this, "Purchase Book Transaction");
+//                ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
                 FillCombo();
                 InitializeGrid();
                 dtPurchaseDate.Focus();
+                
                 string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
                 format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
                 format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
@@ -1730,6 +1731,11 @@ namespace PharmaUI
                 }
             
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

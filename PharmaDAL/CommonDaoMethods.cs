@@ -30,7 +30,7 @@ namespace PharmaDAL
 
                 for (int i = 0; i < properties.Length; i++)
                 {
-                    values[i] = properties[i].GetValue(entity);
+                    values[i] = properties[i].GetValue(entity,null);
                 }
 
                 dataTable.Rows.Add(values);

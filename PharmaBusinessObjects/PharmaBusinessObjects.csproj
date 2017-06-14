@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PharmaBusinessObjects</RootNamespace>
     <AssemblyName>PharmaBusinessObjects</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,6 +75,7 @@
     <Compile Include="Master\CompanyMaster.cs" />
     <Compile Include="Master\CustomerCopanyDiscount.cs" />
     <Compile Include="Master\CustomerLedgerMaster.cs" />
+    <Compile Include="Master\HSNCode.cs" />
     <Compile Include="Master\ItemMaster.cs" />
     <Compile Include="Master\PersonalLedgerMaster.cs" />
     <Compile Include="Master\PersonRouteMaster.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Transaction\ReceiptPayment\BillAdjusted.cs" />
     <Compile Include="Transaction\ReceiptPayment\BillOutstanding.cs" />
     <Compile Include="Transaction\ReceiptPayment\ReceiptPayment.cs" />
+    <Compile Include="Transaction\ReceiptPayment\TempReceiptPayment.cs" />
     <Compile Include="Transaction\SaleEntry\SaleChangeType.cs" />
     <Compile Include="Transaction\SaleEntry\SaleLineItemInfo.cs" />
     <Compile Include="Transaction\TransactionEntity.cs" />

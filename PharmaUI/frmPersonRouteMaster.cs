@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Master;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         public PersonRouteMaster LastSelectedPersonRoute { get; set; }
         public PersonRouteMaster NextPersonRoute { get; set; }
+        public bool IsInChildMode = false;
 
         public frmPersonRouteMaster()
         {
@@ -74,7 +76,7 @@ namespace PharmaUI
         {
             try
             {
-                if (e.KeyCode == Keys.Enter && NextPersonRoute != null)
+                if (e.KeyCode == Keys.Enter && IsInChildMode)
                 {
                     this.Close();
                 }
@@ -173,6 +175,8 @@ namespace PharmaUI
         void AddEditPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster model)
         {
             frmPersonRouteMasterAddUpdate frmPersonRouteMasterAddUpdate = new frmPersonRouteMasterAddUpdate(model);
+            frmPersonRouteMasterAddUpdate.IsInChildMode = true;
+
             frmPersonRouteMasterAddUpdate.FormClosed -= frmPersonRouteMasterAddUpdate_FormClosed;
             frmPersonRouteMasterAddUpdate.FormClosed += frmPersonRouteMasterAddUpdate_FormClosed;
             frmPersonRouteMasterAddUpdate.ShowDialog();
@@ -193,7 +197,20 @@ namespace PharmaUI
             //Add
             if (keyData == (Keys.F9))
             {
-                AddEditPersonRoute(NextPersonRoute);
+                if ((cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeId != 0)
+                {
+                    PersonRouteMaster pmNext = new PersonRouteMaster()
+                    {
+                        RecordTypeNme = (cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeName,
+                        RecordTypeId = (cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeId
+                    };
+
+                    AddEditPersonRoute(pmNext);
+                }
+                else
+                {
+                    AddEditPersonRoute(NextPersonRoute);
+                }
             }
             else if (keyData == Keys.F3)
             {
@@ -202,6 +219,20 @@ namespace PharmaUI
             else if (keyData == Keys.Down)
             {
                 dgvPersonRoute.Focus();
+            }
+            else if (keyData == Keys.Escape)
+            {
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -277,7 +308,20 @@ namespace PharmaUI
         {
             try
             {
-                AddEditPersonRoute(NextPersonRoute);
+                if((cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeId != 0)
+                {
+                    PersonRouteMaster pmNext = new PersonRouteMaster()
+                    {
+                        RecordTypeNme = (cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeName,
+                        RecordTypeId = (cbPersonRouteType.SelectedItem as PharmaBusinessObjects.Common.RecordType).RecordTypeId
+                    };
+
+                    AddEditPersonRoute(pmNext);
+                }
+                else
+                {
+                    AddEditPersonRoute(NextPersonRoute);
+                }
             }
             catch (Exception ex)
             {

@@ -17,6 +17,7 @@ namespace PharmaUI
     public partial class frmPersonalLedgerMaster : Form
     {
         IApplicationFacade applicationFacade;
+        public bool IsInChildMode = false;
 
         public frmPersonalLedgerMaster()
         {
@@ -107,6 +108,8 @@ namespace PharmaUI
         void OpenAddEdit(int personLedgerId)
         {
             var form = new frmPersonalLedgerMasterAddUpdate(personLedgerId,txtSearch.Text);
+            form.IsInChildMode = true;
+
             form.FormClosed -= Form_FormClosed;
             form.FormClosed += Form_FormClosed;
 
@@ -167,6 +170,20 @@ namespace PharmaUI
             else if (keyData == Keys.Down)
             {
                 dgvPersonalLedger.Focus();
+            }
+            else if (keyData == Keys.Escape)
+            {
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

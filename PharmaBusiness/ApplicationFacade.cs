@@ -11,6 +11,7 @@ using PharmaBusinessObjects.Transaction;
 using PharmaBusiness.Transaction;
 using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using PharmaBusinessObjects.Transaction.SaleEntry;
+using System.Data;
 
 namespace PharmaBusiness
 {
@@ -51,6 +52,19 @@ namespace PharmaBusiness
             try
             {
                 return new ItemMasterBiz(this.LoggedInUser).AddNewItem(newItem);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes()
+        {
+            try
+            {
+                return new ItemMasterBiz(this.LoggedInUser).GetAllHSNCodes();
             }
             catch (Exception)
             {
@@ -123,6 +137,19 @@ namespace PharmaBusiness
             {
                 throw;
             }
+        }
+
+        public DataTable GetAllItemsBySearch()
+        {
+            try
+            {
+                return new ItemMasterBiz(this.LoggedInUser).GetAllItemsBySearch();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+           
         }
 
         #endregion
@@ -728,6 +755,11 @@ namespace PharmaBusiness
             return new UserBiz(this.LoggedInUser).UpdatePrivledge(p);
         }
 
+        public PharmaBusinessObjects.Master.UserMaster ValidateUser(string userName, string password)
+        {
+            return new UserBiz(this.LoggedInUser).ValidateUser(userName, password);
+        }
+
         #endregion
 
         #region Purchase Entry     
@@ -889,7 +921,18 @@ namespace PharmaBusiness
                 throw;
             }
         }
-        
+
+        public void SaveAllTempTransaction(List<long> tempReceiptPaymentList)
+        {
+            try
+            {
+                new ReceiptPaymentBiz(this.LoggedInUser).SaveAllTempTransaction(tempReceiptPaymentList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 

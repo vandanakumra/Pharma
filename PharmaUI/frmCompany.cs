@@ -149,6 +149,7 @@ namespace PharmaUI
         private void OpenAddEdit(int companyId)
         {            
             frmCompanyAddUpdate frmCompanyAddUpdate = new frmCompanyAddUpdate(companyId,txtSearch.Text);
+            frmCompanyAddUpdate.IsInChildMode = true;
             frmCompanyAddUpdate.FormClosed -= frmCompanyAddUpdate_FormClosed;
             frmCompanyAddUpdate.FormClosed += frmCompanyAddUpdate_FormClosed;
             frmCompanyAddUpdate.ShowDialog();
@@ -193,6 +194,20 @@ namespace PharmaUI
             {
                 dgvCompanyList.Focus();
             }
+            else if (keyData == Keys.Escape)
+            {
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }       
@@ -207,6 +222,7 @@ namespace PharmaUI
                     if (DialogResult.Yes == MessageBox.Show(Constants.Messages.NotExists, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
                         frmCompanyAddUpdate form = new frmCompanyAddUpdate(0, txtSearch.Text);
+                        form.IsInChildMode = true;
                         form.FormClosed += frmCompanyAddUpdate_FormClosed;
                         form.ShowDialog();
                     }

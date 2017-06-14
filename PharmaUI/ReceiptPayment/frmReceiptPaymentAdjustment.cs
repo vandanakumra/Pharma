@@ -35,14 +35,36 @@ namespace PharmaUI.ReceiptPayment
             {
                 ExtensionMethods.FormLoad(this, "Receipt Payment Adjustment");
 
-                dgvReceiptPaymentAdjustment.CellEndEdit += DgvReceiptPaymentAdjustment_CellEndEdit;
                 LoadGridBillAdjustment();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void DgvReceiptPaymentAdjustment_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if(dgvReceiptPaymentAdjustment.Columns[e.ColumnIndex].Name != "Amount")
+                {
+
+                    this.BeginInvoke(new MethodInvoker(() =>
+                    {
+                        SetAmountColumn(e.RowIndex);
+                    }));
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SetAmountColumn(int rowIndex)
+        {
+            dgvReceiptPaymentAdjustment.CurrentCell = dgvReceiptPaymentAdjustment.Rows[rowIndex].Cells["Amount"];
         }
 
         private void DgvReceiptPaymentAdjustment_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -65,13 +87,13 @@ namespace PharmaUI.ReceiptPayment
                         if (enteredAmount > tempBalance)
                         {
                             MessageBox.Show("Balance amount is less !");
-                            dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = 0;
+                            dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
 
                         }
                         else if (enteredAmount > correspondingOSAmount)
                         {
                             MessageBox.Show("Entered amount is greater than OS amount !");
-                            dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = 0;
+                            dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
                         }
                         else if (enteredAmount > 0)
                         {
@@ -85,11 +107,6 @@ namespace PharmaUI.ReceiptPayment
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void DgvReceiptPaymentAdjustment_KeyDown(object sender, KeyEventArgs e)
-        {
-           
         }
 
         private decimal GetTotallUtilizedAmount()
@@ -107,6 +124,9 @@ namespace PharmaUI.ReceiptPayment
 
         private void LoadGridBillAdjustment()
         {
+            dgvReceiptPaymentAdjustment.CellEndEdit -= DgvReceiptPaymentAdjustment_CellEndEdit;
+            dgvReceiptPaymentAdjustment.CellEnter -= DgvReceiptPaymentAdjustment_CellEnter;
+
             dgvReceiptPaymentAdjustment.DataSource = applicationFacade.GetAllInitialBillAdjustmentForLedger(CurrentTransactionEntity);
 
             dgvReceiptPaymentAdjustment.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -136,6 +156,9 @@ namespace PharmaUI.ReceiptPayment
             dgvReceiptPaymentAdjustment.Columns["Amount"].Visible = true;
             dgvReceiptPaymentAdjustment.Columns["Amount"].HeaderText = "Amount";
             dgvReceiptPaymentAdjustment.Columns["Amount"].DisplayIndex = 3;
+
+            dgvReceiptPaymentAdjustment.CellEndEdit += DgvReceiptPaymentAdjustment_CellEndEdit;
+            dgvReceiptPaymentAdjustment.CellEnter += DgvReceiptPaymentAdjustment_CellEnter;
         }
 
         public void ConfigureReceiptPaymentAdjustment(TransactionEntity transactionEntity)
@@ -180,10 +203,18 @@ namespace PharmaUI.ReceiptPayment
             }
             else if (keyData == Keys.Escape)
             {
-                if (DialogResult.Yes == MessageBox.Show(Constants.Messages.UnsavedDataWarning, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (dgvReceiptPaymentAdjustment.Rows.Count > 0)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.UnsavedDataWarning, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        ReceiptPaymentState = ReceiptPaymentState.Cancel;
+                        applicationFacade.ClearTempBillAdjustment(CurrentTransactionEntity);
+                        this.Close();
+                    }
+                }
+                else
                 {
                     ReceiptPaymentState = ReceiptPaymentState.Cancel;
-                    applicationFacade.ClearTempBillAdjustment(CurrentTransactionEntity);
                     this.Close();
                 }
             }

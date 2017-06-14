@@ -20,7 +20,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         private int _itemId = 0;
         private string _itemName = "";
-
+        public bool IsInChildMode = false;
 
         public frmItemMasterAddUpdated(int itemId , string itemName)
         {
@@ -127,6 +127,7 @@ namespace PharmaUI
                 item.PurchaseTypeId = (cbxPurchaseType.SelectedItem as AccountLedgerMaster).AccountLedgerID;
                 Enum.TryParse<Status>(cbxStatus.SelectedValue.ToString(), out status);
                 item.Status = status == Status.Active;
+                item.HSNCode =tbxHSNCode.Text;
 
                 bool actionResult = false;
                 // if form is in Edit mode then udate item , else add item 
@@ -311,6 +312,9 @@ namespace PharmaUI
 
         public void frmItemMasterAddUpdate_Fill_UsingExistingItem(ItemMaster existingItem)
         {
+
+           
+
             if (existingItem != null)
             {
                 tbxItemCode.Text = existingItem.ItemCode;
@@ -352,6 +356,7 @@ namespace PharmaUI
                 tbxMaximumStock.Text = Convert.ToString(existingItem.MaximumStock);
                 cbxSaleType.SelectedValue = existingItem.SaleTypeId;
                 cbxPurchaseType.SelectedValue = existingItem.PurchaseTypeId;
+                tbxHSNCode.Text = existingItem.HSNCode;
                 cbxStatus.SelectedItem = existingItem.Status ? Status.Active : Status.Inactive;
             }
         }
@@ -409,7 +414,7 @@ namespace PharmaUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if ((sender is TextBox) && (sender as TextBox).Name == "tbxCompanyCode")
+                if ((sender is TextBox) && (sender as TextBox).Name == "tbxCompany")
                 {
                     TextBox activeCompanyControl = sender as TextBox;
                   
@@ -456,6 +461,28 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == Keys.Escape)
+            {
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

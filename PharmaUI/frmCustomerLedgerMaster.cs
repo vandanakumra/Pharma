@@ -64,6 +64,7 @@ namespace PharmaUI
                 if (e.RowIndex != -1)
                 {
                     frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(true);
+                    form.IsInChildMode = true;
                     ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                     CustomerLedgerMaster existingItem = (CustomerLedgerMaster)dgvCustomerLedger.CurrentRow.DataBoundItem;
                     form.frmCustomerLedgerMasterAddUpdate_Fill_UsingExistingItem(existingItem);
@@ -151,10 +152,14 @@ namespace PharmaUI
             try
             {
                 frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(false);
+                form.IsInChildMode = true;
                 ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 form.WindowState = FormWindowState.Maximized;
                 form.FormClosed += Form_FormClosed;
                 form.Show();
+
+                CustomerLedgerMaster nextCust = new CustomerLedgerMaster() { CustomerLedgerName = txtSearch.Text };
+                form.ConfigureCustomerLedger(nextCust);
             }
             catch (Exception ex)
             {
@@ -173,6 +178,7 @@ namespace PharmaUI
                 if (dgvCustomerLedger.SelectedRows[0] != null)
                 {
                     frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(true);
+                    form.IsInChildMode = true;
                     ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                     form.WindowState = FormWindowState.Maximized;
 
@@ -257,7 +263,17 @@ namespace PharmaUI
             }
             else if (keyData == Keys.Escape)
             {
-                this.Close();
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -268,6 +284,7 @@ namespace PharmaUI
             try
             {
                 frmCustomerLedgerMasterAddUpdate form = new frmCustomerLedgerMasterAddUpdate(isEdit);
+                form.IsInChildMode = true;
                 ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
                 form.WindowState = FormWindowState.Maximized;
 
@@ -279,6 +296,12 @@ namespace PharmaUI
                 }
                 form.FormClosed += Form_FormClosed;
                 form.Show();
+
+                if (!isEdit)
+                {
+                    CustomerLedgerMaster nextCust = new CustomerLedgerMaster() { CustomerLedgerName = txtSearch.Text };
+                    form.ConfigureCustomerLedger(nextCust);
+                }
             }
             catch (Exception ex)
             {

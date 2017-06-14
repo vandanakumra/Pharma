@@ -12,6 +12,8 @@ namespace PharmaBusinessObjects.Common
         {
             public const string RequiredField = "Field is Required";
             public const string DeletePrompt = "Do you want to delete ?";
+            public const string ClosePrompt = "Do you want to close ?";
+            public const string SaveDataPrompt = "Do you want to save all data ?";
             public const string Confirmation = "Confirmation";
             public const string InValidEmail = "Please enter valid EmailId";
             public const string ErrorOccured = "Something went wrong";

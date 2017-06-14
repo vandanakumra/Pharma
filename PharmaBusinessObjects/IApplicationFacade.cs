@@ -4,6 +4,7 @@ using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using PharmaBusinessObjects.Transaction.SaleEntry;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace PharmaBusinessObjects
         List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy);
         List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyIDForCustomer(int CompanyID);
         List<SupplierCompanyDiscount> GetAllCompanyItemDiscountByCompanyIDForSupplier(int CompanyID);
+        List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes();
+        DataTable GetAllItemsBySearch();
         #endregion
 
         #region Company Master
@@ -116,11 +119,12 @@ namespace PharmaBusinessObjects
         PharmaBusinessObjects.Master.Privledge GetPrivledgeById(int userid);
         bool AddPrivledge(PharmaBusinessObjects.Master.Privledge p);
         bool UpdatePrivledge(PharmaBusinessObjects.Master.Privledge p);
+        PharmaBusinessObjects.Master.UserMaster ValidateUser(string userName, string password);
 
         #endregion
 
         #region Transaction
-       
+
         long InsertUpdateTempPurchaseBookHeader(PurchaseSaleBookHeader header);
         List<PharmaBusinessObjects.Transaction.PurchaseType> GetPurchaseEntryTypes();
         List<PharmaBusinessObjects.Transaction.PurchaseFormType> GetPurchaseFormTypes(int purchaseTypeID);      
@@ -142,6 +146,8 @@ namespace PharmaBusinessObjects
         void ClearTempTransaction(TransactionEntity transactionEntity);       
         bool DeleteUnSavedData(long purchaseSaleBookHeaderID);
         List<SaleChangeType> GetSaleEntryChangeTypes();
+        void SaveAllTempTransaction(List<long> tempReceiptPaymentList);
+        
         PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode);
         PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerByCode(string code);
         SaleLineItemInfo GetSaleLineItemInfo(string code, long fifoID);

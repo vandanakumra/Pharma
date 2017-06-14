@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PharmaBusinessObjects.Master;
 using PharmaDAL.Master;
+using System.Data;
 
 namespace PharmaBusiness.Master
 {
@@ -85,5 +86,17 @@ namespace PharmaBusiness.Master
             }
             return defaultItemDiscountByCompanyID;
         }
+
+
+        internal List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes()
+        {
+            return new ItemDaoMaster(this.LoggedInUser).GetAllHSNCodes();
+        }
+
+        internal DataTable GetAllItemsBySearch()
+        {
+            return new ItemDaoMaster(this.LoggedInUser).GetAllItemsBySearch();
+        }
+
     }
 }
