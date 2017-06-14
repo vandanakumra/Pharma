@@ -44,8 +44,8 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.FormLoad(this, "Purchase Book Transaction");
-                ExtensionMethods.AddFooter(this);
+                ExtensionMethods.LoadPanel(this, "Purchase Book Transaction");
+//                ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
                 FillCombo();
@@ -1731,6 +1731,11 @@ namespace PharmaUI
                 }
             
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
