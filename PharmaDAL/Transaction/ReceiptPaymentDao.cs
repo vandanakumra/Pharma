@@ -97,7 +97,9 @@ namespace PharmaDAL.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    return context.TempBillOutStandingsAudjustment.Where(q => q.LedgerType == entity.EntityType
+                    return context.TempBillOutStandingsAudjustment.Where(q => 
+                                                                q.ReceiptPaymentID == entity.ReceiptPaymentID &&
+                                                                q.LedgerType == entity.EntityType
                                                                 && q.LedgerTypeCode == entity.EntityCode)
                     .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
                     {
@@ -106,7 +108,8 @@ namespace PharmaDAL.Transaction
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
-                        OSAmount = p.BillOutStandings.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
+                        OSAmount = p.BillOutStandings.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID 
+                                            && x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
                         Amount = p.Amount
                     }).ToList();
                 }
@@ -126,7 +129,8 @@ namespace PharmaDAL.Transaction
                     
                     return context.BillOutStandings.Where(q => q.LedgerType == entity.EntityType
                                                                 && q.LedgerTypeCode == entity.EntityCode
-                                                                && q.OSAmount > 0)
+                                                               // && q.OSAmount > 0
+                                                                )
                     .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
                     {
                         BillOutStandingsID = p.BillOutStandingsID,
@@ -138,8 +142,10 @@ namespace PharmaDAL.Transaction
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
-                        Amount= context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
-                        OSAmount = p.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
+                        Amount= context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID
+                                            && x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
+                        OSAmount = p.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID
+                                            && x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
 
                     }).ToList();
                 }
@@ -311,7 +317,7 @@ namespace PharmaDAL.Transaction
                     DataTable dt = new DataTable();
 
                     sda.Fill(dt);
-            }
+                }
             }
             catch (Exception ex)
             {
