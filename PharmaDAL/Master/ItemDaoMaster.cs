@@ -513,11 +513,11 @@ namespace PharmaDAL.Master
                     master.QtyPerCase = Convert.IsDBNull(dt.Rows[0]["QtyPerCase"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["QtyPerCase"]);
                     master.Location = Convert.ToString(dt.Rows[0]["Location"]);
                     master.SaleTypeId = Convert.IsDBNull(dt.Rows[0]["SaleTypeId"]) ? 0 : Convert.ToInt32(dt.Rows[0]["SaleTypeId"]);
-                    master.Discount = Convert.IsDBNull(dt.Rows[0]["Discount"]) ? 0 : Convert.ToDouble(dt.Rows[0]["Discount"]);
-                    master.Batch = Convert.ToString(dt.Rows[0]["Batch"]);
+                    //master.Discount = Convert.IsDBNull(dt.Rows[0]["Discount"]) ? 0 : Convert.ToDouble(dt.Rows[0]["Discount"]);
+                  //  master.Batch = Convert.ToString(dt.Rows[0]["Batch"]);
                     master.Packing = Convert.ToString(dt.Rows[0]["Packing"]);
                     master.PurchaseRate = Convert.IsDBNull(dt.Rows[0]["PurchaseRate"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["PurchaseRate"]);
-                    master.FifoID = Convert.IsDBNull(dt.Rows[0]["FifoID"]) ? 0 : Convert.ToInt32(dt.Rows[0]["FifoID"]);
+                   // master.FifoID = Convert.IsDBNull(dt.Rows[0]["FifoID"]) ? 0 : Convert.ToInt32(dt.Rows[0]["FifoID"]);
                 }
             }
 
