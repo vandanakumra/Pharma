@@ -153,6 +153,7 @@ namespace PharmaUI
                 company.Status = status == Status.Active;
                 Enum.TryParse<Choice>(cbxSSRequired.SelectedValue.ToString(), out choice);
                 company.StockSummaryRequired = choice == Choice.Yes;
+
                 Enum.TryParse<DI>(cbxDI.SelectedValue.ToString(), out di);
                 company.IsDirect = di == DI.Direct;
 
