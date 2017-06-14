@@ -53,7 +53,7 @@ namespace PharmaDAL.Master
                     BillingPreferenceRating = p.BillingPreferenceRating,
                     CompanyCode = p.CompanyCode,
                     Status = p.Status,
-                    //IsDirect = p.IsDirect,
+                    IsDirect = p.IsDirect,
                     StockSummaryRequired = p.StockSummaryRequired
                 }).FirstOrDefault();
             }
@@ -74,7 +74,7 @@ namespace PharmaDAL.Master
                     CompanyCode = companyCode,
                     Status = company.Status,
                     StockSummaryRequired = company.StockSummaryRequired,
-                    //IsDirect = company.IsDirect,
+                    IsDirect = company.IsDirect,
                     OrderPreferenceRating = company.OrderPreferenceRating,
                     BillingPreferenceRating = company.BillingPreferenceRating,
                     CompanyName = company.CompanyName,
