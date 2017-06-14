@@ -312,7 +312,18 @@ namespace PharmaBusiness
             }
         }
 
+        public PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerByCode(string code)
+        {
+            try
+            {
+                return new AccountLedgerMasterBiz(this.LoggedInUser).GetAccountLedgerByCode(code);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         #endregion
 
         #region Common
@@ -911,7 +922,46 @@ namespace PharmaBusiness
             }
         }
 
-        #endregion
+        public SaleLineItemInfo GetSaleLineItemInfo(string code, long fifoID)
+        {
+            try
+            {
+                return new SaleBiz(this.LoggedInUser).GetSaleLineItemInfo(code, fifoID);
+            }
+            catch (Exception)
+            {
 
-    }
+                throw;
+            }
+        }
+
+        public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> InsertUpdateTempPurchaseBookLineItemForSale(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        {
+            try
+            {
+                return new SaleBiz(this.LoggedInUser).InsertUpdateTempPurchaseBookLineItemForSale(lineItem);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, string itemCode, string customerCode)
+        {
+            try
+            {
+                new SaleBiz(this.LoggedInUser).UpdateSaleDiscount(changeType, discount, specialDiscount, itemCode, customerCode);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+            #endregion
+
+        }
 }

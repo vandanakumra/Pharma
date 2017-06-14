@@ -12,12 +12,12 @@ namespace PharmaBusiness.Transaction
 {
     internal class SaleBiz : BaseBiz
     {
-        public SaleBiz(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
+        internal SaleBiz(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
         {
 
         }
 
-        public List<SaleChangeType> GetTypeOfChanges()
+        internal List<SaleChangeType> GetTypeOfChanges()
         {
             return new List<SaleChangeType>() {
                 new SaleChangeType(){TypeID = Convert.ToInt32(Enums.SaleEntryChangeType.TemporaryChange), TypeName = Enums.SaleEntryChangeType.TemporaryChange.ToString() },
@@ -26,9 +26,24 @@ namespace PharmaBusiness.Transaction
             };
         }
 
-        public PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode)
+        internal PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode)
         {
-            return new PurchaseBookDao(this.LoggedInUser).GetNewSaleLineItem(itemCode, customerCode);
+            return new SaleEntryDao(this.LoggedInUser).GetNewSaleLineItem(itemCode, customerCode);
+        }
+
+        internal SaleLineItemInfo GetSaleLineItemInfo(string code, long fifoID)
+        {
+            return new SaleEntryDao(this.LoggedInUser).GetSaleLineItemInfo(code, fifoID);
+        }
+
+        internal List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> InsertUpdateTempPurchaseBookLineItemForSale(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem)
+        {
+            return new SaleEntryDao(this.LoggedInUser).InsertUpdateTempPurchaseBookLineItemForSale(lineItem);
+        }
+
+        internal void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, string itemCode, string customerCode)
+        {
+            new SaleEntryDao(this.LoggedInUser).UpdateSaleDiscount(changeType, discount, specialDiscount, itemCode, customerCode);
         }
     }
 }

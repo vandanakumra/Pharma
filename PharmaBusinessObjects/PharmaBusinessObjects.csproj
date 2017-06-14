@@ -90,6 +90,7 @@
     <Compile Include="Transaction\ReceiptPayment\BillOutstanding.cs" />
     <Compile Include="Transaction\ReceiptPayment\ReceiptPayment.cs" />
     <Compile Include="Transaction\SaleEntry\SaleChangeType.cs" />
+    <Compile Include="Transaction\SaleEntry\SaleLineItemInfo.cs" />
     <Compile Include="Transaction\TransactionEntity.cs" />
   </ItemGroup>
   <ItemGroup />

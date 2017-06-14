@@ -60,36 +60,46 @@
             this.lblBalance = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.lblPacking = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.lblCaseQuantity = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lblItemAmount = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblSurharge = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.lblSaleTypeCode = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblIsHalf = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.lblTaxRate = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lblDiscount = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lblCaseQuantity = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.lblScheme = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblIsHalf = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lblDiscount = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblSurharge = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lblHalf = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lblVolumeDiscountAmount = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.lblVolumeDis = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.lblTaxRate = new System.Windows.Forms.Label();
             this.errFrmSaleEntry = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblDueBillAmount = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblLBRate = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.lblLBDis = new System.Windows.Forms.Label();
+            this.lblLBSpLDis = new System.Windows.Forms.Label();
+            this.lblLBTax = new System.Windows.Forms.Label();
+            this.lblLBBatch = new System.Windows.Forms.Label();
+            this.lblLBScheme = new System.Windows.Forms.Label();
+            this.lblLBDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errFrmSaleEntry)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtSaleDate
@@ -209,7 +219,7 @@
             // 
             this.lblFRate.AutoSize = true;
             this.lblFRate.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.lblFRate.Location = new System.Drawing.Point(628, 60);
+            this.lblFRate.Location = new System.Drawing.Point(691, 60);
             this.lblFRate.Name = "lblFRate";
             this.lblFRate.Size = new System.Drawing.Size(39, 13);
             this.lblFRate.TabIndex = 27;
@@ -228,6 +238,7 @@
             this.dgvLineItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLineItem.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dgvLineItem.Location = new System.Drawing.Point(8, 116);
+            this.dgvLineItem.MultiSelect = false;
             this.dgvLineItem.Name = "dgvLineItem";
             this.dgvLineItem.Size = new System.Drawing.Size(894, 202);
             this.dgvLineItem.TabIndex = 11;
@@ -261,8 +272,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 321);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 30);
             this.tableLayoutPanel1.TabIndex = 130;
             // 
@@ -273,7 +284,7 @@
             this.label5.Location = new System.Drawing.Point(4, 4);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 31);
+            this.label5.Size = new System.Drawing.Size(69, 32);
             this.label5.TabIndex = 124;
             this.label5.Text = "Scheme Amount";
             // 
@@ -284,7 +295,7 @@
             this.label42.Location = new System.Drawing.Point(716, 4);
             this.label42.Margin = new System.Windows.Forms.Padding(3);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 31);
+            this.label42.Size = new System.Drawing.Size(66, 32);
             this.label42.TabIndex = 128;
             this.label42.Text = "Total Amount";
             // 
@@ -307,7 +318,7 @@
             this.label6.Location = new System.Drawing.Point(182, 4);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 31);
+            this.label6.Size = new System.Drawing.Size(75, 32);
             this.label6.TabIndex = 125;
             this.label6.Text = "Discount Amount";
             // 
@@ -318,7 +329,7 @@
             this.label8.Location = new System.Drawing.Point(538, 4);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 31);
+            this.label8.Size = new System.Drawing.Size(66, 32);
             this.label8.TabIndex = 127;
             this.label8.Text = "Invoice Amount";
             // 
@@ -353,7 +364,7 @@
             this.label7.Location = new System.Drawing.Point(360, 4);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 31);
+            this.label7.Size = new System.Drawing.Size(66, 32);
             this.label7.TabIndex = 126;
             this.label7.Text = "Tax Amount";
             // 
@@ -386,51 +397,51 @@
             this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel2.ColumnCount = 8;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnCount = 14;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel2.Controls.Add(this.label17, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblBalance, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label19, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblPacking, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label25, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblCaseQuantity, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label15, 6, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblItemAmount, 7, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 2, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblSurharge, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.label23, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblSaleTypeCode, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblIsHalf, 5, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label37, 6, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblTaxRate, 7, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblDiscount, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label14, 2, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label33, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblScheme, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 4, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblHalf, 5, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label18, 4, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblVolumeDiscountAmount, 4, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label20, 3, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblVolumeDis, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label25, 8, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblCaseQuantity, 9, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label33, 10, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblScheme, 11, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label10, 12, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblIsHalf, 13, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblDiscount, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label9, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblSurharge, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label13, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblHalf, 5, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label37, 6, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblTaxRate, 7, 1);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(8, 352);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(894, 96);
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(894, 50);
             this.tableLayoutPanel2.TabIndex = 131;
             // 
             // label17
@@ -440,7 +451,7 @@
             this.label17.Location = new System.Drawing.Point(4, 4);
             this.label17.Margin = new System.Windows.Forms.Padding(3);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(62, 16);
+            this.label17.Size = new System.Drawing.Size(62, 17);
             this.label17.TabIndex = 150;
             this.label17.Text = "Balance";
             // 
@@ -449,10 +460,10 @@
             this.lblBalance.AutoSize = true;
             this.lblBalance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBalance.ForeColor = System.Drawing.Color.Blue;
-            this.lblBalance.Location = new System.Drawing.Point(155, 4);
+            this.lblBalance.Location = new System.Drawing.Point(95, 4);
             this.lblBalance.Margin = new System.Windows.Forms.Padding(3);
             this.lblBalance.Name = "lblBalance";
-            this.lblBalance.Size = new System.Drawing.Size(18, 16);
+            this.lblBalance.Size = new System.Drawing.Size(18, 17);
             this.lblBalance.TabIndex = 124;
             this.lblBalance.Text = "0";
             // 
@@ -460,10 +471,10 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(227, 4);
+            this.label19.Location = new System.Drawing.Point(157, 4);
             this.label19.Margin = new System.Windows.Forms.Padding(3);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(63, 16);
+            this.label19.Size = new System.Drawing.Size(54, 17);
             this.label19.TabIndex = 151;
             this.label19.Text = "Packing";
             // 
@@ -472,44 +483,21 @@
             this.lblPacking.AutoSize = true;
             this.lblPacking.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPacking.ForeColor = System.Drawing.Color.Blue;
-            this.lblPacking.Location = new System.Drawing.Point(378, 4);
+            this.lblPacking.Location = new System.Drawing.Point(218, 4);
             this.lblPacking.Margin = new System.Windows.Forms.Padding(3);
             this.lblPacking.Name = "lblPacking";
-            this.lblPacking.Size = new System.Drawing.Size(32, 16);
+            this.lblPacking.Size = new System.Drawing.Size(32, 17);
             this.lblPacking.TabIndex = 126;
             this.lblPacking.Text = "0.0";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(4, 27);
-            this.label25.Margin = new System.Windows.Forms.Padding(3);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(107, 16);
-            this.label25.TabIndex = 154;
-            this.label25.Text = "Case Quantity";
-            // 
-            // lblCaseQuantity
-            // 
-            this.lblCaseQuantity.AutoSize = true;
-            this.lblCaseQuantity.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCaseQuantity.ForeColor = System.Drawing.Color.Blue;
-            this.lblCaseQuantity.Location = new System.Drawing.Point(155, 27);
-            this.lblCaseQuantity.Margin = new System.Windows.Forms.Padding(3);
-            this.lblCaseQuantity.Name = "lblCaseQuantity";
-            this.lblCaseQuantity.Size = new System.Drawing.Size(18, 16);
-            this.lblCaseQuantity.TabIndex = 132;
-            this.lblCaseQuantity.Text = "0";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(673, 4);
+            this.label15.Location = new System.Drawing.Point(403, 4);
             this.label15.Margin = new System.Windows.Forms.Padding(3);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(104, 16);
+            this.label15.Size = new System.Drawing.Size(52, 17);
             this.label15.TabIndex = 149;
             this.label15.Text = "Item Amount";
             // 
@@ -518,44 +506,21 @@
             this.lblItemAmount.AutoSize = true;
             this.lblItemAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblItemAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblItemAmount.Location = new System.Drawing.Point(824, 4);
+            this.lblItemAmount.Location = new System.Drawing.Point(464, 4);
             this.lblItemAmount.Margin = new System.Windows.Forms.Padding(3);
             this.lblItemAmount.Name = "lblItemAmount";
-            this.lblItemAmount.Size = new System.Drawing.Size(32, 16);
+            this.lblItemAmount.Size = new System.Drawing.Size(32, 17);
             this.lblItemAmount.TabIndex = 122;
             this.lblItemAmount.Text = "0.0";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(227, 50);
-            this.label9.Margin = new System.Windows.Forms.Padding(3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(61, 16);
-            this.label9.TabIndex = 163;
-            this.label9.Text = "SC (%)";
-            // 
-            // lblSurharge
-            // 
-            this.lblSurharge.AutoSize = true;
-            this.lblSurharge.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSurharge.ForeColor = System.Drawing.Color.Blue;
-            this.lblSurharge.Location = new System.Drawing.Point(378, 50);
-            this.lblSurharge.Margin = new System.Windows.Forms.Padding(3);
-            this.lblSurharge.Name = "lblSurharge";
-            this.lblSurharge.Size = new System.Drawing.Size(32, 16);
-            this.lblSurharge.TabIndex = 164;
-            this.lblSurharge.Text = "0.0";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(450, 4);
+            this.label23.Location = new System.Drawing.Point(280, 4);
             this.label23.Margin = new System.Windows.Forms.Padding(3);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(78, 16);
+            this.label23.Size = new System.Drawing.Size(44, 17);
             this.label23.TabIndex = 153;
             this.label23.Text = "Sale Type";
             // 
@@ -564,112 +529,44 @@
             this.lblSaleTypeCode.AutoSize = true;
             this.lblSaleTypeCode.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSaleTypeCode.ForeColor = System.Drawing.Color.Blue;
-            this.lblSaleTypeCode.Location = new System.Drawing.Point(601, 4);
+            this.lblSaleTypeCode.Location = new System.Drawing.Point(341, 4);
             this.lblSaleTypeCode.Margin = new System.Windows.Forms.Padding(3);
             this.lblSaleTypeCode.Name = "lblSaleTypeCode";
-            this.lblSaleTypeCode.Size = new System.Drawing.Size(61, 16);
+            this.lblSaleTypeCode.Size = new System.Drawing.Size(43, 17);
             this.lblSaleTypeCode.TabIndex = 130;
             this.lblSaleTypeCode.Text = "Sale 01";
             // 
-            // label10
+            // label25
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(450, 27);
-            this.label10.Margin = new System.Windows.Forms.Padding(3);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 16);
-            this.label10.TabIndex = 165;
-            this.label10.Text = "Half";
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(526, 4);
+            this.label25.Margin = new System.Windows.Forms.Padding(3);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(52, 17);
+            this.label25.TabIndex = 154;
+            this.label25.Text = "Case Quantity";
             // 
-            // lblIsHalf
+            // lblCaseQuantity
             // 
-            this.lblIsHalf.AutoSize = true;
-            this.lblIsHalf.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIsHalf.ForeColor = System.Drawing.Color.Blue;
-            this.lblIsHalf.Location = new System.Drawing.Point(601, 27);
-            this.lblIsHalf.Margin = new System.Windows.Forms.Padding(3);
-            this.lblIsHalf.Name = "lblIsHalf";
-            this.lblIsHalf.Size = new System.Drawing.Size(32, 16);
-            this.lblIsHalf.TabIndex = 166;
-            this.lblIsHalf.Text = "0.0";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(673, 50);
-            this.label37.Margin = new System.Windows.Forms.Padding(3);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(68, 16);
-            this.label37.TabIndex = 160;
-            this.label37.Text = "Tax (%)";
-            // 
-            // lblTaxRate
-            // 
-            this.lblTaxRate.AutoSize = true;
-            this.lblTaxRate.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTaxRate.ForeColor = System.Drawing.Color.Blue;
-            this.lblTaxRate.Location = new System.Drawing.Point(824, 50);
-            this.lblTaxRate.Margin = new System.Windows.Forms.Padding(3);
-            this.lblTaxRate.Name = "lblTaxRate";
-            this.lblTaxRate.Size = new System.Drawing.Size(32, 16);
-            this.lblTaxRate.TabIndex = 144;
-            this.lblTaxRate.Text = "0.0";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(4, 50);
-            this.label11.Margin = new System.Windows.Forms.Padding(3);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(103, 16);
-            this.label11.TabIndex = 161;
-            this.label11.Text = "Discount (%)";
-            // 
-            // lblDiscount
-            // 
-            this.lblDiscount.AutoSize = true;
-            this.lblDiscount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiscount.ForeColor = System.Drawing.Color.Blue;
-            this.lblDiscount.Location = new System.Drawing.Point(155, 50);
-            this.lblDiscount.Margin = new System.Windows.Forms.Padding(3);
-            this.lblDiscount.Name = "lblDiscount";
-            this.lblDiscount.Size = new System.Drawing.Size(32, 16);
-            this.lblDiscount.TabIndex = 162;
-            this.lblDiscount.Text = "0.0";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(227, 73);
-            this.label14.Margin = new System.Windows.Forms.Padding(3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(39, 19);
-            this.label14.TabIndex = 169;
-            this.label14.Text = "Amt";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(4, 73);
-            this.label12.Margin = new System.Windows.Forms.Padding(3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(63, 19);
-            this.label12.TabIndex = 167;
-            this.label12.Text = "Last Bill";
+            this.lblCaseQuantity.AutoSize = true;
+            this.lblCaseQuantity.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCaseQuantity.ForeColor = System.Drawing.Color.Blue;
+            this.lblCaseQuantity.Location = new System.Drawing.Point(587, 4);
+            this.lblCaseQuantity.Margin = new System.Windows.Forms.Padding(3);
+            this.lblCaseQuantity.Name = "lblCaseQuantity";
+            this.lblCaseQuantity.Size = new System.Drawing.Size(18, 17);
+            this.lblCaseQuantity.TabIndex = 132;
+            this.lblCaseQuantity.Text = "0";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(227, 27);
+            this.label33.Location = new System.Drawing.Point(649, 4);
             this.label33.Margin = new System.Windows.Forms.Padding(3);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(64, 16);
+            this.label33.Size = new System.Drawing.Size(42, 17);
             this.label33.TabIndex = 158;
             this.label33.Text = "Scheme";
             // 
@@ -678,21 +575,90 @@
             this.lblScheme.AutoSize = true;
             this.lblScheme.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblScheme.ForeColor = System.Drawing.Color.Blue;
-            this.lblScheme.Location = new System.Drawing.Point(378, 27);
+            this.lblScheme.Location = new System.Drawing.Point(710, 4);
             this.lblScheme.Margin = new System.Windows.Forms.Padding(3);
             this.lblScheme.Name = "lblScheme";
-            this.lblScheme.Size = new System.Drawing.Size(32, 16);
+            this.lblScheme.Size = new System.Drawing.Size(32, 17);
             this.lblScheme.TabIndex = 140;
             this.lblScheme.Text = "0.0";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(772, 4);
+            this.label10.Margin = new System.Windows.Forms.Padding(3);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 17);
+            this.label10.TabIndex = 165;
+            this.label10.Text = "Half";
+            // 
+            // lblIsHalf
+            // 
+            this.lblIsHalf.AutoSize = true;
+            this.lblIsHalf.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIsHalf.ForeColor = System.Drawing.Color.Blue;
+            this.lblIsHalf.Location = new System.Drawing.Point(833, 4);
+            this.lblIsHalf.Margin = new System.Windows.Forms.Padding(3);
+            this.lblIsHalf.Name = "lblIsHalf";
+            this.lblIsHalf.Size = new System.Drawing.Size(32, 17);
+            this.lblIsHalf.TabIndex = 166;
+            this.lblIsHalf.Text = "0.0";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(4, 28);
+            this.label11.Margin = new System.Windows.Forms.Padding(3);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(75, 18);
+            this.label11.TabIndex = 161;
+            this.label11.Text = "Discount (%)";
+            // 
+            // lblDiscount
+            // 
+            this.lblDiscount.AutoSize = true;
+            this.lblDiscount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiscount.ForeColor = System.Drawing.Color.Blue;
+            this.lblDiscount.Location = new System.Drawing.Point(95, 28);
+            this.lblDiscount.Margin = new System.Windows.Forms.Padding(3);
+            this.lblDiscount.Name = "lblDiscount";
+            this.lblDiscount.Size = new System.Drawing.Size(32, 18);
+            this.lblDiscount.TabIndex = 162;
+            this.lblDiscount.Text = "0.0";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(157, 28);
+            this.label9.Margin = new System.Windows.Forms.Padding(3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(37, 18);
+            this.label9.TabIndex = 163;
+            this.label9.Text = "SC (%)";
+            // 
+            // lblSurharge
+            // 
+            this.lblSurharge.AutoSize = true;
+            this.lblSurharge.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSurharge.ForeColor = System.Drawing.Color.Blue;
+            this.lblSurharge.Location = new System.Drawing.Point(218, 28);
+            this.lblSurharge.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSurharge.Name = "lblSurharge";
+            this.lblSurharge.Size = new System.Drawing.Size(32, 18);
+            this.lblSurharge.TabIndex = 164;
+            this.lblSurharge.Text = "0.0";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(450, 50);
+            this.label13.Location = new System.Drawing.Point(280, 28);
             this.label13.Margin = new System.Windows.Forms.Padding(3);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(70, 16);
+            this.label13.Size = new System.Drawing.Size(42, 18);
             this.label13.TabIndex = 171;
             this.label13.Text = "Half (%)";
             // 
@@ -701,59 +667,35 @@
             this.lblHalf.AutoSize = true;
             this.lblHalf.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHalf.ForeColor = System.Drawing.Color.Blue;
-            this.lblHalf.Location = new System.Drawing.Point(601, 50);
+            this.lblHalf.Location = new System.Drawing.Point(341, 28);
             this.lblHalf.Margin = new System.Windows.Forms.Padding(3);
             this.lblHalf.Name = "lblHalf";
-            this.lblHalf.Size = new System.Drawing.Size(32, 16);
+            this.lblHalf.Size = new System.Drawing.Size(32, 18);
             this.lblHalf.TabIndex = 172;
             this.lblHalf.Text = "0.0";
             // 
-            // label18
+            // label37
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(450, 73);
-            this.label18.Margin = new System.Windows.Forms.Padding(3);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(39, 19);
-            this.label18.TabIndex = 173;
-            this.label18.Text = "Amt";
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(403, 28);
+            this.label37.Margin = new System.Windows.Forms.Padding(3);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(40, 18);
+            this.label37.TabIndex = 160;
+            this.label37.Text = "Tax (%)";
             // 
-            // lblVolumeDiscountAmount
+            // lblTaxRate
             // 
-            this.lblVolumeDiscountAmount.AutoSize = true;
-            this.lblVolumeDiscountAmount.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVolumeDiscountAmount.ForeColor = System.Drawing.Color.Blue;
-            this.lblVolumeDiscountAmount.Location = new System.Drawing.Point(601, 73);
-            this.lblVolumeDiscountAmount.Margin = new System.Windows.Forms.Padding(3);
-            this.lblVolumeDiscountAmount.Name = "lblVolumeDiscountAmount";
-            this.lblVolumeDiscountAmount.Size = new System.Drawing.Size(32, 19);
-            this.lblVolumeDiscountAmount.TabIndex = 170;
-            this.lblVolumeDiscountAmount.Text = "0.0";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.Blue;
-            this.label20.Location = new System.Drawing.Point(378, 73);
-            this.label20.Margin = new System.Windows.Forms.Padding(3);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(32, 19);
-            this.label20.TabIndex = 174;
-            this.label20.Text = "0.0";
-            // 
-            // lblVolumeDis
-            // 
-            this.lblVolumeDis.AutoSize = true;
-            this.lblVolumeDis.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVolumeDis.ForeColor = System.Drawing.Color.Blue;
-            this.lblVolumeDis.Location = new System.Drawing.Point(155, 73);
-            this.lblVolumeDis.Margin = new System.Windows.Forms.Padding(3);
-            this.lblVolumeDis.Name = "lblVolumeDis";
-            this.lblVolumeDis.Size = new System.Drawing.Size(32, 19);
-            this.lblVolumeDis.TabIndex = 168;
-            this.lblVolumeDis.Text = "0.0";
+            this.lblTaxRate.AutoSize = true;
+            this.lblTaxRate.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTaxRate.ForeColor = System.Drawing.Color.Blue;
+            this.lblTaxRate.Location = new System.Drawing.Point(464, 28);
+            this.lblTaxRate.Margin = new System.Windows.Forms.Padding(3);
+            this.lblTaxRate.Name = "lblTaxRate";
+            this.lblTaxRate.Size = new System.Drawing.Size(32, 18);
+            this.lblTaxRate.TabIndex = 144;
+            this.lblTaxRate.Text = "0.0";
             // 
             // errFrmSaleEntry
             // 
@@ -768,12 +710,215 @@
             this.lblDueBillAmount.TabIndex = 132;
             this.lblDueBillAmount.Text = "Due Bills";
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel3.ColumnCount = 14;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel3.Controls.Add(this.lblLBRate, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label14, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label16, 6, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label18, 8, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label20, 10, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label21, 12, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label24, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblLBDis, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblLBSpLDis, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblLBTax, 7, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblLBBatch, 9, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblLBScheme, 11, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblLBDate, 13, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(8, 404);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(894, 30);
+            this.tableLayoutPanel3.TabIndex = 133;
+            // 
+            // lblLBRate
+            // 
+            this.lblLBRate.AutoSize = true;
+            this.lblLBRate.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLBRate.ForeColor = System.Drawing.Color.Blue;
+            this.lblLBRate.Location = new System.Drawing.Point(95, 4);
+            this.lblLBRate.Margin = new System.Windows.Forms.Padding(3);
+            this.lblLBRate.Name = "lblLBRate";
+            this.lblLBRate.Size = new System.Drawing.Size(32, 19);
+            this.lblLBRate.TabIndex = 163;
+            this.lblLBRate.Text = "0.0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(4, 4);
+            this.label4.Margin = new System.Windows.Forms.Padding(3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 19);
+            this.label4.TabIndex = 151;
+            this.label4.Text = "Rate";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(280, 4);
+            this.label14.Margin = new System.Windows.Forms.Padding(3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 38);
+            this.label14.TabIndex = 153;
+            this.label14.Text = "Spl Dis";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(403, 4);
+            this.label16.Margin = new System.Windows.Forms.Padding(3);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(35, 19);
+            this.label16.TabIndex = 154;
+            this.label16.Text = "Tax";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(526, 4);
+            this.label18.Margin = new System.Windows.Forms.Padding(3);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(47, 19);
+            this.label18.TabIndex = 155;
+            this.label18.Text = "Batch";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(649, 4);
+            this.label20.Margin = new System.Windows.Forms.Padding(3);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(42, 38);
+            this.label20.TabIndex = 156;
+            this.label20.Text = "Scheme";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(772, 4);
+            this.label21.Margin = new System.Windows.Forms.Padding(3);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(41, 19);
+            this.label21.TabIndex = 157;
+            this.label21.Text = "Date";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.Blue;
+            this.label24.Location = new System.Drawing.Point(218, 4);
+            this.label24.Margin = new System.Windows.Forms.Padding(3);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(32, 19);
+            this.label24.TabIndex = 164;
+            this.label24.Text = "0.0";
+            // 
+            // lblLBDis
+            // 
+            this.lblLBDis.AutoSize = true;
+            this.lblLBDis.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLBDis.Location = new System.Drawing.Point(157, 4);
+            this.lblLBDis.Margin = new System.Windows.Forms.Padding(3);
+            this.lblLBDis.Name = "lblLBDis";
+            this.lblLBDis.Size = new System.Drawing.Size(53, 38);
+            this.lblLBDis.TabIndex = 152;
+            this.lblLBDis.Text = "Dis(%)";
+            // 
+            // lblLBSpLDis
+            // 
+            this.lblLBSpLDis.AutoSize = true;
+            this.lblLBSpLDis.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLBSpLDis.ForeColor = System.Drawing.Color.Blue;
+            this.lblLBSpLDis.Location = new System.Drawing.Point(341, 4);
+            this.lblLBSpLDis.Margin = new System.Windows.Forms.Padding(3);
+            this.lblLBSpLDis.Name = "lblLBSpLDis";
+            this.lblLBSpLDis.Size = new System.Drawing.Size(32, 19);
+            this.lblLBSpLDis.TabIndex = 165;
+            this.lblLBSpLDis.Text = "0.0";
+            // 
+            // lblLBTax
+            // 
+            this.lblLBTax.AutoSize = true;
+            this.lblLBTax.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLBTax.ForeColor = System.Drawing.Color.Blue;
+            this.lblLBTax.Location = new System.Drawing.Point(464, 4);
+            this.lblLBTax.Margin = new System.Windows.Forms.Padding(3);
+            this.lblLBTax.Name = "lblLBTax";
+            this.lblLBTax.Size = new System.Drawing.Size(32, 19);
+            this.lblLBTax.TabIndex = 166;
+            this.lblLBTax.Text = "0.0";
+            // 
+            // lblLBBatch
+            // 
+            this.lblLBBatch.AutoSize = true;
+            this.lblLBBatch.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLBBatch.ForeColor = System.Drawing.Color.Blue;
+            this.lblLBBatch.Location = new System.Drawing.Point(587, 4);
+            this.lblLBBatch.Margin = new System.Windows.Forms.Padding(3);
+            this.lblLBBatch.Name = "lblLBBatch";
+            this.lblLBBatch.Size = new System.Drawing.Size(32, 19);
+            this.lblLBBatch.TabIndex = 167;
+            this.lblLBBatch.Text = "0.0";
+            // 
+            // lblLBScheme
+            // 
+            this.lblLBScheme.AutoSize = true;
+            this.lblLBScheme.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLBScheme.ForeColor = System.Drawing.Color.Blue;
+            this.lblLBScheme.Location = new System.Drawing.Point(710, 4);
+            this.lblLBScheme.Margin = new System.Windows.Forms.Padding(3);
+            this.lblLBScheme.Name = "lblLBScheme";
+            this.lblLBScheme.Size = new System.Drawing.Size(32, 19);
+            this.lblLBScheme.TabIndex = 168;
+            this.lblLBScheme.Text = "0.0";
+            // 
+            // lblLBDate
+            // 
+            this.lblLBDate.AutoSize = true;
+            this.lblLBDate.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLBDate.ForeColor = System.Drawing.Color.Blue;
+            this.lblLBDate.Location = new System.Drawing.Point(833, 4);
+            this.lblLBDate.Margin = new System.Windows.Forms.Padding(3);
+            this.lblLBDate.Name = "lblLBDate";
+            this.lblLBDate.Size = new System.Drawing.Size(32, 19);
+            this.lblLBDate.TabIndex = 169;
+            this.lblLBDate.Text = "0.0";
+            // 
             // frmSaleEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(910, 449);
             this.ControlBox = false;
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.lblDueBillAmount);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -805,6 +950,8 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errFrmSaleEntry)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -855,19 +1002,28 @@
         private System.Windows.Forms.Label lblIsHalf;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label lblTaxRate;
-        private System.Windows.Forms.Label lblVolumeDiscountAmount;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblDiscount;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label lblVolumeDis;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label lblScheme;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lblHalf;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ErrorProvider errFrmSaleEntry;
         private System.Windows.Forms.Label lblDueBillAmount;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label lblLBRate;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblLBDis;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label lblLBSpLDis;
+        private System.Windows.Forms.Label lblLBTax;
+        private System.Windows.Forms.Label lblLBBatch;
+        private System.Windows.Forms.Label lblLBScheme;
+        private System.Windows.Forms.Label lblLBDate;
     }
 }

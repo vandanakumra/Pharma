@@ -92,5 +92,10 @@ namespace PharmaBusiness.Master
             var accountLedgerMasterList = new AccountLedgerMasterDao(this.LoggedInUser).GetAccountLedgers().Where(p=>p.AccountLedgerTypeSystemName == systemName).ToList();          
             return accountLedgerMasterList;
         }
-    }
+
+        internal PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerByCode(string code)
+        {
+            return new AccountLedgerMasterDao(this.LoggedInUser).GetAccountLedgerByCode(code);
+        }
+        }
 }

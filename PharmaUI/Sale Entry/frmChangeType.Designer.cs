@@ -51,6 +51,8 @@
             this.Controls.Add(this.dgvChangeType);
             this.Name = "frmChangeType";
             this.Text = "frmChangeType";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmChangeType_FormClosing);
+            this.Load += new System.EventHandler(this.frmChangeType_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChangeType)).EndInit();
             this.ResumeLayout(false);
 

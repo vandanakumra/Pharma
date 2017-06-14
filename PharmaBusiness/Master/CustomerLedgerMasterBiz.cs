@@ -42,6 +42,7 @@ namespace PharmaBusiness.Master
 
         internal CustomerLedgerMaster GetCustomerLedgerByCode(string customerCode)
         {
+
             return new CustomerLedgerMasterDao(this.LoggedInUser).GetCustomerLedgerByCode(customerCode);
         }
     }

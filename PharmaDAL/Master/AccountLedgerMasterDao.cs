@@ -36,7 +36,7 @@ namespace PharmaDAL.Master
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
                     SalePurchaseTaxValue = p.SalePurchaseTaxType,
-                    Status = p.Status           
+                    Status = p.Status
                 }).ToList();
             }
 
@@ -46,7 +46,7 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.AccountLedgerMaster.Where(p =>p.AccountLedgerID == accountLedgerID).Select(p => new PharmaBusinessObjects.Master.AccountLedgerMaster()
+                return context.AccountLedgerMaster.Where(p => p.AccountLedgerID == accountLedgerID).Select(p => new PharmaBusinessObjects.Master.AccountLedgerMaster()
                 {
                     AccountLedgerID = p.AccountLedgerID,
                     AccountLedgerName = p.AccountLedgerName,
@@ -64,7 +64,7 @@ namespace PharmaDAL.Master
                     CreditDebit = p.CreditDebit,
                     SalePurchaseTaxValue = p.SalePurchaseTaxType,
                     Status = p.Status
-                    
+
                 }).FirstOrDefault();
             }
 
@@ -74,11 +74,12 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q=>q.AccountLedgerID) + 1 : 1;
+                var maxAccountLedgerID = context.AccountLedgerMaster.Count() > 0 ? context.AccountLedgerMaster.Max(q => q.AccountLedgerID) + 1 : 1;
 
                 var accountLedgerCode = "L" + maxAccountLedgerID.ToString().PadLeft(6, '0');
 
-                AccountLedgerMaster table = new AccountLedgerMaster() {
+                AccountLedgerMaster table = new AccountLedgerMaster()
+                {
 
                     AccountLedgerName = p.AccountLedgerName,
                     AccountLedgerCode = accountLedgerCode,
@@ -87,12 +88,12 @@ namespace PharmaDAL.Master
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
                     SalePurchaseTaxType = p.SalePurchaseTaxValue,
-                    Status = p.Status,                    
+                    Status = p.Status,
                     CreatedBy = this.LoggedInUser.Username,
                     CreatedOn = System.DateTime.Now
                 };
 
-                var accountLedger=  new Common.CommonDao().GetAccountLedgerTypes().Where(q => q.AccountLedgerTypeID == p.AccountLedgerTypeId).FirstOrDefault();
+                var accountLedger = new Common.CommonDao().GetAccountLedgerTypes().Where(q => q.AccountLedgerTypeID == p.AccountLedgerTypeId).FirstOrDefault();
 
                 if (accountLedger.AccountLedgerTypeSystemName != Constants.AccountLedgerType.ControlCodes)
                 {
@@ -125,8 +126,8 @@ namespace PharmaDAL.Master
                         accountLedgerMaster.CreditDebit = p.CreditDebit;
                         accountLedgerMaster.Status = p.Status;
                         accountLedgerMaster.SalePurchaseTaxType = p.SalePurchaseTaxValue;
-                        accountLedgerMaster.CreatedBy =this.LoggedInUser.Username;
-                        accountLedgerMaster.CreatedOn =System.DateTime.Now;
+                        accountLedgerMaster.CreatedBy = this.LoggedInUser.Username;
+                        accountLedgerMaster.CreatedOn = System.DateTime.Now;
                     }
 
                     return context.SaveChanges();
@@ -167,14 +168,44 @@ namespace PharmaDAL.Master
                                       }).ToList();
 
                 return accountLedgers;
-                
+
             }
+
+
 
         }
 
+        public PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerByCode(string code)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                var accountLedger = (from p in context.AccountLedgerMaster
+                                     where (p.AccountLedgerCode.ToLower() == code.ToLower())
+                                     select new PharmaBusinessObjects.Master.AccountLedgerMaster()
+                                     {
+                                         AccountLedgerID = p.AccountLedgerID,
+                                         AccountLedgerName = p.AccountLedgerName,
+                                         AccountLedgerCode = p.AccountLedgerCode,
+                                         AccountLedgerTypeId = p.AccountLedgerTypeId,
+                                         AccountLedgerType = p.AccountLedgerType.AccountLedgerTypeName,
+                                         AccountLedgerTypeSystemName = p.AccountLedgerType.SystemName,
+                                         AccountTypeId = p.AccountTypeId,
+                                         AccountType = p.AccountType.AccountTypeName,
+                                         CreditControlCodeID = p.CreditControlCodeID,
+                                         DebitControlCodeID = p.DebitControlCodeID,
+                                         DebitControlCode = p.AccountLedgerMaster3.AccountLedgerName,
+                                         CreditControlCode = p.AccountLedgerMaster2.AccountLedgerName,
+                                         OpeningBalance = p.OpeningBalance,
+                                         CreditDebit = p.CreditDebit,
+                                         SalePurchaseTaxValue = p.SalePurchaseTaxType,
+                                         Status = p.Status
+                                     }).FirstOrDefault();
 
+                return accountLedger;
 
+            }
 
+        }
 
     }
 }

@@ -143,7 +143,11 @@ namespace PharmaBusinessObjects
         bool DeleteUnSavedData(long purchaseSaleBookHeaderID);
         List<SaleChangeType> GetSaleEntryChangeTypes();
         PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode);
-        #endregion
+        PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerByCode(string code);
+        SaleLineItemInfo GetSaleLineItemInfo(string code, long fifoID);
+        List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> InsertUpdateTempPurchaseBookLineItemForSale(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem);
+        void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, string itemCode, string customerCode);
+            #endregion
     }
 
 }

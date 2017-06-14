@@ -20,6 +20,8 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
+
+
                 return context.CustomerLedger.Where(q =>(string.IsNullOrEmpty(searchString) || q.CustomerLedgerName.Contains(searchString)))
                                             .Select(p => new PharmaBusinessObjects.Master.CustomerLedgerMaster()
                     {

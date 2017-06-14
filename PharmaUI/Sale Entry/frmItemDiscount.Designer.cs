@@ -54,14 +54,14 @@
             // 
             // txtDiscount
             // 
-            this.txtDiscount.Location = new System.Drawing.Point(87, 57);
+            this.txtDiscount.Location = new System.Drawing.Point(95, 57);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(100, 20);
             this.txtDiscount.TabIndex = 2;
             // 
             // txtSpecialDiscount
             // 
-            this.txtSpecialDiscount.Location = new System.Drawing.Point(345, 57);
+            this.txtSpecialDiscount.Location = new System.Drawing.Point(358, 57);
             this.txtSpecialDiscount.Name = "txtSpecialDiscount";
             this.txtSpecialDiscount.Size = new System.Drawing.Size(100, 20);
             this.txtSpecialDiscount.TabIndex = 3;
@@ -77,6 +77,8 @@
             this.Controls.Add(this.label1);
             this.Name = "frmItemDiscount";
             this.Text = "frmItemDiscount";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmItemDiscount_FormClosing);
+            this.Load += new System.EventHandler(this.frmItemDiscount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
