@@ -139,6 +139,7 @@ namespace PharmaUI
             txtPersonRouteCode.Text = this.PersonRouteMaster.PersonRouteCode;
             cbPersonRouteType.SelectedValue = this.PersonRouteMaster.RecordTypeId;
             cbxStatus.SelectedItem = this.PersonRouteMaster.Status ? Enums.Status.Active : Enums.Status.Inactive;
+            cbPersonRouteType.Enabled = false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
