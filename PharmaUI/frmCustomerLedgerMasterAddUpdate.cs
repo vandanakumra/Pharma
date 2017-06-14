@@ -21,6 +21,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         private bool isInEditMode { get; set; }
         private int customerLedgerID { get; set; }
+        public bool IsInChildMode = false;
 
         public frmCustomerLedgerMasterAddUpdate(bool isInEditMode = false)
         {
@@ -429,6 +430,19 @@ namespace PharmaUI
                 {
                     btnSave.Focus();
                 }
+                else if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+
+
             }
             else if (keyData == (Keys.F9))
             {

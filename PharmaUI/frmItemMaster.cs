@@ -156,6 +156,7 @@ namespace PharmaUI
         private void OpenItemAddUpdateForm(int itemId)
         {
             frmItemMasterAddUpdated form = new frmItemMasterAddUpdated(itemId,txtSearch.Text);
+            form.IsInChildMode = true;
             ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
             form.WindowState = FormWindowState.Maximized;
 
@@ -266,7 +267,17 @@ namespace PharmaUI
             }
             else if (keyData == Keys.Escape)
             {
-                this.Close();
+                if (isOpenAsChild)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
             }
 
             if (keyData == Keys.Enter && isOpenAsChild && dgvItemList.SelectedRows.Count > 0)

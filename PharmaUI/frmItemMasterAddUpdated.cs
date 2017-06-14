@@ -20,7 +20,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         private int _itemId = 0;
         private string _itemName = "";
-
+        public bool IsInChildMode = false;
 
         public frmItemMasterAddUpdated(int itemId , string itemName)
         {
@@ -461,6 +461,28 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == Keys.Escape)
+            {
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

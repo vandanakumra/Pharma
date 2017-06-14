@@ -20,6 +20,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         public int SupplierId { get; set; }
         private string SupplierNameNew { get; set; }
+        public bool IsInChildMode = false;
 
         public frmSupplierLedgerAddUpdate(int supplierId,string supplierName)
         {
@@ -322,6 +323,17 @@ namespace PharmaUI
                 if (this.ActiveControl.Name == "dgvCompanyDiscount")
                 {
                     btnSave.Focus();
+                }
+                else if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
                 }
             }
             else if (keyData == (Keys.F9))

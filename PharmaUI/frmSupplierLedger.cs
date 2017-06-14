@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -208,7 +209,17 @@ namespace PharmaUI
             }
             else if (keyData == Keys.Escape)
             {
-                this.Close();
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -217,6 +228,8 @@ namespace PharmaUI
         void AddEditSupplierLedger(int supplierId)
         {
             frmSupplierLedgerAddUpdate frmSupplierAddUpdate = new frmSupplierLedgerAddUpdate(supplierId,txtSearch.Text);
+            frmSupplierAddUpdate.IsInChildMode = true;
+
             ExtensionMethods.AddChildFormToPanel(this, frmSupplierAddUpdate, ExtensionMethods.MainPanel);
             frmSupplierAddUpdate.WindowState = FormWindowState.Maximized;
 

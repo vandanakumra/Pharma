@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Master;
 using System;
 using System.Collections.Generic;
@@ -174,6 +175,8 @@ namespace PharmaUI
         void AddEditPersonRoute(PharmaBusinessObjects.Master.PersonRouteMaster model)
         {
             frmPersonRouteMasterAddUpdate frmPersonRouteMasterAddUpdate = new frmPersonRouteMasterAddUpdate(model);
+            frmPersonRouteMasterAddUpdate.IsInChildMode = true;
+
             frmPersonRouteMasterAddUpdate.FormClosed -= frmPersonRouteMasterAddUpdate_FormClosed;
             frmPersonRouteMasterAddUpdate.FormClosed += frmPersonRouteMasterAddUpdate_FormClosed;
             frmPersonRouteMasterAddUpdate.ShowDialog();
@@ -219,7 +222,17 @@ namespace PharmaUI
             }
             else if (keyData == Keys.Escape)
             {
-                this.Close();
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

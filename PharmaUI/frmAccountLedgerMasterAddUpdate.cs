@@ -20,6 +20,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         public int AccountLedgerId { get; set; }
         private string _accountLedgerName { get; set; }
+        public bool IsInChildMode = false;
 
         public frmAccountLedgerMasterAddUpdate(int accountLedgerId,string ledgerName)
         {
@@ -351,6 +352,27 @@ namespace PharmaUI
             }
 
           
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == Keys.Escape)
+            {
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

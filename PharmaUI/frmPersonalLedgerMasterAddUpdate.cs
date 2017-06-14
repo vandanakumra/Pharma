@@ -21,6 +21,7 @@ namespace PharmaUI
 
         private int _personLedgerid;
         private string _personLedgerName;
+        public bool IsInChildMode = false;
 
         public frmPersonalLedgerMasterAddUpdate(int personLedgerid , string personLedgerName)
         {
@@ -241,6 +242,27 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }          
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //Add
+            if (keyData == Keys.Escape)
+            {
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

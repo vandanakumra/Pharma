@@ -314,6 +314,7 @@ namespace PharmaUI
         private void OpenAddEdit(int accountLedgerId)
         {
             frmAccountLedgerMasterAddUpdate form = new frmAccountLedgerMasterAddUpdate(accountLedgerId,txtSearch.Text);
+            form.IsInChildMode = true;
             form.FormClosed -= frmAccountLedgerMasterAddUpdate_FormClosed;
             form.FormClosed += frmAccountLedgerMasterAddUpdate_FormClosed;
             form.ShowDialog();
@@ -405,7 +406,17 @@ namespace PharmaUI
             }
             else if (keyData == Keys.Escape)
             {
-                this.Close();
+                if (IsInChildMode)
+                {
+                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.ClosePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }                  
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

@@ -494,6 +494,7 @@ namespace PharmaUI
                 return;
 
             int rowIndex1 = 0;
+            bool searchedTextFound = false;
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 if (row.Cells[searchColumnName].Value.ToString().Replace(" ","").ToLower().StartsWith(searchString.ToLower().Replace(" ","")))
@@ -501,6 +502,7 @@ namespace PharmaUI
                     int row2 = row.Index;
                     if (flag)
                     {
+                        searchedTextFound = true;
                         rowIndex1 = row.Index;
                         dgv.ClearSelection();
                         flag = false;
@@ -508,7 +510,12 @@ namespace PharmaUI
                     dgv.Rows[row2].DefaultCellStyle = new DataGridViewCellStyle { ForeColor = Color.DarkGreen, BackColor = Color.LightBlue };
                 }
             }
-           
+
+            if (!searchedTextFound)
+            {
+
+            }
+
             dgv.FirstDisplayedScrollingRowIndex = rowIndex1;
             dgv.Rows[rowIndex1].Selected = true;
             dgv.Rows[rowIndex1].Cells[searchColumnName].Selected = true;
