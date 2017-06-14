@@ -544,7 +544,7 @@ namespace PharmaUI
                                 {
                                     tbxArea.Text = lastSelectedPersonRoute.PersonRouteName;
                                     tbxArea.Tag = lastSelectedPersonRoute.PersonRouteID;
-                                    cbxPurchaseType.Focus();
+                                    dgvCompanyDiscount.Focus();
                                 }
                                 break;
                         }

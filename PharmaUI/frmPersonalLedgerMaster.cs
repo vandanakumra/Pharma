@@ -168,6 +168,10 @@ namespace PharmaUI
             {
                 dgvPersonalLedger.Focus();
             }
+            else if (keyData == Keys.Escape)
+            {
+                this.Close();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }

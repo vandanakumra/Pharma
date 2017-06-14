@@ -63,24 +63,24 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label14 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.tbxDL = new System.Windows.Forms.TextBox();
+            this.tbxArea = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbxGST = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbxServiceTax = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbxPAN = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.tbxCIN = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tbxLIN = new System.Windows.Forms.TextBox();
-            this.tbxDL = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tbxGST = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbxServiceTax = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbxPAN = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.gbDiscountDetails = new System.Windows.Forms.GroupBox();
             this.dgvCompanyDiscount = new System.Windows.Forms.DataGridView();
-            this.tbxArea = new System.Windows.Forms.TextBox();
             this.gbCustomerSupplierInfo.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -95,10 +95,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxPurchaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxPurchaseType.FormattingEnabled = true;
-            this.cbxPurchaseType.Location = new System.Drawing.Point(330, 13);
+            this.cbxPurchaseType.Location = new System.Drawing.Point(330, 82);
             this.cbxPurchaseType.Name = "cbxPurchaseType";
             this.cbxPurchaseType.Size = new System.Drawing.Size(166, 21);
-            this.cbxPurchaseType.TabIndex = 202;
+            this.cbxPurchaseType.TabIndex = 208;
+            this.cbxPurchaseType.Visible = false;
             // 
             // gbCustomerSupplierInfo
             // 
@@ -497,22 +498,22 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel2.Controls.Add(this.tbxArea, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label6, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.cbxPurchaseType, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.tbxServiceTax, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 2, 3);
-            this.tableLayoutPanel2.Controls.Add(this.tbxPAN, 3, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label19, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tbxCIN, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label20, 2, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tbxLIN, 3, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tbxDL, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label14, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label15, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.tbxGST, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.cbxPurchaseType, 3, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label14, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 2, 3);
+            this.tableLayoutPanel2.Controls.Add(this.tbxDL, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tbxArea, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label15, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tbxGST, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label19, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tbxCIN, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label20, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tbxLIN, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tbxServiceTax, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label11, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tbxPAN, 3, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -526,120 +527,47 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(509, 110);
             this.tableLayoutPanel2.TabIndex = 199;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(257, 13);
-            this.label6.Margin = new System.Windows.Forms.Padding(3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 13);
-            this.label6.TabIndex = 807;
-            this.label6.Text = "Purchase";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 13);
-            this.label5.Margin = new System.Windows.Forms.Padding(3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 807;
-            this.label5.Text = "Area";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 82);
-            this.label12.Margin = new System.Windows.Forms.Padding(3);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(35, 13);
-            this.label12.TabIndex = 606;
-            this.label12.Text = "S.Tax";
-            // 
-            // tbxServiceTax
-            // 
-            this.tbxServiceTax.Location = new System.Drawing.Point(86, 82);
-            this.tbxServiceTax.Name = "tbxServiceTax";
-            this.tbxServiceTax.Size = new System.Drawing.Size(165, 20);
-            this.tbxServiceTax.TabIndex = 207;
-            this.tbxServiceTax.Tag = "";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(257, 82);
-            this.label11.Margin = new System.Windows.Forms.Padding(3);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 13);
-            this.label11.TabIndex = 608;
-            this.label11.Text = "PAN";
-            // 
-            // tbxPAN
-            // 
-            this.tbxPAN.Location = new System.Drawing.Point(330, 82);
-            this.tbxPAN.Name = "tbxPAN";
-            this.tbxPAN.Size = new System.Drawing.Size(166, 20);
-            this.tbxPAN.TabIndex = 208;
-            this.tbxPAN.Tag = "";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(13, 59);
-            this.label19.Margin = new System.Windows.Forms.Padding(3);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(25, 13);
-            this.label19.TabIndex = 117;
-            this.label19.Text = "CIN";
-            // 
-            // tbxCIN
-            // 
-            this.tbxCIN.Location = new System.Drawing.Point(86, 59);
-            this.tbxCIN.Name = "tbxCIN";
-            this.tbxCIN.Size = new System.Drawing.Size(165, 20);
-            this.tbxCIN.TabIndex = 205;
-            this.tbxCIN.Tag = "";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(257, 59);
-            this.label20.Margin = new System.Windows.Forms.Padding(3);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(24, 13);
-            this.label20.TabIndex = 604;
-            this.label20.Text = "LIN";
-            // 
-            // tbxLIN
-            // 
-            this.tbxLIN.Location = new System.Drawing.Point(330, 59);
-            this.tbxLIN.Name = "tbxLIN";
-            this.tbxLIN.Size = new System.Drawing.Size(166, 20);
-            this.tbxLIN.TabIndex = 206;
-            this.tbxLIN.Tag = "";
-            // 
-            // tbxDL
-            // 
-            this.tbxDL.Location = new System.Drawing.Point(86, 36);
-            this.tbxDL.Name = "tbxDL";
-            this.tbxDL.Size = new System.Drawing.Size(165, 20);
-            this.tbxDL.TabIndex = 203;
-            this.tbxDL.Tag = "";
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(13, 36);
+            this.label14.Location = new System.Drawing.Point(13, 13);
             this.label14.Margin = new System.Windows.Forms.Padding(3);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(21, 13);
             this.label14.TabIndex = 115;
             this.label14.Text = "DL";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(257, 82);
+            this.label6.Margin = new System.Windows.Forms.Padding(3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 807;
+            this.label6.Text = "Purchase";
+            this.label6.Visible = false;
+            // 
+            // tbxDL
+            // 
+            this.tbxDL.Location = new System.Drawing.Point(86, 13);
+            this.tbxDL.Name = "tbxDL";
+            this.tbxDL.Size = new System.Drawing.Size(165, 20);
+            this.tbxDL.TabIndex = 201;
+            this.tbxDL.Tag = "";
+            // 
+            // tbxArea
+            // 
+            this.tbxArea.Location = new System.Drawing.Point(86, 82);
+            this.tbxArea.Name = "tbxArea";
+            this.tbxArea.Size = new System.Drawing.Size(165, 20);
+            this.tbxArea.TabIndex = 207;
+            this.tbxArea.Tag = "";
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(257, 36);
+            this.label15.Location = new System.Drawing.Point(257, 13);
             this.label15.Margin = new System.Windows.Forms.Padding(3);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(29, 13);
@@ -648,11 +576,93 @@
             // 
             // tbxGST
             // 
-            this.tbxGST.Location = new System.Drawing.Point(330, 36);
+            this.tbxGST.Location = new System.Drawing.Point(330, 13);
             this.tbxGST.Name = "tbxGST";
             this.tbxGST.Size = new System.Drawing.Size(166, 20);
-            this.tbxGST.TabIndex = 204;
+            this.tbxGST.TabIndex = 202;
             this.tbxGST.Tag = "";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 82);
+            this.label5.Margin = new System.Windows.Forms.Padding(3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 807;
+            this.label5.Text = "Area";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(13, 36);
+            this.label19.Margin = new System.Windows.Forms.Padding(3);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(25, 13);
+            this.label19.TabIndex = 117;
+            this.label19.Text = "CIN";
+            // 
+            // tbxCIN
+            // 
+            this.tbxCIN.Location = new System.Drawing.Point(86, 36);
+            this.tbxCIN.Name = "tbxCIN";
+            this.tbxCIN.Size = new System.Drawing.Size(165, 20);
+            this.tbxCIN.TabIndex = 203;
+            this.tbxCIN.Tag = "";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(257, 36);
+            this.label20.Margin = new System.Windows.Forms.Padding(3);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(24, 13);
+            this.label20.TabIndex = 604;
+            this.label20.Text = "LIN";
+            // 
+            // tbxLIN
+            // 
+            this.tbxLIN.Location = new System.Drawing.Point(330, 36);
+            this.tbxLIN.Name = "tbxLIN";
+            this.tbxLIN.Size = new System.Drawing.Size(166, 20);
+            this.tbxLIN.TabIndex = 204;
+            this.tbxLIN.Tag = "";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(13, 59);
+            this.label12.Margin = new System.Windows.Forms.Padding(3);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(35, 13);
+            this.label12.TabIndex = 606;
+            this.label12.Text = "S.Tax";
+            // 
+            // tbxServiceTax
+            // 
+            this.tbxServiceTax.Location = new System.Drawing.Point(86, 59);
+            this.tbxServiceTax.Name = "tbxServiceTax";
+            this.tbxServiceTax.Size = new System.Drawing.Size(165, 20);
+            this.tbxServiceTax.TabIndex = 205;
+            this.tbxServiceTax.Tag = "";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(257, 59);
+            this.label11.Margin = new System.Windows.Forms.Padding(3);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 13);
+            this.label11.TabIndex = 608;
+            this.label11.Text = "PAN";
+            // 
+            // tbxPAN
+            // 
+            this.tbxPAN.Location = new System.Drawing.Point(330, 59);
+            this.tbxPAN.Name = "tbxPAN";
+            this.tbxPAN.Size = new System.Drawing.Size(166, 20);
+            this.tbxPAN.TabIndex = 206;
+            this.tbxPAN.Tag = "";
             // 
             // tableLayoutPanel3
             // 
@@ -691,14 +701,6 @@
             this.dgvCompanyDiscount.Tag = "";
             this.dgvCompanyDiscount.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCompanyDiscount_EditingControlShowing);
             this.dgvCompanyDiscount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCompanyDiscount_KeyDown);
-            // 
-            // tbxArea
-            // 
-            this.tbxArea.Location = new System.Drawing.Point(86, 13);
-            this.tbxArea.Name = "tbxArea";
-            this.tbxArea.Size = new System.Drawing.Size(165, 20);
-            this.tbxArea.TabIndex = 201;
-            this.tbxArea.Tag = "";
             // 
             // frmSupplierLedgerAddUpdate
             // 
