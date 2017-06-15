@@ -216,7 +216,7 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.GridSelectionOnSearch(dgvCompanyList, "CompanyName",txtSearch.Text);
+                ExtensionMethods.GridSelectionOnSearch(dgvCompanyList, "CompanyName",txtSearch.Text, this.lblSearchStatus);
                 if (dgvCompanyList.Rows.Count == 0)
                 {
                     if (DialogResult.Yes == MessageBox.Show(Constants.Messages.NotExists, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
