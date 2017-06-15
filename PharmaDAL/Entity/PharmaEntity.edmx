@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -99,7 +99,7 @@
             <PropertyRef Name="CompanyId" />
           </Key>
           <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CompanyCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="CompanyCode" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="IsDirect" Type="bit" Nullable="false" />
@@ -110,6 +110,14 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="ConfigKey" />
+          </Key>
+          <Property Name="ConfigID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigValue" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerCompanyDiscountRef">
           <Key>
@@ -276,7 +284,7 @@
           <Property Name="ClosingQty" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SaltCode" Type="nvarchar" MaxLength="50" />
           <Property Name="SaltName" Type="nvarchar" MaxLength="100" />
-          <Property Name="HSNCode" Type="nvarchar" MaxLength="18" />
+          <Property Name="HSNCode" Type="nvarchar" MaxLength="18" Nullable="false" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -1105,7 +1113,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemMaster_HSNCode">
-          <End Role="HSNCode" Type="Self.HSNCode" Multiplicity="0..1" />
+          <End Role="HSNCode" Type="Self.HSNCode" Multiplicity="1" />
           <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HSNCode">
@@ -1380,6 +1388,7 @@
           <EntitySet Name="BillOutStandings" EntityType="Self.BillOutStandings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BillOutStandingsAudjustment" EntityType="Self.BillOutStandingsAudjustment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configuration" EntityType="Self.Configuration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerCompanyDiscountRef" EntityType="Self.CustomerCompanyDiscountRef" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
@@ -1715,7 +1724,7 @@
             <PropertyRef Name="CompanyId" />
           </Key>
           <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyCode" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="IsDirect" Type="Boolean" Nullable="false" />
@@ -1729,6 +1738,14 @@
           <NavigationProperty Name="CustomerCompanyDiscountRef" Relationship="Self.FK_CustomerCompanyDiscountRef_CompanyMaster" FromRole="CompanyMaster" ToRole="CustomerCompanyDiscountRef" />
           <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="ItemMaster" />
           <NavigationProperty Name="SupplierCompanyDiscountRef" Relationship="Self.FK_SupplierCompanyDiscountRef_CompanyMaster" FromRole="CompanyMaster" ToRole="SupplierCompanyDiscountRef" />
+        </EntityType>
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="ConfigKey" />
+          </Key>
+          <Property Name="ConfigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfigValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerCompanyDiscountRef">
           <Key>
@@ -1912,7 +1929,7 @@
           <Property Name="ClosingQty" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="SaltCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SaltName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="HSNCode" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="HSNCode" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="AccountLedgerMaster1" Relationship="Self.FK_ItemMaster_AccountLedgerMasterPurchase" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ItemMaster_CompanyMaster" FromRole="ItemMaster" ToRole="CompanyMaster" />
@@ -2876,7 +2893,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ItemMaster_HSNCode">
-          <End Role="HSNCode" Type="Self.HSNCode" Multiplicity="0..1" />
+          <End Role="HSNCode" Type="Self.HSNCode" Multiplicity="1" />
           <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HSNCode">
@@ -3067,6 +3084,7 @@
           <EntitySet Name="BillOutStandings" EntityType="Self.BillOutStandings" />
           <EntitySet Name="BillOutStandingsAudjustment" EntityType="Self.BillOutStandingsAudjustment" />
           <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" />
+          <EntitySet Name="Configuration" EntityType="Self.Configuration" />
           <EntitySet Name="CustomerCompanyDiscountRef" EntityType="Self.CustomerCompanyDiscountRef" />
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" />
@@ -3398,6 +3416,15 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configuration">
+            <EntityTypeMapping TypeName="PharmaDBModel.Configuration">
+              <MappingFragment StoreEntitySet="Configuration">
+                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+                <ScalarProperty Name="ConfigKey" ColumnName="ConfigKey" />
+                <ScalarProperty Name="ConfigValue" ColumnName="ConfigValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

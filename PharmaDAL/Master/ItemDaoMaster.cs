@@ -7,14 +7,17 @@ using PharmaDAL.Entity;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace PharmaDAL.Master
 {
     public class ItemDaoMaster : BaseDao
     {
+        string ConnString = "";
+
         public ItemDaoMaster(PharmaBusinessObjects.Master.UserMaster loggedInUser) : base(loggedInUser)
         {
-
+            
         }
 
         public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItems()
@@ -286,11 +289,12 @@ namespace PharmaDAL.Master
 
         public DataTable GetAllItemsBySearch()
         {
-            using (PharmaDBEntities context = new PharmaDBEntities())
-            {
-                List<PharmaBusinessObjects.Master.ItemMaster> itemList = new List<PharmaBusinessObjects.Master.ItemMaster>();
+            ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
 
-                SqlConnection connection = (SqlConnection)context.Database.Connection;
+            using (SqlConnection connection = new SqlConnection(ConnString))
+            {
+
+                List<PharmaBusinessObjects.Master.ItemMaster> itemList = new List<PharmaBusinessObjects.Master.ItemMaster>();
 
                 SqlCommand cmd = new SqlCommand("SELECT * FROM CompanyItemMapping", connection);
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -306,6 +310,7 @@ namespace PharmaDAL.Master
                 }
                 else
                     return new DataTable();
+
 
             }
         }

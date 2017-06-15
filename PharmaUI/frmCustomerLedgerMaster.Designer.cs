@@ -34,6 +34,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
+            this.lblSearchStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerLedger)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,12 +111,25 @@
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
+            // lblSearchStatus
+            // 
+            this.lblSearchStatus.AutoSize = true;
+            this.lblSearchStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblSearchStatus.Location = new System.Drawing.Point(419, 61);
+            this.lblSearchStatus.Name = "lblSearchStatus";
+            this.lblSearchStatus.Size = new System.Drawing.Size(79, 17);
+            this.lblSearchStatus.TabIndex = 205;
+            this.lblSearchStatus.Text = "*Not Found";
+            this.lblSearchStatus.Visible = false;
+            // 
             // frmCustomerLedgerMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(898, 448);
             this.ControlBox = false;
+            this.Controls.Add(this.lblSearchStatus);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAddNew);
@@ -141,5 +155,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAddNew;
+        private System.Windows.Forms.Label lblSearchStatus;
     }
 }

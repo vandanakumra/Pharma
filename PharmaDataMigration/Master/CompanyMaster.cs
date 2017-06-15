@@ -5,6 +5,8 @@ using System.Linq;
 using PharmaDAL.Entity;
 using log4net;
 using System.Reflection;
+using System.Windows.Forms;
+using System.Data.Entity.Validation;
 
 namespace PharmaDataMigration.Master
 {
@@ -44,7 +46,7 @@ namespace PharmaDataMigration.Master
                             {
                                 maxCompanyCode++;
 
-                                string companyCode = maxCompanyCode.ToString().PadLeft(3, '0');
+                                string companyCode = maxCompanyCode.ToString().PadLeft(6, '0');
                                 string originalCompanyCode = Convert.ToString(dr["ACNO"]).TrimEnd();
                                 Common.companyCodeMap.Add(new CompanyCodeMap() { OriginalCompanyCode = originalCompanyCode, MappedCompanyCode = companyCode });
 
@@ -75,6 +77,10 @@ namespace PharmaDataMigration.Master
 
                     return _result;
                 }
+            }
+            catch(DbEntityValidationException ex)
+            {
+                throw new  Exception( string.Join(",", ex.EntityValidationErrors.Select(p => p.ValidationErrors.Select(q => q.ErrorMessage))));
             }
             catch (Exception ex)
             {

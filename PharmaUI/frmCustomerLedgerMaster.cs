@@ -137,7 +137,7 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.GridSelectionOnSearch(dgvCustomerLedger, "CustomerLedgerName", txtSearch.Text);
+                ExtensionMethods.GridSelectionOnSearch(dgvCustomerLedger, "CustomerLedgerName", txtSearch.Text, this.lblSearchStatus);
             }
             catch (Exception ex)
             {

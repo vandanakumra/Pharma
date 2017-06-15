@@ -36,6 +36,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.dgvAccountLedger = new System.Windows.Forms.DataGridView();
+            this.lblSearchStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccountLedger)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,6 +132,18 @@
             this.dgvAccountLedger.Size = new System.Drawing.Size(829, 290);
             this.dgvAccountLedger.TabIndex = 3;
             // 
+            // lblSearchStatus
+            // 
+            this.lblSearchStatus.AutoSize = true;
+            this.lblSearchStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblSearchStatus.Location = new System.Drawing.Point(470, 99);
+            this.lblSearchStatus.Name = "lblSearchStatus";
+            this.lblSearchStatus.Size = new System.Drawing.Size(79, 17);
+            this.lblSearchStatus.TabIndex = 204;
+            this.lblSearchStatus.Text = "*Not Found";
+            this.lblSearchStatus.Visible = false;
+            // 
             // frmAccountLedgerMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,6 +151,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(857, 427);
             this.ControlBox = false;
+            this.Controls.Add(this.lblSearchStatus);
             this.Controls.Add(this.dgvAccountLedger);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -166,5 +180,6 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.DataGridView dgvAccountLedger;
+        private System.Windows.Forms.Label lblSearchStatus;
     }
 }
