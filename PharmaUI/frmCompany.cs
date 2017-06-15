@@ -76,8 +76,8 @@ namespace PharmaUI
             dgvCompanyList.Columns["StockSummaryRequirement"].Visible = true;
             dgvCompanyList.Columns["StockSummaryRequirement"].HeaderText = "Stock Summary Required";
 
-            dgvCompanyList.Columns["Status"].Visible = true;
-            dgvCompanyList.Columns["Status"].HeaderText = "Status";
+            dgvCompanyList.Columns["StatusText"].Visible = true;
+            dgvCompanyList.Columns["StatusText"].HeaderText = "Status";
 
             txtSearch_TextChanged(null, null);
         }

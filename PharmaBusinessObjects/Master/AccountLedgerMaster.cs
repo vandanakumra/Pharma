@@ -23,6 +23,8 @@ namespace PharmaBusinessObjects.Master
         public int? CreditControlCodeID { get; set; }
         public string CreditControlCode { get; set; }
         public bool Status { get; set; }
+        public string StatusText { get; set; }
+        
 
         public decimal? SalePurchaseTaxValue{ get; set; }
 

@@ -8,6 +8,7 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using PharmaBusinessObjects.Common;
 
 namespace PharmaDAL.Master
 {
@@ -65,7 +66,7 @@ namespace PharmaDAL.Master
                     PurchaseTypeRate = p.AccountLedgerMaster1.SalePurchaseTaxType,
                     HSNCode = p.HSNCode,
                     Status = p.Status,
-
+                    StatusText= p.Status ? string.Empty : Constants.Others.Inactive
 
                 }).ToList();
             }

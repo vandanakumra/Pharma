@@ -250,7 +250,8 @@ namespace PharmaUI
             dgvAccountLedger.Columns["CreditControlCode"].Visible = true;
             dgvAccountLedger.Columns["CreditControlCode"].HeaderText = "Credit";
 
-            dgvAccountLedger.Columns["Status"].Visible = true;
+            dgvAccountLedger.Columns["StatusText"].Visible = true;
+            dgvAccountLedger.Columns["StatusText"].HeaderText = "Status";
 
             txtSearch_TextChanged(null,null);
         }

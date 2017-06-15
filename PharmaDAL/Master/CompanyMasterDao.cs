@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PharmaDAL.Entity;
 using static PharmaBusinessObjects.Common.Enums;
+using PharmaBusinessObjects.Common;
 
 namespace PharmaDAL.Master
 {
@@ -28,7 +29,8 @@ namespace PharmaDAL.Master
                                                 CompanyCode = p.CompanyCode,                                               
                                                 IsDirect = p.IsDirect,
                                                 StockSummaryRequired = p.StockSummaryRequired,
-                                                Status = p.Status
+                                                Status = p.Status,
+                                                StatusText = p.Status ? string.Empty : Constants.Others.Inactive
 
                 }).ToList();
 
@@ -54,7 +56,8 @@ namespace PharmaDAL.Master
                     CompanyCode = p.CompanyCode,
                     Status = p.Status,
                     IsDirect = p.IsDirect,
-                    StockSummaryRequired = p.StockSummaryRequired
+                    StockSummaryRequired = p.StockSummaryRequired,
+                    StatusText = p.Status ? string.Empty : Constants.Others.Inactive
                 }).FirstOrDefault();
             }
         }
