@@ -238,8 +238,8 @@
             this.dgvLineItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLineItem.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dgvLineItem.Location = new System.Drawing.Point(8, 116);
-            this.dgvLineItem.MultiSelect = false;
             this.dgvLineItem.Name = "dgvLineItem";
+            this.dgvLineItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvLineItem.Size = new System.Drawing.Size(894, 202);
             this.dgvLineItem.TabIndex = 11;
             // 
@@ -272,8 +272,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 321);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 30);
             this.tableLayoutPanel1.TabIndex = 130;
             // 
@@ -284,7 +284,7 @@
             this.label5.Location = new System.Drawing.Point(4, 4);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 32);
+            this.label5.Size = new System.Drawing.Size(69, 33);
             this.label5.TabIndex = 124;
             this.label5.Text = "Scheme Amount";
             // 
@@ -295,7 +295,7 @@
             this.label42.Location = new System.Drawing.Point(716, 4);
             this.label42.Margin = new System.Windows.Forms.Padding(3);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 32);
+            this.label42.Size = new System.Drawing.Size(66, 33);
             this.label42.TabIndex = 128;
             this.label42.Text = "Total Amount";
             // 
@@ -318,7 +318,7 @@
             this.label6.Location = new System.Drawing.Point(182, 4);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 32);
+            this.label6.Size = new System.Drawing.Size(75, 33);
             this.label6.TabIndex = 125;
             this.label6.Text = "Discount Amount";
             // 
@@ -329,7 +329,7 @@
             this.label8.Location = new System.Drawing.Point(538, 4);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 32);
+            this.label8.Size = new System.Drawing.Size(66, 33);
             this.label8.TabIndex = 127;
             this.label8.Text = "Invoice Amount";
             // 
@@ -364,7 +364,7 @@
             this.label7.Location = new System.Drawing.Point(360, 4);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 32);
+            this.label7.Size = new System.Drawing.Size(66, 33);
             this.label7.TabIndex = 126;
             this.label7.Text = "Tax Amount";
             // 
