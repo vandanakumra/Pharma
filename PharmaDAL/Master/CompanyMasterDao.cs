@@ -67,7 +67,7 @@ namespace PharmaDAL.Master
                     
                 int maxCompanyCode = companyCodeList.Count > 0 ? companyCodeList.Max(p=>Convert.ToInt32(p)) + 1 : 1;
 
-                var companyCode = maxCompanyCode.ToString().PadLeft(3, '0');
+                var companyCode = maxCompanyCode.ToString().PadLeft(6, '0');
 
                 Entity.CompanyMaster table = new Entity.CompanyMaster()
                 {

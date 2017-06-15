@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="22519aa0cca948d4a899102c4a3f3230" Name="Diagram1">
+      <Diagram DiagramId="833c715b142b48bb99158823d8a62ec8" Name="Diagram1">
         <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerMaster" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.AccountLedgerType" Width="1.5" PointX="3.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.AccountType" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="PharmaDBModel.BillOutStandings" Width="1.5" PointX="15" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.BillOutStandingsAudjustment" Width="1.5" PointX="17.25" PointY="21.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CompanyMaster" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.Configuration" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CustomerCompanyDiscountRef" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CustomerLedger" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.CustomerType" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
@@ -19,9 +20,9 @@
         <EntityTypeShape EntityType="PharmaDBModel.HSNCode" Width="1.5" PointX="6" PointY="24.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.ItemMaster" Width="1.5" PointX="8.25" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.Menu" Width="1.5" PointX="15" PointY="32.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.PaymentMode" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.PersonalLedger" Width="1.5" PointX="17.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.PersonLedgerType" Width="1.5" PointX="17.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PaymentMode" Width="1.5" PointX="17.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PersonalLedger" Width="1.5" PointX="17.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.PersonLedgerType" Width="1.5" PointX="2.75" PointY="20.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.PersonRouteMaster" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.Privledges" Width="1.5" PointX="12.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.PurchaseSaleBookHeader" Width="1.5" PointX="12.75" PointY="15.875" IsExpanded="true" />
@@ -41,7 +42,7 @@
         <EntityTypeShape EntityType="PharmaDBModel.TempReceiptPayment" Width="1.5" PointX="18" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.TRN" Width="1.5" PointX="15" PointY="27.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PharmaDBModel.Users" Width="1.5" PointX="15" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PharmaDBModel.VoucherType" Width="1.5" PointX="2.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PharmaDBModel.VoucherType" Width="1.5" PointX="4.75" PointY="20.875" IsExpanded="true" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_AccountLedgerType" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_AccountType" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_AccountLedgerMaster_CreditControlCode" ManuallyRouted="false" />
