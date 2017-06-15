@@ -177,7 +177,7 @@ namespace PharmaUI
                 //Event to allow only decimal entry
                 {
                     tbxConvRate.KeyPress += TbxAllowDecimal_KeyPress;
-                    tbxPacking.KeyPress += TbxAllowDecimal_KeyPress;
+                   // tbxPacking.KeyPress += TbxAllowDecimal_KeyPress;
                     tbxPurchaseRate.KeyPress += TbxAllowDecimal_KeyPress;
                     tbxMRP.KeyPress += TbxAllowDecimal_KeyPress;
                     tbxSaleRate.KeyPress += TbxAllowDecimal_KeyPress;
