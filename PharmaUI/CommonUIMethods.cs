@@ -483,7 +483,7 @@ namespace PharmaUI
         }
 
 
-        public static void GridSelectionOnSearch(DataGridView dgv,string searchColumnName,string searchString)
+        public static void GridSelectionOnSearch(DataGridView dgv,string searchColumnName,string searchString,Label searchResultStatus)
         {
             bool flag = true;
 
@@ -521,7 +521,11 @@ namespace PharmaUI
 
             if (!searchedTextFound)
             {
-
+                searchResultStatus.Visible = true;
+            }
+            else
+            {
+                searchResultStatus.Visible = false ;
             }
 
             dgv.FirstDisplayedScrollingRowIndex = rowIndex1;
