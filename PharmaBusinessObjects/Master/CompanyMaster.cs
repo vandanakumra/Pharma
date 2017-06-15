@@ -18,5 +18,6 @@ namespace PharmaBusinessObjects.Master
         public bool StockSummaryRequired { get; set; }
         public string DirectIndirect { get; set; }
         public string StockSummaryRequirement { get; set; }
+        public string StatusText { get; set; }       
     }
 }

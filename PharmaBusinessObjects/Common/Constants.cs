@@ -24,6 +24,11 @@ namespace PharmaBusinessObjects.Common
             public const string InValidDate = "Please enter valid date with format {DD/MM/YYYY}";
         }
 
+        public static class Others
+        {
+            public const string Inactive = "Inactive";
+        }
+
         public static class RecordType
         {
             public const string ASM = "ASM";

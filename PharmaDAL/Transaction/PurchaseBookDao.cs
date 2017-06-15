@@ -4,6 +4,7 @@ using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
@@ -27,9 +28,10 @@ namespace PharmaDAL.Transaction
             {
                 long PurchaseSaleBookHeaderID = 0;
 
-                using (PharmaDBEntities context = new PharmaDBEntities())
+                string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+                using (SqlConnection connection = new SqlConnection(ConnString))
                 {
-                    SqlConnection connection = (SqlConnection)context.Database.Connection;
 
                     SqlCommand cmd = new SqlCommand("InsertUpdateInvetoryHeadersInTempTable", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -72,11 +74,10 @@ namespace PharmaDAL.Transaction
 
                 List<PurchaseBookAmount> purchaseBookAmounts = new List<PurchaseBookAmount>();
 
-              // lineItem.ExpiryDate = DateTime.Now;
+                string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
 
-                using (PharmaDBEntities context = new PharmaDBEntities())
+                using (SqlConnection connection = new SqlConnection(ConnString))
                 {
-                    SqlConnection connection = (SqlConnection)context.Database.Connection;
 
                     SqlCommand cmd = new SqlCommand("InsertUpdateInvetoryLineItemInTempTable", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -139,11 +140,12 @@ namespace PharmaDAL.Transaction
         {
             try
             {
-                List<PurchaseBookAmount> purchaseBookAmounts = new List<PurchaseBookAmount>();              
+                List<PurchaseBookAmount> purchaseBookAmounts = new List<PurchaseBookAmount>();
 
-                using (PharmaDBEntities context = new PharmaDBEntities())
+                string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+                using (SqlConnection connection = new SqlConnection(ConnString))
                 {
-                    SqlConnection connection = (SqlConnection)context.Database.Connection;
 
                     SqlCommand cmd = new SqlCommand("DeleteInvetoryLineItemInTempTable", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;                  
@@ -240,9 +242,10 @@ namespace PharmaDAL.Transaction
 
         public bool SavePurchaseData(long purchaseBookHeaderID)
         {
-            using (PharmaDBEntities context = new PharmaDBEntities())
+            string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(ConnString))
             {
-                SqlConnection connection = (SqlConnection)context.Database.Connection; ;
                 try
                 {
                     SqlCommand cmd = new SqlCommand("SavePurchaseEntryData", connection);
@@ -267,9 +270,10 @@ namespace PharmaDAL.Transaction
 
             List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> PurchaseAmountList = new List<PharmaBusinessObjects.Transaction.PurchaseBookAmount>();
 
-            using (PharmaDBEntities context = new PharmaDBEntities())
+            string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(ConnString))
             {
-                SqlConnection connection = (SqlConnection)context.Database.Connection;
 
                 SqlCommand cmd = new SqlCommand("GetFinalAmountWithTaxForPurchase", connection);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -348,9 +352,10 @@ namespace PharmaDAL.Transaction
 
                 PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader header = new PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader();
 
-                using (PharmaDBEntities context = new PharmaDBEntities())
+                string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+                using (SqlConnection connection = new SqlConnection(ConnString))
                 {
-                    SqlConnection connection = (SqlConnection)context.Database.Connection;
 
                     SqlCommand cmd = new SqlCommand("GetPurchaseSaleBookHeaderForModify", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -391,9 +396,10 @@ namespace PharmaDAL.Transaction
         {
             List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = new List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem>();
 
-            using (PharmaDBEntities context = new PharmaDBEntities())
+            string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(ConnString))
             {
-                SqlConnection connection = (SqlConnection)context.Database.Connection;
 
                 SqlCommand cmd = new SqlCommand("GetPurchaseSaleBookLineItemsForModify", connection);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;

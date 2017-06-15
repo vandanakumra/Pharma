@@ -33,6 +33,8 @@ namespace PharmaBusinessObjects.Master
         public string ServiceTaxNo { get; set; }
         public string PANNo { get; set; }
         public int PurchaseTypeId { get; set; }
+        public string StatusText { get; set; }
+        
 
         public List<SupplierCompanyDiscount> SupplierCompanyDiscountList { get; set; }
     }

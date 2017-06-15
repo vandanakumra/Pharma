@@ -161,8 +161,6 @@ namespace PharmaUI
             dgvSupplier.Columns["SupplierLedgerName"].HeaderText = "Supplier Name";
             dgvSupplier.Columns["SupplierLedgerName"].FillWeight = 1.5F;
 
-            dgvSupplier.Columns["Status"].Visible = false;
-
             dgvSupplier.Columns["SupplierLedgerShortName"].Visible = true;
             dgvSupplier.Columns["SupplierLedgerShortName"].HeaderText = "Supplier Short Name";
             dgvSupplier.Columns["SupplierLedgerShortName"].FillWeight = 1.3F;
@@ -182,6 +180,9 @@ namespace PharmaUI
             dgvSupplier.Columns["OfficePhone"].Visible = true;
             dgvSupplier.Columns["OfficePhone"].HeaderText = "Office Phone";
             dgvSupplier.Columns["OfficePhone"].FillWeight = 1.5F;
+
+            dgvSupplier.Columns["StatusText"].Visible = true;
+            dgvSupplier.Columns["StatusText"].HeaderText = "Status";
 
             txtSearch_TextChanged(null, null);
         }

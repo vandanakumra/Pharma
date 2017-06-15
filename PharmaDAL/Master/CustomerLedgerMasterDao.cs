@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Entity;
+﻿using PharmaBusinessObjects.Common;
+using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,60 +23,60 @@ namespace PharmaDAL.Master
             {
 
 
-                return context.CustomerLedger.Where(q =>(string.IsNullOrEmpty(searchString) || q.CustomerLedgerName.Contains(searchString)))
+                return context.CustomerLedger.Where(q => (string.IsNullOrEmpty(searchString) || q.CustomerLedgerName.Contains(searchString)))
                                             .Select(p => new PharmaBusinessObjects.Master.CustomerLedgerMaster()
-                    {
-                    CustomerLedgerId = p.CustomerLedgerId,
-                    CustomerLedgerCode = p.CustomerLedgerCode,
-                    CustomerLedgerName = p.CustomerLedgerName,
-                    CustomerLedgerShortName = p.CustomerLedgerShortName,
-                    Address = p.Address,
-                    ContactPerson = p.ContactPerson,
-                    Telephone=p.Telephone,
-                    Mobile = p.Mobile,
-                    OfficePhone = p.OfficePhone,
-                    ResidentPhone = p.ResidentPhone,
-                    EmailAddress = p.EmailAddress,
-                    ZSMId = p.ZSMId,
-                    ZSMName = p.PersonRouteMaster.PersonRouteName,
-                    RSMId = p.RSMId,
-                    RSMName = p.PersonRouteMaster2.PersonRouteName,
-                    ASMId = p.ASMId,
-                    ASMName = p.PersonRouteMaster1.PersonRouteName,
-                    SalesManId = p.SalesManId,
-                    SalesmanName = p.PersonRouteMaster3.PersonRouteName,
-                    AreaId = p.AreaId,
-                    AreaName = p.PersonRouteMaster4.PersonRouteName,
-                    RouteId = p.RouteId,
-                    RouteName = p.PersonRouteMaster5.PersonRouteName,
-                    CreditDebit = p.CreditDebit,
-                    DLNo = p.DLNo,
-                    GSTNo = p.GSTNo,
-                    CINNo = p.CINNo,
-                    LINNo =p.LINNo,
-                    ServiceTaxNo=p.ServiceTaxNo,
-                    PANNo=p.PANNo,
-                    OpeningBal = p.OpeningBal,
-                    TaxRetail = p.TaxRetail,
-                    Status = p.Status,        
-                    CreditLimit = p.CreditLimit,
-                    CustomerTypeID = p.CustomerTypeID,
-                    CustomerTypeName = "",
-                    InterestTypeID =p.InterestTypeID,
-                    InterestTypeName = "",
-                    IsLessExcise = p.IsLessExcise,
-                    RateTypeID = p.RateTypeID,
-                    RateTypeName = "",                 
-                    SaleBillFormat = p.SaleBillFormat,
-                    MaxOSAmount = p.MaxOSAmount,
-                    MaxNumOfOSBill = p.MaxNumOfOSBill,
-                    MaxBillAmount = p.MaxBillAmount,
-                    MaxGracePeriod = p.MaxGracePeriod,
-                    IsFollowConditionStrictly = p.IsFollowConditionStrictly,
-                    Discount = p.Discount,
-                    CentralLocal = p.CentralLocal,
-
-                }).ToList();
+                                            {
+                                                CustomerLedgerId = p.CustomerLedgerId,
+                                                CustomerLedgerCode = p.CustomerLedgerCode,
+                                                CustomerLedgerName = p.CustomerLedgerName,
+                                                CustomerLedgerShortName = p.CustomerLedgerShortName,
+                                                Address = p.Address,
+                                                ContactPerson = p.ContactPerson,
+                                                Telephone = p.Telephone,
+                                                Mobile = p.Mobile,
+                                                OfficePhone = p.OfficePhone,
+                                                ResidentPhone = p.ResidentPhone,
+                                                EmailAddress = p.EmailAddress,
+                                                ZSMId = p.ZSMId,
+                                                ZSMName = p.PersonRouteMaster.PersonRouteName,
+                                                RSMId = p.RSMId,
+                                                RSMName = p.PersonRouteMaster2.PersonRouteName,
+                                                ASMId = p.ASMId,
+                                                ASMName = p.PersonRouteMaster1.PersonRouteName,
+                                                SalesManId = p.SalesManId,
+                                                SalesmanName = p.PersonRouteMaster3.PersonRouteName,
+                                                AreaId = p.AreaId,
+                                                AreaName = p.PersonRouteMaster4.PersonRouteName,
+                                                RouteId = p.RouteId,
+                                                RouteName = p.PersonRouteMaster5.PersonRouteName,
+                                                CreditDebit = p.CreditDebit,
+                                                DLNo = p.DLNo,
+                                                GSTNo = p.GSTNo,
+                                                CINNo = p.CINNo,
+                                                LINNo = p.LINNo,
+                                                ServiceTaxNo = p.ServiceTaxNo,
+                                                PANNo = p.PANNo,
+                                                OpeningBal = p.OpeningBal,
+                                                TaxRetail = p.TaxRetail,
+                                                Status = p.Status,
+                                                CreditLimit = p.CreditLimit,
+                                                CustomerTypeID = p.CustomerTypeID,
+                                                CustomerTypeName = "",
+                                                InterestTypeID = p.InterestTypeID,
+                                                InterestTypeName = "",
+                                                IsLessExcise = p.IsLessExcise,
+                                                RateTypeID = p.RateTypeID,
+                                                RateTypeName = "",
+                                                SaleBillFormat = p.SaleBillFormat,
+                                                MaxOSAmount = p.MaxOSAmount,
+                                                MaxNumOfOSBill = p.MaxNumOfOSBill,
+                                                MaxBillAmount = p.MaxBillAmount,
+                                                MaxGracePeriod = p.MaxGracePeriod,
+                                                IsFollowConditionStrictly = p.IsFollowConditionStrictly,
+                                                Discount = p.Discount,
+                                                CentralLocal = p.CentralLocal,
+                                                StatusText = p.Status ? string.Empty : Constants.Others.Inactive
+                                            }).ToList();
             }
 
         }
@@ -440,6 +441,7 @@ namespace PharmaDAL.Master
                     customer.DueBillCount = Convert.IsDBNull(dt.Rows[0]["DueCount"]) ? 0 : Convert.ToInt32(dt.Rows[0]["DueCount"]);
                     customer.DueBillAmount = Convert.IsDBNull(dt.Rows[0]["DueAmount"]) ? 0L : Convert.ToDouble(dt.Rows[0]["DueAmount"]);
                     customer.SalesManCode = Convert.ToString(dt.Rows[0]["SaleManCode"]);
+                    customer.StatusText = Convert.IsDBNull(dt.Rows[0]["Status"]) ? Constants.Others.Inactive : Convert.ToBoolean(dt.Rows[0]["Status"]) ? string.Empty : Constants.Others.Inactive ;
                 }
 
                 return customer;

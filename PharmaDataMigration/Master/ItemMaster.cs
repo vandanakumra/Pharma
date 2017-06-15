@@ -69,7 +69,7 @@ namespace PharmaDataMigration.Master
                                     companyCodeCounts.Add(new CompanyCodeCounts() { CompanyCode = companyCode, CompanyCodeCount = totalItemsFromSameCompany });
                                 }
 
-                                string itemCode = string.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0'));
+                                string itemCode = string.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft((9 - companyCode.Length), '0'));
                                 string originalItemCode = Convert.ToString(dr["ACNO"]).TrimEnd();
                                 Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = originalItemCode, MappedItemCode = itemCode });
 

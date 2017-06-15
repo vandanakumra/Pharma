@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Entity;
+﻿using PharmaBusinessObjects.Common;
+using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,9 @@ namespace PharmaDAL.Master
                     OfficePhone = p.OfficePhone,
                     ResidentPhone = p.ResidentPhone,
                     EmailAddress=p.EmailAddress,
-                    Status= p.Status                    
+                    Status= p.Status ,
+                    StatusText = p.Status ? string.Empty : Constants.Others.Inactive
+
                 }).ToList();
             }
 

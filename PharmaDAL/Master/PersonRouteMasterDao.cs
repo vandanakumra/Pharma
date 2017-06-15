@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Entity;
+﻿using PharmaBusinessObjects.Common;
+using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,8 @@ namespace PharmaDAL.Master
                     RecordTypeId = p.RecordTypeId,
                     RecordTypeNme = p.RecordType.RecordType1,
                     Status = p.Status,
-                    SystemName = p.RecordType.SystemName
+                    SystemName = p.RecordType.SystemName,
+                    StatusText = p.Status ? string.Empty : Constants.Others.Inactive
                 }).ToList();
             }
         }
@@ -113,7 +115,8 @@ namespace PharmaDAL.Master
                                         RecordTypeId = p.RecordTypeId,
                                         RecordTypeNme = p.RecordType.RecordType1,
                                         Status = p.Status,
-                                        SystemName = p.RecordType.SystemName
+                                        SystemName = p.RecordType.SystemName,
+                                        StatusText = p.Status ? string.Empty : Constants.Others.Inactive
                                     }).ToList();
 
                 return personRoutes;

@@ -135,7 +135,8 @@ namespace PharmaUI
             dgvPersonRoute.Columns["PersonRouteName"].Visible = true;
             dgvPersonRoute.Columns["PersonRouteName"].HeaderText = "Person/Route Name";
 
-            dgvPersonRoute.Columns["Status"].Visible = true;
+            dgvPersonRoute.Columns["StatusText"].Visible = true;
+            dgvPersonRoute.Columns["StatusText"].HeaderText = "Status";
 
             txtSearch_TextChanged(null, null);
         }

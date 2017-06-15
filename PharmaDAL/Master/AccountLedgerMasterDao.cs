@@ -36,7 +36,9 @@ namespace PharmaDAL.Master
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
                     SalePurchaseTaxValue = p.SalePurchaseTaxType,
-                    Status = p.Status
+                    Status = p.Status,
+                    StatusText = p.Status ? string.Empty : Constants.Others.Inactive
+
                 }).ToList();
             }
 
@@ -63,7 +65,8 @@ namespace PharmaDAL.Master
                     OpeningBalance = p.OpeningBalance,
                     CreditDebit = p.CreditDebit,
                     SalePurchaseTaxValue = p.SalePurchaseTaxType,
-                    Status = p.Status
+                    Status = p.Status,
+                    StatusText = p.Status ? string.Empty : Constants.Others.Inactive
 
                 }).FirstOrDefault();
             }
@@ -164,7 +167,8 @@ namespace PharmaDAL.Master
                                           OpeningBalance = p.OpeningBalance,
                                           CreditDebit = p.CreditDebit,
                                           SalePurchaseTaxValue = p.SalePurchaseTaxType,
-                                          Status = p.Status
+                                          Status = p.Status,
+                                          StatusText = p.Status ? string.Empty : Constants.Others.Inactive
                                       }).ToList();
 
                 return accountLedgers;
@@ -198,7 +202,8 @@ namespace PharmaDAL.Master
                                          OpeningBalance = p.OpeningBalance,
                                          CreditDebit = p.CreditDebit,
                                          SalePurchaseTaxValue = p.SalePurchaseTaxType,
-                                         Status = p.Status
+                                         Status = p.Status,
+                                         StatusText = p.Status ? string.Empty : Constants.Others.Inactive
                                      }).FirstOrDefault();
 
                 return accountLedger;

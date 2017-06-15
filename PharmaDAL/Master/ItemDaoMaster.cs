@@ -8,6 +8,7 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using PharmaBusinessObjects.Common;
 
 namespace PharmaDAL.Master
 {
@@ -65,7 +66,7 @@ namespace PharmaDAL.Master
                     PurchaseTypeRate = p.AccountLedgerMaster1.SalePurchaseTaxType,
                     HSNCode = p.HSNCode,
                     Status = p.Status,
-
+                    StatusText= p.Status ? string.Empty : Constants.Others.Inactive
 
                 }).ToList();
             }
@@ -103,7 +104,7 @@ namespace PharmaDAL.Master
 
                             Entity.ItemMaster newItemMasterDB = new Entity.ItemMaster()
                             {
-                                ItemCode = string.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
+                                ItemCode = string.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft((9- newItem.CompanyCode.Length), '0')),
                                 ItemName = newItem.ItemName,
                                 CompanyID = newItem.CompanyID,
                                 ConversionRate = newItem.ConversionRate,
