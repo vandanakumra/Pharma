@@ -103,7 +103,7 @@ namespace PharmaDAL.Master
 
                             Entity.ItemMaster newItemMasterDB = new Entity.ItemMaster()
                             {
-                                ItemCode = string.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft(6, '0')),
+                                ItemCode = string.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft((9- newItem.CompanyCode.Length), '0')),
                                 ItemName = newItem.ItemName,
                                 CompanyID = newItem.CompanyID,
                                 ConversionRate = newItem.ConversionRate,
