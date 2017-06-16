@@ -98,27 +98,40 @@ namespace PharmaUI
 
         private void frmPurchaseBookLineItemUpdate_FormClosing(object sender, FormClosingEventArgs e)
         {
-            decimal value = 0L;
-            decimal.TryParse(txtDiscount.Text, out value);
-            purchaseBookLineItem.Discount = value;
+            DataRow dr = StagingData.ItemList.Select("ItemCode=" + purchaseBookLineItem.ItemCode).FirstOrDefault();
+            if (dr != null)
+            {
+                
+                decimal value = 0L;
+                decimal.TryParse(txtDiscount.Text, out value);
+                purchaseBookLineItem.Discount = value;
+                dr["DiscountRecieved"] = value; 
 
-            decimal.TryParse(txtSpecialDiscount.Text, out value);
-            purchaseBookLineItem.SpecialDiscount = value;
+                decimal.TryParse(txtSpecialDiscount.Text, out value);
+                purchaseBookLineItem.SpecialDiscount = value;
+                dr["SpecialDiscountRecieved"] = value;
 
-            decimal.TryParse(txtVolDiscount.Text, out value);
-            purchaseBookLineItem.VolumeDiscount = value;
+                decimal.TryParse(txtVolDiscount.Text, out value);
+                purchaseBookLineItem.VolumeDiscount = value;
+               // dr["VolumeDiscount"] = value;
 
-            decimal.TryParse(txtMRP.Text, out value);
-            purchaseBookLineItem.MRP = value;
+                decimal.TryParse(txtMRP.Text, out value);
+                purchaseBookLineItem.MRP = value;
+                dr["MRP"] = value;
 
-            //decimal.TryParse(txtExcise.Text, out value);
-            //purchaseBookLineItem.Excise = value;
-            DateTime dt = new DateTime();
-            DateTime.TryParse(dtExpiry.Text, out dt);
-            if (dt == DateTime.MinValue)
-                purchaseBookLineItem.ExpiryDate = null; 
-            else
-                purchaseBookLineItem.ExpiryDate = dt;
+                //decimal.TryParse(txtExcise.Text, out value);
+                //purchaseBookLineItem.Excise = value;
+                DateTime dt = new DateTime();
+                DateTime.TryParse(dtExpiry.Text, out dt);
+                if (dt == DateTime.MinValue)
+                    purchaseBookLineItem.ExpiryDate = null;
+                else
+                {
+                    purchaseBookLineItem.ExpiryDate = dt;
+                    dr["ExpiryDate"] = dt;
+                }
+
+            }
         }
 
         private void EnterKeyDownForTabEvents(Control control)

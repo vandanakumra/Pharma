@@ -94,42 +94,60 @@ namespace PharmaUI
 
         private void frmLineItemDiscount_FormClosing(object sender, FormClosingEventArgs e)
         {
-            decimal value = 0L;
-            decimal.TryParse(txtDiscount.Text, out value);
-            purchaseBookLineItem.Discount = value;
+            DataRow dr = StagingData.ItemList.Select("ItemCode=" + purchaseBookLineItem.ItemCode).FirstOrDefault();
+            if (dr != null)
+            {
 
-            decimal.TryParse(txtSpecialDiscount.Text, out value);
-            purchaseBookLineItem.SpecialDiscount = value;
+                decimal value = 0L;
+                decimal.TryParse(txtDiscount.Text, out value);
+                purchaseBookLineItem.Discount = value;
+                dr["DiscountRecieved"] = value;
 
-            decimal.TryParse(txtVolDiscount.Text, out value);
-            purchaseBookLineItem.VolumeDiscount = value;
+                decimal.TryParse(txtSpecialDiscount.Text, out value);
+                purchaseBookLineItem.SpecialDiscount = value;
+                dr["SpecialDiscountRecieved"] = value;
 
-            decimal.TryParse(txtMRP.Text, out value);
-            purchaseBookLineItem.MRP = value;
+                decimal.TryParse(txtVolDiscount.Text, out value);
+                purchaseBookLineItem.VolumeDiscount = value;
+              //  dr["VolumeDiscount"] = value;
 
-            decimal.TryParse(txtSaleRate.Text, out value);
-            purchaseBookLineItem.SaleRate = value;
+                decimal.TryParse(txtMRP.Text, out value);
+                purchaseBookLineItem.MRP = value;
+                dr["MRP"] = value;
 
-            decimal.TryParse(txtSpecialRate.Text, out value);
-            purchaseBookLineItem.SpecialRate = value;
+                decimal.TryParse(txtSaleRate.Text, out value);
+                purchaseBookLineItem.SaleRate = value;
+                dr["SaleRate"] = value;
 
-            decimal.TryParse(txtWholeSaleRate.Text, out value);
-            purchaseBookLineItem.WholeSaleRate = value;
-          
-            DateTime date = new DateTime();
-            DateTime.TryParse(dtMfgDate.Text, out date);
+                decimal.TryParse(txtSpecialRate.Text, out value);
+                purchaseBookLineItem.SpecialRate = value;
 
-            if (date == DateTime.MinValue)
-                purchaseBookLineItem.PurchaseBillDate = null;
-            else
-                purchaseBookLineItem.PurchaseBillDate = date;
+                decimal.TryParse(txtWholeSaleRate.Text, out value);
+                purchaseBookLineItem.WholeSaleRate = value;
+                dr["WholeSaleRate"] = value;
 
-            date = new DateTime();
-            DateTime.TryParse(dtExpiry.Text, out date);
-            if (date == DateTime.MinValue)
-                purchaseBookLineItem.ExpiryDate = null;
-            else
-                purchaseBookLineItem.ExpiryDate = date;
+                DateTime date = new DateTime();
+                DateTime.TryParse(dtMfgDate.Text, out date);
+              
+
+                if (date == DateTime.MinValue)
+                    purchaseBookLineItem.PurchaseBillDate = null;
+                else
+                {
+                    purchaseBookLineItem.PurchaseBillDate = date;
+                    //dr["PurchaseBillDate"] = date;
+                }
+
+                date = new DateTime();
+                DateTime.TryParse(dtExpiry.Text, out date);
+                if (date == DateTime.MinValue)
+                    purchaseBookLineItem.ExpiryDate = null;
+                else
+                {
+                    purchaseBookLineItem.ExpiryDate = date;
+                    dr["ExpiryDate"] = date;
+                }
+            }
             
         }
 

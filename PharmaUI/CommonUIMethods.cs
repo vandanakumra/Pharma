@@ -21,6 +21,8 @@ namespace PharmaUI
         public string ControlName { get; set; }
     }
 
+    
+
 
     public static class ExtensionMethods
     {
@@ -503,6 +505,7 @@ namespace PharmaUI
 
             int rowIndex1 = 0;
             bool searchedTextFound = false;
+
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 if (row.Cells[searchColumnName].Value.ToString().Replace(" ","").ToLower().StartsWith(searchString.ToLower().Replace(" ","")))

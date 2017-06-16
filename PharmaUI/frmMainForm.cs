@@ -39,12 +39,14 @@ namespace PharmaUI
 
                 List<Control> allControls = ExtensionMethods.GetAllControls(this);
                 allControls.ForEach(k => k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize));
-
-
+                              
+               
                 // ToggleMenuItems(menuStrip1.Items);
                 frmDefault form = new frmDefault();
                 ExtensionMethods.AddFormToPanel(form, pnlMain);
                 form.Show();
+
+                StagingData.SetItemListData(applicationFacade.GetAllItemsBySearch());
 
             }
             catch (Exception ex)

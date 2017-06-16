@@ -179,6 +179,11 @@
     <Compile Include="frmPrivledgeAddUpdate.Designer.cs">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="PharmaDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PharmaDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Purchase Entry\frmAllBillForSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +318,7 @@
     <Compile Include="Sale Entry\frmSaleEntryFixedDiscount.Designer.cs">
       <DependentUpon>frmSaleEntryFixedDiscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="StagingData.cs" />
     <Compile Include="ucSupplierCustomerInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -434,6 +440,7 @@
     <EmbeddedResource Include="ReceiptPayment\frmReceiptPaymentAdjustment.resx">
       <DependentUpon>frmReceiptPaymentAdjustment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PurchaseInvoice.rdlc" />
     <EmbeddedResource Include="Sale Entry\frmChangeType.resx">
       <DependentUpon>frmChangeType.cs</DependentUpon>
     </EmbeddedResource>
@@ -450,6 +457,17 @@
       <DependentUpon>ucSupplierCustomerInfo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="PharmaDBDataSet.xsc">
+      <DependentUpon>PharmaDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PharmaDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PharmaDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PharmaDBDataSet.xss">
+      <DependentUpon>PharmaDBDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -502,8 +520,6 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reports\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
