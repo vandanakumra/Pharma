@@ -60,6 +60,7 @@ namespace PharmaBusinessObjects.Master
         public decimal ?  Discount { get; set; }
         public string CentralLocal { get; set; }
         public List<CustomerCopanyDiscount> CustomerCopanyDiscountList { get; set; }
+        public string StatusText { get; set; }       
 
         #region SaleEntry
         public string SalesManCode { get; set; }

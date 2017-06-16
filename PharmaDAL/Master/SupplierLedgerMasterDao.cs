@@ -1,4 +1,5 @@
-﻿using PharmaBusinessObjects.Master;
+﻿using PharmaBusinessObjects.Common;
+using PharmaBusinessObjects.Master;
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,9 @@ namespace PharmaDAL.Master
                     LINNo = p.LINNo,
                     ServiceTaxNo = p.ServiceTaxNo,
                     PANNo = p.PANNo,
-                    Status = p.Status
+                    Status = p.Status,
+                    StatusText = p.Status ? string.Empty : Constants.Others.Inactive
+
                 }).ToList();
             }
 
@@ -76,7 +79,8 @@ namespace PharmaDAL.Master
                     LINNo = p.LINNo,
                     ServiceTaxNo = p.ServiceTaxNo,
                     PANNo = p.PANNo,
-                    Status = p.Status
+                    Status = p.Status,
+                    StatusText = p.Status ? string.Empty : Constants.Others.Inactive
                 }).FirstOrDefault();
 
             }

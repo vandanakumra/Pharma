@@ -107,6 +107,7 @@ namespace PharmaDAL.Transaction
                     info.TaxAmount = Convert.IsDBNull(dt.Rows[0]["TaxOnSale"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["TaxOnSale"]);
                     info.Scheme1 = Convert.IsDBNull(dt.Rows[0]["Scheme1"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["Scheme1"]);
                     info.Scheme2 = Convert.IsDBNull(dt.Rows[0]["Scheme2"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["Scheme2"]);
+                    info.Balance = Convert.IsDBNull(dt.Rows[0]["Balance"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["Balance"]);
                     info.IsHalf = Convert.IsDBNull(dt.Rows[0]["IsHalfScheme"]) ? false : Convert.ToBoolean(dt.Rows[0]["IsHalfScheme"]);
                     info.CaseQty = Convert.IsDBNull(dt.Rows[0]["QtyPerCase"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["QtyPerCase"]);
                     info.SaleType = Convert.ToString(dt.Rows[0]["AccountLedgerName"]);

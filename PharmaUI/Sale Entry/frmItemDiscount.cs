@@ -85,9 +85,9 @@ namespace PharmaUI
             ischange = saleLineItem.Discount != value;
             saleLineItem.Discount = value;
 
-            decimal.TryParse(txtDiscount.Text, out value);
+            decimal.TryParse(txtSpecialDiscount.Text, out value);
             ischange = ischange || saleLineItem.SpecialDiscount != value;
-            saleLineItem.Discount = value;
+            saleLineItem.SpecialDiscount = value;
 
             if (ischange)
             {

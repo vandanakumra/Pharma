@@ -21,5 +21,7 @@ namespace PharmaBusinessObjects.Master
         public string ResidentPhone { get; set; }
         public string EmailAddress { get; set; }
         public bool Status { get; set; }
+        public string StatusText { get; set; }
+        
     }
 }

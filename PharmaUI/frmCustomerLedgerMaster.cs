@@ -121,11 +121,11 @@ namespace PharmaUI
             dgvCustomerLedger.Columns["CreditDebit"].Visible = true;
             dgvCustomerLedger.Columns["CreditDebit"].HeaderText = "CreditDebit";
 
-            dgvCustomerLedger.Columns["Status"].Visible = true;
-            dgvCustomerLedger.Columns["Status"].HeaderText = "Status";
+            dgvCustomerLedger.Columns["StatusText"].Visible = true;
+            dgvCustomerLedger.Columns["StatusText"].HeaderText = "Status";
 
             //Change order
-            dgvCustomerLedger.Columns["Status"].DisplayIndex = dgvCustomerLedger.ColumnCount - 1;
+            dgvCustomerLedger.Columns["StatusText"].DisplayIndex = dgvCustomerLedger.ColumnCount - 1;
 
             txtSearch_TextChanged(null, null);
 
