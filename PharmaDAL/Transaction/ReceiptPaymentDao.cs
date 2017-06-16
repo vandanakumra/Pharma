@@ -116,7 +116,7 @@ namespace PharmaDAL.Transaction
             }
             catch (DbEntityValidationException ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -152,7 +152,7 @@ namespace PharmaDAL.Transaction
             }
             catch(Exception ex)
             {
-                throw;
+                throw ex;
             }         
         }
 

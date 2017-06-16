@@ -187,17 +187,22 @@ namespace PharmaUI
        
         private void LoadDataGrid()
         {
-            string searchBy = "Name";
+           // string searchBy = "Name";
 
-            if (isOpenAsChild)
+            //if (isOpenAsChild)
             {
                 dgvItemList.ColumnHeadersVisible = false;
             }
 
+
+            //DataView dv = applicationFacade.GetAllItemsBySearch().DefaultView;
+            //dv.Sort = "ItemName";
+            //DataTable sortedDT = dv.ToTable();
+
             dgvItemList.DataSource = applicationFacade.GetAllItemsBySearch();
-                
+
            //applicationFacade.GetAllItemsBySearch(null, searchBy).OrderBy(p=>p.ItemName).ToList();
-           ExtensionMethods.SetGridDefaultProperty(dgvItemList);
+            ExtensionMethods.SetGridDefaultProperty(dgvItemList);
 
            dgvItemList.Columns["ItemName"].Visible = true;
             //dgvItemList.Columns["ItemName"].HeaderText = "Item";
