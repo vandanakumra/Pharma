@@ -316,12 +316,15 @@ namespace PharmaUI
                     double balance = 0;
                     double.TryParse(lblBalance.Text, out balance);
 
+                    double freeQuantity = 0;
+                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out freeQuantity);
+
                     if (value == 0)
                     {
                         dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
                         return;
                     }
-                    else if(balance < value)
+                    else if (balance < (value + freeQuantity))
                     {
                         MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
                         dgvLineItem.BeginEdit(true);
@@ -331,7 +334,25 @@ namespace PharmaUI
                     {
                         InsertUpdateLineItemAndsetToGrid(lineItem);
                         OpenDialogAndMoveToNextControl();
-                        SetFooterInfo(lineItem.ItemCode, lineItem.FifoID??0);
+                        SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
+                    }
+                }
+                else if (columnName == "FreeQuantity")
+                {
+                    double value = 0;
+                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value), out value);
+
+                    double balance = 0;
+                    double.TryParse(lblBalance.Text, out balance);
+
+                    double freeQuantity = 0;
+                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out freeQuantity);
+
+                    if (balance < (value + freeQuantity))
+                    {
+                        MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
+                        dgvLineItem.BeginEdit(true);
+                        return;
                     }
                 }
                 else if (columnName == "SaleRate")
