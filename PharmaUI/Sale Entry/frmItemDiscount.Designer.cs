@@ -32,6 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtDiscount = new System.Windows.Forms.TextBox();
             this.txtSpecialDiscount = new System.Windows.Forms.TextBox();
+            this.txtVolumeDiscount = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -46,7 +48,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(231, 60);
+            this.label2.Location = new System.Drawing.Point(450, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 1;
@@ -54,23 +56,41 @@
             // 
             // txtDiscount
             // 
-            this.txtDiscount.Location = new System.Drawing.Point(95, 57);
+            this.txtDiscount.Location = new System.Drawing.Point(85, 57);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(100, 20);
             this.txtDiscount.TabIndex = 2;
             // 
             // txtSpecialDiscount
             // 
-            this.txtSpecialDiscount.Location = new System.Drawing.Point(358, 57);
+            this.txtSpecialDiscount.Location = new System.Drawing.Point(560, 57);
             this.txtSpecialDiscount.Name = "txtSpecialDiscount";
             this.txtSpecialDiscount.Size = new System.Drawing.Size(100, 20);
             this.txtSpecialDiscount.TabIndex = 3;
+            // 
+            // txtVolumeDiscount
+            // 
+            this.txtVolumeDiscount.Location = new System.Drawing.Point(324, 57);
+            this.txtVolumeDiscount.Name = "txtVolumeDiscount";
+            this.txtVolumeDiscount.Size = new System.Drawing.Size(100, 20);
+            this.txtVolumeDiscount.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(214, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Volume Discount (%)";
             // 
             // frmItemDiscount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 96);
+            this.ClientSize = new System.Drawing.Size(730, 96);
+            this.Controls.Add(this.txtVolumeDiscount);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSpecialDiscount);
             this.Controls.Add(this.txtDiscount);
             this.Controls.Add(this.label2);
@@ -90,5 +110,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDiscount;
         private System.Windows.Forms.TextBox txtSpecialDiscount;
+        private System.Windows.Forms.TextBox txtVolumeDiscount;
+        private System.Windows.Forms.Label label3;
     }
 }

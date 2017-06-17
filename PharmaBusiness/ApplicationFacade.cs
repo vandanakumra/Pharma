@@ -991,11 +991,11 @@ namespace PharmaBusiness
             }
         }
 
-        public void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, string itemCode, string customerCode)
+        public void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, decimal volumeDiscount,string itemCode, string customerCode)
         {
             try
             {
-                new SaleBiz(this.LoggedInUser).UpdateSaleDiscount(changeType, discount, specialDiscount, itemCode, customerCode);
+                new SaleBiz(this.LoggedInUser).UpdateSaleDiscount(changeType, discount, specialDiscount, volumeDiscount, itemCode, customerCode);
             }
             catch (Exception)
             {

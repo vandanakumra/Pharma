@@ -336,19 +336,7 @@ namespace PharmaUI
                 }
                 else if (columnName == "SaleRate")
                 {
-                    double value = 0;
-                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value), out value);
-
-                    if (value == 0)
-                    {
-                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["SaleRate"];
-                        return;
-                    }
-                    else
-                    {
-                        InsertUpdateLineItemAndsetToGrid(lineItem);
-                        OpenDialogAndMoveToNextControl();
-                    }
+                    ValidateSaleRate(rowIndex, true);
                 }
                 else
                 {
@@ -360,6 +348,47 @@ namespace PharmaUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ValidateSaleRate(int rowIndex, bool isEdit)
+        {
+
+            double value = 0;
+            double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value), out value);
+
+            if (value == 0)
+            {
+                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["SaleRate"];
+                return;
+            }
+            else
+            {
+                double purchaseSaleRate = 0;
+                double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out purchaseSaleRate);
+
+                if (purchaseSaleRate > value)
+                {
+                    if (MessageBox.Show(string.Format("Cost of this item {0} is greater than purchase rate. Do you want to continue?", purchaseSaleRate.ToString("#.##")), "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        if(isEdit)
+                            InsertUpdateLineItemAndsetToGrid(lineItem);
+                        OpenDialogAndMoveToNextControl();
+                    }
+                    else
+                    {
+                        if (isEdit)
+                            dgvLineItem.BeginEdit(true);
+                        else
+                            dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["SaleRate"];
+                    }
+                }
+                else
+                {
+                    if(isEdit)
+                        InsertUpdateLineItemAndsetToGrid(lineItem);
+                    OpenDialogAndMoveToNextControl();
+                }
             }
         }
 
