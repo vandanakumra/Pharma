@@ -155,31 +155,31 @@ namespace PharmaUI
 
             dgvSupplier.Columns["SupplierLedgerCode"].Visible = true;
             dgvSupplier.Columns["SupplierLedgerCode"].HeaderText = "Supplier Code";
-            dgvSupplier.Columns["SupplierLedgerCode"].FillWeight = 1;
+          //  dgvSupplier.Columns["SupplierLedgerCode"].FillWeight = 1;
 
             dgvSupplier.Columns["SupplierLedgerName"].Visible = true;
             dgvSupplier.Columns["SupplierLedgerName"].HeaderText = "Supplier Name";
-            dgvSupplier.Columns["SupplierLedgerName"].FillWeight = 1.5F;
+           // dgvSupplier.Columns["SupplierLedgerName"].FillWeight = 1.5F;
 
             dgvSupplier.Columns["SupplierLedgerShortName"].Visible = true;
             dgvSupplier.Columns["SupplierLedgerShortName"].HeaderText = "Supplier Short Name";
-            dgvSupplier.Columns["SupplierLedgerShortName"].FillWeight = 1.3F;
+          //  dgvSupplier.Columns["SupplierLedgerShortName"].FillWeight = 1.3F;
 
             dgvSupplier.Columns["Address"].Visible = true;
             dgvSupplier.Columns["Address"].HeaderText = "Address";
-            dgvSupplier.Columns["Address"].FillWeight = 2;
+        //    dgvSupplier.Columns["Address"].FillWeight = 2;
 
             dgvSupplier.Columns["ContactPerson"].Visible = true;
             dgvSupplier.Columns["ContactPerson"].HeaderText = "Contact Person";
-            dgvSupplier.Columns["ContactPerson"].FillWeight = 1.5F;
+        //    dgvSupplier.Columns["ContactPerson"].FillWeight = 1.5F;
 
             dgvSupplier.Columns["AreaName"].Visible = true;
             dgvSupplier.Columns["AreaName"].HeaderText = "Area Name";
-            dgvSupplier.Columns["AreaName"].FillWeight = 1.5F;
+        //    dgvSupplier.Columns["AreaName"].FillWeight = 1.5F;
 
             dgvSupplier.Columns["OfficePhone"].Visible = true;
             dgvSupplier.Columns["OfficePhone"].HeaderText = "Office Phone";
-            dgvSupplier.Columns["OfficePhone"].FillWeight = 1.5F;
+        //    dgvSupplier.Columns["OfficePhone"].FillWeight = 1.5F;
 
             dgvSupplier.Columns["StatusText"].Visible = true;
             dgvSupplier.Columns["StatusText"].HeaderText = "Status";
