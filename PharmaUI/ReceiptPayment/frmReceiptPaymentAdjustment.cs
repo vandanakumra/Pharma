@@ -100,11 +100,11 @@ namespace PharmaUI.ReceiptPayment
                 dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
 
             }
-            else if (enteredAmount > correspondingOSAmount)
-            {
-                MessageBox.Show("Entered amount is greater than OS amount !");
-                dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
-            }
+            //else if (enteredAmount > correspondingOSAmount)
+            //{
+            //    MessageBox.Show("Entered amount is greater than OS amount !");
+            //    dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
+            //}
             else if (enteredAmount > 0)
             {
                 CurrentTransactionEntity.EntityBalAmount = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount - enteredAmount;

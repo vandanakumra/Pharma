@@ -72,6 +72,7 @@ namespace PharmaDAL.Transaction
                 return context.BillOutStandings.Where(q=>q.LedgerType== entity.EntityType 
                                                             && q.LedgerTypeCode == entity.EntityCode
                                                             && q.OSAmount > 0)
+                                               .OrderBy(x => x.BillOutStandingsID)
                 .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
                 {
                                 BillOutStandingsID = p.BillOutStandingsID,
@@ -101,6 +102,7 @@ namespace PharmaDAL.Transaction
                                                                 q.ReceiptPaymentID == entity.ReceiptPaymentID &&
                                                                 q.LedgerType == entity.EntityType
                                                                 && q.LedgerTypeCode == entity.EntityCode)
+                                                                 .OrderBy(x => x.BillOutStandingsID)
                     .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
                     {
                         BillOutStandingsAudjustmentID = p.BillOutStandingsAudjustmentID,
@@ -131,6 +133,7 @@ namespace PharmaDAL.Transaction
                                                                 && q.LedgerTypeCode == entity.EntityCode
                                                                // && q.OSAmount > 0
                                                                 )
+                                                                 .OrderBy(x => x.BillOutStandingsID)
                     .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
                     {
                         BillOutStandingsID = p.BillOutStandingsID,
