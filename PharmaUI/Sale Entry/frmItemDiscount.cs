@@ -42,6 +42,7 @@ namespace PharmaUI
         private void FillFormForUpdate()
         {
             txtDiscount.Text = (saleLineItem.Discount??0).ToString("#.##");
+            txtVolumeDiscount.Text = (saleLineItem.VolumeDiscount ?? 0).ToString("#.##");
             txtSpecialDiscount.Text = (saleLineItem.SpecialDiscount ?? 0).ToString("#.##");
         }
 
@@ -89,6 +90,10 @@ namespace PharmaUI
             ischange = ischange || saleLineItem.SpecialDiscount != value;
             saleLineItem.SpecialDiscount = value;
 
+            decimal.TryParse(txtVolumeDiscount.Text, out value);
+            ischange = ischange || saleLineItem.VolumeDiscount != value;
+            saleLineItem.VolumeDiscount = value;
+
             if (ischange)
             {
                 frmChangeType changeType = new frmChangeType();
@@ -107,7 +112,10 @@ namespace PharmaUI
 
             decimal specialDiscount;
             decimal.TryParse(txtSpecialDiscount.Text, out specialDiscount);
-            applicationFacade.UpdateSaleDiscount(changeType.ChangeType, discount, specialDiscount, saleLineItem.ItemCode, customerCode);
+
+            decimal volumeDiscount;
+            decimal.TryParse(txtVolumeDiscount.Text, out volumeDiscount);
+            applicationFacade.UpdateSaleDiscount(changeType.ChangeType, discount, specialDiscount, volumeDiscount,saleLineItem.ItemCode, customerCode);
 
             this.Close();
         }

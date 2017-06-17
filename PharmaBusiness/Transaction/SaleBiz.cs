@@ -41,9 +41,9 @@ namespace PharmaBusiness.Transaction
             return new SaleEntryDao(this.LoggedInUser).InsertUpdateTempPurchaseBookLineItemForSale(lineItem);
         }
 
-        internal void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, string itemCode, string customerCode)
+        internal void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, decimal volumeDiscount,string itemCode, string customerCode)
         {
-            new SaleEntryDao(this.LoggedInUser).UpdateSaleDiscount(changeType, discount, specialDiscount, itemCode, customerCode);
+            new SaleEntryDao(this.LoggedInUser).UpdateSaleDiscount(changeType, discount, specialDiscount, volumeDiscount, itemCode, customerCode);
         }
     }
 }

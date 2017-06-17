@@ -136,7 +136,10 @@ namespace PharmaDAL.Transaction
                 //List<PurchaseBookAmount> purchaseBookAmounts = new List<PurchaseBookAmount>();
 
                 // lineItem.ExpiryDate = DateTime.Now;
-
+                lineItem.CreatedBy = LoggedInUser.Username;
+                lineItem.ModifiedBy = LoggedInUser.Username;
+                lineItem.CreatedOn = DateTime.Now;
+                lineItem.ModifiedOn = DateTime.Now;
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
                     SqlConnection connection = (SqlConnection)context.Database.Connection;
@@ -241,7 +244,7 @@ namespace PharmaDAL.Transaction
             }
         }
 
-        public void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, string itemCode, string customerCode)
+        public void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, decimal volumeDiscount,string itemCode, string customerCode)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -262,9 +265,10 @@ namespace PharmaDAL.Transaction
                     if (disItem != null)
                     {
                         disItem.Normal = discount;
-                        master.SpecialDiscount = specialDiscount;
+                       
                     }
-
+                    master.SpecialDiscount = specialDiscount;
+                    
                 }
 
                 context.SaveChanges();

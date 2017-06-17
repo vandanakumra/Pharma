@@ -152,7 +152,7 @@ namespace PharmaBusinessObjects
         PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerByCode(string code);
         SaleLineItemInfo GetSaleLineItemInfo(string code, long fifoID);
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> InsertUpdateTempPurchaseBookLineItemForSale(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem);
-        void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, string itemCode, string customerCode);
+        void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, decimal volumeDiscount,string itemCode, string customerCode);
             #endregion
     }
 
