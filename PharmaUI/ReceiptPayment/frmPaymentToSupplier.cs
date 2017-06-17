@@ -69,7 +69,7 @@ namespace PharmaUI.ReceiptPayment
             try
             {
                 DataGridViewRow row = dgvPaymentToSupplier.CurrentRow;
-                if(row.Cells["ReceiptPaymentID"].Value != null)
+                if(row!= null && row.Cells["ReceiptPaymentID"].Value != null)
                 {
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
