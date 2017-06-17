@@ -48,7 +48,7 @@ namespace PharmaUI.ReceiptPayment
                 dgvPaymentToSupplier.KeyDown += DgvPaymentToSupplier_KeyDown;
                 dgvPaymentToSupplier.CellEndEdit += DgvPaymentToSupplier_CellEndEdit;
                 // dgvPaymentToSupplier.EditingControlShowing += dgvCustomerItemDiscount_EditingControlShowing;
-
+                dgvPaymentToSupplier.SelectionChanged += DgvPaymentToSupplier_SelectionChanged;
 
                 string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
                 format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
@@ -59,6 +59,30 @@ namespace PharmaUI.ReceiptPayment
 
             }
             catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DgvPaymentToSupplier_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridViewRow row = dgvPaymentToSupplier.CurrentRow;
+                if(row.Cells["ReceiptPaymentID"].Value != null)
+                {
+                    TransactionEntity transactionEntity = new TransactionEntity()
+                    {
+                        ReceiptPaymentID=(long)row.Cells["ReceiptPaymentID"].Value,
+                        EntityType = Constants.TransactionEntityType.SupplierLedger,
+                        EntityCode =Convert.ToString(row.Cells["LedgerTypeCode"].Value),
+                    };
+
+                    LoadGridBillOutstanding(transactionEntity);
+                    LoadGridBillAdjusted(transactionEntity);
+                }
+            }
+            catch (Exception ex )
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -110,6 +134,7 @@ namespace PharmaUI.ReceiptPayment
             dgvPaymentToSupplier.Columns["LedgerTypeName"].Visible = true;
             dgvPaymentToSupplier.Columns["LedgerTypeName"].HeaderText = "Party Name";
             dgvPaymentToSupplier.Columns["LedgerTypeName"].DisplayIndex = 1;
+            dgvPaymentToSupplier.Columns["LedgerTypeName"].ReadOnly = true;
 
             dgvPaymentToSupplier.Columns["ChequeNumber"].Visible = true;
             dgvPaymentToSupplier.Columns["ChequeNumber"].HeaderText = "Cheque Number";
@@ -174,13 +199,9 @@ namespace PharmaUI.ReceiptPayment
             dgvSupplierBillAdjusted.Columns["InvoiceDate"].HeaderText = "Bill Date";
             dgvSupplierBillAdjusted.Columns["InvoiceDate"].DisplayIndex = 1;
 
-            dgvSupplierBillAdjusted.Columns["OSAmount"].Visible = true;
-            dgvSupplierBillAdjusted.Columns["OSAmount"].HeaderText = "Outstanding Amount";
-            dgvSupplierBillAdjusted.Columns["OSAmount"].DisplayIndex = 2;
-
             dgvSupplierBillAdjusted.Columns["Amount"].Visible = true;
             dgvSupplierBillAdjusted.Columns["Amount"].HeaderText = "Adjusted Amount";
-            dgvSupplierBillAdjusted.Columns["Amount"].DisplayIndex = 3;
+            dgvSupplierBillAdjusted.Columns["Amount"].DisplayIndex = 2;
 
             //Display totall of adjusted amount
             decimal totallAdjusted = 0;
@@ -286,6 +307,7 @@ namespace PharmaUI.ReceiptPayment
             {
                 if (e.KeyData == Keys.Enter && dgvPaymentToSupplier.Rows.Count > 0)
                 {
+                    e.Handled = true;
                     Grid_CellNextlAction();
                 }
             }
@@ -410,8 +432,16 @@ namespace PharmaUI.ReceiptPayment
                 }
                 else
                 {
-                    dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CHEQUE;
-                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeDate"];
+                    if (Convert.ToString(dgvPaymentToSupplier.CurrentCell.Value).Length > 10)
+                    {
+                        dgvPaymentToSupplier.CurrentCell.ErrorText = Constants.Messages.InValidCheque;
+                    }
+                    else
+                    {
+                        dgvPaymentToSupplier.CurrentCell.ErrorText = string.Empty;
+                        dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CHEQUE;
+                        dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeDate"];
+                    }
                 }
             }
             else if (columnName == "ChequeDate")
