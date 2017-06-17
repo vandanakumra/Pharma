@@ -408,7 +408,7 @@ namespace PharmaUI.ReceiptPayment
                 }
                 else
                 {
-                    if (String.IsNullOrWhiteSpace(Convert.ToString(dgvPaymentToSupplier.CurrentCell.Value)) || Convert.ToString(dgvPaymentToSupplier.CurrentCell.Value).Length > 10)
+                    if (Convert.ToString(dgvPaymentToSupplier.CurrentCell.Value).Length > 10)
                     {
                         dgvPaymentToSupplier.CurrentCell.ErrorText = Constants.Messages.InValidCheque;
                     }
