@@ -12,6 +12,7 @@ using PharmaBusinessObjects;
 using PharmaBusinessObjects.Master;
 using PharmaBusinessObjects.Common;
 using System.Reflection;
+using System.Threading;
 
 namespace PharmaUI
 {
@@ -32,7 +33,9 @@ namespace PharmaUI
 
                 isOpenAsChild = _isOpenAsChild;
 
-                
+                timer = new System.Threading.Timer((c) => LoadData(), null, Timeout.Infinite, Timeout.Infinite);
+
+
             }
             catch (Exception ex)
             {
@@ -176,6 +179,7 @@ namespace PharmaUI
             try
             {
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                StagingData.SetItemListData(applicationFacade.GetAllItemsBySearch());
                 LoadDataGrid();
             }
             catch (Exception ex)
@@ -187,31 +191,33 @@ namespace PharmaUI
        
         private void LoadDataGrid()
         {
-            string searchBy = "Name";
+            // string searchBy = "Name";
 
             if (isOpenAsChild)
             {
                 dgvItemList.ColumnHeadersVisible = false;
             }
 
-            dgvItemList.DataSource = applicationFacade.GetAllItemsBySearch();
-                
+            dgvItemList.DataSource = StagingData.ItemList;
+
            //applicationFacade.GetAllItemsBySearch(null, searchBy).OrderBy(p=>p.ItemName).ToList();
-           ExtensionMethods.SetGridDefaultProperty(dgvItemList);
+            ExtensionMethods.SetGridDefaultProperty(dgvItemList);
 
            dgvItemList.Columns["ItemName"].Visible = true;
-            //dgvItemList.Columns["ItemName"].HeaderText = "Item";
+            dgvItemList.Columns["ItemName"].HeaderText = "Item";
 
             dgvItemList.Columns["CompanyName"].Visible = true;
-            ////dgvItemList.Columns["CompanyName"].HeaderText = "Company";
+            dgvItemList.Columns["CompanyName"].HeaderText = "Company";
 
             dgvItemList.Columns["Packing"].Visible = true;
-            //dgvItemList.Columns["Packing"].HeaderText = "Pack";
+            dgvItemList.Columns["Packing"].HeaderText = "Pack";
 
             dgvItemList.Columns["QtyPerCase"].Visible = true;
-            //dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
+            dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
 
-           
+            txtSearch_TextChanged(null, null);
+
+
         }
 
         private void DgvItemList_KeyDown(object sender, KeyEventArgs e)
@@ -235,11 +241,25 @@ namespace PharmaUI
             }
         }
 
+        private System.Threading.Timer timer;
+
+        public void LoadData()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(LoadData));
+            }
+            else
+            {
+                ExtensionMethods.GridSelectionOnSearch(dgvItemList, "ItemName", txtSearch.Text, this.lblSearchStatus);
+            }
+        }
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             try
-            {
-                ExtensionMethods.GridSelectionOnSearch(dgvItemList,"ItemName",txtSearch.Text, this.lblSearchStatus);
+            {                
+                ExtensionMethods.GridSelectionOnSearch(dgvItemList, "ItemName", txtSearch.Text, this.lblSearchStatus);               
             }
             catch (Exception ex)
             {
@@ -247,6 +267,7 @@ namespace PharmaUI
             }
             
         }
+
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

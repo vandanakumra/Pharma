@@ -430,6 +430,7 @@ namespace PharmaDAL.Transaction
                             OldPurchaseSaleRate = Convert.ToDecimal(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
                             EffecivePurchaseSaleRate = Convert.ToDecimal(row["EffecivePurchaseSaleRate"] == DBNull.Value ? 0 : row["EffecivePurchaseSaleRate"]),
                             PurchaseSaleTypeCode = Convert.ToString(row["PurchaseSaleTypeCode"]),
+                            PurchaseSaleTax = Convert.ToDecimal(row["PurchaseSaleTax"] == DBNull.Value ? 0 : row["PurchaseSaleTax"]),
                             SurCharge = Convert.ToDecimal(row["SurCharge"] == DBNull.Value ? 0 : row["SurCharge"]),
                             LocalCentral = Convert.ToString(row["LocalCentral"]),
                             SGST = Convert.ToDecimal(row["SGST"]== DBNull.Value ? 0 : row["SGST"]),

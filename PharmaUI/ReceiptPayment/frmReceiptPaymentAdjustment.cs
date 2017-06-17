@@ -34,7 +34,6 @@ namespace PharmaUI.ReceiptPayment
             try
             {
                 ExtensionMethods.FormLoad(this, "Receipt Payment Adjustment");
-
                 LoadGridBillAdjustment();
             }
             catch (Exception ex)
@@ -77,35 +76,39 @@ namespace PharmaUI.ReceiptPayment
 
                     if (columnName == "Amount")
                     {
-
-                        decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
-                        decimal correspondingOSAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(decimal);
-
-                        decimal utilizedAmount = GetTotallUtilizedAmount();
-                        decimal tempBalance= CurrentTransactionEntity.EntityTotalAmount - utilizedAmount;
-                
-                        if (enteredAmount > tempBalance)
-                        {
-                            MessageBox.Show("Balance amount is less !");
-                            dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
-
-                        }
-                        else if (enteredAmount > correspondingOSAmount)
-                        {
-                            MessageBox.Show("Entered amount is greater than OS amount !");
-                            dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
-                        }
-                        else if (enteredAmount > 0)
-                        {
-                            CurrentTransactionEntity.EntityBalAmount = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount - enteredAmount;
-                            lblBalAmountVal.Text = this.CurrentTransactionEntity.EntityBalAmount.ToString();
-                        }
+                        AdjustBillOS();
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AdjustBillOS()
+        {
+            decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
+            decimal correspondingOSAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(decimal);
+
+            decimal utilizedAmount = GetTotallUtilizedAmount();
+            decimal tempBalance = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount;
+
+            if (enteredAmount > tempBalance)
+            {
+                MessageBox.Show("Balance amount is less !");
+                dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
+
+            }
+            else if (enteredAmount > correspondingOSAmount)
+            {
+                MessageBox.Show("Entered amount is greater than OS amount !");
+                dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
+            }
+            else if (enteredAmount > 0)
+            {
+                CurrentTransactionEntity.EntityBalAmount = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount - enteredAmount;
+                lblBalAmountVal.Text = this.CurrentTransactionEntity.EntityBalAmount.ToString();
             }
         }
 
@@ -159,6 +162,29 @@ namespace PharmaUI.ReceiptPayment
 
             dgvReceiptPaymentAdjustment.CellEndEdit += DgvReceiptPaymentAdjustment_CellEndEdit;
             dgvReceiptPaymentAdjustment.CellEnter += DgvReceiptPaymentAdjustment_CellEnter;
+            dgvReceiptPaymentAdjustment.KeyDown += DgvReceiptPaymentAdjustment_KeyDown;
+        }
+
+        private void DgvReceiptPaymentAdjustment_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyData == Keys.Enter && dgvReceiptPaymentAdjustment.Rows.Count > 0)
+                {
+                    if (dgvReceiptPaymentAdjustment.CurrentCell.Value != null
+                       && (decimal)dgvReceiptPaymentAdjustment.CurrentCell.Value == default(decimal))
+                    {
+                        decimal correspondingOSAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(decimal);
+                        dgvReceiptPaymentAdjustment.CurrentCell.Value = CurrentTransactionEntity.EntityBalAmount > correspondingOSAmount ? correspondingOSAmount
+                                                                                                                                         : CurrentTransactionEntity.EntityBalAmount;
+                        AdjustBillOS();
+                    }
+                }          
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void ConfigureReceiptPaymentAdjustment(TransactionEntity transactionEntity)

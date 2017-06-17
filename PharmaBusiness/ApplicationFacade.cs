@@ -29,18 +29,18 @@ namespace PharmaBusiness
         /// <summary>
         /// Fetch all the active items
         /// </summary>
-        /// <returns>List of items</returns>
-        public List<ItemMaster> GetAllItems()
-        {
-            try
-            {
-                return new ItemMasterBiz(this.LoggedInUser).GetAllItems();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        ///// <returns>List of items</returns>
+        //public List<ItemMaster> GetAllItems()
+        //{
+        //    try
+        //    {
+        //        return new ItemMasterBiz(this.LoggedInUser).GetAllItems();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         /// <summary>
         /// Add new item to ItemMaster
@@ -127,17 +127,17 @@ namespace PharmaBusiness
         /// Fetch all the active items by Search
         /// </summary>
         /// <returns>List of items</returns>
-        public List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
-        {
-            try
-            {
-                return new ItemMasterBiz(this.LoggedInUser).GetAllItemsBySearch(searchString, searchBy);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //public List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
+        //{
+        //    try
+        //    {
+        //        return new ItemMasterBiz(this.LoggedInUser).GetAllItemsBySearch(searchString, searchBy);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         public DataTable GetAllItemsBySearch()
         {

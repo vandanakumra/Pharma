@@ -206,7 +206,7 @@ namespace PharmaUI
                 Cursor.Current = Cursors.WaitCursor;
 
                 Status status;
-                int areaId = 0;
+              //  int areaId = 0;
                 decimal openingBal = 0.00M;
 
                 SupplierLedgerMaster supplier = new SupplierLedgerMaster();

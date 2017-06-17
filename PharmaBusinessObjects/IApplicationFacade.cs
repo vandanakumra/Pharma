@@ -16,12 +16,12 @@ namespace PharmaBusinessObjects
 
         #region Item Master
 
-        List<ItemMaster> GetAllItems();
+       // List<ItemMaster> GetAllItems();
         bool AddNewItem(ItemMaster newItem);
         bool UpdateItem(ItemMaster existingItem);
         bool DeleteItem(ItemMaster existingItem);
         string GetNextItemCode(string companyCode);
-        List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy);
+      //  List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy);
         List<CustomerCopanyDiscount> GetAllCompanyItemDiscountByCompanyIDForCustomer(int CompanyID);
         List<SupplierCompanyDiscount> GetAllCompanyItemDiscountByCompanyIDForSupplier(int CompanyID);
         List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes();

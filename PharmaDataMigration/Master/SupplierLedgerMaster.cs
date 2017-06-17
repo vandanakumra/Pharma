@@ -130,42 +130,39 @@ namespace PharmaDataMigration.Master
                         {
                             try
                             {
-                                string supplierLedgerCode = Common.supplierLedgerCodeMap.Where(p => p.OriginalSupplierLedgerCode == Convert.ToString(dr["PCode"]).TrimEnd()).FirstOrDefault().MappedSupplierLedgerCode;
-                                int supplierLedgerID = supplierLedgerList.Where(p => p.SupplierLedgerCode == supplierLedgerCode).FirstOrDefault().SupplierLedgerId;
-                                string companyCode = string.Empty;
-                                //var companyCode = (string.IsNullOrEmpty(Convert.ToString(dr["Ccode"]).TrimEnd())
-                                //                        || Convert.ToString(dr["Ccode"]).TrimEnd() == "004" //these values are not available as Company Codes in MASTERS
-                                //                        || Convert.ToString(dr["Ccode"]).TrimEnd() == "007"
-                                //                        || Convert.ToString(dr["Ccode"]).TrimEnd() == "040"
-                                //                        || Convert.ToString(dr["Ccode"]).TrimEnd() == "091")
-                                //                        //|| Convert.ToString(dr["Ccode"]).TrimEnd().Contains("011") //this value is available as Company Code but is not matching. Unable to identify reason of mismatch
-                                //                        ? "001" : Common.companyCodeMap.Where(p => p.OriginalCompanyCode == Convert.ToString(dr["Ccode"]).TrimEnd()).FirstOrDefault().MappedCompanyCode;
-
-                                var company = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == Convert.ToString(dr["Ccode"]).TrimEnd()).FirstOrDefault();
-
-                                if (company == null)
+                                if (dr["Disamt"] != null && Convert.ToDecimal(dr["Disamt"]) > 0)
                                 {
-                                    continue;
+
+                                    string supplierLedgerCode = Common.supplierLedgerCodeMap.Where(p => p.OriginalSupplierLedgerCode == Convert.ToString(dr["PCode"]).TrimEnd()).FirstOrDefault().MappedSupplierLedgerCode;
+                                    int supplierLedgerID = supplierLedgerList.Where(p => p.SupplierLedgerCode == supplierLedgerCode).FirstOrDefault().SupplierLedgerId;
+                                    string companyCode = string.Empty;
+
+                                    var company = Common.companyCodeMap.Where(p => p.OriginalCompanyCode == Convert.ToString(dr["Ccode"]).TrimEnd()).FirstOrDefault();
+
+                                    if (company == null)
+                                    {
+                                        continue;
+                                    }
+
+                                    companyCode = company.MappedCompanyCode;
+                                    int companyID = companyList.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
+
+                                    string itemCode = string.IsNullOrEmpty(Convert.ToString(dr["ICode"]).TrimEnd()) ? null : Common.itemCodeMap.Where(p => p.OriginalItemCode == Convert.ToString(dr["ICode"]).TrimEnd()).FirstOrDefault().MappedItemCode;
+                                    int? itemID = itemCode == null ? (int?)null : itemList.Where(p => p.ItemCode == itemCode).FirstOrDefault().ItemID;
+
+                                    SupplierCompanyDiscountRef newSupplierCompanyRef = new SupplierCompanyDiscountRef()
+                                    {
+                                        SupplierLedgerID = supplierLedgerID,
+                                        CompanyID = companyID,
+                                        ItemID = itemID,
+                                        Normal = Convert.ToDecimal(dr["Disamt"]),
+                                        Breakage = Convert.ToDecimal(dr["Disamtbe"]),
+                                        Expired = Convert.ToDecimal(dr["Disamtex"]),
+                                        IsLessEcise = Convert.ToString(dr["Less_ex"]) == "Y" ? true : false
+                                    };
+
+                                    listSupplierCompanyRef.Add(newSupplierCompanyRef);
                                 }
-
-                                companyCode = company.MappedCompanyCode;
-                                int companyID = companyList.Where(p => p.CompanyCode == companyCode).FirstOrDefault().CompanyId;
-
-                                string itemCode = string.IsNullOrEmpty(Convert.ToString(dr["ICode"]).TrimEnd()) ? null : Common.itemCodeMap.Where(p => p.OriginalItemCode == Convert.ToString(dr["ICode"]).TrimEnd()).FirstOrDefault().MappedItemCode;
-                                int? itemID = itemCode == null ? (int?)null : itemList.Where(p => p.ItemCode == itemCode).FirstOrDefault().ItemID;
-
-                                SupplierCompanyDiscountRef newSupplierCompanyRef = new SupplierCompanyDiscountRef()
-                                {
-                                    SupplierLedgerID = supplierLedgerID,
-                                    CompanyID = companyID,
-                                    ItemID = itemID,
-                                    Normal = Convert.ToDecimal(dr["Disamt"]),
-                                    Breakage = Convert.ToDecimal(dr["Disamtbe"]),
-                                    Expired = Convert.ToDecimal(dr["Disamtex"]),
-                                    IsLessEcise = Convert.ToString(dr["Less_ex"]) == "Y" ? true : false
-                                };
-
-                                listSupplierCompanyRef.Add(newSupplierCompanyRef);
                             }
                             catch (Exception)
                             {
@@ -182,7 +179,7 @@ namespace PharmaDataMigration.Master
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
