@@ -48,7 +48,7 @@ namespace PharmaUI.ReceiptPayment
                 dgvPaymentToSupplier.KeyDown += DgvPaymentToSupplier_KeyDown;
                 dgvPaymentToSupplier.CellEndEdit += DgvPaymentToSupplier_CellEndEdit;
                 // dgvPaymentToSupplier.EditingControlShowing += dgvCustomerItemDiscount_EditingControlShowing;
-
+                dgvPaymentToSupplier.SelectionChanged += DgvPaymentToSupplier_SelectionChanged;
 
                 string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
                 format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
@@ -59,6 +59,30 @@ namespace PharmaUI.ReceiptPayment
 
             }
             catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DgvPaymentToSupplier_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridViewRow row = dgvPaymentToSupplier.CurrentRow;
+                if(row.Cells["ReceiptPaymentID"].Value != null)
+                {
+                    TransactionEntity transactionEntity = new TransactionEntity()
+                    {
+                        ReceiptPaymentID=(long)row.Cells["ReceiptPaymentID"].Value,
+                        EntityType = Constants.TransactionEntityType.SupplierLedger,
+                        EntityCode =Convert.ToString(row.Cells["LedgerTypeCode"].Value),
+                    };
+
+                    LoadGridBillOutstanding(transactionEntity);
+                    LoadGridBillAdjusted(transactionEntity);
+                }
+            }
+            catch (Exception ex )
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
