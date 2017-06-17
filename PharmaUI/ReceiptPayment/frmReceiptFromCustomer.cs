@@ -404,8 +404,16 @@ namespace PharmaUI.ReceiptPayment
                 }
                 else
                 {
-                    dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CHEQUE;
-                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeDate"];
+                    if (Convert.ToString(dgvReceiptFromCustomer.CurrentCell.Value).Length > 10)
+                    {
+                        dgvReceiptFromCustomer.CurrentCell.ErrorText = Constants.Messages.InValidCheque;
+                    }
+                    else
+                    {
+                        dgvReceiptFromCustomer.CurrentCell.ErrorText = string.Empty;
+                        dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CHEQUE;
+                        dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeDate"];
+                    }
                 }
             }
             else if (columnName == "ChequeDate")

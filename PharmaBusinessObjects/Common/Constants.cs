@@ -22,6 +22,7 @@ namespace PharmaBusinessObjects.Common
             public const string NotExists = "{0} does not exists. Do you want to add new?";
             public const string UnsavedDataWarning = "Unsaved data will be lost";
             public const string InValidDate = "Please enter valid date with format {DD/MM/YYYY}";
+            public const string InValidCheque = "Please enter valid cheque number";
         }
 
         public static class Others
