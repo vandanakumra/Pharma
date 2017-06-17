@@ -107,6 +107,7 @@ namespace PharmaUI.ReceiptPayment
             dgvReceiptFromCustomer.Columns["LedgerTypeName"].Visible = true;
             dgvReceiptFromCustomer.Columns["LedgerTypeName"].HeaderText = "Party Name";
             dgvReceiptFromCustomer.Columns["LedgerTypeName"].DisplayIndex = 1;
+            dgvReceiptFromCustomer.Columns["LedgerTypeName"].ReadOnly = true;
 
             dgvReceiptFromCustomer.Columns["ChequeNumber"].Visible = true;
             dgvReceiptFromCustomer.Columns["ChequeNumber"].HeaderText = "Cheque Number";
@@ -171,13 +172,9 @@ namespace PharmaUI.ReceiptPayment
             dgvCustomerBillAdjusted.Columns["InvoiceDate"].HeaderText = "Bill Date";
             dgvCustomerBillAdjusted.Columns["InvoiceDate"].DisplayIndex = 1;
 
-            dgvCustomerBillAdjusted.Columns["OSAmount"].Visible = true;
-            dgvCustomerBillAdjusted.Columns["OSAmount"].HeaderText = "Outstanding Amount";
-            dgvCustomerBillAdjusted.Columns["OSAmount"].DisplayIndex = 2;
-
             dgvCustomerBillAdjusted.Columns["Amount"].Visible = true;
             dgvCustomerBillAdjusted.Columns["Amount"].HeaderText = "Adjusted Amount";
-            dgvCustomerBillAdjusted.Columns["Amount"].DisplayIndex = 3;
+            dgvCustomerBillAdjusted.Columns["Amount"].DisplayIndex = 2;
 
             //Display totall of adjusted amount
             decimal totallAdjusted = 0;
@@ -303,6 +300,7 @@ namespace PharmaUI.ReceiptPayment
             {
                 if (e.KeyData == Keys.Enter && dgvReceiptFromCustomer.Rows.Count > 0)
                 {
+                    e.Handled = true;
                     Grid_CellNextlAction();
                 }
             }

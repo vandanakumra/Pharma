@@ -110,6 +110,7 @@ namespace PharmaUI.ReceiptPayment
             dgvPaymentToSupplier.Columns["LedgerTypeName"].Visible = true;
             dgvPaymentToSupplier.Columns["LedgerTypeName"].HeaderText = "Party Name";
             dgvPaymentToSupplier.Columns["LedgerTypeName"].DisplayIndex = 1;
+            dgvPaymentToSupplier.Columns["LedgerTypeName"].ReadOnly = true;
 
             dgvPaymentToSupplier.Columns["ChequeNumber"].Visible = true;
             dgvPaymentToSupplier.Columns["ChequeNumber"].HeaderText = "Cheque Number";
@@ -174,13 +175,9 @@ namespace PharmaUI.ReceiptPayment
             dgvSupplierBillAdjusted.Columns["InvoiceDate"].HeaderText = "Bill Date";
             dgvSupplierBillAdjusted.Columns["InvoiceDate"].DisplayIndex = 1;
 
-            dgvSupplierBillAdjusted.Columns["OSAmount"].Visible = true;
-            dgvSupplierBillAdjusted.Columns["OSAmount"].HeaderText = "Outstanding Amount";
-            dgvSupplierBillAdjusted.Columns["OSAmount"].DisplayIndex = 2;
-
             dgvSupplierBillAdjusted.Columns["Amount"].Visible = true;
             dgvSupplierBillAdjusted.Columns["Amount"].HeaderText = "Adjusted Amount";
-            dgvSupplierBillAdjusted.Columns["Amount"].DisplayIndex = 3;
+            dgvSupplierBillAdjusted.Columns["Amount"].DisplayIndex = 2;
 
             //Display totall of adjusted amount
             decimal totallAdjusted = 0;
@@ -286,6 +283,7 @@ namespace PharmaUI.ReceiptPayment
             {
                 if (e.KeyData == Keys.Enter && dgvPaymentToSupplier.Rows.Count > 0)
                 {
+                    e.Handled = true;
                     Grid_CellNextlAction();
                 }
             }
