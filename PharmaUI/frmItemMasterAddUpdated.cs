@@ -74,6 +74,7 @@ namespace PharmaUI
         {
             try
             {
+
                 if (String.IsNullOrWhiteSpace(tbxItemName.Text))
                 {
                     errorProviderItem.SetError(tbxItemName, Constants.Messages.RequiredField);

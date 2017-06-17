@@ -1047,11 +1047,11 @@ namespace PharmaUI
                 decimal.TryParse(Convert.ToString(row.Cells["Amount"].Value), out dValue);
                 item.Amount = dValue;
 
-                Int32.TryParse(Convert.ToString(row.Cells["Scheme1"].Value), out id);
-                item.Scheme1 = id;
+                decimal.TryParse(Convert.ToString(row.Cells["Scheme1"].Value), out dValue);
+                item.Scheme1 = dValue;
 
-                Int32.TryParse(Convert.ToString(row.Cells["Scheme2"].Value), out id);
-                item.Scheme2 = id;
+                decimal.TryParse(Convert.ToString(row.Cells["Scheme2"].Value), out dValue);
+                item.Scheme2 = dValue;
 
                 item.IsHalfScheme = Convert.ToBoolean(row.Cells["IsHalfScheme"].Value);
 
@@ -1552,45 +1552,6 @@ namespace PharmaUI
                     dgvLineItem.Rows[rowIndex].Selected = true;
 
                     InsertUpdateLineItemAndsetToGrid(lineItem);
-
-                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value = lineItem.PurchaseSaleBookLineItemID;
-                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookHeaderID"].Value = purchaseSaleBookHeaderID;
-                    //dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value = lineItem.ItemCode;
-                    //dgvLineItem.Rows[rowIndex].Cells["ItemName"].Value = lineItem.ItemName;
-                    //dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value = lineItem.Quantity;
-                    //dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = lineItem.FreeQuantity;
-                    //dgvLineItem.Rows[rowIndex].Cells["Batch"].Value = lineItem.Batch;
-                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
-                    //dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleRate"].Value = lineItem.PurchaseSaleRate;
-                    //dgvLineItem.Rows[rowIndex].Cells["Amount"].Value = lineItem.Amount;
-                    //dgvLineItem.Rows[rowIndex].Cells["Scheme1"].Value = lineItem.Scheme1;
-                    //dgvLineItem.Rows[rowIndex].Cells["Scheme2"].Value = lineItem.Scheme2;
-                    //dgvLineItem.Rows[rowIndex].Cells["IsHalfScheme"].Value = lineItem.IsHalfScheme;
-                    //dgvLineItem.Rows[rowIndex].Cells["Discount"].Value = lineItem.Discount;
-                    //dgvLineItem.Rows[rowIndex].Cells["SpecialDiscount"].Value = lineItem.SpecialDiscount;
-                    //dgvLineItem.Rows[rowIndex].Cells["VolumeDiscount"].Value = lineItem.VolumeDiscount;
-                    //dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
-                    //dgvLineItem.Rows[rowIndex].Cells["ExpiryDate"].Value = lineItem.ExpiryDate;
-                    //dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value = lineItem.SaleRate;
-                    //dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
-                    //dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;
-                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTypeCode"].Value = lineItem.PurchaseSaleTypeCode;
-                    //dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleTax"].Value = lineItem.PurchaseSaleTax;
-                    //dgvLineItem.Rows[rowIndex].Cells["LocalCentral"].Value = lineItem.LocalCentral;
-                    //dgvLineItem.Rows[rowIndex].Cells["CostAmount"].Value = lineItem.CostAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["DiscountAmount"].Value = lineItem.DiscountAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["SpecialDiscountAmount"].Value = lineItem.SpecialDiscountAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["VolumeDiscountAmount"].Value = lineItem.VolumeDiscountAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["GrossAmount"].Value = lineItem.GrossAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["TaxAmount"].Value = lineItem.TaxAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["SchemeAmount"].Value = lineItem.SchemeAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["SurchargeAmount"].Value = lineItem.SurchargeAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["TotalDiscountAmount"].Value = lineItem.TotalDiscountAmount;
-                    //dgvLineItem.Rows[rowIndex].Cells["UsedQuantity"].Value = lineItem.UsedQuantity;
-                    //dgvLineItem.Rows[rowIndex].Cells["BalanceQuantity"].Value = lineItem.BalanceQuantity;
-                    //dgvLineItem.Rows[rowIndex].Cells["OldPurchaseSaleBookLineItemID"].Value = lineItem.OldPurchaseSaleBookLineItemID;
-                    //dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value = lineItem.FifoID;
-
                 }
             }
 

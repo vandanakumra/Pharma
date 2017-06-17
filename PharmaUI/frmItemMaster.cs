@@ -215,7 +215,7 @@ namespace PharmaUI
             dgvItemList.Columns["QtyPerCase"].Visible = true;
             dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
 
-          
+            txtSearch_TextChanged(null, null);
 
 
         }
@@ -258,8 +258,8 @@ namespace PharmaUI
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             try
-            {
-                LoadData();
+            {                
+                ExtensionMethods.GridSelectionOnSearch(dgvItemList, "ItemName", txtSearch.Text, this.lblSearchStatus);               
             }
             catch (Exception ex)
             {
@@ -267,6 +267,7 @@ namespace PharmaUI
             }
             
         }
+
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

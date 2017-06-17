@@ -15,15 +15,15 @@ namespace PharmaBusiness.Master
         {
 
         }
-        internal List<ItemMaster> GetAllItems()
-        {
-            return new ItemDaoMaster(this.LoggedInUser).GetAllItems();
-        }
+        //internal List<ItemMaster> GetAllItems()
+        //{
+        //    return new ItemDaoMaster(this.LoggedInUser).GetAllItems();
+        //}
 
-        internal List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
-        {
-            return new ItemDaoMaster(this.LoggedInUser).GetAllItemsBySearch(searchString, searchBy);
-        }
+        //internal List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
+        //{
+        //    return new ItemDaoMaster(this.LoggedInUser).GetAllItemsBySearch(searchString, searchBy);
+        //}
         
 
         internal bool AddNewItem(ItemMaster newItem)

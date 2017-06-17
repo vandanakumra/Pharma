@@ -112,11 +112,11 @@ namespace PharmaUI.Purchase_Entry
             if (dr != null)
             {
 
-                int scheme1 = 0;
-                int.TryParse(txtScheme1.Text, out scheme1);
+                decimal scheme1 = 0;
+                decimal.TryParse(txtScheme1.Text, out scheme1);
 
-                int scheme2 = 0;
-                int.TryParse(txtScheme2.Text, out scheme2);
+                decimal scheme2 = 0;
+                decimal.TryParse(txtScheme2.Text, out scheme2);
 
                 Choice choice;
                 Enum.TryParse<Choice>(cbxHalfScheme.SelectedValue.ToString(), out choice);

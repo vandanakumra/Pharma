@@ -66,7 +66,8 @@ namespace PharmaDAL.Master
                     PurchaseTypeRate = p.AccountLedgerMaster1.SalePurchaseTaxType,
                     HSNCode = p.HSNCode,
                     Status = p.Status,
-                    StatusText= p.Status ? string.Empty : Constants.Others.Inactive
+                    StatusText = p.Status ? string.Empty : Constants.Others.Inactive,
+                    CompanyCode = p.CompanyMaster.CompanyCode
 
                 }).ToList();
             }
@@ -84,7 +85,7 @@ namespace PharmaDAL.Master
                         {
 
                             int _result = 0;
-                            int totalItemsFromSameCompany = TotalItemsFromSameCompany(newItem.CompanyCode);
+                            int totalItemsFromSameCompany = context.ItemMaster.Where(p => p.CompanyID == newItem.CompanyID).Count();
                             totalItemsFromSameCompany++;
 
                             //Add HSN if does not exist
@@ -102,61 +103,68 @@ namespace PharmaDAL.Master
                             }
 
 
-                            Entity.ItemMaster newItemMasterDB = new Entity.ItemMaster()
-                            {
-                                ItemCode = string.Concat(newItem.CompanyCode, totalItemsFromSameCompany.ToString().PadLeft((9- newItem.CompanyCode.Length), '0')),
-                                ItemName = newItem.ItemName,
-                                CompanyID = newItem.CompanyID,
-                                ConversionRate = newItem.ConversionRate,
-                                ShortName = newItem.ShortName,
-                                Packing = newItem.Packing,
-                                PurchaseRate = newItem.PurchaseRate,
-                                MRP = newItem.MRP,
-                                SaleRate = newItem.SaleRate,
-                                SpecialRate = newItem.SpecialRate,
-                                WholeSaleRate = newItem.WholeSaleRate,
-                                SaleExcise = newItem.SaleExcise,
-                                SurchargeOnSale = newItem.SurchargeOnSale,
-                                TaxOnSale = newItem.TaxOnSale,
-                                Scheme1 = newItem.Scheme1,
-                                Scheme2 = newItem.Scheme2,
-                                PurchaseExcise = newItem.PurchaseExcise,
-                                UPC = newItem.UPC,
-                                IsHalfScheme = newItem.IsHalfScheme,
-                                IsQTRScheme = newItem.IsQTRScheme,
-                                SpecialDiscount = newItem.SpecialDiscount,
-                                SpecialDiscountOnQty = newItem.SpecialDiscountOnQty,
-                                IsFixedDiscount = newItem.IsFixedDiscount,
-                                FixedDiscountRate = newItem.FixedDiscountRate,
-                                SurchargeOnPurchase = newItem.SurchargeOnPurchase,
-                                TaxOnPurchase = newItem.TaxOnPurchase,
-                                DiscountRecieved = newItem.DiscountRecieved,
-                                SpecialDiscountRecieved = newItem.SpecialDiscountRecieved,
-                                QtyPerCase = newItem.QtyPerCase,
-                                Location = newItem.Location,
-                                SaleTypeId = newItem.SaleTypeId,
-                                PurchaseTypeId = newItem.PurchaseTypeId,
+                            string companyCode = context.CompanyMaster.Where(p => p.CompanyId == newItem.CompanyID).FirstOrDefault().CompanyCode;
 
-                                HSNCode = newItem.HSNCode,
+                            Entity.ItemMaster newItemMasterDB = new Entity.ItemMaster();
 
-                                Status = newItem.Status,
-                                CreatedBy = this.LoggedInUser.Username,
-                                CreatedOn = System.DateTime.Now,
+                            newItemMasterDB.ItemCode = string.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft((9 - companyCode.Length), '0'));
+                            newItemMasterDB.ItemName = newItem.ItemName;
+                            newItemMasterDB.CompanyID = newItem.CompanyID;
+                            newItemMasterDB.ConversionRate = newItem.ConversionRate;
+                            newItemMasterDB.ShortName = newItem.ShortName;
+                            newItemMasterDB.Packing = newItem.Packing;
+                            newItemMasterDB.PurchaseRate = newItem.PurchaseRate;
+                            newItemMasterDB.MRP = newItem.MRP;
+                            newItemMasterDB.SaleRate = newItem.SaleRate;
+                            newItemMasterDB.SpecialRate = newItem.SpecialRate;
+                            newItemMasterDB.WholeSaleRate = newItem.WholeSaleRate;
+                            newItemMasterDB.SaleExcise = newItem.SaleExcise;
+                            newItemMasterDB.SurchargeOnSale = newItem.SurchargeOnSale;
+                            newItemMasterDB.TaxOnSale = newItem.TaxOnSale;
+                            newItemMasterDB.Scheme1 = newItem.Scheme1;
+                            newItemMasterDB.Scheme2 = newItem.Scheme2;
+                            newItemMasterDB.PurchaseExcise = newItem.PurchaseExcise;
+                            newItemMasterDB.UPC = newItem.UPC;
+                            newItemMasterDB.IsHalfScheme = newItem.IsHalfScheme;
+                            newItemMasterDB.IsQTRScheme = newItem.IsQTRScheme;
+                            newItemMasterDB.SpecialDiscount = newItem.SpecialDiscount;
+                            newItemMasterDB.SpecialDiscountOnQty = newItem.SpecialDiscountOnQty;
+                            newItemMasterDB.IsFixedDiscount = newItem.IsFixedDiscount;
+                            newItemMasterDB.FixedDiscountRate = newItem.FixedDiscountRate;
+                            newItemMasterDB.SurchargeOnPurchase = newItem.SurchargeOnPurchase;
+                            newItemMasterDB.TaxOnPurchase = newItem.TaxOnPurchase;
+                            newItemMasterDB.DiscountRecieved = newItem.DiscountRecieved;
+                            newItemMasterDB.SpecialDiscountRecieved = newItem.SpecialDiscountRecieved;
+                            newItemMasterDB.QtyPerCase = newItem.QtyPerCase;
+                            newItemMasterDB.Location = newItem.Location;
+                            newItemMasterDB.SaleTypeId = newItem.SaleTypeId;
+                            newItemMasterDB.PurchaseTypeId = newItem.PurchaseTypeId;
+                            newItemMasterDB.HSNCode = newItem.HSNCode;
+                            newItemMasterDB.Status = newItem.Status;
+                            newItemMasterDB.CreatedBy = this.LoggedInUser.Username;
+                            newItemMasterDB.CreatedOn = System.DateTime.Now;
 
-                            };
+
 
                             context.ItemMaster.Add(newItemMasterDB);
                             _result = context.SaveChanges();
+
+                            transaction.Commit();
 
                             if (_result > 0)
                                 return true;
                             else
                                 return false;
                         }
-                        catch (Exception)
+                        catch (DbEntityValidationException ex)
                         {
                             transaction.Rollback();
-                            return false;
+                            throw ex;
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw ex;
                         }
                     }
                 }
@@ -281,8 +289,7 @@ namespace PharmaDAL.Master
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                int totalItemsFromSameCompany = GetAllItems().Where(x => x.CompanyCode == companyCode).Count();
-                return totalItemsFromSameCompany;
+                return context.ItemMaster.Where(p => p.CompanyMaster.CompanyCode == companyCode).Count();
             }
         }
 
@@ -316,129 +323,129 @@ namespace PharmaDAL.Master
             }
         }
 
-        public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null, string searchBy = "Name")
-        {
+        //public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null, string searchBy = "Name")
+        //{
 
-            //using (PharmaDBEntities context = new PharmaDBEntities())
-            //{
-            //    List<PharmaBusinessObjects.Master.ItemMaster> itemList = new List<PharmaBusinessObjects.Master.ItemMaster>();
+        //    //using (PharmaDBEntities context = new PharmaDBEntities())
+        //    //{
+        //    //    List<PharmaBusinessObjects.Master.ItemMaster> itemList = new List<PharmaBusinessObjects.Master.ItemMaster>();
 
-            //    SqlConnection connection = (SqlConnection)context.Database.Connection;
+        //    //    SqlConnection connection = (SqlConnection)context.Database.Connection;
 
-            //    SqlCommand cmd = new SqlCommand("Select * from ItemMaster", connection);
-            //    cmd.CommandType = System.Data.CommandType.Text;               
+        //    //    SqlCommand cmd = new SqlCommand("Select * from ItemMaster", connection);
+        //    //    cmd.CommandType = System.Data.CommandType.Text;               
 
-            //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            //    DataTable dt = new DataTable();
+        //    //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+        //    //    DataTable dt = new DataTable();
 
-            //    sda.Fill(dt);
-
-
-            //    if(dt != null && dt.Rows.Count > 0)
-            //    {
-            //        foreach (DataRow row in dt.Rows)
-            //        {
-            //            PharmaBusinessObjects.Master.ItemMaster item = new PharmaBusinessObjects.Master.ItemMaster()
-            //            {
-
-            //                ItemID = Convert.ToInt32(row["ItemID"]),
-            //                ItemCode = Convert.ToString(row["ItemCode"]),
-            //                ItemName = Convert.ToString(row["ItemName"]),
-            //                CompanyID = Convert.ToInt32(row["CompanyID"]),
-            //                ConversionRate = Convert.ToDecimal(row["ConversionRate"]),
-            //               // CompanyName = Convert.ToString(row["CompanyMaster.CompanyName"]),
-            //                ShortName = Convert.ToString(row["ShortName"]),
-            //                Packing = Convert.ToString(row["Packing"]),
-            //                PurchaseRate = Convert.ToDecimal(row["PurchaseRate"]),
-            //                MRP = Convert.ToDecimal(row["MRP"]),
-            //                SaleRate = Convert.ToDecimal(row["SaleRate"]),
-            //                SpecialRate = Convert.ToDecimal(row["SpecialRate"]),
-            //                WholeSaleRate = Convert.ToDecimal(row["WholeSaleRate"]),
-            //                SaleExcise = Convert.ToDecimal(row["SaleExcise"]),
-            //                SurchargeOnSale = Convert.ToDecimal(row["SurchargeOnSale"]),
-            //                TaxOnSale = Convert.ToDecimal(row["TaxOnSale"]),
-            //                Scheme1 = Convert.ToDecimal(row["Scheme1"]),
-            //                Scheme2 = Convert.ToDecimal(row["Scheme2"]),
-            //                PurchaseExcise = Convert.ToDecimal(row["PurchaseExcise"]),
-            //                UPC = Convert.ToString(row["UPC"]),
-            //                IsHalfScheme = Convert.ToBoolean(row["IsHalfScheme"]),
-            //                IsQTRScheme = Convert.ToBoolean(row["IsQTRScheme"]),
-            //                SpecialDiscount = Convert.ToDecimal(row["SpecialDiscount"]),
-            //                SpecialDiscountOnQty = Convert.ToDecimal(row["SpecialDiscountOnQty"]),
-            //                IsFixedDiscount = Convert.ToBoolean(row["IsFixedDiscount"]),
-            //                FixedDiscountRate = Convert.ToDecimal(row["FixedDiscountRate"]),
-            //                SurchargeOnPurchase = Convert.ToDecimal(row["SurchargeOnPurchase"]),
-            //                TaxOnPurchase = Convert.ToDecimal(row["TaxOnPurchase"]),
-            //                DiscountRecieved = Convert.ToDecimal(row["DiscountRecieved"]),
-            //                SpecialDiscountRecieved = Convert.ToDecimal(row["SpecialDiscountRecieved"]),
-            //                QtyPerCase = Convert.ToDecimal(row["QtyPerCase"]),
-            //                Location = Convert.ToString(row["Location"]),
-            //                SaleTypeId = Convert.ToInt32(row["SaleTypeId"]),
-            //                PurchaseTypeId = Convert.ToInt32(row["PurchaseTypeId"]),
-            //                //PurchaseTypeCode = Convert.ToDecimal(row["AccountLedgerMaster1.AccountLedgerCode,
-            //                //PurchaseTypeName = Convert.ToDecimal(row["AccountLedgerMaster1.AccountLedgerName,
-            //                //PurchaseTypeRate = Convert.ToDecimal(row["AccountLedgerMaster1.SalePurchaseTaxType,
-            //                Status = Convert.ToBoolean(row["Status"])
-            //            };
-
-            //            itemList.Add(item);
-
-            //        }
-            //    }
-            //    return itemList;              
-            //}
+        //    //    sda.Fill(dt);
 
 
+        //    //    if(dt != null && dt.Rows.Count > 0)
+        //    //    {
+        //    //        foreach (DataRow row in dt.Rows)
+        //    //        {
+        //    //            PharmaBusinessObjects.Master.ItemMaster item = new PharmaBusinessObjects.Master.ItemMaster()
+        //    //            {
 
-            using (PharmaDBEntities context = new PharmaDBEntities())
-            {
-                return context.ItemMaster.Where(p => p.Status
-                                                && (string.IsNullOrEmpty(searchString) || p.ItemName.Contains(searchString))
-                                                ).Select(p => new PharmaBusinessObjects.Master.ItemMaster()
-                                                {
-                                                    ItemID = p.ItemID,
-                                                    ItemCode = p.ItemCode,
-                                                    ItemName = p.ItemName,
-                                                    CompanyID = p.CompanyID,
-                                                    ConversionRate = p.ConversionRate,
-                                                    CompanyName = p.CompanyMaster.CompanyName,
-                                                    ShortName = p.ShortName,
-                                                    Packing = p.Packing,
-                                                    PurchaseRate = p.PurchaseRate,
-                                                    MRP = p.MRP,
-                                                    SaleRate = p.SaleRate,
-                                                    SpecialRate = p.SpecialRate,
-                                                    WholeSaleRate = p.WholeSaleRate,
-                                                    SaleExcise = p.SaleExcise,
-                                                    SurchargeOnSale = p.SurchargeOnSale,
-                                                    TaxOnSale = p.TaxOnSale,
-                                                    Scheme1 = p.Scheme1,
-                                                    Scheme2 = p.Scheme2,
-                                                    PurchaseExcise = p.PurchaseExcise,
-                                                    UPC = p.UPC,
-                                                    IsHalfScheme = p.IsHalfScheme,
-                                                    IsQTRScheme = p.IsQTRScheme,
-                                                    SpecialDiscount = p.SpecialDiscount,
-                                                    SpecialDiscountOnQty = p.SpecialDiscountOnQty,
-                                                    IsFixedDiscount = p.IsFixedDiscount,
-                                                    FixedDiscountRate = p.FixedDiscountRate,
-                                                    SurchargeOnPurchase = p.SurchargeOnPurchase,
-                                                    TaxOnPurchase = p.TaxOnPurchase,
-                                                    DiscountRecieved = p.DiscountRecieved,
-                                                    SpecialDiscountRecieved = p.SpecialDiscountRecieved,
-                                                    QtyPerCase = p.QtyPerCase,
-                                                    Location = p.Location,
-                                                    SaleTypeId = p.SaleTypeId,
-                                                    PurchaseTypeId = p.PurchaseTypeId,
-                                                    PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
-                                                    PurchaseTypeName = p.AccountLedgerMaster1.AccountLedgerName,
-                                                    PurchaseTypeRate = p.AccountLedgerMaster1.SalePurchaseTaxType,
-                                                    HSNCode = p.HSNCode,
-                                                    Status = p.Status
+        //    //                ItemID = Convert.ToInt32(row["ItemID"]),
+        //    //                ItemCode = Convert.ToString(row["ItemCode"]),
+        //    //                ItemName = Convert.ToString(row["ItemName"]),
+        //    //                CompanyID = Convert.ToInt32(row["CompanyID"]),
+        //    //                ConversionRate = Convert.ToDecimal(row["ConversionRate"]),
+        //    //               // CompanyName = Convert.ToString(row["CompanyMaster.CompanyName"]),
+        //    //                ShortName = Convert.ToString(row["ShortName"]),
+        //    //                Packing = Convert.ToString(row["Packing"]),
+        //    //                PurchaseRate = Convert.ToDecimal(row["PurchaseRate"]),
+        //    //                MRP = Convert.ToDecimal(row["MRP"]),
+        //    //                SaleRate = Convert.ToDecimal(row["SaleRate"]),
+        //    //                SpecialRate = Convert.ToDecimal(row["SpecialRate"]),
+        //    //                WholeSaleRate = Convert.ToDecimal(row["WholeSaleRate"]),
+        //    //                SaleExcise = Convert.ToDecimal(row["SaleExcise"]),
+        //    //                SurchargeOnSale = Convert.ToDecimal(row["SurchargeOnSale"]),
+        //    //                TaxOnSale = Convert.ToDecimal(row["TaxOnSale"]),
+        //    //                Scheme1 = Convert.ToDecimal(row["Scheme1"]),
+        //    //                Scheme2 = Convert.ToDecimal(row["Scheme2"]),
+        //    //                PurchaseExcise = Convert.ToDecimal(row["PurchaseExcise"]),
+        //    //                UPC = Convert.ToString(row["UPC"]),
+        //    //                IsHalfScheme = Convert.ToBoolean(row["IsHalfScheme"]),
+        //    //                IsQTRScheme = Convert.ToBoolean(row["IsQTRScheme"]),
+        //    //                SpecialDiscount = Convert.ToDecimal(row["SpecialDiscount"]),
+        //    //                SpecialDiscountOnQty = Convert.ToDecimal(row["SpecialDiscountOnQty"]),
+        //    //                IsFixedDiscount = Convert.ToBoolean(row["IsFixedDiscount"]),
+        //    //                FixedDiscountRate = Convert.ToDecimal(row["FixedDiscountRate"]),
+        //    //                SurchargeOnPurchase = Convert.ToDecimal(row["SurchargeOnPurchase"]),
+        //    //                TaxOnPurchase = Convert.ToDecimal(row["TaxOnPurchase"]),
+        //    //                DiscountRecieved = Convert.ToDecimal(row["DiscountRecieved"]),
+        //    //                SpecialDiscountRecieved = Convert.ToDecimal(row["SpecialDiscountRecieved"]),
+        //    //                QtyPerCase = Convert.ToDecimal(row["QtyPerCase"]),
+        //    //                Location = Convert.ToString(row["Location"]),
+        //    //                SaleTypeId = Convert.ToInt32(row["SaleTypeId"]),
+        //    //                PurchaseTypeId = Convert.ToInt32(row["PurchaseTypeId"]),
+        //    //                //PurchaseTypeCode = Convert.ToDecimal(row["AccountLedgerMaster1.AccountLedgerCode,
+        //    //                //PurchaseTypeName = Convert.ToDecimal(row["AccountLedgerMaster1.AccountLedgerName,
+        //    //                //PurchaseTypeRate = Convert.ToDecimal(row["AccountLedgerMaster1.SalePurchaseTaxType,
+        //    //                Status = Convert.ToBoolean(row["Status"])
+        //    //            };
 
-                                                }).ToList();
-            }
-        }
+        //    //            itemList.Add(item);
+
+        //    //        }
+        //    //    }
+        //    //    return itemList;              
+        //    //}
+
+
+
+        //    using (PharmaDBEntities context = new PharmaDBEntities())
+        //    {
+        //        return context.ItemMaster.Where(p => p.Status
+        //                                        && (string.IsNullOrEmpty(searchString) || p.ItemName.Contains(searchString))
+        //                                        ).Select(p => new PharmaBusinessObjects.Master.ItemMaster()
+        //                                        {
+        //                                            ItemID = p.ItemID,
+        //                                            ItemCode = p.ItemCode,
+        //                                            ItemName = p.ItemName,
+        //                                            CompanyID = p.CompanyID,
+        //                                            ConversionRate = p.ConversionRate,
+        //                                            CompanyName = p.CompanyMaster.CompanyName,
+        //                                            ShortName = p.ShortName,
+        //                                            Packing = p.Packing,
+        //                                            PurchaseRate = p.PurchaseRate,
+        //                                            MRP = p.MRP,
+        //                                            SaleRate = p.SaleRate,
+        //                                            SpecialRate = p.SpecialRate,
+        //                                            WholeSaleRate = p.WholeSaleRate,
+        //                                            SaleExcise = p.SaleExcise,
+        //                                            SurchargeOnSale = p.SurchargeOnSale,
+        //                                            TaxOnSale = p.TaxOnSale,
+        //                                            Scheme1 = p.Scheme1,
+        //                                            Scheme2 = p.Scheme2,
+        //                                            PurchaseExcise = p.PurchaseExcise,
+        //                                            UPC = p.UPC,
+        //                                            IsHalfScheme = p.IsHalfScheme,
+        //                                            IsQTRScheme = p.IsQTRScheme,
+        //                                            SpecialDiscount = p.SpecialDiscount,
+        //                                            SpecialDiscountOnQty = p.SpecialDiscountOnQty,
+        //                                            IsFixedDiscount = p.IsFixedDiscount,
+        //                                            FixedDiscountRate = p.FixedDiscountRate,
+        //                                            SurchargeOnPurchase = p.SurchargeOnPurchase,
+        //                                            TaxOnPurchase = p.TaxOnPurchase,
+        //                                            DiscountRecieved = p.DiscountRecieved,
+        //                                            SpecialDiscountRecieved = p.SpecialDiscountRecieved,
+        //                                            QtyPerCase = p.QtyPerCase,
+        //                                            Location = p.Location,
+        //                                            SaleTypeId = p.SaleTypeId,
+        //                                            PurchaseTypeId = p.PurchaseTypeId,
+        //                                            PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
+        //                                            PurchaseTypeName = p.AccountLedgerMaster1.AccountLedgerName,
+        //                                            PurchaseTypeRate = p.AccountLedgerMaster1.SalePurchaseTaxType,
+        //                                            HSNCode = p.HSNCode,
+        //                                            Status = p.Status
+
+        //                                        }).ToList();
+        //    }
+        //}
 
         public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemByCompanyID(int CompanyID)
         {
