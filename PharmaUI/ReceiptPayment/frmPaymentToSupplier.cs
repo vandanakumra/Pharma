@@ -81,6 +81,13 @@ namespace PharmaUI.ReceiptPayment
                     LoadGridBillOutstanding(transactionEntity);
                     LoadGridBillAdjusted(transactionEntity);
                 }
+                else
+                {
+                    dgvSupplierBillOS.DataSource = null;
+                    dgvSupplierBillAdjusted.DataSource = null;
+                    lblAmtOSVal.Text = String.Empty;
+                    lblAmtAdjVal.Text = String.Empty;
+                }
             }
             catch (Exception ex )
             {
@@ -305,7 +312,7 @@ namespace PharmaUI.ReceiptPayment
         {
             try
             {
-                if (e.KeyData == Keys.Enter && dgvPaymentToSupplier.Rows.Count > 0)
+                if ((e.KeyData == Keys.Enter || e.KeyData == Keys.Right) && dgvPaymentToSupplier.Rows.Count > 0)
                 {
                     e.Handled = true;
                     Grid_CellNextlAction();
