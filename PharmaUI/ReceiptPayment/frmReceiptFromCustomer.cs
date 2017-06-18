@@ -49,10 +49,7 @@ namespace PharmaUI.ReceiptPayment
                 // dgvReceiptFromCustomer.EditingControlShowing += DgvReceiptFromCustomer_EditingControlShowing;
                 dgvReceiptFromCustomer.SelectionChanged += DgvReceiptFromCustomer_SelectionChanged;
 
-                string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
-                format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
-                format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
-                dtReceiptPayment.Text = DateTime.Now.ToString(format);
+                dtReceiptPayment.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
                 dtReceiptPayment.Focus();
                 dtReceiptPayment.Select(0, 0);
             }
@@ -256,7 +253,7 @@ namespace PharmaUI.ReceiptPayment
                 ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
                 {
                     VoucherTypeCode = Constants.VoucherTypeCode.RECEIPTFROMCUSTOMER,
-                    VoucherDate = Convert.ToDateTime(dtReceiptPayment.Text),
+                    VoucherDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text),
                     LedgerType = Constants.TransactionEntityType.CustomerLedger,
                     LedgerTypeCode = selectedCustomer.CustomerLedgerCode,
                     LedgerTypeName = selectedCustomer.CustomerLedgerName,
@@ -521,7 +518,7 @@ namespace PharmaUI.ReceiptPayment
                 receiptPaymentItem.Amount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"].Value));
                 receiptPaymentItem.ChequeNumber = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeNumber"].Value);
                 receiptPaymentItem.BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag);
-                receiptPaymentItem.ChequeDate = Convert.ToDateTime(dtReceiptPayment.Text);
+                receiptPaymentItem.ChequeDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text);
                 receiptPaymentItem.UnadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value));
             }
             return receiptPaymentItem;
