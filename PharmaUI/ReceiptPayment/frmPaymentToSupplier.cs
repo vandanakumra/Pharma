@@ -212,7 +212,7 @@ namespace PharmaUI.ReceiptPayment
 
             //Display totall of adjusted amount
             decimal totallAdjusted = 0;
-            allAdjustment.ForEach(x => totallAdjusted += x.Amount);
+            allAdjustment.ForEach(x => totallAdjusted += (decimal)x.Amount);
             lblAmtAdjVal.Text = Convert.ToString(totallAdjusted);
         }
 
@@ -328,6 +328,7 @@ namespace PharmaUI.ReceiptPayment
         {
             try
             {
+
                 if (dgvPaymentToSupplier.Rows.Count > 0)
                 {
                     string columnName = dgvPaymentToSupplier.Columns[dgvPaymentToSupplier.SelectedCells[0].ColumnIndex].Name;
@@ -511,6 +512,7 @@ namespace PharmaUI.ReceiptPayment
         private ReceiptPaymentItem FillDataboundToCurrentRow()
         {
             ReceiptPaymentItem receiptPaymentItem = new ReceiptPaymentItem();
+
             if (dgvPaymentToSupplier.SelectedCells.Count > 0)
             {
                 int rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;

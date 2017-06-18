@@ -128,7 +128,7 @@ namespace PharmaUI.ReceiptPayment
         private void LoadGridBillAdjustment()
         {
             dgvReceiptPaymentAdjustment.CellEndEdit -= DgvReceiptPaymentAdjustment_CellEndEdit;
-            dgvReceiptPaymentAdjustment.CellEnter -= DgvReceiptPaymentAdjustment_CellEnter;
+            dgvReceiptPaymentAdjustment.CellEnter -= DgvReceiptPaymentAdjustment_CellEnter;            
 
             dgvReceiptPaymentAdjustment.DataSource = applicationFacade.GetAllInitialBillAdjustmentForLedger(CurrentTransactionEntity);
 
