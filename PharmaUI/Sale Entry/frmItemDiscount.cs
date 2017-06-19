@@ -106,6 +106,7 @@ namespace PharmaUI
 
         private void ChangeType_FormClosed(object sender, FormClosedEventArgs e)
         {
+
             frmChangeType changeType = sender as frmChangeType;
             decimal discount;
             decimal.TryParse(txtDiscount.Text, out discount);
@@ -113,11 +114,18 @@ namespace PharmaUI
             decimal specialDiscount;
             decimal.TryParse(txtSpecialDiscount.Text, out specialDiscount);
 
+            DataRow dr = StagingData.ItemList.Select("ItemCode=" + saleLineItem.ItemCode).FirstOrDefault();
+            if (dr != null)
+            {
+                dr["SpecialDiscountRecieved"] = specialDiscount;
+            }
+
             decimal volumeDiscount;
             decimal.TryParse(txtVolumeDiscount.Text, out volumeDiscount);
-            applicationFacade.UpdateSaleDiscount(changeType.ChangeType, discount, specialDiscount, volumeDiscount,saleLineItem.ItemCode, customerCode);
+            applicationFacade.UpdateSaleDiscount(changeType.ChangeType, discount, specialDiscount, volumeDiscount, saleLineItem.ItemCode, customerCode);
 
             this.Close();
+
         }
 
         private void tblDiscount_Paint(object sender, PaintEventArgs e)
