@@ -1004,7 +1004,31 @@ namespace PharmaBusiness
             }
         }
 
+        public List<int> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
+        {
+            return new SaleBiz(this.LoggedInUser).DeleteSaleLineItem(saleBookHeaderID, saleBookLineItemID);
+        }
+
+        public bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity)
+        {
+            return new SaleBiz(this.LoggedInUser).IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity);
+        }
+
+        public bool SaveSaleEntryData(long purchaseBookHeaderID)
+        {
+            return new SaleBiz(this.LoggedInUser).SaveSaleEntryData(purchaseBookHeaderID);
+        }
+
+        public bool IsTempSaleEntryExists(long purchaseSaleBookHeaderID)
+        {
+            return new SaleBiz(this.LoggedInUser).IsTempSaleEntryExists(purchaseSaleBookHeaderID);
+        }
+
+        public void RollbackSaleEntry(long purchaseSaleBookHeaderID)
+        {
+            new SaleBiz(this.LoggedInUser).RollbackSaleEntry(purchaseSaleBookHeaderID);
+        }
             #endregion
 
-        }
+    }
 }

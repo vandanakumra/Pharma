@@ -25,10 +25,12 @@ namespace PharmaUI
         private int layoutHeight = 0;
         private int layoutWidth = 0;
         private bool isCellEdit = false;
+        private decimal oldQuantity = 0M;
+        private decimal oldFreeQuantity = 0M;
 
         IApplicationFacade applicationFacade;
         private PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
-        private PurchaseSaleBookLineItem lineItem = new PurchaseSaleBookLineItem();
+       // private PurchaseSaleBookLineItem lineItem = new PurchaseSaleBookLineItem();
 
         private int oldSelectedRowIndex = -1;
         private bool isSetGrid = false;
@@ -251,18 +253,24 @@ namespace PharmaUI
 
         private void DgvLineItem_SelectionChanged(object sender, EventArgs e)
         {
-            int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
-
-            if (oldSelectedRowIndex != rowIndex && !isSetGrid && !string.IsNullOrEmpty(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value)))
+            if (dgvLineItem.SelectedCells.Count > 0)
             {
-                long id = 0;
-                long.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value), out id);
-                SetFooterInfo(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value), id);
+
+                int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
+
+                if (oldSelectedRowIndex != rowIndex && !isSetGrid && !string.IsNullOrEmpty(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value)))
+                {
+                    long id = 0;
+                    long.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value), out id);
+                    SetFooterInfo(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value), id);
+                }
+
+                if (oldSelectedRowIndex != rowIndex && !isSetGrid)
+                    oldSelectedRowIndex = rowIndex;
             }
-
-            if (oldSelectedRowIndex != rowIndex && !isSetGrid)
-                oldSelectedRowIndex = rowIndex;
-
+            else {
+                SetFooterInfo(string.Empty, 0);
+            }
         }
 
         private void DgvLineItem_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -270,11 +278,30 @@ namespace PharmaUI
             try
             {
                 isCellEdit = false;
+                oldQuantity = 0;
+                decimal.TryParse(Convert.ToString(dgvLineItem.Rows[e.RowIndex].Cells["Quantity"].Value), out oldQuantity);
+
+                oldFreeQuantity = 0;
+                decimal.TryParse(Convert.ToString(dgvLineItem.Rows[e.RowIndex].Cells["FreeQuantity"].Value), out oldFreeQuantity);
 
                 if (header.PurchaseSaleBookHeaderID == 0)
                 {
                     MessageBox.Show("Please enter invoice number before adding the items");
                     dgvLineItem.CancelEdit();
+                }
+
+                string columnName = dgvLineItem.Columns[e.ColumnIndex].Name;
+
+                if (columnName == "Quantity" || columnName == "FreeQuantity")
+                {
+                    int rowIndex = dgvLineItem.Rows.Cast<DataGridViewRow>().Where(p => Convert.ToString(p.Cells["ItemCode"].Value) == Convert.ToString(dgvLineItem.Rows[e.RowIndex].Cells["ItemCode"].Value)).Select(p => p.Index).ToList().OrderByDescending(p => p).FirstOrDefault();
+
+                    if(rowIndex != e.RowIndex)
+                    {
+                        e.Cancel = true;
+                        MessageBox.Show("Please edit last row of same item code");
+
+                    }
                 }
 
             }
@@ -305,64 +332,50 @@ namespace PharmaUI
         {
             try
             {
-                int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
-                PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
-                string columnName = dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name;
-                if (columnName == "Quantity")
+                if (isCellEdit)
                 {
-                    double value = 0;
-                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value), out value);
+                    int rowIndex = e.RowIndex; //dgvLineItem.SelectedCells[0].RowIndex;
+                    PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                    string columnName = dgvLineItem.Columns[e.ColumnIndex].Name;
 
-                    double balance = 0;
-                    double.TryParse(lblBalance.Text, out balance);
-
-                    double freeQuantity = 0;
-                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out freeQuantity);
-
-                    if (value == 0)
+                    if (columnName == "Quantity")
                     {
-                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
-                        return;
+                        if (lineItem.Quantity == 0)
+                        {
+                            dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
+                            return;
+                        }
+                        else if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID,lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity??0))
+                        {
+                            MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
+                            dgvLineItem.BeginEdit(true);
+                            return;
+                        }
+                        else
+                        {
+                            InsertUpdateLineItemAndsetToGrid(lineItem);
+                            OpenDialogAndMoveToNextControl();
+                            SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
+                        }
                     }
-                    else if (balance < (value + freeQuantity))
+                    else if (columnName == "FreeQuantity")
                     {
-                        MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
-                        dgvLineItem.BeginEdit(true);
-                        return;
+                        if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity ?? 0))
+                        {
+                            MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
+                            dgvLineItem.BeginEdit(true);
+                            return;
+                        }
+                    }
+                    else if (columnName == "SaleRate")
+                    {
+                        ValidateSaleRate(lineItem,rowIndex, true);
                     }
                     else
                     {
                         InsertUpdateLineItemAndsetToGrid(lineItem);
                         OpenDialogAndMoveToNextControl();
-                        SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
                     }
-                }
-                else if (columnName == "FreeQuantity")
-                {
-                    double value = 0;
-                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value), out value);
-
-                    double balance = 0;
-                    double.TryParse(lblBalance.Text, out balance);
-
-                    double freeQuantity = 0;
-                    double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out freeQuantity);
-
-                    if (balance < (value + freeQuantity))
-                    {
-                        MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
-                        dgvLineItem.BeginEdit(true);
-                        return;
-                    }
-                }
-                else if (columnName == "SaleRate")
-                {
-                    ValidateSaleRate(rowIndex, true);
-                }
-                else
-                {
-                    InsertUpdateLineItemAndsetToGrid(lineItem);
-                    OpenDialogAndMoveToNextControl();
                 }
 
             }
@@ -372,25 +385,24 @@ namespace PharmaUI
             }
         }
 
-        private void ValidateSaleRate(int rowIndex, bool isEdit)
+        private bool IsQuantityAvailable(long headerID, string itemCode, long lineItemID, decimal quantity, decimal freeQuantity)
+        {
+            return applicationFacade.IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity);
+        }
+
+        private void ValidateSaleRate(PurchaseSaleBookLineItem lineItem, int rowIndex, bool isEdit)
         {
 
-            double value = 0;
-            double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value), out value);
-
-            if (value == 0)
+            if (lineItem.SaleRate == 0)
             {
                 dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["SaleRate"];
                 return;
             }
             else
             {
-                double purchaseSaleRate = 0;
-                double.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleRate"].Value), out purchaseSaleRate);
-
-                if (purchaseSaleRate > value)
+                if (lineItem.PurchaseSaleRate > lineItem.SaleRate)
                 {
-                    if (MessageBox.Show(string.Format("Cost of this item {0} is greater than purchase rate. Do you want to continue?", purchaseSaleRate.ToString("#.##")), "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show(string.Format("Cost of this item {0} is greater than sale rate {1}. Do you want to continue?", lineItem.PurchaseSaleRate.ToString("#.##"), (lineItem.SaleRate??0).ToString("#.##")), "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         if(isEdit)
                             InsertUpdateLineItemAndsetToGrid(lineItem);
@@ -840,20 +852,33 @@ namespace PharmaUI
                     {
                         if (DialogResult.Yes == MessageBox.Show("Do you want to delete ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                         {
-
-                            PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                            //PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
                             int rowIndex = dgvLineItem.CurrentRow.Index;
-                            dgvLineItem.Rows.RemoveAt(rowIndex);
+                            int headerID = 0;
+                            int lineItemID = 0;
 
-                            if (dgvLineItem.Rows.Count == 0)
+                            Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value), out lineItemID);
+                            Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookHeaderID"].Value), out headerID);
+                            List<int> lineItemList = applicationFacade.DeleteSaleLineItem(headerID, lineItemID);
+
+                            if (lineItemList.Count > 0)
                             {
-                                dgvLineItem.Rows.Add();
-                                dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
-                                dgvLineItem.Focus();
-                            }
-                            else
-                            {
-                                dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.RowCount - 1].Cells["ItemCode"];
+                                foreach (int id in lineItemList)
+                                {
+                                    DataGridViewRow rowToBeDeleted = dgvLineItem.Rows.Cast<DataGridViewRow>().Where(p => Convert.ToString(p.Cells["PurchaseSaleBookLineItemID"].Value) == id.ToString()).FirstOrDefault();
+                                    dgvLineItem.Rows.Remove(rowToBeDeleted);
+                                }
+
+                                if (dgvLineItem.Rows.Count == 0)
+                                {
+                                    dgvLineItem.Rows.Add();
+                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                                    dgvLineItem.Focus();
+                                }
+                                else
+                                {
+                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.RowCount - 1].Cells["ItemCode"];
+                                }
                             }
                         }
                     }
@@ -956,10 +981,14 @@ namespace PharmaUI
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
                 dgvLineItem.Focus();
-                if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentRow.Cells["Batch"].Value)))
-                    dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Quantity"];
-                else
-                    dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Batch"];
+
+                if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentRow.Cells["ItemCode"].Value)))
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentRow.Cells["Batch"].Value)))
+                        dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Quantity"];
+                    else
+                        dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Batch"];
+                }
 
 
             }
@@ -979,13 +1008,17 @@ namespace PharmaUI
                 colIndex = dgvLineItem.SelectedCells[0].ColumnIndex;
                 currentRowIndex = dgvLineItem.SelectedCells[0].RowIndex;
 
-                List<PurchaseSaleBookLineItem> lineItemList = applicationFacade.InsertUpdateTempPurchaseBookLineItemForSale(lineItem);
+                List<PurchaseSaleBookLineItem> allLineItemList = applicationFacade.InsertUpdateTempPurchaseBookLineItemForSale(lineItem);
                 var existingIDlist = dgvLineItem.Rows.OfType<DataGridViewRow>()
                                                 .Select(r => new {
                                                     LineItemId = Convert.ToString(r.Cells["PurchaseSaleBookLineItemID"].Value),
                                                     RwIndex = r.Index
                                                     })
                                                 .ToList();
+
+                List<PurchaseSaleBookLineItem> lineItemList = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID > 0 && p.PurchaseSaleBookHeaderID > 0).ToList();
+                PurchaseSaleBookLineItem totalLineItemDetail = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID == 0).FirstOrDefault();
+
                 isSetGrid = true;
                 for (int i = 0; i < lineItemList.Count; i++)
                 {
@@ -1052,7 +1085,16 @@ namespace PharmaUI
 
                 }
                 isSetGrid = false;
-                
+
+                if (totalLineItemDetail != null)
+                {
+                    lblTotalSchemeAmt.Text = (totalLineItemDetail.SchemeAmount??0).ToString("#.##");
+                    lblTotalTaxAmount.Text = (totalLineItemDetail.TaxAmount ?? 0).ToString("#.##");
+                    lblTotalNetAmount.Text = (totalLineItemDetail.CostAmount ?? 0).ToString("#.##");
+                    lblTotalDiscountAmt.Text = (totalLineItemDetail.DiscountAmount ?? 0).ToString("#.##");
+                    lblTotalAmount.Text = (totalLineItemDetail.GrossAmount ?? 0).ToString("#.##");
+
+                }
             }
 
             if (currentRowIndex != -1)
@@ -1221,31 +1263,107 @@ namespace PharmaUI
 
         private void SetFooterInfo(string code, long fifoID)
         {
-            SaleLineItemInfo info = applicationFacade.GetSaleLineItemInfo(code, fifoID);
-            lblBalance.Text = info.Balance.ToString("#.##");
-            lblPacking.Text = info.Packing;
-            lblSaleTypeCode.Text = info.SaleType;
-            lblCaseQuantity.Text = info.CaseQty.ToString("#.##");
-            lblIsHalf.Text = info.IsHalf ? "Y" : "N";
-            lblDiscount.Text = dgvLineItem.SelectedCells.Count > 0 ? Convert.ToString(dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Discount"].Value) : "0";
-            lblSurharge.Text = info.Surcharge.ToString("#.##");
-            lblTaxRate.Text = dgvLineItem.SelectedCells.Count > 0 ? Convert.ToString(dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["PurchaseSaleTax"].Value): "0";//info.TaxAmount.ToString("#.##");
-            lblScheme.Text = string.Concat(dgvLineItem.SelectedCells.Count > 0 ? Convert.ToString(dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Scheme1"].Value) : "0", "+", dgvLineItem.SelectedCells.Count > 0 ? Convert.ToString(dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Scheme2"].Value) : "0");
-
-            if(info.LastBillInfo != null && info.LastBillInfo.BillDate != DateTime.MinValue)
+            if (!string.IsNullOrEmpty(code))
             {
-                tableLayoutPanel3.Height = layoutHeight;
-                tableLayoutPanel3.Width = layoutWidth;
+                SaleLineItemInfo info = applicationFacade.GetSaleLineItemInfo(code, fifoID);
+                lblBalance.Text = info.Balance.ToString("#.##");
+                lblPacking.Text = info.Packing;
+                lblSaleTypeCode.Text = info.SaleType;
+                lblCaseQuantity.Text = info.CaseQty.ToString("#.##");
+                lblIsHalf.Text = info.IsHalf ? "Y" : "N";
+                lblDiscount.Text = dgvLineItem.SelectedCells.Count > 0 ? Convert.ToString(dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Discount"].Value) : "0";
+                lblSurharge.Text = info.Surcharge.ToString("#.##");
+                lblTaxRate.Text = dgvLineItem.SelectedCells.Count > 0 ? Convert.ToString(dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["PurchaseSaleTax"].Value) : "0";//info.TaxAmount.ToString("#.##");
+                lblScheme.Text = string.Concat(dgvLineItem.SelectedCells.Count > 0 ? Convert.ToString(dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Scheme1"].Value) : "0", "+", dgvLineItem.SelectedCells.Count > 0 ? Convert.ToString(dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Scheme2"].Value) : "0");
 
-                lblLBBatch.Text = info.LastBillInfo.Batch;
-                lblLBRate.Text = info.LastBillInfo.Rate.ToString("#.##");
-                lblLBScheme.Text = string.Concat(info.LastBillInfo.Scheme1.ToString("#.##"), "+", info.LastBillInfo.Scheme2.ToString("#.##"));
-                lblLBSpLDis.Text = info.LastBillInfo.SpecialDiscount.ToString("#.##");
-                lblLBTax.Text = info.LastBillInfo.Tax.ToString("#.##");
-                lblLBDis.Text = info.LastBillInfo.Discount.ToString("#.##");
-                lblLBDate.Text = info.LastBillInfo.BillDate == DateTime.MinValue ? string.Empty : info.LastBillInfo.BillDate.ToString("dd/mm/yyyy");
+                if (info.LastBillInfo != null && info.LastBillInfo.BillDate != DateTime.MinValue)
+                {
+                    tableLayoutPanel3.Height = layoutHeight;
+                    tableLayoutPanel3.Width = layoutWidth;
+
+                    lblLBBatch.Text = info.LastBillInfo.Batch;
+                    lblLBRate.Text = info.LastBillInfo.Rate.ToString("#.##");
+                    lblLBScheme.Text = string.Concat(info.LastBillInfo.Scheme1.ToString("#.##"), "+", info.LastBillInfo.Scheme2.ToString("#.##"));
+                    lblLBSpLDis.Text = info.LastBillInfo.SpecialDiscount.ToString("#.##");
+                    lblLBTax.Text = info.LastBillInfo.Tax.ToString("#.##");
+                    lblLBDis.Text = info.LastBillInfo.Discount.ToString("#.##");
+                    lblLBDate.Text = info.LastBillInfo.BillDate == DateTime.MinValue ? string.Empty : info.LastBillInfo.BillDate.ToString("dd/mm/yyyy");
+                }
+            }
+            else
+            {
+                lblBalance.Text = string.Empty;
+                lblPacking.Text = string.Empty;
+                lblSaleTypeCode.Text = string.Empty;
+                lblCaseQuantity.Text = string.Empty;
+                lblIsHalf.Text = string.Empty;
+                lblDiscount.Text = string.Empty;
+                lblSurharge.Text = string.Empty;
+                lblTaxRate.Text = string.Empty;//info.TaxAmount.ToString("#.##");
+                lblScheme.Text = string.Empty;
+
+                tableLayoutPanel3.Height = 0;
+                tableLayoutPanel3.Width = 0;
             }
 
+        }
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            try
+            {
+                if (keyData == Keys.End)
+                {
+                    if (header != null && header.PurchaseSaleBookHeaderID > 0 && dgvLineItem.Rows.Count > 0)
+                    {
+                        var result = MessageBox.Show("Are you sure you want to save the sale entry", "Confirmation", MessageBoxButtons.OKCancel);
+                        if (result == DialogResult.OK)
+                        {
+                            applicationFacade.SaveSaleEntryData(header.PurchaseSaleBookHeaderID);
+                            this.Close();
+                        }
+                    }
+
+                }
+
+                else if (keyData == Keys.F5)
+                {
+                    frmSaleEntry form = new frmSaleEntry(false);
+                    ExtensionMethods.AddTrasanctionFormToPanel(form, ExtensionMethods.MainPanel);
+                    form.Show();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void frmSaleEntry_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (header.PurchaseSaleBookHeaderID > 0)
+            {
+                bool result = applicationFacade.IsTempSaleEntryExists(header.PurchaseSaleBookHeaderID);
+
+                if (result)
+                {
+                    DialogResult isConfirm = MessageBox.Show("There are some unsaved changes. Do you want to close the screen", "Warning", MessageBoxButtons.YesNo);
+
+                    if (isConfirm == DialogResult.No)
+                    {
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        applicationFacade.RollbackSaleEntry(header.PurchaseSaleBookHeaderID);
+                    }
+                }
+
+            }
         }
 
     }
