@@ -50,10 +50,7 @@ namespace PharmaUI.ReceiptPayment
                 // dgvPaymentToSupplier.EditingControlShowing += dgvCustomerItemDiscount_EditingControlShowing;
                 dgvPaymentToSupplier.SelectionChanged += DgvPaymentToSupplier_SelectionChanged;
 
-                string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
-                format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
-                format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
-                dtReceiptPayment.Text = DateTime.Now.ToString(format);
+                dtReceiptPayment.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
                 dtReceiptPayment.Focus();
                 dtReceiptPayment.Select(0, 0);
 
@@ -212,7 +209,7 @@ namespace PharmaUI.ReceiptPayment
 
             //Display totall of adjusted amount
             decimal totallAdjusted = 0;
-            allAdjustment.ForEach(x => totallAdjusted += x.Amount);
+            allAdjustment.ForEach(x => totallAdjusted += (decimal)x.Amount);
             lblAmtAdjVal.Text = Convert.ToString(totallAdjusted);
         }
 
@@ -258,7 +255,7 @@ namespace PharmaUI.ReceiptPayment
                 ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
                 {
                     VoucherTypeCode = Constants.VoucherTypeCode.PAYMENTTOSUPPLIER,
-                    VoucherDate = Convert.ToDateTime(dtReceiptPayment.Text),
+                    VoucherDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text),
                     LedgerType = Constants.TransactionEntityType.SupplierLedger,
                     LedgerTypeCode = selectedSupplier.SupplierLedgerCode,
                     LedgerTypeName = selectedSupplier.SupplierLedgerName,
@@ -328,6 +325,7 @@ namespace PharmaUI.ReceiptPayment
         {
             try
             {
+
                 if (dgvPaymentToSupplier.Rows.Count > 0)
                 {
                     string columnName = dgvPaymentToSupplier.Columns[dgvPaymentToSupplier.SelectedCells[0].ColumnIndex].Name;
@@ -511,6 +509,7 @@ namespace PharmaUI.ReceiptPayment
         private ReceiptPaymentItem FillDataboundToCurrentRow()
         {
             ReceiptPaymentItem receiptPaymentItem = new ReceiptPaymentItem();
+
             if (dgvPaymentToSupplier.SelectedCells.Count > 0)
             {
                 int rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;
@@ -524,7 +523,7 @@ namespace PharmaUI.ReceiptPayment
                 receiptPaymentItem.Amount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"].Value));
                 receiptPaymentItem.ChequeNumber = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeNumber"].Value);
                 receiptPaymentItem.BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag);
-                receiptPaymentItem.ChequeDate = Convert.ToDateTime(dtReceiptPayment.Text);
+                receiptPaymentItem.ChequeDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text);
                 receiptPaymentItem.UnadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"].Value));
             }
             return receiptPaymentItem;

@@ -198,7 +198,7 @@ namespace PharmaDAL.Transaction
                                     AdjustmentVoucherDate = billAdjust.AdjustmentVoucherDate,
                                     LedgerType = billAdjust.LedgerType,
                                     LedgerTypeCode = billAdjust.LedgerTypeCode,
-                                    Amount = billAdjust.Amount,
+                                    Amount = (decimal)billAdjust.Amount,
                                     ChequeNumber = receiptPaymentEntity.ChequeNumber
                                 };
                                 context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);

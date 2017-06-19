@@ -22,7 +22,7 @@ namespace PharmaBusinessObjects.Transaction.ReceiptPayment
         public string LedgerTypeCode { get; set; }
         public string InvoiceNumber { get; set; }
         public System.DateTime InvoiceDate { get; set; }
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
         public decimal OSAmount { get; set; }
         public string ChequeNumber { get; set; }
     }

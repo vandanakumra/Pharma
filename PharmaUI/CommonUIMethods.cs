@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -20,9 +21,6 @@ namespace PharmaUI
         public bool Visible { get; set; }
         public string ControlName { get; set; }
     }
-
-    
-
 
     public static class ExtensionMethods
     {
@@ -557,5 +555,16 @@ namespace PharmaUI
             //if (!dgv.ColumnHeadersVisible)
             //    dgv.ColumnHeadersVisible = true;
         }
+
+        public static string ConvertToAppDateFormat(DateTime dateTime)
+        {
+            return dateTime.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+        }
+
+        public static DateTime ConvertToSystemDateFormat(string dateTime)
+        {
+            return DateTime.ParseExact(dateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        }
+
     }
 }

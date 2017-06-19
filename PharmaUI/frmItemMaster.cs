@@ -16,12 +16,33 @@ using System.Threading;
 
 namespace PharmaUI
 {
+    public class TypeAssistant
+    {
+        public event EventHandler Idled = delegate { };
+        public int WaitingMilliSeconds { get; set; }
+        System.Threading.Timer waitingTimer;
+
+        public TypeAssistant(int waitingMilliSeconds = 600)
+        {
+            WaitingMilliSeconds = waitingMilliSeconds;
+            waitingTimer = new System.Threading.Timer(p =>
+            {
+                Idled(this, EventArgs.Empty);
+            });
+        }
+        public void TextChanged()
+        {
+            waitingTimer.Change(WaitingMilliSeconds, System.Threading.Timeout.Infinite);
+        }
+    }
+
     public partial class frmItemMaster : Form
     {
         public PharmaBusinessObjects.Master.ItemMaster LastSelectedItemMaster { get; set; }
         IApplicationFacade applicationFacade;
 
         private bool isOpenAsChild = false;
+        TypeAssistant assistant;
 
         public frmItemMaster(bool _isOpenAsChild = false)
         {
@@ -32,10 +53,8 @@ namespace PharmaUI
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
 
                 isOpenAsChild = _isOpenAsChild;
-
-                timer = new System.Threading.Timer((c) => LoadData(), null, Timeout.Infinite, Timeout.Infinite);
-
-
+                assistant = new TypeAssistant();
+                assistant.Idled += Assistant_Idled;
             }
             catch (Exception ex)
             {
@@ -43,6 +62,8 @@ namespace PharmaUI
             }
           
         }
+
+       
 
         private void frmItemMaster_Load(object sender, EventArgs e)
         {
@@ -204,18 +225,18 @@ namespace PharmaUI
             ExtensionMethods.SetGridDefaultProperty(dgvItemList);
 
            dgvItemList.Columns["ItemName"].Visible = true;
-            dgvItemList.Columns["ItemName"].HeaderText = "Item";
+          //  dgvItemList.Columns["ItemName"].HeaderText = "Item";
 
             dgvItemList.Columns["CompanyName"].Visible = true;
-            dgvItemList.Columns["CompanyName"].HeaderText = "Company";
+          //  dgvItemList.Columns["CompanyName"].HeaderText = "Company";
 
             dgvItemList.Columns["Packing"].Visible = true;
-            dgvItemList.Columns["Packing"].HeaderText = "Pack";
+           // dgvItemList.Columns["Packing"].HeaderText = "Pack";
 
             dgvItemList.Columns["QtyPerCase"].Visible = true;
-            dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
+          //  dgvItemList.Columns["QtyPerCase"].HeaderText = "Qty";
 
-            txtSearch_TextChanged(null, null);
+          //  txtSearch_TextChanged(null, null);
 
 
         }
@@ -241,25 +262,21 @@ namespace PharmaUI
             }
         }
 
-        private System.Threading.Timer timer;
-
-        public void LoadData()
+        private void Assistant_Idled(object sender, EventArgs e)
         {
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new Action(LoadData));
-            }
-            else
-            {
-                ExtensionMethods.GridSelectionOnSearch(dgvItemList, "ItemName", txtSearch.Text, this.lblSearchStatus);
-            }
+            this.Invoke(
+               new MethodInvoker(() =>
+               {
+                   ExtensionMethods.GridSelectionOnSearch(dgvItemList, "ItemName", txtSearch.Text, this.lblSearchStatus);
+               }));
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             try
-            {                
-                ExtensionMethods.GridSelectionOnSearch(dgvItemList, "ItemName", txtSearch.Text, this.lblSearchStatus);               
+            {
+                assistant.TextChanged();
+               // ExtensionMethods.GridSelectionOnSearch(dgvItemList, "ItemName", txtSearch.Text, this.lblSearchStatus);               
             }
             catch (Exception ex)
             {
@@ -282,9 +299,21 @@ namespace PharmaUI
                 EditItem();
 
             }
-            else if(keyData == Keys.Down)
+            else if(keyData == Keys.Down )
             {
                 dgvItemList.Focus();
+
+                int rowindex = dgvItemList.Rows.Count == dgvItemList.CurrentRow.Index + 1 ? dgvItemList.CurrentRow.Index : dgvItemList.CurrentRow.Index + 1;
+
+                dgvItemList.Rows[rowindex].Selected = true;
+            }
+            else if (keyData == Keys.Up)
+            {
+                dgvItemList.Focus();
+
+                int rowindex = dgvItemList.CurrentRow.Index  == 0 ? dgvItemList.CurrentRow.Index : dgvItemList.CurrentRow.Index - 1;
+
+                dgvItemList.Rows[rowindex].Selected = true;
             }
             else if (keyData == Keys.Escape)
             {
