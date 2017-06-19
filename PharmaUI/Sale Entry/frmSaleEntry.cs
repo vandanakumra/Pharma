@@ -257,7 +257,7 @@ namespace PharmaUI
             {
                 long id = 0;
                 long.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value), out id);
-                SetFooterInfo(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"]), id);
+                SetFooterInfo(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value), id);
             }
 
             if (oldSelectedRowIndex != rowIndex && !isSetGrid)

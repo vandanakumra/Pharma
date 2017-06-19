@@ -102,26 +102,26 @@ namespace PharmaUI
             decimal.TryParse(txtAmount7.Text, out amount);
             purchaseBookHeader.Amount07 = amount;
 
-            decimal.TryParse(txtIGST1.Text, out amount);
-            purchaseBookHeader.IGST01 = amount;
+            decimal.TryParse(txtCGST1.Text, out amount);
+            purchaseBookHeader.CGST01 = amount;
 
-            decimal.TryParse(txtIGST2.Text, out amount);
-            purchaseBookHeader.IGST02 = amount;
+            decimal.TryParse(txtCGST2.Text, out amount);
+            purchaseBookHeader.CGST02 = amount;
 
-            decimal.TryParse(txtIGST3.Text, out amount);
-            purchaseBookHeader.IGST03 = amount;
+            decimal.TryParse(txtCGST3.Text, out amount);
+            purchaseBookHeader.CGST03 = amount;
 
-            decimal.TryParse(txtIGST4.Text, out amount);
-            purchaseBookHeader.IGST04 = amount;
+            decimal.TryParse(txtCGST4.Text, out amount);
+            purchaseBookHeader.CGST04 = amount;
 
-            decimal.TryParse(txtIGST5.Text, out amount);
-            purchaseBookHeader.IGST05 = amount;
+            decimal.TryParse(txtCGST5.Text, out amount);
+            purchaseBookHeader.CGST05 = amount;
 
-            decimal.TryParse(txtIGST6.Text, out amount);
-            purchaseBookHeader.IGST06 = amount;
+            decimal.TryParse(txtCGST6.Text, out amount);
+            purchaseBookHeader.CGST06 = amount;
 
-            decimal.TryParse(txtIGST7.Text, out amount);
-            purchaseBookHeader.IGST07 = amount;
+            decimal.TryParse(txtCGST7.Text, out amount);
+            purchaseBookHeader.CGST07 = amount;
 
             decimal.TryParse(txtSGST1.Text, out amount);
             purchaseBookHeader.SGST01 = amount;
@@ -165,7 +165,7 @@ namespace PharmaUI
                 lblAmount1.Text = amount.PurchaseSaleTypeName;
                 txtAmount1.Text = amount.Amount.ToString("#.##");
                 txtAmount1.Tag = amount.TaxApplicable.ToString("#.##");
-                txtIGST1.Text = amount.IGST.ToString("#.##");
+                txtCGST1.Text = amount.CGST.ToString("#.##");
                 txtSGST1.Text = amount.SGST.ToString("#.##");
             }
 
@@ -176,7 +176,7 @@ namespace PharmaUI
                 lblAmount2.Text = amount.PurchaseSaleTypeName;
                 txtAmount2.Text = amount.Amount.ToString("#.##");
                 txtAmount2.Tag = amount.TaxApplicable.ToString("#.##");
-                txtIGST2.Text = amount.IGST.ToString("#.##");
+                txtCGST2.Text = amount.CGST.ToString("#.##");
                 txtSGST2.Text = amount.SGST.ToString("#.##");
             }
 
@@ -187,7 +187,7 @@ namespace PharmaUI
                 lblAmount3.Text = amount.PurchaseSaleTypeName;
                 txtAmount3.Text = amount.Amount.ToString("#.##");
                 txtAmount3.Tag = amount.TaxApplicable.ToString("#.##");
-                txtIGST3.Text = amount.IGST.ToString("#.##");
+                txtCGST3.Text = amount.CGST.ToString("#.##");
                 txtSGST3.Text = amount.SGST.ToString("#.##");
             }
 
@@ -198,7 +198,7 @@ namespace PharmaUI
                 lblAmount4.Text = amount.PurchaseSaleTypeName;
                 txtAmount4.Text = amount.Amount.ToString("#.##");
                 txtAmount4.Tag = amount.TaxApplicable.ToString("#.##");
-                txtIGST4.Text = amount.IGST.ToString("#.##");
+                txtCGST4.Text = amount.CGST.ToString("#.##");
                 txtSGST4.Text = amount.SGST.ToString("#.##");
             }
 
@@ -209,7 +209,7 @@ namespace PharmaUI
                 lblAmount5.Text = amount.PurchaseSaleTypeName;
                 txtAmount5.Text = amount.Amount.ToString("#.##");
                 txtAmount5.Tag = amount.TaxApplicable.ToString("#.##");
-                txtIGST5.Text = amount.IGST.ToString("#.##");
+                txtCGST5.Text = amount.CGST.ToString("#.##");
                 txtSGST5.Text = amount.SGST.ToString("#.##");
             }
 
@@ -220,7 +220,7 @@ namespace PharmaUI
                 lblAmount6.Text = amount.PurchaseSaleTypeName;
                 txtAmount6.Text = amount.Amount.ToString("#.##");
                 txtAmount6.Tag = amount.TaxApplicable.ToString("#.##");
-                txtIGST6.Text = amount.IGST.ToString("#.##");
+                txtCGST6.Text = amount.CGST.ToString("#.##");
                 txtSGST6.Text = amount.SGST.ToString("#.##");
             }
 
@@ -231,7 +231,7 @@ namespace PharmaUI
                 lblAmount7.Text = amount.PurchaseSaleTypeName;
                 txtAmount7.Text = amount.Amount.ToString("#.##");
                 txtAmount7.Tag = amount.TaxApplicable.ToString("#.##");
-                txtIGST7.Text = amount.IGST.ToString("#.##");
+                txtCGST7.Text = amount.CGST.ToString("#.##");
                 txtSGST7.Text = amount.SGST.ToString("#.##");
             }
 
@@ -261,26 +261,26 @@ namespace PharmaUI
             decimal amount7 = 0;
             decimal.TryParse(txtAmount7.Text, out amount7);
 
-            decimal igst1 = 0;
-            decimal.TryParse(txtIGST1.Text, out igst1);
+            decimal CGST1 = 0;
+            decimal.TryParse(txtCGST1.Text, out CGST1);
 
-            decimal igst2 = 0;
-            decimal.TryParse(txtIGST2.Text, out igst2);
+            decimal CGST2 = 0;
+            decimal.TryParse(txtCGST2.Text, out CGST2);
 
-            decimal igst3 = 0;
-            decimal.TryParse(txtIGST3.Text, out igst3);
+            decimal CGST3 = 0;
+            decimal.TryParse(txtCGST3.Text, out CGST3);
 
-            decimal igst4 = 0;
-            decimal.TryParse(txtIGST4.Text, out igst4);
+            decimal CGST4 = 0;
+            decimal.TryParse(txtCGST4.Text, out CGST4);
 
-            decimal igst5 = 0;
-            decimal.TryParse(txtIGST5.Text, out igst5);
+            decimal CGST5 = 0;
+            decimal.TryParse(txtCGST5.Text, out CGST5);
 
-            decimal igst6 = 0;
-            decimal.TryParse(txtIGST6.Text, out igst6);
+            decimal CGST6 = 0;
+            decimal.TryParse(txtCGST6.Text, out CGST6);
 
-            decimal igst7 = 0;
-            decimal.TryParse(txtIGST7.Text, out igst7);
+            decimal CGST7 = 0;
+            decimal.TryParse(txtCGST7.Text, out CGST7);
 
             decimal sgst1 = 0;
             decimal.TryParse(txtSGST1.Text, out sgst1);
@@ -306,8 +306,8 @@ namespace PharmaUI
             decimal otherAmount = 0;
             decimal.TryParse(txtOtherAmt.Text, out otherAmount);
 
-            txtTotalBillAmount.Text = (amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + igst1 + igst2 + igst3
-                + igst3 + igst4 + igst5 + igst6 + igst7 + sgst1 + sgst2 + sgst3 + sgst4 + sgst5 + sgst6 + sgst7).ToString("#.##");
+            txtTotalBillAmount.Text = (amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + CGST1 + CGST2 + CGST3
+                + CGST3 + CGST4 + CGST5 + CGST6 + CGST7 + sgst1 + sgst2 + sgst3 + sgst4 + sgst5 + sgst6 + sgst7).ToString("#.##");
         }
 
         public void GotFocusEventRaised(Control control)
@@ -360,43 +360,43 @@ namespace PharmaUI
                 {
                     case "txtAmount1":
                         {
-                            txtIGST1.Text = tax == 0L && amount != 0L ? "0.00" : (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
+                            txtCGST1.Text = tax == 0L && amount != 0L ? "0.00" : (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
                             txtSGST1.Text = tax == 0L && amount != 0L ? "0.00" : (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
                         }
                         break;
                     case "txtAmount2":
                         {
-                            txtIGST2.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
+                            txtCGST2.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
                             txtSGST2.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
                         }
                         break;
                     case "txtAmount3":
                         {
-                            txtIGST3.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
+                            txtCGST3.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
                             txtSGST3.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
                         }
                         break;
                     case "txtAmount4":
                         {
-                            txtIGST4.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
+                            txtCGST4.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
                             txtSGST4.Text = (amount * tax * (decimal).01 * (decimal)0.5).ToString("#.##");
                         }
                         break;
                     case "txtAmount5":
                         {
-                            txtIGST5.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
+                            txtCGST5.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
                             txtSGST5.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
                         }
                         break;
                     case "txtAmount6":
                         {
-                            txtIGST6.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
+                            txtCGST6.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
                             txtSGST6.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
                         }
                         break;
                     case "txtAmount7":
                         {
-                            txtIGST7.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
+                            txtCGST7.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
                             txtSGST7.Text = (amount * tax * (decimal)(decimal).01 * (decimal)(decimal)0.5).ToString("#.##");
                         }
                         break;

@@ -30,7 +30,7 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtOtherAmt = new System.Windows.Forms.TextBox();
-            this.txtCGST1 = new System.Windows.Forms.TextBox();
+            this.txtIGST1 = new System.Windows.Forms.TextBox();
             this.lblAmount1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblAmount2 = new System.Windows.Forms.Label();
@@ -54,12 +54,12 @@
             this.txtAmount5 = new System.Windows.Forms.TextBox();
             this.txtAmount6 = new System.Windows.Forms.TextBox();
             this.txtAmount7 = new System.Windows.Forms.TextBox();
-            this.txtCGST2 = new System.Windows.Forms.TextBox();
-            this.txtCGST3 = new System.Windows.Forms.TextBox();
-            this.txtCGST4 = new System.Windows.Forms.TextBox();
-            this.txtCGST5 = new System.Windows.Forms.TextBox();
-            this.txtCGST6 = new System.Windows.Forms.TextBox();
-            this.txtCGST7 = new System.Windows.Forms.TextBox();
+            this.txtIGST2 = new System.Windows.Forms.TextBox();
+            this.txtIGST3 = new System.Windows.Forms.TextBox();
+            this.txtIGST4 = new System.Windows.Forms.TextBox();
+            this.txtIGST5 = new System.Windows.Forms.TextBox();
+            this.txtIGST6 = new System.Windows.Forms.TextBox();
+            this.txtIGST7 = new System.Windows.Forms.TextBox();
             this.txtTotalBillAmount = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +75,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.txtOtherAmt, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.txtCGST1, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtIGST1, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblAmount1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblAmount2, 0, 1);
@@ -99,12 +99,12 @@
             this.tableLayoutPanel1.Controls.Add(this.txtAmount5, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.txtAmount6, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.txtAmount7, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.txtCGST2, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtCGST3, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtCGST4, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtCGST5, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtCGST6, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtCGST7, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtIGST2, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtIGST3, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtIGST4, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtIGST5, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtIGST6, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txtIGST7, 3, 6);
             this.tableLayoutPanel1.Controls.Add(this.txtTotalBillAmount, 1, 8);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 66);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -129,14 +129,14 @@
             this.txtOtherAmt.Size = new System.Drawing.Size(111, 20);
             this.txtOtherAmt.TabIndex = 15;
             // 
-            // txtCGST1
+            // txtIGST1
             // 
-            this.txtCGST1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCGST1.Location = new System.Drawing.Point(400, 5);
-            this.txtCGST1.Name = "txtCGST1";
-            this.txtCGST1.Size = new System.Drawing.Size(112, 20);
-            this.txtCGST1.TabIndex = 2;
-            this.txtCGST1.Visible = false;
+            this.txtIGST1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIGST1.Location = new System.Drawing.Point(400, 5);
+            this.txtIGST1.Name = "txtIGST1";
+            this.txtIGST1.Size = new System.Drawing.Size(112, 20);
+            this.txtIGST1.TabIndex = 2;
+            this.txtIGST1.Visible = false;
             // 
             // lblAmount1
             // 
@@ -156,7 +156,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "CGST";
+            this.label2.Text = "IGST";
             this.label2.Visible = false;
             // 
             // lblAmount2
@@ -177,7 +177,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "CGST";
+            this.label5.Text = "IGST";
             // 
             // lblAmount3
             // 
@@ -257,7 +257,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(36, 13);
             this.label14.TabIndex = 13;
-            this.label14.Text = "CGST";
+            this.label14.Text = "IGST";
             // 
             // label15
             // 
@@ -267,7 +267,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(36, 13);
             this.label15.TabIndex = 14;
-            this.label15.Text = "CGST";
+            this.label15.Text = "IGST";
             // 
             // label16
             // 
@@ -277,7 +277,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(36, 13);
             this.label16.TabIndex = 15;
-            this.label16.Text = "CGST";
+            this.label16.Text = "IGST";
             // 
             // label17
             // 
@@ -287,7 +287,7 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(36, 13);
             this.label17.TabIndex = 16;
-            this.label17.Text = "CGST";
+            this.label17.Text = "IGST";
             // 
             // label18
             // 
@@ -297,7 +297,7 @@
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(36, 13);
             this.label18.TabIndex = 17;
-            this.label18.Text = "CGST";
+            this.label18.Text = "IGST";
             // 
             // txtAmount1
             // 
@@ -355,53 +355,53 @@
             this.txtAmount7.Size = new System.Drawing.Size(111, 20);
             this.txtAmount7.TabIndex = 13;
             // 
-            // txtCGST2
+            // txtIGST2
             // 
-            this.txtCGST2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCGST2.Location = new System.Drawing.Point(400, 35);
-            this.txtCGST2.Name = "txtCGST2";
-            this.txtCGST2.Size = new System.Drawing.Size(112, 20);
-            this.txtCGST2.TabIndex = 4;
+            this.txtIGST2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIGST2.Location = new System.Drawing.Point(400, 35);
+            this.txtIGST2.Name = "txtIGST2";
+            this.txtIGST2.Size = new System.Drawing.Size(112, 20);
+            this.txtIGST2.TabIndex = 4;
             // 
-            // txtCGST3
+            // txtIGST3
             // 
-            this.txtCGST3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCGST3.Location = new System.Drawing.Point(400, 65);
-            this.txtCGST3.Name = "txtCGST3";
-            this.txtCGST3.Size = new System.Drawing.Size(112, 20);
-            this.txtCGST3.TabIndex = 6;
+            this.txtIGST3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIGST3.Location = new System.Drawing.Point(400, 65);
+            this.txtIGST3.Name = "txtIGST3";
+            this.txtIGST3.Size = new System.Drawing.Size(112, 20);
+            this.txtIGST3.TabIndex = 6;
             // 
-            // txtCGST4
+            // txtIGST4
             // 
-            this.txtCGST4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCGST4.Location = new System.Drawing.Point(400, 95);
-            this.txtCGST4.Name = "txtCGST4";
-            this.txtCGST4.Size = new System.Drawing.Size(112, 20);
-            this.txtCGST4.TabIndex = 8;
+            this.txtIGST4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIGST4.Location = new System.Drawing.Point(400, 95);
+            this.txtIGST4.Name = "txtIGST4";
+            this.txtIGST4.Size = new System.Drawing.Size(112, 20);
+            this.txtIGST4.TabIndex = 8;
             // 
-            // txtCGST5
+            // txtIGST5
             // 
-            this.txtCGST5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCGST5.Location = new System.Drawing.Point(400, 125);
-            this.txtCGST5.Name = "txtCGST5";
-            this.txtCGST5.Size = new System.Drawing.Size(112, 20);
-            this.txtCGST5.TabIndex = 10;
+            this.txtIGST5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIGST5.Location = new System.Drawing.Point(400, 125);
+            this.txtIGST5.Name = "txtIGST5";
+            this.txtIGST5.Size = new System.Drawing.Size(112, 20);
+            this.txtIGST5.TabIndex = 10;
             // 
-            // txtCGST6
+            // txtIGST6
             // 
-            this.txtCGST6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCGST6.Location = new System.Drawing.Point(400, 155);
-            this.txtCGST6.Name = "txtCGST6";
-            this.txtCGST6.Size = new System.Drawing.Size(112, 20);
-            this.txtCGST6.TabIndex = 12;
+            this.txtIGST6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIGST6.Location = new System.Drawing.Point(400, 155);
+            this.txtIGST6.Name = "txtIGST6";
+            this.txtIGST6.Size = new System.Drawing.Size(112, 20);
+            this.txtIGST6.TabIndex = 12;
             // 
-            // txtCGST7
+            // txtIGST7
             // 
-            this.txtCGST7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCGST7.Location = new System.Drawing.Point(400, 185);
-            this.txtCGST7.Name = "txtCGST7";
-            this.txtCGST7.Size = new System.Drawing.Size(112, 20);
-            this.txtCGST7.TabIndex = 14;
+            this.txtIGST7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIGST7.Location = new System.Drawing.Point(400, 185);
+            this.txtIGST7.Name = "txtIGST7";
+            this.txtIGST7.Size = new System.Drawing.Size(112, 20);
+            this.txtIGST7.TabIndex = 14;
             // 
             // txtTotalBillAmount
             // 
@@ -431,7 +431,7 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox txtOtherAmt;
-        private System.Windows.Forms.TextBox txtCGST1;
+        private System.Windows.Forms.TextBox txtIGST1;
         private System.Windows.Forms.Label lblAmount1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblAmount2;
@@ -455,12 +455,12 @@
         private System.Windows.Forms.TextBox txtAmount5;
         private System.Windows.Forms.TextBox txtAmount6;
         private System.Windows.Forms.TextBox txtAmount7;
-        private System.Windows.Forms.TextBox txtCGST2;
-        private System.Windows.Forms.TextBox txtCGST3;
-        private System.Windows.Forms.TextBox txtCGST4;
-        private System.Windows.Forms.TextBox txtCGST5;
-        private System.Windows.Forms.TextBox txtCGST6;
-        private System.Windows.Forms.TextBox txtCGST7;
+        private System.Windows.Forms.TextBox txtIGST2;
+        private System.Windows.Forms.TextBox txtIGST3;
+        private System.Windows.Forms.TextBox txtIGST4;
+        private System.Windows.Forms.TextBox txtIGST5;
+        private System.Windows.Forms.TextBox txtIGST6;
+        private System.Windows.Forms.TextBox txtIGST7;
         private System.Windows.Forms.TextBox txtTotalBillAmount;
     }
 }
