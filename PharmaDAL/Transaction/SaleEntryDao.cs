@@ -2,6 +2,7 @@
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -212,6 +213,11 @@ namespace PharmaDAL.Transaction
                             item.PurchaseSaleRate = Convert.IsDBNull(row["PurchaseSaleRate"]) ? 0 : Convert.ToDecimal(row["PurchaseSaleRate"]);
                             item.FifoID = Convert.IsDBNull(row["Fifoid"]) ? 0 : Convert.ToInt32(row["Fifoid"]);
 
+                            item.SchemeAmount = Convert.IsDBNull(row["SchemeAmount"]) ? 0 : Convert.ToDecimal(row["SchemeAmount"]);
+                            item.GrossAmount = Convert.IsDBNull(row["GrossAmount"]) ? 0 : Convert.ToDecimal(row["GrossAmount"]);
+                            item.TaxAmount = Convert.IsDBNull(row["TaxAmount"]) ? 0 : Convert.ToDecimal(row["TaxAmount"]);
+                            item.TotalDiscountAmount = Convert.IsDBNull(row["DiscountAmount"]) ? 0 : Convert.ToDecimal(row["DiscountAmount"]);
+                            item.CostAmount = Convert.IsDBNull(row["BillAmount"]) ? 0 : Convert.ToDecimal(row["BillAmount"]);
                             lineItemList.Add(item);
                             //PurchaseBookAmount obj = new PurchaseBookAmount()
                             //{
@@ -274,5 +280,126 @@ namespace PharmaDAL.Transaction
                 context.SaveChanges();
             }
         }
+
+        public List<int> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
+        {
+            List<int> itemList = new List<int>();
+
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                SqlCommand cmd = new SqlCommand("DeleteSaleLineItem", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("PurchaseSaleBookHeaderID", saleBookHeaderID));
+                cmd.Parameters.Add(new SqlParameter("TempPurchaseSaleBookLineItemID", saleBookLineItemID));
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        int id = 0;
+                        Int32.TryParse(Convert.ToString(row["LineItemID"]), out id);
+                        itemList.Add(id);
+                    }
+                }
+
+            }
+
+            return itemList;
+        }
+
+        public bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                SqlConnection connection = (SqlConnection)context.Database.Connection;
+
+                SqlCommand cmd = new SqlCommand("CheckQuantityIfAvailableForSale", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookHeaderID", headerID));
+                cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookLineItemID", lineItemID));
+                cmd.Parameters.Add(new SqlParameter("@ItemCode", itemCode));
+                cmd.Parameters.Add(new SqlParameter("@Quantity", quantity));
+                cmd.Parameters.Add(new SqlParameter("@FreeQuantity", freeQuantity));
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    int result = 0;
+                    Int32.TryParse(dt.Rows[0]["IsAvailable"].ToString(), out result);
+                    return result > 0;
+                }
+            }
+
+            return false;
+        }
+
+        public bool SaveSaleEntryData(long purchaseBookHeaderID)
+        {
+            string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(ConnString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SaveSaleEntryData", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookHeaderID", purchaseBookHeaderID));
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                }
+                finally
+                {
+
+                    connection.Close();
+                }
+
+            }
+            return true;
+        }
+
+        public bool IsTempSaleEntryExists(long purchaseSaleBookHeaderID)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.TempPurchaseSaleBookHeader.Any(p => p.PurchaseSaleBookHeaderID == purchaseSaleBookHeaderID);
+            }
+        }
+
+        public void RollbackSaleEntry(long purchaseSaleBookHeaderID)
+        {
+            string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+            //using (SqlConnection connection = new SqlConnection(ConnString))
+            //{
+            //    try
+            //    {
+            //        SqlCommand cmd = new SqlCommand("DeleteSaleEntryData", connection);
+            //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //        cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookHeaderID", purchaseSaleBookHeaderID));
+            //        connection.Open();
+            //        cmd.ExecuteNonQuery();
+
+            //    }
+            //    finally
+            //    {
+
+            //        connection.Close();
+            //    }
+
+            //}
+        }
+
     }
 }

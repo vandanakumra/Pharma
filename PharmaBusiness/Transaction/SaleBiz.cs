@@ -45,5 +45,30 @@ namespace PharmaBusiness.Transaction
         {
             new SaleEntryDao(this.LoggedInUser).UpdateSaleDiscount(changeType, discount, specialDiscount, volumeDiscount, itemCode, customerCode);
         }
+
+        internal List<int> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
+        {
+            return new SaleEntryDao(this.LoggedInUser).DeleteSaleLineItem(saleBookHeaderID, saleBookLineItemID);
+        }
+
+        internal bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity)
+        {
+            return new SaleEntryDao(this.LoggedInUser).IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity);
+        }
+
+        internal bool SaveSaleEntryData(long purchaseBookHeaderID)
+        {
+            return new SaleEntryDao(this.LoggedInUser).SaveSaleEntryData(purchaseBookHeaderID);
+        }
+
+        internal bool IsTempSaleEntryExists(long purchaseSaleBookHeaderID)
+        {
+            return new SaleEntryDao(this.LoggedInUser).IsTempSaleEntryExists(purchaseSaleBookHeaderID);
+        }
+
+        internal void RollbackSaleEntry(long purchaseSaleBookHeaderID)
+        {
+            new SaleEntryDao(this.LoggedInUser).RollbackSaleEntry(purchaseSaleBookHeaderID);
+        }
     }
 }

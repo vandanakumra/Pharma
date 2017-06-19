@@ -66,14 +66,14 @@
             this.txtSpecialDiscount.Location = new System.Drawing.Point(560, 57);
             this.txtSpecialDiscount.Name = "txtSpecialDiscount";
             this.txtSpecialDiscount.Size = new System.Drawing.Size(100, 20);
-            this.txtSpecialDiscount.TabIndex = 3;
+            this.txtSpecialDiscount.TabIndex = 4;
             // 
             // txtVolumeDiscount
             // 
             this.txtVolumeDiscount.Location = new System.Drawing.Point(324, 57);
             this.txtVolumeDiscount.Name = "txtVolumeDiscount";
             this.txtVolumeDiscount.Size = new System.Drawing.Size(100, 20);
-            this.txtVolumeDiscount.TabIndex = 5;
+            this.txtVolumeDiscount.TabIndex = 3;
             // 
             // label3
             // 
