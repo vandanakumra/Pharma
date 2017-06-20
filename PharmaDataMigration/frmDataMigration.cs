@@ -85,9 +85,6 @@ namespace PharmaDataMigration
             BillOutstanding billOutstanding = new BillOutstanding();
             FIFO fifo = new FIFO();
 
-            fifo.InsertFIFOData();
-            return;
-
             int result;
 
             grdDataMigration.Rows.Add("Company Master", "Processing", 0);
@@ -217,6 +214,15 @@ namespace PharmaDataMigration
 
             grdDataMigration.Rows[15].Cells[1].Value = "Completed";
             grdDataMigration.Rows[15].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("FIFO", "Processing", 0);
+            result = 0;
+
+            result = fifo.InsertFIFOData();
+
+            grdDataMigration.Rows[16].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[16].Cells[2].Value = result;
+
 
             grdDataMigration.Rows.Add("Supplier Ledger", "Processing", 0);
             result = 0;
