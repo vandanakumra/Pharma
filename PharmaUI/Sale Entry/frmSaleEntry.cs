@@ -1410,7 +1410,7 @@ namespace PharmaUI
             {
                 if (header.PurchaseSaleBookHeaderID > 0)
                 {
-                    PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
+                    
                     PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleFormType.SelectedItem;
                     header.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
 
