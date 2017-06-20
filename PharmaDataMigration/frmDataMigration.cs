@@ -25,6 +25,7 @@ namespace PharmaDataMigration
             Common.accountLedgerCodeMap = new List<AccountLedgerCodeMap>();
             Common.supplierLedgerCodeMap = new List<SupplierLedgerCodeMap>();
             Common.customerLedgerCodeMap = new List<CustomerLedgerCodeMap>();
+            Common.voucherTypeMap = new List<VoucherTypeMap>();
         }
 
         private void frmDataMigration_Load(object sender, EventArgs e)
@@ -73,6 +74,7 @@ namespace PharmaDataMigration
 
         private void StartMigration()
         {
+
             CompanyMaster companyMaster = new CompanyMaster();
             ItemMaster itemMaster = new ItemMaster();
             PersonRouteMaster personRouteMaster = new PersonRouteMaster();
@@ -80,6 +82,8 @@ namespace PharmaDataMigration
             AccountLedgerMaster accountLedgerMaster = new AccountLedgerMaster();
             SupplierLedgerMaster supplierLedgerMaster = new SupplierLedgerMaster();
             CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
+            BillOutstanding billOutstanding = new BillOutstanding();
+
             int result;
 
             grdDataMigration.Rows.Add("Company Master", "Processing", 0);
@@ -244,6 +248,15 @@ namespace PharmaDataMigration
 
             grdDataMigration.Rows[19].Cells[1].Value = "Completed";
             grdDataMigration.Rows[19].Cells[2].Value = result;
+
+            grdDataMigration.Rows.Add("Bill Oustanding", "Processing", 0);
+            result = 0;
+
+            result = billOutstanding.InsertBillOutstandingData();
+
+            grdDataMigration.Rows[18].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[18].Cells[2].Value = result;
+            
 
             MessageBox.Show("Process Completed");
         }

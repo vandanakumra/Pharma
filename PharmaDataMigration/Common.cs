@@ -19,6 +19,13 @@ namespace PharmaDataMigration
         public static List<AccountLedgerCodeMap> accountLedgerCodeMap;
         public static List<SupplierLedgerCodeMap> supplierLedgerCodeMap;
         public static List<CustomerLedgerCodeMap> customerLedgerCodeMap;
+        public static List<VoucherTypeMap> voucherTypeMap;
+    }
+
+    public class VoucherTypeMap
+    {
+        public string OriginalVoucherType { get; set; }
+        public string MappedVoucherType { get; set; }
     }
 
     public class CompanyCodeMap

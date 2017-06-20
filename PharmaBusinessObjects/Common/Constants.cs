@@ -98,6 +98,8 @@ namespace PharmaBusinessObjects.Common
             public const string SALERETURN = "SALERETURN";
             public const string STOCKADUSTMENT = "STOCKADUSTMENT";
             public const string VOUCHERENTRY = "VOUCHERENTRY";
+            public const string SALEONCHALLAN = "SALEONCHALLAN";
+            public const string SALERETURNBREAKAGEEXPIRY = "SALERETURNBREAKAGEEXPIRY";
             public const string RECEIPTFROMCUSTOMER = "RECEIPTFROMCUSTOMER";
             public const string PAYMENTTOSUPPLIER = "PAYMENTTOSUPPLIER";
         }
