@@ -71,6 +71,16 @@ namespace PharmaUI
                 layoutWidth = tableLayoutPanel3.Width;
                 tableLayoutPanel3.Height = 0;
                 tableLayoutPanel3.Width = 0;
+
+                cbxSaleFormType.DataSource = applicationFacade.GetPurchaseEntryTypes();
+                cbxSaleFormType.DisplayMember = "PurchaseTypeName";
+                cbxSaleFormType.ValueMember = "ID";
+                cbxSaleFormType.SelectedIndexChanged += cbxSaleFormType_SelectedIndexChanged;
+                cbxSaleFormType.SelectedIndex = 0;
+
+                lblFRate.Visible = false;
+                lblDueBillAmount.Visible = false;
+                lblDueBills.Visible = false;
             }
             catch (Exception ex)
             {
@@ -669,13 +679,13 @@ namespace PharmaUI
                     else if (!string.IsNullOrEmpty(txt.Text))
                     {
 
-                        if (txt.Name == "txtSalesManCode" && dgvLineItem.Rows.Count == 0)
-                        {
-                            AddRowToGrid();
-                        }
+                        //if (txt.Name == "txtSalesManCode" && dgvLineItem.Rows.Count == 0)
+                        //{
+                        //    AddRowToGrid();
+                        //}
                         this.SelectNextControl(this.ActiveControl, true, true, true, true);
-                        
-                        
+
+
                     }
                     else
                     {
@@ -691,6 +701,10 @@ namespace PharmaUI
                             ledger.FormClosed += CustomerLedger_Closed;
                             ledger.Show();
 
+                        }
+                        if (txt.Name == "txtInvoiceNumber")
+                        {
+                            txtSalesManCode.Focus();
                         }
                         if (txt.Name == "txtSalesManCode")
                         {
@@ -709,7 +723,23 @@ namespace PharmaUI
                     this.SelectNextControl(this.ActiveControl, true, true, true, true);
                 }
             }
-            
+            else if (sender is ComboBox)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (header.PurchaseSaleBookHeaderID > 0)
+                    {
+                        ComboBox cb1 = (ComboBox)sender;
+
+                        if (cb1.Name == "cbxSaleFormType")
+                        {
+                            if (dgvLineItem.Rows.Count == 0)
+                                AddRowToGrid();
+                        }
+                    }
+                }
+            }
+
         }
 
         private void CustomerLedger_Closed(object sender, FormClosedEventArgs e)
@@ -755,6 +785,10 @@ namespace PharmaUI
             }
             else
             {
+                lblFRate.Visible = true;
+                lblDueBillAmount.Visible = true;
+                lblDueBills.Visible = true;
+
                 lblCustomerName.Text = customer.CustomerLedgerName;
                 txtCustomerCode.Text = customer.CustomerLedgerCode;
                 lblSaleManName.Text = customer.SalesmanName;
@@ -774,6 +808,10 @@ namespace PharmaUI
                 header.LedgerTypeCode = txtCustomerCode.Text;
                 header.LedgerType = Constants.TransactionEntityType.CustomerLedger;
                 header.VoucherTypeCode = Constants.VoucherTypeCode.SALEENTRY;
+
+                PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleFormType.SelectedItem;
+                header.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
+
 
                 header.PurchaseSaleBookHeaderID = applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
             }
@@ -1366,5 +1404,23 @@ namespace PharmaUI
             }
         }
 
+        private void cbxSaleFormType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (header.PurchaseSaleBookHeaderID > 0)
+                {
+                    PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
+                    PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleFormType.SelectedItem;
+                    header.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
+
+                    applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
