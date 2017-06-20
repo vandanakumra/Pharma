@@ -83,6 +83,10 @@ namespace PharmaDataMigration
             SupplierLedgerMaster supplierLedgerMaster = new SupplierLedgerMaster();
             CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
             BillOutstanding billOutstanding = new BillOutstanding();
+            FIFO fifo = new FIFO();
+
+            fifo.InsertFIFOData();
+            return;
 
             int result;
 

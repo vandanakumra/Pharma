@@ -197,7 +197,7 @@
             <PropertyRef Name="FifoID" />
           </Key>
           <Property Name="FifoID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" Nullable="false" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" />
           <Property Name="VoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="VoucherDate" Type="datetime" Nullable="false" />
           <Property Name="SRLNO" Type="int" Nullable="false" />
@@ -490,6 +490,7 @@
           <Property Name="SpecialDiscountAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="VolumeDiscountAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalDiscountAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MfgDate" Type="datetime" />
         </EntityType>
         <EntityType Name="PurchaseSaleEntryForm">
           <Key>
@@ -758,6 +759,7 @@
           <Property Name="UsedQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="BalanceQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OldPurchaseSaleBookLineItemID" Type="bigint" />
+          <Property Name="MfgDate" Type="datetime" />
         </EntityType>
         <EntityType Name="TempReceiptPayment">
           <Key>
@@ -1066,7 +1068,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FIFO_PurchaseSaleBookHeader">
-          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
+          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
           <End Role="FIFO" Type="Self.FIFO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseSaleBookHeader">
@@ -1839,7 +1841,7 @@
             <PropertyRef Name="FifoID" />
           </Key>
           <Property Name="FifoID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" Nullable="false" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" />
           <Property Name="VoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SRLNO" Type="Int32" Nullable="false" />
@@ -2160,6 +2162,7 @@
           <Property Name="SpecialDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="VolumeDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MfgDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_PurchaseSaleBookLineItem_FIFO" FromRole="PurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookLineItem" ToRole="PurchaseSaleBookHeader" />
         </EntityType>
@@ -2450,6 +2453,7 @@
           <Property Name="UsedQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="BalanceQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OldPurchaseSaleBookLineItemID" Type="Int64" />
+          <Property Name="MfgDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="TempPurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="TempPurchaseSaleBookHeader" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookLineItem" ToRole="TempPurchaseSaleBookHeader" />
         </EntityType>
@@ -2859,7 +2863,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FIFO_PurchaseSaleBookHeader">
-          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
+          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
           <End Role="FIFO" Type="Self.FIFO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseSaleBookHeader">
@@ -3813,6 +3817,7 @@
                 <ScalarProperty Name="SpecialDiscountAmount" ColumnName="SpecialDiscountAmount" />
                 <ScalarProperty Name="VolumeDiscountAmount" ColumnName="VolumeDiscountAmount" />
                 <ScalarProperty Name="TotalDiscountAmount" ColumnName="TotalDiscountAmount" />
+                <ScalarProperty Name="MfgDate" ColumnName="MfgDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4093,6 +4098,7 @@
                 <ScalarProperty Name="UsedQuantity" ColumnName="UsedQuantity" />
                 <ScalarProperty Name="BalanceQuantity" ColumnName="BalanceQuantity" />
                 <ScalarProperty Name="OldPurchaseSaleBookLineItemID" ColumnName="OldPurchaseSaleBookLineItemID" />
+                <ScalarProperty Name="MfgDate" ColumnName="MfgDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

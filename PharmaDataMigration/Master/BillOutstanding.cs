@@ -11,7 +11,7 @@ using PharmaBusinessObjects.Common;
 
 namespace PharmaDataMigration.Master
 {
-    class BillOutstanding
+    public class BillOutstanding
     {
         private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
