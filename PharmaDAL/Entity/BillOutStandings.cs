@@ -23,7 +23,7 @@ namespace PharmaDAL.Entity
         }
     
         public long BillOutStandingsID { get; set; }
-        public long PurchaseSaleBookHeaderID { get; set; }
+        public Nullable<long> PurchaseSaleBookHeaderID { get; set; }
         public string VoucherNumber { get; set; }
         public string VoucherTypeCode { get; set; }
         public System.DateTime VoucherDate { get; set; }
@@ -33,6 +33,7 @@ namespace PharmaDAL.Entity
         public decimal OSAmount { get; set; }
         public bool IsHold { get; set; }
         public string HOLDRemarks { get; set; }
+        public Nullable<System.DateTime> DueDate { get; set; }
     
         public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -327,7 +327,7 @@ namespace PharmaDAL.Transaction
                 .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
                 {
                     BillOutStandingsID = p.BillOutStandingsID,
-                    PurchaseSaleBookHeaderID = p.PurchaseSaleBookHeaderID,
+                    PurchaseSaleBookHeaderID =(long) p.PurchaseSaleBookHeaderID,
                     VoucherNumber = p.VoucherNumber,
                     VoucherTypeCode = p.VoucherTypeCode,
                     VoucherDate = p.VoucherDate,
