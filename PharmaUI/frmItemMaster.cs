@@ -303,17 +303,17 @@ namespace PharmaUI
             {
                 dgvItemList.Focus();
 
-                int rowindex = dgvItemList.Rows.Count == dgvItemList.CurrentRow.Index + 1 ? dgvItemList.CurrentRow.Index : dgvItemList.CurrentRow.Index + 1;
+                //int rowindex = dgvItemList.Rows.Count == dgvItemList.CurrentRow.Index + 1 ? dgvItemList.CurrentRow.Index : dgvItemList.CurrentRow.Index + 1;
 
-                dgvItemList.Rows[rowindex].Selected = true;
+                //dgvItemList.Rows[rowindex].Selected = true;
             }
             else if (keyData == Keys.Up)
             {
                 dgvItemList.Focus();
 
-                int rowindex = dgvItemList.CurrentRow.Index  == 0 ? dgvItemList.CurrentRow.Index : dgvItemList.CurrentRow.Index - 1;
+                //int rowindex = dgvItemList.CurrentRow.Index  == 0 ? dgvItemList.CurrentRow.Index : dgvItemList.CurrentRow.Index - 1;
 
-                dgvItemList.Rows[rowindex].Selected = true;
+                //dgvItemList.Rows[rowindex].Selected = true;
             }
             else if (keyData == Keys.Escape)
             {
