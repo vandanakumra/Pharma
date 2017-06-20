@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -64,7 +64,7 @@
             <PropertyRef Name="BillOutStandingsID" />
           </Key>
           <Property Name="BillOutStandingsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" Nullable="false" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" />
           <Property Name="VoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VoucherDate" Type="datetime" Nullable="false" />
@@ -74,6 +74,7 @@
           <Property Name="OSAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IsHold" Type="bit" Nullable="false" />
           <Property Name="HOLDRemarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="DueDate" Type="datetime" />
         </EntityType>
         <EntityType Name="BillOutStandingsAudjustment">
           <Key>
@@ -885,7 +886,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BillOutStandings_PurchaseSaleBookHeader">
-          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
+          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
           <End Role="BillOutStandings" Type="Self.BillOutStandings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseSaleBookHeader">
@@ -1679,7 +1680,7 @@
             <PropertyRef Name="BillOutStandingsID" />
           </Key>
           <Property Name="BillOutStandingsID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" Nullable="false" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" />
           <Property Name="VoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -1689,6 +1690,7 @@
           <Property Name="OSAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IsHold" Type="Boolean" Nullable="false" />
           <Property Name="HOLDRemarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_BillOutStandings_PurchaseSaleBookHeader" FromRole="BillOutStandings" ToRole="PurchaseSaleBookHeader" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_BillOutStandings" FromRole="BillOutStandings" ToRole="BillOutStandingsAudjustment" />
           <NavigationProperty Name="BillOutStandingsAudjustment1" Relationship="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings" FromRole="BillOutStandings" ToRole="BillOutStandingsAudjustment" />
@@ -2605,7 +2607,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BillOutStandings_PurchaseSaleBookHeader">
-          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
+          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
           <End Role="BillOutStandings" Type="Self.BillOutStandings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseSaleBookHeader">
@@ -3378,6 +3380,7 @@
                 <ScalarProperty Name="OSAmount" ColumnName="OSAmount" />
                 <ScalarProperty Name="IsHold" ColumnName="IsHold" />
                 <ScalarProperty Name="HOLDRemarks" ColumnName="HOLDRemarks" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
