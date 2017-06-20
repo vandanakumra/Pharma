@@ -22,7 +22,7 @@ namespace PharmaDAL.Entity
         }
     
         public long FifoID { get; set; }
-        public long PurchaseSaleBookHeaderID { get; set; }
+        public Nullable<long> PurchaseSaleBookHeaderID { get; set; }
         public string VoucherNumber { get; set; }
         public System.DateTime VoucherDate { get; set; }
         public int SRLNO { get; set; }
