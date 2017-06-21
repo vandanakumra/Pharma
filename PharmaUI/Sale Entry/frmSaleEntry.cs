@@ -377,6 +377,12 @@ namespace PharmaUI
                             dgvLineItem.BeginEdit(true);
                             return;
                         }
+                        else
+                        {
+                            InsertUpdateLineItemAndsetToGrid(lineItem);
+                            OpenDialogAndMoveToNextControl();
+                            SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
+                        }
                     }
                     else if (columnName == "SaleRate")
                     {
@@ -857,6 +863,7 @@ namespace PharmaUI
 
                 if (e.KeyData == Keys.Enter || e.KeyData == Keys.Right)
                 {
+
                     string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
 
                     if (string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentCell.Value)))
@@ -917,13 +924,16 @@ namespace PharmaUI
 
                             Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value), out lineItemID);
                             Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookHeaderID"].Value), out headerID);
-                            List<int> lineItemList = applicationFacade.DeleteSaleLineItem(headerID, lineItemID);
+                            List<PurchaseSaleBookLineItem> allLineItemList = applicationFacade.DeleteSaleLineItem(headerID, lineItemID);
+
+                            List<PurchaseSaleBookLineItem> lineItemList = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID > 0).ToList();
+                            PurchaseSaleBookLineItem totalLineItem = allLineItemList.FirstOrDefault(p => p.PurchaseSaleBookLineItemID == 0 && p.PurchaseSaleBookHeaderID > 0);
 
                             if (lineItemList.Count > 0)
                             {
-                                foreach (int id in lineItemList)
+                                foreach (PurchaseSaleBookLineItem item in lineItemList)
                                 {
-                                    DataGridViewRow rowToBeDeleted = dgvLineItem.Rows.Cast<DataGridViewRow>().Where(p => Convert.ToString(p.Cells["PurchaseSaleBookLineItemID"].Value) == id.ToString()).FirstOrDefault();
+                                    DataGridViewRow rowToBeDeleted = dgvLineItem.Rows.Cast<DataGridViewRow>().Where(p => Convert.ToString(p.Cells["PurchaseSaleBookLineItemID"].Value) == item.PurchaseSaleBookLineItemID.ToString()).FirstOrDefault();
                                     dgvLineItem.Rows.Remove(rowToBeDeleted);
                                 }
 
@@ -937,6 +947,8 @@ namespace PharmaUI
                                 {
                                     dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.RowCount - 1].Cells["ItemCode"];
                                 }
+
+                                SetNetAmount(totalLineItem);
                             }
                         }
                     }
@@ -1402,6 +1414,12 @@ namespace PharmaUI
                     frmSaleEntry form = new frmSaleEntry(false);
                     ExtensionMethods.AddTrasanctionFormToPanel(form, ExtensionMethods.MainPanel);
                     form.Show();
+                }
+
+                else if (keyData == Keys.Escape)
+                {
+                    this.Close();
+
                 }
 
             }

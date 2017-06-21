@@ -153,7 +153,7 @@ namespace PharmaBusinessObjects
         SaleLineItemInfo GetSaleLineItemInfo(string code, long fifoID);
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> InsertUpdateTempPurchaseBookLineItemForSale(PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem lineItem);
         void UpdateSaleDiscount(PharmaBusinessObjects.Common.Enums.SaleEntryChangeType changeType, decimal discount, decimal specialDiscount, decimal volumeDiscount,string itemCode, string customerCode);
-        List<int> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID);
+        List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID);
         bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity);
         bool SaveSaleEntryData(long purchaseBookHeaderID);
         bool IsTempSaleEntryExists(long purchaseSaleBookHeaderID);

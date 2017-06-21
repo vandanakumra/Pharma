@@ -281,9 +281,9 @@ namespace PharmaDAL.Transaction
             }
         }
 
-        public List<int> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
+        public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
         {
-            List<int> itemList = new List<int>();
+            List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> itemList = new List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem>();
 
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -303,9 +303,18 @@ namespace PharmaDAL.Transaction
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        int id = 0;
-                        Int32.TryParse(Convert.ToString(row["LineItemID"]), out id);
-                        itemList.Add(id);
+                        PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem item = new PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem();
+
+                        item.PurchaseSaleBookLineItemID = Convert.ToInt32(row["PurchaseSaleBookLineItemID"]);
+                        item.PurchaseSaleBookHeaderID = Convert.ToInt32(row["PurchaseSaleBookHeaderID"]);
+
+                        item.SchemeAmount = Convert.IsDBNull(row["SchemeAmount"]) ? 0 : Convert.ToDecimal(row["SchemeAmount"]);
+                        item.GrossAmount = Convert.IsDBNull(row["GrossAmount"]) ? 0 : Convert.ToDecimal(row["GrossAmount"]);
+                        item.TaxAmount = Convert.IsDBNull(row["TaxAmount"]) ? 0 : Convert.ToDecimal(row["TaxAmount"]);
+                        item.TotalDiscountAmount = Convert.IsDBNull(row["DiscountAmount"]) ? 0 : Convert.ToDecimal(row["DiscountAmount"]);
+                        item.CostAmount = Convert.IsDBNull(row["BillAmount"]) ? 0 : Convert.ToDecimal(row["BillAmount"]);
+
+                        itemList.Add(item);
                     }
                 }
 
@@ -381,24 +390,24 @@ namespace PharmaDAL.Transaction
         {
             string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
 
-            //using (SqlConnection connection = new SqlConnection(ConnString))
-            //{
-            //    try
-            //    {
-            //        SqlCommand cmd = new SqlCommand("DeleteSaleEntryData", connection);
-            //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //        cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookHeaderID", purchaseSaleBookHeaderID));
-            //        connection.Open();
-            //        cmd.ExecuteNonQuery();
+            using (SqlConnection connection = new SqlConnection(ConnString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("DeleteSaleEntryData", connection);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookHeaderID", purchaseSaleBookHeaderID));
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
 
-            //    }
-            //    finally
-            //    {
+                }
+                finally
+                {
 
-            //        connection.Close();
-            //    }
+                    connection.Close();
+                }
 
-            //}
+            }
         }
 
     }

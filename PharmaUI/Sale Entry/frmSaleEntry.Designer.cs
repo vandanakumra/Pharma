@@ -275,8 +275,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 321);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1116, 30);
             this.tableLayoutPanel1.TabIndex = 130;
             // 
@@ -287,7 +287,7 @@
             this.label5.Location = new System.Drawing.Point(4, 4);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 36);
+            this.label5.Size = new System.Drawing.Size(69, 37);
             this.label5.TabIndex = 124;
             this.label5.Text = "Scheme Amount";
             // 
@@ -298,7 +298,7 @@
             this.label42.Location = new System.Drawing.Point(892, 4);
             this.label42.Margin = new System.Windows.Forms.Padding(3);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 36);
+            this.label42.Size = new System.Drawing.Size(66, 37);
             this.label42.TabIndex = 128;
             this.label42.Text = "Total Amount";
             // 
@@ -321,7 +321,7 @@
             this.label6.Location = new System.Drawing.Point(226, 4);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 36);
+            this.label6.Size = new System.Drawing.Size(75, 37);
             this.label6.TabIndex = 125;
             this.label6.Text = "Discount Amount";
             // 
@@ -332,7 +332,7 @@
             this.label8.Location = new System.Drawing.Point(670, 4);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 36);
+            this.label8.Size = new System.Drawing.Size(66, 37);
             this.label8.TabIndex = 127;
             this.label8.Text = "Invoice Amount";
             // 
@@ -980,6 +980,7 @@
             this.MinimizeBox = false;
             this.Name = "frmSaleEntry";
             this.Text = "frmSaleEntry";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSaleEntry_FormClosing);
             this.Load += new System.EventHandler(this.frmSaleEntry_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmSaleEntry_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLineItem)).EndInit();

@@ -1004,7 +1004,7 @@ namespace PharmaBusiness
             }
         }
 
-        public List<int> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
+        public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
         {
             return new SaleBiz(this.LoggedInUser).DeleteSaleLineItem(saleBookHeaderID, saleBookLineItemID);
         }

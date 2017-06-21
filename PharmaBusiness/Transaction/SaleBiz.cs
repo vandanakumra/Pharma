@@ -46,7 +46,7 @@ namespace PharmaBusiness.Transaction
             new SaleEntryDao(this.LoggedInUser).UpdateSaleDiscount(changeType, discount, specialDiscount, volumeDiscount, itemCode, customerCode);
         }
 
-        internal List<int> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
+        internal List<PurchaseSaleBookLineItem> DeleteSaleLineItem(int saleBookHeaderID, int saleBookLineItemID)
         {
             return new SaleEntryDao(this.LoggedInUser).DeleteSaleLineItem(saleBookHeaderID, saleBookLineItemID);
         }
