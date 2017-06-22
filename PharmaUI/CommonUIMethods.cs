@@ -24,12 +24,12 @@ namespace PharmaUI
 
     public static class ExtensionMethods
     {
-        private static List<TransactionForm> TransactionForms = new List<TransactionForm>(); 
+        private static List<TransactionForm> TransactionForms = new List<TransactionForm>();
 
         public static PharmaBusinessObjects.Master.UserMaster LoggedInUser { get; set; }
         public static string FontFamily = "Microsoft Sans Serif";
 
-        
+
         public static int FontSize = 9;
         public static Panel MainPanel;
 
@@ -54,7 +54,7 @@ namespace PharmaUI
             return list;
         }
 
-        
+
 
         public static List<Control> GetAllControls(Control container)
         {
@@ -82,7 +82,7 @@ namespace PharmaUI
                         }
                     }
 
-                    else if(c is ComboBox)
+                    else if (c is ComboBox)
                     {
                         if (c.Enabled == true)
                         {
@@ -102,7 +102,7 @@ namespace PharmaUI
             if (ctrlToEnable != null)
             {
                 ctrlToEnable.BackColor = Color.LightPink;
-               
+
             }
         }
 
@@ -126,7 +126,7 @@ namespace PharmaUI
             }
         }
 
-        public static double ? SafeConversionDouble(string inputVal)
+        public static double? SafeConversionDouble(string inputVal)
         {
             double outputVal;
             if (!double.TryParse(inputVal, out outputVal))
@@ -151,7 +151,7 @@ namespace PharmaUI
             //allControls.ForEach(k =>{ if (k.Name != "lblSearch" && k.Name != "txtSearch" && k.Name != "lblPersonRouteType") { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); } });
 
             allControls.ForEach(k => { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); });
-            
+
             allControls.ForEach(k => { if (k is ComboBox) { ((ComboBox)k).FlatStyle = FlatStyle.Flat; } });
 
             LoadPanel(form, lblText);
@@ -289,7 +289,7 @@ namespace PharmaUI
                 control.Close();
                 pnl.Controls.Remove(control);
             }
-           
+
             pnl.Controls.Add(frm);
         }
 
@@ -330,7 +330,7 @@ namespace PharmaUI
 
             if (max > 1)
             {
-                pnl.Controls[TransactionForms.Where(p => p.FormNo == (max - 1)).FirstOrDefault().FormName].Visible = false;                
+                pnl.Controls[TransactionForms.Where(p => p.FormNo == (max - 1)).FirstOrDefault().FormName].Visible = false;
             }
             else
             {
@@ -350,7 +350,7 @@ namespace PharmaUI
 
             string[] form = childFrm.Name.Split('_');
 
-            if(form[0] == "1")
+            if (form[0] == "1")
             {
                 TransactionForm tform = TransactionForms.Where(p => p.FormName == childFrm.Name).FirstOrDefault();
                 TransactionForms.Remove(tform);
@@ -368,7 +368,7 @@ namespace PharmaUI
                 TransactionForms.Remove(tform);
                 pnl.Controls.Remove(childFrm);
 
-                pnl.Controls[TransactionForms.Where(p=>p.FormNo == 1).FirstOrDefault().FormName].Visible = true;
+                pnl.Controls[TransactionForms.Where(p => p.FormNo == 1).FirstOrDefault().FormName].Visible = true;
 
             }
         }
@@ -377,7 +377,7 @@ namespace PharmaUI
 
 
         public static void SetFormProperties(Form frm)
-        {           
+        {
             frm.FormBorderStyle = FormBorderStyle.FixedSingle;
             frm.ControlBox = false;
             frm.Text = "";
@@ -386,8 +386,8 @@ namespace PharmaUI
             frm.ShowIcon = false;
             frm.Dock = DockStyle.Fill;
             frm.AutoSize = false;
-            frm.AutoSizeMode = AutoSizeMode.GrowOnly;            
-           
+            frm.AutoSizeMode = AutoSizeMode.GrowOnly;
+
         }
 
         public static void SetChildFormProperties(Form frm)
@@ -406,7 +406,7 @@ namespace PharmaUI
                 {
                     if (btn.Name.ToLower().Contains("cancel"))
                     {
-                        frm.CancelButton =(Button) btn;
+                        frm.CancelButton = (Button)btn;
                         break;
                     }
                 }
@@ -428,7 +428,7 @@ namespace PharmaUI
         }
 
         public static bool IsValidEmail(string emailaddress)
-        {     
+        {
             if (emailaddress != null) return System.Text.RegularExpressions.Regex.IsMatch(emailaddress, MatchEmailPattern);
             else return false;
         }
@@ -483,7 +483,7 @@ namespace PharmaUI
         }
 
 
-        public static void GridSelectionOnSearch(DataGridView dgv,string searchColumnName,string searchString,Label searchResultStatus)
+        public static void GridSelectionOnSearch(DataGridView dgv, string searchColumnName, string searchString, Label searchResultStatus)
         {
             bool flag = true;
 
@@ -506,7 +506,7 @@ namespace PharmaUI
 
             foreach (DataGridViewRow row in dgv.Rows)
             {
-                if (row.Cells[searchColumnName].Value.ToString().Replace(" ","").ToLower().StartsWith(searchString.ToLower().Replace(" ","")))
+                if (row.Cells[searchColumnName].Value.ToString().Replace(" ", "").ToLower().StartsWith(searchString.ToLower().Replace(" ", "")))
                 {
                     int row2 = row.Index;
                     if (flag)
@@ -526,7 +526,7 @@ namespace PharmaUI
             }
             else
             {
-                searchResultStatus.Visible = false ;
+                searchResultStatus.Visible = false;
             }
 
             dgv.FirstDisplayedScrollingRowIndex = rowIndex1;
@@ -566,5 +566,17 @@ namespace PharmaUI
             return DateTime.ParseExact(dateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
 
+        public static bool IsValidDate(string inputDate)
+        {
+            bool isValidDate = false;
+
+            DateTime dt;
+            if (DateTime.TryParseExact(inputDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt) || String.IsNullOrWhiteSpace(inputDate))
+            {
+                isValidDate = true;
+            }
+
+            return isValidDate;
+        }
     }
 }
