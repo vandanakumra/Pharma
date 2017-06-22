@@ -48,29 +48,30 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(431, 60);
+            this.label2.Location = new System.Drawing.Point(465, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Special Discount (%)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtDiscount
             // 
-            this.txtDiscount.Location = new System.Drawing.Point(85, 57);
+            this.txtDiscount.Location = new System.Drawing.Point(99, 57);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(100, 20);
             this.txtDiscount.TabIndex = 2;
             // 
             // txtSpecialDiscount
             // 
-            this.txtSpecialDiscount.Location = new System.Drawing.Point(541, 57);
+            this.txtSpecialDiscount.Location = new System.Drawing.Point(575, 57);
             this.txtSpecialDiscount.Name = "txtSpecialDiscount";
             this.txtSpecialDiscount.Size = new System.Drawing.Size(100, 20);
             this.txtSpecialDiscount.TabIndex = 4;
             // 
             // txtVolumeDiscount
             // 
-            this.txtVolumeDiscount.Location = new System.Drawing.Point(315, 57);
+            this.txtVolumeDiscount.Location = new System.Drawing.Point(322, 57);
             this.txtVolumeDiscount.Name = "txtVolumeDiscount";
             this.txtVolumeDiscount.Size = new System.Drawing.Size(100, 20);
             this.txtVolumeDiscount.TabIndex = 3;
@@ -78,7 +79,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(205, 60);
+            this.label3.Location = new System.Drawing.Point(220, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 13);
             this.label3.TabIndex = 4;
@@ -88,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 96);
+            this.ClientSize = new System.Drawing.Size(730, 96);
             this.Controls.Add(this.txtVolumeDiscount);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSpecialDiscount);
