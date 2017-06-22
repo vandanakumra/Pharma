@@ -341,6 +341,11 @@
     <Compile Include="Sale Entry\frmSaleEntryFixedDiscount.Designer.cs">
       <DependentUpon>frmSaleEntryFixedDiscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="SaleInvoice.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaleInvoice.xsd</DependentUpon>
+    </Compile>
     <Compile Include="StagingData.cs" />
     <Compile Include="ucSupplierCustomerInfo.cs">
       <SubType>UserControl</SubType>
@@ -464,6 +469,7 @@
       <DependentUpon>frmReceiptPaymentAdjustment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\LITInvoice.rdlc" />
+    <EmbeddedResource Include="Reports\SaleInvoice.rdlc" />
     <EmbeddedResource Include="Sale Entry\frmChangeType.resx">
       <DependentUpon>frmChangeType.cs</DependentUpon>
     </EmbeddedResource>
@@ -500,6 +506,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SaleInvoice.xsc">
+      <DependentUpon>SaleInvoice.xsd</DependentUpon>
+    </None>
+    <None Include="SaleInvoice.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SaleInvoice.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SaleInvoice.xss">
+      <DependentUpon>SaleInvoice.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
