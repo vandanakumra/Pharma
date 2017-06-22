@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Master;
+﻿using PharmaBusinessObjects.Crypto;
+using PharmaDAL.Master;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,26 +17,36 @@ namespace PharmaBusiness.Master
 
         internal List<PharmaBusinessObjects.Master.UserMaster> GetUsers(string searchText)
         {
-            return new PharmaDAL.Master.UserDao(this.LoggedInUser).GetUsers(searchText);
+            List<PharmaBusinessObjects.Master.UserMaster> users = new PharmaDAL.Master.UserDao(this.LoggedInUser).GetUsers(searchText);
+            users.ForEach(p => p.Password = DecryptPassword(p.Password));
+            return users;
         }
 
         internal PharmaBusinessObjects.Master.UserMaster GetUserByUserName(string userName)
         {
-            return new PharmaDAL.Master.UserDao(this.LoggedInUser).GetUserByUserName(userName);
+            PharmaBusinessObjects.Master.UserMaster user = new PharmaDAL.Master.UserDao(this.LoggedInUser).GetUserByUserName(userName);
+            if(user != null)
+                user.Password = DecryptPassword(user.Password);
+            return user;
         }
 
         internal PharmaBusinessObjects.Master.UserMaster GetUserByUserId(int userid)
         {
-            return new PharmaDAL.Master.UserDao(this.LoggedInUser).GetUserByUserId(userid);
+            PharmaBusinessObjects.Master.UserMaster user = new PharmaDAL.Master.UserDao(this.LoggedInUser).GetUserByUserId(userid);
+            if (user != null)
+                user.Password = DecryptPassword(user.Password);
+            return user;
         }
 
         internal int AddUser(PharmaBusinessObjects.Master.UserMaster p)
         {
+            p.Password = EncryptPassword(p.Password);  
             return new PharmaDAL.Master.UserDao(this.LoggedInUser).AddUser(p);
         }
 
         internal int UpdateUser(PharmaBusinessObjects.Master.UserMaster p)
         {
+            p.Password = EncryptPassword(p.Password);
             return new PharmaDAL.Master.UserDao(this.LoggedInUser).UpdateUser(p);
         }
 
@@ -92,7 +103,22 @@ namespace PharmaBusiness.Master
 
         public PharmaBusinessObjects.Master.UserMaster ValidateUser(string userName, string password)
         {
+            password = EncryptPassword(password);
             return new UserDao(this.LoggedInUser).ValidateUser(userName, password);
+        }
+
+        private string EncryptPassword(string password)
+        {
+            CryptoMgr mgr = new CryptoMgr(PharmaBusinessObjects.Crypto.CryptoTypes.encTypeTripleDES);
+            password = mgr.Encrypt(password);
+            return password;
+        }
+
+        private string DecryptPassword(string password)
+        {
+            CryptoMgr mgr = new CryptoMgr(PharmaBusinessObjects.Crypto.CryptoTypes.encTypeTripleDES);
+            password = mgr.Decrypt(password);
+            return password;
         }
 
     } 
