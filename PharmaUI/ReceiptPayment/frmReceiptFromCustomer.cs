@@ -52,10 +52,25 @@ namespace PharmaUI.ReceiptPayment
                 dtReceiptPayment.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
                 dtReceiptPayment.Focus();
                 dtReceiptPayment.Select(0, 0);
+
+                dtReceiptPayment.LostFocus += DtReceiptPayment_LostFocus; 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DtReceiptPayment_LostFocus(object sender, EventArgs e)
+        {
+            if (!ExtensionMethods.IsValidDate(dtReceiptPayment.Text))
+            {
+                errorProviderReceipt.SetError(dtReceiptPayment, Constants.Messages.InValidDate);
+                dtReceiptPayment.Focus();
+            }
+            else
+            {
+                errorProviderReceipt.SetError(dtReceiptPayment, String.Empty);
             }
         }
 
@@ -448,8 +463,7 @@ namespace PharmaUI.ReceiptPayment
             else if (columnName == "ChequeDate")
             {
                 string chequeDate = Convert.ToString(dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeDate"].Value);
-                DateTime dt;
-                if (DateTime.TryParseExact(chequeDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt) || String.IsNullOrWhiteSpace(chequeDate))
+                if (ExtensionMethods.IsValidDate(chequeDate))
                 {
                     dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["Amount"];
                     dgvReceiptFromCustomer.CurrentRow.Cells["ChequeDate"].ErrorText = String.Empty;

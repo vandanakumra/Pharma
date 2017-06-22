@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTransAccount = new System.Windows.Forms.Label();
             this.txtTransactAccount = new System.Windows.Forms.TextBox();
             this.dtReceiptPayment = new System.Windows.Forms.MaskedTextBox();
@@ -44,10 +45,12 @@
             this.lblAmtOS = new System.Windows.Forms.Label();
             this.lblSearch = new System.Windows.Forms.Label();
             this.dgvReceiptFromCustomer = new System.Windows.Forms.DataGridView();
+            this.errorProviderReceipt = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerBillAdjusted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerBillOS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReceiptFromCustomer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderReceipt)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTransAccount
@@ -268,6 +271,10 @@
             this.dgvReceiptFromCustomer.Size = new System.Drawing.Size(1028, 192);
             this.dgvReceiptFromCustomer.TabIndex = 208;
             // 
+            // errorProviderReceipt
+            // 
+            this.errorProviderReceipt.ContainerControl = this;
+            // 
             // frmReceiptFromCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,6 +296,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerBillAdjusted)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerBillOS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReceiptFromCustomer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderReceipt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,5 +320,6 @@
         private System.Windows.Forms.Label lblAmtOS;
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.DataGridView dgvReceiptFromCustomer;
+        private System.Windows.Forms.ErrorProvider errorProviderReceipt;
     }
 }
