@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonMethods.cs" />
     <Compile Include="DBFConnectionManager.cs" />
     <Compile Include="frmDataMigration.cs">
       <SubType>Form</SubType>
