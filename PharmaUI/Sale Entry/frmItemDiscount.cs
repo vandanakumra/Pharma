@@ -122,7 +122,9 @@ namespace PharmaUI
 
             decimal volumeDiscount;
             decimal.TryParse(txtVolumeDiscount.Text, out volumeDiscount);
-            applicationFacade.UpdateSaleDiscount(changeType.ChangeType, discount, specialDiscount, volumeDiscount, saleLineItem.ItemCode, customerCode);
+
+            if(changeType.ChangeType != PharmaBusinessObjects.Common.Enums.SaleEntryChangeType.TemporaryChange)
+                applicationFacade.UpdateSaleDiscount(changeType.ChangeType, discount, specialDiscount, volumeDiscount, saleLineItem.ItemCode, customerCode);
 
             this.Close();
 
@@ -163,6 +165,11 @@ namespace PharmaUI
                     this.SelectNextControl(this.ActiveControl, true, true, true, true);
                 }
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
