@@ -51,6 +51,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +64,7 @@
     <Compile Include="Common\AccountLedgerType.cs" />
     <Compile Include="Common\AccountType.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Crypto.cs" />
     <Compile Include="Common\CustomerType.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\ExcludedControls.cs" />
