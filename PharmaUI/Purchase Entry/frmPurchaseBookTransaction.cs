@@ -50,19 +50,29 @@ namespace PharmaUI
                 EnterKeyDownForTabEvents(this);
                 FillCombo();
                 InitializeGrid();
+               
+                dtPurchaseDate.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
                 dtPurchaseDate.Focus();
-                
-                string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
-                format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
-                format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
-                //format = format.IndexOf("yyyy") < 0 ? format.Replace("d", "dd") : format;
-                dtPurchaseDate.Text = DateTime.Now.ToString(format);
                 dtPurchaseDate.Select(0, 0);
 
+                dtPurchaseDate.LostFocus += DtPurchaseDate_LostFocus;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DtPurchaseDate_LostFocus(object sender, EventArgs e)
+        {
+            if (!ExtensionMethods.IsValidDate(dtPurchaseDate.Text))
+            {
+                errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.InValidDate);
+                dtPurchaseDate.Focus();
+            }
+            else
+            {
+                errFrmPurchaseBookHeader.SetError(dtPurchaseDate, String.Empty);
             }
         }
 
@@ -623,22 +633,22 @@ namespace PharmaUI
                         case "dtPurchaseDate":
                             {
                                 MaskedTextBox dtPicker = (MaskedTextBox)sender;
-
-                                if (string.IsNullOrWhiteSpace(dtPicker.Text) || dtPicker.Text == "  /  /")
+                                if (!ExtensionMethods.IsValidDate(dtPurchaseDate.Text))
                                 {
-                                    errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.RequiredField);
+                                    errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.InValidDate);
                                     dtPurchaseDate.Focus();
                                 }
                                 else
                                 {
+                                    errFrmPurchaseBookHeader.SetError(dtPurchaseDate, String.Empty);
                                     DateTime dt = new DateTime();
-                                    DateTime.TryParse(dtPicker.Text, out dt);
+                                    dt = ExtensionMethods.ConvertToSystemDateFormat(dtPicker.Text);
                                     if (dt > DateTime.Today || dt < DateTime.Today)
                                     {
                                         DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
 
                                         if (result == DialogResult.No)
-                                            dtPicker.Text = DateTime.Now.ToShortDateString();
+                                            dtPicker.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
 
                                     }
                                 }
@@ -711,7 +721,7 @@ namespace PharmaUI
         private bool GetPurchaseBookHeader(ref PurchaseSaleBookHeader header)
         {
             DateTime purchaseDate = new DateTime();
-            DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+            purchaseDate = ExtensionMethods.ConvertToSystemDateFormat(dtPurchaseDate.Text);
             if (purchaseDate == DateTime.MinValue)
             {
                 errFrmPurchaseBookHeader.SetError(dtPurchaseDate, Constants.Messages.RequiredField);
@@ -873,7 +883,7 @@ namespace PharmaUI
                         lineItem.PurchaseSaleBookLineItemID = lineItemID;
 
                         DateTime purchaseDate = new DateTime();
-                        DateTime.TryParse(dtPurchaseDate.Text, out purchaseDate);
+                        purchaseDate = ExtensionMethods.ConvertToSystemDateFormat(dtPurchaseDate.Text);
                       
                         PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxPurchaseType.SelectedItem;
                         lineItem.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
