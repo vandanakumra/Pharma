@@ -59,13 +59,6 @@ namespace PharmaUI
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
                 InitializeGrid();
-                
-                string format = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
-                format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
-                format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
-                //format = format.IndexOf("yyyy") < 0 ? format.Replace("d", "dd") : format;
-                dtSaleDate.Text = DateTime.Now.ToString(format);
-                dtSaleDate.Select(0, 0);
 
                 layoutHeight = tableLayoutPanel3.Height;
                 layoutWidth = tableLayoutPanel3.Width;
@@ -81,11 +74,28 @@ namespace PharmaUI
                 lblDueBillAmount.Visible = false;
                 lblDueBills.Visible = false;
 
+                dtSaleDate.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
                 dtSaleDate.Focus();
+                dtSaleDate.Select(0, 0);
+
+                dtSaleDate.LostFocus += DtSaleDate_LostFocus;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DtSaleDate_LostFocus(object sender, EventArgs e)
+        {
+            if (!ExtensionMethods.IsValidDate(dtSaleDate.Text))
+            {
+                errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.InValidDate);
+                dtSaleDate.Focus();
+            }
+            else
+            {
+                errFrmSaleEntry.SetError(dtSaleDate, String.Empty);
             }
         }
 
@@ -548,22 +558,23 @@ namespace PharmaUI
                             {
                                 MaskedTextBox dtPicker = (MaskedTextBox)sender;
 
-                                if (string.IsNullOrWhiteSpace(dtPicker.Text) || dtPicker.Text == "  /  /")
+                                if (!ExtensionMethods.IsValidDate(dtSaleDate.Text))
                                 {
-                                    errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.RequiredField);
+                                    errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.InValidDate);
                                     dtSaleDate.Focus();
                                 }
                                 else
                                 {
+                                    errFrmSaleEntry.SetError(dtSaleDate, String.Empty);
                                     DateTime dt = new DateTime();
-                                    DateTime.TryParse(dtPicker.Text, out dt);
+                                    dt = ExtensionMethods.ConvertToSystemDateFormat(dtPicker.Text);
                                     if (dt > DateTime.Today || dt < DateTime.Today)
                                     {
                                         DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
 
                                         if (result == DialogResult.No)
                                         {
-                                            dtPicker.Text = DateTime.Now.ToString();
+                                            dtPicker.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
                                         }
                                     }
                                 }
@@ -821,7 +832,7 @@ namespace PharmaUI
                 lblDueBillAmount.Text = (customer.DueBillAmount ?? 0).ToString("#.##");
 
                 DateTime date;
-                DateTime.TryParse(dtSaleDate.Text, out date);
+                date = ExtensionMethods.ConvertToSystemDateFormat(dtSaleDate.Text);
                 if (date == DateTime.MinValue)
                     header.DueDate = null;
                 else
@@ -1040,7 +1051,7 @@ namespace PharmaUI
                         lineItem.PurchaseSaleBookLineItemID = lineItemID;
 
                         DateTime saleDate = new DateTime();
-                        DateTime.TryParse(dtSaleDate.Text, out saleDate);
+                        saleDate = ExtensionMethods.ConvertToSystemDateFormat(dtSaleDate.Text);
 
                         InsertUpdateLineItemAndsetToGrid(lineItem);
                         SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
