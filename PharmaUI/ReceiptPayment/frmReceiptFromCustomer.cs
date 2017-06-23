@@ -185,6 +185,7 @@ namespace PharmaUI.ReceiptPayment
             dgvCustomerBillOS.Columns["InvoiceDate"].Visible = true;
             dgvCustomerBillOS.Columns["InvoiceDate"].HeaderText = "Bill Date";
             dgvCustomerBillOS.Columns["InvoiceDate"].DisplayIndex = 1;
+            dgvCustomerBillOS.Columns["InvoiceDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             dgvCustomerBillOS.Columns["BillAmount"].Visible = true;
             dgvCustomerBillOS.Columns["BillAmount"].HeaderText = "Bill Amount";
@@ -215,6 +216,7 @@ namespace PharmaUI.ReceiptPayment
             dgvCustomerBillAdjusted.Columns["InvoiceDate"].Visible = true;
             dgvCustomerBillAdjusted.Columns["InvoiceDate"].HeaderText = "Bill Date";
             dgvCustomerBillAdjusted.Columns["InvoiceDate"].DisplayIndex = 1;
+            dgvCustomerBillAdjusted.Columns["InvoiceDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             dgvCustomerBillAdjusted.Columns["Amount"].Visible = true;
             dgvCustomerBillAdjusted.Columns["Amount"].HeaderText = "Adjusted Amount";
