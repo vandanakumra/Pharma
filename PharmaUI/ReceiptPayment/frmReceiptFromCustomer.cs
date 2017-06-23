@@ -490,7 +490,7 @@ namespace PharmaUI.ReceiptPayment
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
                         ReceiptPaymentID = (long)dgvReceiptFromCustomer.CurrentRow.Cells["ReceiptPaymentID"].Value,
-                        EntityType = Constants.TransactionEntityType.SupplierLedger,
+                        EntityType = Constants.TransactionEntityType.CustomerLedger,
                         EntityCode = Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["LedgerTypeCode"].Value),
                         EntityName = Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["LedgerTypeName"].Value),
                         EntityTotalAmount = enteredAmount,
