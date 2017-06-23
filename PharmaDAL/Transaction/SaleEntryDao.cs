@@ -44,7 +44,10 @@ namespace PharmaDAL.Transaction
                     master.SaleRate = Convert.IsDBNull(dt.Rows[0]["SaleRate"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["SaleRate"]);
                     master.SpecialRate = Convert.IsDBNull(dt.Rows[0]["SpecialRate"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["SpecialRate"]);
                     master.WholeSaleRate = Convert.IsDBNull(dt.Rows[0]["WholeSaleRate"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["WholeSaleRate"]);
-                    master.PurchaseBillDate = Convert.IsDBNull(dt.Rows[0]["PurchaseBillDate"]) ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[0]["PurchaseBillDate"]);
+
+
+
+                    master.PurchaseBillDate = Convert.IsDBNull(dt.Rows[0]["PurchaseBillDate"]) ? DateTime.Now : Convert.ToDateTime(dt.Rows[0]["PurchaseBillDate"]);
                     master.PurchaseVoucherNumber = Convert.ToString(dt.Rows[0]["PurchaseVoucherNumber"]);
                     master.PurchaseSrlNo = Convert.IsDBNull(dt.Rows[0]["PurchaseSrlNo"]) ? 0 : Convert.ToInt32(dt.Rows[0]["PurchaseSrlNo"]);
                     master.Quantity = 0;
@@ -66,7 +69,12 @@ namespace PharmaDAL.Transaction
                     master.VolumeDiscount = Convert.IsDBNull(dt.Rows[0]["VolumeDiscount"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["VolumeDiscount"]);
                     master.ConversionRate = Convert.IsDBNull(dt.Rows[0]["ConversionRate"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["ConversionRate"]);
                     master.MRP = Convert.IsDBNull(dt.Rows[0]["MRP"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["MRP"]);
-                    master.ExpiryDate = Convert.IsDBNull(dt.Rows[0]["ExpiryDate"]) ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[0]["ExpiryDate"]);
+
+                    if(!Convert.IsDBNull(dt.Rows[0]["ExpiryDate"]))
+                    {
+                        master.ExpiryDate = Convert.ToDateTime(dt.Rows[0]["ExpiryDate"]);
+                    }
+                   
                     master.WholeSaleRate = Convert.IsDBNull(dt.Rows[0]["WholeSaleRate"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["WholeSaleRate"]);
                     master.SpecialRate = Convert.IsDBNull(dt.Rows[0]["SpecialRate"]) ? 0 : Convert.ToDecimal(dt.Rows[0]["SpecialRate"]);
                     master.LocalCentral = Convert.ToString(dt.Rows[0]["LocalCentral"]);

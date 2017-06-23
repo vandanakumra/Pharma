@@ -563,7 +563,15 @@ namespace PharmaUI
 
         public static DateTime ConvertToSystemDateFormat(string dateTime)
         {
-            return DateTime.ParseExact(dateTime, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+            DateTimeFormatInfo dtfi = culture.DateTimeFormat;
+            string sep = culture.DateTimeFormat.DateSeparator;
+
+            dateTime = dateTime.Replace("-", sep);
+
+            string dtFrmt = "dd{0}MM{0}yyyy";
+
+            return DateTime.ParseExact(dateTime, string.Format(dtFrmt,sep), CultureInfo.InvariantCulture);
         }
 
         public static bool IsValidDate(string inputDate)
@@ -571,7 +579,16 @@ namespace PharmaUI
             bool isValidDate = false;
 
             DateTime dt;
-            if (DateTime.TryParseExact(inputDate, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt) || String.IsNullOrWhiteSpace(inputDate))
+
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+            DateTimeFormatInfo dtfi = culture.DateTimeFormat;
+            string sep = culture.DateTimeFormat.DateSeparator;
+
+            string dtFrmt = "dd{0}MM{0}yyyy";
+
+            inputDate = inputDate.Replace("-", sep);
+
+            if (DateTime.TryParseExact(inputDate, string.Format(dtFrmt, sep), CultureInfo.InvariantCulture, DateTimeStyles.None, out dt) || String.IsNullOrWhiteSpace(inputDate))
             {
                 isValidDate = true;
             }

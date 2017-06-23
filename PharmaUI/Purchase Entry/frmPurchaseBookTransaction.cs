@@ -1698,9 +1698,18 @@ namespace PharmaUI
                     else
                     {
                         applicationFacade.DeleteUnSavedData(purchaseSaleBookHeaderID);
+                        ExtensionMethods.RemoveTransactionFormToPanel(this, ExtensionMethods.MainPanel);
                     }
                 }
+                else
+                {
+                    ExtensionMethods.RemoveTransactionFormToPanel(this, ExtensionMethods.MainPanel);
+                }
             
+            }
+            else
+            {
+                ExtensionMethods.RemoveTransactionFormToPanel(this, ExtensionMethods.MainPanel);
             }
         }
 

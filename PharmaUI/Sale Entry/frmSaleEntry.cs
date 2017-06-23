@@ -1459,9 +1459,17 @@ namespace PharmaUI
                     else
                     {
                         applicationFacade.RollbackSaleEntry(header.PurchaseSaleBookHeaderID);
+                        ExtensionMethods.RemoveTransactionFormToPanel(this, ExtensionMethods.MainPanel);
                     }
                 }
-
+                else
+                {
+                    ExtensionMethods.RemoveTransactionFormToPanel(this, ExtensionMethods.MainPanel);
+                }
+            }
+            else
+            {
+                ExtensionMethods.RemoveTransactionFormToPanel(this, ExtensionMethods.MainPanel);
             }
         }
 

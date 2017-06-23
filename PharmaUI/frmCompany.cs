@@ -314,7 +314,7 @@ namespace PharmaUI
                 if (dgvCompanyList.CurrentRow != null)
                 {
                     this.LastSelectedCompany = dgvCompanyList.CurrentRow.DataBoundItem as CompanyMaster;
-                }
+                }                
             }
             catch (Exception ex)
             {
