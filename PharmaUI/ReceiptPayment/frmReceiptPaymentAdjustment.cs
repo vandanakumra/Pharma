@@ -150,6 +150,7 @@ namespace PharmaUI.ReceiptPayment
             dgvReceiptPaymentAdjustment.Columns["InvoiceDate"].HeaderText = "Bill Date";
             dgvReceiptPaymentAdjustment.Columns["InvoiceDate"].ReadOnly = true;
             dgvReceiptPaymentAdjustment.Columns["InvoiceDate"].DisplayIndex = 1;
+            dgvReceiptPaymentAdjustment.Columns["InvoiceDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             dgvReceiptPaymentAdjustment.Columns["OSAmount"].Visible = true;
             dgvReceiptPaymentAdjustment.Columns["OSAmount"].HeaderText = "Outstanding Amount";
