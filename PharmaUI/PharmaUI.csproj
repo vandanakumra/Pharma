@@ -169,12 +169,6 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,6 +320,12 @@
     <Compile Include="Reports\frmReportViewer.Designer.cs">
       <DependentUpon>frmReportViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sale Entry\frmAllBillForCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sale Entry\frmAllBillForCustomer.Designer.cs">
+      <DependentUpon>frmAllBillForCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sale Entry\frmChangeType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -394,9 +394,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainForm.resx">
       <DependentUpon>frmMainForm.cs</DependentUpon>
@@ -482,6 +479,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\LITInvoice.rdlc" />
     <EmbeddedResource Include="Reports\SaleInvoice.rdlc" />
+    <EmbeddedResource Include="Sale Entry\frmAllBillForCustomer.resx">
+      <DependentUpon>frmAllBillForCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sale Entry\frmChangeType.resx">
       <DependentUpon>frmChangeType.cs</DependentUpon>
     </EmbeddedResource>

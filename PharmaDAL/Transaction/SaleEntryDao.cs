@@ -418,5 +418,30 @@ namespace PharmaDAL.Transaction
             }
         }
 
+
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.BillOutStandings.Where(q => q.LedgerTypeCode == customerCode && q.PurchaseSaleBookHeaderID != null)
+                .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
+                {
+                    BillOutStandingsID = p.BillOutStandingsID,
+                    PurchaseSaleBookHeaderID = (long)p.PurchaseSaleBookHeaderID,
+                    VoucherNumber = p.VoucherNumber,
+                    VoucherTypeCode = p.VoucherTypeCode,
+                    VoucherDate = p.VoucherDate,
+                    InvoiceNumber = p.VoucherNumber,
+                    InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
+                    LedgerType = p.LedgerType,
+                    LedgerTypeCode = p.LedgerTypeCode,
+                    BillAmount = p.BillAmount,
+                    OSAmount = p.OSAmount,
+                    IsHold = p.IsHold,
+                    HOLDRemarks = p.HOLDRemarks
+                }).ToList();
+            }
+        }
+
     }
 }

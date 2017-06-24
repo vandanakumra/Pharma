@@ -1,5 +1,6 @@
 ﻿using PharmaBusiness;
 using PharmaBusinessObjects;
+using PharmaBusinessObjects.Common;
 using PharmaUI.ReceiptPayment;
 using System;
 using System.Collections.Generic;
@@ -272,7 +273,7 @@ namespace PharmaUI
         {
             try
             {
-                frmSaleEntry form = new frmSaleEntry(false);
+                frmSaleEntry form = new frmSaleEntry(false,Constants.VoucherTypeCode.SALEENTRY);
                 ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
                 form.Show();
             }
@@ -329,6 +330,20 @@ namespace PharmaUI
         private void receiptFromCustomerToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void modificationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmSaleEntry form = new frmSaleEntry(true,Constants.VoucherTypeCode.SALEENTRY);
+                ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
