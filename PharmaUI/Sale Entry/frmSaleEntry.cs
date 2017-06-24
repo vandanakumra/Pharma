@@ -420,6 +420,8 @@ namespace PharmaUI
         private void ValidateSaleRate(PurchaseSaleBookLineItem lineItem, int rowIndex, bool isEdit)
         {
 
+            DataRow dr = StagingData.ItemList.Select("ItemCode=" + lineItem.ItemCode).FirstOrDefault();
+
             if (lineItem.SaleRate == 0)
             {
                 dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["SaleRate"];
@@ -431,22 +433,34 @@ namespace PharmaUI
                 {
                     if (MessageBox.Show(string.Format("Cost of this item {0} is greater than sale rate {1}. Do you want to continue?", lineItem.PurchaseSaleRate.ToString("#.##"), (lineItem.SaleRate??0).ToString("#.##")), "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        if(isEdit)
+                        if (isEdit)
+                        {
+                            dr["SaleRate"] = lineItem.SaleRate;
                             InsertUpdateLineItemAndsetToGrid(lineItem);
+                        }
+
                         OpenDialogAndMoveToNextControl();
                     }
                     else
                     {
                         if (isEdit)
+                        {
                             dgvLineItem.BeginEdit(true);
+                        }
                         else
+                        {
                             dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["SaleRate"];
+                        }
                     }
                 }
                 else
                 {
-                    if(isEdit)
+                    if (isEdit)
+                    {
+                        dr["SaleRate"] = lineItem.SaleRate;
                         InsertUpdateLineItemAndsetToGrid(lineItem);
+                    }
+
                     OpenDialogAndMoveToNextControl();
                 }
             }

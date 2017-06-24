@@ -87,7 +87,7 @@ namespace PharmaDataMigration.Master
             }
             catch (DbEntityValidationException ex)
             {
-                throw new Exception(string.Join(",", ex.EntityValidationErrors.Select(p => p.ValidationErrors.Select(q => q.ErrorMessage))));
+                throw ex;
             }
             catch (Exception ex)
             {

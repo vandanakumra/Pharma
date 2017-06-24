@@ -229,16 +229,16 @@ namespace PharmaDataMigration
 
             result = supplierLedgerMaster.InsertSupplierLedgerMasterData();
 
-            grdDataMigration.Rows[16].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[16].Cells[2].Value = result;
+            grdDataMigration.Rows[17].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[17].Cells[2].Value = result;
 
             grdDataMigration.Rows.Add("Customer Ledger", "Processing", 0);
             result = 0;
 
             result = customerLedgerMaster.InsertCustomerLedgerMasterData(); //confirm mapping columns for columns having comments in CustomerLedgerMaster
 
-            grdDataMigration.Rows[17].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[17].Cells[2].Value = result;
+            grdDataMigration.Rows[18].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[18].Cells[2].Value = result;
 
             //For below method check comments in CustomerLedgerMaster
             grdDataMigration.Rows.Add("Customer Company Discount", "Processing", 0);
@@ -246,8 +246,8 @@ namespace PharmaDataMigration
 
             result = customerLedgerMaster.InsertCustomerCompanyReferenceData();
 
-            grdDataMigration.Rows[18].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[18].Cells[2].Value = result;
+            grdDataMigration.Rows[19].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[19].Cells[2].Value = result;
 
 
             //For below method check comments in CustomerLedgerMaster
@@ -256,16 +256,16 @@ namespace PharmaDataMigration
 
             result = supplierLedgerMaster.InsertSupplierCompanyReferenceData();
 
-            grdDataMigration.Rows[19].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[19].Cells[2].Value = result;
+            grdDataMigration.Rows[20].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[20].Cells[2].Value = result;
 
             grdDataMigration.Rows.Add("Bill Oustanding", "Processing", 0);
             result = 0;
 
             result = billOutstanding.InsertBillOutstandingData();
 
-            grdDataMigration.Rows[18].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[18].Cells[2].Value = result;
+            grdDataMigration.Rows[21].Cells[1].Value = "Completed";
+            grdDataMigration.Rows[21].Cells[2].Value = result;
             
 
             MessageBox.Show("Process Completed");

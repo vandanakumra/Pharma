@@ -751,5 +751,14 @@ namespace PharmaUI.ReceiptPayment
             lblAmtAdjVal.Text = String.Empty;
         }
 
+        private void frmReceiptFromCustomer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ExtensionMethods.RemoveTransactionFormToPanel(this, ExtensionMethods.MainPanel);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -46,6 +46,7 @@
             this.lblSearch = new System.Windows.Forms.Label();
             this.dgvReceiptFromCustomer = new System.Windows.Forms.DataGridView();
             this.errorProviderReceipt = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerBillAdjusted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerBillOS)).BeginInit();
@@ -275,12 +276,25 @@
             // 
             this.errorProviderReceipt.ContainerControl = this;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(953, 49);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(83, 32);
+            this.btnCancel.TabIndex = 210;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // frmReceiptFromCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 537);
             this.ControlBox = false;
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblTransAccount);
             this.Controls.Add(this.txtTransactAccount);
             this.Controls.Add(this.dtReceiptPayment);
@@ -290,6 +304,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmReceiptFromCustomer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmReceiptFromCustomer_FormClosing);
             this.Load += new System.EventHandler(this.frmReceiptFromCustomer_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -321,5 +336,6 @@
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.DataGridView dgvReceiptFromCustomer;
         private System.Windows.Forms.ErrorProvider errorProviderReceipt;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

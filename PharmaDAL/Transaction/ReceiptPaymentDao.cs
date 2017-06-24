@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Entity;
+﻿using PharmaBusinessObjects.Common;
+using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -71,7 +72,8 @@ namespace PharmaDAL.Transaction
             {
                 return context.BillOutStandings.Where(q=>q.LedgerType== entity.EntityType 
                                                             && q.LedgerTypeCode == entity.EntityCode
-                                                            && q.OSAmount > 0)
+                                                            && q.OSAmount > 0
+                                                            && q.PurchaseSaleBookHeaderID != null)
                                                .OrderBy(x => x.BillOutStandingsID)
                 .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
                 {
@@ -80,7 +82,7 @@ namespace PharmaDAL.Transaction
                                 VoucherNumber = p.VoucherNumber,
                                 VoucherTypeCode = p.VoucherTypeCode,
                                 VoucherDate = p.VoucherDate,
-                                InvoiceNumber=p.PurchaseSaleBookHeader.PurchaseBillNo,
+                                InvoiceNumber=p.VoucherTypeCode == Constants.TransactionEntityType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo :  p.VoucherNumber,
                                 InvoiceDate=p.PurchaseSaleBookHeader.VoucherDate,
                                 LedgerType = p.LedgerType,
                                 LedgerTypeCode = p.LedgerTypeCode,
@@ -106,7 +108,7 @@ namespace PharmaDAL.Transaction
                     .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
                     {
                         BillOutStandingsAudjustmentID = p.BillOutStandingsAudjustmentID,
-                        InvoiceNumber = p.PurchaseSaleBookHeader.PurchaseBillNo,
+                        InvoiceNumber = p.VoucherTypeCode == Constants.TransactionEntityType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.AdjustmentVoucherNumber,
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
@@ -131,9 +133,8 @@ namespace PharmaDAL.Transaction
                     
                     return context.BillOutStandings.Where(q => q.LedgerType == entity.EntityType
                                                                 && q.LedgerTypeCode == entity.EntityCode
-                                                               // && q.OSAmount > 0
-                                                                )
-                                                                 .OrderBy(x => x.BillOutStandingsID)
+                                                                && q.PurchaseSaleBookHeaderID != null
+                                                                ).OrderBy(x => x.BillOutStandingsID)
                     .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
                     {
                         BillOutStandingsID = p.BillOutStandingsID,
@@ -141,7 +142,7 @@ namespace PharmaDAL.Transaction
                         VoucherNumber = p.VoucherNumber,
                         VoucherTypeCode = p.VoucherTypeCode,
                         VoucherDate = p.VoucherDate,
-                        InvoiceNumber = p.PurchaseSaleBookHeader.PurchaseBillNo,
+                        InvoiceNumber = p.VoucherTypeCode == Constants.TransactionEntityType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.VoucherNumber,
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,

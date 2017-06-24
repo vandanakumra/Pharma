@@ -323,7 +323,7 @@ namespace PharmaDAL.Transaction
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.BillOutStandings.Where(q => q.LedgerTypeCode == supplierCode)
+                return context.BillOutStandings.Where(q => q.LedgerTypeCode == supplierCode && q.PurchaseSaleBookHeaderID != null)
                 .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
                 {
                     BillOutStandingsID = p.BillOutStandingsID,
