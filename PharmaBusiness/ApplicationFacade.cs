@@ -890,6 +890,19 @@ namespace PharmaBusiness
             }
         }
 
+
+        public PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem GetTransactionByTransactionID(long transactionID)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetTransactionByTransactionID(transactionID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
         {
             try

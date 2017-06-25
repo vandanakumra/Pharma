@@ -39,6 +39,11 @@ namespace PharmaBusiness.Transaction
             return new ReceiptPaymentDao(this.LoggedInUser).InsertUpdateTempReceiptPayment(receiptPayment);
         }
 
+        internal PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem GetTransactionByTransactionID(long transactionID)
+        {
+            return new ReceiptPaymentDao(this.LoggedInUser).GetTransactionByTransactionID(transactionID);
+        }
+        
         internal void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
         {
              new ReceiptPaymentDao(this.LoggedInUser).InsertTempBillAdjustment(billAdjustmentList);

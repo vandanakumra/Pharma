@@ -149,6 +149,7 @@ namespace PharmaBusinessObjects
         List<SaleChangeType> GetSaleEntryChangeTypes();
         void SaveAllTempTransaction(List<long> tempReceiptPaymentList);
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem> GetAllTransactionForParticularDate(DateTime transDate, string transactionEntityType);
+        PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem GetTransactionByTransactionID(long transactionID);
 
         PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode);
         PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerByCode(string code);

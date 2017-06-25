@@ -73,88 +73,107 @@ namespace PharmaDAL.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var transaction = context.ReceiptPayment.Where(x=>x.ReceiptPaymentID == transactionID).Select(x => x).FirstOrDefault();
-                    var billAdjustmentListForTransaction = context.BillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == transaction.ReceiptPaymentID).Select(x => x).ToList();
-
-                    var transactionObject = new ReceiptPaymentItem()
+                    using (var transactionScope = context.Database.BeginTransaction())
                     {
-                        ReceiptPaymentID = transaction.ReceiptPaymentID,
-                        VoucherNumber = transaction.VoucherNumber,
-                        VoucherTypeCode = transaction.VoucherTypeCode,
-                        VoucherDate = transaction.VoucherDate,
-                        LedgerType = transaction.LedgerType,
-                        LedgerTypeCode = transaction.LedgerTypeCode,
-                        PaymentMode = transaction.PaymentMode,
-                        Amount = transaction.Amount,
-                        BankAccountLedgerTypeCode = transaction.BankAccountLedgerTypeCode,
-                        ChequeDate = transaction.ChequeDate,
-                        ChequeClearDate = transaction.ChequeClearDate,
-                        IsChequeCleared = transaction.IsChequeCleared,
-                        POST = transaction.POST,
-                        PISNumber = transaction.PISNumber,
-                        ChequeNumber = transaction.ChequeNumber
-                    };
+                        try
+                        {
+                            var transaction = context.ReceiptPayment.Where(x => x.ReceiptPaymentID == transactionID).Select(x => x).FirstOrDefault();
+                            var billAdjustmentListForTransaction = context.BillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == transaction.ReceiptPaymentID).Select(x => x).ToList();
 
-                    ///Add record to temp receipt
-                    ///
-                    context.TempReceiptPayment.Add(new Entity.TempReceiptPayment()
-                    {
+                            var transactionObject = new ReceiptPaymentItem()
+                            {
+                                ReceiptPaymentID = transaction.ReceiptPaymentID,
+                                VoucherNumber = transaction.VoucherNumber,
+                                VoucherTypeCode = transaction.VoucherTypeCode,
+                                VoucherDate = transaction.VoucherDate,
+                                LedgerType = transaction.LedgerType,
+                                LedgerTypeCode = transaction.LedgerTypeCode,
+                                PaymentMode = transaction.PaymentMode,
+                                Amount = transaction.Amount,
+                                BankAccountLedgerTypeCode = transaction.BankAccountLedgerTypeCode,
+                                ChequeDate = transaction.ChequeDate,
+                                ChequeClearDate = transaction.ChequeClearDate,
+                                IsChequeCleared = transaction.IsChequeCleared,
+                                POST = transaction.POST,
+                                PISNumber = transaction.PISNumber,
+                                ChequeNumber = transaction.ChequeNumber
+                            };
 
-                        ReceiptPaymentID = transaction.ReceiptPaymentID,
-                        VoucherNumber = transaction.VoucherNumber,
-                        VoucherTypeCode = transaction.VoucherTypeCode,
-                        VoucherDate = transaction.VoucherDate,
-                        LedgerType = transaction.LedgerType,
-                        LedgerTypeCode = transaction.LedgerTypeCode,
-                        PaymentMode = transaction.PaymentMode,
-                        Ammount = transaction.Amount,
-                        BankAccountLedgerTypeCode = transaction.BankAccountLedgerTypeCode,
-                        ChequeDate = transaction.ChequeDate,
-                        ChequeClearDate = transaction.ChequeClearDate,
-                        IsChequeCleared = transaction.IsChequeCleared,
-                        POST = transaction.POST,
-                        PISNumber = transaction.PISNumber,
-                        ChequeNumber = transaction.ChequeNumber,
-                        OldReceiptPaymentID = transaction.ReceiptPaymentID
+                            ///Add record to temp receipt
+                            ///
+                            var copiedReceiptPayment = new Entity.TempReceiptPayment()
+                            {
+                                ReceiptPaymentID= transaction.ReceiptPaymentID,
+                                VoucherNumber = transaction.VoucherNumber,
+                                VoucherTypeCode = transaction.VoucherTypeCode,
+                                VoucherDate = transaction.VoucherDate,
+                                LedgerType = transaction.LedgerType,
+                                LedgerTypeCode = transaction.LedgerTypeCode,
+                                PaymentMode = transaction.PaymentMode,
+                                Ammount = transaction.Amount,
+                                BankAccountLedgerTypeCode = transaction.BankAccountLedgerTypeCode,
+                                ChequeDate = transaction.ChequeDate,
+                                ChequeClearDate = transaction.ChequeClearDate,
+                                IsChequeCleared = transaction.IsChequeCleared,
+                                POST = transaction.POST,
+                                PISNumber = transaction.PISNumber,
+                                ChequeNumber = transaction.ChequeNumber,
+                                CreatedBy = LoggedInUser.Username,
+                                CreatedOn = DateTime.Now,
+                                OldReceiptPaymentID = transaction.ReceiptPaymentID
 
-                    });
+                            };
 
-                    ///Copy All previous bill adjustment
-                    ///
-                    foreach (BillOutStandingsAudjustment billOutStandingsAudjustment in billAdjustmentListForTransaction)
-                    {
-                        context.TempBillOutStandingsAudjustment.Add(new TempBillOutStandingsAudjustment() {
+                            context.TempReceiptPayment.Add(copiedReceiptPayment);
 
-                            BillOutStandingsAudjustmentID = billOutStandingsAudjustment.BillOutStandingsAudjustmentID,
-                            PurchaseSaleBookHeaderID = billOutStandingsAudjustment.PurchaseSaleBookHeaderID,
-                            VoucherNumber = billOutStandingsAudjustment.VoucherNumber,
-                            VoucherTypeCode = billOutStandingsAudjustment.VoucherTypeCode,
-                            VoucherDate = billOutStandingsAudjustment.VoucherDate,
-                            ReceiptPaymentID = billOutStandingsAudjustment.ReceiptPaymentID,
-                            BillOutStandingsID = billOutStandingsAudjustment.BillOutStandingsID,
-                            AdjustmentVoucherNumber = billOutStandingsAudjustment.AdjustmentVoucherNumber,
-                            AdjustmentVoucherTypeCode = billOutStandingsAudjustment.AdjustmentVoucherTypeCode,
-                            AdjustmentVoucherDate = billOutStandingsAudjustment.AdjustmentVoucherDate,
-                            LedgerType = billOutStandingsAudjustment.LedgerType,
-                            LedgerTypeCode = billOutStandingsAudjustment.LedgerTypeCode,
-                            Amount = billOutStandingsAudjustment.Amount,
-                            ChequeNumber = billOutStandingsAudjustment.ChequeNumber,
-                            OldBillOutStandingsAudjustmentID = billOutStandingsAudjustment.BillOutStandingsAudjustmentID
+                            ///Copy All previous bill adjustment
+                            ///
+                            foreach (BillOutStandingsAudjustment billOutStandingsAudjustment in billAdjustmentListForTransaction)
+                            {
+                                context.TempBillOutStandingsAudjustment.Add(new TempBillOutStandingsAudjustment()
+                                {
 
-                        });
+                                    BillOutStandingsAudjustmentID = billOutStandingsAudjustment.BillOutStandingsAudjustmentID,
+                                    PurchaseSaleBookHeaderID = billOutStandingsAudjustment.PurchaseSaleBookHeaderID,
+                                    VoucherNumber = billOutStandingsAudjustment.VoucherNumber,
+                                    VoucherTypeCode = billOutStandingsAudjustment.VoucherTypeCode,
+                                    VoucherDate = billOutStandingsAudjustment.VoucherDate,
+                                    ReceiptPaymentID = billOutStandingsAudjustment.ReceiptPaymentID,
+                                    BillOutStandingsID = billOutStandingsAudjustment.BillOutStandingsID,
+                                    AdjustmentVoucherNumber = billOutStandingsAudjustment.AdjustmentVoucherNumber,
+                                    AdjustmentVoucherTypeCode = billOutStandingsAudjustment.AdjustmentVoucherTypeCode,
+                                    AdjustmentVoucherDate = billOutStandingsAudjustment.AdjustmentVoucherDate,
+                                    LedgerType = billOutStandingsAudjustment.LedgerType,
+                                    LedgerTypeCode = billOutStandingsAudjustment.LedgerTypeCode,
+                                    Amount = billOutStandingsAudjustment.Amount,
+                                    ChequeNumber = billOutStandingsAudjustment.ChequeNumber,
+                                    OldBillOutStandingsAudjustmentID = billOutStandingsAudjustment.BillOutStandingsAudjustmentID,
+                                    CreatedBy = LoggedInUser.Username,
+                                    CreatedOn = DateTime.Now,
+                                });
+                            }
+
+                            context.SaveChanges();
+                            transactionScope.Commit();
+
+                            transactionObject.OldReceiptPaymentID = copiedReceiptPayment.ReceiptPaymentID;
+
+                            return transactionObject;
+                        }
+                        catch (DbEntityValidationException dex )
+                        {
+                            transactionScope.Rollback();
+                            throw;
+                        }
                     }
-
-                    return transactionObject;
-
                 }
             }
-            catch (DbEntityValidationException ex)
+            catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-        
+
         public List<PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem> GetAllTransactionForParticularDate(DateTime transDate, string transactionEntityType)
         {
             
@@ -173,6 +192,7 @@ namespace PharmaDAL.Transaction
                                                PaymentMode = x.PaymentMode,
                                                Amount = x.Amount,
                                                BankAccountLedgerTypeCode = x.BankAccountLedgerTypeCode
+
                                            }).ToList();
                 }
             }

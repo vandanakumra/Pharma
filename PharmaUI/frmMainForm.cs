@@ -353,8 +353,9 @@ namespace PharmaUI
             {
                 frmReceiptFromCustomer formReceipt = new frmReceiptFromCustomer();
                 ExtensionMethods.AddTrasanctionFormToPanel(formReceipt, pnlMain);
-                formReceipt.Show();
                 formReceipt.ConfigureUIForModification();
+                formReceipt.Show();
+                
             }
             catch (Exception ex)
             {
