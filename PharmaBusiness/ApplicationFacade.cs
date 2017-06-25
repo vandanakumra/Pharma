@@ -1028,7 +1028,21 @@ namespace PharmaBusiness
         {
             new SaleBiz(this.LoggedInUser).RollbackSaleEntry(purchaseSaleBookHeaderID);
         }
-            #endregion
+        #endregion
+        #region "Reports"
+
+        public DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID)
+        {
+            return new ReportBiz(LoggedInUser).GetSaleInvoiceData(purchaseSaleBookHeaderID);
+
+        }
+
+        public DataTable GetFirmProperties(int purchaseSaleBookHeaderID)
+        {
+            return new ReportBiz(LoggedInUser).GetFirmProperties(purchaseSaleBookHeaderID);
+        }
+
+        #endregion
 
     }
 }

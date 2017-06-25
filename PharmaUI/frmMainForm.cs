@@ -316,8 +316,9 @@ namespace PharmaUI
         {
             try
             {
-                frmPurchaseBookTransaction form = new frmPurchaseBookTransaction(true);
-                ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
+                // frmPurchaseBookTransaction form = new frmPurchaseBookTransaction(true);
+                //ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
+                frmReportViewer form = new frmReportViewer();
                 form.Show();
             }
             catch (Exception ex)

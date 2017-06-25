@@ -333,6 +333,40 @@ namespace PharmaUI {
             
             private global::System.Data.DataColumn columnHSNCode;
             
+            private global::System.Data.DataColumn columnAddress;
+            
+            private global::System.Data.DataColumn columnCIN;
+            
+            private global::System.Data.DataColumn columnDLNO;
+            
+            private global::System.Data.DataColumn columnDLNOGODOWN;
+            
+            private global::System.Data.DataColumn columnEmail;
+            
+            private global::System.Data.DataColumn columnGSTIN;
+            
+            private global::System.Data.DataColumn columnName;
+            
+            private global::System.Data.DataColumn columnOfficeNumber;
+            
+            private global::System.Data.DataColumn columnPAN;
+            
+            private global::System.Data.DataColumn columnPhone;
+            
+            private global::System.Data.DataColumn columnWebSite;
+            
+            private global::System.Data.DataColumn columnCustomerGstNo;
+            
+            private global::System.Data.DataColumn columnCustomerPanNo;
+            
+            private global::System.Data.DataColumn columnFLinNo;
+            
+            private global::System.Data.DataColumn columnInvoiceDate1;
+            
+            private global::System.Data.DataColumn columnInvoiceNumber1;
+            
+            private global::System.Data.DataColumn columnCustomerDLNO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SaleInvoiceDataTable() {
@@ -584,6 +618,142 @@ namespace PharmaUI {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AddressColumn {
+                get {
+                    return this.columnAddress;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CINColumn {
+                get {
+                    return this.columnCIN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DLNOColumn {
+                get {
+                    return this.columnDLNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DLNOGODOWNColumn {
+                get {
+                    return this.columnDLNOGODOWN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EmailColumn {
+                get {
+                    return this.columnEmail;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn GSTINColumn {
+                get {
+                    return this.columnGSTIN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NameColumn {
+                get {
+                    return this.columnName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OfficeNumberColumn {
+                get {
+                    return this.columnOfficeNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PANColumn {
+                get {
+                    return this.columnPAN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PhoneColumn {
+                get {
+                    return this.columnPhone;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn WebSiteColumn {
+                get {
+                    return this.columnWebSite;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CustomerGstNoColumn {
+                get {
+                    return this.columnCustomerGstNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CustomerPanNoColumn {
+                get {
+                    return this.columnCustomerPanNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FLinNoColumn {
+                get {
+                    return this.columnFLinNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InvoiceDate1Column {
+                get {
+                    return this.columnInvoiceDate1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InvoiceNumber1Column {
+                get {
+                    return this.columnInvoiceNumber1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CustomerDLNOColumn {
+                get {
+                    return this.columnCustomerDLNO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -644,7 +814,24 @@ namespace PharmaUI {
                         decimal SaleRate, 
                         System.DateTime MfgDate, 
                         string Packing, 
-                        string HSNCode) {
+                        string HSNCode, 
+                        string Address, 
+                        string CIN, 
+                        string DLNO, 
+                        string DLNOGODOWN, 
+                        string Email, 
+                        string GSTIN, 
+                        string Name, 
+                        string OfficeNumber, 
+                        string PAN, 
+                        string Phone, 
+                        string WebSite, 
+                        string CustomerGstNo, 
+                        string CustomerPanNo, 
+                        string FLinNo, 
+                        System.DateTime InvoiceDate1, 
+                        string InvoiceNumber1, 
+                        string CustomerDLNO) {
                 SaleInvoiceRow rowSaleInvoiceRow = ((SaleInvoiceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -673,7 +860,24 @@ namespace PharmaUI {
                         SaleRate,
                         MfgDate,
                         Packing,
-                        HSNCode};
+                        HSNCode,
+                        Address,
+                        CIN,
+                        DLNO,
+                        DLNOGODOWN,
+                        Email,
+                        GSTIN,
+                        Name,
+                        OfficeNumber,
+                        PAN,
+                        Phone,
+                        WebSite,
+                        CustomerGstNo,
+                        CustomerPanNo,
+                        FLinNo,
+                        InvoiceDate1,
+                        InvoiceNumber1,
+                        CustomerDLNO};
                 rowSaleInvoiceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSaleInvoiceRow);
                 return rowSaleInvoiceRow;
@@ -723,6 +927,23 @@ namespace PharmaUI {
                 this.columnMfgDate = base.Columns["MfgDate"];
                 this.columnPacking = base.Columns["Packing"];
                 this.columnHSNCode = base.Columns["HSNCode"];
+                this.columnAddress = base.Columns["Address"];
+                this.columnCIN = base.Columns["CIN"];
+                this.columnDLNO = base.Columns["DLNO"];
+                this.columnDLNOGODOWN = base.Columns["DLNOGODOWN"];
+                this.columnEmail = base.Columns["Email"];
+                this.columnGSTIN = base.Columns["GSTIN"];
+                this.columnName = base.Columns["Name"];
+                this.columnOfficeNumber = base.Columns["OfficeNumber"];
+                this.columnPAN = base.Columns["PAN"];
+                this.columnPhone = base.Columns["Phone"];
+                this.columnWebSite = base.Columns["WebSite"];
+                this.columnCustomerGstNo = base.Columns["CustomerGstNo"];
+                this.columnCustomerPanNo = base.Columns["CustomerPanNo"];
+                this.columnFLinNo = base.Columns["FLinNo"];
+                this.columnInvoiceDate1 = base.Columns["InvoiceDate1"];
+                this.columnInvoiceNumber1 = base.Columns["InvoiceNumber1"];
+                this.columnCustomerDLNO = base.Columns["CustomerDLNO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -782,6 +1003,40 @@ namespace PharmaUI {
                 base.Columns.Add(this.columnPacking);
                 this.columnHSNCode = new global::System.Data.DataColumn("HSNCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnHSNCode);
+                this.columnAddress = new global::System.Data.DataColumn("Address", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAddress);
+                this.columnCIN = new global::System.Data.DataColumn("CIN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCIN);
+                this.columnDLNO = new global::System.Data.DataColumn("DLNO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDLNO);
+                this.columnDLNOGODOWN = new global::System.Data.DataColumn("DLNOGODOWN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDLNOGODOWN);
+                this.columnEmail = new global::System.Data.DataColumn("Email", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmail);
+                this.columnGSTIN = new global::System.Data.DataColumn("GSTIN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGSTIN);
+                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnName);
+                this.columnOfficeNumber = new global::System.Data.DataColumn("OfficeNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOfficeNumber);
+                this.columnPAN = new global::System.Data.DataColumn("PAN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAN);
+                this.columnPhone = new global::System.Data.DataColumn("Phone", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPhone);
+                this.columnWebSite = new global::System.Data.DataColumn("WebSite", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWebSite);
+                this.columnCustomerGstNo = new global::System.Data.DataColumn("CustomerGstNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomerGstNo);
+                this.columnCustomerPanNo = new global::System.Data.DataColumn("CustomerPanNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomerPanNo);
+                this.columnFLinNo = new global::System.Data.DataColumn("FLinNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFLinNo);
+                this.columnInvoiceDate1 = new global::System.Data.DataColumn("InvoiceDate1", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceDate1);
+                this.columnInvoiceNumber1 = new global::System.Data.DataColumn("InvoiceNumber1", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceNumber1);
+                this.columnCustomerDLNO = new global::System.Data.DataColumn("CustomerDLNO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCustomerDLNO);
                 this.columnPurchaseSaleBookHeaderID.AutoIncrement = true;
                 this.columnPurchaseSaleBookHeaderID.AllowDBNull = false;
                 this.columnPurchaseSaleBookHeaderID.ReadOnly = true;
@@ -807,6 +1062,37 @@ namespace PharmaUI {
                 this.columnPacking.MaxLength = 10;
                 this.columnHSNCode.AllowDBNull = false;
                 this.columnHSNCode.MaxLength = 18;
+                this.columnAddress.ReadOnly = true;
+                this.columnAddress.MaxLength = 200;
+                this.columnCIN.ReadOnly = true;
+                this.columnCIN.MaxLength = 200;
+                this.columnDLNO.ReadOnly = true;
+                this.columnDLNO.MaxLength = 200;
+                this.columnDLNOGODOWN.ReadOnly = true;
+                this.columnDLNOGODOWN.MaxLength = 200;
+                this.columnEmail.ReadOnly = true;
+                this.columnEmail.MaxLength = 200;
+                this.columnGSTIN.ReadOnly = true;
+                this.columnGSTIN.MaxLength = 200;
+                this.columnName.ReadOnly = true;
+                this.columnName.MaxLength = 200;
+                this.columnOfficeNumber.ReadOnly = true;
+                this.columnOfficeNumber.MaxLength = 200;
+                this.columnPAN.ReadOnly = true;
+                this.columnPAN.MaxLength = 200;
+                this.columnPhone.ReadOnly = true;
+                this.columnPhone.MaxLength = 200;
+                this.columnWebSite.ReadOnly = true;
+                this.columnWebSite.MaxLength = 200;
+                this.columnCustomerGstNo.AllowDBNull = false;
+                this.columnCustomerGstNo.MaxLength = 10;
+                this.columnCustomerPanNo.MaxLength = 20;
+                this.columnFLinNo.MaxLength = 20;
+                this.columnInvoiceDate1.AllowDBNull = false;
+                this.columnInvoiceNumber1.AllowDBNull = false;
+                this.columnInvoiceNumber1.MaxLength = 8;
+                this.columnCustomerDLNO.AllowDBNull = false;
+                this.columnCustomerDLNO.MaxLength = 20;
                 this.ExtendedProperties.Add("Generator_TablePropName", "_SaleInvoice");
                 this.ExtendedProperties.Add("Generator_UserTableName", "SaleInvoice");
             }
@@ -1348,6 +1634,258 @@ namespace PharmaUI {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Address {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.AddressColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Address\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.AddressColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CIN {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.CINColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CIN\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.CINColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DLNO {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.DLNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DLNO\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.DLNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DLNOGODOWN {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.DLNOGODOWNColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DLNOGODOWN\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.DLNOGODOWNColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Email {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.EmailColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Email\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.EmailColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string GSTIN {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.GSTINColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GSTIN\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.GSTINColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Name {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.NameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Name\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string OfficeNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.OfficeNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OfficeNumber\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.OfficeNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PAN {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.PANColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PAN\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.PANColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Phone {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.PhoneColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Phone\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.PhoneColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string WebSite {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.WebSiteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'WebSite\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.WebSiteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CustomerGstNo {
+                get {
+                    return ((string)(this[this.tableSaleInvoice.CustomerGstNoColumn]));
+                }
+                set {
+                    this[this.tableSaleInvoice.CustomerGstNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CustomerPanNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.CustomerPanNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CustomerPanNo\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.CustomerPanNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FLinNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableSaleInvoice.FLinNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FLinNo\' in table \'SaleInvoice\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSaleInvoice.FLinNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime InvoiceDate1 {
+                get {
+                    return ((global::System.DateTime)(this[this.tableSaleInvoice.InvoiceDate1Column]));
+                }
+                set {
+                    this[this.tableSaleInvoice.InvoiceDate1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string InvoiceNumber1 {
+                get {
+                    return ((string)(this[this.tableSaleInvoice.InvoiceNumber1Column]));
+                }
+                set {
+                    this[this.tableSaleInvoice.InvoiceNumber1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CustomerDLNO {
+                get {
+                    return ((string)(this[this.tableSaleInvoice.CustomerDLNOColumn]));
+                }
+                set {
+                    this[this.tableSaleInvoice.CustomerDLNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsInvoiceNumberNull() {
                 return this.IsNull(this.tableSaleInvoice.InvoiceNumberColumn);
             }
@@ -1585,6 +2123,162 @@ namespace PharmaUI {
             public void SetPackingNull() {
                 this[this.tableSaleInvoice.PackingColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAddressNull() {
+                return this.IsNull(this.tableSaleInvoice.AddressColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAddressNull() {
+                this[this.tableSaleInvoice.AddressColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCINNull() {
+                return this.IsNull(this.tableSaleInvoice.CINColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCINNull() {
+                this[this.tableSaleInvoice.CINColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDLNONull() {
+                return this.IsNull(this.tableSaleInvoice.DLNOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDLNONull() {
+                this[this.tableSaleInvoice.DLNOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDLNOGODOWNNull() {
+                return this.IsNull(this.tableSaleInvoice.DLNOGODOWNColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDLNOGODOWNNull() {
+                this[this.tableSaleInvoice.DLNOGODOWNColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEmailNull() {
+                return this.IsNull(this.tableSaleInvoice.EmailColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEmailNull() {
+                this[this.tableSaleInvoice.EmailColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsGSTINNull() {
+                return this.IsNull(this.tableSaleInvoice.GSTINColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetGSTINNull() {
+                this[this.tableSaleInvoice.GSTINColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNameNull() {
+                return this.IsNull(this.tableSaleInvoice.NameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNameNull() {
+                this[this.tableSaleInvoice.NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsOfficeNumberNull() {
+                return this.IsNull(this.tableSaleInvoice.OfficeNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetOfficeNumberNull() {
+                this[this.tableSaleInvoice.OfficeNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPANNull() {
+                return this.IsNull(this.tableSaleInvoice.PANColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPANNull() {
+                this[this.tableSaleInvoice.PANColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPhoneNull() {
+                return this.IsNull(this.tableSaleInvoice.PhoneColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPhoneNull() {
+                this[this.tableSaleInvoice.PhoneColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsWebSiteNull() {
+                return this.IsNull(this.tableSaleInvoice.WebSiteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetWebSiteNull() {
+                this[this.tableSaleInvoice.WebSiteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCustomerPanNoNull() {
+                return this.IsNull(this.tableSaleInvoice.CustomerPanNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCustomerPanNoNull() {
+                this[this.tableSaleInvoice.CustomerPanNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFLinNoNull() {
+                return this.IsNull(this.tableSaleInvoice.FLinNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFLinNoNull() {
+                this[this.tableSaleInvoice.FLinNoColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -1773,6 +2467,23 @@ namespace PharmaUI.SaleInvoiceTableAdapters {
             tableMapping.ColumnMappings.Add("MfgDate", "MfgDate");
             tableMapping.ColumnMappings.Add("Packing", "Packing");
             tableMapping.ColumnMappings.Add("HSNCode", "HSNCode");
+            tableMapping.ColumnMappings.Add("Address", "Address");
+            tableMapping.ColumnMappings.Add("CIN", "CIN");
+            tableMapping.ColumnMappings.Add("DLNO", "DLNO");
+            tableMapping.ColumnMappings.Add("DLNOGODOWN", "DLNOGODOWN");
+            tableMapping.ColumnMappings.Add("Email", "Email");
+            tableMapping.ColumnMappings.Add("GSTIN", "GSTIN");
+            tableMapping.ColumnMappings.Add("Name", "Name");
+            tableMapping.ColumnMappings.Add("OfficeNumber", "OfficeNumber");
+            tableMapping.ColumnMappings.Add("PAN", "PAN");
+            tableMapping.ColumnMappings.Add("Phone", "Phone");
+            tableMapping.ColumnMappings.Add("WebSite", "WebSite");
+            tableMapping.ColumnMappings.Add("CustomerGstNo", "CustomerGstNo");
+            tableMapping.ColumnMappings.Add("CustomerPanNo", "CustomerPanNo");
+            tableMapping.ColumnMappings.Add("FLinNo", "FLinNo");
+            tableMapping.ColumnMappings.Add("InvoiceDate1", "InvoiceDate1");
+            tableMapping.ColumnMappings.Add("InvoiceNumber1", "InvoiceNumber1");
+            tableMapping.ColumnMappings.Add("CustomerDLNO", "CustomerDLNO");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

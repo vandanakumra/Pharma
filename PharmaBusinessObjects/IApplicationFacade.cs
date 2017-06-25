@@ -160,6 +160,10 @@ namespace PharmaBusinessObjects
         void RollbackSaleEntry(long purchaseSaleBookHeaderID);
 
         #endregion
+        #region "Reports"
+        DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID);
+        DataTable GetFirmProperties(int purchaseSaleBookHeaderID);
+        #endregion
     }
 
 }
