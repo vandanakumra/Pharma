@@ -89,6 +89,7 @@
         <AssociationConnector Association="PharmaDBModel.FK_SupplierCompanyDiscountRef_SupplierLedger" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" ManuallyRouted="false" />
         <AssociationConnector Association="PharmaDBModel.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PharmaDBModel.FirmProperties" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
