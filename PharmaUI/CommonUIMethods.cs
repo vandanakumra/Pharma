@@ -144,15 +144,15 @@ namespace PharmaUI
 
             List<Control> allControls = ExtensionMethods.GetAllControls(form);
 
+            allControls.ForEach(k => { if (k is ComboBox) { ((ComboBox)k).FlatStyle = FlatStyle.Flat;  } });
+            allControls.ForEach(k => { if (k is TextBox) { ((TextBox)k).CharacterCasing = CharacterCasing.Upper; } });
+
             // Exclude.GetExcludedControls(
             allControls = allControls.Where(x => !Exclude.GetExcludedControls().Where(p => p.Name == x.Name).Any()).ToList();
-
 
             //allControls.ForEach(k =>{ if (k.Name != "lblSearch" && k.Name != "txtSearch" && k.Name != "lblPersonRouteType") { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); } });
 
             allControls.ForEach(k => { k.Font = new System.Drawing.Font(ExtensionMethods.FontFamily, ExtensionMethods.FontSize); });
-
-            allControls.ForEach(k => { if (k is ComboBox) { ((ComboBox)k).FlatStyle = FlatStyle.Flat; } });
 
             LoadPanel(form, lblText);
         }
@@ -449,6 +449,7 @@ namespace PharmaUI
             }
         }
 
+
         private static void C_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -545,7 +546,7 @@ namespace PharmaUI
             dgv.DefaultCellStyle.SelectionBackColor = Color.Pink;
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
+            
 
             for (int i = 0; i < dgv.Columns.Count; i++)
             {

@@ -44,7 +44,7 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.LoadPanel(this, "Purchase Book Transaction");
+                ExtensionMethods.FormLoad(this, "Purchase Book Transaction");
 //                ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
