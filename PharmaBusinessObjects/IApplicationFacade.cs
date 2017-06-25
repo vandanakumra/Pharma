@@ -148,7 +148,8 @@ namespace PharmaBusinessObjects
         bool DeleteUnSavedData(long purchaseSaleBookHeaderID);
         List<SaleChangeType> GetSaleEntryChangeTypes();
         void SaveAllTempTransaction(List<long> tempReceiptPaymentList);
-        
+        List<PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem> GetAllTransactionForParticularDate(DateTime transDate, string transactionEntityType);
+
         PurchaseSaleBookLineItem GetNewSaleLineItem(string itemCode, string customerCode);
         PharmaBusinessObjects.Master.AccountLedgerMaster GetAccountLedgerByCode(string code);
         SaleLineItemInfo GetSaleLineItemInfo(string code, long fifoID);

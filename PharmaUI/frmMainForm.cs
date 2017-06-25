@@ -346,5 +346,20 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void modifyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmReceiptFromCustomer formReceipt = new frmReceiptFromCustomer();
+                ExtensionMethods.AddTrasanctionFormToPanel(formReceipt, pnlMain);
+                formReceipt.Show();
+                formReceipt.ConfigureUIForModification();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

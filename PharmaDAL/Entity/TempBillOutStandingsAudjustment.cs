@@ -29,6 +29,8 @@ namespace PharmaDAL.Entity
         public decimal Amount { get; set; }
         public string ChequeNumber { get; set; }
         public Nullable<long> OldBillOutStandingsAudjustmentID { get; set; }
+        public string CreatedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
     
         public virtual BillOutStandings BillOutStandings { get; set; }
         public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }

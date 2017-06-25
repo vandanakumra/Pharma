@@ -1,4 +1,5 @@
 ﻿using PharmaBusinessObjects.Common;
+using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace PharmaDAL.Transaction
                     var receiptPaymentDB = context.TempReceiptPayment.Where(x => x.ReceiptPaymentID == receiptPayment.ReceiptPaymentID).FirstOrDefault();
 
                     if (receiptPaymentDB != null)
-                    {                       
+                    {
                         receiptPaymentDB.PaymentMode = receiptPayment.PaymentMode;
                         receiptPaymentDB.Ammount = receiptPayment.Amount;
                         receiptPaymentDB.BankAccountLedgerTypeCode = receiptPayment.BankAccountLedgerTypeCode;
@@ -43,12 +44,12 @@ namespace PharmaDAL.Transaction
                     {
                         Entity.TempReceiptPayment receiptPaymentDBEntry = new Entity.TempReceiptPayment()
                         {
-                            VoucherNumber="TPVOCHER",
+                            VoucherNumber = "TPVOCHER",
                             VoucherTypeCode = receiptPayment.VoucherTypeCode,
                             VoucherDate = receiptPayment.VoucherDate,
                             LedgerType = receiptPayment.LedgerType,
                             LedgerTypeCode = receiptPayment.LedgerTypeCode,
-                            PaymentMode=receiptPayment.PaymentMode,
+                            PaymentMode = receiptPayment.PaymentMode,
                             BankAccountLedgerTypeCode = receiptPayment.BankAccountLedgerTypeCode
                         };
 
@@ -66,30 +67,146 @@ namespace PharmaDAL.Transaction
             }
         }
 
+        public PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem GetTransactionByTransactionID(long transactionID)
+        {
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    var transaction = context.ReceiptPayment.Where(x=>x.ReceiptPaymentID == transactionID).Select(x => x).FirstOrDefault();
+                    var billAdjustmentListForTransaction = context.BillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == transaction.ReceiptPaymentID).Select(x => x).ToList();
+
+                    var transactionObject = new ReceiptPaymentItem()
+                    {
+                        ReceiptPaymentID = transaction.ReceiptPaymentID,
+                        VoucherNumber = transaction.VoucherNumber,
+                        VoucherTypeCode = transaction.VoucherTypeCode,
+                        VoucherDate = transaction.VoucherDate,
+                        LedgerType = transaction.LedgerType,
+                        LedgerTypeCode = transaction.LedgerTypeCode,
+                        PaymentMode = transaction.PaymentMode,
+                        Amount = transaction.Amount,
+                        BankAccountLedgerTypeCode = transaction.BankAccountLedgerTypeCode,
+                        ChequeDate = transaction.ChequeDate,
+                        ChequeClearDate = transaction.ChequeClearDate,
+                        IsChequeCleared = transaction.IsChequeCleared,
+                        POST = transaction.POST,
+                        PISNumber = transaction.PISNumber,
+                        ChequeNumber = transaction.ChequeNumber
+                    };
+
+                    ///Add record to temp receipt
+                    ///
+                    context.TempReceiptPayment.Add(new Entity.TempReceiptPayment()
+                    {
+
+                        ReceiptPaymentID = transaction.ReceiptPaymentID,
+                        VoucherNumber = transaction.VoucherNumber,
+                        VoucherTypeCode = transaction.VoucherTypeCode,
+                        VoucherDate = transaction.VoucherDate,
+                        LedgerType = transaction.LedgerType,
+                        LedgerTypeCode = transaction.LedgerTypeCode,
+                        PaymentMode = transaction.PaymentMode,
+                        Ammount = transaction.Amount,
+                        BankAccountLedgerTypeCode = transaction.BankAccountLedgerTypeCode,
+                        ChequeDate = transaction.ChequeDate,
+                        ChequeClearDate = transaction.ChequeClearDate,
+                        IsChequeCleared = transaction.IsChequeCleared,
+                        POST = transaction.POST,
+                        PISNumber = transaction.PISNumber,
+                        ChequeNumber = transaction.ChequeNumber,
+                        OldReceiptPaymentID = transaction.ReceiptPaymentID
+
+                    });
+
+                    ///Copy All previous bill adjustment
+                    ///
+                    foreach (BillOutStandingsAudjustment billOutStandingsAudjustment in billAdjustmentListForTransaction)
+                    {
+                        context.TempBillOutStandingsAudjustment.Add(new TempBillOutStandingsAudjustment() {
+
+                            BillOutStandingsAudjustmentID = billOutStandingsAudjustment.BillOutStandingsAudjustmentID,
+                            PurchaseSaleBookHeaderID = billOutStandingsAudjustment.PurchaseSaleBookHeaderID,
+                            VoucherNumber = billOutStandingsAudjustment.VoucherNumber,
+                            VoucherTypeCode = billOutStandingsAudjustment.VoucherTypeCode,
+                            VoucherDate = billOutStandingsAudjustment.VoucherDate,
+                            ReceiptPaymentID = billOutStandingsAudjustment.ReceiptPaymentID,
+                            BillOutStandingsID = billOutStandingsAudjustment.BillOutStandingsID,
+                            AdjustmentVoucherNumber = billOutStandingsAudjustment.AdjustmentVoucherNumber,
+                            AdjustmentVoucherTypeCode = billOutStandingsAudjustment.AdjustmentVoucherTypeCode,
+                            AdjustmentVoucherDate = billOutStandingsAudjustment.AdjustmentVoucherDate,
+                            LedgerType = billOutStandingsAudjustment.LedgerType,
+                            LedgerTypeCode = billOutStandingsAudjustment.LedgerTypeCode,
+                            Amount = billOutStandingsAudjustment.Amount,
+                            ChequeNumber = billOutStandingsAudjustment.ChequeNumber,
+                            OldBillOutStandingsAudjustmentID = billOutStandingsAudjustment.BillOutStandingsAudjustmentID
+
+                        });
+                    }
+
+                    return transactionObject;
+
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+
+                throw ex;
+            }
+        }
+        
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem> GetAllTransactionForParticularDate(DateTime transDate, string transactionEntityType)
+        {
+            
+            try
+            {
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    return context.ReceiptPayment.Where(x => x.VoucherDate == transDate && x.LedgerType == transactionEntityType)
+                                           .Select(x => new ReceiptPaymentItem()
+                                           {
+                                               ReceiptPaymentID = x.ReceiptPaymentID,
+                                               VoucherNumber = x.VoucherNumber,
+                                               VoucherTypeCode = x.VoucherTypeCode,
+                                               VoucherDate = x.VoucherDate,
+                                               LedgerType = x.LedgerType,
+                                               PaymentMode = x.PaymentMode,
+                                               Amount = x.Amount,
+                                               BankAccountLedgerTypeCode = x.BankAccountLedgerTypeCode
+                                           }).ToList();
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(PharmaBusinessObjects.Transaction.TransactionEntity entity)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                return context.BillOutStandings.Where(q=>q.LedgerType== entity.EntityType 
+                return context.BillOutStandings.Where(q => q.LedgerType == entity.EntityType
                                                             && q.LedgerTypeCode == entity.EntityCode
                                                             && q.OSAmount > 0
                                                             && q.PurchaseSaleBookHeaderID != null)
                                                .OrderBy(x => x.BillOutStandingsID)
                 .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
                 {
-                                BillOutStandingsID = p.BillOutStandingsID,
-                                PurchaseSaleBookHeaderID = (long)p.PurchaseSaleBookHeaderID,
-                                VoucherNumber = p.VoucherNumber,
-                                VoucherTypeCode = p.VoucherTypeCode,
-                                VoucherDate = p.VoucherDate,
-                                InvoiceNumber=p.VoucherTypeCode == Constants.TransactionEntityType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo :  p.VoucherNumber,
-                                InvoiceDate=p.PurchaseSaleBookHeader.VoucherDate,
-                                LedgerType = p.LedgerType,
-                                LedgerTypeCode = p.LedgerTypeCode,
-                                BillAmount = p.BillAmount,
-                                OSAmount = p.OSAmount,
-                                IsHold = p.IsHold,
-                                HOLDRemarks = p.HOLDRemarks
+                    BillOutStandingsID = p.BillOutStandingsID,
+                    PurchaseSaleBookHeaderID = (long)p.PurchaseSaleBookHeaderID,
+                    VoucherNumber = p.VoucherNumber,
+                    VoucherTypeCode = p.VoucherTypeCode,
+                    VoucherDate = p.VoucherDate,
+                    InvoiceNumber = p.VoucherTypeCode == Constants.TransactionEntityType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.VoucherNumber,
+                    InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
+                    LedgerType = p.LedgerType,
+                    LedgerTypeCode = p.LedgerTypeCode,
+                    BillAmount = p.BillAmount,
+                    OSAmount = p.OSAmount,
+                    IsHold = p.IsHold,
+                    HOLDRemarks = p.HOLDRemarks
                 }).ToList();
             }
         }
@@ -100,7 +217,7 @@ namespace PharmaDAL.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    return context.TempBillOutStandingsAudjustment.Where(q => 
+                    return context.TempBillOutStandingsAudjustment.Where(q =>
                                                                 q.ReceiptPaymentID == entity.ReceiptPaymentID &&
                                                                 q.LedgerType == entity.EntityType
                                                                 && q.LedgerTypeCode == entity.EntityCode)
@@ -112,7 +229,7 @@ namespace PharmaDAL.Transaction
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
-                        OSAmount = p.BillOutStandings.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID 
+                        OSAmount = p.BillOutStandings.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID
                                             && x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
                         Amount = p.Amount
                     }).ToList();
@@ -130,7 +247,7 @@ namespace PharmaDAL.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    
+
                     return context.BillOutStandings.Where(q => q.LedgerType == entity.EntityType
                                                                 && q.LedgerTypeCode == entity.EntityCode
                                                                 && q.PurchaseSaleBookHeaderID != null
@@ -146,18 +263,18 @@ namespace PharmaDAL.Transaction
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
-                        Amount= context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID
-                                            && x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
+                        Amount = context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID
+                                             && x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
                         OSAmount = p.OSAmount + context.TempBillOutStandingsAudjustment.Where(x => x.ReceiptPaymentID == entity.ReceiptPaymentID
                                             && x.BillOutStandingsID == p.BillOutStandingsID).Select(x => x.Amount).FirstOrDefault(),
 
                     }).ToList();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
-            }         
+            }
         }
 
         public void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
@@ -175,7 +292,7 @@ namespace PharmaDAL.Transaction
                                 transaction.Dispose();
                                 return;
                             }
-                              
+
 
                             long receiptPaymentID = billAdjustmentList.FirstOrDefault().ReceiptPaymentID ?? default(long);
                             var receiptPaymentEntity = context.TempReceiptPayment.Where(q => q.ReceiptPaymentID == receiptPaymentID).Select(q => q).ToList().FirstOrDefault();
@@ -205,7 +322,7 @@ namespace PharmaDAL.Transaction
                                 context.TempBillOutStandingsAudjustment.Add(billAdjustmentDBEntry);
 
                                 var billOSDB = context.BillOutStandings.Where(x => x.BillOutStandingsID == billAdjustmentDBEntry.BillOutStandingsID).FirstOrDefault();
-                                    billOSDB.OSAmount -= billAdjustmentDBEntry.Amount;
+                                billOSDB.OSAmount -= billAdjustmentDBEntry.Amount;
                             }
                             context.SaveChanges();
                             transaction.Commit();
@@ -230,9 +347,9 @@ namespace PharmaDAL.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                  var tempBillAdjustmentForEntity =  context.TempBillOutStandingsAudjustment.Where(q => q.ReceiptPaymentID == entity.ReceiptPaymentID
-                                                                && q.LedgerTypeCode == entity.EntityCode)
-                                                                .Select(q => q).ToList();
+                    var tempBillAdjustmentForEntity = context.TempBillOutStandingsAudjustment.Where(q => q.ReceiptPaymentID == entity.ReceiptPaymentID
+                                                                 && q.LedgerTypeCode == entity.EntityCode)
+                                                                  .Select(q => q).ToList();
 
                     ///Rollback all amount deducted amount from OS amount from Bill outstanding
                     ///
@@ -283,7 +400,7 @@ namespace PharmaDAL.Transaction
                             transaction.Rollback();
                             throw;
                         }
-                    }                      
+                    }
                 }
             }
             catch (Exception ex)

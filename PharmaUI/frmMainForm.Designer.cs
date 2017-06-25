@@ -46,6 +46,7 @@
             this.modificationPurchaseEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saleEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptPaymentBooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptFromCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptFromCustTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +54,7 @@
             this.transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.modificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -187,14 +188,14 @@
             // 
             this.transactionCtrlPToolStripMenuItem.Name = "transactionCtrlPToolStripMenuItem";
             this.transactionCtrlPToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.transactionCtrlPToolStripMenuItem.Text = "Transaction";
             this.transactionCtrlPToolStripMenuItem.Click += new System.EventHandler(this.purchaseTransactionToolStripMenuItem_Click);
             // 
             // modificationPurchaseEntryToolStripMenuItem
             // 
             this.modificationPurchaseEntryToolStripMenuItem.Name = "modificationPurchaseEntryToolStripMenuItem";
-            this.modificationPurchaseEntryToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.modificationPurchaseEntryToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.modificationPurchaseEntryToolStripMenuItem.Text = "Modification";
             this.modificationPurchaseEntryToolStripMenuItem.Click += new System.EventHandler(this.modificationPurchaseEntryToolStripMenuItem_Click);
             // 
@@ -211,9 +212,16 @@
             // 
             this.transactionToolStripMenuItem1.Name = "transactionToolStripMenuItem1";
             this.transactionToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.transactionToolStripMenuItem1.Size = new System.Drawing.Size(176, 22);
+            this.transactionToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
             this.transactionToolStripMenuItem1.Text = "Transaction";
             this.transactionToolStripMenuItem1.Click += new System.EventHandler(this.saleEntryToolStripMenuItem_Click);
+            // 
+            // modificationToolStripMenuItem
+            // 
+            this.modificationToolStripMenuItem.Name = "modificationToolStripMenuItem";
+            this.modificationToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.modificationToolStripMenuItem.Text = "Modification";
+            this.modificationToolStripMenuItem.Click += new System.EventHandler(this.modificationToolStripMenuItem_Click);
             // 
             // receiptPaymentBooksToolStripMenuItem
             // 
@@ -227,7 +235,8 @@
             // receiptFromCustomerToolStripMenuItem
             // 
             this.receiptFromCustomerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.receiptFromCustTransactionToolStripMenuItem});
+            this.receiptFromCustTransactionToolStripMenuItem,
+            this.modifyToolStripMenuItem});
             this.receiptFromCustomerToolStripMenuItem.Name = "receiptFromCustomerToolStripMenuItem";
             this.receiptFromCustomerToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.receiptFromCustomerToolStripMenuItem.Text = "Receipt From Customer";
@@ -238,7 +247,7 @@
             this.receiptFromCustTransactionToolStripMenuItem.Name = "receiptFromCustTransactionToolStripMenuItem";
             this.receiptFromCustTransactionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
-            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.receiptFromCustTransactionToolStripMenuItem.Text = "Transaction";
             this.receiptFromCustTransactionToolStripMenuItem.Click += new System.EventHandler(this.receiptFromCustTransactionToolStripMenuItem_Click);
             // 
@@ -255,7 +264,7 @@
             this.transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
             this.transactionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.P)));
-            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.transactionToolStripMenuItem.Text = "Transaction";
             this.transactionToolStripMenuItem.Click += new System.EventHandler(this.transactionToolStripMenuItem_Click);
             // 
@@ -274,12 +283,14 @@
             this.pnlMain.Size = new System.Drawing.Size(756, 31);
             this.pnlMain.TabIndex = 1;
             // 
-            // modificationToolStripMenuItem
+            // modifyToolStripMenuItem
             // 
-            this.modificationToolStripMenuItem.Name = "modificationToolStripMenuItem";
-            this.modificationToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.modificationToolStripMenuItem.Text = "Modification";
-            this.modificationToolStripMenuItem.Click += new System.EventHandler(this.modificationToolStripMenuItem_Click);
+            this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
+            this.modifyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.M)));
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.modifyToolStripMenuItem.Text = "Modify";
+            this.modifyToolStripMenuItem.Click += new System.EventHandler(this.modifyToolStripMenuItem_Click);
             // 
             // frmMainForm
             // 
@@ -329,5 +340,6 @@
         private System.Windows.Forms.ToolStripMenuItem saleEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem modificationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modifyToolStripMenuItem;
     }
 }

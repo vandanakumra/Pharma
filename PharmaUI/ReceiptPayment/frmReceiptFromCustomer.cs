@@ -22,6 +22,7 @@ namespace PharmaUI.ReceiptPayment
     public partial class frmReceiptFromCustomer : Form
     {
         IApplicationFacade applicationFacade;
+        public bool IsInEditMode = false;
 
         public frmReceiptFromCustomer()
         {
@@ -625,8 +626,6 @@ namespace PharmaUI.ReceiptPayment
                 if (sender is TextBox)
                 {
                     TextBox activeControl = (sender as TextBox);
-
-
                     if (activeControl.Name == "txtTransactAccount" && String.IsNullOrWhiteSpace(activeControl.Text))
                     {
                         PharmaBusinessObjects.Common.AccountLedgerType accountLedgerMaster = new PharmaBusinessObjects.Common.AccountLedgerType()
@@ -648,10 +647,33 @@ namespace PharmaUI.ReceiptPayment
                         SendKeys.Send("{TAB}");
                     }
                 }
+                else if(sender is MaskedTextBox)
+                {
+                    if (IsInEditMode)
+                    {
+                        frmTransactions frmTrans = new frmTransactions(ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text), Constants.TransactionEntityType.CustomerLedger);
+                        frmTrans.Show();
+                        frmTrans.FormClosed += FrmTrans_FormClosed;
+                    }
+                }
                 else
                 {
                     SendKeys.Send("{TAB}");
                 }
+            }
+        }
+
+        private void FrmTrans_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+
+                //LoadGridBillAdjusted(currentTransactionEntity);
+                //LoadGridBillOutstanding(currentTransactionEntity);
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
@@ -760,5 +782,14 @@ namespace PharmaUI.ReceiptPayment
         {
             this.Close();
         }
+
+        ///Configure for Edit Mode
+        ///
+        public void ConfigureUIForModification()
+        {
+            this.IsInEditMode = true;
+
+        }
+
     }
 }

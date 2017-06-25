@@ -315,6 +315,12 @@
     <Compile Include="ReceiptPayment\frmReceiptPaymentAdjustment.Designer.cs">
       <DependentUpon>frmReceiptPaymentAdjustment.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReceiptPayment\frmTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReceiptPayment\frmTransactions.Designer.cs">
+      <DependentUpon>frmTransactions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\frmReportViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -477,6 +483,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReceiptPayment\frmReceiptPaymentAdjustment.resx">
       <DependentUpon>frmReceiptPaymentAdjustment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReceiptPayment\frmTransactions.resx">
+      <DependentUpon>frmTransactions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmReportViewer.resx">
       <DependentUpon>frmReportViewer.cs</DependentUpon>

@@ -939,6 +939,18 @@ namespace PharmaBusiness
             }
         }
 
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem> GetAllTransactionForParticularDate(DateTime transDate , string transactionEntityType)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllTransactionForParticularDate(transDate, transactionEntityType);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Sale Entry

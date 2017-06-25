@@ -59,7 +59,7 @@ namespace PharmaDAL.Entity
         public Nullable<decimal> VolumeDiscountAmount { get; set; }
         public Nullable<decimal> TotalDiscountAmount { get; set; }
         public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public System.DateTime CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<decimal> UsedQuantity { get; set; }

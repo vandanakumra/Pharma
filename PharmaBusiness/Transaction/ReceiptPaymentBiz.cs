@@ -60,5 +60,9 @@ namespace PharmaBusiness.Transaction
             new ReceiptPaymentDao(this.LoggedInUser).SaveAllTempTransaction(tempReceiptPaymentList);
         }
 
+        internal List<ReceiptPaymentItem> GetAllTransactionForParticularDate(DateTime transDate, string transactionEntityType)
+        {
+           return new ReceiptPaymentDao(this.LoggedInUser).GetAllTransactionForParticularDate(transDate, transactionEntityType);
+        }
     }
 }
