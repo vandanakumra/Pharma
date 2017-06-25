@@ -44,7 +44,7 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.LoadPanel(this, "Purchase Book Transaction");
+                ExtensionMethods.FormLoad(this, "Purchase Book Transaction");
 //                ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
@@ -1528,17 +1528,6 @@ namespace PharmaUI
                     List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID);
 
                     FillGridWithLineItems(lineitems);
-
-                    //if(dgvLineItem.Rows.Count > 0)
-                    //{
-                    //    dgvLineItem.Focus();
-                    //    dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
-                    //}
-                    //else
-                    //{
-                    //    txtInvoiceNumber.Focus();
-                    //}
-
                 }
             }
             catch (Exception ex)

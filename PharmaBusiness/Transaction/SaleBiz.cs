@@ -1,5 +1,6 @@
 ﻿using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Transaction;
+using PharmaBusinessObjects.Transaction.ReceiptPayment;
 using PharmaBusinessObjects.Transaction.SaleEntry;
 using PharmaDAL.Transaction;
 using System;
@@ -69,6 +70,11 @@ namespace PharmaBusiness.Transaction
         internal void RollbackSaleEntry(long purchaseSaleBookHeaderID)
         {
             new SaleEntryDao(this.LoggedInUser).RollbackSaleEntry(purchaseSaleBookHeaderID);
+        }
+
+        internal List<BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode)
+        {
+            return new SaleEntryDao(this.LoggedInUser).GetAllSaleInvoiceForCustomer(customerCode);
         }
     }
 }
