@@ -70,6 +70,16 @@ namespace PharmaDataMigration.Master
                                 string ledgerType = string.Empty;
                                 string ledgerTypeCode = string.Empty;
 
+                                if(string.IsNullOrWhiteSpace(Convert.ToString(dr["vno"]).TrimEnd()))
+                                {
+                                    throw new Exception();
+                                }
+                                else if(Convert.ToString(dr["vno"]).TrimEnd().Length > 8)
+                                {
+                                    log.Error("BillOS : VNO Length is greater than 8 -->" + Convert.ToString(dr["vno"]).TrimEnd());
+                                    throw new Exception();
+                                }
+
                                 string originalVoucherTypeCode = Convert.ToString(dr["vtyp"]).TrimEnd();
                                 string mappedVoucherTypeCode = Common.voucherTypeMap.Where(x => x.OriginalVoucherType == originalVoucherTypeCode).Select(x => x.MappedVoucherType).FirstOrDefault();
 
@@ -116,7 +126,7 @@ namespace PharmaDataMigration.Master
             }
             catch (DbEntityValidationException ex)
             {
-                throw new Exception(string.Join(",", ex.EntityValidationErrors.Select(p => p.ValidationErrors.Select(q => q.ErrorMessage))));
+                throw ex;
             }
             catch (Exception ex)
             {
