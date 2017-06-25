@@ -110,6 +110,9 @@
     <Compile Include="Entity\FIFO.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\FirmProperties.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\HSNCode.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>

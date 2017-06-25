@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -220,6 +220,13 @@
           <Property Name="OnHoldRemarks" Type="nvarchar" MaxLength="200" />
           <Property Name="MfgDate" Type="datetime" />
           <Property Name="UPC" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="FirmProperties">
+          <Key>
+            <PropertyRef Name="ParamName" />
+          </Key>
+          <Property Name="ParamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParamValue" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="HSNCode">
           <Key>
@@ -636,6 +643,7 @@
           <Property Name="LedgerTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="OldBillOutStandingsAudjustmentID" Type="bigint" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookHeader">
           <Key>
@@ -782,6 +790,7 @@
           <Property Name="PISNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
           <Property Name="UnadjustedAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OldReceiptPaymentID" Type="bigint" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -1396,6 +1405,7 @@
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FIFO" EntityType="Self.FIFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FirmProperties" EntityType="Self.FirmProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HSNCode" EntityType="Self.HSNCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
@@ -1607,8 +1617,7 @@
             <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2329,6 +2338,7 @@
           <NavigationProperty Name="BillOutStandings" Relationship="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings1" FromRole="TempBillOutStandingsAudjustment" ToRole="BillOutStandings" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" FromRole="TempBillOutStandingsAudjustment" ToRole="PurchaseSaleBookHeader" />
           <NavigationProperty Name="TempReceiptPayment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempBillOutStandingsAudjustment" ToRole="TempReceiptPayment" />
+          <Property Name="OldBillOutStandingsAudjustmentID" Type="Int64" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookHeader">
           <Key>
@@ -2479,6 +2489,7 @@
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="UnadjustedAmount" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempReceiptPayment" ToRole="TempBillOutStandingsAudjustment" />
+          <Property Name="OldReceiptPaymentID" Type="Int64" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -3305,7 +3316,15 @@
             <End Role="TempPurchaseSaleBookHeader" EntitySet="TempPurchaseSaleBookHeader" />
             <End Role="TempPurchaseSaleBookLineItem" EntitySet="TempPurchaseSaleBookLineItem" />
           </AssociationSet>
+          <EntitySet Name="FirmProperties" EntityType="PharmaDBModel.FirmProperties" />
         </EntityContainer>
+        <EntityType Name="FirmProperties">
+          <Key>
+            <PropertyRef Name="ParamName" />
+          </Key>
+          <Property Name="ParamName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParamValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3959,6 +3978,7 @@
           <EntitySetMapping Name="TempBillOutStandingsAudjustment">
             <EntityTypeMapping TypeName="PharmaDBModel.TempBillOutStandingsAudjustment">
               <MappingFragment StoreEntitySet="TempBillOutStandingsAudjustment">
+                <ScalarProperty Name="OldBillOutStandingsAudjustmentID" ColumnName="OldBillOutStandingsAudjustmentID" />
                 <ScalarProperty Name="BillOutStandingsAudjustmentID" ColumnName="BillOutStandingsAudjustmentID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
@@ -4105,6 +4125,7 @@
           <EntitySetMapping Name="TempReceiptPayment">
             <EntityTypeMapping TypeName="PharmaDBModel.TempReceiptPayment">
               <MappingFragment StoreEntitySet="TempReceiptPayment">
+                <ScalarProperty Name="OldReceiptPaymentID" ColumnName="OldReceiptPaymentID" />
                 <ScalarProperty Name="ReceiptPaymentID" ColumnName="ReceiptPaymentID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
@@ -4169,6 +4190,14 @@
                 <ScalarProperty Name="VoucherTypeID" ColumnName="VoucherTypeID" />
                 <ScalarProperty Name="VoucherTypeName" ColumnName="VoucherTypeName" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FirmProperties">
+            <EntityTypeMapping TypeName="PharmaDBModel.FirmProperties">
+              <MappingFragment StoreEntitySet="FirmProperties">
+                <ScalarProperty Name="ParamValue" ColumnName="ParamValue" />
+                <ScalarProperty Name="ParamName" ColumnName="ParamName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
