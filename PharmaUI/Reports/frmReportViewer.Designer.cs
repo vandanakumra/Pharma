@@ -1,4 +1,4 @@
-﻿namespace PharmaUI.Reports
+﻿namespace PharmaUI
 {
     partial class frmReportViewer
     {

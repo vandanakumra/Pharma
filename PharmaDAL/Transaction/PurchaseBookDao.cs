@@ -462,8 +462,11 @@ namespace PharmaDAL.Transaction
                             TotalDiscountAmount = Convert.ToDecimal(row["TotalDiscountAmount"]== DBNull.Value ? 0 : row["TotalDiscountAmount"]),
                             OldPurchaseSaleBookLineItemID = Convert.ToInt64(row["OldPurchaseSaleBookLineItemID"]== DBNull.Value ? 0 : row["OldPurchaseSaleBookLineItemID"]),
                             BalanceQuantity = Convert.ToDecimal(row["BalanceQuantity"]== DBNull.Value ? 0 : row["BalanceQuantity"]),
-                            UsedQuantity = Convert.ToDecimal(row["UsedQuantity"]== DBNull.Value ? 0 : row["UsedQuantity"])
-                       };
+                            UsedQuantity = Convert.ToDecimal(row["UsedQuantity"]== DBNull.Value ? 0 : row["UsedQuantity"]),
+                            PurchaseBillDate = row["PurchaseBillDate"] != DBNull.Value ? Convert.ToDateTime(row["PurchaseBillDate"]) : (DateTime?)null,
+                            PurchaseSrlNo = row["PurchaseSrlNo"] != null ? Convert.ToInt32(row["PurchaseSrlNo"]) : (int?)null,
+                            PurchaseVoucherNumber = row["PurchaseVoucherNumber"]  != null ? Convert.ToString(row["PurchaseVoucherNumber"]) : null,
+                        };
 
                         lineitems.Add(obj);
                     }

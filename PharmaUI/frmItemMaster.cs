@@ -43,6 +43,8 @@ namespace PharmaUI
 
         private bool isOpenAsChild = false;
         TypeAssistant assistant;
+        private bool isAddEditFormClosed = false;
+        private bool useMemoryForItem = false;
 
         public frmItemMaster(bool _isOpenAsChild = false)
         {
@@ -52,9 +54,19 @@ namespace PharmaUI
                 ExtensionMethods.SetFormProperties(this);
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
 
+                txtSearch.CharacterCasing = CharacterCasing.Upper;
+
                 isOpenAsChild = _isOpenAsChild;
                 assistant = new TypeAssistant();
                 assistant.Idled += Assistant_Idled;
+
+                string value = System.Configuration.ConfigurationManager.AppSettings["UseMemoryForItemMaster"];
+
+                if(value != null)
+                {
+                    useMemoryForItem = Convert.ToBoolean(value);
+                }
+
             }
             catch (Exception ex)
             {
@@ -140,6 +152,8 @@ namespace PharmaUI
                     lblMaxStockVal.Text = Convert.ToString(row.Cells["MaximumStock"].Value);
                     lblMinStockVal.Text = Convert.ToString(row.Cells["MinimumStock"].Value);
 
+                    lblBalVal.Text = Convert.ToString(row.Cells["BalanceQuantity"].Value);
+
                 }
             }
             catch (Exception ex)
@@ -200,7 +214,7 @@ namespace PharmaUI
             try
             {
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-                StagingData.SetItemListData(applicationFacade.GetAllItemsBySearch());
+                isAddEditFormClosed = true;
                 LoadDataGrid();
             }
             catch (Exception ex)
@@ -219,6 +233,16 @@ namespace PharmaUI
                 dgvItemList.ColumnHeadersVisible = false;
             }
 
+            if (isAddEditFormClosed)
+            {
+                StagingData.SetItemListData(applicationFacade.GetAllItemsBySearch());
+            }
+            else if(!useMemoryForItem)
+            {
+                StagingData.SetItemListData(applicationFacade.GetAllItemsBySearch());
+            }
+
+
             dgvItemList.DataSource = StagingData.ItemList;
 
            //applicationFacade.GetAllItemsBySearch(null, searchBy).OrderBy(p=>p.ItemName).ToList();
@@ -228,6 +252,8 @@ namespace PharmaUI
           //  dgvItemList.Columns["ItemName"].HeaderText = "Item";
 
             dgvItemList.Columns["CompanyName"].Visible = true;
+
+            dgvItemList.Columns["BalanceQuantity"].Visible = true;
           //  dgvItemList.Columns["CompanyName"].HeaderText = "Company";
 
             dgvItemList.Columns["Packing"].Visible = true;
@@ -275,6 +301,7 @@ namespace PharmaUI
         {
             try
             {
+
                 assistant.TextChanged();
                // ExtensionMethods.GridSelectionOnSearch(dgvItemList, "ItemName", txtSearch.Text, this.lblSearchStatus);               
             }

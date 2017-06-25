@@ -83,7 +83,7 @@ namespace PharmaUI.Purchase_Entry
 
         private void DgvPurchaseBill_KeyDown(object sender, KeyEventArgs e)
         {
-          if(e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter)
             {
                 this.Close();
             }

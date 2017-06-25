@@ -19,6 +19,7 @@ namespace PharmaUI
 {
     public partial class frmSaleEntry : Form
     {
+       // private bool isModifyLoad = true;
         private bool IsModify = false;
         private bool isDirty = false;
         private bool isBatchUpdate = false;
@@ -27,6 +28,9 @@ namespace PharmaUI
         private bool isCellEdit = false;
         private decimal oldQuantity = 0M;
         private decimal oldFreeQuantity = 0M;
+        private string VoucherTypeCode = "";
+        private long purchaseSaleBookHeaderID = 0;
+        private long? oldPurchaseSaleBookHeaderID = null;
 
         IApplicationFacade applicationFacade;
         private PurchaseSaleBookHeader header = new PurchaseSaleBookHeader();
@@ -35,7 +39,7 @@ namespace PharmaUI
         private int oldSelectedRowIndex = -1;
         private bool isSetGrid = false;
 
-        public frmSaleEntry(bool isModify)
+        public frmSaleEntry(bool isModify,string voucherTypeCode)
         {
             try
             {
@@ -43,6 +47,7 @@ namespace PharmaUI
                 ExtensionMethods.SetFormProperties(this);
                 applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
                 this.IsModify = isModify;
+                this.VoucherTypeCode = voucherTypeCode;
             }
             catch (Exception ex)
             {
@@ -794,21 +799,42 @@ namespace PharmaUI
         {
             try
             {
-                TextBox tb;
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                TextBox tb = null;
 
                 frmCustomerLedgerMaster ledger = (frmCustomerLedgerMaster)sender;
 
                 if (ledger.LastSelectedCustomerLedger != null)
                 {
-                    SetCustomerCodeFields(ledger.LastSelectedCustomerLedger.CustomerLedgerCode);
-                    tb = txtSalesManCode;
+                    string custCode = ledger.LastSelectedCustomerLedger.CustomerLedgerCode;
+
+                    if (IsModify)
+                    {
+                        var listInvoices = applicationFacade.GetAllSaleInvoiceForCustomer(custCode);
+
+                        if (listInvoices.Count > 0)
+                        {
+                            SetCustomerCodeFields(custCode);
+                            Sale_Entry.frmAllBillForCustomer frm = new Sale_Entry.frmAllBillForCustomer(listInvoices);
+                            frm.FormClosed += FrmAllBillForCustomer_FormClosed;
+                            frm.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No invoice for modification !!");
+                            tb = txtCustomerCode;
+                        }
+                    }
+                    else
+                    {
+                        SetCustomerCodeFields(custCode);
+                        tb = txtSalesManCode;
+                    }
                 }
                 else
                 {
                     tb = txtCustomerCode;
                 }
-
-                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
 
                 if (tb != null)
                 {
@@ -822,10 +848,72 @@ namespace PharmaUI
             }
         }
 
+        private void FrmAllBillForCustomer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                Sale_Entry.frmAllBillForCustomer frm = (Sale_Entry.frmAllBillForCustomer)sender;
+
+                long PurchaseSaleBookHeaderID = frm.PurchaseSaleBookHeaderID;
+
+                header = applicationFacade.GetPurchaseSaleBookHeaderForModify(PurchaseSaleBookHeaderID);
+
+                if (header != null)
+                {
+                   
+                    txtInvoiceNumber.Text = header.PurchaseBillNo;
+                    string localCentral = header.LocalCentral == "L" ? "Local" : "Central";
+
+                    int id = applicationFacade.GetPurchaseEntryTypes().Where(p => p.PurchaseTypeName.ToLower().Equals(localCentral.ToLower())).FirstOrDefault().ID;
+
+                    cbxSaleType.SelectedValue = id;
+                    purchaseSaleBookHeaderID = header.PurchaseSaleBookHeaderID;
+                    oldPurchaseSaleBookHeaderID = header.OldPurchaseSaleBookHeaderID;
+
+
+                    if (header.LocalCentral == "C")
+                    {
+
+                        cbxSaleFormType.DataSource = applicationFacade.GetPurchaseFormTypes(id);
+                        cbxSaleFormType.DisplayMember = "FormTypeName";
+                        cbxSaleFormType.ValueMember = "ID";
+
+                        cbxSaleFormType.Visible = true;
+                        cbxSaleFormType.SelectedValue = header.PurchaseEntryFormID;
+                    }
+
+                    List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID);
+
+                    //List<String> itemCodes = new List<string>();
+
+                    //if(lineitems != null && lineitems.Count > 0)
+                    //{
+                    //    itemCodes = lineitems.Select(p => p.ItemCode).Distinct().ToList();
+                    //}
+
+                    //foreach (var itemcode in itemCodes)
+                    //{
+                    //    var lineItem = lineitems.Where(p => p.ItemCode == itemcode).FirstOrDefault();
+
+                    //    InsertUpdateLineItemAndsetToGridForModify(lineItem);
+                    //}
+
+                    InsertUpdateLineItemAndsetToGridForModify(lineitems);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         private void SetCustomerCodeFields(string code)
         {
 
             PharmaBusinessObjects.Master.CustomerLedgerMaster customer = applicationFacade.GetCustomerLedgerByCode(code);
+
             if (customer == null)
             {
                 lblCustomerName.Text = "**No Such Code**";
@@ -847,15 +935,21 @@ namespace PharmaUI
 
                 DateTime date;
                 date = ExtensionMethods.ConvertToSystemDateFormat(dtSaleDate.Text);
+
                 if (date == DateTime.MinValue)
+                {
                     header.DueDate = null;
+                }
                 else
+                {
                     header.DueDate = date;
+                }
+
                 header.CustomerTypeId = customer.CustomerTypeID;
                 header.VoucherDate = header.DueDate??DateTime.Now;
                 header.LedgerTypeCode = txtCustomerCode.Text;
                 header.LedgerType = Constants.TransactionEntityType.CustomerLedger;
-                header.VoucherTypeCode = Constants.VoucherTypeCode.SALEENTRY;
+                header.VoucherTypeCode = this.VoucherTypeCode;
 
                 PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleType.SelectedItem;
                 header.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
@@ -864,7 +958,10 @@ namespace PharmaUI
                 Int32.TryParse(Convert.ToString(cbxSaleFormType.SelectedValue), out saleFormTypeId);
                 header.PurchaseEntryFormID = saleFormTypeId;
 
-                header.PurchaseSaleBookHeaderID = applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
+                if (!IsModify)
+                {
+                    header.PurchaseSaleBookHeaderID = applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
+                }
             }
         }
 
@@ -1048,7 +1145,7 @@ namespace PharmaUI
                 int rowIndex = -1;
                 int colIndex = -1;
 
-                if (dgvLineItem.SelectedCells.Count > 0 && header .PurchaseSaleBookHeaderID > 0)
+                if (dgvLineItem.SelectedCells.Count > 0 && header.PurchaseSaleBookHeaderID > 0)
                 {
                     rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
                     colIndex = dgvLineItem.SelectedCells[0].ColumnIndex;
@@ -1090,7 +1187,60 @@ namespace PharmaUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }        }
+            }
+        }
+
+
+        private void InsertUpdateLineItemAndsetToGridForModify(List<PurchaseSaleBookLineItem> lineItemList) //,int srno, bool setSrNo = false)
+        {
+            if (lineItemList != null && lineItemList.Count > 0)
+            {
+                for (int i = 0; i < lineItemList.Count; i++)
+                {
+                    dgvLineItem.Rows.Add();
+
+                    dgvLineItem.Rows[i].Cells["PurchaseSaleBookLineItemID"].Value = lineItemList[i].PurchaseSaleBookLineItemID;
+                    dgvLineItem.Rows[i].Cells["PurchaseSaleBookHeaderID"].Value = header.PurchaseSaleBookHeaderID;
+                    dgvLineItem.Rows[i].Cells["ItemCode"].Value = lineItemList[i].ItemCode;
+                    dgvLineItem.Rows[i].Cells["ItemName"].Value = lineItemList[i].ItemName;
+                    dgvLineItem.Rows[i].Cells["Quantity"].Value = lineItemList[i].Quantity;
+                    dgvLineItem.Rows[i].Cells["FreeQuantity"].Value = lineItemList[i].FreeQuantity;
+                    dgvLineItem.Rows[i].Cells["Batch"].Value = lineItemList[i].Batch;
+                    dgvLineItem.Rows[i].Cells["PurchaseSaleRate"].Value = lineItemList[i].PurchaseSaleRate;
+                    dgvLineItem.Rows[i].Cells["SaleRate"].Value = lineItemList[i].SaleRate;
+                    //dgvLineItem.Rows[i].Cells["OldPurchaseSaleRate"].Value = lineItemList[i].OldPurchaseSaleRate;
+                    dgvLineItem.Rows[i].Cells["Amount"].Value = GetLineItemAmount(Convert.ToString(lineItemList[i].Quantity), Convert.ToString(lineItemList[i].SaleRate));
+                    dgvLineItem.Rows[i].Cells["Scheme1"].Value = lineItemList[i].Scheme1;
+                    dgvLineItem.Rows[i].Cells["Scheme2"].Value = lineItemList[i].Scheme2;
+                    dgvLineItem.Rows[i].Cells["IsHalfScheme"].Value = lineItemList[i].IsHalfScheme;
+                    dgvLineItem.Rows[i].Cells["Discount"].Value = lineItemList[i].Discount;
+                    dgvLineItem.Rows[i].Cells["SpecialDiscount"].Value = lineItemList[i].SpecialDiscount;
+                    dgvLineItem.Rows[i].Cells["VolumeDiscount"].Value = lineItemList[i].VolumeDiscount;
+                    dgvLineItem.Rows[i].Cells["MRP"].Value = lineItemList[i].MRP;
+                    dgvLineItem.Rows[i].Cells["ExpiryDate"].Value = lineItemList[i].ExpiryDate;
+
+                    dgvLineItem.Rows[i].Cells["SpecialRate"].Value = lineItemList[i].SpecialRate;
+                    dgvLineItem.Rows[i].Cells["WholeSaleRate"].Value = lineItemList[i].WholeSaleRate;
+                    dgvLineItem.Rows[i].Cells["PurchaseSaleTypeCode"].Value = lineItemList[i].PurchaseSaleTypeCode;
+                    dgvLineItem.Rows[i].Cells["PurchaseBillDate"].Value = lineItemList[i].PurchaseBillDate;
+                    dgvLineItem.Rows[i].Cells["PurchaseVoucherNumber"].Value = lineItemList[i].PurchaseVoucherNumber;
+                    dgvLineItem.Rows[i].Cells["PurchaseSrlNo"].Value = lineItemList[i].PurchaseSrlNo;
+                    dgvLineItem.Rows[i].Cells["BatchNew"].Value = lineItemList[i].BatchNew;
+                    dgvLineItem.Rows[i].Cells["PurchaseSaleTax"].Value = lineItemList[i].PurchaseSaleTax;
+                    dgvLineItem.Rows[i].Cells["LocalCentral"].Value = lineItemList[i].LocalCentral;
+                    dgvLineItem.Rows[i].Cells["DiscountQuantity"].Value = lineItemList[i].DiscountQuantity;
+                    dgvLineItem.Rows[i].Cells["HalfSchemeRate"].Value = lineItemList[i].HalfSchemeRate;
+                    //dgvLineItem.Rows[i].Cells["OldPurchaseSaleBookLineItemID"].Value = lineItemList[i].OldPurchaseSaleBookLineItemID;
+                    dgvLineItem.Rows[i].Cells["FifoID"].Value = lineItemList[i].FifoID;
+                    dgvLineItem.Rows[i].Cells["SurCharge"].Value = lineItemList[i].SurCharge;
+                    dgvLineItem.Rows[i].Cells["SGST"].Value = lineItemList[i].SGST;
+                    dgvLineItem.Rows[i].Cells["IGST"].Value = lineItemList[i].IGST;
+                    dgvLineItem.Rows[i].Cells["CGST"].Value = lineItemList[i].CGST;
+                    dgvLineItem.Rows[i].Cells["ConversionRate"].Value = lineItemList[i].ConversionRate;
+
+                }
+            }
+        }
 
         private void InsertUpdateLineItemAndsetToGrid(PurchaseSaleBookLineItem lineItem) //,int srno, bool setSrNo = false)
         {
@@ -1098,24 +1248,25 @@ namespace PharmaUI
             int colIndex = -1;
             int currentRowIndex = -1;
 
-            if (dgvLineItem.SelectedCells.Count > 0 && !string.IsNullOrEmpty(lineItem.ItemCode))
+            if (dgvLineItem.SelectedCells.Count > 0 && !string.IsNullOrEmpty(lineItem.ItemCode)) 
             {
                 colIndex = dgvLineItem.SelectedCells[0].ColumnIndex;
                 currentRowIndex = dgvLineItem.SelectedCells[0].RowIndex;
 
                 List<PurchaseSaleBookLineItem> allLineItemList = applicationFacade.InsertUpdateTempPurchaseBookLineItemForSale(lineItem);
+
                 var existingIDlist = dgvLineItem.Rows.OfType<DataGridViewRow>()
                                                 .Select(r => new
                                                 {
                                                     LineItemId = Convert.ToString(r.Cells["PurchaseSaleBookLineItemID"].Value),
                                                     RwIndex = r.Index
-                                                })
-                                                .ToList();
+                                                }).ToList();
 
                 List<PurchaseSaleBookLineItem> lineItemList = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID > 0 && p.PurchaseSaleBookHeaderID > 0).ToList();
                 PurchaseSaleBookLineItem totalLineItemDetail = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID == 0).FirstOrDefault();
 
                 isSetGrid = true;
+
                 for (int i = 0; i < lineItemList.Count; i++)
                 {
                     if (!existingIDlist.Any(p => p.LineItemId == lineItemList[i].PurchaseSaleBookLineItemID.ToString()))
@@ -1436,7 +1587,7 @@ namespace PharmaUI
 
                 else if (keyData == Keys.F5)
                 {
-                    frmSaleEntry form = new frmSaleEntry(false);
+                    frmSaleEntry form = new frmSaleEntry(false,this.VoucherTypeCode);
                     ExtensionMethods.AddTrasanctionFormToPanel(form, ExtensionMethods.MainPanel);
                     form.Show();
                 }

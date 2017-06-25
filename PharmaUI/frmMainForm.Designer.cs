@@ -53,6 +53,7 @@
             this.transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.modificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -200,7 +201,8 @@
             // saleEntryToolStripMenuItem
             // 
             this.saleEntryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.transactionToolStripMenuItem1});
+            this.transactionToolStripMenuItem1,
+            this.modificationToolStripMenuItem});
             this.saleEntryToolStripMenuItem.Name = "saleEntryToolStripMenuItem";
             this.saleEntryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saleEntryToolStripMenuItem.Text = "Sale Entry";
@@ -272,6 +274,13 @@
             this.pnlMain.Size = new System.Drawing.Size(756, 31);
             this.pnlMain.TabIndex = 1;
             // 
+            // modificationToolStripMenuItem
+            // 
+            this.modificationToolStripMenuItem.Name = "modificationToolStripMenuItem";
+            this.modificationToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.modificationToolStripMenuItem.Text = "Modification";
+            this.modificationToolStripMenuItem.Click += new System.EventHandler(this.modificationToolStripMenuItem_Click);
+            // 
             // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,5 +328,6 @@
         private System.Windows.Forms.ToolStripMenuItem modificationPurchaseEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saleEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem modificationToolStripMenuItem;
     }
 }

@@ -135,6 +135,7 @@ namespace PharmaBusinessObjects
         bool SavePurchaseData(long purchaseBookHeaderID);
         List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID);
         List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode);
+        List<BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode);
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetPurchaseSaleBookLineItemForModify(long purchaseSaleBookHeaderID);
         PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID);
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> GetAllInitialBillAdjustmentForLedger(TransactionEntity transactionEntity);
@@ -159,6 +160,10 @@ namespace PharmaBusinessObjects
         bool IsTempSaleEntryExists(long purchaseSaleBookHeaderID);
         void RollbackSaleEntry(long purchaseSaleBookHeaderID);
 
+        #endregion
+        #region "Reports"
+        DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID);
+        DataTable GetFirmProperties(int purchaseSaleBookHeaderID);
         #endregion
     }
 
