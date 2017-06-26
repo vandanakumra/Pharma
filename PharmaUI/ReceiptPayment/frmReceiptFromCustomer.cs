@@ -22,6 +22,7 @@ namespace PharmaUI.ReceiptPayment
     public partial class frmReceiptFromCustomer : Form
     {
         IApplicationFacade applicationFacade;
+        public bool IsInEditMode = false;
 
         public frmReceiptFromCustomer()
         {
@@ -40,7 +41,10 @@ namespace PharmaUI.ReceiptPayment
 
                 ///Load all the grid 
                 ///
-                LoadReceiptFromCustomer();
+                if (!IsInEditMode)
+                {
+                    LoadReceiptFromCustomer();
+                }
 
                 ///Grid events
                 ///
@@ -111,7 +115,6 @@ namespace PharmaUI.ReceiptPayment
         {
             ///Add All the columns as its not a Data Bound data source
             ///
-            {
                 dgvReceiptFromCustomer.Columns.Add("ReceiptPaymentID", "ReceiptPaymentID");
                 dgvReceiptFromCustomer.Columns.Add("VoucherNumber", "VoucherNumber");
                 dgvReceiptFromCustomer.Columns.Add("VoucherTypeCode", "VoucherTypeCode");
@@ -131,9 +134,13 @@ namespace PharmaUI.ReceiptPayment
                 dgvReceiptFromCustomer.Columns.Add("PISNumber", "PISNumber");
                 dgvReceiptFromCustomer.Columns.Add("UnadjustedAmount", "UnadjustedAmount");
                 dgvReceiptFromCustomer.Columns.Add("ConsumedAmount", "ConsumedAmount");
-            }
 
+                DisplayDataGrid();
 
+        }
+
+        private void DisplayDataGrid()
+        {
             dgvReceiptFromCustomer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvReceiptFromCustomer.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dgvReceiptFromCustomer.AllowUserToAddRows = false;
@@ -169,7 +176,6 @@ namespace PharmaUI.ReceiptPayment
             dgvReceiptFromCustomer.Columns["UnadjustedAmount"].HeaderText = "Unadjusted Amount";
             dgvReceiptFromCustomer.Columns["UnadjustedAmount"].DisplayIndex = 5;
             dgvReceiptFromCustomer.Columns["UnadjustedAmount"].ReadOnly = true;
-
         }
 
         private void LoadGridBillOutstanding(TransactionEntity transactionEntity)
@@ -625,8 +631,6 @@ namespace PharmaUI.ReceiptPayment
                 if (sender is TextBox)
                 {
                     TextBox activeControl = (sender as TextBox);
-
-
                     if (activeControl.Name == "txtTransactAccount" && String.IsNullOrWhiteSpace(activeControl.Text))
                     {
                         PharmaBusinessObjects.Common.AccountLedgerType accountLedgerMaster = new PharmaBusinessObjects.Common.AccountLedgerType()
@@ -648,10 +652,50 @@ namespace PharmaUI.ReceiptPayment
                         SendKeys.Send("{TAB}");
                     }
                 }
+                else if(sender is MaskedTextBox)
+                {
+                    if (IsInEditMode)
+                    {
+                        frmTransactions frmTrans = new frmTransactions(ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text), Constants.TransactionEntityType.CustomerLedger);
+                        frmTrans.Show();
+                        frmTrans.FormClosed += FrmTrans_FormClosed;
+                    }
+                }
                 else
                 {
                     SendKeys.Send("{TAB}");
                 }
+            }
+        }
+
+        private void FrmTrans_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                ReceiptPaymentItem transaction = (sender as frmTransactions).SelectedTransaction;
+                if(transaction.ReceiptPaymentID > 0)
+                {
+                    dgvReceiptFromCustomer.DataSource = null;       
+                    List<ReceiptPaymentItem> list = new List<ReceiptPaymentItem>();
+                    list.Add(applicationFacade.GetTransactionByTransactionID(transaction.ReceiptPaymentID));
+                    dgvReceiptFromCustomer.DataSource = list;
+                    DisplayDataGrid();
+
+                    TransactionEntity transactionEntity = new TransactionEntity();
+
+                    transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["ReceiptPaymentID"].Value;
+                    transactionEntity.EntityType = Constants.TransactionEntityType.CustomerLedger;
+                    transactionEntity.EntityCode = Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"].Value);
+
+                    LoadGridBillAdjusted(transactionEntity);
+
+                    transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["OldReceiptPaymentID"].Value;
+                    LoadGridBillOutstanding(transactionEntity);
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
@@ -760,5 +804,14 @@ namespace PharmaUI.ReceiptPayment
         {
             this.Close();
         }
+
+        ///Configure for Edit Mode
+        ///
+        public void ConfigureUIForModification()
+        {
+            this.IsInEditMode = true;
+
+        }
+
     }
 }

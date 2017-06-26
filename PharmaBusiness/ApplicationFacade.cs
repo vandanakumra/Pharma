@@ -890,6 +890,19 @@ namespace PharmaBusiness
             }
         }
 
+
+        public PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem GetTransactionByTransactionID(long transactionID)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetTransactionByTransactionID(transactionID);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList)
         {
             try
@@ -932,6 +945,18 @@ namespace PharmaBusiness
             try
             {
                 new ReceiptPaymentBiz(this.LoggedInUser).SaveAllTempTransaction(tempReceiptPaymentList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem> GetAllTransactionForParticularDate(DateTime transDate , string transactionEntityType)
+        {
+            try
+            {
+                return new ReceiptPaymentBiz(this.LoggedInUser).GetAllTransactionForParticularDate(transDate, transactionEntityType);
             }
             catch (Exception)
             {

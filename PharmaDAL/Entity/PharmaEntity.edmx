@@ -644,6 +644,8 @@
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
           <Property Name="OldBillOutStandingsAudjustmentID" Type="bigint" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookHeader">
           <Key>
@@ -760,8 +762,8 @@
           <Property Name="SpecialDiscountAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="VolumeDiscountAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalDiscountAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="UsedQuantity" Type="decimal" Precision="18" Scale="2" />
@@ -791,6 +793,8 @@
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
           <Property Name="UnadjustedAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OldReceiptPaymentID" Type="bigint" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -2339,6 +2343,8 @@
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" FromRole="TempBillOutStandingsAudjustment" ToRole="PurchaseSaleBookHeader" />
           <NavigationProperty Name="TempReceiptPayment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempBillOutStandingsAudjustment" ToRole="TempReceiptPayment" />
           <Property Name="OldBillOutStandingsAudjustmentID" Type="Int64" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookHeader">
           <Key>
@@ -2456,8 +2462,8 @@
           <Property Name="SpecialDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="VolumeDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="UsedQuantity" Type="Decimal" Precision="18" Scale="2" />
@@ -2490,6 +2496,8 @@
           <Property Name="UnadjustedAmount" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempReceiptPayment" ToRole="TempBillOutStandingsAudjustment" />
           <Property Name="OldReceiptPaymentID" Type="Int64" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -3978,6 +3986,8 @@
           <EntitySetMapping Name="TempBillOutStandingsAudjustment">
             <EntityTypeMapping TypeName="PharmaDBModel.TempBillOutStandingsAudjustment">
               <MappingFragment StoreEntitySet="TempBillOutStandingsAudjustment">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="OldBillOutStandingsAudjustmentID" ColumnName="OldBillOutStandingsAudjustmentID" />
                 <ScalarProperty Name="BillOutStandingsAudjustmentID" ColumnName="BillOutStandingsAudjustmentID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
@@ -4125,6 +4135,8 @@
           <EntitySetMapping Name="TempReceiptPayment">
             <EntityTypeMapping TypeName="PharmaDBModel.TempReceiptPayment">
               <MappingFragment StoreEntitySet="TempReceiptPayment">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="OldReceiptPaymentID" ColumnName="OldReceiptPaymentID" />
                 <ScalarProperty Name="ReceiptPaymentID" ColumnName="ReceiptPaymentID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />

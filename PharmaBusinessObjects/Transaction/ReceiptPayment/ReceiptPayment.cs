@@ -9,6 +9,8 @@ namespace PharmaBusinessObjects.Transaction.ReceiptPayment
     public class ReceiptPaymentItem : BaseBusinessObjects
     {
         public long ReceiptPaymentID { get; set; }
+        public long OldReceiptPaymentID { get; set; }
+
         public string VoucherNumber { get; set; }
         public string VoucherTypeCode { get; set; }
         public System.DateTime VoucherDate { get; set; }
