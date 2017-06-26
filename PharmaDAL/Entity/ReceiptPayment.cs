@@ -36,6 +36,7 @@ namespace PharmaDAL.Entity
         public string POST { get; set; }
         public string PISNumber { get; set; }
         public string ChequeNumber { get; set; }
+        public string LedgerTypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillOutStandingsAudjustment> BillOutStandingsAudjustment { get; set; }

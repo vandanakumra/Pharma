@@ -57,25 +57,30 @@ namespace PharmaUI.ReceiptPayment
                 dgvTransactions.Columns[i].Visible = false;
             }
 
-            dgvTransactions.Columns["VoucherNumber"].Visible = true;
-            dgvTransactions.Columns["VoucherNumber"].HeaderText = "Voucher Number";
-            dgvTransactions.Columns["VoucherNumber"].DisplayIndex = 0;
-
             dgvTransactions.Columns["VoucherDate"].Visible = true;
             dgvTransactions.Columns["VoucherDate"].HeaderText = "Bill Date";
             dgvTransactions.Columns["VoucherDate"].ReadOnly = true;
-            dgvTransactions.Columns["VoucherDate"].DisplayIndex = 1;
+            dgvTransactions.Columns["VoucherDate"].DisplayIndex = 0;
             dgvTransactions.Columns["VoucherDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
+            dgvTransactions.Columns["VoucherNumber"].Visible = true;
+            dgvTransactions.Columns["VoucherNumber"].HeaderText = "Voucher Number";
+            dgvTransactions.Columns["VoucherNumber"].DisplayIndex = 1;
+
             dgvTransactions.Columns["LedgerTypeCode"].Visible = true;
-            dgvTransactions.Columns["LedgerTypeCode"].HeaderText = "Ledger Type Code";
+            dgvTransactions.Columns["LedgerTypeCode"].HeaderText = "Ledger Code";
             dgvTransactions.Columns["LedgerTypeCode"].ReadOnly = true;
             dgvTransactions.Columns["LedgerTypeCode"].DisplayIndex = 2;
+
+            dgvTransactions.Columns["LedgerTypeName"].Visible = true;
+            dgvTransactions.Columns["LedgerTypeName"].HeaderText = "Ledger Name";
+            dgvTransactions.Columns["LedgerTypeName"].ReadOnly = true;
+            dgvTransactions.Columns["LedgerTypeName"].DisplayIndex = 3;
 
             dgvTransactions.Columns["Amount"].Visible = true;
             dgvTransactions.Columns["Amount"].HeaderText = "Amount";
             dgvTransactions.Columns["Amount"].ReadOnly = true;
-            dgvTransactions.Columns["Amount"].DisplayIndex = 3;
+            dgvTransactions.Columns["Amount"].DisplayIndex = 4;
 
 
             ///Events 

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -548,6 +548,7 @@
           <Property Name="POST" Type="nvarchar" MaxLength="50" />
           <Property Name="PISNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="LedgerTypeName" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="RecordType">
           <Key>
@@ -795,6 +796,7 @@
           <Property Name="OldReceiptPaymentID" Type="bigint" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LedgerTypeName" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -1621,7 +1623,8 @@
             <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1880,6 +1883,13 @@
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_FIFO_PurchaseSaleBookHeader" FromRole="FIFO" ToRole="PurchaseSaleBookHeader" />
           <NavigationProperty Name="PurchaseSaleBookLineItem" Relationship="Self.FK_PurchaseSaleBookLineItem_FIFO" FromRole="FIFO" ToRole="PurchaseSaleBookLineItem" />
           <NavigationProperty Name="TempPurchaseSaleBookLineItem" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="FIFO" ToRole="TempPurchaseSaleBookLineItem" />
+        </EntityType>
+        <EntityType Name="FirmProperties">
+          <Key>
+            <PropertyRef Name="ParamName" />
+          </Key>
+          <Property Name="ParamName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParamValue" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="HSNCode">
           <Key>
@@ -2231,6 +2241,7 @@
           <Property Name="POST" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PISNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LedgerTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_ReceiptPayment" FromRole="ReceiptPayment" ToRole="BillOutStandingsAudjustment" />
           <NavigationProperty Name="BillOutStandingsAudjustment1" Relationship="Self.FK_TempBillOutStandingsAudjustment_ReceiptPayment" FromRole="ReceiptPayment" ToRole="BillOutStandingsAudjustment" />
         </EntityType>
@@ -2339,12 +2350,12 @@
           <Property Name="LedgerTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OldBillOutStandingsAudjustmentID" Type="Int64" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="BillOutStandings" Relationship="Self.FK_TempBillOutStandingsAudjustment_BillOutStandings1" FromRole="TempBillOutStandingsAudjustment" ToRole="BillOutStandings" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" FromRole="TempBillOutStandingsAudjustment" ToRole="PurchaseSaleBookHeader" />
           <NavigationProperty Name="TempReceiptPayment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempBillOutStandingsAudjustment" ToRole="TempReceiptPayment" />
-          <Property Name="OldBillOutStandingsAudjustmentID" Type="Int64" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookHeader">
           <Key>
@@ -2463,7 +2474,7 @@
           <Property Name="VolumeDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="UsedQuantity" Type="Decimal" Precision="18" Scale="2" />
@@ -2494,10 +2505,11 @@
           <Property Name="PISNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="UnadjustedAmount" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempReceiptPayment" ToRole="TempBillOutStandingsAudjustment" />
           <Property Name="OldReceiptPaymentID" Type="Int64" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LedgerTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempReceiptPayment" ToRole="TempBillOutStandingsAudjustment" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -3114,6 +3126,7 @@
           <EntitySet Name="CustomerLedger" EntityType="Self.CustomerLedger" />
           <EntitySet Name="CustomerType" EntityType="Self.CustomerType" />
           <EntitySet Name="FIFO" EntityType="Self.FIFO" />
+          <EntitySet Name="FirmProperties" EntityType="Self.FirmProperties" />
           <EntitySet Name="HSNCode" EntityType="Self.HSNCode" />
           <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" />
           <EntitySet Name="Menu" EntityType="Self.Menu" />
@@ -3324,15 +3337,7 @@
             <End Role="TempPurchaseSaleBookHeader" EntitySet="TempPurchaseSaleBookHeader" />
             <End Role="TempPurchaseSaleBookLineItem" EntitySet="TempPurchaseSaleBookLineItem" />
           </AssociationSet>
-          <EntitySet Name="FirmProperties" EntityType="PharmaDBModel.FirmProperties" />
         </EntityContainer>
-        <EntityType Name="FirmProperties">
-          <Key>
-            <PropertyRef Name="ParamName" />
-          </Key>
-          <Property Name="ParamName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ParamValue" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3564,6 +3569,14 @@
                 <ScalarProperty Name="OnHoldRemarks" ColumnName="OnHoldRemarks" />
                 <ScalarProperty Name="MfgDate" ColumnName="MfgDate" />
                 <ScalarProperty Name="UPC" ColumnName="UPC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FirmProperties">
+            <EntityTypeMapping TypeName="PharmaDBModel.FirmProperties">
+              <MappingFragment StoreEntitySet="FirmProperties">
+                <ScalarProperty Name="ParamName" ColumnName="ParamName" />
+                <ScalarProperty Name="ParamValue" ColumnName="ParamValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3899,6 +3912,7 @@
                 <ScalarProperty Name="POST" ColumnName="POST" />
                 <ScalarProperty Name="PISNumber" ColumnName="PISNumber" />
                 <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+                <ScalarProperty Name="LedgerTypeName" ColumnName="LedgerTypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3986,9 +4000,6 @@
           <EntitySetMapping Name="TempBillOutStandingsAudjustment">
             <EntityTypeMapping TypeName="PharmaDBModel.TempBillOutStandingsAudjustment">
               <MappingFragment StoreEntitySet="TempBillOutStandingsAudjustment">
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="OldBillOutStandingsAudjustmentID" ColumnName="OldBillOutStandingsAudjustmentID" />
                 <ScalarProperty Name="BillOutStandingsAudjustmentID" ColumnName="BillOutStandingsAudjustmentID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
@@ -4003,6 +4014,9 @@
                 <ScalarProperty Name="LedgerTypeCode" ColumnName="LedgerTypeCode" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+                <ScalarProperty Name="OldBillOutStandingsAudjustmentID" ColumnName="OldBillOutStandingsAudjustmentID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4135,9 +4149,6 @@
           <EntitySetMapping Name="TempReceiptPayment">
             <EntityTypeMapping TypeName="PharmaDBModel.TempReceiptPayment">
               <MappingFragment StoreEntitySet="TempReceiptPayment">
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="OldReceiptPaymentID" ColumnName="OldReceiptPaymentID" />
                 <ScalarProperty Name="ReceiptPaymentID" ColumnName="ReceiptPaymentID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
@@ -4155,6 +4166,10 @@
                 <ScalarProperty Name="PISNumber" ColumnName="PISNumber" />
                 <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
                 <ScalarProperty Name="UnadjustedAmount" ColumnName="UnadjustedAmount" />
+                <ScalarProperty Name="OldReceiptPaymentID" ColumnName="OldReceiptPaymentID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LedgerTypeName" ColumnName="LedgerTypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4202,14 +4217,6 @@
                 <ScalarProperty Name="VoucherTypeID" ColumnName="VoucherTypeID" />
                 <ScalarProperty Name="VoucherTypeName" ColumnName="VoucherTypeName" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FirmProperties">
-            <EntityTypeMapping TypeName="PharmaDBModel.FirmProperties">
-              <MappingFragment StoreEntitySet="FirmProperties">
-                <ScalarProperty Name="ParamValue" ColumnName="ParamValue" />
-                <ScalarProperty Name="ParamName" ColumnName="ParamName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
