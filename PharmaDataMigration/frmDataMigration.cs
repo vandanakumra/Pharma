@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using PharmaDataMigration.Master;
 using System.Data.Entity.Validation;
+using PharmaDataMigration.DBFWriter;
 
 namespace PharmaDataMigration
 {
@@ -30,6 +31,9 @@ namespace PharmaDataMigration
 
         private void frmDataMigration_Load(object sender, EventArgs e)
         {
+            Common.DataDirectory = @"D:\PharmaProject\TestDBF";
+            DBFFileWriter writer = new DBFFileWriter();
+            writer.WriteFile();
 
         }
 

@@ -6,7 +6,7 @@ namespace PharmaDataMigration
 {
     public class DBFConnectionManager
     {
-        private OleDbConnection dbConnection { get; set; }
+        public OleDbConnection dbConnection { get; set; }
         private string dataDirectory { get; set; }
 
         public DBFConnectionManager(string _dataDirectory)
