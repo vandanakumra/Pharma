@@ -44,8 +44,9 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.FormLoad(this, "Purchase Book Transaction");
-//                ExtensionMethods.AddFooter(this);
+                string pageHeading = IsModify ? "Purchase Entry Modification" : "Purchase Entry Transaction";
+                ExtensionMethods.FormLoad(this, pageHeading);
+                //                ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
                 FillCombo();

@@ -59,7 +59,8 @@ namespace PharmaUI
         {
             try
             {
-                ExtensionMethods.FormLoad(this, "Sale Entry Transaction");
+                string pageHeading = IsModify ? "Sale Entry Modification" : "Sale Entry Transaction";
+                ExtensionMethods.FormLoad(this, pageHeading);
                 ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
