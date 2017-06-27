@@ -380,7 +380,7 @@ namespace PharmaUI
                         }
                         else
                         {
-                            InsertUpdateLineItemAndsetToGrid(lineItem);
+                            // InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
                             OpenDialogAndMoveToNextControl();
                             SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
                         }
@@ -395,7 +395,7 @@ namespace PharmaUI
                         }
                         else
                         {
-                            InsertUpdateLineItemAndsetToGrid(lineItem);
+                            //InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
                             OpenDialogAndMoveToNextControl();
                             SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
                         }
@@ -1095,6 +1095,7 @@ namespace PharmaUI
             int colIndex = dgvLineItem.CurrentCell.ColumnIndex + 1;
             int rowIndex = dgvLineItem.CurrentCell.RowIndex;
             string columnName = dgvLineItem.Columns[dgvLineItem.CurrentCell.ColumnIndex].Name;
+
             if (columnName == "SaleRate")
             {
                 PurchaseSaleBookLineItem item = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
