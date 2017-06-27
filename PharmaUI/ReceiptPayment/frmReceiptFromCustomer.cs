@@ -57,7 +57,7 @@ namespace PharmaUI.ReceiptPayment
                 dtReceiptPayment.Focus();
                 dtReceiptPayment.Select(0, 0);
 
-                dtReceiptPayment.LostFocus += DtReceiptPayment_LostFocus; 
+                dtReceiptPayment.LostFocus += DtReceiptPayment_LostFocus;
             }
             catch (Exception ex)
             {
@@ -115,27 +115,27 @@ namespace PharmaUI.ReceiptPayment
         {
             ///Add All the columns as its not a Data Bound data source
             ///
-                dgvReceiptFromCustomer.Columns.Add("ReceiptPaymentID", "ReceiptPaymentID");
-                dgvReceiptFromCustomer.Columns.Add("VoucherNumber", "VoucherNumber");
-                dgvReceiptFromCustomer.Columns.Add("VoucherTypeCode", "VoucherTypeCode");
-                dgvReceiptFromCustomer.Columns.Add("VoucherDate", "VoucherDate");
-                dgvReceiptFromCustomer.Columns.Add("LedgerType", "LedgerType");
-                dgvReceiptFromCustomer.Columns.Add("LedgerTypeCode", "LedgerTypeCode");
-                dgvReceiptFromCustomer.Columns.Add("LedgerTypeName", "LedgerTypeName");
-                dgvReceiptFromCustomer.Columns.Add("PaymentMode", "PaymentMode");
-                dgvReceiptFromCustomer.Columns.Add("Amount", "Amount");
-                dgvReceiptFromCustomer.Columns.Add("ChequeNumber", "ChequeNumber");
-                dgvReceiptFromCustomer.Columns.Add("BankAccountLedgerTypeCode", "BankAccountLedgerTypeCode");
-                dgvReceiptFromCustomer.Columns.Add("BankAccountLedgerTypeName", "BankAccountLedgerTypeName");
-                dgvReceiptFromCustomer.Columns.Add("ChequeDate", "ChequeDate");
-                dgvReceiptFromCustomer.Columns.Add("ChequeClearDate", "ChequeClearDate");
-                dgvReceiptFromCustomer.Columns.Add("IsChequeCleared", "IsChequeCleared");
-                dgvReceiptFromCustomer.Columns.Add("POST", "POST");
-                dgvReceiptFromCustomer.Columns.Add("PISNumber", "PISNumber");
-                dgvReceiptFromCustomer.Columns.Add("UnadjustedAmount", "UnadjustedAmount");
-                dgvReceiptFromCustomer.Columns.Add("ConsumedAmount", "ConsumedAmount");
+            dgvReceiptFromCustomer.Columns.Add("ReceiptPaymentID", "ReceiptPaymentID");
+            dgvReceiptFromCustomer.Columns.Add("VoucherNumber", "VoucherNumber");
+            dgvReceiptFromCustomer.Columns.Add("VoucherTypeCode", "VoucherTypeCode");
+            dgvReceiptFromCustomer.Columns.Add("VoucherDate", "VoucherDate");
+            dgvReceiptFromCustomer.Columns.Add("LedgerType", "LedgerType");
+            dgvReceiptFromCustomer.Columns.Add("LedgerTypeCode", "LedgerTypeCode");
+            dgvReceiptFromCustomer.Columns.Add("LedgerTypeName", "LedgerTypeName");
+            dgvReceiptFromCustomer.Columns.Add("PaymentMode", "PaymentMode");
+            dgvReceiptFromCustomer.Columns.Add("Amount", "Amount");
+            dgvReceiptFromCustomer.Columns.Add("ChequeNumber", "ChequeNumber");
+            dgvReceiptFromCustomer.Columns.Add("BankAccountLedgerTypeCode", "BankAccountLedgerTypeCode");
+            dgvReceiptFromCustomer.Columns.Add("BankAccountLedgerTypeName", "BankAccountLedgerTypeName");
+            dgvReceiptFromCustomer.Columns.Add("ChequeDate", "ChequeDate");
+            dgvReceiptFromCustomer.Columns.Add("ChequeClearDate", "ChequeClearDate");
+            dgvReceiptFromCustomer.Columns.Add("IsChequeCleared", "IsChequeCleared");
+            dgvReceiptFromCustomer.Columns.Add("POST", "POST");
+            dgvReceiptFromCustomer.Columns.Add("PISNumber", "PISNumber");
+            dgvReceiptFromCustomer.Columns.Add("UnadjustedAmount", "UnadjustedAmount");
+            dgvReceiptFromCustomer.Columns.Add("ConsumedAmount", "ConsumedAmount");
 
-                DisplayDataGrid();
+            DisplayDataGrid();
 
         }
 
@@ -167,6 +167,7 @@ namespace PharmaUI.ReceiptPayment
             dgvReceiptFromCustomer.Columns["ChequeDate"].Visible = true;
             dgvReceiptFromCustomer.Columns["ChequeDate"].HeaderText = "Cheque Date";
             dgvReceiptFromCustomer.Columns["ChequeDate"].DisplayIndex = 3;
+            dgvReceiptFromCustomer.Columns["ChequeDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             dgvReceiptFromCustomer.Columns["Amount"].Visible = true;
             dgvReceiptFromCustomer.Columns["Amount"].HeaderText = "Amount";
@@ -322,6 +323,43 @@ namespace PharmaUI.ReceiptPayment
             LoadGridBillOutstanding(currentTransactionEntity);
 
         }
+
+        private void FrmTrans_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                dgvReceiptFromCustomer.SelectionChanged -= DgvReceiptFromCustomer_SelectionChanged;
+
+                ReceiptPaymentItem transaction = (sender as frmTransactions).SelectedTransaction;
+                if (transaction.ReceiptPaymentID > 0)
+                {
+                    dgvReceiptFromCustomer.DataSource = null;
+                    List<ReceiptPaymentItem> list = new List<ReceiptPaymentItem>();
+                    list.Add(applicationFacade.GetTransactionByTransactionID(transaction.ReceiptPaymentID));
+                    dgvReceiptFromCustomer.DataSource = list;
+                    DisplayDataGrid();
+
+
+                    TransactionEntity transactionEntity = new TransactionEntity();
+
+                    transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["OldReceiptPaymentID"].Value;
+                    transactionEntity.EntityType = Constants.TransactionEntityType.CustomerLedger;
+                    transactionEntity.EntityCode = Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"].Value);
+
+                    LoadGridBillOutstanding(transactionEntity);
+
+                    transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["ReceiptPaymentID"].Value;
+                    LoadGridBillAdjusted(transactionEntity);
+
+                    dgvReceiptFromCustomer.SelectionChanged += DgvReceiptFromCustomer_SelectionChanged;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
 
         ///Data Grid Events
         ///
@@ -652,7 +690,7 @@ namespace PharmaUI.ReceiptPayment
                         SendKeys.Send("{TAB}");
                     }
                 }
-                else if(sender is MaskedTextBox)
+                else if (sender is MaskedTextBox)
                 {
                     if (IsInEditMode)
                     {
@@ -660,42 +698,15 @@ namespace PharmaUI.ReceiptPayment
                         frmTrans.Show();
                         frmTrans.FormClosed += FrmTrans_FormClosed;
                     }
+                    else
+                    {
+                        SendKeys.Send("{TAB}");
+                    }
                 }
                 else
                 {
                     SendKeys.Send("{TAB}");
                 }
-            }
-        }
-
-        private void FrmTrans_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            try
-            {
-                ReceiptPaymentItem transaction = (sender as frmTransactions).SelectedTransaction;
-                if(transaction.ReceiptPaymentID > 0)
-                {
-                    dgvReceiptFromCustomer.DataSource = null;       
-                    List<ReceiptPaymentItem> list = new List<ReceiptPaymentItem>();
-                    list.Add(applicationFacade.GetTransactionByTransactionID(transaction.ReceiptPaymentID));
-                    dgvReceiptFromCustomer.DataSource = list;
-                    DisplayDataGrid();
-
-                    TransactionEntity transactionEntity = new TransactionEntity();
-
-                    transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["ReceiptPaymentID"].Value;
-                    transactionEntity.EntityType = Constants.TransactionEntityType.CustomerLedger;
-                    transactionEntity.EntityCode = Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"].Value);
-
-                    LoadGridBillAdjusted(transactionEntity);
-
-                    transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["OldReceiptPaymentID"].Value;
-                    LoadGridBillOutstanding(transactionEntity);
-                }
-            }
-            catch (Exception ex)
-            {
-
             }
         }
 
