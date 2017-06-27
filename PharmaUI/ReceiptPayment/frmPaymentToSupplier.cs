@@ -276,7 +276,8 @@ namespace PharmaUI.ReceiptPayment
                     LedgerTypeCode = selectedSupplier.SupplierLedgerCode,
                     LedgerTypeName = selectedSupplier.SupplierLedgerName,
                     PaymentMode = Constants.PaymentMode.CASH,
-                    BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag)
+                    BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag),
+                    BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text)
                 };
 
                 TransactionEntity transactionEntity = new TransactionEntity()
@@ -538,6 +539,7 @@ namespace PharmaUI.ReceiptPayment
                 receiptPaymentItem.Amount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"].Value));
                 receiptPaymentItem.ChequeNumber = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeNumber"].Value);
                 receiptPaymentItem.BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag);
+                receiptPaymentItem.BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text);
                 receiptPaymentItem.ChequeDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text);
                 receiptPaymentItem.UnadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"].Value));
             }

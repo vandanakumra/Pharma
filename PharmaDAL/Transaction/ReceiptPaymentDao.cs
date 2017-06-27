@@ -34,6 +34,7 @@ namespace PharmaDAL.Transaction
                         receiptPaymentDB.PaymentMode = receiptPayment.PaymentMode;
                         receiptPaymentDB.Ammount = receiptPayment.Amount;
                         receiptPaymentDB.BankAccountLedgerTypeCode = receiptPayment.BankAccountLedgerTypeCode;
+                        receiptPaymentDB.BankAccountLedgerTypeName = receiptPayment.BankAccountLedgerTypeName;
                         receiptPaymentDB.ChequeNumber = receiptPayment.ChequeNumber;
                         receiptPaymentDB.ChequeDate = receiptPayment.ChequeDate;
                         receiptPaymentDB.UnadjustedAmount = receiptPayment.UnadjustedAmount;
@@ -53,7 +54,8 @@ namespace PharmaDAL.Transaction
                             LedgerTypeName=receiptPayment.LedgerTypeName,
                             PaymentMode = receiptPayment.PaymentMode,
                             BankAccountLedgerTypeCode = receiptPayment.BankAccountLedgerTypeCode,
-                            CreatedBy=LoggedInUser.Username,
+                            BankAccountLedgerTypeName = receiptPayment.BankAccountLedgerTypeName,
+                            CreatedBy =LoggedInUser.Username,
                             CreatedOn=DateTime.Now
                         };
 
@@ -100,7 +102,9 @@ namespace PharmaDAL.Transaction
                                 LedgerTypeName=transaction.LedgerTypeName,
                                 PaymentMode = transaction.PaymentMode,
                                 Amount = transaction.Amount,
+                                UnadjustedAmount=transaction.UnadjustedAmount,
                                 BankAccountLedgerTypeCode = transaction.BankAccountLedgerTypeCode,
+                                BankAccountLedgerTypeName=transaction.BankAccountLedgerTypeName,
                                 ChequeDate = transaction.ChequeDate,
                                 ChequeClearDate = transaction.ChequeClearDate,
                                 IsChequeCleared = transaction.IsChequeCleared,
@@ -122,7 +126,9 @@ namespace PharmaDAL.Transaction
                                 LedgerTypeName=transaction.LedgerTypeName,
                                 PaymentMode = transaction.PaymentMode,
                                 Ammount = transaction.Amount,
+                                UnadjustedAmount=transaction.UnadjustedAmount,
                                 BankAccountLedgerTypeCode = transaction.BankAccountLedgerTypeCode,
+                                BankAccountLedgerTypeName=transaction.BankAccountLedgerTypeName,
                                 ChequeDate = transaction.ChequeDate,
                                 ChequeClearDate = transaction.ChequeClearDate,
                                 IsChequeCleared = transaction.IsChequeCleared,
@@ -205,8 +211,10 @@ namespace PharmaDAL.Transaction
                                                LedgerTypeName = x.LedgerTypeName ,
                                                PaymentMode = x.PaymentMode,
                                                Amount = x.Amount,
-                                               BankAccountLedgerTypeCode = x.BankAccountLedgerTypeCode
-
+                                               UnadjustedAmount=x.UnadjustedAmount,
+                                               BankAccountLedgerTypeCode = x.BankAccountLedgerTypeCode,
+                                               BankAccountLedgerTypeName=x.BankAccountLedgerTypeName
+                                               
                                            }).ToList();
                 }
             }
