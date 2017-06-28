@@ -64,14 +64,21 @@ namespace PharmaUI.ReceiptPayment
 
         private void DtReceiptPayment_LostFocus(object sender, EventArgs e)
         {
-            if (!ExtensionMethods.IsValidDate(dtReceiptPayment.Text))
+            try
             {
-                errorProviderPaymentToSupplier.SetError(dtReceiptPayment, Constants.Messages.InValidDate);
-                dtReceiptPayment.Focus();
+                if (!ExtensionMethods.IsValidDate(dtReceiptPayment.Text))
+                {
+                    errorProviderPaymentToSupplier.SetError(dtReceiptPayment, Constants.Messages.InValidDate);
+                    dtReceiptPayment.Focus();
+                }
+                else
+                {
+                    errorProviderPaymentToSupplier.SetError(dtReceiptPayment, String.Empty);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                errorProviderPaymentToSupplier.SetError(dtReceiptPayment, String.Empty);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -80,13 +87,13 @@ namespace PharmaUI.ReceiptPayment
             try
             {
                 DataGridViewRow row = dgvPaymentToSupplier.CurrentRow;
-                if(row!= null && row.Cells["ReceiptPaymentID"].Value != null)
+                if (row != null && row.Cells["ReceiptPaymentID"].Value != null)
                 {
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
-                        ReceiptPaymentID=(long)row.Cells["ReceiptPaymentID"].Value,
+                        ReceiptPaymentID = (long)row.Cells["ReceiptPaymentID"].Value,
                         EntityType = Constants.TransactionEntityType.SupplierLedger,
-                        EntityCode =Convert.ToString(row.Cells["LedgerTypeCode"].Value),
+                        EntityCode = Convert.ToString(row.Cells["LedgerTypeCode"].Value),
                     };
 
                     LoadGridBillOutstanding(transactionEntity);
@@ -100,7 +107,7 @@ namespace PharmaUI.ReceiptPayment
                     lblAmtAdjVal.Text = String.Empty;
                 }
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -264,59 +271,75 @@ namespace PharmaUI.ReceiptPayment
 
         private void FormSupplierLedgerMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            SupplierLedgerMaster selectedSupplier = (sender as frmSupplierLedger).LastSelectedSupplier;
-            if (selectedSupplier != null)
+            try
             {
-                ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                SupplierLedgerMaster selectedSupplier = (sender as frmSupplierLedger).LastSelectedSupplier;
+                if (selectedSupplier != null)
                 {
-                    VoucherTypeCode = Constants.VoucherTypeCode.PAYMENTTOSUPPLIER,
-                    VoucherDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text),
-                    LedgerType = Constants.TransactionEntityType.SupplierLedger,
-                    LedgerTypeCode = selectedSupplier.SupplierLedgerCode,
-                    LedgerTypeName = selectedSupplier.SupplierLedgerName,
-                    PaymentMode = Constants.PaymentMode.CASH,
-                    BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag),
-                    BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text)
-                };
+                    ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
+                    {
+                        VoucherTypeCode = Constants.VoucherTypeCode.PAYMENTTOSUPPLIER,
+                        VoucherDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text),
+                        LedgerType = Constants.TransactionEntityType.SupplierLedger,
+                        LedgerTypeCode = selectedSupplier.SupplierLedgerCode,
+                        LedgerTypeName = selectedSupplier.SupplierLedgerName,
+                        PaymentMode = Constants.PaymentMode.CASH,
+                        BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag),
+                        BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text)
+                    };
 
-                TransactionEntity transactionEntity = new TransactionEntity()
-                {
-                    EntityType = Constants.TransactionEntityType.SupplierLedger,
-                    EntityCode = selectedSupplier.SupplierLedgerCode
-                };
+                    TransactionEntity transactionEntity = new TransactionEntity()
+                    {
+                        EntityType = Constants.TransactionEntityType.SupplierLedger,
+                        EntityCode = selectedSupplier.SupplierLedgerCode
+                    };
 
-                UpdateReceiptPaymentRow(receiptPaymentForSelectedCust);
-                LoadGridBillOutstanding(transactionEntity);
+                    UpdateReceiptPaymentRow(receiptPaymentForSelectedCust);
+                    LoadGridBillOutstanding(transactionEntity);
 
-                dgvPaymentToSupplier.Focus();
-                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
+                    dgvPaymentToSupplier.Focus();
+                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void FormReceiptPaymentAdjustment_FormClosed(object sender, FormClosedEventArgs e)
         {
-            TransactionEntity currentTransactionEntity = (sender as frmReceiptPaymentAdjustment).CurrentTransactionEntity;
 
-            dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"];
-
-            if ((sender as frmReceiptPaymentAdjustment).ReceiptPaymentState == ReceiptPaymentState.Save)
+            try
             {
-                dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"].Value = currentTransactionEntity.EntityBalAmount;
-                dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ConsumedAmount"].Value = currentTransactionEntity.EntityTotalAmount - currentTransactionEntity.EntityBalAmount;
+                TransactionEntity currentTransactionEntity = (sender as frmReceiptPaymentAdjustment).CurrentTransactionEntity;
+
+                int rowIndex = (sender as frmReceiptPaymentAdjustment).RowIndex;
+
+                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"];
+
+                if ((sender as frmReceiptPaymentAdjustment).ReceiptPaymentState == ReceiptPaymentState.Save)
+                {
+                    dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"].Value = currentTransactionEntity.EntityBalAmount;
+                    dgvPaymentToSupplier.Rows[rowIndex].Cells["ConsumedAmount"].Value = currentTransactionEntity.EntityTotalAmount - currentTransactionEntity.EntityBalAmount;
+                }
+                else
+                {
+                    double enteredAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"].Value)) ?? default(double);
+                    double consumedAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["ConsumedAmount"].Value)) ?? default(double);
+                    dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"].Value = enteredAmount;
+                    dgvPaymentToSupplier.Rows[rowIndex].Cells["ConsumedAmount"].Value = default(double);
+                }
+
+                applicationFacade.InsertUpdateTempReceiptPayment(FillDataboundToCurrentRow());
+                LoadGridBillAdjusted(currentTransactionEntity);
+                LoadGridBillOutstanding(currentTransactionEntity);
             }
-            else
+            catch (Exception ex)
             {
-                double enteredAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["Amount"].Value)) ?? default(double);
-                double consumedAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(double);
-                dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"].Value = enteredAmount;
-                dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ConsumedAmount"].Value = default(double);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            applicationFacade.InsertUpdateTempReceiptPayment(FillDataboundToCurrentRow());
-            LoadGridBillAdjusted(currentTransactionEntity);
-            LoadGridBillOutstanding(currentTransactionEntity);
-
         }
 
 
@@ -421,6 +444,7 @@ namespace PharmaUI.ReceiptPayment
 
         private void Grid_CellNextlAction()
         {
+            int rowIndex = dgvPaymentToSupplier.CurrentRow.Index;
             string columnName = dgvPaymentToSupplier.Columns[dgvPaymentToSupplier.SelectedCells[0].ColumnIndex].Name;
             if (columnName == "LedgerTypeCode")
             {
@@ -437,20 +461,20 @@ namespace PharmaUI.ReceiptPayment
                 }
                 else
                 {
-                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
+                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeNumber"];
                 }
             }
             else if (columnName == "LedgerTypeName")
             {
-                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
+                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeNumber"];
             }
             else if (columnName == "ChequeNumber")
             {
                 if (String.IsNullOrWhiteSpace(Convert.ToString(dgvPaymentToSupplier.CurrentCell.Value)))
                 {
                     dgvPaymentToSupplier.CurrentCell.Value = Constants.PaymentMode.CASHTEXT;
-                    dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CASH;
-                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["Amount"];
+                    dgvPaymentToSupplier.Rows[rowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CASH;
+                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"];
                 }
                 else
                 {
@@ -461,22 +485,22 @@ namespace PharmaUI.ReceiptPayment
                     else
                     {
                         dgvPaymentToSupplier.CurrentCell.ErrorText = string.Empty;
-                        dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CHEQUE;
-                        dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeDate"];
+                        dgvPaymentToSupplier.Rows[rowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CHEQUE;
+                        dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeDate"];
                     }
                 }
             }
             else if (columnName == "ChequeDate")
             {
-                string chequeDate = Convert.ToString(dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeDate"].Value);
+                string chequeDate = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeDate"].Value);
                 if (ExtensionMethods.IsValidDate(chequeDate))
                 {
-                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["Amount"];
+                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"];
                     dgvPaymentToSupplier.CurrentRow.Cells["ChequeDate"].ErrorText = String.Empty;
                 }
                 else
                 {
-                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex].Cells["ChequeDate"];
+                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeDate"];
                     dgvPaymentToSupplier.CurrentRow.Cells["ChequeDate"].ErrorText = Constants.Messages.InValidDate;
 
                 }
@@ -490,9 +514,9 @@ namespace PharmaUI.ReceiptPayment
                 decimal consumedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
 
 
-                if (enteredAmount > 0)
+                if (enteredAmount != 0)
                 {
-                    frmReceiptPaymentAdjustment formReceiptPaymentAdjustment = new frmReceiptPaymentAdjustment();
+                    frmReceiptPaymentAdjustment formReceiptPaymentAdjustment = new frmReceiptPaymentAdjustment(rowIndex);
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
                         ReceiptPaymentID = (long)dgvPaymentToSupplier.CurrentRow.Cells["ReceiptPaymentID"].Value,
@@ -507,6 +531,8 @@ namespace PharmaUI.ReceiptPayment
                     formReceiptPaymentAdjustment.FormClosed += FormReceiptPaymentAdjustment_FormClosed;
                     formReceiptPaymentAdjustment.Show();
                 }
+
+                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"];
             }
             else if (columnName == "UnadjustedAmount")
             {
@@ -517,7 +543,7 @@ namespace PharmaUI.ReceiptPayment
                 lblAmtOSVal.Text = String.Empty;
                 lblAmtAdjVal.Text = String.Empty;
 
-                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[dgvPaymentToSupplier.SelectedCells[0].RowIndex + 1].Cells["LedgerTypeCode"];
+                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
                 // dgvPaymentToSupplier.BeginEdit(true);
             }
         }
@@ -573,31 +599,38 @@ namespace PharmaUI.ReceiptPayment
         ///
         public void GotFocusEventRaised(Control control)
         {
-            foreach (Control c in control.Controls)
+            try
             {
-                if (c.Controls.Count > 0)
+                foreach (Control c in control.Controls)
                 {
-                    GotFocusEventRaised(c);
-                }
-                else
-                {
-                    if (c is TextBox)
+                    if (c.Controls.Count > 0)
                     {
-                        TextBox tb1 = (TextBox)c;
-                        tb1.GotFocus += C_GotFocus;
+                        GotFocusEventRaised(c);
                     }
+                    else
+                    {
+                        if (c is TextBox)
+                        {
+                            TextBox tb1 = (TextBox)c;
+                            tb1.GotFocus += C_GotFocus;
+                        }
 
-                    else if (c is ComboBox)
-                    {
-                        ComboBox tb1 = (ComboBox)c;
-                        tb1.GotFocus += C_GotFocus;
-                    }
-                    else if (c is MaskedTextBox)
-                    {
-                        MaskedTextBox tb1 = (MaskedTextBox)c;
-                        tb1.GotFocus += C_GotFocus;
+                        else if (c is ComboBox)
+                        {
+                            ComboBox tb1 = (ComboBox)c;
+                            tb1.GotFocus += C_GotFocus;
+                        }
+                        else if (c is MaskedTextBox)
+                        {
+                            MaskedTextBox tb1 = (MaskedTextBox)c;
+                            tb1.GotFocus += C_GotFocus;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -609,18 +642,25 @@ namespace PharmaUI.ReceiptPayment
 
         private void EnterKeyDownForTabEvents(Control control)
         {
-            foreach (Control c in control.Controls)
+            try
             {
-                if (c.Controls.Count > 0)
+                foreach (Control c in control.Controls)
                 {
-                    EnterKeyDownForTabEvents(c);
-                }
-                else
-                {
+                    if (c.Controls.Count > 0)
+                    {
+                        EnterKeyDownForTabEvents(c);
+                    }
+                    else
+                    {
 
-                    c.KeyDown -= C_KeyDown;
-                    c.KeyDown += C_KeyDown;
+                        c.KeyDown -= C_KeyDown;
+                        c.KeyDown += C_KeyDown;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -676,63 +716,63 @@ namespace PharmaUI.ReceiptPayment
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.End)
-            {
-                if (dgvPaymentToSupplier.SelectedCells.Count > 0)
+                if (keyData == Keys.End)
                 {
-                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.SaveDataPrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    if (dgvPaymentToSupplier.SelectedCells.Count > 0)
                     {
-                        List<long> listTempReceiptPaymentList = new List<long>();
-                        foreach (DataGridViewRow receiptPaymentRow in dgvPaymentToSupplier.Rows.Cast<DataGridViewRow>())
+                        if (DialogResult.Yes == MessageBox.Show(Constants.Messages.SaveDataPrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                         {
-                            if (receiptPaymentRow.Cells["ReceiptPaymentID"].Value != null)
+                            List<long> listTempReceiptPaymentList = new List<long>();
+                            foreach (DataGridViewRow receiptPaymentRow in dgvPaymentToSupplier.Rows.Cast<DataGridViewRow>())
                             {
-                                listTempReceiptPaymentList.Add((long)receiptPaymentRow.Cells["ReceiptPaymentID"].Value);
+                                if (receiptPaymentRow.Cells["ReceiptPaymentID"].Value != null)
+                                {
+                                    listTempReceiptPaymentList.Add((long)receiptPaymentRow.Cells["ReceiptPaymentID"].Value);
+                                }
                             }
-                        }
 
-                        if (listTempReceiptPaymentList.Count > 0)
-                        {
-                            applicationFacade.SaveAllTempTransaction(listTempReceiptPaymentList);
-                            this.Close();
+                            if (listTempReceiptPaymentList.Count > 0)
+                            {
+                                applicationFacade.SaveAllTempTransaction(listTempReceiptPaymentList);
+                                this.Close();
+                            }
                         }
                     }
                 }
-            }
-            else if (keyData == Keys.Escape || keyData == Keys.Delete)
-            {
-                if (dgvPaymentToSupplier.SelectedCells.Count > 0)
+                else if (keyData == Keys.Escape || keyData == Keys.Delete)
                 {
-                    int rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;
-                    if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    if (dgvPaymentToSupplier.SelectedCells.Count > 0)
                     {
-                        if (dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value != null)
+                        int rowIndex = dgvPaymentToSupplier.SelectedCells[0].RowIndex;
+                        if (DialogResult.Yes == MessageBox.Show(Constants.Messages.DeletePrompt, Constants.Messages.Confirmation, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                         {
-                            TransactionEntity tranEntity = new TransactionEntity();
-                            tranEntity.ReceiptPaymentID = (long)dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value;
-                            tranEntity.EntityCode = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeCode"].Value);
-
-                            applicationFacade.ClearTempTransaction(tranEntity);
-                            dgvPaymentToSupplier.Rows.RemoveAt(rowIndex);
-                            dgvPaymentToSupplier.Refresh();
-                            if (dgvPaymentToSupplier.Rows.Count == 0)
+                            if (dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value != null)
                             {
-                                dgvPaymentToSupplier.Rows.Add();
-                                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[0].Cells["LedgerTypeCode"];
-                                dgvPaymentToSupplier.BeginEdit(true);
-                            }
+                                TransactionEntity tranEntity = new TransactionEntity();
+                                tranEntity.ReceiptPaymentID = (long)dgvPaymentToSupplier.Rows[rowIndex].Cells["ReceiptPaymentID"].Value;
+                                tranEntity.EntityCode = Convert.ToString(dgvPaymentToSupplier.Rows[rowIndex].Cells["LedgerTypeCode"].Value);
 
-                            RaisePaymentModeCalculations();
-                            dgvSupplierBillOS.DataSource = null;
-                            dgvSupplierBillAdjusted.DataSource = null;
-                            lblAmtOSVal.Text = String.Empty;
-                            lblAmtAdjVal.Text = String.Empty;
+                                applicationFacade.ClearTempTransaction(tranEntity);
+                                dgvPaymentToSupplier.Rows.RemoveAt(rowIndex);
+                                dgvPaymentToSupplier.Refresh();
+                                if (dgvPaymentToSupplier.Rows.Count == 0)
+                                {
+                                    dgvPaymentToSupplier.Rows.Add();
+                                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[0].Cells["LedgerTypeCode"];
+                                    dgvPaymentToSupplier.BeginEdit(true);
+                                }
+
+                                RaisePaymentModeCalculations();
+                                dgvSupplierBillOS.DataSource = null;
+                                dgvSupplierBillAdjusted.DataSource = null;
+                                lblAmtOSVal.Text = String.Empty;
+                                lblAmtAdjVal.Text = String.Empty;
+                            }
                         }
                     }
                 }
-            }
 
-            return base.ProcessCmdKey(ref msg, keyData);
+                return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void ClearScreen()
@@ -764,7 +804,14 @@ namespace PharmaUI.ReceiptPayment
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
