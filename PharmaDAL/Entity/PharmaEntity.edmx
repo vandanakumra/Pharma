@@ -549,6 +549,8 @@
           <Property Name="PISNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="ChequeNumber" Type="nvarchar" MaxLength="10" />
           <Property Name="LedgerTypeName" Type="varchar" MaxLength="100" />
+          <Property Name="UnadjustedAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BankAccountLedgerTypeName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="RecordType">
           <Key>
@@ -797,6 +799,7 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="LedgerTypeName" Type="varchar" MaxLength="100" />
+          <Property Name="BankAccountLedgerTypeName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TRN">
           <Key>
@@ -2242,6 +2245,8 @@
           <Property Name="PISNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="LedgerTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UnadjustedAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BankAccountLedgerTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_ReceiptPayment" FromRole="ReceiptPayment" ToRole="BillOutStandingsAudjustment" />
           <NavigationProperty Name="BillOutStandingsAudjustment1" Relationship="Self.FK_TempBillOutStandingsAudjustment_ReceiptPayment" FromRole="ReceiptPayment" ToRole="BillOutStandingsAudjustment" />
         </EntityType>
@@ -2509,6 +2514,7 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LedgerTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BankAccountLedgerTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_TempReceiptPayment" FromRole="TempReceiptPayment" ToRole="TempBillOutStandingsAudjustment" />
         </EntityType>
         <EntityType Name="TRN">
@@ -3913,6 +3919,8 @@
                 <ScalarProperty Name="PISNumber" ColumnName="PISNumber" />
                 <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
                 <ScalarProperty Name="LedgerTypeName" ColumnName="LedgerTypeName" />
+                <ScalarProperty Name="UnadjustedAmount" ColumnName="UnadjustedAmount" />
+                <ScalarProperty Name="BankAccountLedgerTypeName" ColumnName="BankAccountLedgerTypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4170,6 +4178,7 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="LedgerTypeName" ColumnName="LedgerTypeName" />
+                <ScalarProperty Name="BankAccountLedgerTypeName" ColumnName="BankAccountLedgerTypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

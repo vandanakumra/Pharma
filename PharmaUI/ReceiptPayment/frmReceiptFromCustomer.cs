@@ -282,7 +282,8 @@ namespace PharmaUI.ReceiptPayment
                     LedgerTypeCode = selectedCustomer.CustomerLedgerCode,
                     LedgerTypeName = selectedCustomer.CustomerLedgerName,
                     PaymentMode = Constants.PaymentMode.CASH,
-                    BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag)
+                    BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag),
+                    BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text)
                 };
 
                 TransactionEntity transactionEntity = new TransactionEntity()
@@ -341,6 +342,9 @@ namespace PharmaUI.ReceiptPayment
 
 
                     TransactionEntity transactionEntity = new TransactionEntity();
+
+                    txtTransactAccount.Tag= Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["BankAccountLedgerTypeCode"].Value);
+                    txtTransactAccount.Text = Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["BankAccountLedgerTypeName"].Value);
 
                     transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["OldReceiptPaymentID"].Value;
                     transactionEntity.EntityType = Constants.TransactionEntityType.CustomerLedger;
@@ -578,6 +582,7 @@ namespace PharmaUI.ReceiptPayment
                 receiptPaymentItem.Amount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"].Value));
                 receiptPaymentItem.ChequeNumber = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeNumber"].Value);
                 receiptPaymentItem.BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag);
+                receiptPaymentItem.BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text);
                 receiptPaymentItem.ChequeDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text);
                 receiptPaymentItem.UnadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value));
             }
