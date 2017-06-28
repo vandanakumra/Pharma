@@ -1586,7 +1586,6 @@ namespace PharmaUI
                     }
 
                 }
-
                 else if (keyData == Keys.F5)
                 {
                     frmSaleEntry form = new frmSaleEntry(false,this.VoucherTypeCode);
@@ -1594,11 +1593,11 @@ namespace PharmaUI
                     form.Show();
                 }
 
-                else if (keyData == Keys.Escape)
-                {
-                    this.Close();
+                //else if (keyData == Keys.Escape)
+                //{
+                //    this.Close();
 
-                }
+                //}
 
             }
             catch (Exception ex)

@@ -31,9 +31,9 @@ namespace PharmaDataMigration
 
         private void frmDataMigration_Load(object sender, EventArgs e)
         {
-            Common.DataDirectory = @"D:\PharmaProject\TestDBF";
-            DBFFileWriter writer = new DBFFileWriter();
-            writer.WriteFile();
+            //Common.DataDirectory = @"D:\PharmaProject\TestDBF";
+            //DBFFileWriter writer = new DBFFileWriter();
+            //writer.WriteFile();
 
         }
 

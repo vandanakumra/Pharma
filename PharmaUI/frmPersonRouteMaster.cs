@@ -255,7 +255,8 @@ namespace PharmaUI
                 
 
                 List<DataGridViewRow> filteredRow = dgvPersonRoute.Rows.OfType<DataGridViewRow>().Where(x => (int)x.Cells["PersonRouteID"].Value == model.PersonRouteID).ToList();
-                if(filteredRow.Count > 0)
+
+                if (filteredRow.Count > 0)
                 {
                     dgvPersonRoute.ClearSelection();
                     filteredRow.First().Selected = true;
@@ -263,7 +264,7 @@ namespace PharmaUI
                 }
                 else
                 {
-                  if (dgvPersonRoute.RowCount>0)
+                    if (dgvPersonRoute.RowCount > 0)
                     {
                         dgvPersonRoute.ClearSelection();
                         dgvPersonRoute.Rows.OfType<DataGridViewRow>().First().Selected = true;
