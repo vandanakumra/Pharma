@@ -52,9 +52,9 @@ namespace PharmaBusiness.Transaction
             return new SaleEntryDao(this.LoggedInUser).DeleteSaleLineItem(saleBookHeaderID, saleBookLineItemID);
         }
 
-        internal bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity)
+        internal bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity, ref decimal calcFreeQuantity)
         {
-            return new SaleEntryDao(this.LoggedInUser).IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity);
+            return new SaleEntryDao(this.LoggedInUser).IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity, ref calcFreeQuantity);
         }
 
         internal bool SaveSaleEntryData(long purchaseBookHeaderID)
