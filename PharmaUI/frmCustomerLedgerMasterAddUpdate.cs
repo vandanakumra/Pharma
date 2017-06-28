@@ -294,6 +294,7 @@ namespace PharmaUI
 
 
                 int _result = 0;
+
                 if (isInEditMode)
                 {
                     _result = applicationFacade.UpdateCustomerLedger(customerLedgerMaster);

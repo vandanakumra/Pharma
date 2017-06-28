@@ -331,7 +331,7 @@ namespace PharmaDAL.Transaction
             return itemList;
         }
 
-        public bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity)
+        public bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity, ref decimal calcFreeQuantity)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
@@ -354,6 +354,9 @@ namespace PharmaDAL.Transaction
                 {
                     int result = 0;
                     Int32.TryParse(dt.Rows[0]["IsAvailable"].ToString(), out result);
+
+                    calcFreeQuantity = 0;
+                    decimal.TryParse(dt.Rows[0]["FreeQuantity"].ToString(), out calcFreeQuantity);
                     return result > 0;
                 }
             }

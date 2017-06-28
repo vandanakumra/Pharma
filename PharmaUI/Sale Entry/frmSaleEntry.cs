@@ -364,15 +364,17 @@ namespace PharmaUI
                     int rowIndex = e.RowIndex; //dgvLineItem.SelectedCells[0].RowIndex;
                     PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
                     string columnName = dgvLineItem.Columns[e.ColumnIndex].Name;
+                    decimal freeQuantity = 0;
 
                     if (columnName == "Quantity")
                     {
                         if (lineItem.Quantity == 0)
                         {
                             dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
+                            
                             return;
                         }
-                        else if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID,lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity??0))
+                        else if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID,lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity??0, ref freeQuantity))
                         {
                             MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
                             dgvLineItem.BeginEdit(true);
@@ -381,13 +383,16 @@ namespace PharmaUI
                         else
                         {
                             // InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
+                            lineItem.FreeQuantity = freeQuantity;
+                            dgvLineItem.Rows[e.RowIndex].Cells["FreeQuantity"].Value = freeQuantity.ToString();
                             OpenDialogAndMoveToNextControl();
                             SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
                         }
                     }
                     else if (columnName == "FreeQuantity")
                     {
-                        if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity ?? 0))
+                        decimal calcFreeQty = 0;
+                        if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity ?? 0, ref calcFreeQty))
                         {
                             MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
                             dgvLineItem.BeginEdit(true);
@@ -417,10 +422,10 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private bool IsQuantityAvailable(long headerID, string itemCode, long lineItemID, decimal quantity, decimal freeQuantity)
+        
+        private bool IsQuantityAvailable(long headerID, string itemCode, long lineItemID, decimal quantity, decimal freeQuantity, ref decimal newFreeQuantity)
         {
-            return applicationFacade.IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity);
+            return applicationFacade.IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity, ref newFreeQuantity);
         }
 
         private void ValidateSaleRate(PurchaseSaleBookLineItem lineItem, int rowIndex, bool isEdit)
@@ -1586,7 +1591,6 @@ namespace PharmaUI
                     }
 
                 }
-
                 else if (keyData == Keys.F5)
                 {
                     frmSaleEntry form = new frmSaleEntry(false,this.VoucherTypeCode);
@@ -1594,11 +1598,11 @@ namespace PharmaUI
                     form.Show();
                 }
 
-                else if (keyData == Keys.Escape)
-                {
-                    this.Close();
+                //else if (keyData == Keys.Escape)
+                //{
+                //    this.Close();
 
-                }
+                //}
 
             }
             catch (Exception ex)

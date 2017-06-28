@@ -1039,9 +1039,9 @@ namespace PharmaBusiness
             return new SaleBiz(this.LoggedInUser).DeleteSaleLineItem(saleBookHeaderID, saleBookLineItemID);
         }
 
-        public bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity)
+        public bool IsQuantityAvailable(long headerID, long lineItemID, string itemCode, decimal quantity, decimal freeQuantity, ref decimal calcFreeQuantity)
         {
-            return new SaleBiz(this.LoggedInUser).IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity);
+            return new SaleBiz(this.LoggedInUser).IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity, ref calcFreeQuantity);
         }
 
         public bool SaveSaleEntryData(long purchaseBookHeaderID)
