@@ -19,7 +19,7 @@ namespace PharmaBusiness.Transaction
 
         internal List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllBillOutstandingForLedger(TransactionEntity transactionEntity)
         {
-            return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillOutstandingForLedger(transactionEntity).Where(x=>x.OSAmount > 0).ToList();
+            return new ReceiptPaymentDao(this.LoggedInUser).GetAllBillOutstandingForLedger(transactionEntity).Where(x=>x.OSAmount != 0).ToList();
         }
 
         

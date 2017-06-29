@@ -20,13 +20,15 @@ namespace PharmaUI.ReceiptPayment
         IApplicationFacade applicationFacade;
         public TransactionEntity CurrentTransactionEntity;
         public ReceiptPaymentState ReceiptPaymentState;
+        public int RowIndex;
 
 
-        public frmReceiptPaymentAdjustment()
-        {
+        public frmReceiptPaymentAdjustment(int _rowIndex)
+        {          
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new PharmaBusiness.ApplicationFacade(ExtensionMethods.LoggedInUser);
+            this.RowIndex = _rowIndex;
         }
 
         private void frmReceiptPaymentAdjustment_Load(object sender, EventArgs e)
@@ -92,6 +94,20 @@ namespace PharmaUI.ReceiptPayment
             decimal correspondingOSAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptPaymentAdjustment.CurrentRow.Cells["OSAmount"].Value)) ?? default(decimal);
 
             decimal utilizedAmount = GetTotallUtilizedAmount();
+
+            if(enteredAmount == 0)
+            {
+                if(utilizedAmount > CurrentTransactionEntity.EntityTotalAmount)
+                {
+                    foreach (DataGridViewRow row in dgvReceiptPaymentAdjustment.Rows)
+                    {
+                        row.Cells["Amount"].Value = default(decimal);
+                    }
+
+                    utilizedAmount = default(decimal);
+                }
+            }
+
             decimal tempBalance = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount;
 
             if (enteredAmount > tempBalance)
@@ -105,7 +121,7 @@ namespace PharmaUI.ReceiptPayment
             //    MessageBox.Show("Entered amount is greater than OS amount !");
             //    dgvReceiptPaymentAdjustment.CurrentRow.Cells["Amount"].Value = default(decimal);
             //}
-            else if (enteredAmount > 0)
+            //else if (enteredAmount != 0)
             {
                 CurrentTransactionEntity.EntityBalAmount = CurrentTransactionEntity.EntityTotalAmount - utilizedAmount - enteredAmount;
                 lblBalAmountVal.Text = this.CurrentTransactionEntity.EntityBalAmount.ToString();
@@ -207,7 +223,7 @@ namespace PharmaUI.ReceiptPayment
                 {
                     List<BillAdjusted> listBillAdjustment = dgvReceiptPaymentAdjustment.Rows
                                                                              .Cast<DataGridViewRow>()
-                                                                             .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Amount"].Value)) && Convert.ToDecimal(r.Cells["Amount"].Value) > 0)
+                                                                             .Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["Amount"].Value)) && Convert.ToDecimal(r.Cells["Amount"].Value) != 0)
                                                                              .Select(x => new BillAdjusted()
                                                                              {
                                                                                  ReceiptPaymentID = CurrentTransactionEntity.ReceiptPaymentID,

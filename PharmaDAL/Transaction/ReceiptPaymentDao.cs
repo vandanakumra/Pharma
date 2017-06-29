@@ -238,7 +238,7 @@ namespace PharmaDAL.Transaction
                 {
                     return context.BillOutStandings.Where(q => q.LedgerType == entity.EntityType
                                                                 && q.LedgerTypeCode == entity.EntityCode
-                                                                && q.OSAmount > 0
+                                                                && q.OSAmount != 0
                                                                 && q.PurchaseSaleBookHeaderID != null)
                                                    .OrderBy(x => x.BillOutStandingsID)
                     .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()

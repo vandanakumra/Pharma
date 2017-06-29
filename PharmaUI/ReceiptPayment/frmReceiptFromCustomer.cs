@@ -39,12 +39,7 @@ namespace PharmaUI.ReceiptPayment
                 GotFocusEventRaised(this);
                 EnterKeyDownForTabEvents(this);
 
-                ///Load all the grid 
-                ///
-                if (!IsInEditMode)
-                {
-                    LoadReceiptFromCustomer();
-                }
+                LoadReceiptFromCustomer();
 
                 ///Grid events
                 ///
@@ -133,7 +128,8 @@ namespace PharmaUI.ReceiptPayment
             dgvReceiptFromCustomer.Columns.Add("POST", "POST");
             dgvReceiptFromCustomer.Columns.Add("PISNumber", "PISNumber");
             dgvReceiptFromCustomer.Columns.Add("UnadjustedAmount", "UnadjustedAmount");
-            dgvReceiptFromCustomer.Columns.Add("ConsumedAmount", "ConsumedAmount");
+            dgvReceiptFromCustomer.Columns.Add("ConsumedAmount", "ConsumedAmount"); 
+            dgvReceiptFromCustomer.Columns.Add("OldReceiptPaymentID", "OldReceiptPaymentID");
 
             DisplayDataGrid();
 
@@ -302,26 +298,35 @@ namespace PharmaUI.ReceiptPayment
 
         private void FormReceiptPaymentAdjustment_FormClosed(object sender, FormClosedEventArgs e)
         {
-            TransactionEntity currentTransactionEntity = (sender as frmReceiptPaymentAdjustment).CurrentTransactionEntity;
-
-            dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"];
-
-            if ((sender as frmReceiptPaymentAdjustment).ReceiptPaymentState == ReceiptPaymentState.Save)
+            try
             {
-                dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"].Value = currentTransactionEntity.EntityBalAmount;
-                dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ConsumedAmount"].Value = currentTransactionEntity.EntityTotalAmount - currentTransactionEntity.EntityBalAmount;
-            }
-            else
-            {
-                double enteredAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["Amount"].Value)) ?? default(double);
-                double consumedAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(double);
-                dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["UnadjustedAmount"].Value = enteredAmount;
-                dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ConsumedAmount"].Value = default(double);
-            }
+                TransactionEntity currentTransactionEntity = (sender as frmReceiptPaymentAdjustment).CurrentTransactionEntity;
 
-            applicationFacade.InsertUpdateTempReceiptPayment(FillDataboundToCurrentRow());
-            LoadGridBillAdjusted(currentTransactionEntity);
-            LoadGridBillOutstanding(currentTransactionEntity);
+                int rowIndex = (sender as frmReceiptPaymentAdjustment).RowIndex;
+
+                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"];
+
+                if ((sender as frmReceiptPaymentAdjustment).ReceiptPaymentState == ReceiptPaymentState.Save)
+                {
+                    dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value = currentTransactionEntity.EntityBalAmount;
+                    dgvReceiptFromCustomer.Rows[rowIndex].Cells["ConsumedAmount"].Value = currentTransactionEntity.EntityTotalAmount - currentTransactionEntity.EntityBalAmount;
+                }
+                else
+                {
+                    double enteredAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"].Value)) ?? default(double);
+                    double consumedAmount = ExtensionMethods.SafeConversionDouble(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["ConsumedAmount"].Value)) ?? default(double);
+                    dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value = enteredAmount;
+                    dgvReceiptFromCustomer.Rows[rowIndex].Cells["ConsumedAmount"].Value = default(double);
+                }
+
+                applicationFacade.InsertUpdateTempReceiptPayment(FillDataboundToCurrentRow());
+                LoadGridBillAdjusted(currentTransactionEntity);
+                LoadGridBillOutstanding(currentTransactionEntity);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -334,12 +339,13 @@ namespace PharmaUI.ReceiptPayment
                 ReceiptPaymentItem transaction = (sender as frmTransactions).SelectedTransaction;
                 if (transaction.ReceiptPaymentID > 0)
                 {
-                    dgvReceiptFromCustomer.DataSource = null;
-                    List<ReceiptPaymentItem> list = new List<ReceiptPaymentItem>();
-                    list.Add(applicationFacade.GetTransactionByTransactionID(transaction.ReceiptPaymentID));
-                    dgvReceiptFromCustomer.DataSource = list;
-                    DisplayDataGrid();
+                    dgvReceiptFromCustomer.Rows.Add();
 
+                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
+
+                    ReceiptPaymentItem transactionDetail = applicationFacade.GetTransactionByTransactionID(transaction.ReceiptPaymentID);
+                    UpdateReceiptPaymentRow(transactionDetail);
+                    DisplayDataGrid();
 
                     TransactionEntity transactionEntity = new TransactionEntity();
 
@@ -360,7 +366,7 @@ namespace PharmaUI.ReceiptPayment
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
         }
 
@@ -465,6 +471,7 @@ namespace PharmaUI.ReceiptPayment
 
         private void Grid_CellNextlAction()
         {
+            int rowIndex = dgvReceiptFromCustomer.CurrentRow.Index;
             string columnName = dgvReceiptFromCustomer.Columns[dgvReceiptFromCustomer.SelectedCells[0].ColumnIndex].Name;
             if (columnName == "LedgerTypeCode")
             {
@@ -481,20 +488,20 @@ namespace PharmaUI.ReceiptPayment
                 }
                 else
                 {
-                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
+                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeNumber"];
                 }
             }
             else if (columnName == "LedgerTypeName")
             {
-                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
+                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeNumber"];
             }
             else if (columnName == "ChequeNumber")
             {
                 if (String.IsNullOrWhiteSpace(Convert.ToString(dgvReceiptFromCustomer.CurrentCell.Value)))
                 {
                     dgvReceiptFromCustomer.CurrentCell.Value = Constants.PaymentMode.CASHTEXT;
-                    dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CASH;
-                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["Amount"];
+                    dgvReceiptFromCustomer.Rows[rowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CASH;
+                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"];
                 }
                 else
                 {
@@ -505,22 +512,22 @@ namespace PharmaUI.ReceiptPayment
                     else
                     {
                         dgvReceiptFromCustomer.CurrentCell.ErrorText = string.Empty;
-                        dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CHEQUE;
-                        dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeDate"];
+                        dgvReceiptFromCustomer.Rows[rowIndex].Cells["PaymentMode"].Value = Constants.PaymentMode.CHEQUE;
+                        dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeDate"];
                     }
                 }
             }
             else if (columnName == "ChequeDate")
             {
-                string chequeDate = Convert.ToString(dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeDate"].Value);
+                string chequeDate = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeDate"].Value);
                 if (ExtensionMethods.IsValidDate(chequeDate))
                 {
-                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["Amount"];
+                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"];
                     dgvReceiptFromCustomer.CurrentRow.Cells["ChequeDate"].ErrorText = String.Empty;
                 }
                 else
                 {
-                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeDate"];
+                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeDate"];
                     dgvReceiptFromCustomer.CurrentRow.Cells["ChequeDate"].ErrorText = Constants.Messages.InValidDate;
 
                 }
@@ -534,13 +541,13 @@ namespace PharmaUI.ReceiptPayment
                 decimal consumedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
 
 
-                if (enteredAmount > 0)
+                if (enteredAmount != 0)
                 {
-                    frmReceiptPaymentAdjustment formReceiptPaymentAdjustment = new frmReceiptPaymentAdjustment();
+                    frmReceiptPaymentAdjustment formReceiptPaymentAdjustment = new frmReceiptPaymentAdjustment(rowIndex);
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
                         ReceiptPaymentID = (long)dgvReceiptFromCustomer.CurrentRow.Cells["ReceiptPaymentID"].Value,
-                        EntityType = Constants.TransactionEntityType.CustomerLedger,
+                        EntityType = Constants.TransactionEntityType.SupplierLedger,
                         EntityCode = Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["LedgerTypeCode"].Value),
                         EntityName = Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["LedgerTypeName"].Value),
                         EntityTotalAmount = enteredAmount,
@@ -551,6 +558,8 @@ namespace PharmaUI.ReceiptPayment
                     formReceiptPaymentAdjustment.FormClosed += FormReceiptPaymentAdjustment_FormClosed;
                     formReceiptPaymentAdjustment.Show();
                 }
+
+                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"];
             }
             else if (columnName == "UnadjustedAmount")
             {
@@ -561,7 +570,7 @@ namespace PharmaUI.ReceiptPayment
                 lblAmtOSVal.Text = String.Empty;
                 lblAmtAdjVal.Text = String.Empty;
 
-                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex + 1].Cells["LedgerTypeCode"];
+                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
                 // dgvReceiptFromCustomer.BeginEdit(true);
             }
         }
@@ -609,6 +618,7 @@ namespace PharmaUI.ReceiptPayment
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeDate"].Value = receiptPayment.ChequeDate;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"].Value = receiptPayment.Amount;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value = receiptPayment.UnadjustedAmount;
+                dgvReceiptFromCustomer.Rows[rowIndex].Cells["OldReceiptPaymentID"].Value = receiptPayment.OldReceiptPaymentID;
             }
         }
 
