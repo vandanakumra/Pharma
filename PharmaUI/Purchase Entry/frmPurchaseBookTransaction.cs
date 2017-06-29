@@ -245,6 +245,8 @@ namespace PharmaUI
             dgvLineItem.CellValueChanged += DgvLineItem_CellValueChanged;
             dgvLineItem.EditingControlShowing += DgvLineItem_EditingControlShowing;
             dgvLineItem.SelectionChanged += DgvLineItem_SelectionChanged;
+            dgvLineItem.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgvLineItem.cell
 
         }
 
@@ -261,13 +263,20 @@ namespace PharmaUI
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(Column_KeyPress);
+                    tb.KeyPress +=  new KeyPressEventHandler(Column_KeyPress);
+                    tb.KeyDown += Tb_KeyDown;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Tb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                e.SuppressKeyPress = true;
         }
 
         private void Column_KeyPress(object sender, KeyPressEventArgs e)
@@ -299,6 +308,12 @@ namespace PharmaUI
                         {
                             PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
                             OpenRateDialog(dgvLineItem.CurrentCell.RowIndex, lineItem);
+                        }
+                        else
+                        {
+                            e.Handled = true;
+                            
+                            dgvLineItem.EndEdit();
                         }
                     }
                 }
@@ -381,9 +396,10 @@ namespace PharmaUI
                         InsertUpdateLineItemAndsetToGrid(lineItem);
                     }
                 }
-
+                dgvLineItem.Rows[e.RowIndex].Selected = true;
+                dgvLineItem.CurrentCell = dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 OpenDialogAndMoveToNextControl(columnName);
-
+                
 
             }
             catch (Exception ex)
@@ -797,7 +813,11 @@ namespace PharmaUI
                     ExtensionMethods.AddTrasanctionFormToPanel(form, ExtensionMethods.MainPanel);
                     form.Show();
                 }
-               
+               else if (keyData == Keys.Enter && dgvLineItem.IsCurrentCellInEditMode)
+                {
+                    return true;
+
+                }
             }
             catch (Exception ex)
             {
@@ -1162,6 +1182,7 @@ namespace PharmaUI
             {
                 if (e.KeyData == Keys.Enter || e.KeyData == Keys.Right)
                 {
+                    e.SuppressKeyPress = true;
                     string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
 
                     if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentCell.Value)))// || columnName == "SrNo")
@@ -1328,7 +1349,8 @@ namespace PharmaUI
 
                 if (colIndex <= 8)
                 {
-                    dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells[colIndex];
+                    dgvLineItem.Rows[rowIndex].Selected = true;
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
                 }
                 else
                 {
@@ -1339,6 +1361,7 @@ namespace PharmaUI
                     }
                     else
                     {
+                        dgvLineItem.Rows[rowIndex + 1].Selected = true;
                         dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells["ItemCode"];
                     }
                 }
@@ -1552,7 +1575,13 @@ namespace PharmaUI
                     dgvLineItem.Rows[rowIndex].Selected = true;
 
                     InsertUpdateLineItemAndsetToGrid(lineItem);
+
+                    
                 }
+                dgvLineItem.Rows[0].Selected = true;
+                dgvLineItem.Focus();
+                dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                
             }
 
         }

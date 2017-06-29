@@ -149,7 +149,9 @@
             this.dgvLineItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLineItem.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dgvLineItem.Location = new System.Drawing.Point(12, 108);
+            this.dgvLineItem.MultiSelect = false;
             this.dgvLineItem.Name = "dgvLineItem";
+            this.dgvLineItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvLineItem.Size = new System.Drawing.Size(894, 202);
             this.dgvLineItem.TabIndex = 11;
             this.dgvLineItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvLineItem_KeyDown);
@@ -702,7 +704,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 312);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 30);
             this.tableLayoutPanel1.TabIndex = 129;
             // 
