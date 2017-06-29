@@ -245,6 +245,7 @@ namespace PharmaUI
             dgvLineItem.CellValueChanged += DgvLineItem_CellValueChanged;
             dgvLineItem.EditingControlShowing += DgvLineItem_EditingControlShowing;
             dgvLineItem.SelectionChanged += DgvLineItem_SelectionChanged;
+            dgvLineItem.SelectionMode = DataGridViewSelectionMode.CellSelect;
 
         }
 
@@ -358,11 +359,18 @@ namespace PharmaUI
                         {
                             MessageBox.Show("Quantity can not be less than used quantity. Used Quantity is --> " + usedQuantity);
 
-                            dgvLineItem.CurrentCell.Value = usedQuantity + balanceQuantity;
-                            dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
-                            dgvLineItem.BeginEdit(true);
+                            dgvLineItem.Rows[e.RowIndex].Selected = true;
+                            dgvLineItem.CurrentCell = dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex - 1];
+                            dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = usedQuantity + balanceQuantity;
+
+
+
+                            this.BeginInvoke(new MethodInvoker(() =>
+                            {
+                                OpenDialogAndMoveToNextControl(columnName, rowIndex);
+                            }));
                             bFlag = false;
-                            return;
+                           return;
                         }
 
 
@@ -1561,9 +1569,13 @@ namespace PharmaUI
                     rowIndex = dgvLineItem.Rows.Count - 1;
 
                     dgvLineItem.Rows[rowIndex].Selected = true;
-
+                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["ItemCode"];
                     InsertUpdateLineItemAndsetToGrid(lineItem);
                 }
+
+                dgvLineItem.Rows[0].Selected = true;
+                dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+
             }
 
         }
