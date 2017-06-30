@@ -161,7 +161,7 @@ namespace PharmaBusinessObjects
         bool SaveSaleEntryData(long purchaseBookHeaderID);
         bool IsTempSaleEntryExists(long purchaseSaleBookHeaderID);
         void RollbackSaleEntry(long purchaseSaleBookHeaderID);
-
+        PersonRouteMaster GetPersonRouteMasterByCode(string personRouteCode);
         #endregion
         #region "Reports"
         DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID);

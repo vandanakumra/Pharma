@@ -645,48 +645,28 @@ namespace PharmaUI
                             break;
                         case "txtSalesManCode":
                             {
-                                if (isDirty)
-                                {
-                                    if (!string.IsNullOrEmpty(txtSalesManCode.Text))
-                                    {
-                                        if (header.PurchaseSaleBookHeaderID > 0)
-                                        {
-                                            AccountLedgerMaster master = applicationFacade.GetAccountLedgerByCode(txtSalesManCode.Text);
-
-                                            if (master != null && master.AccountLedgerID > 0)
-                                            {
-                                                header.SalesManId = master.AccountLedgerID;
-                                                lblSaleTypeCode.Text = master.AccountLedgerCode;
-                                                applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
-
-                                                if (dgvLineItem.Rows.Count == 0)
-                                                    AddRowToGrid();
-                                                else
-                                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
-                                            }
-                                            else
-                                            {
-                                                lblSaleTypeCode.Text = "**No Such Code**";
-                                                txtSalesManCode.Focus();
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        txtSalesManCode.Focus();
-                                    }
-                                }
-                                else {
-                                    if (!string.IsNullOrEmpty(txtSalesManCode.Text))
-                                    {
-                                        if (dgvLineItem.Rows.Count > 0 && header.PurchaseSaleBookHeaderID > 0)
-                                            AddRowToGrid();
-                                    }
-                                    else
-                                    {
-                                        txtSalesManCode.Focus();
-                                    }
-                                }
+                                //if (isDirty)
+                                //{
+                                //    if (!string.IsNullOrEmpty(txtSalesManCode.Text))
+                                //    {
+                                //        SetSalesManCode();
+                                //    }
+                                //    else
+                                //    {
+                                //        txtSalesManCode.Focus();
+                                //    }
+                                //}
+                                //else {
+                                //    if (!string.IsNullOrEmpty(txtSalesManCode.Text))
+                                //    {
+                                //        if (dgvLineItem.Rows.Count > 0 && header.PurchaseSaleBookHeaderID > 0)
+                                //            AddRowToGrid();
+                                //    }
+                                //    else
+                                //    {
+                                //        txtSalesManCode.Focus();
+                                //    }
+                                //}
                               
                              }
                             break;
@@ -699,6 +679,60 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void SetSalesManCode(bool isValueChanged)
+        {
+            if (!string.IsNullOrEmpty(txtSalesManCode.Text))
+            {
+                if (isValueChanged)
+                {
+                    PersonRouteMaster master = applicationFacade.GetPersonRouteMasterByCode(txtSalesManCode.Text);
+
+                    if (master != null && master.PersonRouteID > 0)
+                    {
+                        header.SalesManId = master.PersonRouteID;
+                        lblSaleTypeCode.Text = master.PersonRouteName;
+                        if (header.PurchaseSaleBookHeaderID > 0)
+                        {
+                            applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
+                        }
+                        cbxSaleType.Focus();
+                        //if (dgvLineItem.Rows.Count == 0)
+                        //    AddRowToGrid();
+                        //else
+                        //    dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                    }
+                    else
+                    {
+                        lblSaleTypeCode.Text = "**No Such Code**";
+                        txtSalesManCode.Focus();
+                    }
+                }
+                else {
+                    cbxSaleType.Focus();
+                }
+            }
+            else
+            {
+                PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                {
+                    RecordTypeNme = Constants.RecordType.SALESMANDISPLAYNAME,
+                    PersonRouteID = 0,
+                    PersonRouteName = string.Empty
+                };
+
+                frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                frmPersonRouteMaster.IsInChildMode = true;
+                //Set Child UI
+                ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
+                frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+                frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
+                frmPersonRouteMaster.Show();
+                frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+
+            }
+                            
         }
 
         private void Tb1_TextChanged(object sender, EventArgs e)
@@ -756,6 +790,10 @@ namespace PharmaUI
                         //frm.FormClosed += AllBillForSuppier_FormClosed;
                         //frm.ShowDialog();
 
+                    }
+                    else if (txt.Name == "txtSalesManCode")
+                    {
+                        SetSalesManCode(isDirty);
                     }
                     else if (!string.IsNullOrEmpty(txt.Text))
                     {
@@ -835,6 +873,39 @@ namespace PharmaUI
                         }
                     }
                 }
+            }
+
+        }
+
+        private void FrmPersonRouteMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+
+                PersonRouteMaster lastSelectedPersonRoute = (sender as frmPersonRouteMaster).LastSelectedPersonRoute;
+
+                if (lastSelectedPersonRoute != null)
+                {
+                    if (lastSelectedPersonRoute.PersonRouteID > 0)
+                    {
+                        switch (lastSelectedPersonRoute.RecordTypeNme)
+                        {
+                            
+                            case Constants.RecordType.SALESMANDISPLAYNAME:
+                                {
+                                    txtSalesManCode.Text = lastSelectedPersonRoute.PersonRouteCode;
+                                    SetSalesManCode(true);
+                                }
+                                break;
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

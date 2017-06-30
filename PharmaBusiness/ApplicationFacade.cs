@@ -612,6 +612,18 @@ namespace PharmaBusiness
             }
         }
 
+        public PersonRouteMaster GetPersonRouteMasterByCode(string personRouteCode)
+        {
+            try
+            {
+                return new PersonRouteMasterBiz(this.LoggedInUser).GetPersonRouteMasterByCode(personRouteCode);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Customer Ledger Master

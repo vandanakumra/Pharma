@@ -125,6 +125,18 @@ namespace PharmaDAL.Master
 
         }
 
+        public PharmaBusinessObjects.Master.PersonRouteMaster GetPersonRouteMasterByCode(string personRouteCode)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return context.PersonRouteMaster.Where(p => p.PersonRouteCode == personRouteCode)
+                    .Select(p=>new PharmaBusinessObjects.Master.PersonRouteMaster() {
+                        PersonRouteCode = p.PersonRouteCode,
+                        PersonRouteName=p.PersonRouteName,
+                        PersonRouteID = p.PersonRouteID,
+                    }).FirstOrDefault();
+            }
+        }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using PharmaDAL.Master;
+﻿using PharmaBusinessObjects.Master;
+using PharmaDAL.Master;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,5 +42,9 @@ namespace PharmaBusiness.Master
             return personRouteList;
         }
 
-    }
+        internal PersonRouteMaster GetPersonRouteMasterByCode(string personRouteCode)
+        {
+            return new PersonRouteMasterDao(this.LoggedInUser).GetPersonRouteMasterByCode(personRouteCode);
+        }
+        }
 }
