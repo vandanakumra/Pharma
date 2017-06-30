@@ -62,14 +62,21 @@ namespace PharmaUI.ReceiptPayment
 
         private void DtReceiptPayment_LostFocus(object sender, EventArgs e)
         {
-            if (!ExtensionMethods.IsValidDate(dtReceiptPayment.Text))
+            try
             {
-                errorProviderReceipt.SetError(dtReceiptPayment, Constants.Messages.InValidDate);
-                dtReceiptPayment.Focus();
+                if (!ExtensionMethods.IsValidDate(dtReceiptPayment.Text))
+                {
+                    errorProviderReceipt.SetError(dtReceiptPayment, Constants.Messages.InValidDate);
+                    dtReceiptPayment.Focus();
+                }
+                else
+                {
+                    errorProviderReceipt.SetError(dtReceiptPayment, String.Empty);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                errorProviderReceipt.SetError(dtReceiptPayment, String.Empty);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -128,7 +135,7 @@ namespace PharmaUI.ReceiptPayment
             dgvReceiptFromCustomer.Columns.Add("POST", "POST");
             dgvReceiptFromCustomer.Columns.Add("PISNumber", "PISNumber");
             dgvReceiptFromCustomer.Columns.Add("UnadjustedAmount", "UnadjustedAmount");
-            dgvReceiptFromCustomer.Columns.Add("ConsumedAmount", "ConsumedAmount"); 
+            dgvReceiptFromCustomer.Columns.Add("ConsumedAmount", "ConsumedAmount");
             dgvReceiptFromCustomer.Columns.Add("OldReceiptPaymentID", "OldReceiptPaymentID");
 
             DisplayDataGrid();
@@ -266,33 +273,40 @@ namespace PharmaUI.ReceiptPayment
 
         private void FormCustomerLedgerMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
-            CustomerLedgerMaster selectedCustomer = (sender as frmCustomerLedgerMaster).LastSelectedCustomerLedger;
-            if (selectedCustomer != null)
+            try
             {
-                ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
+                ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
+                CustomerLedgerMaster selectedCustomer = (sender as frmCustomerLedgerMaster).LastSelectedCustomerLedger;
+                if (selectedCustomer != null)
                 {
-                    VoucherTypeCode = Constants.VoucherTypeCode.RECEIPTFROMCUSTOMER,
-                    VoucherDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text),
-                    LedgerType = Constants.TransactionEntityType.CustomerLedger,
-                    LedgerTypeCode = selectedCustomer.CustomerLedgerCode,
-                    LedgerTypeName = selectedCustomer.CustomerLedgerName,
-                    PaymentMode = Constants.PaymentMode.CASH,
-                    BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag),
-                    BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text)
-                };
+                    ReceiptPaymentItem receiptPaymentForSelectedCust = new ReceiptPaymentItem()
+                    {
+                        VoucherTypeCode = Constants.VoucherTypeCode.RECEIPTFROMCUSTOMER,
+                        VoucherDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text),
+                        LedgerType = Constants.TransactionEntityType.CustomerLedger,
+                        LedgerTypeCode = selectedCustomer.CustomerLedgerCode,
+                        LedgerTypeName = selectedCustomer.CustomerLedgerName,
+                        PaymentMode = Constants.PaymentMode.CASH,
+                        BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag),
+                        BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text)
+                    };
 
-                TransactionEntity transactionEntity = new TransactionEntity()
-                {
-                    EntityType = Constants.TransactionEntityType.CustomerLedger,
-                    EntityCode = selectedCustomer.CustomerLedgerCode
-                };
+                    TransactionEntity transactionEntity = new TransactionEntity()
+                    {
+                        EntityType = Constants.TransactionEntityType.CustomerLedger,
+                        EntityCode = selectedCustomer.CustomerLedgerCode
+                    };
 
-                UpdateReceiptPaymentRow(receiptPaymentForSelectedCust);
-                LoadGridBillOutstanding(transactionEntity);
+                    UpdateReceiptPaymentRow(receiptPaymentForSelectedCust);
+                    LoadGridBillOutstanding(transactionEntity);
 
-                dgvReceiptFromCustomer.Focus();
-                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
+                    dgvReceiptFromCustomer.Focus();
+                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[dgvReceiptFromCustomer.SelectedCells[0].RowIndex].Cells["ChequeNumber"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -337,7 +351,7 @@ namespace PharmaUI.ReceiptPayment
                 dgvReceiptFromCustomer.SelectionChanged -= DgvReceiptFromCustomer_SelectionChanged;
 
                 ReceiptPaymentItem transaction = (sender as frmTransactions).SelectedTransaction;
-                if (transaction.ReceiptPaymentID > 0)
+                if (transaction != null && transaction.ReceiptPaymentID > 0)
                 {
                     dgvReceiptFromCustomer.Rows.Add();
 
@@ -349,7 +363,7 @@ namespace PharmaUI.ReceiptPayment
 
                     TransactionEntity transactionEntity = new TransactionEntity();
 
-                    txtTransactAccount.Tag= Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["BankAccountLedgerTypeCode"].Value);
+                    txtTransactAccount.Tag = Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["BankAccountLedgerTypeCode"].Value);
                     txtTransactAccount.Text = Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["BankAccountLedgerTypeName"].Value);
 
                     transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["OldReceiptPaymentID"].Value;
@@ -366,7 +380,7 @@ namespace PharmaUI.ReceiptPayment
             }
             catch (Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -406,7 +420,7 @@ namespace PharmaUI.ReceiptPayment
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -615,6 +629,7 @@ namespace PharmaUI.ReceiptPayment
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["PaymentMode"].Value = receiptPayment.PaymentMode;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeNumber"].Value = receiptPayment.ChequeNumber;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["BankAccountLedgerTypeName"].Value = receiptPayment.BankAccountLedgerTypeName;
+                dgvReceiptFromCustomer.Rows[rowIndex].Cells["BankAccountLedgerTypeCode"].Value = receiptPayment.BankAccountLedgerTypeCode;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeDate"].Value = receiptPayment.ChequeDate;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"].Value = receiptPayment.Amount;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value = receiptPayment.UnadjustedAmount;
@@ -828,7 +843,14 @@ namespace PharmaUI.ReceiptPayment
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         ///Configure for Edit Mode
@@ -836,7 +858,6 @@ namespace PharmaUI.ReceiptPayment
         public void ConfigureUIForModification()
         {
             this.IsInEditMode = true;
-
         }
 
     }

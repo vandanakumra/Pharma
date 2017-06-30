@@ -50,11 +50,12 @@
             this.receiptPaymentBooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptFromCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiptFromCustTransactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentToCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.modifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -251,10 +252,20 @@
             this.receiptFromCustTransactionToolStripMenuItem.Text = "Transaction";
             this.receiptFromCustTransactionToolStripMenuItem.Click += new System.EventHandler(this.receiptFromCustTransactionToolStripMenuItem_Click);
             // 
+            // modifyToolStripMenuItem
+            // 
+            this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
+            this.modifyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.M)));
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.modifyToolStripMenuItem.Text = "Modify";
+            this.modifyToolStripMenuItem.Click += new System.EventHandler(this.modifyToolStripMenuItem_Click);
+            // 
             // paymentToCustomerToolStripMenuItem
             // 
             this.paymentToCustomerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.transactionToolStripMenuItem});
+            this.transactionToolStripMenuItem,
+            this.modifyToolStripMenuItem1});
             this.paymentToCustomerToolStripMenuItem.Name = "paymentToCustomerToolStripMenuItem";
             this.paymentToCustomerToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.paymentToCustomerToolStripMenuItem.Text = "Payment To Supplier";
@@ -283,14 +294,14 @@
             this.pnlMain.Size = new System.Drawing.Size(756, 31);
             this.pnlMain.TabIndex = 1;
             // 
-            // modifyToolStripMenuItem
+            // modifyToolStripMenuItem1
             // 
-            this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
-            this.modifyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.modifyToolStripMenuItem1.Name = "modifyToolStripMenuItem1";
+            this.modifyToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.M)));
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.modifyToolStripMenuItem.Text = "Modify";
-            this.modifyToolStripMenuItem.Click += new System.EventHandler(this.modifyToolStripMenuItem_Click);
+            this.modifyToolStripMenuItem1.Size = new System.Drawing.Size(208, 22);
+            this.modifyToolStripMenuItem1.Text = "Modify";
+            this.modifyToolStripMenuItem1.Click += new System.EventHandler(this.modifyToolStripMenuItem1_Click);
             // 
             // frmMainForm
             // 
@@ -341,5 +352,6 @@
         private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem modificationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modifyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modifyToolStripMenuItem1;
     }
 }
