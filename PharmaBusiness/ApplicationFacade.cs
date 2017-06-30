@@ -952,6 +952,19 @@ namespace PharmaBusiness
             }
         }
 
+        public void ClearUnsavedReceiptPayment(List<int> unsavedReceiptPaymentIDs)
+        {
+            try
+            {
+                new ReceiptPaymentBiz(this.LoggedInUser).ClearUnsavedReceiptPayment(unsavedReceiptPaymentIDs);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+
         public void SaveAllTempTransaction(List<long> tempReceiptPaymentList)
         {
             try

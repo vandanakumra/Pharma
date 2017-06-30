@@ -144,7 +144,8 @@ namespace PharmaBusinessObjects
         long InsertUpdateTempReceiptPayment(PharmaBusinessObjects.Transaction.ReceiptPayment.ReceiptPaymentItem receiptPayment);
         void InsertTempBillAdjustment(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted> billAdjustmentList);
         void ClearTempBillAdjustment(TransactionEntity transactionEntity);
-        void ClearTempTransaction(TransactionEntity transactionEntity);       
+        void ClearTempTransaction(TransactionEntity transactionEntity);
+        void ClearUnsavedReceiptPayment(List<int> unsavedReceiptPaymentIDs);
         bool DeleteUnSavedData(long purchaseSaleBookHeaderID);
         List<SaleChangeType> GetSaleEntryChangeTypes();
         void SaveAllTempTransaction(List<long> tempReceiptPaymentList);

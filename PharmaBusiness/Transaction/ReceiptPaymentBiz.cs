@@ -60,6 +60,16 @@ namespace PharmaBusiness.Transaction
             new ReceiptPaymentDao(this.LoggedInUser).ClearTempTransaction(transactionEntity);
         }
 
+        internal void ClearUnsavedReceiptPayment(List<int> unsavedReceiptPaymentIDs)
+        {
+            unsavedReceiptPaymentIDs.ForEach(id =>
+                    {
+                        TransactionEntity unsavedReceiptPaymentEntity = new TransactionEntity() { ReceiptPaymentID = id };
+                        new ReceiptPaymentDao(this.LoggedInUser).ClearTempTransaction(unsavedReceiptPaymentEntity);
+                    }
+            );
+        }
+
         internal void SaveAllTempTransaction(List<long> tempReceiptPaymentList)
         {
             new ReceiptPaymentDao(this.LoggedInUser).SaveAllTempTransaction(tempReceiptPaymentList);

@@ -170,7 +170,6 @@ namespace PharmaUI.ReceiptPayment
             dgvReceiptFromCustomer.Columns["ChequeDate"].Visible = true;
             dgvReceiptFromCustomer.Columns["ChequeDate"].HeaderText = "Cheque Date";
             dgvReceiptFromCustomer.Columns["ChequeDate"].DisplayIndex = 3;
-            dgvReceiptFromCustomer.Columns["ChequeDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             dgvReceiptFromCustomer.Columns["Amount"].Visible = true;
             dgvReceiptFromCustomer.Columns["Amount"].HeaderText = "Amount";
@@ -634,6 +633,7 @@ namespace PharmaUI.ReceiptPayment
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["BankAccountLedgerTypeCode"].Value = receiptPayment.BankAccountLedgerTypeCode;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeDate"].Value = receiptPayment.ChequeDate;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"].Value = receiptPayment.Amount;
+                dgvReceiptFromCustomer.Rows[rowIndex].Cells["ConsumedAmount"].Value = receiptPayment.Amount - receiptPayment.UnadjustedAmount;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value = receiptPayment.UnadjustedAmount;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["OldReceiptPaymentID"].Value = receiptPayment.OldReceiptPaymentID;
             }
@@ -847,7 +847,20 @@ namespace PharmaUI.ReceiptPayment
         {
             try
             {
-                this.Close();
+                List<int> unsavedReceiptPayment = GetUnsavedReceiptPayment();
+                if (unsavedReceiptPayment.Count > 0)
+                {
+                    DialogResult isConfirm = MessageBox.Show("There are some unsaved changes. Do you want to close the screen", "Warning", MessageBoxButtons.YesNo);
+                    if (isConfirm == DialogResult.Yes)
+                    {
+                        applicationFacade.ClearUnsavedReceiptPayment(unsavedReceiptPayment);
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }               
             }
             catch (Exception ex)
             {
@@ -865,9 +878,20 @@ namespace PharmaUI.ReceiptPayment
 
         private void AddNewRowToGrid()
         {
-            int rowIndex = dgvReceiptFromCustomer.Rows.Add();
-            DataGridViewRow row = dgvReceiptFromCustomer.Rows[rowIndex];
-           // row.Cells["ChequeDate"].Value = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+            if (IsInEditMode && dgvReceiptFromCustomer.Rows.Count > 0)
+            {
+                int rowIndex = dgvReceiptFromCustomer.Rows.Add();
+                DataGridViewRow row = dgvReceiptFromCustomer.Rows[rowIndex];
+                // row.Cells["ChequeDate"].Value = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+            }
+        }
+
+        private List<int> GetUnsavedReceiptPayment()
+        {
+            List<int> unsavedReceivedPayment = new List<int>();
+            unsavedReceivedPayment=dgvReceiptFromCustomer.Rows.Cast<DataGridViewRow>().Where(r =>!String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["ReceiptPaymentID"].Value)))
+                                                               .Select(x => Convert.ToInt32(x.Cells["ReceiptPaymentID"].Value)).ToList();
+            return unsavedReceivedPayment;
         }
     }
 }

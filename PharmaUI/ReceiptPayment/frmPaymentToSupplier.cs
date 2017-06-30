@@ -172,7 +172,6 @@ namespace PharmaUI.ReceiptPayment
             dgvPaymentToSupplier.Columns["ChequeDate"].Visible = true;
             dgvPaymentToSupplier.Columns["ChequeDate"].HeaderText = "Cheque Date";
             dgvPaymentToSupplier.Columns["ChequeDate"].DisplayIndex = 3;
-            dgvPaymentToSupplier.Columns["ChequeDate"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             dgvPaymentToSupplier.Columns["Amount"].Visible = true;
             dgvPaymentToSupplier.Columns["Amount"].HeaderText = "Amount";
@@ -560,7 +559,6 @@ namespace PharmaUI.ReceiptPayment
                 decimal unadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["UnadjustedAmount"].Value)) ?? default(decimal);
                 decimal consumedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvPaymentToSupplier.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
 
-
                 if (enteredAmount != 0)
                 {
                     frmReceiptPaymentAdjustment formReceiptPaymentAdjustment = new frmReceiptPaymentAdjustment(rowIndex);
@@ -637,8 +635,9 @@ namespace PharmaUI.ReceiptPayment
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeNumber"].Value = receiptPayment.ChequeNumber;
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["BankAccountLedgerTypeName"].Value = receiptPayment.BankAccountLedgerTypeName;
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["BankAccountLedgerTypeCode"].Value = receiptPayment.BankAccountLedgerTypeCode;
-                dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeDate"].Value = receiptPayment.ChequeDate;
+                dgvPaymentToSupplier.Rows[rowIndex].Cells["ChequeDate"].Value = receiptPayment.ChequeDate == null ? String.Empty : ExtensionMethods.ConvertToAppDateFormat((DateTime)receiptPayment.ChequeDate);
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"].Value = receiptPayment.Amount;
+                dgvPaymentToSupplier.Rows[rowIndex].Cells["ConsumedAmount"].Value = receiptPayment.Amount - receiptPayment.UnadjustedAmount;
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"].Value = receiptPayment.UnadjustedAmount;
                 dgvPaymentToSupplier.Rows[rowIndex].Cells["OldReceiptPaymentID"].Value = receiptPayment.OldReceiptPaymentID;
             }
@@ -867,7 +866,20 @@ namespace PharmaUI.ReceiptPayment
         {
             try
             {
-                this.Close();
+                List<int> unsavedReceiptPayment = GetUnsavedReceiptPayment();
+                if (unsavedReceiptPayment.Count > 0)
+                {
+                    DialogResult isConfirm = MessageBox.Show("There are some unsaved changes. Do you want to close the screen", "Warning", MessageBoxButtons.YesNo);
+                    if (isConfirm == DialogResult.Yes)
+                    {
+                        applicationFacade.ClearUnsavedReceiptPayment(unsavedReceiptPayment);
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -884,9 +896,20 @@ namespace PharmaUI.ReceiptPayment
 
         private void AddNewRowToGrid()
         {
-            int rowIndex = dgvPaymentToSupplier.Rows.Add();
-            DataGridViewRow row = dgvPaymentToSupplier.Rows[rowIndex];
-           // row.Cells["ChequeDate"].Value = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+            if (IsInEditMode && dgvPaymentToSupplier.Rows.Count > 0)
+            {
+                int rowIndex = dgvPaymentToSupplier.Rows.Add();
+                DataGridViewRow row = dgvPaymentToSupplier.Rows[rowIndex];
+                // row.Cells["ChequeDate"].Value = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+            }
+        }
+
+        private List<int> GetUnsavedReceiptPayment()
+        {
+            List<int> unsavedReceivedPayment = new List<int>();
+            unsavedReceivedPayment = dgvPaymentToSupplier.Rows.Cast<DataGridViewRow>().Where(r => !String.IsNullOrWhiteSpace(Convert.ToString(r.Cells["ReceiptPaymentID"].Value)))
+                                                               .Select(x => Convert.ToInt32(x.Cells["ReceiptPaymentID"].Value)).ToList();
+            return unsavedReceivedPayment;
         }
     }
 }
