@@ -258,7 +258,7 @@ namespace PharmaUI.ReceiptPayment
 
                     if (dgvReceiptFromCustomer.Rows.Count == 0)
                     {
-                        dgvReceiptFromCustomer.Rows.Add();
+                        AddNewRowToGrid();
                     }
 
                     dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
@@ -288,7 +288,8 @@ namespace PharmaUI.ReceiptPayment
                         LedgerTypeName = selectedCustomer.CustomerLedgerName,
                         PaymentMode = Constants.PaymentMode.CASH,
                         BankAccountLedgerTypeCode = Convert.ToString(txtTransactAccount.Tag),
-                        BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text)
+                        BankAccountLedgerTypeName = Convert.ToString(txtTransactAccount.Text),
+                        ChequeDate = DateTime.Now
                     };
 
                     TransactionEntity transactionEntity = new TransactionEntity()
@@ -353,7 +354,7 @@ namespace PharmaUI.ReceiptPayment
                 ReceiptPaymentItem transaction = (sender as frmTransactions).SelectedTransaction;
                 if (transaction != null && transaction.ReceiptPaymentID > 0)
                 {
-                    dgvReceiptFromCustomer.Rows.Add();
+                    AddNewRowToGrid();
 
                     dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
 
@@ -387,6 +388,7 @@ namespace PharmaUI.ReceiptPayment
 
         ///Data Grid Events
         ///
+
         private void DgvReceiptFromCustomer_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -577,7 +579,7 @@ namespace PharmaUI.ReceiptPayment
             }
             else if (columnName == "UnadjustedAmount")
             {
-                dgvReceiptFromCustomer.Rows.Add();
+                AddNewRowToGrid();
 
                 dgvCustomerBillOS.DataSource = null;
                 dgvCustomerBillAdjusted.DataSource = null;
@@ -796,7 +798,7 @@ namespace PharmaUI.ReceiptPayment
                             dgvReceiptFromCustomer.Refresh();
                             if (dgvReceiptFromCustomer.Rows.Count == 0)
                             {
-                                dgvReceiptFromCustomer.Rows.Add();
+                                AddNewRowToGrid();
                                 dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
                                 dgvReceiptFromCustomer.BeginEdit(true);
                             }
@@ -860,5 +862,12 @@ namespace PharmaUI.ReceiptPayment
             this.IsInEditMode = true;
         }
 
+
+        private void AddNewRowToGrid()
+        {
+            int rowIndex = dgvReceiptFromCustomer.Rows.Add();
+            DataGridViewRow row = dgvReceiptFromCustomer.Rows[rowIndex];
+           // row.Cells["ChequeDate"].Value = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+        }
     }
 }
