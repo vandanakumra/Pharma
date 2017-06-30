@@ -25,14 +25,19 @@ namespace PharmaDataMigration.DBFWriter
         public void WriteFile()
         {
 
-            DataSetIntoDBF(ReadExcel());
+            for (int i = 1; i <= 4; i++)
+            {                
+                DataSetIntoDBF(ReadExcel(i.ToString()));
+            }
         }
 
-        private DataTable ReadExcel()
+        private DataTable ReadExcel(string filename)
         {
             try
             {
-                string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\PharmaProject\TestDBF\HSNCodes.xls;" + @"Extended Properties='Excel 8.0;HDR=Yes;'";
+                // string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\PharmaProject\TestDBF\" + filename + ".xlsx;" + @"Extended Properties='Excel 8.0;HDR=Yes;'";
+
+                string con = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\PharmaProject\TestDBF\" + filename + ".xlsx;Extended Properties='Excel 12.0;HDR=YES;IMEX=1;';";
 
                 using (OleDbConnection connection = new OleDbConnection(con))
                 {
@@ -50,49 +55,54 @@ namespace PharmaDataMigration.DBFWriter
             }
         }
 
+        ArrayList list = new ArrayList();
+
         public void DataSetIntoDBF(DataTable dataSet)
-        {
-            ArrayList list = new ArrayList();
+        {          
 
             string fileName = "HSN";
+            string createSql = "";
 
-            string createSql = "create table " + fileName + " (";
-
-            foreach (DataColumn dc in dataSet.Columns)
+            if (!File.Exists(@"D:\PharmaProject\TestDBF\HSN.dbf"))
             {
-                string fieldName = dc.ColumnName;
+                createSql = "create table " + fileName + " (";
 
-                string type = dc.DataType.ToString();
-
-                switch (type)
+                foreach (DataColumn dc in dataSet.Columns)
                 {
-                    case "System.String":
-                        type = "varchar(100)";
-                        break;
+                    string fieldName = dc.ColumnName;
 
-                    case "System.Boolean":
-                        type = "varchar(10)";
-                        break;
+                    string type = dc.DataType.ToString();
 
-                    case "System.Int32":
-                        type = "varchar(10)";
-                        break;
+                    switch (type)
+                    {
+                        case "System.String":
+                            type = "varchar(100)";
+                            break;
 
-                    case "System.Double":
-                        type = "varchar(10)";
-                        break;
+                        case "System.Boolean":
+                            type = "varchar(10)";
+                            break;
 
-                    case "System.DateTime":
-                        type = "TimeStamp";
-                        break;
+                        case "System.Int32":
+                            type = "varchar(10)";
+                            break;
+
+                        case "System.Double":
+                            type = "varchar(10)";
+                            break;
+
+                        case "System.DateTime":
+                            type = "TimeStamp";
+                            break;
+                    }
+
+                    createSql = createSql + "[" + fieldName + "]" + " " + type + ",";
+
+                    list.Add(fieldName);
                 }
 
-                createSql = createSql + "[" + fieldName + "]" + " " + type + ",";
-
-                list.Add(fieldName);
+                createSql = createSql.Substring(0, createSql.Length - 1) + ")";
             }
-
-            createSql = createSql.Substring(0, createSql.Length - 1) + ")";
 
             using (OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; " + " Data Source=" + Common.DataDirectory + "; " + "Extended Properties=dBase IV"))
             {
@@ -102,9 +112,12 @@ namespace PharmaDataMigration.DBFWriter
 
                 con.Open();
 
-                cmd.CommandText = createSql;
+                if (!string.IsNullOrEmpty(createSql))
+                {
+                    cmd.CommandText = createSql;
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
 
                 foreach (DataRow row in dataSet.Rows)
                 {
