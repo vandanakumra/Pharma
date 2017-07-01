@@ -551,9 +551,9 @@ namespace PharmaUI.ReceiptPayment
             {
                 RaisePaymentModeCalculations();
 
-                decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["Amount"].Value)) ?? default(decimal);
-                decimal unadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["UnadjustedAmount"].Value)) ?? default(decimal);
-                decimal consumedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["ConsumedAmount"].Value)) ?? default(decimal);
+                decimal enteredAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"].Value)) ?? default(decimal);
+                decimal unadjustedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value)) ?? default(decimal);
+                decimal consumedAmount = ExtensionMethods.SafeConversionDecimal(Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["ConsumedAmount"].Value)) ?? default(decimal);
 
 
                 if (enteredAmount != 0)
@@ -561,10 +561,10 @@ namespace PharmaUI.ReceiptPayment
                     frmReceiptPaymentAdjustment formReceiptPaymentAdjustment = new frmReceiptPaymentAdjustment(rowIndex);
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
-                        ReceiptPaymentID = (long)dgvReceiptFromCustomer.CurrentRow.Cells["ReceiptPaymentID"].Value,
-                        EntityType = Constants.TransactionEntityType.SupplierLedger,
-                        EntityCode = Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["LedgerTypeCode"].Value),
-                        EntityName = Convert.ToString(dgvReceiptFromCustomer.CurrentRow.Cells["LedgerTypeName"].Value),
+                        ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[rowIndex].Cells["ReceiptPaymentID"].Value,
+                        EntityType = Constants.TransactionEntityType.CustomerLedger,
+                        EntityCode = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["LedgerTypeCode"].Value),
+                        EntityName = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["LedgerTypeName"].Value),
                         EntityTotalAmount = enteredAmount,
                         EntityBalAmount = enteredAmount - consumedAmount
                     };
