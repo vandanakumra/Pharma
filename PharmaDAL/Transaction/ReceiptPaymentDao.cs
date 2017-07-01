@@ -427,7 +427,20 @@ namespace PharmaDAL.Transaction
                     ///
                     foreach (var tempAdj in tempBillAdjustmentForEntity)
                     {
-                        tempAdj.BillOutStandings.OSAmount += tempAdj.Amount;
+                        if (tempAdj.TempReceiptPayment.OldReceiptPaymentID != null)
+                        {
+                            var billOutStanding = context.BillOutStandings.Where(p => p.BillOutStandingsID == tempAdj.TempReceiptPayment.OldReceiptPaymentID).FirstOrDefault();
+                            if (billOutStanding != null)
+                            {
+                                billOutStanding.OSAmount = tempAdj.BillOutStandings.BillAmount - tempAdj.Amount;
+                            }
+
+                            // tempAdj.BillOutStandings.OSAmount = tempAdj.BillOutStandings.BillAmount - tempAdj.Amount;
+                        }
+                        else
+                        {
+                            tempAdj.BillOutStandings.OSAmount += tempAdj.Amount;
+                        }
                     }
 
                     context.TempBillOutStandingsAudjustment.RemoveRange(tempBillAdjustmentForEntity);
@@ -456,7 +469,20 @@ namespace PharmaDAL.Transaction
                             ///
                             foreach (var tempAdj in tempAdjustments)
                             {
-                                tempAdj.BillOutStandings.OSAmount += tempAdj.Amount;
+                                if (tempAdj.TempReceiptPayment.OldReceiptPaymentID != null)
+                                {
+                                    var billOutStanding = context.BillOutStandings.Where(p => p.BillOutStandingsID == tempAdj.TempReceiptPayment.OldReceiptPaymentID).FirstOrDefault();
+                                    if(billOutStanding != null)
+                                    {
+                                        billOutStanding.OSAmount = tempAdj.BillOutStandings.BillAmount - tempAdj.Amount;
+                                    }
+
+                                   // tempAdj.BillOutStandings.OSAmount = tempAdj.BillOutStandings.BillAmount - tempAdj.Amount;
+                                }
+                                else
+                                {
+                                    tempAdj.BillOutStandings.OSAmount += tempAdj.Amount;
+                                }
                             }
 
                             context.TempBillOutStandingsAudjustment.RemoveRange(tempAdjustments);

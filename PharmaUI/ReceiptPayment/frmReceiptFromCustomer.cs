@@ -355,8 +355,7 @@ namespace PharmaUI.ReceiptPayment
                 {
                     AddNewRowToGrid();
 
-                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
-
+                    
                     ReceiptPaymentItem transactionDetail = applicationFacade.GetTransactionByTransactionID(transaction.ReceiptPaymentID);
                     UpdateReceiptPaymentRow(transactionDetail);
                     DisplayDataGrid();
@@ -376,6 +375,9 @@ namespace PharmaUI.ReceiptPayment
                     LoadGridBillAdjusted(transactionEntity);
 
                     dgvReceiptFromCustomer.SelectionChanged += DgvReceiptFromCustomer_SelectionChanged;
+
+                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"];
+                    dgvReceiptFromCustomer.Focus();
                 }
             }
             catch (Exception ex)
