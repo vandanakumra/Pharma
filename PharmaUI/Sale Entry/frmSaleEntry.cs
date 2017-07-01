@@ -797,14 +797,7 @@ namespace PharmaUI
                     }
                     else if (!string.IsNullOrEmpty(txt.Text))
                     {
-
-                        //if (txt.Name == "txtSalesManCode" && dgvLineItem.Rows.Count == 0)
-                        //{
-                        //    AddRowToGrid();
-                        //}
                         this.SelectNextControl(this.ActiveControl, true, true, true, true);
-
-
                     }
                     else
                     {

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaDataMigration", "Phar
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetUpProject", "SetUpProject\SetUpProject.vdproj", "{66391098-62A5-4BF2-B4DA-9548F3731C0E}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PharmaDatabase", "PharmaDatabase\PharmaDatabase.sqlproj", "{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,18 @@ Global
 		{66391098-62A5-4BF2-B4DA-9548F3731C0E}.Debug|x86.ActiveCfg = Debug
 		{66391098-62A5-4BF2-B4DA-9548F3731C0E}.Release|Any CPU.ActiveCfg = Release
 		{66391098-62A5-4BF2-B4DA-9548F3731C0E}.Release|x86.ActiveCfg = Release
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Debug|x86.Build.0 = Debug|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Debug|x86.Deploy.0 = Debug|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Release|x86.ActiveCfg = Release|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Release|x86.Build.0 = Release|Any CPU
+		{38E449E9-ADF8-4C6D-9CB6-3490A4E570CD}.Release|x86.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
