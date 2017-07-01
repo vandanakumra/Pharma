@@ -148,6 +148,7 @@ namespace PharmaUI
             dgvLineItem.Columns.Add("Amount", "Amount");
             dgvLineItem.Columns["Amount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["Amount"].FillWeight = 5;
+            dgvLineItem.Columns["Amount"].ReadOnly = true;
 
             dgvLineItem.Columns.Add("PurchaseSaleBookHeaderID", "PurchaseSaleBookHeaderID");
             dgvLineItem.Columns["PurchaseSaleBookHeaderID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -1197,13 +1198,14 @@ namespace PharmaUI
 
         }
 
-        private void OpenDialogAndMoveToNextControl(int rowIndex, int columnIndex)
+        private void 
+            OpenDialogAndMoveToNextControl(int rowIndex, int columnIndex, bool isDiscountFormClosed = false)
         {
             int colIndex = columnIndex + 1;
             ///int rowIndex = dgvLineItem.CurrentCell.RowIndex;
             string columnName = dgvLineItem.Columns[columnIndex].Name;
             
-            if (columnName == "SaleRate")
+            if (columnName == "SaleRate" && !isDiscountFormClosed)
             {
                 PurchaseSaleBookLineItem item = ConvertToPurchaseBookLineItem(dgvLineItem.Rows[rowIndex]);
                 frmItemDiscount discount = new frmItemDiscount(item,txtCustomerCode.Text);
@@ -1212,7 +1214,7 @@ namespace PharmaUI
             }
             else
             {
-                if (colIndex <= 8)
+                if (colIndex <= 7)
                 {
                     dgvLineItem.Rows[rowIndex].Selected = true;
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
@@ -1240,9 +1242,10 @@ namespace PharmaUI
             frmItemDiscount discountForm = sender as frmItemDiscount;
             InsertUpdateLineItemAndsetToGrid(discountForm.SaleLinetem);
             if (dgvLineItem.SelectedCells.Count > 0)
-            { 
-                dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Selected = true;
-                dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Amount"];
+            {
+                OpenDialogAndMoveToNextControl(dgvLineItem.SelectedCells[0].RowIndex, dgvLineItem.SelectedCells[0].ColumnIndex, true);
+                //dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Selected = true;
+                //dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Amount"];
             }
         }
 
