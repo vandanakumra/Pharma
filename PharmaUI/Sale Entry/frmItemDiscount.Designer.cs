@@ -48,7 +48,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(465, 60);
+            this.label2.Location = new System.Drawing.Point(253, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 1;
@@ -64,32 +64,32 @@
             // 
             // txtSpecialDiscount
             // 
-            this.txtSpecialDiscount.Location = new System.Drawing.Point(575, 57);
+            this.txtSpecialDiscount.Location = new System.Drawing.Point(380, 57);
             this.txtSpecialDiscount.Name = "txtSpecialDiscount";
             this.txtSpecialDiscount.Size = new System.Drawing.Size(100, 20);
-            this.txtSpecialDiscount.TabIndex = 4;
+            this.txtSpecialDiscount.TabIndex = 3;
             // 
             // txtVolumeDiscount
             // 
-            this.txtVolumeDiscount.Location = new System.Drawing.Point(322, 57);
+            this.txtVolumeDiscount.Location = new System.Drawing.Point(640, 57);
             this.txtVolumeDiscount.Name = "txtVolumeDiscount";
             this.txtVolumeDiscount.Size = new System.Drawing.Size(100, 20);
-            this.txtVolumeDiscount.TabIndex = 3;
+            this.txtVolumeDiscount.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(220, 60);
+            this.label3.Location = new System.Drawing.Point(510, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.Size = new System.Drawing.Size(104, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Volume Discount";
+            this.label3.Text = "Volume Discount (%)";
             // 
             // frmItemDiscount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 96);
+            this.ClientSize = new System.Drawing.Size(752, 96);
             this.Controls.Add(this.txtVolumeDiscount);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSpecialDiscount);

@@ -156,7 +156,7 @@ namespace PharmaUI
             if (e.KeyCode == Keys.Enter)
             {
                 Control ctl = sender as Control;
-                if (ctl.Name == "txtSpecialDiscount")
+                if (ctl.Name == "txtVolumeDiscount")
                 {
                     this.Close();
                 }
