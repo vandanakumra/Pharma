@@ -110,7 +110,7 @@ namespace PharmaDataMigration.Master
             try
             {
                 //string query = "select * from DIS where Icode not in (select distinct acno from masters where slcd = 'IT') and Ccode not in (select distinct acno from masters where slcd = 'CO')";
-                string query = "select * from DIS1";
+                string query = "select * from DIS1 WHERE Disamt > 0";
 
                 DataTable dtSupplierCompanyRef = dbConnection.GetData(query);
 

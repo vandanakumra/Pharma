@@ -878,7 +878,7 @@ namespace PharmaUI.ReceiptPayment
 
         private void AddNewRowToGrid()
         {
-            if (IsInEditMode && dgvReceiptFromCustomer.Rows.Count > 0)
+            if (!IsInEditMode || (IsInEditMode && dgvReceiptFromCustomer.Rows.Count == 0))
             {
                 int rowIndex = dgvReceiptFromCustomer.Rows.Add();
                 DataGridViewRow row = dgvReceiptFromCustomer.Rows[rowIndex];

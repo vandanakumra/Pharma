@@ -91,7 +91,10 @@ namespace PharmaUI.Purchase_Entry
 
         private void FrmAllBillForSupplier_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.PurchaseSaleBookHeaderID = Convert.ToInt64(dgvPurchaseBill.SelectedRows[0].Cells["PurchaseSaleBookHeaderID"].Value);
+            if (dgvPurchaseBill.Rows.Count > 0)
+            {
+                this.PurchaseSaleBookHeaderID = Convert.ToInt64(dgvPurchaseBill.SelectedRows[0].Cells["PurchaseSaleBookHeaderID"].Value);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

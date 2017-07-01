@@ -256,7 +256,7 @@ namespace PharmaUI
             decimal otherAmount = 0;
             decimal.TryParse(txtOtherAmt.Text, out otherAmount);
 
-            txtTotalBillAmount.Text = (amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + IGST1 + IGST2 + IGST3
+            txtTotalBillAmount.Text = (amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + IGST1 + IGST2
                 + IGST3 + IGST4 + IGST5 + IGST6 + IGST7 + otherAmount).ToString("#.##");
         }
 
