@@ -583,13 +583,17 @@ namespace PharmaUI.ReceiptPayment
             {
                 AddNewRowToGrid();
 
-                dgvSupplierBillOS.DataSource = null;
-                dgvSupplierBillAdjusted.DataSource = null;
-                lblAmtOSVal.Text = String.Empty;
-                lblAmtAdjVal.Text = String.Empty;
+                if (!IsInEditMode)
+                {
+                    dgvSupplierBillOS.DataSource = null;
+                    dgvSupplierBillAdjusted.DataSource = null;
+                    lblAmtOSVal.Text = String.Empty;
+                    lblAmtAdjVal.Text = String.Empty;
 
-                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
-                // dgvPaymentToSupplier.BeginEdit(true);
+                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
+                    // dgvPaymentToSupplier.BeginEdit(true);
+                }
+
             }
         }
 

@@ -579,14 +579,15 @@ namespace PharmaUI.ReceiptPayment
             else if (columnName == "UnadjustedAmount")
             {
                 AddNewRowToGrid();
-
-                dgvCustomerBillOS.DataSource = null;
-                dgvCustomerBillAdjusted.DataSource = null;
-                lblAmtOSVal.Text = String.Empty;
-                lblAmtAdjVal.Text = String.Empty;
-
-                dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
-                // dgvReceiptFromCustomer.BeginEdit(true);
+                if (!IsInEditMode)
+                {
+                    dgvCustomerBillOS.DataSource = null;
+                    dgvCustomerBillAdjusted.DataSource = null;
+                    lblAmtOSVal.Text = String.Empty;
+                    lblAmtAdjVal.Text = String.Empty;
+                    dgvReceiptFromCustomer.CurrentCell = dgvReceiptFromCustomer.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
+                    // dgvReceiptFromCustomer.BeginEdit(true);
+                }
             }
         }
 
@@ -631,7 +632,7 @@ namespace PharmaUI.ReceiptPayment
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeNumber"].Value = receiptPayment.ChequeNumber;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["BankAccountLedgerTypeName"].Value = receiptPayment.BankAccountLedgerTypeName;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["BankAccountLedgerTypeCode"].Value = receiptPayment.BankAccountLedgerTypeCode;
-                dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeDate"].Value = receiptPayment.ChequeDate;
+                dgvReceiptFromCustomer.Rows[rowIndex].Cells["ChequeDate"].Value = receiptPayment.ChequeDate == null ? String.Empty : ExtensionMethods.ConvertToAppDateFormat((DateTime)receiptPayment.ChequeDate);
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["Amount"].Value = receiptPayment.Amount;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["ConsumedAmount"].Value = receiptPayment.Amount - receiptPayment.UnadjustedAmount;
                 dgvReceiptFromCustomer.Rows[rowIndex].Cells["UnadjustedAmount"].Value = receiptPayment.UnadjustedAmount;
