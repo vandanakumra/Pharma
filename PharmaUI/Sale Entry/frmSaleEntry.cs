@@ -286,14 +286,22 @@ namespace PharmaUI
 
                 int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
 
-                if (oldSelectedRowIndex != rowIndex && !isSetGrid && !string.IsNullOrEmpty(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value)))
+                if (oldSelectedRowIndex != rowIndex)
+
                 {
-                    long id = 0;
-                    long.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value), out id);
-                    SetFooterInfo(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value), id);
+                    if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value)))
+                    {
+                        long id = 0;
+                        long.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value), out id);
+                        SetFooterInfo(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value), id);
+                    }
+                    else
+                    {
+                       SetFooterInfo(string.Empty, 0);
+                    }
                 }
 
-                if (oldSelectedRowIndex != rowIndex && !isSetGrid)
+                if (oldSelectedRowIndex != rowIndex)
                     oldSelectedRowIndex = rowIndex;
             }
             else {
@@ -362,84 +370,86 @@ namespace PharmaUI
             {
                 if (isCellEdit)
                 {
-                    int rowIndex = e.RowIndex; //dgvLineItem.SelectedCells[0].RowIndex;
-                    PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
-                    string columnName = dgvLineItem.Columns[e.ColumnIndex].Name;
-                    decimal freeQuantity = 0;
+                    int rowIndex = e.RowIndex;
+                    ValidateFields(e.RowIndex, e.ColumnIndex, true);
+                    //dgvLineItem.SelectedCells[0].RowIndex;
+                    //PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.CurrentRow);
+                    //string columnName = dgvLineItem.Columns[e.ColumnIndex].Name;
+                    //decimal freeQuantity = 0;
 
-                    if (columnName == "Quantity")
-                    {
-                        if (lineItem.Quantity == 0)
-                        {
-                            dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
-                            dgvLineItem.Rows[e.RowIndex].Selected = true;
-                            dgvLineItem.CurrentCell = dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex - 1];
-                            this.BeginInvoke(new MethodInvoker(() =>
-                            {
-                                OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex - 1);
-                            }));
-                            return;
-                        }
-                        else if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID,lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity??0, ref freeQuantity))
-                        {
-                            MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
-                            dgvLineItem.Rows[e.RowIndex].Selected = true;
-                            dgvLineItem.CurrentCell = dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex - 1];
-                            this.BeginInvoke(new MethodInvoker(() =>
-                            {
-                                OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex - 1);
-                            }));
-                            return;
-                        }
-                        else
-                        {
-                            // InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
-                            lineItem.FreeQuantity = freeQuantity;
-                            dgvLineItem.Rows[e.RowIndex].Cells["FreeQuantity"].Value = freeQuantity.ToString();
-                            this.BeginInvoke(new MethodInvoker(() =>
-                            {
-                                OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex);
-                            }));
+                    //if (columnName == "Quantity")
+                    //{
+                    //    if (lineItem.Quantity == 0)
+                    //    {
+                    //        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
+                    //        dgvLineItem.Rows[e.RowIndex].Selected = true;
+                    //        dgvLineItem.CurrentCell = dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex - 1];
+                    //        this.BeginInvoke(new MethodInvoker(() =>
+                    //        {
+                    //            OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex - 1);
+                    //        }));
+                    //        return;
+                    //    }
+                    //    else if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity ?? 0, ref freeQuantity))
+                    //    {
+                    //        MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
+                    //        dgvLineItem.Rows[e.RowIndex].Selected = true;
+                    //        dgvLineItem.CurrentCell = dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex - 1];
+                    //        this.BeginInvoke(new MethodInvoker(() =>
+                    //        {
+                    //            OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex - 1);
+                    //        }));
+                    //        return;
+                    //    }
+                    //    else
+                    //    {
+                    //        // InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
+                    //        lineItem.FreeQuantity = freeQuantity;
+                    //        dgvLineItem.Rows[e.RowIndex].Cells["FreeQuantity"].Value = freeQuantity.ToString();
+                    //        this.BeginInvoke(new MethodInvoker(() =>
+                    //        {
+                    //            OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex);
+                    //        }));
 
-                            SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
-                        }
-                    }
-                    else if (columnName == "FreeQuantity")
-                    {
-                        decimal calcFreeQty = 0;
-                        if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity ?? 0, ref calcFreeQty))
-                        {
-                            MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
-                            dgvLineItem.Rows[e.RowIndex].Selected = true;
-                            dgvLineItem.CurrentCell = dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex - 1];
-                            this.BeginInvoke(new MethodInvoker(() =>
-                            {
-                                OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex -1);
-                            }));
-                            return;
-                        }
-                        else
-                        {
-                            //InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
-                            this.BeginInvoke(new MethodInvoker(() =>
-                            {
-                                OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex);
-                            }));
-                            SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
-                        }
-                    }
-                    else if (columnName == "SaleRate")
-                    {
-                        ValidateSaleRate(lineItem,rowIndex, true);
-                    }
-                    else
-                    {
-                        InsertUpdateLineItemAndsetToGrid(lineItem);
-                        this.BeginInvoke(new MethodInvoker(() =>
-                        {
-                            OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex);
-                        }));
-                    }
+                    //        SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
+                    //    }
+                    //}
+                    //else if (columnName == "FreeQuantity")
+                    //{
+                    //    decimal calcFreeQty = 0;
+                    //    if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity ?? 0, ref calcFreeQty))
+                    //    {
+                    //        MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
+                    //        dgvLineItem.Rows[e.RowIndex].Selected = true;
+                    //        dgvLineItem.CurrentCell = dgvLineItem.Rows[e.RowIndex].Cells[e.ColumnIndex - 1];
+                    //        this.BeginInvoke(new MethodInvoker(() =>
+                    //        {
+                    //            OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex - 1);
+                    //        }));
+                    //        return;
+                    //    }
+                    //    else
+                    //    {
+                    //        //InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
+                    //        this.BeginInvoke(new MethodInvoker(() =>
+                    //        {
+                    //            OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex);
+                    //        }));
+                    //        SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
+                    //    }
+                    //}
+                    //else if (columnName == "SaleRate")
+                    //{
+                    //    ValidateSaleRate(lineItem, rowIndex, true);
+                    //}
+                    //else
+                    //{
+                    //    InsertUpdateLineItemAndsetToGrid(lineItem);
+                    //    this.BeginInvoke(new MethodInvoker(() =>
+                    //    {
+                    //        OpenDialogAndMoveToNextControl(e.RowIndex, e.ColumnIndex);
+                    //    }));
+                    //}
                 }
 
             }
@@ -447,6 +457,238 @@ namespace PharmaUI
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ValidateFields(int rowIndex, int colIndex, bool isEdit)
+        {
+            string columnIndex = dgvLineItem.Columns[colIndex].Name;
+
+            PurchaseSaleBookLineItem lineItem = ConvertToPurchaseBookLineItem(dgvLineItem.Rows[rowIndex]);
+            string columnName = dgvLineItem.Columns[colIndex].Name;
+            decimal freeQuantity = 0;
+
+            if (columnName == "ItemCode" && ((!isEdit && string.IsNullOrEmpty(lineItem.ItemCode)) || isEdit))
+            {
+                frmItemMaster itemMaster = new frmItemMaster(true);
+                //Set Child UI
+                ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
+                itemMaster.WindowState = FormWindowState.Maximized;
+
+                itemMaster.FormClosed += ItemMaster_FormClosed;
+                itemMaster.Show();
+
+            }
+            else if (columnName == "Batch" && string.IsNullOrEmpty(lineItem.Batch) && !isEdit)
+            {
+                MessageBox.Show("Batch cannot be left blank. Please select other item");
+                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Batch"];
+
+            }
+            else if (columnName == "Quantity")
+            {
+                if (lineItem.Quantity == 0)
+                {
+                    dgvLineItem.Rows[rowIndex].Selected = true;
+                  
+                    if (isEdit)
+                    {
+                        colIndex = colIndex - 1;
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                        this.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                        }));
+                    }
+                    else
+                    {
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                        //OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                    }
+                    return;
+                }
+                else if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity ?? 0, ref freeQuantity))
+                {
+                    MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
+                    if (isEdit)
+                    {
+                        colIndex = colIndex - 1;
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                        this.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                        }));
+                    }
+                    else
+                    {
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                        //OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                    }
+                    return;
+                }
+                else
+                {
+                    // InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
+                    lineItem.FreeQuantity = freeQuantity;
+                    dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = freeQuantity.ToString();
+
+                    if (isEdit)
+                    {
+                        this.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                        }));
+                        SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
+                    }
+                    else
+                    {
+                        OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                    }
+                }
+            }
+            else if (columnName == "FreeQuantity")
+            {
+                decimal calcFreeQty = 0;
+                if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, lineItem.Quantity, lineItem.FreeQuantity ?? 0, ref calcFreeQty))
+                {
+                    MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
+                    if (isEdit)
+                    {
+                        colIndex = colIndex - 1;
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                        this.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                        }));
+                    }
+                    else
+                    {
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                       // OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                    }
+                    return;
+                }
+                else
+                {
+                    if (isEdit)
+                    {
+                        //InsertUpdateLineItemAndsetToGrid(lineItem);  //Commented By Nitin
+                        this.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                        }));
+                        SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
+                    }
+                    else
+                    {
+                        OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                    }
+                }
+            }
+            else if (columnName == "SaleRate")
+            {
+                DataRow dr = StagingData.ItemList.Select("ItemCode=" + lineItem.ItemCode).FirstOrDefault();
+
+                if (lineItem.SaleRate == 0)
+                {
+                    if (isEdit)
+                    {
+                        colIndex = colIndex - 1;
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                        this.BeginInvoke(new MethodInvoker(() =>
+                        {
+                            OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                        }));
+                    }
+                    else
+                    {
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                        OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                    }
+                    return;
+                }
+                else
+                {
+                    if (lineItem.PurchaseSaleRate > lineItem.SaleRate)
+                    {
+                        if (MessageBox.Show(string.Format("Cost of this item {0} is greater than sale rate {1}. Do you want to continue?", lineItem.PurchaseSaleRate.ToString("#.##"), (lineItem.SaleRate ?? 0).ToString("#.##")), "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            dr["SaleRate"] = lineItem.SaleRate;
+                            if (isEdit)
+                            {
+                                InsertUpdateLineItemAndsetToGrid(lineItem);
+
+                                this.BeginInvoke(new MethodInvoker(() =>
+                                {
+                                    OpenDialogAndMoveToNextControl(rowIndex, colIndex - 1);
+                                }));
+
+                                OpenSaleRateDialog(lineItem);
+                            }
+                            else
+                            {
+                                OpenSaleRateDialog(lineItem);
+                            }
+
+                        }
+                        else
+                        {
+                            dgvLineItem.Rows[rowIndex].Selected = true;
+                            if (isEdit)
+                            {
+                                colIndex = colIndex - 1;
+                                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                                this.BeginInvoke(new MethodInvoker(() =>
+                                {
+                                    OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                                }));
+                                //dgvLineItem.BeginEdit(true);
+                            }
+                            else
+                            {
+                                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                                OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        dr["SaleRate"] = lineItem.SaleRate;
+                        if (isEdit)
+                        {
+                            //InsertUpdateLineItemAndsetToGrid(lineItem);
+                            this.BeginInvoke(new MethodInvoker(() =>
+                            {
+                                OpenDialogAndMoveToNextControl(rowIndex, colIndex - 1);
+                            }));
+
+                            OpenSaleRateDialog(lineItem);
+                        }
+                        else
+                        {
+                            //OpenDialogAndMoveToNextControl(rowIndex, colIndex - 1);
+                            OpenSaleRateDialog(lineItem);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (isEdit)
+                {
+                    InsertUpdateLineItemAndsetToGrid(lineItem);
+
+                    this.BeginInvoke(new MethodInvoker(() =>
+                    {
+                        OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                    }));
+                }
+                else
+                {
+                    OpenDialogAndMoveToNextControl(rowIndex, colIndex);
+                }
+            }
+
         }
         
         private bool IsQuantityAvailable(long headerID, string itemCode, long lineItemID, decimal quantity, decimal freeQuantity, ref decimal newFreeQuantity)
@@ -1094,7 +1336,6 @@ namespace PharmaUI
 
                 if (e.KeyData == Keys.Enter || e.KeyData == Keys.Right)
                 {
-
                     string columnName = dgvLineItem.Columns[dgvLineItem.SelectedCells[0].ColumnIndex].Name;
 
                     if (string.IsNullOrEmpty(Convert.ToString(dgvLineItem.CurrentCell.Value)))
@@ -1102,43 +1343,45 @@ namespace PharmaUI
                         if (columnName == "ItemCode")
                         {
                             e.SuppressKeyPress = true;
-                            frmItemMaster itemMaster = new frmItemMaster(true);
-                            //Set Child UI
-                            ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
-                            itemMaster.WindowState = FormWindowState.Maximized;
 
-                            itemMaster.FormClosed += ItemMaster_FormClosed;
-                            itemMaster.Show();
-                        }
-                        else if (columnName == "Batch")
-                        {
-                            MessageBox.Show("Batch cannot be left blank. Please select other item");
-                            dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Batch"];
-                        }
-                        else if (columnName == "Quantity" || columnName == "SaleRate")
-                        {
-                            dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
-                        }
-                        else
-                        {
-                            OpenDialogAndMoveToNextControl(dgvLineItem.CurrentCell.RowIndex, dgvLineItem.CurrentCell.ColumnIndex);
-                        }
+                        }                            //frmItemMaster itemMaster = new frmItemMaster(true);
+                            ////Set Child UI
+                            //ExtensionMethods.AddChildFormToPanel(this, itemMaster, ExtensionMethods.MainPanel);
+                            //itemMaster.WindowState = FormWindowState.Maximized;
+
+                            //itemMaster.FormClosed += ItemMaster_FormClosed;
+                            //itemMaster.Show();
+                        //else if (columnName == "Batch")
+                        //{
+                        //    MessageBox.Show("Batch cannot be left blank. Please select other item");
+                        //    dgvLineItem.CurrentCell = dgvLineItem.CurrentRow.Cells["Batch"];
+                        //}
+                        //else if (columnName == "Quantity" || columnName == "SaleRate")
+                        //{
+                        //    dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
+                        //}
+                        //else
+                        //{
+                        //    OpenDialogAndMoveToNextControl(dgvLineItem.CurrentCell.RowIndex, dgvLineItem.CurrentCell.ColumnIndex);
+                        //}
                     }
-                    else
-                    {
-                        
-                        if ((columnName == "Quantity" || columnName == "SaleRate"))
-                        {
-                            decimal value = 0;
-                            decimal.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out value);
-                            if(value == 0)
-                                dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
-                            else
-                                OpenDialogAndMoveToNextControl(dgvLineItem.CurrentCell.RowIndex, dgvLineItem.CurrentCell.ColumnIndex);
-                        }
-                        else
-                            OpenDialogAndMoveToNextControl(dgvLineItem.CurrentCell.RowIndex, dgvLineItem.CurrentCell.ColumnIndex);
-                    }
+                    //else
+                    //{
+
+                    //    if ((columnName == "Quantity" || columnName == "SaleRate"))
+                    //    {
+                    //        decimal value = 0;
+                    //        decimal.TryParse(Convert.ToString(dgvLineItem.CurrentCell.Value), out value);
+                    //        if(value == 0)
+                    //            dgvLineItem.CurrentCell = dgvLineItem.CurrentCell;
+                    //        else
+                    //            OpenDialogAndMoveToNextControl(dgvLineItem.CurrentCell.RowIndex, dgvLineItem.CurrentCell.ColumnIndex);
+                    //    }
+                    //    else
+                    //        OpenDialogAndMoveToNextControl(dgvLineItem.CurrentCell.RowIndex, dgvLineItem.CurrentCell.ColumnIndex);
+                    //}
+
+                    ValidateFields(dgvLineItem.CurrentCell.RowIndex, dgvLineItem.CurrentCell.ColumnIndex, false);
 
                     e.Handled = true;
                 }
@@ -1198,22 +1441,28 @@ namespace PharmaUI
 
         }
 
-        private void 
-            OpenDialogAndMoveToNextControl(int rowIndex, int columnIndex, bool isDiscountFormClosed = false)
+        private void OpenSaleRateDialog(PurchaseSaleBookLineItem item)
+        {
+            frmItemDiscount discount = new frmItemDiscount(item, txtCustomerCode.Text);
+            discount.FormClosed += Discount_FormClosed;
+            discount.Show();
+        }
+
+        private void OpenDialogAndMoveToNextControl(int rowIndex, int columnIndex, bool isDiscountFormClosed = false)
         {
             int colIndex = columnIndex + 1;
             ///int rowIndex = dgvLineItem.CurrentCell.RowIndex;
-            string columnName = dgvLineItem.Columns[columnIndex].Name;
+            //string columnName = dgvLineItem.Columns[columnIndex].Name;
             
-            if (columnName == "SaleRate" && !isDiscountFormClosed)
-            {
-                PurchaseSaleBookLineItem item = ConvertToPurchaseBookLineItem(dgvLineItem.Rows[rowIndex]);
-                frmItemDiscount discount = new frmItemDiscount(item,txtCustomerCode.Text);
-                discount.FormClosed += Discount_FormClosed;
-                discount.Show();
-            }
-            else
-            {
+            //if (columnName == "SaleRate" && !isDiscountFormClosed)
+            //{
+            //    PurchaseSaleBookLineItem item = ConvertToPurchaseBookLineItem(dgvLineItem.Rows[rowIndex]);
+            //    frmItemDiscount discount = new frmItemDiscount(item,txtCustomerCode.Text);
+            //    discount.FormClosed += Discount_FormClosed;
+            //    discount.Show();
+            //}
+            //else
+            //{
                 if (colIndex <= 7)
                 {
                     dgvLineItem.Rows[rowIndex].Selected = true;
@@ -1233,7 +1482,7 @@ namespace PharmaUI
                         dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells["ItemCode"];
                     }
                 }
-            }
+            //}
             
         }
 
@@ -1244,6 +1493,7 @@ namespace PharmaUI
             if (dgvLineItem.SelectedCells.Count > 0)
             {
                 OpenDialogAndMoveToNextControl(dgvLineItem.SelectedCells[0].RowIndex, dgvLineItem.SelectedCells[0].ColumnIndex, true);
+                //OpenSaleRateDialog(discountForm.SaleLinetem);
                 //dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Selected = true;
                 //dgvLineItem.CurrentCell = dgvLineItem.Rows[dgvLineItem.SelectedCells[0].RowIndex].Cells["Amount"];
             }
@@ -1374,7 +1624,7 @@ namespace PharmaUI
                                                     RwIndex = r.Index
                                                 }).ToList();
 
-                List<PurchaseSaleBookLineItem> lineItemList = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID > 0 && p.PurchaseSaleBookHeaderID > 0).ToList();
+                List<PurchaseSaleBookLineItem> lineItemList = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID > 0 && p.PurchaseSaleBookHeaderID > 0).OrderBy(p=>p.PurchaseSaleBookLineItemID).ToList();
                 PurchaseSaleBookLineItem totalLineItemDetail = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID == 0).FirstOrDefault();
 
                 isSetGrid = true;
@@ -1447,10 +1697,20 @@ namespace PharmaUI
 
                 SetNetAmount(totalLineItemDetail);
 
-                if (currentRowIndex != -1)
+                if (rowIndex != -1)
                 {
-                    dgvLineItem.Rows[currentRowIndex].Selected = true;
-                    dgvLineItem.CurrentCell = dgvLineItem.Rows[currentRowIndex].Cells[colIndex];
+                    //dgvLineItem.Rows[rowIndex].Selected = true;
+
+                    if (lineItemList.Count > 1)
+                    {
+                        dgvLineItem.Rows[rowIndex - 1].Selected = true;
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["SaleRate"];
+                    }
+                    else
+                    {
+                        dgvLineItem.Rows[rowIndex].Selected = true;
+                        dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex];
+                    }
                 }
             }
             else if (string.IsNullOrEmpty(lineItem.ItemCode))
