@@ -22,7 +22,7 @@ namespace PharmaUI
         // private bool isModifyLoad = true;
         private bool IsModify = false;
         private bool isDirty = false;
-        //   private bool isBatchUpdate = false;
+        private bool isBatchUpdate = false;
         private int layoutHeight = 0;
         private int layoutWidth = 0;
         private bool isCellEdit = false;
@@ -274,7 +274,7 @@ namespace PharmaUI
             dgvLineItem.KeyDown += dgvLineItem_KeyDown;
             dgvLineItem.CellBeginEdit += DgvLineItem_CellBeginEdit;
             dgvLineItem.CellEndEdit += DgvLineItem_CellEndEdit;
-            //dgvLineItem.CellValueChanged += DgvLineItem_CellValueChanged;
+            dgvLineItem.CellValueChanged += DgvLineItem_CellValueChanged;
             dgvLineItem.EditingControlShowing += DgvLineItem_EditingControlShowing;
             dgvLineItem.SelectionChanged += DgvLineItem_SelectionChanged; ;
         }
@@ -534,13 +534,13 @@ namespace PharmaUI
         }
 
 
-        //private void DgvLineItem_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (!isBatchUpdate)
-        //    {
-        //        isCellEdit = true;
-        //    }
-        //}
+        private void DgvLineItem_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!isBatchUpdate)
+            {
+                isCellEdit = true;
+            }
+        }
 
         private void Column_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1195,7 +1195,7 @@ namespace PharmaUI
 
                     if (itemMaster.LastSelectedItemMaster != null)
                     {
-                        //isBatchUpdate = true;
+                        isBatchUpdate = true;
                         int lineItemID = 0;
                         Int32.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["PurchaseSaleBookLineItemID"].Value), out lineItemID);
 
@@ -1211,7 +1211,7 @@ namespace PharmaUI
                         SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
                     }
 
-                    // isBatchUpdate = false;
+                     isBatchUpdate = false;
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
