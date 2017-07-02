@@ -15,16 +15,7 @@ namespace PharmaBusiness.Master
         {
 
         }
-        //internal List<ItemMaster> GetAllItems()
-        //{
-        //    return new ItemDaoMaster(this.LoggedInUser).GetAllItems();
-        //}
-
-        //internal List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
-        //{
-        //    return new ItemDaoMaster(this.LoggedInUser).GetAllItemsBySearch(searchString, searchBy);
-        //}
-        
+               
 
         internal bool AddNewItem(ItemMaster newItem)
         {
@@ -98,5 +89,14 @@ namespace PharmaBusiness.Master
             return new ItemDaoMaster(this.LoggedInUser).GetAllItemsBySearch();
         }
 
+        internal List<PharmaBusinessObjects.Transaction.FifoBatches> GetFifoBatchesByItemCode(string itemCode)
+        {
+            return new ItemDaoMaster(this.LoggedInUser).GetFifoBatchesByItemCode(itemCode);
+        }
+
+        public int UpdateFifoBatchesByItemCode(PharmaBusinessObjects.Transaction.FifoBatches fifoBatch)
+        {
+            return new ItemDaoMaster(this.LoggedInUser).UpdateFifoBatchesByItemCode(fifoBatch);
+        }
     }
 }

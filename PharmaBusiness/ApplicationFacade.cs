@@ -26,23 +26,7 @@ namespace PharmaBusiness
 
         #region Item Master
 
-        /// <summary>
-        /// Fetch all the active items
-        /// </summary>
-        ///// <returns>List of items</returns>
-        //public List<ItemMaster> GetAllItems()
-        //{
-        //    try
-        //    {
-        //        return new ItemMasterBiz(this.LoggedInUser).GetAllItems();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        /// <summary>
+           /// <summary>
         /// Add new item to ItemMaster
         /// </summary>
         /// <param name="newItem"></param>
@@ -123,22 +107,7 @@ namespace PharmaBusiness
             }
         }
 
-        /// <summary>
-        /// Fetch all the active items by Search
-        /// </summary>
-        /// <returns>List of items</returns>
-        //public List<ItemMaster> GetAllItemsBySearch(string searchString, string searchBy)
-        //{
-        //    try
-        //    {
-        //        return new ItemMasterBiz(this.LoggedInUser).GetAllItemsBySearch(searchString, searchBy);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
+        
         public DataTable GetAllItemsBySearch()
         {
             try
@@ -151,6 +120,18 @@ namespace PharmaBusiness
             }
            
         }
+
+        public List<PharmaBusinessObjects.Transaction.FifoBatches> GetFifoBatchesByItemCode(string itemCode)
+        {
+            return new ItemMasterBiz(this.LoggedInUser).GetFifoBatchesByItemCode(itemCode);
+        }
+
+        public int UpdateFifoBatchesByItemCode(PharmaBusinessObjects.Transaction.FifoBatches fifoBatch)
+        {
+            return new ItemMasterBiz(this.LoggedInUser).UpdateFifoBatchesByItemCode(fifoBatch);
+        }
+
+
 
         #endregion
 

@@ -108,6 +108,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.lblSearchStatus = new System.Windows.Forms.Label();
+            this.btnBatches = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).BeginInit();
             this.grpItemInfo.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -1051,7 +1052,7 @@
             this.btnAddNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAddNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNew.Location = new System.Drawing.Point(731, 54);
+            this.btnAddNew.Location = new System.Drawing.Point(626, 53);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(99, 33);
             this.btnAddNew.TabIndex = 201;
@@ -1071,12 +1072,26 @@
             this.lblSearchStatus.Text = "*Not Found";
             this.lblSearchStatus.Visible = false;
             // 
+            // btnBatches
+            // 
+            this.btnBatches.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBatches.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBatches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBatches.Location = new System.Drawing.Point(731, 54);
+            this.btnBatches.Name = "btnBatches";
+            this.btnBatches.Size = new System.Drawing.Size(99, 33);
+            this.btnBatches.TabIndex = 207;
+            this.btnBatches.Text = "Batches (F5)";
+            this.btnBatches.UseVisualStyleBackColor = true;
+            this.btnBatches.Click += new System.EventHandler(this.btnBatches_Click);
+            // 
             // frmItemMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1052, 537);
             this.ControlBox = false;
+            this.Controls.Add(this.btnBatches);
             this.Controls.Add(this.lblSearchStatus);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -1197,5 +1212,6 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Label lblSearchStatus;
+        private System.Windows.Forms.Button btnBatches;
     }
 }
