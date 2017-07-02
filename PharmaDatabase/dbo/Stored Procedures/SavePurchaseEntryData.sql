@@ -303,7 +303,6 @@ BEGIN TRY
 			(
 				PurchaseSaleBookHeaderID
 			   ,PurchaseVoucherNumber, COALESCE(PurchaseSrlNo,PurchaseSrlNoNew)
-			   ,ItemCode,Batch,BatchNew,Quantity,FreeQuantity
 			   ,PurchaseSaleRate,EffecivePurchaseSaleRate,PurchaseSaleTypeCode
 			   ,SurCharge,PurchaseSaleTax,LocalCentral
 			   ,SGST,IGST,CGST,Amount

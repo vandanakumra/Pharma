@@ -16,6 +16,7 @@ namespace PharmaUI.Purchase_Entry
     {
         IApplicationFacade applicationFacade;
         public string SupplierCode { get; set; }
+        public int RowIndex { get; set; }
 
         public long PurchaseSaleBookHeaderID { get; set; }
 

@@ -18,6 +18,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
 
         public string SupplierCode { get; set; }
+        public int RowIndex { get; set; }
         public PurchaseSaleBookLineItem PurchaseBookLineItem { get; set; }
         private List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> list;
 
