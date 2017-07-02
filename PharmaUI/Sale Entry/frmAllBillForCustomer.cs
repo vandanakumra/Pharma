@@ -15,6 +15,7 @@ namespace PharmaUI.Sale_Entry
     {
         IApplicationFacade applicationFacade;
         public string CustomerCode { get; set; }
+        public int RowIndex { get; set; }
 
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> list;
 

@@ -16,7 +16,7 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         PurchaseSaleBookLineItem saleLineItem;
-
+        public int RowIndex { get; set; }
         public PurchaseSaleBookLineItem SaleLinetem { get { return saleLineItem; } }
         private string customerCode = string.Empty;
 
