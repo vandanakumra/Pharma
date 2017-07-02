@@ -281,6 +281,7 @@ namespace PharmaUI
 
         private void DgvLineItem_SelectionChanged(object sender, EventArgs e)
         {
+
             if (dgvLineItem.SelectedCells.Count > 0)
             {
 
@@ -432,6 +433,7 @@ namespace PharmaUI
             else if (columnName == "Quantity")
             {
                 decimal qty = 0;
+                decimal calFreeQuantity = 0;
                 decimal.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value), out qty);
 
                 decimal.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out freeQuantity);
@@ -440,7 +442,7 @@ namespace PharmaUI
                 {
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
                 }
-                else if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, qty, freeQuantity, ref freeQuantity))
+                else if (!IsQuantityAvailable(lineItem.PurchaseSaleBookHeaderID, lineItem.ItemCode, lineItem.PurchaseSaleBookLineItemID, qty, freeQuantity, ref calFreeQuantity))
                 {
                     MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
@@ -448,8 +450,8 @@ namespace PharmaUI
                 else
                 {
                     lineItem.Quantity = qty;
-                    lineItem.FreeQuantity = freeQuantity;
-                    dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = freeQuantity;
+                    lineItem.FreeQuantity = isEdit ? calFreeQuantity : freeQuantity;
+                    dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = lineItem.FreeQuantity;
                     SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"];
                 }
@@ -1627,7 +1629,21 @@ namespace PharmaUI
                         if (result == DialogResult.OK)
                         {
                             applicationFacade.SaveSaleEntryData(header.PurchaseSaleBookHeaderID);
-                            this.Close();
+
+                            result = MessageBox.Show("Are you sure you want to print the invoice", "Confirmation", MessageBoxButtons.YesNo);
+
+                            if (result == DialogResult.Yes)
+                            { 
+                                frmReportViewer reportViewer = new frmReportViewer();
+                                reportViewer.Show();
+                                reportViewer.WindowState = FormWindowState.Minimized;
+                                reportViewer.Hide();
+                                reportViewer.FormClosed += ReportViewer_FormClosed;
+                            }
+                            else
+                            {
+                                this.Close();
+                            }
                         }
                     }
 
@@ -1652,6 +1668,11 @@ namespace PharmaUI
 
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void ReportViewer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
         }
 
         private void frmSaleEntry_FormClosing(object sender, FormClosingEventArgs e)
