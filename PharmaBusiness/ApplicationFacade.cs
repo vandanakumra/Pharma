@@ -826,9 +826,9 @@ namespace PharmaBusiness
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetAllPurchaseInvoiceForSuppier(supplierCode);
         }
 
-        public List<BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode)
+        public List<BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode, string invoiceDate)
         {
-            return new Transaction.SaleBiz(this.LoggedInUser).GetAllSaleInvoiceForCustomer(customerCode);
+            return new Transaction.SaleBiz(this.LoggedInUser).GetAllSaleInvoiceForCustomer(customerCode, invoiceDate);
         }
 
 

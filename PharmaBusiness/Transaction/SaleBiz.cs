@@ -72,9 +72,9 @@ namespace PharmaBusiness.Transaction
             new SaleEntryDao(this.LoggedInUser).RollbackSaleEntry(purchaseSaleBookHeaderID);
         }
 
-        internal List<BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode)
+        internal List<BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode, string invoiceDate)
         {
-            return new SaleEntryDao(this.LoggedInUser).GetAllSaleInvoiceForCustomer(customerCode);
+            return new SaleEntryDao(this.LoggedInUser).GetAllSaleInvoiceForCustomer(customerCode, invoiceDate);
         }
     }
 }

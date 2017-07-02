@@ -902,18 +902,26 @@ namespace PharmaUI
 
                     if (IsModify)
                     {
-                        var listInvoices = applicationFacade.GetAllSaleInvoiceForCustomer(custCode);
-
-                        if (listInvoices.Count > 0)
+                        if (!string.IsNullOrEmpty(dtSaleDate.Text))
                         {
-                            SetCustomerCodeFields(custCode);
-                            Sale_Entry.frmAllBillForCustomer frm = new Sale_Entry.frmAllBillForCustomer(listInvoices);
-                            frm.FormClosed += FrmAllBillForCustomer_FormClosed;
-                            frm.ShowDialog();
+                            var listInvoices = applicationFacade.GetAllSaleInvoiceForCustomer(custCode, dtSaleDate.Text);
+
+                            if (listInvoices.Count > 0)
+                            {
+                                SetCustomerCodeFields(custCode);
+                                Sale_Entry.frmAllBillForCustomer frm = new Sale_Entry.frmAllBillForCustomer(listInvoices);
+                                frm.FormClosed += FrmAllBillForCustomer_FormClosed;
+                                frm.ShowDialog();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No invoice for modification !!");
+                                tb = txtCustomerCode;
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("No invoice for modification !!");
+                            MessageBox.Show("Please enter invoice date");
                             tb = txtCustomerCode;
                         }
                     }
@@ -1282,6 +1290,11 @@ namespace PharmaUI
                     dgvLineItem.Rows[i].Cells["ConversionRate"].Value = lineItemList[i].ConversionRate;
 
                 }
+
+                
+                dgvLineItem.Rows[0].Selected = true;
+                dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                dgvLineItem.Focus();
             }
         }
 

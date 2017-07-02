@@ -422,8 +422,13 @@ namespace PharmaDAL.Transaction
         }
 
 
-        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode)
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode, string invoiceDate)
         {
+            DateTime dt;
+            DateTime.TryParse(invoiceDate, out dt);
+
+            DateTime.TryParse(dt.ToString("dd/MM/yyyy h:mm:ss"), out dt);
+
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 return context.BillOutStandings.Where(q => q.LedgerTypeCode == customerCode && q.PurchaseSaleBookHeaderID != null)
@@ -442,7 +447,7 @@ namespace PharmaDAL.Transaction
                     OSAmount = p.OSAmount,
                     IsHold = p.IsHold,
                     HOLDRemarks = p.HOLDRemarks
-                }).ToList();
+                }).ToList().Where(p=>p.InvoiceDate.Date == dt.Date).ToList();
             }
         }
 
