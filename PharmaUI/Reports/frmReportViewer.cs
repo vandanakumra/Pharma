@@ -47,7 +47,14 @@ namespace PharmaUI
 
             this.reportViewer1.Visible = true;
             this.reportViewer1.RefreshReport();
+
+            this.reportViewer1.RenderingComplete += ReportViewer1_RenderingComplete;
             
+        }
+
+        private void ReportViewer1_RenderingComplete(object sender, RenderingCompleteEventArgs e)
+        {
+            this.reportViewer1.PrintDialog();
         }
     }
 }

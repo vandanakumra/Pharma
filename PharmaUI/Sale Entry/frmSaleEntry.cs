@@ -1951,7 +1951,19 @@ namespace PharmaUI
                         if (result == DialogResult.OK)
                         {
                             applicationFacade.SaveSaleEntryData(header.PurchaseSaleBookHeaderID);
-                            this.Close();
+
+                            result = MessageBox.Show("Are you sure you want to print the invoice", "Confirmation", MessageBoxButtons.YesNo);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                frmReportViewer reportViewer = new frmReportViewer();
+                                reportViewer.Show();
+                                reportViewer.FormClosed += ReportViewer_FormClosed;
+                            }
+                            else
+                            {
+                                this.Close();
+                            }
                         }
                     }
 
@@ -1976,6 +1988,11 @@ namespace PharmaUI
 
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void ReportViewer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
         }
 
         private void frmSaleEntry_FormClosing(object sender, FormClosingEventArgs e)
