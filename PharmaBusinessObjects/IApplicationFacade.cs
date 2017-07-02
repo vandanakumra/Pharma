@@ -26,6 +26,8 @@ namespace PharmaBusinessObjects
         List<SupplierCompanyDiscount> GetAllCompanyItemDiscountByCompanyIDForSupplier(int CompanyID);
         List<PharmaBusinessObjects.Master.HSNCodes> GetAllHSNCodes();
         DataTable GetAllItemsBySearch();
+        List<PharmaBusinessObjects.Transaction.FifoBatches> GetFifoBatchesByItemCode(string itemCode);
+        int UpdateFifoBatchesByItemCode(PharmaBusinessObjects.Transaction.FifoBatches fifoBatch);
         #endregion
 
         #region Company Master

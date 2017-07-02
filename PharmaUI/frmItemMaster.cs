@@ -15,27 +15,7 @@ using System.Reflection;
 using System.Threading;
 
 namespace PharmaUI
-{
-    public class TypeAssistant
-    {
-        public event EventHandler Idled = delegate { };
-        public int WaitingMilliSeconds { get; set; }
-        System.Threading.Timer waitingTimer;
-
-        public TypeAssistant(int waitingMilliSeconds = 600)
-        {
-            WaitingMilliSeconds = waitingMilliSeconds;
-            waitingTimer = new System.Threading.Timer(p =>
-            {
-                Idled(this, EventArgs.Empty);
-            });
-        }
-        public void TextChanged()
-        {
-            waitingTimer.Change(WaitingMilliSeconds, System.Threading.Timeout.Infinite);
-        }
-    }
-
+{   
     public partial class frmItemMaster : Form
     {
         public PharmaBusinessObjects.Master.ItemMaster LastSelectedItemMaster { get; set; }
@@ -325,9 +305,12 @@ namespace PharmaUI
             else if (keyData == Keys.F3)
             {
                 EditItem();
-
             }
-            else if(keyData == Keys.Down )
+            else if(keyData == Keys.F5)
+            {
+                btnBatches_Click(null, null);
+            }
+            else if(keyData == Keys.Down)
             {
                 dgvItemList.Focus();
 
@@ -514,6 +497,39 @@ namespace PharmaUI
         {
             ExtensionMethods.DisableAllTextBoxAndComboBox(this, (Control)sender);
             return;
+        }
+
+        private void btnBatches_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvItemList.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please select atleast one row to edit batch");
+                }
+                else
+                {                    
+
+                    DataGridViewRow row = dgvItemList.CurrentRow;
+
+                    frmBatches form = new frmBatches(Convert.ToString(row.Cells["ItemCode"].Value), Convert.ToString(row.Cells["ItemName"].Value));
+                    ExtensionMethods.AddChildFormToPanel(this, form, ExtensionMethods.MainPanel);
+                    form.WindowState = FormWindowState.Maximized;
+                    form.FormClosed += FormBatch_Closed;
+                    form.Show();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void FormBatch_Closed(object sender, FormClosedEventArgs e)
+        {
+            ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
         }
     }
 }

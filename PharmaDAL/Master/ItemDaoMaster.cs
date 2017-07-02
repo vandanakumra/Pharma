@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using PharmaBusinessObjects.Common;
+using PharmaBusinessObjects.Transaction;
 
 namespace PharmaDAL.Master
 {
@@ -143,8 +144,6 @@ namespace PharmaDAL.Master
                             newItemMasterDB.Status = newItem.Status;
                             newItemMasterDB.CreatedBy = this.LoggedInUser.Username;
                             newItemMasterDB.CreatedOn = System.DateTime.Now;
-
-
 
                             context.ItemMaster.Add(newItemMasterDB);
                             _result = context.SaveChanges();
@@ -318,134 +317,9 @@ namespace PharmaDAL.Master
                 }
                 else
                     return new DataTable();
-
-
             }
         }
-
-        //public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemsBySearch(string searchString = null, string searchBy = "Name")
-        //{
-
-        //    //using (PharmaDBEntities context = new PharmaDBEntities())
-        //    //{
-        //    //    List<PharmaBusinessObjects.Master.ItemMaster> itemList = new List<PharmaBusinessObjects.Master.ItemMaster>();
-
-        //    //    SqlConnection connection = (SqlConnection)context.Database.Connection;
-
-        //    //    SqlCommand cmd = new SqlCommand("Select * from ItemMaster", connection);
-        //    //    cmd.CommandType = System.Data.CommandType.Text;               
-
-        //    //    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-        //    //    DataTable dt = new DataTable();
-
-        //    //    sda.Fill(dt);
-
-
-        //    //    if(dt != null && dt.Rows.Count > 0)
-        //    //    {
-        //    //        foreach (DataRow row in dt.Rows)
-        //    //        {
-        //    //            PharmaBusinessObjects.Master.ItemMaster item = new PharmaBusinessObjects.Master.ItemMaster()
-        //    //            {
-
-        //    //                ItemID = Convert.ToInt32(row["ItemID"]),
-        //    //                ItemCode = Convert.ToString(row["ItemCode"]),
-        //    //                ItemName = Convert.ToString(row["ItemName"]),
-        //    //                CompanyID = Convert.ToInt32(row["CompanyID"]),
-        //    //                ConversionRate = Convert.ToDecimal(row["ConversionRate"]),
-        //    //               // CompanyName = Convert.ToString(row["CompanyMaster.CompanyName"]),
-        //    //                ShortName = Convert.ToString(row["ShortName"]),
-        //    //                Packing = Convert.ToString(row["Packing"]),
-        //    //                PurchaseRate = Convert.ToDecimal(row["PurchaseRate"]),
-        //    //                MRP = Convert.ToDecimal(row["MRP"]),
-        //    //                SaleRate = Convert.ToDecimal(row["SaleRate"]),
-        //    //                SpecialRate = Convert.ToDecimal(row["SpecialRate"]),
-        //    //                WholeSaleRate = Convert.ToDecimal(row["WholeSaleRate"]),
-        //    //                SaleExcise = Convert.ToDecimal(row["SaleExcise"]),
-        //    //                SurchargeOnSale = Convert.ToDecimal(row["SurchargeOnSale"]),
-        //    //                TaxOnSale = Convert.ToDecimal(row["TaxOnSale"]),
-        //    //                Scheme1 = Convert.ToDecimal(row["Scheme1"]),
-        //    //                Scheme2 = Convert.ToDecimal(row["Scheme2"]),
-        //    //                PurchaseExcise = Convert.ToDecimal(row["PurchaseExcise"]),
-        //    //                UPC = Convert.ToString(row["UPC"]),
-        //    //                IsHalfScheme = Convert.ToBoolean(row["IsHalfScheme"]),
-        //    //                IsQTRScheme = Convert.ToBoolean(row["IsQTRScheme"]),
-        //    //                SpecialDiscount = Convert.ToDecimal(row["SpecialDiscount"]),
-        //    //                SpecialDiscountOnQty = Convert.ToDecimal(row["SpecialDiscountOnQty"]),
-        //    //                IsFixedDiscount = Convert.ToBoolean(row["IsFixedDiscount"]),
-        //    //                FixedDiscountRate = Convert.ToDecimal(row["FixedDiscountRate"]),
-        //    //                SurchargeOnPurchase = Convert.ToDecimal(row["SurchargeOnPurchase"]),
-        //    //                TaxOnPurchase = Convert.ToDecimal(row["TaxOnPurchase"]),
-        //    //                DiscountRecieved = Convert.ToDecimal(row["DiscountRecieved"]),
-        //    //                SpecialDiscountRecieved = Convert.ToDecimal(row["SpecialDiscountRecieved"]),
-        //    //                QtyPerCase = Convert.ToDecimal(row["QtyPerCase"]),
-        //    //                Location = Convert.ToString(row["Location"]),
-        //    //                SaleTypeId = Convert.ToInt32(row["SaleTypeId"]),
-        //    //                PurchaseTypeId = Convert.ToInt32(row["PurchaseTypeId"]),
-        //    //                //PurchaseTypeCode = Convert.ToDecimal(row["AccountLedgerMaster1.AccountLedgerCode,
-        //    //                //PurchaseTypeName = Convert.ToDecimal(row["AccountLedgerMaster1.AccountLedgerName,
-        //    //                //PurchaseTypeRate = Convert.ToDecimal(row["AccountLedgerMaster1.SalePurchaseTaxType,
-        //    //                Status = Convert.ToBoolean(row["Status"])
-        //    //            };
-
-        //    //            itemList.Add(item);
-
-        //    //        }
-        //    //    }
-        //    //    return itemList;              
-        //    //}
-
-
-
-        //    using (PharmaDBEntities context = new PharmaDBEntities())
-        //    {
-        //        return context.ItemMaster.Where(p => p.Status
-        //                                        && (string.IsNullOrEmpty(searchString) || p.ItemName.Contains(searchString))
-        //                                        ).Select(p => new PharmaBusinessObjects.Master.ItemMaster()
-        //                                        {
-        //                                            ItemID = p.ItemID,
-        //                                            ItemCode = p.ItemCode,
-        //                                            ItemName = p.ItemName,
-        //                                            CompanyID = p.CompanyID,
-        //                                            ConversionRate = p.ConversionRate,
-        //                                            CompanyName = p.CompanyMaster.CompanyName,
-        //                                            ShortName = p.ShortName,
-        //                                            Packing = p.Packing,
-        //                                            PurchaseRate = p.PurchaseRate,
-        //                                            MRP = p.MRP,
-        //                                            SaleRate = p.SaleRate,
-        //                                            SpecialRate = p.SpecialRate,
-        //                                            WholeSaleRate = p.WholeSaleRate,
-        //                                            SaleExcise = p.SaleExcise,
-        //                                            SurchargeOnSale = p.SurchargeOnSale,
-        //                                            TaxOnSale = p.TaxOnSale,
-        //                                            Scheme1 = p.Scheme1,
-        //                                            Scheme2 = p.Scheme2,
-        //                                            PurchaseExcise = p.PurchaseExcise,
-        //                                            UPC = p.UPC,
-        //                                            IsHalfScheme = p.IsHalfScheme,
-        //                                            IsQTRScheme = p.IsQTRScheme,
-        //                                            SpecialDiscount = p.SpecialDiscount,
-        //                                            SpecialDiscountOnQty = p.SpecialDiscountOnQty,
-        //                                            IsFixedDiscount = p.IsFixedDiscount,
-        //                                            FixedDiscountRate = p.FixedDiscountRate,
-        //                                            SurchargeOnPurchase = p.SurchargeOnPurchase,
-        //                                            TaxOnPurchase = p.TaxOnPurchase,
-        //                                            DiscountRecieved = p.DiscountRecieved,
-        //                                            SpecialDiscountRecieved = p.SpecialDiscountRecieved,
-        //                                            QtyPerCase = p.QtyPerCase,
-        //                                            Location = p.Location,
-        //                                            SaleTypeId = p.SaleTypeId,
-        //                                            PurchaseTypeId = p.PurchaseTypeId,
-        //                                            PurchaseTypeCode = p.AccountLedgerMaster1.AccountLedgerCode,
-        //                                            PurchaseTypeName = p.AccountLedgerMaster1.AccountLedgerName,
-        //                                            PurchaseTypeRate = p.AccountLedgerMaster1.SalePurchaseTaxType,
-        //                                            HSNCode = p.HSNCode,
-        //                                            Status = p.Status
-
-        //                                        }).ToList();
-        //    }
-        //}
+       
 
         public List<PharmaBusinessObjects.Master.ItemMaster> GetAllItemByCompanyID(int CompanyID)
         {
@@ -536,5 +410,84 @@ namespace PharmaDAL.Master
 
             return master;
         }
+        
+        public List<FifoBatches> GetFifoBatchesByItemCode(string itemCode)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                List<FifoBatches> list = new List<FifoBatches>();
+
+                list = context.FIFO.Where(p => p.ItemCode == itemCode).Select(batch => new FifoBatches()
+                {
+
+                    FifoID = batch.FifoID,
+                    PurchaseSaleBookHeaderID = batch.PurchaseSaleBookHeaderID,
+                    ItemCode = batch.ItemCode,
+                    PurchaseBillNo = batch.PurchaseBillNo,
+                    Batch = batch.Batch,
+                    PurchaseRate = batch.PurchaseRate,
+                    SaleRate = batch.SaleRate,
+                    WholeSaleRate = batch.WholeSaleRate,
+                    BalanceQuanity = batch.BalanceQuanity,
+                    Quantity = batch.Quantity,
+                    EffectivePurchaseRate = batch.EffectivePurchaseRate,
+                    ExpiryDate = batch.ExpiryDate,
+                    MfgDate = batch.MfgDate,
+                    MRP = batch.MRP,
+                    SpecialRate = batch.SpecialRate,
+                    SRLNO = batch.SRLNO,
+                    VoucherDate = batch.VoucherDate,
+                    VoucherNumber = batch.VoucherNumber,
+                    Scheme1 = batch.Scheme1,
+                    Scheme2 = batch.Scheme2,
+                    IsOnHold = batch.IsOnHold,
+                    OnHoldRemarks = batch.OnHoldRemarks,
+                    UPC = batch.UPC,
+                   // Scheme=  Convert.ToString(batch.Scheme1 ?? default(decimal)) + Convert.ToString(batch.Scheme2 ?? default(decimal))
+
+                }).ToList();
+
+                return list;
+            }
+        }
+
+        public int UpdateFifoBatchesByItemCode(FifoBatches fifoBatch)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                FIFO fifo = context.FIFO.Where(p => p.FifoID == fifoBatch.FifoID).FirstOrDefault();
+
+                if (fifo != null)
+                {
+                    fifo.Batch = fifoBatch.Batch;
+                    fifo.SaleRate = fifoBatch.SaleRate;
+                    fifo.WholeSaleRate = fifoBatch.WholeSaleRate;
+                    fifo.SpecialRate = fifoBatch.SpecialRate;
+                    fifo.MRP = fifoBatch.MRP;
+                    fifo.PurchaseRate = fifoBatch.PurchaseRate;
+                    fifo.IsOnHold = fifoBatch.IsOnHold;
+                    fifo.OnHoldRemarks = fifoBatch.OnHoldRemarks;
+                    fifo.MfgDate = fifoBatch.MfgDate;
+                    fifo.ExpiryDate = fifoBatch.ExpiryDate;
+
+                    context.SaveChanges();
+
+
+
+
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+
+
+
+
+            }
+        }
+
+
     }
 }
