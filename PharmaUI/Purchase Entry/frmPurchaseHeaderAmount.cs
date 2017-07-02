@@ -19,6 +19,7 @@ namespace PharmaUI
         IApplicationFacade applicationFacade;
         PurchaseSaleBookHeader purchaseBookHeader;
         bool isDirty = false;
+        public int RowIndex { get; set; }
 
         public PurchaseSaleBookHeader PurchaseBookHeader { get { return purchaseBookHeader; } }
 

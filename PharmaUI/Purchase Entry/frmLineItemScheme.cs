@@ -18,6 +18,7 @@ namespace PharmaUI.Purchase_Entry
     {
         IApplicationFacade applicationFacade;
         PurchaseSaleBookLineItem purchaseBookLineItem;
+        public int RowIndex { get; set; }
 
         public PurchaseSaleBookLineItem PurchaseBookLinetem { get { return purchaseBookLineItem; } }
 

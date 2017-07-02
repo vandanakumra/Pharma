@@ -16,11 +16,12 @@ namespace PharmaUI
     public partial class frmReportViewer : Form
     {
         IApplicationFacade applicationFacade;
-
+        
         public frmReportViewer()
         {
             InitializeComponent();
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
+           
         }
 
         private void frmReportViewer_Load(object sender, EventArgs e)
@@ -36,7 +37,7 @@ namespace PharmaUI
 
             //this.reportViewer1.
             DataTable saleInvoice =applicationFacade.GetSaleInvoiceData(2);
-            DataTable firmProperties = applicationFacade.GetFirmProperties(2);
+            //DataTable firmProperties = applicationFacade.GetFirmProperties(2);
 
             ReportDataSource dtSaleInvoice = new ReportDataSource("SaleInvoice", saleInvoice);
            // ReportDataSource dtFirmProperties = new ReportDataSource("FirmProperties", firmProperties);
@@ -46,15 +47,14 @@ namespace PharmaUI
             this.reportViewer1.RefreshReport();
 
             this.reportViewer1.Visible = true;
-            this.reportViewer1.RefreshReport();
-
             this.reportViewer1.RenderingComplete += ReportViewer1_RenderingComplete;
-            
         }
+
 
         private void ReportViewer1_RenderingComplete(object sender, RenderingCompleteEventArgs e)
         {
-            this.reportViewer1.PrintDialog();
+            DialogResult result = this.reportViewer1.PrintDialog();
+            this.Close();
         }
     }
 }

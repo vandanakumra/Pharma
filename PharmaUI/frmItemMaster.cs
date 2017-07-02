@@ -45,6 +45,7 @@ namespace PharmaUI
         TypeAssistant assistant;
         private bool isAddEditFormClosed = false;
         private bool useMemoryForItem = false;
+        public int RowIndex { get; set; }
 
         public frmItemMaster(bool _isOpenAsChild = false)
         {

@@ -15,6 +15,7 @@ namespace PharmaUI
     {
         IApplicationFacade applicationFacade;
         public PharmaBusinessObjects.Common.Enums.SaleEntryChangeType ChangeType { get; set; }
+        public int RowIndex { get; set; }
 
         public frmChangeType()
         {
