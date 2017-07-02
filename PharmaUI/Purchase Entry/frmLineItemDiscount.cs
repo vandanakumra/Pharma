@@ -49,7 +49,7 @@ namespace PharmaUI
             format = format.IndexOf("MM") < 0 ? format.Replace("M", "MM") : format;
             format = format.IndexOf("dd") < 0 ? format.Replace("d", "dd") : format;
 
-            dtMfgDate.Text = purchaseBookLineItem.PurchaseBillDate == null || purchaseBookLineItem.PurchaseBillDate == (DateTime)DateTime.MinValue ? DateTime.Now.ToString(format) : ((DateTime)purchaseBookLineItem.PurchaseBillDate).ToString(format);
+            dtMfgDate.Text = purchaseBookLineItem.MfgDate == null || purchaseBookLineItem.MfgDate == (DateTime)DateTime.MinValue ? DateTime.Now.ToString(format) : ((DateTime)purchaseBookLineItem.MfgDate).ToString(format);
             txtSpecialRate.Text = Convert.ToString(purchaseBookLineItem.SpecialRate);
             txtWholeSaleRate.Text = Convert.ToString(purchaseBookLineItem.WholeSaleRate);
             txtSaleRate.Text = Convert.ToString(purchaseBookLineItem.SaleRate);
@@ -128,18 +128,20 @@ namespace PharmaUI
 
                 DateTime date = new DateTime();
                 DateTime.TryParse(dtMfgDate.Text, out date);
+             
               
-
                 if (date == DateTime.MinValue)
-                    purchaseBookLineItem.PurchaseBillDate = null;
+                    purchaseBookLineItem.MfgDate = null;
                 else
                 {
-                    purchaseBookLineItem.PurchaseBillDate = date;
+                    purchaseBookLineItem.MfgDate = date;
                     //dr["PurchaseBillDate"] = date;
                 }
 
                 date = new DateTime();
+
                 DateTime.TryParse(dtExpiry.Text, out date);
+
                 if (date == DateTime.MinValue)
                     purchaseBookLineItem.ExpiryDate = null;
                 else

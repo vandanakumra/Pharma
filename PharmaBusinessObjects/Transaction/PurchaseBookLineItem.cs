@@ -57,6 +57,7 @@ namespace PharmaBusinessObjects.Transaction
         public Nullable<decimal> UsedQuantity { get; set; }
         public Nullable<decimal> BalanceQuantity { get; set; }
         public Nullable<long> OldPurchaseSaleBookLineItemID { get; set; }
+        public Nullable<DateTime> MfgDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
@@ -65,20 +66,19 @@ namespace PharmaBusinessObjects.Transaction
         public PurchaseSaleBookLineItem()
         {
             Batch = BatchNew = ItemCode = PurchaseSaleTypeCode = string.Empty;
-            Quantity = 0;
-            FreeQuantity = 0;
+            Quantity = default(decimal);
+            FreeQuantity = default(decimal);
             Scheme1 = Scheme1 = 0;
             IsHalfScheme = false;
-            Amount = 0;
             PurchaseSaleBookLineItemID = 0;
             PurchaseSaleRate = OldPurchaseSaleRate = 0;
-            SpecialRate = WholeSaleRate = SaleRate = Amount = 0;
-            MRP = 0L;
-            VolumeDiscount = SpecialDiscount = Discount = 0;
-            PurchaseSaleTax = 0;
-            IGST = SGST = CGST = 0;
-            CostAmount = DiscountAmount = SpecialDiscountAmount = VolumeDiscountAmount = GrossAmount = TaxAmount = 0;
-            SchemeAmount = SurchargeAmount = TotalDiscountAmount = 0;           
+            SpecialRate = WholeSaleRate = SaleRate = Amount = default(decimal);
+            MRP = default(decimal);
+            VolumeDiscount = SpecialDiscount = Discount = default(decimal);
+            PurchaseSaleTax = default(decimal);
+            IGST = SGST = CGST = default(decimal);
+            CostAmount = DiscountAmount = SpecialDiscountAmount = VolumeDiscountAmount = GrossAmount = TaxAmount = default(decimal);
+            SchemeAmount = SurchargeAmount = TotalDiscountAmount = default(decimal);           
         }
     }
 }

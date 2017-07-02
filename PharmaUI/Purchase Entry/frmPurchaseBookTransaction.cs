@@ -237,7 +237,12 @@ namespace PharmaUI
 
             dgvLineItem.Columns.Add("FifoID", "FifoID");
             dgvLineItem.Columns["FifoID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvLineItem.Columns["FifoID"].Visible = false;          
+            dgvLineItem.Columns["FifoID"].Visible = false;
+
+
+            dgvLineItem.Columns.Add("MfgDate", "MfgDate");
+            dgvLineItem.Columns["MfgDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["MfgDate"].Visible = false;
 
 
             dgvLineItem.CellBeginEdit += DgvLineItem_CellBeginEdit;
@@ -1103,6 +1108,14 @@ namespace PharmaUI
                 else
                     item.ExpiryDate = date;
 
+
+                date = DateTime.MinValue;
+                DateTime.TryParse(Convert.ToString(row.Cells["MfgDate"].Value), out date);
+                if (date == DateTime.MinValue)
+                    item.MfgDate = null;
+                else
+                    item.MfgDate = date;
+
                 decimal.TryParse(Convert.ToString(row.Cells["WholeSaleRate"].Value), out dValue);
                 item.WholeSaleRate = dValue;
 
@@ -1670,6 +1683,7 @@ namespace PharmaUI
                 dgvLineItem.Rows[rowIndex].Cells["VolumeDiscount"].Value = lineItem.VolumeDiscount;
                 dgvLineItem.Rows[rowIndex].Cells["MRP"].Value = lineItem.MRP;
                 dgvLineItem.Rows[rowIndex].Cells["ExpiryDate"].Value = lineItem.ExpiryDate;
+                dgvLineItem.Rows[rowIndex].Cells["MfgDate"].Value = lineItem.MfgDate;
                 dgvLineItem.Rows[rowIndex].Cells["SaleRate"].Value = lineItem.SaleRate;
                 dgvLineItem.Rows[rowIndex].Cells["SpecialRate"].Value = lineItem.SpecialRate;
                 dgvLineItem.Rows[rowIndex].Cells["WholeSaleRate"].Value = lineItem.WholeSaleRate;
