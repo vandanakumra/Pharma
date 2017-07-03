@@ -19,7 +19,7 @@ namespace PharmaUI
 {
     public partial class frmSaleEntry : Form
     {
-        // private bool isModifyLoad = true;
+        
         private bool IsModify = false;
         private bool isDirty = false;
         private bool isBatchUpdate = false;
@@ -54,7 +54,7 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message);
             }
         }
-
+        
         private void frmSaleEntry_Load(object sender, EventArgs e)
         {
             try
@@ -281,7 +281,7 @@ namespace PharmaUI
 
         private void DgvLineItem_SelectionChanged(object sender, EventArgs e)
         {
-
+            
             if (dgvLineItem.SelectedCells.Count > 0)
             {
 
@@ -912,6 +912,15 @@ namespace PharmaUI
                                 Sale_Entry.frmAllBillForCustomer frm = new Sale_Entry.frmAllBillForCustomer(listInvoices);
                                 frm.FormClosed += FrmAllBillForCustomer_FormClosed;
                                 frm.ShowDialog();
+
+                                if (IsModify && dgvLineItem.Rows.Count > 0)
+                                {
+                                    dgvLineItem.ClearSelection();
+                                    dgvLineItem.Focus();
+                                    dgvLineItem.Rows[0].Selected = true;
+                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
+                                    dgvLineItem.CurrentCell.Selected = true;
+                                }
                             }
                             else
                             {
@@ -1290,11 +1299,7 @@ namespace PharmaUI
                     dgvLineItem.Rows[i].Cells["ConversionRate"].Value = lineItemList[i].ConversionRate;
 
                 }
-
                 
-                dgvLineItem.Rows[0].Selected = true;
-                dgvLineItem.CurrentCell = dgvLineItem.Rows[0].Cells["ItemCode"];
-                dgvLineItem.Focus();
             }
         }
 
