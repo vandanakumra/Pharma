@@ -1,4 +1,5 @@
-﻿using PharmaBusiness;
+﻿using Microsoft.Reporting.WebForms;
+using PharmaBusiness;
 using PharmaBusinessObjects;
 using PharmaBusinessObjects.Common;
 using PharmaBusinessObjects.Master;
@@ -9,7 +10,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Printing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -367,6 +371,7 @@ namespace PharmaUI
         }
 
         private void DgvLineItem_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+
         {
             try
             {
@@ -612,56 +617,56 @@ namespace PharmaUI
         {
             try
             {
-                if (isDirty)
-                {
-                    Control text = (Control)sender;
+                //if (isDirty)
+                //{
+                //    Control text = (Control)sender;
 
-                    switch (text.Name)
-                    {
-                        case "txtCustomerCode":
-                            {
-                                if (isDirty && !string.IsNullOrEmpty(txtCustomerCode.Text))
-                                {
-                                    SetCustomerCodeFields(txtCustomerCode.Text);
-                                }
-                            }
+                //    switch (text.Name)
+                //    {
+                //        case "txtCustomerCode":
+                //            {
+                //                if (isDirty && !string.IsNullOrEmpty(txtCustomerCode.Text))
+                //                {
+                //                    SetCustomerCodeFields(txtCustomerCode.Text);
+                //                }
+                //            }
 
-                            break;
-                        case "dtSaleDate":
-                            {
-                                MaskedTextBox dtPicker = (MaskedTextBox)sender;
+                //            break;
+                //        case "dtSaleDate":
+                //            {
+                //                MaskedTextBox dtPicker = (MaskedTextBox)sender;
 
-                                if (!ExtensionMethods.IsValidDate(dtSaleDate.Text))
-                                {
-                                    errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.InValidDate);
-                                    dtSaleDate.Focus();
-                                }
-                                else
-                                {
-                                    errFrmSaleEntry.SetError(dtSaleDate, String.Empty);
-                                    DateTime dt = new DateTime();
-                                    dt = ExtensionMethods.ConvertToSystemDateFormat(dtPicker.Text);
-                                    if (dt > DateTime.Today || dt < DateTime.Today)
-                                    {
-                                        DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
+                //                if (!ExtensionMethods.IsValidDate(dtSaleDate.Text))
+                //                {
+                //                    errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.InValidDate);
+                //                    dtSaleDate.Focus();
+                //                }
+                //                else
+                //                {
+                //                    errFrmSaleEntry.SetError(dtSaleDate, String.Empty);
+                //                    DateTime dt = new DateTime();
+                //                    dt = ExtensionMethods.ConvertToSystemDateFormat(dtPicker.Text);
+                //                    if (dt > DateTime.Today || dt < DateTime.Today)
+                //                    {
+                //                        DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
 
-                                        if (result == DialogResult.No)
-                                        {
-                                            dtPicker.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
-                                        }
-                                    }
-                                }
-                            }
-                            break;
-                        case "txtSalesManCode":
-                            {
+                //                        if (result == DialogResult.No)
+                //                        {
+                //                            dtPicker.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+                //                        }
+                //                    }
+                //                }
+                //            }
+                //            break;
+                //        case "txtSalesManCode":
+                //            {
 
-                            }
-                            break;
-                    }
+                //            }
+                //            break;
+                //    }
 
-                    isDirty = false;
-                }
+                //    isDirty = false;
+                //}
             }
             catch (Exception ex)
             {
@@ -769,7 +774,7 @@ namespace PharmaUI
             {
                 TextBox txt = (TextBox)sender;
 
-                if (e.KeyCode == Keys.Enter)
+                if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
                 {
                     if (txt.Name == "txtInvoiceNumber" && IsModify && string.IsNullOrEmpty(txtInvoiceNumber.Text))
                     {
@@ -781,6 +786,12 @@ namespace PharmaUI
                     }
                     else if (!string.IsNullOrEmpty(txt.Text))
                     {
+                        if (txt.Name == "txtCustomerCode")
+                        {
+                            SetCustomerCodeFields(txtCustomerCode.Text);
+                        }
+
+
                         this.SelectNextControl(this.ActiveControl, true, true, true, true);
                     }
                     else
@@ -813,10 +824,38 @@ namespace PharmaUI
             else if (sender is MaskedTextBox)
             {
                 MaskedTextBox txt = (MaskedTextBox)sender;
-
-                if (e.KeyCode == Keys.Enter && txt.Text != "  /  /")
+                if (txt.Name == "dtSaleDate")
                 {
-                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                    MaskedTextBox dtPicker = (MaskedTextBox)sender;
+
+                    if (!ExtensionMethods.IsValidDate(dtSaleDate.Text))
+                    {
+                        errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.InValidDate);
+                        dtSaleDate.Focus();
+                    }
+                    else
+                    {
+                        errFrmSaleEntry.SetError(dtSaleDate, String.Empty);
+                        DateTime dt = new DateTime();
+                        dt = ExtensionMethods.ConvertToSystemDateFormat(dtPicker.Text);
+                        if (dt > DateTime.Today || dt < DateTime.Today)
+                        {
+                            DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
+
+                            if (result == DialogResult.No)
+                            {
+                                dtPicker.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+                            }
+                            else
+                            {
+                                this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                            }
+                        }
+                        else
+                        {
+                            this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                        }
+                    }
                 }
             }
             else if (sender is ComboBox)
@@ -989,7 +1028,7 @@ namespace PharmaUI
                         cbxSaleFormType.SelectedValue = header.PurchaseEntryFormID;
                     }
 
-                    List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID).OrderBy(p=>p.PurchaseSaleBookLineItemID).ToList();
+                    List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID).OrderBy(p => p.PurchaseSaleBookLineItemID).ToList();
 
                     InsertUpdateLineItemAndsetToGridForModify(lineitems);
 
@@ -1228,7 +1267,7 @@ namespace PharmaUI
                         SetFooterInfo(lineItem.ItemCode, lineItem.FifoID ?? 0);
                     }
 
-                     isBatchUpdate = false;
+                    isBatchUpdate = false;
                 }
 
                 ExtensionMethods.RemoveChildFormToPanel(this, (Control)sender, ExtensionMethods.MainPanel);
@@ -1651,12 +1690,35 @@ namespace PharmaUI
                             result = MessageBox.Show("Are you sure you want to print the invoice", "Confirmation", MessageBoxButtons.YesNo);
 
                             if (result == DialogResult.Yes)
-                            { 
-                                frmReportViewer reportViewer = new frmReportViewer();
-                                reportViewer.Show();
-                                reportViewer.WindowState = FormWindowState.Minimized;
-                                reportViewer.Hide();
-                                reportViewer.FormClosed += ReportViewer_FormClosed;
+                            {
+                                Cursor.Current = Cursors.WaitCursor;
+
+                                string appPath = AppDomain.CurrentDomain.BaseDirectory;
+                                appPath = appPath.Replace(@"bin\Debug", string.Empty);
+
+                                string reportPath = Path.Combine(appPath, "Reports");
+                                string reportName = "SaleInvoice.rdlc";
+
+                                LocalReport report = new LocalReport();
+                                report.ReportPath = Path.Combine(reportPath, reportName);
+                                //report.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource("SaleInvoice", applicationFacade.GetSaleInvoiceData(2)));
+
+                                //this.reportViewer1.
+                                DataTable saleInvoice = applicationFacade.GetSaleInvoiceData(purchaseSaleBookHeaderID);
+                                //DataTable firmProperties = applicationFacade.GetFirmProperties(2);
+
+                                ReportDataSource dtSaleInvoice = new ReportDataSource();
+                                dtSaleInvoice.Name = "SaleInvoice";
+                                dtSaleInvoice.Value = saleInvoice;
+
+                                report.DataSources.Add(dtSaleInvoice);
+                                Export(report);
+                                Print();
+
+                                Cursor.Current = Cursors.Default;
+
+                                this.Close();
+                               
                             }
                             else
                             {
@@ -1673,12 +1735,6 @@ namespace PharmaUI
                     form.Show();
                 }
 
-                //else if (keyData == Keys.Escape)
-                //{
-                //    this.Close();
-
-                //}
-
             }
             catch (Exception ex)
             {
@@ -1686,6 +1742,80 @@ namespace PharmaUI
 
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private int m_currentPageIndex;
+        private IList<Stream> m_streams;
+
+        private Stream CreateStream(string name, string fileNameExtension, Encoding encoding, string mimeType, bool willSeek)
+        {
+            Stream stream = new MemoryStream();
+            m_streams.Add(stream);
+            return stream;
+        }
+    
+        // Export the given report as an EMF (Enhanced Metafile) file.
+        private void Export(LocalReport report)
+        {
+            string deviceInfo =
+              @"<DeviceInfo>
+                <OutputFormat>EMF</OutputFormat>
+                <PageWidth>12in</PageWidth>
+                <PageHeight>11in</PageHeight>
+                <MarginTop>0.25in</MarginTop>
+                <MarginLeft>0.25in</MarginLeft>
+                <MarginRight>0.25in</MarginRight>
+                <MarginBottom>0.25in</MarginBottom>
+            </DeviceInfo>";
+
+            Warning[] warnings; 
+            m_streams = new List<Stream>();
+            report.Render("Image", deviceInfo, CreateStream,out warnings);
+            foreach (Stream stream in m_streams)
+                stream.Position = 0;
+        }
+       
+
+        private void Print()
+        {
+            if (m_streams == null || m_streams.Count == 0)
+                throw new Exception("Error: no stream to print.");
+           
+            PrintDocument printDoc = new PrintDocument();
+
+            if (!printDoc.PrinterSettings.IsValid)
+            {
+                throw new Exception("Error: cannot find the default printer.");
+            }
+            else
+            {
+                printDoc.PrintPage += PrintDoc_PrintPage;
+                //  printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
+                m_currentPageIndex = 0;
+                printDoc.Print();
+            }
+        }
+
+        private void PrintDoc_PrintPage(object sender, PrintPageEventArgs ev)
+        {
+            Metafile pageImage = new Metafile(m_streams[m_currentPageIndex]);
+
+            // Adjust rectangular area with printer margins.
+            Rectangle adjustedRect = new Rectangle(
+                ev.PageBounds.Left - (int)ev.PageSettings.HardMarginX,
+                ev.PageBounds.Top - (int)ev.PageSettings.HardMarginY,
+                ev.PageBounds.Width,
+                ev.PageBounds.Height);
+
+            // Draw a white background for the report
+            ev.Graphics.FillRectangle(Brushes.White, adjustedRect);
+
+            // Draw the report content
+            ev.Graphics.DrawImage(pageImage, adjustedRect);
+
+            // Prepare for the next page. Make sure we haven't hit the end.
+            m_currentPageIndex++;
+            ev.HasMorePages = (m_currentPageIndex < m_streams.Count);
         }
 
         private void ReportViewer_FormClosed(object sender, FormClosedEventArgs e)
@@ -1775,8 +1905,6 @@ namespace PharmaUI
                     applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
                 }
             }
-
-
 
             cbxSaleType.Focus();
 

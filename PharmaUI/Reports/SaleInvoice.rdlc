@@ -1997,7 +1997,7 @@
                   </Style>
                 </TextRun>
                 <TextRun>
-                  <Value>=FormatDateTime(Fields!InvoiceDate1.Value,"dd/MM/yyyy")</Value>
+                  <Value>=Fields!InvoiceDate1.Value</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                   </Style>
