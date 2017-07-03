@@ -545,7 +545,9 @@
     <EmbeddedResource Include="Reports\frmReportViewer.resx">
       <DependentUpon>frmReportViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SaleInvoice.rdlc" />
+    <EmbeddedResource Include="Reports\SaleInvoice.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sale Entry\frmAllBillForCustomer.resx">
       <DependentUpon>frmAllBillForCustomer.cs</DependentUpon>
     </EmbeddedResource>
