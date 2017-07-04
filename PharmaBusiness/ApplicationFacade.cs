@@ -1067,7 +1067,7 @@ namespace PharmaBusiness
         #endregion
         #region "Reports"
 
-        public DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID)
+        public DataTable GetSaleInvoiceData(long purchaseSaleBookHeaderID)
         {
             return new ReportBiz(LoggedInUser).GetSaleInvoiceData(purchaseSaleBookHeaderID);
 

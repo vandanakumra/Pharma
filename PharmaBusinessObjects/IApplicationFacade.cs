@@ -167,7 +167,7 @@ namespace PharmaBusinessObjects
         PersonRouteMaster GetPersonRouteMasterByCode(string personRouteCode);
         #endregion
         #region "Reports"
-        DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID);
+        DataTable GetSaleInvoiceData(long purchaseSaleBookHeaderID);
         DataTable GetFirmProperties(int purchaseSaleBookHeaderID);
         #endregion
     }

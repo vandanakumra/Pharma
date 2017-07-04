@@ -15,7 +15,7 @@ namespace PharmaBusiness.Transaction
 
         }
 
-        internal DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID)
+        internal DataTable GetSaleInvoiceData(long purchaseSaleBookHeaderID)
         {
             return new ReportDao(LoggedInUser).GetSaleInvoiceData(purchaseSaleBookHeaderID);
 
