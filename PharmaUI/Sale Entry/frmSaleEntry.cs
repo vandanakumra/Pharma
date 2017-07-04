@@ -1685,7 +1685,7 @@ namespace PharmaUI
                         var result = MessageBox.Show("Are you sure you want to save the sale entry", "Confirmation", MessageBoxButtons.OKCancel);
                         if (result == DialogResult.OK)
                         {
-                            applicationFacade.SaveSaleEntryData(header.PurchaseSaleBookHeaderID);
+                            long purchaseHeaderId =  applicationFacade.SaveSaleEntryData(header.PurchaseSaleBookHeaderID);
 
                             result = MessageBox.Show("Are you sure you want to print the invoice", "Confirmation", MessageBoxButtons.YesNo);
 
@@ -1704,7 +1704,7 @@ namespace PharmaUI
                                 //report.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource("SaleInvoice", applicationFacade.GetSaleInvoiceData(2)));
 
                                 //this.reportViewer1.
-                                DataTable saleInvoice = applicationFacade.GetSaleInvoiceData(purchaseSaleBookHeaderID);
+                                DataTable saleInvoice = applicationFacade.GetSaleInvoiceData(purchaseHeaderId);
                                 //DataTable firmProperties = applicationFacade.GetFirmProperties(2);
 
                                 ReportDataSource dtSaleInvoice = new ReportDataSource();

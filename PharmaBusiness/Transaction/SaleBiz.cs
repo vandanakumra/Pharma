@@ -57,7 +57,7 @@ namespace PharmaBusiness.Transaction
             return new SaleEntryDao(this.LoggedInUser).IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity, ref calcFreeQuantity);
         }
 
-        internal bool SaveSaleEntryData(long purchaseBookHeaderID)
+        internal long SaveSaleEntryData(long purchaseBookHeaderID)
         {
             return new SaleEntryDao(this.LoggedInUser).SaveSaleEntryData(purchaseBookHeaderID);
         }
