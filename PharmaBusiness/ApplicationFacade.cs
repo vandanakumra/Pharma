@@ -1050,7 +1050,7 @@ namespace PharmaBusiness
             return new SaleBiz(this.LoggedInUser).IsQuantityAvailable(headerID, lineItemID, itemCode, quantity, freeQuantity, ref calcFreeQuantity);
         }
 
-        public bool SaveSaleEntryData(long purchaseBookHeaderID)
+        public long SaveSaleEntryData(long purchaseBookHeaderID)
         {
             return new SaleBiz(this.LoggedInUser).SaveSaleEntryData(purchaseBookHeaderID);
         }
@@ -1067,7 +1067,7 @@ namespace PharmaBusiness
         #endregion
         #region "Reports"
 
-        public DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID)
+        public DataTable GetSaleInvoiceData(long purchaseSaleBookHeaderID)
         {
             return new ReportBiz(LoggedInUser).GetSaleInvoiceData(purchaseSaleBookHeaderID);
 

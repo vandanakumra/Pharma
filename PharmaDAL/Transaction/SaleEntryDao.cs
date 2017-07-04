@@ -364,7 +364,7 @@ namespace PharmaDAL.Transaction
             return false;
         }
 
-        public bool SaveSaleEntryData(long purchaseBookHeaderID)
+        public long SaveSaleEntryData(long purchaseBookHeaderID)
         {
             string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
 
@@ -375,18 +375,25 @@ namespace PharmaDAL.Transaction
                     SqlCommand cmd = new SqlCommand("SaveSaleEntryData", connection);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@PurchaseSaleBookHeaderID", purchaseBookHeaderID));
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
 
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    sda.Fill(dt);
+
+                    if(dt.Rows.Count > 0)
+                    {
+                        return Convert.ToInt64(dt.Rows[0]["PurchaseSaleHeaderID"].ToString());
+                    }
+
+                    return 0;
                 }
                 finally
                 {
 
                     connection.Close();
                 }
-
             }
-            return true;
+           
         }
 
         public bool IsTempSaleEntryExists(long purchaseSaleBookHeaderID)

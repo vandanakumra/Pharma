@@ -15,7 +15,7 @@ namespace PharmaDAL.Transaction
 
         }
 
-        public DataTable GetSaleInvoiceData(int purchaseSaleBookHeaderID)
+        public DataTable GetSaleInvoiceData(long purchaseSaleBookHeaderID)
         {
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString))
