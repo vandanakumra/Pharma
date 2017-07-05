@@ -1697,7 +1697,7 @@ namespace PharmaUI
                                 appPath = appPath.Replace(@"bin\Debug", string.Empty);
 
                                 string reportPath = Path.Combine(appPath, "Reports");
-                                string reportName = "SaleInvoice.rdlc";
+                                string reportName = "GSTInvoice.rdlc";
 
                                 LocalReport report = new LocalReport();
                                 report.ReportPath = Path.Combine(reportPath, reportName);
@@ -1708,7 +1708,7 @@ namespace PharmaUI
                                 //DataTable firmProperties = applicationFacade.GetFirmProperties(2);
 
                                 ReportDataSource dtSaleInvoice = new ReportDataSource();
-                                dtSaleInvoice.Name = "SaleInvoice";
+                                dtSaleInvoice.Name = "GSTInvoiceResult";
                                 dtSaleInvoice.Value = saleInvoice;
 
                                 report.DataSources.Add(dtSaleInvoice);
@@ -1760,8 +1760,8 @@ namespace PharmaUI
             string deviceInfo =
               @"<DeviceInfo>
                 <OutputFormat>EMF</OutputFormat>
-                <PageWidth>12in</PageWidth>
-                <PageHeight>11in</PageHeight>
+                <PageWidth>8.27in</PageWidth>
+                <PageHeight>11.39in</PageHeight>
                 <MarginTop>0.25in</MarginTop>
                 <MarginLeft>0.25in</MarginLeft>
                 <MarginRight>0.25in</MarginRight>
