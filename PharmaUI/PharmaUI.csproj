@@ -248,6 +248,11 @@
     <Compile Include="frmPrivledgeAddUpdate.Designer.cs">
       <DependentUpon>frmPrivledgeAddUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="GSTInvoice.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GSTInvoice.xsd</DependentUpon>
+    </Compile>
     <Compile Include="PharmaDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -569,6 +574,17 @@
     <EmbeddedResource Include="ucSupplierCustomerInfo.resx">
       <DependentUpon>ucSupplierCustomerInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="GSTInvoice.xsc">
+      <DependentUpon>GSTInvoice.xsd</DependentUpon>
+    </None>
+    <None Include="GSTInvoice.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GSTInvoice.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GSTInvoice.xss">
+      <DependentUpon>GSTInvoice.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="PharmaDBDataSet.xsc">
       <DependentUpon>PharmaDBDataSet.xsd</DependentUpon>
