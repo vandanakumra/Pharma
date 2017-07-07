@@ -319,7 +319,7 @@ namespace PharmaDAL.Transaction
             }
         }
 
-        public List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode)
+        public List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode, string date)
         {
             using (PharmaDBEntities context = new PharmaDBEntities())
             {

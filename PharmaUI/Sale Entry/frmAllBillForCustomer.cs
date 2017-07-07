@@ -20,6 +20,7 @@ namespace PharmaUI.Sale_Entry
         List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> list;
 
         public long PurchaseSaleBookHeaderID { get; set; }
+        public string InvoiceNumber { get; private set; }
 
         public frmAllBillForCustomer(List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> listinvoice)
         {
@@ -85,6 +86,7 @@ namespace PharmaUI.Sale_Entry
         private void FrmAllBillForCustomer_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.PurchaseSaleBookHeaderID = Convert.ToInt64(dgvSaleBill.SelectedRows[0].Cells["PurchaseSaleBookHeaderID"].Value);
+            this.InvoiceNumber = Convert.ToString(dgvSaleBill.SelectedRows[0].Cells["InvoiceNumber"].Value);
         }
 
         private void DgvSaleBill_KeyDown(object sender, KeyEventArgs e)

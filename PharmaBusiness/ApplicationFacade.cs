@@ -802,9 +802,9 @@ namespace PharmaBusiness
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).DeleteTempPurchaseBookLineItem(lineItem);
         }
 
-        public List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode)
+        public List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode, string date)
         {
-            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetAllPurchaseInvoiceForSuppier(supplierCode);
+            return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetAllPurchaseInvoiceForSuppier(supplierCode,date);
         }
 
         public List<BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode, string invoiceDate)

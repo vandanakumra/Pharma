@@ -300,21 +300,9 @@ namespace PharmaUI
                     if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
                     {
                         e.Handled = true;
-                    }
-                    
+                    }                    
                 }
-                //if(!string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
-                //{
-                //    dgvLineItem.EndEdit();
-                //    e.Handled = true;
-                //}
-                //if (string.IsNullOrWhiteSpace(Convert.ToString(dgvLineItem.CurrentCell.Value)) && e.KeyChar == (char)Keys.Enter)
-                //{
-                //    e.Handled = true;
-                //    int rowIndex = dgvLineItem.CurrentCell.RowIndex;
-                //    int colIndex = dgvLineItem.CurrentCell.ColumnIndex;
-                //    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells[colIndex + 1];
-                //}
+                
             }
             catch (Exception ex)
             {
@@ -346,29 +334,7 @@ namespace PharmaUI
             }
         }
 
-        //private void OpenRateDialog(int rowIndex, PurchaseSaleBookLineItem lineItem)
-        //{
-        //    decimal newRate = 0L;
-        //    decimal oldRate = 0L;
-
-        //    decimal.TryParse(Convert.ToString(dgvLineItem["OldPurchaseSaleRate", rowIndex].Value), out oldRate);
-        //    decimal.TryParse(Convert.ToString(dgvLineItem["PurchaseSaleRate", rowIndex].Value), out newRate);
-
-        //    if (oldRate != newRate)
-        //    {
-        //        frmLineItemDiscount updateForm = new frmLineItemDiscount(lineItem);
-        //        updateForm.FormClosed += frmLineItemDiscount_FormClosed;
-        //        updateForm.ShowDialog();
-
-        //    }
-        //    else
-        //    {
-        //        frmLineItemBriefDiscount updateForm = new frmLineItemBriefDiscount(lineItem);
-        //        updateForm.FormClosed += frmLineItemBriefDiscount_FormClosed;
-        //        updateForm.ShowDialog();
-
-        //    }
-        //}
+        
 
         private void OpenSchemeDialog(PurchaseSaleBookLineItem lineItem,int rowIndex)
         {
@@ -1424,10 +1390,10 @@ namespace PharmaUI
                 TextBox txt = (TextBox)sender;
 
                 if (e.KeyCode == Keys.Enter)
-                {
-                    if(txt.Name == "txtInvoiceNumber"  && IsModify && string.IsNullOrEmpty(txtInvoiceNumber.Text))
+                {                    
+                    if (txt.Name == "txtInvoiceNumber" && !string.IsNullOrEmpty(dtPurchaseDate.Text) && IsModify && string.IsNullOrEmpty(txtInvoiceNumber.Text))
                     {
-                        Purchase_Entry.frmAllBillForSupplier frm = new Purchase_Entry.frmAllBillForSupplier(txtSupplierCode.Text);
+                        Purchase_Entry.frmAllBillForSupplier frm = new Purchase_Entry.frmAllBillForSupplier(txtSupplierCode.Text, dtPurchaseDate.Text);
                         frm.FormClosed += AllBillForSuppier_FormClosed;
                         frm.ShowDialog();
 

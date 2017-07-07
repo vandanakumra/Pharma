@@ -38,11 +38,44 @@ namespace PharmaUI
 
             GotFocusEventRaised(this);
             EnterKeyDownForTabEvents(this);
+            EnterKeyPress(this);
 
             FillFormForUpdate();
 
             txtAmount1.Focus();
 
+        }
+
+        private void EnterKeyPress(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c.Controls.Count > 0)
+                {
+                    EnterKeyPress(c);
+                }
+                else
+                {
+                    if (c is TextBox)
+                    {
+                        c.KeyPress -= C_KeyPress;
+                        c.KeyPress += C_KeyPress;
+                    }
+                }
+            }
+        }
+
+        private void C_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
 
         private void EnterKeyDownForTabEvents(Control control)
@@ -72,7 +105,7 @@ namespace PharmaUI
                     this.Close();
                 }
                 else
-                {
+                {                    
                     this.SelectNextControl(this.ActiveControl, true, true, true, true);
                 }
             }
@@ -308,7 +341,7 @@ namespace PharmaUI
             decimal.TryParse(txtOtherAmt.Text, out otherAmount);
 
             txtTotalBillAmount.Text = (amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + CGST1 + CGST2 + CGST3
-                + CGST4 + CGST5 + CGST6 + CGST7 + sgst1 + sgst2 + sgst3 + sgst4 + sgst5 + sgst6 + sgst7).ToString("#.##");
+                + CGST4 + CGST5 + CGST6 + CGST7 + sgst1 + sgst2 + sgst3 + sgst4 + sgst5 + sgst6 + sgst7 + otherAmount).ToString("#.##");
         }
 
         public void GotFocusEventRaised(Control control)
@@ -325,7 +358,6 @@ namespace PharmaUI
                     {
                         TextBox tb1 = (TextBox)c;
                         tb1.GotFocus += C_GotFocus;
-                        tb1.Leave += Tb1_Leave;
                         tb1.TextChanged += Tb1_TextChanged;
                     }
 
@@ -340,10 +372,20 @@ namespace PharmaUI
 
         private void Tb1_TextChanged(object sender, EventArgs e)
         {
-            isDirty = true;
+            try
+            {
+                isDirty = true;
+                CalculateTax(sender, e);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
-        private void Tb1_Leave(object sender, EventArgs e)
+        private void CalculateTax(object sender, EventArgs e)
         {
             TextBox txt = sender as TextBox;
 
