@@ -818,6 +818,11 @@ namespace PharmaBusiness
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseSaleBookLineItemForModify(purchaseSaleBookHeaderID);
         }
 
+        public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetSaleChallanLineItems(long saleChallanHeaderID, long purchaseSaleBookHeaderID)
+        {
+            return new SaleBiz(this.LoggedInUser).GetSaleChallanLineItems(saleChallanHeaderID, purchaseSaleBookHeaderID);
+        }
+
         public PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID)
         {
             return new Transaction.PurchaseBookBiz(this.LoggedInUser).GetPurchaseSaleBookHeaderForModify(purchaseSaleBookHeaderID);
@@ -1064,10 +1069,15 @@ namespace PharmaBusiness
         {
             new SaleBiz(this.LoggedInUser).RollbackSaleEntry(purchaseSaleBookHeaderID);
         }
-        #endregion
-        #region "Reports"
 
-        public DataTable GetSaleInvoiceData(long purchaseSaleBookHeaderID)
+        public List<BillOutstanding> GetSaleChallanForCustomer(string customerCode, string invoiceDate)
+        {
+            return new SaleBiz(this.LoggedInUser).GetSaleChallanForCustomer(customerCode, invoiceDate);
+        }
+            #endregion
+            #region "Reports"
+
+            public DataTable GetSaleInvoiceData(long purchaseSaleBookHeaderID)
         {
             return new ReportBiz(LoggedInUser).GetSaleInvoiceData(purchaseSaleBookHeaderID);
 

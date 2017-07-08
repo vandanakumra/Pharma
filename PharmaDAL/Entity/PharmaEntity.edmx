@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -444,6 +444,7 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="SaleChallanHeaderID" Type="bigint" />
         </EntityType>
         <EntityType Name="PurchaseSaleBookLineItem">
           <Key>
@@ -716,6 +717,7 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="OldPurchaseSaleBookHeaderID" Type="bigint" />
+          <Property Name="SaleChallanHeaderID" Type="bigint" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookLineItem">
           <Key>
@@ -1626,8 +1628,7 @@
             <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2135,6 +2136,7 @@
           <NavigationProperty Name="PurchaseSaleBookLineItem" Relationship="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="PurchaseSaleBookLineItem" />
           <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" FromRole="PurchaseSaleBookHeader" ToRole="TempBillOutStandingsAudjustment" />
           <NavigationProperty Name="TRN" Relationship="Self.FK_TRN_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="TRN" />
+          <Property Name="SaleChallanHeaderID" Type="Int64" />
         </EntityType>
         <EntityType Name="PurchaseSaleBookLineItem">
           <Key>
@@ -2429,6 +2431,7 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="OldPurchaseSaleBookHeaderID" Type="Int64" />
           <NavigationProperty Name="TempPurchaseSaleBookLineItem" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookHeader" ToRole="TempPurchaseSaleBookLineItem" />
+          <Property Name="SaleChallanHeaderID" Type="Int64" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookLineItem">
           <Key>
@@ -3739,6 +3742,7 @@
           <EntitySetMapping Name="PurchaseSaleBookHeader">
             <EntityTypeMapping TypeName="PharmaDBModel.PurchaseSaleBookHeader">
               <MappingFragment StoreEntitySet="PurchaseSaleBookHeader">
+                <ScalarProperty Name="SaleChallanHeaderID" ColumnName="SaleChallanHeaderID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
@@ -4031,6 +4035,7 @@
           <EntitySetMapping Name="TempPurchaseSaleBookHeader">
             <EntityTypeMapping TypeName="PharmaDBModel.TempPurchaseSaleBookHeader">
               <MappingFragment StoreEntitySet="TempPurchaseSaleBookHeader">
+                <ScalarProperty Name="SaleChallanHeaderID" ColumnName="SaleChallanHeaderID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
                 <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
