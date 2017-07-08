@@ -136,7 +136,7 @@ namespace PharmaBusinessObjects
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetLastNBatchNoForSupplierItem(string supplierCode, string itemCode);
         bool SavePurchaseData(long purchaseBookHeaderID);
         List<PharmaBusinessObjects.Transaction.PurchaseBookAmount> GetFinalAmountWithTaxForPurchase(long purchaseBookHeaderID);
-        List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode);
+        List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode, string date);
         List<BillOutstanding> GetAllSaleInvoiceForCustomer(string customerCode, string date);
         List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetPurchaseSaleBookLineItemForModify(long purchaseSaleBookHeaderID);
         PharmaBusinessObjects.Transaction.PurchaseSaleBookHeader GetPurchaseSaleBookHeaderForModify(long purchaseSaleBookHeaderID);

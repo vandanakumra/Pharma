@@ -72,9 +72,9 @@ namespace PharmaBusiness.Transaction
             return new PurchaseBookDao(this.LoggedInUser).IsTempPurchaseHeaderExists(purchaseBookHeaderID);
         }
 
-        internal List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode)
+        internal List<BillOutstanding> GetAllPurchaseInvoiceForSuppier(string supplierCode, string date)
         {
-            return new PurchaseBookDao(this.LoggedInUser).GetAllPurchaseInvoiceForSuppier(supplierCode);
+            return new PurchaseBookDao(this.LoggedInUser).GetAllPurchaseInvoiceForSuppier(supplierCode,date);
         }
 
         internal List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetPurchaseSaleBookLineItemForModify(long purchaseSaleBookHeaderID)

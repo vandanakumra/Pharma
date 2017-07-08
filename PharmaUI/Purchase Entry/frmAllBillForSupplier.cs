@@ -17,15 +17,17 @@ namespace PharmaUI.Purchase_Entry
         IApplicationFacade applicationFacade;
         public string SupplierCode { get; set; }
         public int RowIndex { get; set; }
+        public string Date { get; set; }
 
         public long PurchaseSaleBookHeaderID { get; set; }
 
-        public frmAllBillForSupplier(string _supplierCode)
+        public frmAllBillForSupplier(string _supplierCode, string date)
         {
             InitializeComponent();
             ExtensionMethods.SetChildFormProperties(this);
             applicationFacade = new ApplicationFacade(ExtensionMethods.LoggedInUser);
             SupplierCode = _supplierCode;
+            Date = date;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -44,7 +46,7 @@ namespace PharmaUI.Purchase_Entry
         {
             ExtensionMethods.FormLoad(this, "LIST OF PURCHASE INVOICES");
 
-            List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> list = applicationFacade.GetAllPurchaseInvoiceForSuppier(SupplierCode);
+            List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> list = applicationFacade.GetAllPurchaseInvoiceForSuppier(SupplierCode,Date);
 
             if (list == null)
                 list = new List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding>();

@@ -285,33 +285,39 @@ namespace PharmaUI
 
         private void DgvLineItem_SelectionChanged(object sender, EventArgs e)
         {
-            
-            if (dgvLineItem.SelectedCells.Count > 0)
+            try
             {
-
-                int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
-
-                if (oldSelectedRowIndex != rowIndex)
-
+                if (dgvLineItem.SelectedCells.Count > 0)
                 {
-                    if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value)))
-                    {
-                        long id = 0;
-                        long.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value), out id);
-                        SetFooterInfo(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value), id);
-                    }
-                    else
-                    {
-                        SetFooterInfo(string.Empty, 0);
-                    }
-                }
 
-                if (oldSelectedRowIndex != rowIndex)
-                    oldSelectedRowIndex = rowIndex;
+                    int rowIndex = dgvLineItem.SelectedCells[0].RowIndex;
+
+                    if (oldSelectedRowIndex != rowIndex)
+
+                    {
+                        if (!string.IsNullOrEmpty(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value)))
+                        {
+                            long id = 0;
+                            long.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FifoID"].Value), out id);
+                            SetFooterInfo(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["ItemCode"].Value), id);
+                        }
+                        else
+                        {
+                            SetFooterInfo(string.Empty, 0);
+                        }
+                    }
+
+                    if (oldSelectedRowIndex != rowIndex)
+                        oldSelectedRowIndex = rowIndex;
+                }
+                else
+                {
+                    SetFooterInfo(string.Empty, 0);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                SetFooterInfo(string.Empty, 0);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -541,9 +547,16 @@ namespace PharmaUI
 
         private void DgvLineItem_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (!isBatchUpdate)
+            try
             {
-                isCellEdit = true;
+                if (!isBatchUpdate)
+                {
+                    isCellEdit = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -587,14 +600,12 @@ namespace PharmaUI
                         TextBox tb1 = (TextBox)c;
                         tb1.GotFocus += C_GotFocus;
                         tb1.TextChanged += Tb1_TextChanged;
-                        tb1.Leave += Tb1_Leave;
                     }
                     else if (c is MaskedTextBox)
                     {
                         MaskedTextBox tb1 = (MaskedTextBox)c;
                         tb1.GotFocus += C_GotFocus;
-                        tb1.TextChanged += Tb1_TextChanged;
-                        tb1.Leave += Tb1_Leave;
+                        tb1.TextChanged += Tb1_TextChanged;                       
                     }
                     else if (c is ComboBox)
                     {
@@ -606,123 +617,69 @@ namespace PharmaUI
                         DateTimePicker tb1 = (DateTimePicker)c;
                         tb1.GotFocus += C_GotFocus;
                         tb1.ValueChanged += Tb1_TextChanged;
-                        tb1.LostFocus += Tb1_Leave;
-
                     }
                 }
             }
         }
 
-        private void Tb1_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                //if (isDirty)
-                //{
-                //    Control text = (Control)sender;
-
-                //    switch (text.Name)
-                //    {
-                //        case "txtCustomerCode":
-                //            {
-                //                if (isDirty && !string.IsNullOrEmpty(txtCustomerCode.Text))
-                //                {
-                //                    SetCustomerCodeFields(txtCustomerCode.Text);
-                //                }
-                //            }
-
-                //            break;
-                //        case "dtSaleDate":
-                //            {
-                //                MaskedTextBox dtPicker = (MaskedTextBox)sender;
-
-                //                if (!ExtensionMethods.IsValidDate(dtSaleDate.Text))
-                //                {
-                //                    errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.InValidDate);
-                //                    dtSaleDate.Focus();
-                //                }
-                //                else
-                //                {
-                //                    errFrmSaleEntry.SetError(dtSaleDate, String.Empty);
-                //                    DateTime dt = new DateTime();
-                //                    dt = ExtensionMethods.ConvertToSystemDateFormat(dtPicker.Text);
-                //                    if (dt > DateTime.Today || dt < DateTime.Today)
-                //                    {
-                //                        DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
-
-                //                        if (result == DialogResult.No)
-                //                        {
-                //                            dtPicker.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
-                //                        }
-                //                    }
-                //                }
-                //            }
-                //            break;
-                //        case "txtSalesManCode":
-                //            {
-
-                //            }
-                //            break;
-                //    }
-
-                //    isDirty = false;
-                //}
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         private void SetSalesManCode(bool isValueChanged)
         {
-            if (!string.IsNullOrEmpty(txtSalesManCode.Text))
+            try
             {
-                if (isValueChanged)
+
+                if (!string.IsNullOrEmpty(txtSalesManCode.Text))
                 {
-                    PersonRouteMaster master = applicationFacade.GetPersonRouteMasterByCode(txtSalesManCode.Text);
-
-                    if (master != null && master.PersonRouteID > 0)
+                    if (isValueChanged)
                     {
-                        header.SalesManId = master.PersonRouteID;
-                        lblSaleTypeCode.Text = master.PersonRouteName;
+                        PersonRouteMaster master = applicationFacade.GetPersonRouteMasterByCode(txtSalesManCode.Text);
 
-                        if (header.PurchaseSaleBookHeaderID > 0)
+                        if (master != null && master.PersonRouteID > 0)
                         {
-                            applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
-                        }
+                            header.SalesManId = master.PersonRouteID;
+                            lblSaleTypeCode.Text = master.PersonRouteName;
 
-                        cbxSaleType.Focus();
+                            if (header.PurchaseSaleBookHeaderID > 0)
+                            {
+                                applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
+                            }
+
+                            cbxSaleType.Focus();
+                        }
+                        else
+                        {
+                            lblSaleTypeCode.Text = "**No Such Code**";
+                            txtSalesManCode.Focus();
+                        }
                     }
                     else
                     {
-                        lblSaleTypeCode.Text = "**No Such Code**";
-                        txtSalesManCode.Focus();
+                        cbxSaleType.Focus();
                     }
                 }
                 else
                 {
-                    cbxSaleType.Focus();
+                    PersonRouteMaster personRouteMaster = new PersonRouteMaster()
+                    {
+                        RecordTypeNme = Constants.RecordType.SALESMANDISPLAYNAME,
+                        PersonRouteID = 0,
+                        PersonRouteName = string.Empty
+                    };
+
+                    frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
+                    frmPersonRouteMaster.IsInChildMode = true;
+                    //Set Child UI
+                    ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
+                    frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
+                    frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
+                    frmPersonRouteMaster.Show();
+                    frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
+
                 }
             }
-            else
+            catch (Exception ex)
             {
-                PersonRouteMaster personRouteMaster = new PersonRouteMaster()
-                {
-                    RecordTypeNme = Constants.RecordType.SALESMANDISPLAYNAME,
-                    PersonRouteID = 0,
-                    PersonRouteName = string.Empty
-                };
-
-                frmPersonRouteMaster frmPersonRouteMaster = new frmPersonRouteMaster();
-                frmPersonRouteMaster.IsInChildMode = true;
-                //Set Child UI
-                ExtensionMethods.AddChildFormToPanel(this, frmPersonRouteMaster, ExtensionMethods.MainPanel);
-                frmPersonRouteMaster.WindowState = FormWindowState.Maximized;
-                frmPersonRouteMaster.FormClosed += FrmPersonRouteMaster_FormClosed;
-                frmPersonRouteMaster.Show();
-                frmPersonRouteMaster.ConfigurePersonRoute(personRouteMaster);
-
+                MessageBox.Show(ex.Message);
             }
 
         }
@@ -748,149 +705,164 @@ namespace PharmaUI
 
         private void EnterKeyDownForTabEvents(Control control)
         {
-            foreach (Control c in control.Controls)
+            try
             {
-                if (c.Controls.Count > 0)
+                foreach (Control c in control.Controls)
                 {
-                    EnterKeyDownForTabEvents(c);
+                    if (c.Controls.Count > 0)
+                    {
+                        EnterKeyDownForTabEvents(c);
+                    }
+                    else
+                    {
+                        c.KeyDown -= C_KeyDown;
+                        c.KeyDown += C_KeyDown;
+                    }
                 }
-                else
-                {
-                    c.KeyDown -= C_KeyDown;
-                    c.KeyDown += C_KeyDown;
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void C_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
+            try
             {
-                SendKeys.Send("+{TAB}");
-                return;
-            }
 
-            if (sender is TextBox)
-            {
-                TextBox txt = (TextBox)sender;
-
-                if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
+                if (e.KeyCode == Keys.Left)
                 {
-                    if (txt.Name == "txtInvoiceNumber" && IsModify && string.IsNullOrEmpty(txtInvoiceNumber.Text))
-                    {
-
-                    }
-                    else if (txt.Name == "txtSalesManCode")
-                    {
-                        SetSalesManCode(isDirty);
-                    }
-                    else if (!string.IsNullOrEmpty(txt.Text))
-                    {
-                        if (txt.Name == "txtCustomerCode")
-                        {
-                            SetCustomerCodeFields(txtCustomerCode.Text);
-                        }
-
-
-                        this.SelectNextControl(this.ActiveControl, true, true, true, true);
-                    }
-                    else
-                    {
-                        if (txt.Name == "txtCustomerCode")
-                        {
-                            frmCustomerLedgerMaster ledger = new frmCustomerLedgerMaster();
-                            ledger.IsInChildMode = true;
-                            //Set Child UI
-
-                            ExtensionMethods.AddChildFormToPanel(this, ledger, ExtensionMethods.MainPanel);
-                            ledger.WindowState = FormWindowState.Maximized;
-
-                            ledger.FormClosed += CustomerLedger_Closed;
-                            ledger.Show();
-
-                        }
-                        if (txt.Name == "txtInvoiceNumber")
-                        {
-                            txtSalesManCode.Focus();
-                        }
-                        if (txt.Name == "txtSalesManCode")
-                        {
-                            txtSalesManCode.Focus();
-                        }
-                    }
+                    SendKeys.Send("+{TAB}");
+                    return;
                 }
-            }
-
-            else if (sender is MaskedTextBox)
-            {
-                MaskedTextBox txt = (MaskedTextBox)sender;
-                if (txt.Name == "dtSaleDate")
+                else
                 {
-                    MaskedTextBox dtPicker = (MaskedTextBox)sender;
+                    if (sender is TextBox)
+                    {
+                        TextBox txt = (TextBox)sender;
 
-                    if (!ExtensionMethods.IsValidDate(dtSaleDate.Text))
-                    {
-                        errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.InValidDate);
-                        dtSaleDate.Focus();
-                    }
-                    else
-                    {
-                        errFrmSaleEntry.SetError(dtSaleDate, String.Empty);
-                        DateTime dt = new DateTime();
-                        dt = ExtensionMethods.ConvertToSystemDateFormat(dtPicker.Text);
-                        if (dt > DateTime.Today || dt < DateTime.Today)
+                        if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
                         {
-                            DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
-
-                            if (result == DialogResult.No)
+                            if (txt.Name == "txtSalesManCode")
                             {
-                                dtPicker.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+                                SetSalesManCode(isDirty);
+                            }
+                            else if (!string.IsNullOrEmpty(txt.Text))
+                            {
+                                if (txt.Name == "txtCustomerCode")
+                                {
+                                    SetCustomerCodeFields(txtCustomerCode.Text);
+                                }
+
+                                this.SelectNextControl(this.ActiveControl, true, true, true, true);
                             }
                             else
                             {
-                                this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                                if (txt.Name == "txtCustomerCode")
+                                {
+                                    frmCustomerLedgerMaster ledger = new frmCustomerLedgerMaster();
+                                    ledger.IsInChildMode = true;
+                                    //Set Child UI
+
+                                    ExtensionMethods.AddChildFormToPanel(this, ledger, ExtensionMethods.MainPanel);
+                                    ledger.WindowState = FormWindowState.Maximized;
+
+                                    ledger.FormClosed += CustomerLedger_Closed;
+                                    ledger.Show();
+
+                                }
+                                if (txt.Name == "txtInvoiceNumber")
+                                {
+                                    txtSalesManCode.Focus();
+                                }
+                                if (txt.Name == "txtSalesManCode")
+                                {
+                                    txtSalesManCode.Focus();
+                                }
                             }
                         }
                         else
                         {
-                            this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                            e.SuppressKeyPress = true;
                         }
                     }
-                }
-            }
-            else if (sender is ComboBox)
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    if (header.PurchaseSaleBookHeaderID > 0)
+                    else if (sender is MaskedTextBox)
                     {
-                        ComboBox cb1 = (ComboBox)sender;
+                        MaskedTextBox txt = (MaskedTextBox)sender;
 
-                        if (cb1.Name == "cbxSaleType")
+                        if (txt.Name == "dtSaleDate")
                         {
-                            PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleType.SelectedItem;
-                            if (type != null && type.PurchaseTypeName.ToLower() == "local")
+                            MaskedTextBox dtPicker = (MaskedTextBox)sender;
+
+                            if (!ExtensionMethods.IsValidDate(dtSaleDate.Text))
                             {
-                                AddRowToGrid();
+                                errFrmSaleEntry.SetError(dtSaleDate, Constants.Messages.InValidDate);
+                                dtSaleDate.Focus();
                             }
                             else
                             {
-                                cbxSaleFormType.Focus();
+                                errFrmSaleEntry.SetError(dtSaleDate, String.Empty);
+                                DateTime dt = new DateTime();
+                                dt = ExtensionMethods.ConvertToSystemDateFormat(dtPicker.Text);
+                                if (dt > DateTime.Today || dt < DateTime.Today)
+                                {
+                                    DialogResult result = MessageBox.Show(string.Format("Date is {0} today.", dt > DateTime.Today ? "ahead of" : "less than"));
+
+                                    if (result == DialogResult.No)
+                                    {
+                                        dtPicker.Text = ExtensionMethods.ConvertToAppDateFormat(DateTime.Now);
+                                    }
+                                    else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
+                                    {
+                                        this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                                    }
+                                }
+                                else if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
+                                {
+                                    this.SelectNextControl(this.ActiveControl, true, true, true, true);
+                                }
                             }
                         }
-                        else if (cb1.Name == "cbxSaleFormType")
+                    }
+                    else if (sender is ComboBox)
+                    {
+                        if (e.KeyCode == Keys.Enter)
                         {
-                            PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleType.SelectedItem;
-
-                            if (type != null && type.PurchaseTypeName.ToLower() == "central")
+                            if (header.PurchaseSaleBookHeaderID > 0)
                             {
-                                AddRowToGrid();
+                                ComboBox cb1 = (ComboBox)sender;
+
+                                if (cb1.Name == "cbxSaleType")
+                                {
+                                    PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleType.SelectedItem;
+                                    if (type != null && type.PurchaseTypeName.ToLower() == "local")
+                                    {
+                                        AddRowToGrid();
+                                    }
+                                    else
+                                    {
+                                        cbxSaleFormType.Focus();
+                                    }
+                                }
+                                else if (cb1.Name == "cbxSaleFormType")
+                                {
+                                    PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleType.SelectedItem;
+
+                                    if (type != null && type.PurchaseTypeName.ToLower() == "central")
+                                    {
+                                        AddRowToGrid();
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void FrmPersonRouteMaster_FormClosed(object sender, FormClosedEventArgs e)
@@ -1003,6 +975,7 @@ namespace PharmaUI
                 Sale_Entry.frmAllBillForCustomer frm = (Sale_Entry.frmAllBillForCustomer)sender;
 
                 long PurchaseSaleBookHeaderID = frm.PurchaseSaleBookHeaderID;
+                txtInvoiceNumber.Text = frm.InvoiceNumber;
 
                 header = applicationFacade.GetPurchaseSaleBookHeaderForModify(PurchaseSaleBookHeaderID);
 
@@ -1017,6 +990,8 @@ namespace PharmaUI
                     cbxSaleType.SelectedValue = id;
                     purchaseSaleBookHeaderID = header.PurchaseSaleBookHeaderID;
                     oldPurchaseSaleBookHeaderID = header.OldPurchaseSaleBookHeaderID;
+
+                    
 
                     if (header.LocalCentral == "C")
                     {
@@ -1697,7 +1672,7 @@ namespace PharmaUI
                                 appPath = appPath.Replace(@"bin\Debug", string.Empty);
 
                                 string reportPath = Path.Combine(appPath, "Reports");
-                                string reportName = "SaleInvoice.rdlc";
+                                string reportName = "GSTInvoice.rdlc";
 
                                 LocalReport report = new LocalReport();
                                 report.ReportPath = Path.Combine(reportPath, reportName);
@@ -1708,7 +1683,7 @@ namespace PharmaUI
                                 //DataTable firmProperties = applicationFacade.GetFirmProperties(2);
 
                                 ReportDataSource dtSaleInvoice = new ReportDataSource();
-                                dtSaleInvoice.Name = "SaleInvoice";
+                                dtSaleInvoice.Name = "GSTInvoiceResult";
                                 dtSaleInvoice.Value = saleInvoice;
 
                                 report.DataSources.Add(dtSaleInvoice);
@@ -1760,12 +1735,12 @@ namespace PharmaUI
             string deviceInfo =
               @"<DeviceInfo>
                 <OutputFormat>EMF</OutputFormat>
-                <PageWidth>12in</PageWidth>
-                <PageHeight>11in</PageHeight>
-                <MarginTop>0.25in</MarginTop>
-                <MarginLeft>0.25in</MarginLeft>
-                <MarginRight>0.25in</MarginRight>
-                <MarginBottom>0.25in</MarginBottom>
+                <PageWidth>8.27in</PageWidth>
+                <PageHeight>11.69in</PageHeight>
+                <MarginTop>0</MarginTop>
+                <MarginLeft>0</MarginLeft>
+                <MarginRight>0</MarginRight>
+                <MarginBottom>0</MarginBottom>
             </DeviceInfo>";
 
             Warning[] warnings; 

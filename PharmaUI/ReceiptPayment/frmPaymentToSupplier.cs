@@ -322,7 +322,7 @@ namespace PharmaUI.ReceiptPayment
 
                 int rowIndex = (sender as frmReceiptPaymentAdjustment).RowIndex;
 
-                dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"];
+               // dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["UnadjustedAmount"];
 
                 if ((sender as frmReceiptPaymentAdjustment).ReceiptPaymentState == ReceiptPaymentState.Save)
                 {
@@ -340,6 +340,19 @@ namespace PharmaUI.ReceiptPayment
                 applicationFacade.InsertUpdateTempReceiptPayment(FillDataboundToCurrentRow());
                 LoadGridBillAdjusted(currentTransactionEntity);
                 LoadGridBillOutstanding(currentTransactionEntity);
+
+                AddNewRowToGrid();
+
+                if (!IsInEditMode)
+                {
+                    dgvSupplierBillOS.DataSource = null;
+                    dgvSupplierBillAdjusted.DataSource = null;
+                    lblAmtOSVal.Text = String.Empty;
+                    lblAmtAdjVal.Text = String.Empty;
+
+                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
+                    // dgvPaymentToSupplier.BeginEdit(true);
+                }
             }
             catch (Exception ex)
             {
@@ -582,22 +595,21 @@ namespace PharmaUI.ReceiptPayment
 
                 dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex].Cells["Amount"];
             }
-            else if (columnName == "UnadjustedAmount")
-            {
-                AddNewRowToGrid();
+            //else if (columnName == "UnadjustedAmount")
+            //{
+            //    AddNewRowToGrid();
 
-                if (!IsInEditMode)
-                {
-                    dgvSupplierBillOS.DataSource = null;
-                    dgvSupplierBillAdjusted.DataSource = null;
-                    lblAmtOSVal.Text = String.Empty;
-                    lblAmtAdjVal.Text = String.Empty;
+            //    if (!IsInEditMode)
+            //    {
+            //        dgvSupplierBillOS.DataSource = null;
+            //        dgvSupplierBillAdjusted.DataSource = null;
+            //        lblAmtOSVal.Text = String.Empty;
+            //        lblAmtAdjVal.Text = String.Empty;
 
-                    dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
-                    // dgvPaymentToSupplier.BeginEdit(true);
-                }
-
-            }
+            //        dgvPaymentToSupplier.CurrentCell = dgvPaymentToSupplier.Rows[rowIndex + 1].Cells["LedgerTypeCode"];
+            //        // dgvPaymentToSupplier.BeginEdit(true);
+            //    }
+            //}
         }
 
         private ReceiptPaymentItem FillDataboundToCurrentRow()
