@@ -92,16 +92,18 @@
     <Compile Include="Common.cs" />
     <Compile Include="DataMigrationResult.cs" />
     <Compile Include="Master\AccountLedgerMaster.cs" />
-    <Compile Include="Master\BillOutstanding.cs" />
+    <Compile Include="Transaction\BillOutstanding.cs" />
     <Compile Include="Master\CompanyMaster.cs" />
     <Compile Include="Master\CustomerLedgerMaster.cs" />
-    <Compile Include="Master\FIFO.cs" />
+    <Compile Include="Transaction\FIFO.cs" />
     <Compile Include="Master\ItemMaster.cs" />
     <Compile Include="Master\PersonalLedgerMaster.cs" />
     <Compile Include="Master\PersonRouteMaster.cs" />
     <Compile Include="Master\SupplierLedgerMaster.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction\PurchaseSaleBookHeaderMigration.cs" />
+    <Compile Include="Transaction\PurchaseSaleBookLineItemMigration.cs" />
     <EmbeddedResource Include="frmDataMigration.resx">
       <DependentUpon>frmDataMigration.cs</DependentUpon>
     </EmbeddedResource>

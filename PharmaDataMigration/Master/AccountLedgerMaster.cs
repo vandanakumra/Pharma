@@ -533,8 +533,7 @@ namespace PharmaDataMigration.Master
                 {
 
                     saleMasters = context.AccountLedgerMaster.Where(p => p.AccountLedgerType.SystemName == Constants.AccountLedgerType.SaleLedger).Select(p => p).ToList();
-
-
+                    
                     var maxAccountLedgerID = context.AccountLedgerMaster.Count();
                     int accountLedgerTypeID = context.AccountLedgerType.Where(p => p.SystemName == PharmaBusinessObjects.Common.Constants.AccountLedgerType.SaleLedger).FirstOrDefault().AccountLedgerTypeID;
 

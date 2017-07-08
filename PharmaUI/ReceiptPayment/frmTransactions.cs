@@ -32,7 +32,7 @@ namespace PharmaUI.ReceiptPayment
 
         private void frmTransactions_Load(object sender, EventArgs e)
         {
-            if(TransactionEntityType== Constants.TransactionEntityType.CustomerLedger)
+            if(TransactionEntityType== Constants.LedgerType.CustomerLedger)
             {
                 ExtensionMethods.FormLoad(this, "Transactions for Customer");
             }

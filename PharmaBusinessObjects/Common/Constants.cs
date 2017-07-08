@@ -71,7 +71,7 @@ namespace PharmaBusinessObjects.Common
             public const string ControlCodes = "Control Codes";
         }
 
-        public static class TransactionEntityType
+        public static class LedgerType
         {
             public const string CustomerLedger = "CUSTOMERLEDGER";
             public const string SupplierLedger = "SUPPLIERLEDGER";
