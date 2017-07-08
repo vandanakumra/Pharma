@@ -1,4 +1,5 @@
-﻿using PharmaBusinessObjects.Transaction.SaleEntry;
+﻿using PharmaBusinessObjects.Common;
+using PharmaBusinessObjects.Transaction.SaleEntry;
 using PharmaDAL.Entity;
 using System;
 using System.Collections.Generic;
@@ -435,7 +436,6 @@ namespace PharmaDAL.Transaction
             DateTime.TryParse(invoiceDate, out dt);
 
             DateTime.TryParse(dt.ToString("dd/MM/yyyy h:mm:ss"), out dt);
-
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
                 return context.BillOutStandings.Where(q => q.LedgerTypeCode == customerCode && q.PurchaseSaleBookHeaderID != null)
@@ -454,8 +454,137 @@ namespace PharmaDAL.Transaction
                     OSAmount = p.OSAmount,
                     IsHold = p.IsHold,
                     HOLDRemarks = p.HOLDRemarks
-                }).ToList().Where(p=>p.InvoiceDate.Date == dt.Date).ToList();
+                }).ToList().Where(p => p.InvoiceDate.Date == dt.Date).ToList();
             }
+        }
+
+        public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetSaleChallanByCustomer(string customerCode, string invoiceDate)
+        {
+            DateTime dt;
+            DateTime.TryParse(invoiceDate, out dt);
+
+            DateTime.TryParse(dt.ToString("dd/MM/yyyy h:mm:ss"), out dt);
+
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
+                return (
+                            from challan in context.PurchaseSaleBookHeader
+                            join invoice in context.PurchaseSaleBookHeader
+                            on challan.PurchaseSaleBookHeaderID equals invoice.SaleChallanHeaderID ?? 0
+                            into t
+                            from f in t.DefaultIfEmpty()
+                            join tempInvoice in context.TempPurchaseSaleBookHeader
+                            on challan.PurchaseSaleBookHeaderID equals tempInvoice.SaleChallanHeaderID ?? 0
+                            into p
+                            from l in p.DefaultIfEmpty()
+                            where f == null && l == null && challan.VoucherTypeCode == Constants.VoucherTypeCode.SALEONCHALLAN
+                            select new PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding()
+                            {
+                                BillOutStandingsID = 0,
+                                PurchaseSaleBookHeaderID = (long)challan.PurchaseSaleBookHeaderID,
+                                VoucherNumber = challan.VoucherNumber,
+                                VoucherTypeCode = challan.VoucherTypeCode,
+                                VoucherDate = challan.VoucherDate,
+                                InvoiceNumber = challan.VoucherNumber,
+                                InvoiceDate = challan.VoucherDate,
+                                LedgerType = challan.LedgerType,
+                                LedgerTypeCode = challan.LedgerTypeCode,
+                                BillAmount = challan.TotalBillAmount ?? 0,
+                                OSAmount = challan.TotalBillAmount ?? 0
+
+                            }
+                        ).ToList().Where(p => p.InvoiceDate.Date == dt.Date).ToList(); 
+                    
+            }
+
+        }
+
+
+        public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetSaleChallanLineItems(long saleChallanHeaderID, long purchaseSaleBookHeaderID)
+        {
+            List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = new List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem>();
+
+            string ConnString = ConfigurationManager.ConnectionStrings["PharmaDBConn"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(ConnString))
+            {
+
+                SqlCommand cmd = new SqlCommand("GetSaleChallanLineItems", connection);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PurchaseSaleBookHeaderID", Value = purchaseSaleBookHeaderID });
+                cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SaleChallanHeaderID", Value = saleChallanHeaderID });
+
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem obj = new PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem()
+                        {
+                            PurchaseSaleBookHeaderID = Convert.ToInt64(row["PurchaseSaleBookHeaderID"]),
+                            PurchaseSaleBookLineItemID = Convert.ToInt64(row["PurchaseSaleBookLineItemID"]),
+                            FifoID = Convert.ToInt64(row["FifoID"] == DBNull.Value ? 0 : row["FifoID"]),
+                            ItemCode = Convert.ToString(row["ItemCode"]),
+                            ItemName = Convert.ToString(row["ItemName"]),
+                            Batch = Convert.ToString(row["Batch"]),
+                            Quantity = Convert.ToDecimal(row["Quantity"] == DBNull.Value ? 0 : row["Quantity"]),
+                            FreeQuantity = Convert.ToDecimal(row["FreeQuantity"] == DBNull.Value ? 0 : row["FreeQuantity"]),
+                            PurchaseSaleRate = Convert.ToDecimal(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
+                            OldPurchaseSaleRate = Convert.ToDecimal(row["PurchaseSaleRate"] == DBNull.Value ? 0 : row["PurchaseSaleRate"]),
+                            EffecivePurchaseSaleRate = Convert.ToDecimal(row["EffecivePurchaseSaleRate"] == DBNull.Value ? 0 : row["EffecivePurchaseSaleRate"]),
+                            PurchaseSaleTypeCode = Convert.ToString(row["PurchaseSaleTypeCode"]),
+                            PurchaseSaleTax = Convert.ToDecimal(row["PurchaseSaleTax"] == DBNull.Value ? 0 : row["PurchaseSaleTax"]),
+                            SurCharge = Convert.ToDecimal(row["SurCharge"] == DBNull.Value ? 0 : row["SurCharge"]),
+                            LocalCentral = Convert.ToString(row["LocalCentral"]),
+                            SGST = Convert.ToDecimal(row["SGST"] == DBNull.Value ? 0 : row["SGST"]),
+                            IGST = Convert.ToDecimal(row["IGST"] == DBNull.Value ? 0 : row["IGST"]),
+                            CGST = Convert.ToDecimal(row["CGST"] == DBNull.Value ? 0 : row["CGST"]),
+                            Amount = Convert.ToDecimal(row["Amount"] == DBNull.Value ? 0 : row["Amount"]),
+                            Discount = Convert.ToDecimal(row["Discount"] == DBNull.Value ? 0 : row["Discount"]),
+                            SpecialDiscount = Convert.ToDecimal(row["SpecialDiscount"] == DBNull.Value ? 0 : row["SpecialDiscount"]),
+                            DiscountQuantity = Convert.ToDecimal(row["DiscountQuantity"] == DBNull.Value ? 0 : row["DiscountQuantity"]),
+                            VolumeDiscount = Convert.ToDecimal(row["VolumeDiscount"] == DBNull.Value ? 0 : row["VolumeDiscount"]),
+                            Scheme1 = Convert.ToDecimal(row["Scheme1"] == DBNull.Value ? 0 : row["Scheme1"]),
+                            Scheme2 = Convert.ToDecimal(row["Scheme2"] == DBNull.Value ? 0 : row["Scheme2"]),
+                            IsHalfScheme = Convert.ToBoolean(row["IsHalfScheme"] == DBNull.Value ? false : row["IsHalfScheme"]),
+                            HalfSchemeRate = Convert.ToDecimal(row["HalfSchemeRate"] == DBNull.Value ? 0 : row["HalfSchemeRate"]),
+                            CostAmount = Convert.ToDecimal(row["CostAmount"] == DBNull.Value ? 0 : row["CostAmount"]),
+                            GrossAmount = Convert.ToDecimal(row["GrossAmount"] == DBNull.Value ? 0 : row["GrossAmount"]),
+                            SchemeAmount = Convert.ToDecimal(row["SchemeAmount"] == DBNull.Value ? 0 : row["SchemeAmount"]),
+                            DiscountAmount = Convert.ToDecimal(row["DiscountAmount"] == DBNull.Value ? 0 : row["DiscountAmount"]),
+                            SurchargeAmount = Convert.ToDecimal(row["SurchargeAmount"] == DBNull.Value ? 0 : row["SurchargeAmount"]),
+                            ConversionRate = Convert.ToDecimal(row["ConversionRate"] == DBNull.Value ? 0 : row["ConversionRate"]),
+                            MRP = Convert.ToDecimal(row["MRP"] == DBNull.Value ? 0 : row["MRP"]),
+                            ExpiryDate = Convert.ToDateTime(row["ExpiryDate"]),
+                            SaleRate = Convert.ToDecimal(row["SaleRate"] == DBNull.Value ? 0 : row["SaleRate"]),
+                            WholeSaleRate = Convert.ToDecimal(row["WholeSaleRate"] == DBNull.Value ? 0 : row["WholeSaleRate"]),
+                            SpecialRate = Convert.ToDecimal(row["SpecialRate"] == DBNull.Value ? 0 : row["SpecialRate"]),
+                            TaxAmount = Convert.ToDecimal(row["TaxAmount"] == DBNull.Value ? 0 : row["TaxAmount"]),
+                            SpecialDiscountAmount = Convert.ToDecimal(row["SpecialDiscountAmount"] == DBNull.Value ? 0 : row["SpecialDiscountAmount"]),
+                            VolumeDiscountAmount = Convert.ToDecimal(row["VolumeDiscountAmount"] == DBNull.Value ? 0 : row["VolumeDiscountAmount"]),
+                            TotalDiscountAmount = Convert.ToDecimal(row["TotalDiscountAmount"] == DBNull.Value ? 0 : row["TotalDiscountAmount"]),
+                            OldPurchaseSaleBookLineItemID = Convert.ToInt64(row["OldPurchaseSaleBookLineItemID"] == DBNull.Value ? 0 : row["OldPurchaseSaleBookLineItemID"]),
+                            BalanceQuantity = Convert.ToDecimal(row["BalanceQuantity"] == DBNull.Value ? 0 : row["BalanceQuantity"]),
+                            UsedQuantity = Convert.ToDecimal(row["UsedQuantity"] == DBNull.Value ? 0 : row["UsedQuantity"]),
+                            PurchaseBillDate = row["PurchaseBillDate"] != DBNull.Value ? Convert.ToDateTime(row["PurchaseBillDate"]) : (DateTime?)null,
+                            PurchaseSrlNo = row["PurchaseSrlNo"] != null ? Convert.ToInt32(row["PurchaseSrlNo"]) : (int?)null,
+                            PurchaseVoucherNumber = row["PurchaseVoucherNumber"] != null ? Convert.ToString(row["PurchaseVoucherNumber"]) : null,
+                            MfgDate = row["MfgDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["MfgDate"])
+                        };
+
+                        lineitems.Add(obj);
+                    }
+
+
+                }
+            }
+            return lineitems;
         }
 
     }

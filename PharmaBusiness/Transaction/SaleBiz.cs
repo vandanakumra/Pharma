@@ -76,5 +76,15 @@ namespace PharmaBusiness.Transaction
         {
             return new SaleEntryDao(this.LoggedInUser).GetAllSaleInvoiceForCustomer(customerCode, invoiceDate);
         }
-    }
+
+        internal List<BillOutstanding> GetSaleChallanForCustomer(string customerCode, string invoiceDate)
+        {
+            return new SaleEntryDao(this.LoggedInUser).GetSaleChallanByCustomer(customerCode, invoiceDate);
+        }
+
+        public List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetSaleChallanLineItems(long saleChallanHeaderID, long purchaseSaleBookHeaderID)
+        {
+            return new SaleEntryDao(this.LoggedInUser).GetSaleChallanLineItems(saleChallanHeaderID, purchaseSaleBookHeaderID);
+        }
+        }
 }

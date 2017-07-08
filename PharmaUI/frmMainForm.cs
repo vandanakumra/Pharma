@@ -378,5 +378,35 @@ namespace PharmaUI
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void saleEntryChallanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmSaleEntry form = new frmSaleEntry(false, Constants.VoucherTypeCode.SALEONCHALLAN);
+                ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+        private void modificationSaleChallanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmSaleEntry form = new frmSaleEntry(true, Constants.VoucherTypeCode.SALEONCHALLAN);
+                ExtensionMethods.AddTrasanctionFormToPanel(form, pnlMain);
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

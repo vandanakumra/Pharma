@@ -56,6 +56,8 @@
             this.modifyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.chaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.challanModificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -189,14 +191,14 @@
             // 
             this.transactionCtrlPToolStripMenuItem.Name = "transactionCtrlPToolStripMenuItem";
             this.transactionCtrlPToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.transactionCtrlPToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.transactionCtrlPToolStripMenuItem.Text = "Transaction";
             this.transactionCtrlPToolStripMenuItem.Click += new System.EventHandler(this.purchaseTransactionToolStripMenuItem_Click);
             // 
             // modificationPurchaseEntryToolStripMenuItem
             // 
             this.modificationPurchaseEntryToolStripMenuItem.Name = "modificationPurchaseEntryToolStripMenuItem";
-            this.modificationPurchaseEntryToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.modificationPurchaseEntryToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.modificationPurchaseEntryToolStripMenuItem.Text = "Modification";
             this.modificationPurchaseEntryToolStripMenuItem.Click += new System.EventHandler(this.modificationPurchaseEntryToolStripMenuItem_Click);
             // 
@@ -204,7 +206,9 @@
             // 
             this.saleEntryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.transactionToolStripMenuItem1,
-            this.modificationToolStripMenuItem});
+            this.modificationToolStripMenuItem,
+            this.chaToolStripMenuItem,
+            this.challanModificationToolStripMenuItem});
             this.saleEntryToolStripMenuItem.Name = "saleEntryToolStripMenuItem";
             this.saleEntryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saleEntryToolStripMenuItem.Text = "Sale Entry";
@@ -213,14 +217,14 @@
             // 
             this.transactionToolStripMenuItem1.Name = "transactionToolStripMenuItem1";
             this.transactionToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.transactionToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.transactionToolStripMenuItem1.Size = new System.Drawing.Size(176, 22);
             this.transactionToolStripMenuItem1.Text = "Transaction";
             this.transactionToolStripMenuItem1.Click += new System.EventHandler(this.saleEntryToolStripMenuItem_Click);
             // 
             // modificationToolStripMenuItem
             // 
             this.modificationToolStripMenuItem.Name = "modificationToolStripMenuItem";
-            this.modificationToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.modificationToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.modificationToolStripMenuItem.Text = "Modification";
             this.modificationToolStripMenuItem.Click += new System.EventHandler(this.modificationToolStripMenuItem_Click);
             // 
@@ -246,8 +250,9 @@
             // receiptFromCustTransactionToolStripMenuItem
             // 
             this.receiptFromCustTransactionToolStripMenuItem.Name = "receiptFromCustTransactionToolStripMenuItem";
-            this.receiptFromCustTransactionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.receiptFromCustTransactionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.R)));
+            this.receiptFromCustTransactionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.receiptFromCustTransactionToolStripMenuItem.Text = "Transaction";
             this.receiptFromCustTransactionToolStripMenuItem.Click += new System.EventHandler(this.receiptFromCustTransactionToolStripMenuItem_Click);
             // 
@@ -255,8 +260,8 @@
             // 
             this.modifyToolStripMenuItem.Name = "modifyToolStripMenuItem";
             this.modifyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.R)));
-            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            | System.Windows.Forms.Keys.M)));
+            this.modifyToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.modifyToolStripMenuItem.Text = "Modify";
             this.modifyToolStripMenuItem.Click += new System.EventHandler(this.modifyToolStripMenuItem_Click);
             // 
@@ -272,17 +277,18 @@
             // transactionToolStripMenuItem
             // 
             this.transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
-            this.transactionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.transactionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.P)));
+            this.transactionToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.transactionToolStripMenuItem.Text = "Transaction";
             this.transactionToolStripMenuItem.Click += new System.EventHandler(this.transactionToolStripMenuItem_Click);
             // 
             // modifyToolStripMenuItem1
             // 
             this.modifyToolStripMenuItem1.Name = "modifyToolStripMenuItem1";
-            this.modifyToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.T)));
-            this.modifyToolStripMenuItem1.Size = new System.Drawing.Size(185, 22);
+            this.modifyToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.M)));
+            this.modifyToolStripMenuItem1.Size = new System.Drawing.Size(209, 22);
             this.modifyToolStripMenuItem1.Text = "Modify";
             this.modifyToolStripMenuItem1.Click += new System.EventHandler(this.modifyToolStripMenuItem1_Click);
             // 
@@ -300,6 +306,20 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(756, 31);
             this.pnlMain.TabIndex = 1;
+            // 
+            // chaToolStripMenuItem
+            // 
+            this.chaToolStripMenuItem.Name = "chaToolStripMenuItem";
+            this.chaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.chaToolStripMenuItem.Text = "Challan";
+            this.chaToolStripMenuItem.Click += new System.EventHandler(this.saleEntryChallanToolStripMenuItem_Click);
+            // 
+            // challanModificationToolStripMenuItem
+            // 
+            this.challanModificationToolStripMenuItem.Name = "challanModificationToolStripMenuItem";
+            this.challanModificationToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.challanModificationToolStripMenuItem.Text = "Challan Modification";
+            this.challanModificationToolStripMenuItem.Click += new System.EventHandler(this.modificationSaleChallanToolStripMenuItem_Click);
             // 
             // frmMainForm
             // 
@@ -351,5 +371,7 @@
         private System.Windows.Forms.ToolStripMenuItem modificationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modifyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modifyToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem chaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem challanModificationToolStripMenuItem;
     }
 }

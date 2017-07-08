@@ -63,7 +63,10 @@ namespace PharmaUI
         {
             try
             {
-                string pageHeading = IsModify ? "Sale Entry Modification" : "Sale Entry Transaction";
+                string pageHeading = VoucherTypeCode == Constants.VoucherTypeCode.SALEENTRY && IsModify ? "Sale Entry Modification" 
+                                    : VoucherTypeCode == Constants.VoucherTypeCode.SALEENTRY && !IsModify ? "Sale Entry Transaction"
+                                    : VoucherTypeCode == Constants.VoucherTypeCode.SALEONCHALLAN && IsModify ? "Sale Challan Transaction"
+                                    : "Sale Challan Transaction";
                 ExtensionMethods.FormLoad(this, pageHeading);
                 ExtensionMethods.AddFooter(this);
                 GotFocusEventRaised(this);
@@ -910,12 +913,12 @@ namespace PharmaUI
                 if (ledger.LastSelectedCustomerLedger != null)
                 {
                     string custCode = ledger.LastSelectedCustomerLedger.CustomerLedgerCode;
-
-                    if (IsModify)
+                    List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> listInvoices = new List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding>();
+                    if (!string.IsNullOrEmpty(dtSaleDate.Text))
                     {
-                        if (!string.IsNullOrEmpty(dtSaleDate.Text))
+                        if (IsModify && VoucherTypeCode == Constants.VoucherTypeCode.SALEENTRY)
                         {
-                            var listInvoices = applicationFacade.GetAllSaleInvoiceForCustomer(custCode, dtSaleDate.Text);
+                            listInvoices = applicationFacade.GetAllSaleInvoiceForCustomer(custCode, dtSaleDate.Text);
 
                             if (listInvoices.Count > 0)
                             {
@@ -924,7 +927,7 @@ namespace PharmaUI
                                 frm.FormClosed += FrmAllBillForCustomer_FormClosed;
                                 frm.ShowDialog();
 
-                                if (IsModify && dgvLineItem.Rows.Count > 0)
+                                if (dgvLineItem.Rows.Count > 0)
                                 {
                                     dgvLineItem.ClearSelection();
                                     dgvLineItem.Focus();
@@ -939,17 +942,52 @@ namespace PharmaUI
                                 tb = txtCustomerCode;
                             }
                         }
+                        else if ((VoucherTypeCode == Constants.VoucherTypeCode.SALEENTRY && !IsModify) || (VoucherTypeCode == Constants.VoucherTypeCode.SALEONCHALLAN && IsModify))
+                        {
+                            listInvoices = applicationFacade.GetSaleChallanForCustomer(custCode, dtSaleDate.Text);
+
+                            if (listInvoices.Count > 0)
+                            {
+                                SetCustomerCodeFields(custCode);
+                                Sale_Entry.frmAllBillForCustomer frm = new Sale_Entry.frmAllBillForCustomer(listInvoices);
+                                frm.FormClosed += FrmAllBillForCustomer_FormClosed;
+                                frm.ShowDialog();
+
+                                if (dgvLineItem.Rows.Count > 0)
+                                {
+                                    int rowIndex = IsModify ? 0 : dgvLineItem.Rows.Count - 1;
+                                    dgvLineItem.ClearSelection();
+                                    dgvLineItem.Focus();
+                                    dgvLineItem.Rows[rowIndex].Selected = true;
+                                    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["ItemCode"];
+                                    dgvLineItem.CurrentCell.Selected = true;
+                                }
+                            }
+                            else {
+                                if (VoucherTypeCode == Constants.VoucherTypeCode.SALEENTRY)
+                                {
+                                    SetCustomerCodeFields(custCode);
+                                    tb = txtSalesManCode;
+                                }
+                                else {
+                                    MessageBox.Show("No invoice for modification !!");
+                                    tb = txtCustomerCode;
+                                }
+                            }
+                        }
                         else
                         {
-                            MessageBox.Show("Please enter invoice date");
-                            tb = txtCustomerCode;
+                            SetCustomerCodeFields(custCode);
+                            tb = txtSalesManCode;
                         }
                     }
                     else
                     {
-                        SetCustomerCodeFields(custCode);
-                        tb = txtSalesManCode;
+                        MessageBox.Show("Please enter invoice date");
+                        tb = txtCustomerCode;
                     }
+                    
+                
                 }
                 else
                 {
@@ -975,40 +1013,53 @@ namespace PharmaUI
                 Sale_Entry.frmAllBillForCustomer frm = (Sale_Entry.frmAllBillForCustomer)sender;
 
                 long PurchaseSaleBookHeaderID = frm.PurchaseSaleBookHeaderID;
-                txtInvoiceNumber.Text = frm.InvoiceNumber;
 
-                header = applicationFacade.GetPurchaseSaleBookHeaderForModify(PurchaseSaleBookHeaderID);
-
-                if (header != null)
+                if (IsModify && (VoucherTypeCode == Constants.VoucherTypeCode.SALEENTRY || VoucherTypeCode == Constants.VoucherTypeCode.SALEONCHALLAN))
                 {
+                    txtInvoiceNumber.Text = frm.InvoiceNumber;
 
-                    txtInvoiceNumber.Text = header.PurchaseBillNo;
-                    string localCentral = header.LocalCentral == "L" ? "Local" : "Central";
+                    header = applicationFacade.GetPurchaseSaleBookHeaderForModify(PurchaseSaleBookHeaderID);
 
-                    int id = applicationFacade.GetPurchaseEntryTypes().Where(p => p.PurchaseTypeName.ToLower().Equals(localCentral.ToLower())).FirstOrDefault().ID;
-
-                    cbxSaleType.SelectedValue = id;
-                    purchaseSaleBookHeaderID = header.PurchaseSaleBookHeaderID;
-                    oldPurchaseSaleBookHeaderID = header.OldPurchaseSaleBookHeaderID;
-
-                    
-
-                    if (header.LocalCentral == "C")
+                    if (header != null)
                     {
-                        cbxSaleFormType.DataSource = applicationFacade.GetPurchaseFormTypes(id);
-                        cbxSaleFormType.DisplayMember = "FormTypeName";
-                        cbxSaleFormType.ValueMember = "ID";
 
-                        cbxSaleFormType.Visible = true;
-                        cbxSaleFormType.SelectedValue = header.PurchaseEntryFormID;
+                        txtInvoiceNumber.Text = header.PurchaseBillNo;
+                        string localCentral = header.LocalCentral == "L" ? "Local" : "Central";
+
+                        int id = applicationFacade.GetPurchaseEntryTypes().Where(p => p.PurchaseTypeName.ToLower().Equals(localCentral.ToLower())).FirstOrDefault().ID;
+
+                        cbxSaleType.SelectedValue = id;
+                        purchaseSaleBookHeaderID = header.PurchaseSaleBookHeaderID;
+                        oldPurchaseSaleBookHeaderID = header.OldPurchaseSaleBookHeaderID;
+
+
+
+                        if (header.LocalCentral == "C")
+                        {
+                            cbxSaleFormType.DataSource = applicationFacade.GetPurchaseFormTypes(id);
+                            cbxSaleFormType.DisplayMember = "FormTypeName";
+                            cbxSaleFormType.ValueMember = "ID";
+
+                            cbxSaleFormType.Visible = true;
+                            cbxSaleFormType.SelectedValue = header.PurchaseEntryFormID;
+                        }
+
+                        List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID).OrderBy(p => p.PurchaseSaleBookLineItemID).ToList();
+
+                        InsertUpdateLineItemAndsetToGridForModify(lineitems);
+
                     }
-
-                    List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetPurchaseSaleBookLineItemForModify(header.PurchaseSaleBookHeaderID).OrderBy(p => p.PurchaseSaleBookLineItemID).ToList();
-
-                    InsertUpdateLineItemAndsetToGridForModify(lineitems);
-
                 }
+                else if (!IsModify && VoucherTypeCode == Constants.VoucherTypeCode.SALEENTRY)
+                {
+                    SaveSaleBookHeader(0, PurchaseSaleBookHeaderID);
 
+                    if (dgvLineItem.Rows.Count == 0)
+                    {
+                        List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> lineitems = applicationFacade.GetSaleChallanLineItems(PurchaseSaleBookHeaderID, header.PurchaseSaleBookHeaderID).OrderBy(p => p.PurchaseSaleBookLineItemID).ToList();
+                        InsertUpdateLineItemAndsetToGridForModify(lineitems);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -1040,35 +1091,42 @@ namespace PharmaUI
                 lblDueBills.Text = customer.DueBillCount.ToString();
                 lblDueBillAmount.Text = (customer.DueBillAmount ?? 0).ToString("#.##");
 
-                DateTime date;
-                date = ExtensionMethods.ConvertToSystemDateFormat(dtSaleDate.Text);
+                SaveSaleBookHeader(customer.CustomerTypeID, null);
+            }
+        }
 
-                if (date == DateTime.MinValue)
-                {
-                    header.DueDate = null;
-                }
-                else
-                {
-                    header.DueDate = date;
-                }
+        private void SaveSaleBookHeader(int customerTypeID = 0,long? saleChallanHeaderID = null)
+        {
 
-                header.CustomerTypeId = customer.CustomerTypeID;
-                header.VoucherDate = header.DueDate ?? DateTime.Now;
-                header.LedgerTypeCode = txtCustomerCode.Text;
-                header.LedgerType = Constants.LedgerType.CustomerLedger;
-                header.VoucherTypeCode = this.VoucherTypeCode;
+            DateTime date;
+            date = ExtensionMethods.ConvertToSystemDateFormat(dtSaleDate.Text);
 
-                PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleType.SelectedItem;
-                header.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
+            if (date == DateTime.MinValue)
+            {
+                header.DueDate = null;
+            }
+            else
+            {
+                header.DueDate = date;
+            }
 
-                int saleFormTypeId = 0;
-                Int32.TryParse(Convert.ToString(cbxSaleFormType.SelectedValue), out saleFormTypeId);
-                header.PurchaseEntryFormID = saleFormTypeId;
+            header.CustomerTypeId = customerTypeID == 0 ? header.CustomerTypeId : customerTypeID;
+            header.VoucherDate = header.DueDate ?? DateTime.Now;
+            header.LedgerTypeCode = txtCustomerCode.Text;
+            header.LedgerType = Constants.TransactionEntityType.CustomerLedger;
+            header.VoucherTypeCode = this.VoucherTypeCode;
+            header.SaleChallanHeaderID = saleChallanHeaderID == null ? header.SaleChallanHeaderID : saleChallanHeaderID;
 
-                if (!IsModify)
-                {
-                    header.PurchaseSaleBookHeaderID = applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
-                }
+            PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleType.SelectedItem;
+            header.LocalCentral = (type != null && type.PurchaseTypeName.ToLower() == "central") ? "C" : "L";
+
+            int saleFormTypeId = 0;
+            Int32.TryParse(Convert.ToString(cbxSaleFormType.SelectedValue), out saleFormTypeId);
+            header.PurchaseEntryFormID = saleFormTypeId;
+
+            if (!IsModify)
+            {
+                header.PurchaseSaleBookHeaderID = applicationFacade.InsertUpdateTempPurchaseBookHeader(header);
             }
         }
 
