@@ -1736,11 +1736,11 @@ namespace PharmaUI
               @"<DeviceInfo>
                 <OutputFormat>EMF</OutputFormat>
                 <PageWidth>8.27in</PageWidth>
-                <PageHeight>11.39in</PageHeight>
-                <MarginTop>0.25in</MarginTop>
-                <MarginLeft>0.25in</MarginLeft>
-                <MarginRight>0.25in</MarginRight>
-                <MarginBottom>0.25in</MarginBottom>
+                <PageHeight>11.69in</PageHeight>
+                <MarginTop>0</MarginTop>
+                <MarginLeft>0</MarginLeft>
+                <MarginRight>0</MarginRight>
+                <MarginBottom>0</MarginBottom>
             </DeviceInfo>";
 
             Warning[] warnings; 

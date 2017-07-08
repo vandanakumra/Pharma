@@ -31,9 +31,9 @@ namespace PharmaUI
 
             string reportPath = Path.Combine(appPath, "Reports");
             string reportName = "GSTInvoice.rdlc";
-            this.reportViewer1.Reset();
-            this.reportViewer1.LocalReport.ReportPath = Path.Combine(reportPath, reportName);
-            this.reportViewer1.LocalReport.DataSources.Clear();
+            this.reportViewer2.Reset();
+            this.reportViewer2.LocalReport.ReportPath = Path.Combine(reportPath, reportName);
+            this.reportViewer2.LocalReport.DataSources.Clear();
 
             //this.reportViewer1.
             DataTable saleInvoice =applicationFacade.GetSaleInvoiceData(2);
@@ -42,12 +42,12 @@ namespace PharmaUI
             ReportDataSource dtSaleInvoice = new ReportDataSource("GSTInvoiceResult", saleInvoice);
            // ReportDataSource dtFirmProperties = new ReportDataSource("FirmProperties", firmProperties);
 
-            this.reportViewer1.LocalReport.DataSources.Add(dtSaleInvoice);
+            this.reportViewer2.LocalReport.DataSources.Add(dtSaleInvoice);
             //this.reportViewer1.LocalReport.DataSources.Add(dtFirmProperties);
-            this.reportViewer1.RefreshReport();
+            this.reportViewer2.RefreshReport();
 
-            this.reportViewer1.Visible = true;
-            this.reportViewer1.RenderingComplete += ReportViewer1_RenderingComplete;
+            this.reportViewer2.Visible = true;
+            this.reportViewer2.RenderingComplete += ReportViewer1_RenderingComplete;
         }
 
 

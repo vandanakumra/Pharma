@@ -118,11 +118,9 @@ namespace PharmaDAL.Transaction
                             };
 
                             purchaseBookAmounts.Add(obj);
-                        }
-                       
+                        }                       
                     }
                 }
-
 
                 return purchaseBookAmounts;
             }
@@ -377,9 +375,7 @@ namespace PharmaDAL.Transaction
                         header.LedgerTypeCode = Convert.ToString(dt.Rows[0]["LedgerTypeCode"]);
                         header.LocalCentral = Convert.ToString(dt.Rows[0]["LocalCentral"]);
                         header.OldPurchaseSaleBookHeaderID = Convert.ToInt64(dt.Rows[0]["OldPurchaseSaleBookHeaderID"]);
-                        header.PurchaseEntryFormID = Convert.ToInt32(dt.Rows[0]["PurchaseEntryFormID"]);
-
-                        
+                        header.PurchaseEntryFormID = Convert.ToInt32(dt.Rows[0]["PurchaseEntryFormID"]);                        
 
                     }
                 }
