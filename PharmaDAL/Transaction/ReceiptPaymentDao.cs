@@ -248,7 +248,7 @@ namespace PharmaDAL.Transaction
                         VoucherNumber = p.VoucherNumber,
                         VoucherTypeCode = p.VoucherTypeCode,
                         VoucherDate = p.VoucherDate,
-                        InvoiceNumber = p.VoucherTypeCode == Constants.TransactionEntityType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.VoucherNumber,
+                        InvoiceNumber = p.VoucherTypeCode == Constants.LedgerType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.VoucherNumber,
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
@@ -285,7 +285,7 @@ namespace PharmaDAL.Transaction
                     .Select(p => new PharmaBusinessObjects.Transaction.ReceiptPayment.BillAdjusted()
                     {
                         BillOutStandingsAudjustmentID = p.BillOutStandingsAudjustmentID,
-                        InvoiceNumber = p.VoucherTypeCode == Constants.TransactionEntityType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.AdjustmentVoucherNumber,
+                        InvoiceNumber = p.VoucherTypeCode == Constants.LedgerType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.AdjustmentVoucherNumber,
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,
@@ -323,7 +323,7 @@ namespace PharmaDAL.Transaction
                         VoucherNumber = p.VoucherNumber,
                         VoucherTypeCode = p.VoucherTypeCode,
                         VoucherDate = p.VoucherDate,
-                        InvoiceNumber = p.VoucherTypeCode == Constants.TransactionEntityType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.VoucherNumber,
+                        InvoiceNumber = p.VoucherTypeCode == Constants.LedgerType.SupplierLedger ? p.PurchaseSaleBookHeader.PurchaseBillNo : p.VoucherNumber,
                         InvoiceDate = p.PurchaseSaleBookHeader.VoucherDate,
                         LedgerType = p.LedgerType,
                         LedgerTypeCode = p.LedgerTypeCode,

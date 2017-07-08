@@ -25,7 +25,7 @@ namespace PharmaDataMigration.DBFWriter
         public void WriteFile()
         {
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 1; i++)
             {                
                 DataSetIntoDBF(ReadExcel(i.ToString()));
             }
@@ -37,7 +37,7 @@ namespace PharmaDataMigration.DBFWriter
             {
                 // string con = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\PharmaProject\TestDBF\" + filename + ".xlsx;" + @"Extended Properties='Excel 8.0;HDR=Yes;'";
 
-                string con = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\PharmaProject\TestDBF\" + filename + ".xlsx;Extended Properties='Excel 12.0;HDR=YES;IMEX=1;';";
+                string con = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\PharmaProject\TestDBF\HSN" + filename + ".xlsx;Extended Properties='Excel 12.0;HDR=YES;IMEX=1;';";
 
                 using (OleDbConnection connection = new OleDbConnection(con))
                 {

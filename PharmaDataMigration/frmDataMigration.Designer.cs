@@ -69,7 +69,7 @@
             // 
             // btnStartMigration
             // 
-            this.btnStartMigration.Location = new System.Drawing.Point(234, 87);
+            this.btnStartMigration.Location = new System.Drawing.Point(566, 32);
             this.btnStartMigration.Name = "btnStartMigration";
             this.btnStartMigration.Size = new System.Drawing.Size(138, 24);
             this.btnStartMigration.TabIndex = 3;
@@ -88,10 +88,10 @@
             this.colTableName,
             this.colStatus,
             this.colRecordCount});
-            this.grdDataMigration.Location = new System.Drawing.Point(40, 138);
+            this.grdDataMigration.Location = new System.Drawing.Point(40, 63);
             this.grdDataMigration.Name = "grdDataMigration";
             this.grdDataMigration.ReadOnly = true;
-            this.grdDataMigration.Size = new System.Drawing.Size(515, 298);
+            this.grdDataMigration.Size = new System.Drawing.Size(831, 448);
             this.grdDataMigration.TabIndex = 4;
             // 
             // colTableName
@@ -121,7 +121,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 523);
+            this.ClientSize = new System.Drawing.Size(916, 523);
             this.Controls.Add(this.grdDataMigration);
             this.Controls.Add(this.btnStartMigration);
             this.Controls.Add(this.btnDataDirectory);
