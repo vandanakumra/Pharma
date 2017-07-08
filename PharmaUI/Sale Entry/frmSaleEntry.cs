@@ -1055,7 +1055,7 @@ namespace PharmaUI
                 header.CustomerTypeId = customer.CustomerTypeID;
                 header.VoucherDate = header.DueDate ?? DateTime.Now;
                 header.LedgerTypeCode = txtCustomerCode.Text;
-                header.LedgerType = Constants.TransactionEntityType.CustomerLedger;
+                header.LedgerType = Constants.LedgerType.CustomerLedger;
                 header.VoucherTypeCode = this.VoucherTypeCode;
 
                 PharmaBusinessObjects.Transaction.PurchaseType type = (PharmaBusinessObjects.Transaction.PurchaseType)cbxSaleType.SelectedItem;

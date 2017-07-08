@@ -90,7 +90,7 @@ namespace PharmaUI.ReceiptPayment
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
                         ReceiptPaymentID = (long)row.Cells["ReceiptPaymentID"].Value,
-                        EntityType = Constants.TransactionEntityType.CustomerLedger,
+                        EntityType = Constants.LedgerType.CustomerLedger,
                         EntityCode = Convert.ToString(row.Cells["LedgerTypeCode"].Value),
                     };
 
@@ -282,7 +282,7 @@ namespace PharmaUI.ReceiptPayment
                     {
                         VoucherTypeCode = Constants.VoucherTypeCode.RECEIPTFROMCUSTOMER,
                         VoucherDate = ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text),
-                        LedgerType = Constants.TransactionEntityType.CustomerLedger,
+                        LedgerType = Constants.LedgerType.CustomerLedger,
                         LedgerTypeCode = selectedCustomer.CustomerLedgerCode,
                         LedgerTypeName = selectedCustomer.CustomerLedgerName,
                         PaymentMode = Constants.PaymentMode.CASH,
@@ -293,7 +293,7 @@ namespace PharmaUI.ReceiptPayment
 
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
-                        EntityType = Constants.TransactionEntityType.CustomerLedger,
+                        EntityType = Constants.LedgerType.CustomerLedger,
                         EntityCode = selectedCustomer.CustomerLedgerCode
                     };
 
@@ -377,7 +377,7 @@ namespace PharmaUI.ReceiptPayment
                     txtTransactAccount.Text = Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["BankAccountLedgerTypeName"].Value);
 
                     transactionEntity.ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[0].Cells["OldReceiptPaymentID"].Value;
-                    transactionEntity.EntityType = Constants.TransactionEntityType.CustomerLedger;
+                    transactionEntity.EntityType = Constants.LedgerType.CustomerLedger;
                     transactionEntity.EntityCode = Convert.ToString(dgvReceiptFromCustomer.Rows[0].Cells["LedgerTypeCode"].Value);
 
                     LoadGridBillOutstanding(transactionEntity);
@@ -575,7 +575,7 @@ namespace PharmaUI.ReceiptPayment
                     TransactionEntity transactionEntity = new TransactionEntity()
                     {
                         ReceiptPaymentID = (long)dgvReceiptFromCustomer.Rows[rowIndex].Cells["ReceiptPaymentID"].Value,
-                        EntityType = Constants.TransactionEntityType.CustomerLedger,
+                        EntityType = Constants.LedgerType.CustomerLedger,
                         EntityCode = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["LedgerTypeCode"].Value),
                         EntityName = Convert.ToString(dgvReceiptFromCustomer.Rows[rowIndex].Cells["LedgerTypeName"].Value),
                         EntityTotalAmount = enteredAmount,
@@ -740,7 +740,7 @@ namespace PharmaUI.ReceiptPayment
                 {
                     if (IsInEditMode)
                     {
-                        frmTransactions frmTrans = new frmTransactions(ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text), Constants.TransactionEntityType.CustomerLedger);
+                        frmTransactions frmTrans = new frmTransactions(ExtensionMethods.ConvertToSystemDateFormat(dtReceiptPayment.Text), Constants.LedgerType.CustomerLedger);
                         frmTrans.Show();
                         frmTrans.FormClosed += FrmTrans_FormClosed;
                     }

@@ -36,7 +36,7 @@ namespace PharmaUI
             this.reportViewer2.LocalReport.DataSources.Clear();
 
             //this.reportViewer1.
-            DataTable saleInvoice =applicationFacade.GetSaleInvoiceData(2);
+            DataTable saleInvoice =applicationFacade.GetSaleInvoiceData(5);
             //DataTable firmProperties = applicationFacade.GetFirmProperties(2);
 
             ReportDataSource dtSaleInvoice = new ReportDataSource("GSTInvoiceResult", saleInvoice);

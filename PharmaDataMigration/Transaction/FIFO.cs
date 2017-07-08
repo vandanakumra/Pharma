@@ -51,8 +51,11 @@ namespace PharmaDataMigration.Master
 
                                 PharmaDAL.Entity.FIFO newFIFO = new PharmaDAL.Entity.FIFO();
 
-                                newFIFO.PurchaseSaleBookHeaderID = null;
-                                newFIFO.VoucherNumber = (Convert.ToString(dr["vno"]).TrimEnd()).PadLeft(8, '0');
+                                //string oldVNo = Convert.ToString(dr["vno"]).TrimEnd();
+                                //var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
+
+                                //newFIFO.PurchaseSaleBookHeaderID = header.MappedPurchaseHeaderID;
+                                newFIFO.VoucherNumber = Convert.ToString(dr["vno"]).TrimEnd();// header.MappedVoucherNumber;
                                 newFIFO.VoucherDate = Convert.ToDateTime(dr["vdt"]);
                                 newFIFO.SRLNO = Convert.ToInt32(dr["srlno"]);
                                 newFIFO.ItemCode = mappedItemCode;

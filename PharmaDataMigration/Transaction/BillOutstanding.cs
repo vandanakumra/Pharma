@@ -15,39 +15,12 @@ namespace PharmaDataMigration.Master
     {
         private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private DBFConnectionManager dbConnection;
-
-        private const string ORIGINAL_SLCD_CL = "CL";
-        private const string ORIGINAL_SLCD_SL = "SL";
-
-        private const string MAPPED_SLCD_CL = "CUSTOMERLEDGER";
-        private const string MAPPED_SLCD_SL = "SUPPLIERLEDGER";
+        private DBFConnectionManager dbConnection;        
 
         public BillOutstanding()
         {
-            dbConnection = new DBFConnectionManager(Common.DataDirectory);
-            FillVoucherTypeMap();
-        }
-
-        public void FillVoucherTypeMap()
-        {
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "CN", MappedVoucherType = Constants.VoucherTypeCode.CREDITNOTE });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "DN", MappedVoucherType = Constants.VoucherTypeCode.DEBITNOTE });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PB", MappedVoucherType = Constants.VoucherTypeCode.PURCHASEENTRY });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PR", MappedVoucherType = Constants.VoucherTypeCode.PURCHASERETURN });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "SB", MappedVoucherType = Constants.VoucherTypeCode.SALEENTRY });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "S1", MappedVoucherType = Constants.VoucherTypeCode.SALEENTRY });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "SR", MappedVoucherType = Constants.VoucherTypeCode.SALERETURN });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "R1", MappedVoucherType = Constants.VoucherTypeCode.SALERETURN });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "ST", MappedVoucherType = Constants.VoucherTypeCode.STOCKADUSTMENT });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "S8", MappedVoucherType = Constants.VoucherTypeCode.SALEONCHALLAN });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "RV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "JV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "R9", MappedVoucherType = Constants.VoucherTypeCode.SALERETURNBREAKAGEEXPIRY });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "RT", MappedVoucherType = Constants.VoucherTypeCode.RECEIPTFROMCUSTOMER });
-            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PT", MappedVoucherType = Constants.VoucherTypeCode.PAYMENTTOSUPPLIER });           
-        }
+            dbConnection = new DBFConnectionManager(Common.DataDirectory);           
+        }      
 
         public int InsertBillOutstandingData()
         {
@@ -83,27 +56,30 @@ namespace PharmaDataMigration.Master
                                 string originalVoucherTypeCode = Convert.ToString(dr["vtyp"]).TrimEnd();
                                 string mappedVoucherTypeCode = Common.voucherTypeMap.Where(x => x.OriginalVoucherType == originalVoucherTypeCode).Select(x => x.MappedVoucherType).FirstOrDefault();
 
-                                if (Convert.ToString(dr["slcd"]).TrimEnd() == ORIGINAL_SLCD_SL)
+                                if (Convert.ToString(dr["slcd"]).TrimEnd() == "SL")
                                 {
-                                    ledgerType = MAPPED_SLCD_SL;
+                                    ledgerType = Common.ledgerTypeMap.Where(p => p.OriginaLedgerType == "SL").Select(p => p.MappedLedgerType).FirstOrDefault();
                                     ledgerTypeCode= Common.supplierLedgerCodeMap.Where(p => p.OriginalSupplierLedgerCode == Convert.ToString(dr["ACNO"]).TrimEnd()).Select(x=>x.MappedSupplierLedgerCode).FirstOrDefault();                                  
                                 }
-                                else
+                                else if (Convert.ToString(dr["slcd"]).TrimEnd() == "CL")
                                 {
-                                    ledgerType = MAPPED_SLCD_CL;
-                                    ledgerTypeCode= Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["ACNO"]).TrimEnd()).Select(x=>x.MappedCustomerLedgerCode).FirstOrDefault();
+                                    ledgerType = Common.ledgerTypeMap.Where(p => p.OriginaLedgerType == "CL").Select(p => p.MappedLedgerType).FirstOrDefault();
+                                    ledgerTypeCode = Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["ACNO"]).TrimEnd()).Select(x=>x.MappedCustomerLedgerCode).FirstOrDefault();
                                 }
+
+                                string oldVNo = Convert.ToString(dr["vno"]).TrimEnd();
+                                var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
 
                                 PharmaDAL.Entity.BillOutStandings newBillOS = new PharmaDAL.Entity.BillOutStandings()
                                 {
-                                    PurchaseSaleBookHeaderID= null,
-                                    VoucherNumber = (Convert.ToString(dr["vno"]).TrimEnd()).PadLeft(8,'0'),
+                                    //PurchaseSaleBookHeaderID= header.MappedPurchaseHeaderID,
+                                    VoucherNumber = Convert.ToString(dr["vno"]).TrimEnd(),//header.MappedVoucherNumber,
                                     VoucherTypeCode= mappedVoucherTypeCode,
                                     VoucherDate= Convert.ToDateTime(dr["vdt"]),
                                     DueDate= Convert.ToDateTime(dr["duedt"]),
                                     LedgerType = ledgerType,
                                     LedgerTypeCode= ledgerTypeCode,
-                                    BillAmount=0,
+                                    BillAmount= Convert.ToDecimal(dr["osamt"]),
                                     OSAmount= Convert.ToDecimal(dr["osamt"]),
                                     IsHold= Convert.ToString(dr["vno"]).TrimEnd()=="Y" ? true :false,
                                     HOLDRemarks=null

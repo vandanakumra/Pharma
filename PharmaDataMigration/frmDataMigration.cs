@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using PharmaDataMigration.Master;
 using System.Data.Entity.Validation;
 using PharmaDataMigration.DBFWriter;
+using PharmaBusinessObjects.Common;
 
 namespace PharmaDataMigration
 {
@@ -27,6 +28,38 @@ namespace PharmaDataMigration
             Common.supplierLedgerCodeMap = new List<SupplierLedgerCodeMap>();
             Common.customerLedgerCodeMap = new List<CustomerLedgerCodeMap>();
             Common.voucherTypeMap = new List<VoucherTypeMap>();
+            Common.ledgerTypeMap = new List<LedgerTypeMap>();
+            Common.voucherNumberMap = new List<VoucherNumberMap>();
+          
+
+            FillVoucherType();
+            FillLedgerType();
+        }
+     
+        private void FillLedgerType()
+        {
+            Common.ledgerTypeMap.Add(new LedgerTypeMap() {OriginaLedgerType = "CL" , MappedLedgerType = Constants.LedgerType.CustomerLedger });
+            Common.ledgerTypeMap.Add(new LedgerTypeMap() {OriginaLedgerType = "SL" , MappedLedgerType = Constants.LedgerType.SupplierLedger });
+        }
+
+        private void FillVoucherType()
+        {
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "CN", MappedVoucherType = Constants.VoucherTypeCode.CREDITNOTE });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "DN", MappedVoucherType = Constants.VoucherTypeCode.DEBITNOTE });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PB", MappedVoucherType = Constants.VoucherTypeCode.PURCHASEENTRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PR", MappedVoucherType = Constants.VoucherTypeCode.PURCHASERETURN });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "SB", MappedVoucherType = Constants.VoucherTypeCode.SALEENTRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "S1", MappedVoucherType = Constants.VoucherTypeCode.SALEENTRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "SR", MappedVoucherType = Constants.VoucherTypeCode.SALERETURN });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "R1", MappedVoucherType = Constants.VoucherTypeCode.SALERETURN });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "ST", MappedVoucherType = Constants.VoucherTypeCode.STOCKADUSTMENT });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "S8", MappedVoucherType = Constants.VoucherTypeCode.SALEONCHALLAN });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "RV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "JV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "R9", MappedVoucherType = Constants.VoucherTypeCode.SALERETURNBREAKAGEEXPIRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "RT", MappedVoucherType = Constants.VoucherTypeCode.RECEIPTFROMCUSTOMER });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PT", MappedVoucherType = Constants.VoucherTypeCode.PAYMENTTOSUPPLIER });
         }
 
         private void frmDataMigration_Load(object sender, EventArgs e)
@@ -34,6 +67,8 @@ namespace PharmaDataMigration
             //Common.DataDirectory = @"D:\PharmaProject\TestDBF";
             //DBFFileWriter writer = new DBFFileWriter();
             //writer.WriteFile();
+
+
 
         }
 
@@ -89,190 +124,215 @@ namespace PharmaDataMigration
             BillOutstanding billOutstanding = new BillOutstanding();
             FIFO fifo = new FIFO();
 
-            int result;
+            int result = 0;
+            int rowIndex = 0;
 
-            grdDataMigration.Rows.Add("Company Master", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Company Master", rowIndex, "Processing", result, true);
+
+            result = companyMaster.InsertCompanyMasterData();
+
+            SetProcessingText(grdDataMigration, "Company Master", rowIndex, "Completed", result, false);
             result = 0;
-
-           result = companyMaster.InsertCompanyMasterData();
-
-            grdDataMigration.Rows[0].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[0].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("A.S.M.", "Processing", 0);
-            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "ASM", rowIndex, "Processing", result, true);
 
             result = personRouteMaster.InsertASMData();
 
-            grdDataMigration.Rows[1].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[1].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("R.S.M.", "Processing", 0);
+            SetProcessingText(grdDataMigration, "ASM", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "RSM", rowIndex, "Processing", result, true);
 
-           result = personRouteMaster.InsertRSMData();
+            result = personRouteMaster.InsertRSMData();
 
-            grdDataMigration.Rows[2].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[2].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Z.S.M.", "Processing", 0);
+            SetProcessingText(grdDataMigration, "RSM", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "ZSM", rowIndex, "Processing", result, true);
 
             result = personRouteMaster.InsertZSMData();
 
-            grdDataMigration.Rows[3].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[3].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Sales Man", "Processing", 0);
+            SetProcessingText(grdDataMigration, "ZSM", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Sales Man", rowIndex, "Processing", result, true);
 
-           result = personRouteMaster.InsertSalesManData();
+            result = personRouteMaster.InsertSalesManData();
 
-            grdDataMigration.Rows[4].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[4].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Area", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Sales Man", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Area", rowIndex, "Processing", result, true);
 
             result = personRouteMaster.InsertAreaData();
 
-            grdDataMigration.Rows[5].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[5].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Route", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Area", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Route", rowIndex, "Processing", result, true);
 
             result = personRouteMaster.InsertRouteData();
 
-            grdDataMigration.Rows[6].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[6].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Personal Details", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Route", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Personal Ledger", rowIndex, "Processing", result, true);
 
             result = personalLedgerMaster.InsertPersonalLedgerMasterData();
 
-            grdDataMigration.Rows[7].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[7].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Control Codes", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Personal Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Control Codes", rowIndex, "Processing", result, true);
 
             result = accountLedgerMaster.InsertControlCodesData();
 
-            grdDataMigration.Rows[8].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[8].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Income Ledger", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Control Codes", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Income Ledger", rowIndex, "Processing", result, true);
 
             result = accountLedgerMaster.InsertIncomeLedgerData();
 
-            grdDataMigration.Rows[9].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[9].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Expenditure Ledger", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Income Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Expenditure Ledger", rowIndex, "Processing", result, true);
 
             result = accountLedgerMaster.InsertExpenditureLedgerData();
 
-            grdDataMigration.Rows[10].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[10].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Transaction Books", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Expenditure Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Transaction Ledger", rowIndex, "Processing", result, true);
 
-           result = accountLedgerMaster.InsertTransactionLedgerData();
+            result = accountLedgerMaster.InsertTransactionLedgerData();
 
-            grdDataMigration.Rows[11].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[11].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("General Ledger", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Transaction Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "General Ledger", rowIndex, "Processing", result, true);
 
             result = accountLedgerMaster.InsertGeneralLedgerData();
 
-            grdDataMigration.Rows[12].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[12].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Purchase Ledger", "Processing", 0);
+            SetProcessingText(grdDataMigration, "General Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Purchase Ledger", rowIndex, "Processing", result, true);
 
             result = accountLedgerMaster.InsertPurchaseLedgerData();
 
-            grdDataMigration.Rows[13].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[13].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Sale Ledger", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Purchase Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Sale Ledger", rowIndex, "Processing", result, true);
 
-           result = accountLedgerMaster.InsertSaleLedgerData();
+            result = accountLedgerMaster.InsertSaleLedgerData();
 
-            grdDataMigration.Rows[14].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[14].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Item Master", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Sale Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Item Master", rowIndex, "Processing", result, true);
 
             result = itemMaster.InsertItemMasterData();
 
-            grdDataMigration.Rows[15].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[15].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("FIFO", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Item Master", rowIndex, "Completed", result, false);
             result = 0;
-
-            result = fifo.InsertFIFOData();
-
-            grdDataMigration.Rows[16].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[16].Cells[2].Value = result;
-
-
-            grdDataMigration.Rows.Add("Supplier Ledger", "Processing", 0);
-            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Supplier Ledger", rowIndex, "Processing", result, true);
 
             result = supplierLedgerMaster.InsertSupplierLedgerMasterData();
 
-            grdDataMigration.Rows[17].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[17].Cells[2].Value = result;
-
-            grdDataMigration.Rows.Add("Customer Ledger", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Supplier Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Customer Ledger", rowIndex, "Processing", result, true);
 
             result = customerLedgerMaster.InsertCustomerLedgerMasterData(); //confirm mapping columns for columns having comments in CustomerLedgerMaster
 
-            grdDataMigration.Rows[18].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[18].Cells[2].Value = result;
-
-            //For below method check comments in CustomerLedgerMaster
-            grdDataMigration.Rows.Add("Customer Company Discount", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Customer Ledger", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Processing", result, true);
 
             result = customerLedgerMaster.InsertCustomerCompanyReferenceData();
 
-            grdDataMigration.Rows[19].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[19].Cells[2].Value = result;
-
-
-            //For below method check comments in CustomerLedgerMaster
-            grdDataMigration.Rows.Add("Supplier Company Discount", "Processing", 0);
+            SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Completed", result, false);
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Processing", result, true);
 
             result = supplierLedgerMaster.InsertSupplierCompanyReferenceData();
 
-            grdDataMigration.Rows[20].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[20].Cells[2].Value = result;
+            SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Completed", result, false);
 
-            grdDataMigration.Rows.Add("Bill Oustanding", "Processing", 0);
+            /*------------------------------------------------------------*/
+
+
+
             result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Fifo", rowIndex, "Processing", result, true);
+
+            result = fifo.InsertFIFOData();
+
+            SetProcessingText(grdDataMigration, "Fifo", rowIndex, "Completed", result, false);
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Bill Outstanding", rowIndex, "Processing", result, true);
 
             result = billOutstanding.InsertBillOutstandingData();
 
-            grdDataMigration.Rows[21].Cells[1].Value = "Completed";
-            grdDataMigration.Rows[21].Cells[2].Value = result;
-            
+            SetProcessingText(grdDataMigration, "Bill Outstanding", rowIndex, "Completed", result, false);
+
+            /* ---------------------------------------  ---------------------------------------*/
 
             MessageBox.Show("Process Completed");
         }
+
+        public delegate void ControlStringConsumer(Control control, string tablname, int rowIndex, string message, int result, bool addRow);  // defines a delegate type
+
+        public void SetProcessingText(Control control, string tablname, int rowIndex, string message, int result, bool addRow)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new ControlStringConsumer(SetProcessingText), new object[] { control, tablname, rowIndex, message, result, addRow });  // invoking itself
+            }
+            else
+            {
+                if (addRow)
+                {
+                    grdDataMigration.Rows.Add(tablname, message, result);
+                }
+                else
+                {
+                    grdDataMigration.Rows[rowIndex].Cells[1].Value = message;
+                    grdDataMigration.Rows[rowIndex].Cells[2].Value = result;
+                }     
+            }
+        }
+
+        //private void SetProcessingText(string tablname,int rowIndex,string message,int result,bool addRow)
+        //{
+        //    if (grdDataMigration.InvokeRequired)
+        //    {
+        //        grdDataMigration.Invoke(new MethodInvoker(() => { SetProcessingText(tablname, rowIndex, message, result, addRow); }));
+        //    }
+        //    else
+        //    {
+        //        if (addRow)
+        //        {
+        //            grdDataMigration.Rows.Add(tablname, message, result);
+        //        }
+        //        else
+        //        {
+        //            grdDataMigration.Rows[rowIndex].Cells[1].Value = message;
+        //            grdDataMigration.Rows[rowIndex].Cells[2].Value = result;
+        //        }
+        //    }
+           
+
+        //}
+
     }
 }
