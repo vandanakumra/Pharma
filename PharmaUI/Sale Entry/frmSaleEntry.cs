@@ -1113,7 +1113,7 @@ namespace PharmaUI
             header.CustomerTypeId = customerTypeID == 0 ? header.CustomerTypeId : customerTypeID;
             header.VoucherDate = header.DueDate ?? DateTime.Now;
             header.LedgerTypeCode = txtCustomerCode.Text;
-            header.LedgerType = Constants.TransactionEntityType.CustomerLedger;
+            header.LedgerType = Constants.LedgerType.CustomerLedger;
             header.VoucherTypeCode = this.VoucherTypeCode;
             header.SaleChallanHeaderID = saleChallanHeaderID == null ? header.SaleChallanHeaderID : saleChallanHeaderID;
 
