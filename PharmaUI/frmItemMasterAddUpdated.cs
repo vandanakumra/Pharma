@@ -100,7 +100,7 @@ namespace PharmaUI
                 item.WholeSaleRate = ExtensionMethods.SafeConversionDecimal(tbxWholeSaleRate.Text);
                 item.SaleExcise = ExtensionMethods.SafeConversionDecimal(tbxSaleExcise.Text);
                 item.SurchargeOnSale = ExtensionMethods.SafeConversionDecimal(tbxSCOnSale.Text);
-                item.TaxOnSale = ExtensionMethods.SafeConversionDecimal(tbxTaxOnSale.Text);
+                item.TaxOnSale = (cbxSaleType.SelectedItem as AccountLedgerMaster).SalePurchaseTaxValue;
                 item.Scheme1 = ExtensionMethods.SafeConversionDecimal(tbxScheme1.Text);
                 item.Scheme2 = ExtensionMethods.SafeConversionDecimal(tbxScheme2.Text);
                 item.PurchaseExcise = ExtensionMethods.SafeConversionDecimal(tbxPurchaseExcise.Text);
@@ -117,7 +117,7 @@ namespace PharmaUI
                 item.MaximumQty = ExtensionMethods.SafeConversionDecimal(tbxMaxQty.Text);
                 item.MaximumDiscount = ExtensionMethods.SafeConversionDecimal(tbxMaxDiscount.Text);
                 item.SurchargeOnPurchase = ExtensionMethods.SafeConversionDecimal(tbxSCOnPurchase.Text);
-                item.TaxOnPurchase = ExtensionMethods.SafeConversionDecimal(tbxTaxOnPurchase.Text);
+                item.TaxOnPurchase = (cbxPurchaseType.SelectedItem as AccountLedgerMaster).SalePurchaseTaxValue;
                 item.DiscountRecieved = ExtensionMethods.SafeConversionDecimal(tbxDiscountRecieved.Text);
                 item.SpecialDiscountRecieved = ExtensionMethods.SafeConversionDecimal(tbxSpecialDiscountRecieved.Text);
                 item.QtyPerCase = ExtensionMethods.SafeConversionDecimal(tbxQtyPerCase.Text);
@@ -484,6 +484,31 @@ namespace PharmaUI
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void cbxPurchaseType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (cbxSaleType.Items.Count > 0)
+                {
+                    decimal? purchaseTaxValue = (cbxPurchaseType.SelectedItem as AccountLedgerMaster).SalePurchaseTaxValue;
+                    if (purchaseTaxValue != null)
+                    {
+                        int gstSaleTypeID = cbxSaleType.Items.Cast<AccountLedgerMaster>().Where(x => x.SalePurchaseTaxValue == purchaseTaxValue).Select(x => x.AccountLedgerID).First();
+                        cbxSaleType.SelectedValue = gstSaleTypeID;
+                    }
+                    else
+                    {
+                        cbxSaleType.SelectedValue = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
