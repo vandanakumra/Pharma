@@ -43,15 +43,15 @@ namespace PharmaDataMigration.Master
                             try
                             {
                                 maxAccountLedgerID++;
-                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).Trim();
                                 int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                                 string accountLedgerCode = "CTRL" + maxAccountLedgerID.ToString().PadLeft(6, '0');
-                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).Trim();
                                 Common.controlCodeMap.Add(new ControlCodeMap() { OriginalControlCode = originalAccountLedgerCode, MappedControlCode = accountLedgerCode });
 
                                 PharmaDAL.Entity.AccountLedgerMaster newControlCodeMaster = new PharmaDAL.Entity.AccountLedgerMaster()
                                 {
-                                    AccountLedgerName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                    AccountLedgerName = Convert.ToString(dr["ACName"]).Trim(),
                                     AccountLedgerCode = accountLedgerCode,
                                     AccountLedgerTypeId = accountLedgerTypeID,
                                     AccountTypeId = accountTypeID,
@@ -69,7 +69,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("CONTROL CODES: Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("CONTROL CODES: Error in ACName --> " + Convert.ToString(dr["ACName"]).Trim());
                             }
                         }
                     }
@@ -110,26 +110,26 @@ namespace PharmaDataMigration.Master
                             {
 
                                 maxAccountLedgerID++;
-                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).Trim();
                                 int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                                 string accountLedgerCode = "INC" + maxAccountLedgerID.ToString().PadLeft(7, '0');
-                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).Trim();
+                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).Trim();
                                 string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
                                 int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
-                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).Trim();
                                 string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
                                 int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                                 Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
-                                if (Convert.ToString(dr["ACName"]).TrimEnd().ToUpper().Equals("ROUNDED OFF ADJUSTMENT A/C"))
+                                if (Convert.ToString(dr["ACName"]).Trim().ToUpper().Equals("ROUNDED OFF ADJUSTMENT A/C"))
                                 {
                                     accountLedgerCode = "ADJ" + Convert.ToString("1").PadLeft(7, '0');
                                 }
 
                                 PharmaDAL.Entity.AccountLedgerMaster newIncomeLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
                                 {
-                                    AccountLedgerName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                    AccountLedgerName = Convert.ToString(dr["ACName"]).Trim(),
                                     AccountLedgerCode = accountLedgerCode,
                                     AccountLedgerTypeId = accountLedgerTypeID,
                                     AccountTypeId = accountTypeID,
@@ -147,7 +147,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("INCOME LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("INCOME LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).Trim());
                             }
                         }
                     }
@@ -187,21 +187,21 @@ namespace PharmaDataMigration.Master
                             try
                             {
                                 maxAccountLedgerID++;
-                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).Trim();
                                 int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                                 string accountLedgerCode = "EXP" + maxAccountLedgerID.ToString().PadLeft(7, '0');
-                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).Trim();
+                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).Trim();
                                 string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
                                 int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
-                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).Trim();
                                 string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
                                 int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                                 Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
                                 PharmaDAL.Entity.AccountLedgerMaster newExpenditureLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
                                 {
-                                    AccountLedgerName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                    AccountLedgerName = Convert.ToString(dr["ACName"]).Trim(),
                                     AccountLedgerCode = accountLedgerCode,
                                     AccountLedgerTypeId = accountLedgerTypeID,
                                     AccountTypeId = accountTypeID,
@@ -219,7 +219,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("EXPENDITURE LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("EXPENDITURE LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).Trim());
                             }
                         }
                     }
@@ -259,21 +259,21 @@ namespace PharmaDataMigration.Master
                             try
                             {
                                 maxAccountLedgerID++;
-                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).Trim();
                                 int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                                 string accountLedgerCode = "TRN" + maxAccountLedgerID.ToString().PadLeft(7, '0');
-                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).Trim();
+                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).Trim();
                                 string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
                                 int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
-                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).Trim();
                                 string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
                                 int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                                 Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
 
                                 PharmaDAL.Entity.AccountLedgerMaster newTransactionLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
                                 {
-                                    AccountLedgerName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                    AccountLedgerName = Convert.ToString(dr["ACName"]).Trim(),
                                     AccountLedgerCode = accountLedgerCode,
                                     AccountLedgerTypeId = accountLedgerTypeID,
                                     AccountTypeId = accountTypeID,
@@ -291,7 +291,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("TRANSACTION LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("TRANSACTION LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).Trim());
                             }
                         }
                     }
@@ -333,18 +333,18 @@ namespace PharmaDataMigration.Master
                             try
                             {
                                 maxAccountLedgerID++;
-                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).Trim();
                                 int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                                 string accountLedgerCode = "GEN" + maxAccountLedgerID.ToString().PadLeft(7, '0');
-                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).Trim();
+                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).Trim();
                                 string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
                                 int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
-                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).Trim();
                                 string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
                                 int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
 
-                                if (Convert.ToString(dr["ACNO"]).TrimEnd().ToUpper().Contains("PTAX01") || Convert.ToString(dr["ACNO"]).TrimEnd().ToUpper().Contains("STAX01"))
+                                if (Convert.ToString(dr["ACNO"]).Trim().ToUpper().Contains("PTAX01") || Convert.ToString(dr["ACNO"]).Trim().ToUpper().Contains("STAX01"))
                                 {
                                     debitCreditControlId = debitControlCodeID;
                                     continue;
@@ -354,7 +354,7 @@ namespace PharmaDataMigration.Master
 
                                 PharmaDAL.Entity.AccountLedgerMaster newGeneralLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
                                 {
-                                    AccountLedgerName = Convert.ToString(dr["ACName"]).TrimEnd(),
+                                    AccountLedgerName = Convert.ToString(dr["ACName"]).Trim(),
                                     AccountLedgerCode = accountLedgerCode,
                                     AccountLedgerTypeId = accountLedgerTypeID,
                                     AccountTypeId = accountTypeID,
@@ -372,7 +372,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("GENERAL LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("GENERAL LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).Trim());
                             }
                         }
                     }
@@ -450,41 +450,41 @@ namespace PharmaDataMigration.Master
 
                                 decimal? salePurchaseTaxType = null;
 
-                                if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 5%") == 0)
+                                if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "PURCHASE - TAXABLE 5%") == 0)
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(5);
                                     bcontinue = true;
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 12.5%") == 0 || (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 12%") == 0))
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "PURCHASE - TAXABLE 12.5%") == 0 || (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "PURCHASE - TAXABLE 12%") == 0))
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(12);
                                     bcontinue = true;
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 18%") == 0)
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "PURCHASE - TAXABLE 18%") == 0)
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(18);
                                     bcontinue = true;
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 28%") == 0)
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "PURCHASE - TAXABLE 28%") == 0)
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(28);
                                     bcontinue = true;
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAX EXEMPTED") == 0)
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "PURCHASE - TAX EXEMPTED") == 0)
                                 {
                                     salePurchaseTaxType = 0;
                                     bcontinue = true;
                                 }
 
                                 maxAccountLedgerID++;
-                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).Trim();
                                 int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                                 string accountLedgerCode = "PUR" + maxAccountLedgerID.ToString().PadLeft(7, '0');
-                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).Trim();
+                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).Trim();
                                 string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
                                 int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
-                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).Trim();
                                 string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
                                 int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
 
@@ -500,7 +500,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("PURCHASE LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("PURCHASE LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).Trim());
                             }
                         }
                     }
@@ -556,36 +556,36 @@ namespace PharmaDataMigration.Master
 
                                 decimal? salePurchaseTaxType = null;
 
-                                if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 5%") == 0)
+                                if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "SALE - TAXABLE 5%") == 0)
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(5);
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 12.5%") == 0 || (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 12%") == 0))
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "SALE - TAXABLE 12.5%") == 0 || (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "SALE - TAXABLE 12%") == 0))
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(12);                                    
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 18%") == 0)
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "SALE - TAXABLE 18%") == 0)
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(18);
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 28%") == 0)
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "SALE - TAXABLE 28%") == 0)
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(28);
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAX EXEMPTED") == 0)
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).Trim(), "SALE - TAX EXEMPTED") == 0)
                                 {
                                     salePurchaseTaxType = 0;
                                 }
 
                                 maxAccountLedgerID++;
-                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).TrimEnd();
+                                string accountTypeShortName = Convert.ToString(dr["Actyp"]).Trim();
                                 int accountTypeID = context.AccountType.Where(p => p.AccountTypeShortName == accountTypeShortName).FirstOrDefault().AccountTypeID;
                                 string accountLedgerCode = "SALE" + maxAccountLedgerID.ToString().PadLeft(6, '0');
-                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).TrimEnd();
-                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).TrimEnd();
+                                string originalAccountLedgerCode = Convert.ToString(dr["ACNO"]).Trim();
+                                string originalCreditControlCode = Convert.ToString(dr["Cac"]).Trim();
                                 string mappedCreditControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalCreditControlCode).FirstOrDefault().MappedControlCode;
                                 int creditControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedCreditControlCode).FirstOrDefault().AccountLedgerID;
-                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).TrimEnd();
+                                string originalDebitControlCode = Convert.ToString(dr["Cad"]).Trim();
                                 string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
                                 int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
                                 //Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
@@ -605,7 +605,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("SALE LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("SALE LEDGER : Error in ACName --> " + Convert.ToString(dr["ACName"]).Trim());
 
                             }
                         }

@@ -43,53 +43,62 @@ namespace PharmaDataMigration.Master
                                 string ledgerType = string.Empty;
                                 string ledgerTypeCode = string.Empty;
 
-                                if(string.IsNullOrWhiteSpace(Convert.ToString(dr["vno"]).TrimEnd()))
+                                if(string.IsNullOrWhiteSpace(Convert.ToString(dr["vno"]).Trim()))
                                 {
                                     throw new Exception();
                                 }
-                                else if(Convert.ToString(dr["vno"]).TrimEnd().Length > 8)
+                                else if(Convert.ToString(dr["vno"]).Trim().Length > 8)
                                 {
-                                    log.Error("BillOS : VNO Length is greater than 8 -->" + Convert.ToString(dr["vno"]).TrimEnd());
+                                    log.Error("BillOS : VNO Length is greater than 8 -->" + Convert.ToString(dr["vno"]).Trim());
                                     throw new Exception();
                                 }
 
-                                string originalVoucherTypeCode = Convert.ToString(dr["vtyp"]).TrimEnd();
+                                string originalVoucherTypeCode = Convert.ToString(dr["vtyp"]).Trim();
                                 string mappedVoucherTypeCode = Common.voucherTypeMap.Where(x => x.OriginalVoucherType == originalVoucherTypeCode).Select(x => x.MappedVoucherType).FirstOrDefault();
 
-                                if (Convert.ToString(dr["slcd"]).TrimEnd() == "SL")
+                                if (Convert.ToString(dr["slcd"]).Trim() == "SL")
                                 {
                                     ledgerType = Common.ledgerTypeMap.Where(p => p.OriginaLedgerType == "SL").Select(p => p.MappedLedgerType).FirstOrDefault();
-                                    ledgerTypeCode= Common.supplierLedgerCodeMap.Where(p => p.OriginalSupplierLedgerCode == Convert.ToString(dr["ACNO"]).TrimEnd()).Select(x=>x.MappedSupplierLedgerCode).FirstOrDefault();                                  
+                                    ledgerTypeCode= Common.supplierLedgerCodeMap.Where(p => p.OriginalSupplierLedgerCode == Convert.ToString(dr["ACNO"]).Trim()).Select(x=>x.MappedSupplierLedgerCode).FirstOrDefault();                                  
                                 }
-                                else if (Convert.ToString(dr["slcd"]).TrimEnd() == "CL")
+                                else if (Convert.ToString(dr["slcd"]).Trim() == "CL")
                                 {
                                     ledgerType = Common.ledgerTypeMap.Where(p => p.OriginaLedgerType == "CL").Select(p => p.MappedLedgerType).FirstOrDefault();
-                                    ledgerTypeCode = Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["ACNO"]).TrimEnd()).Select(x=>x.MappedCustomerLedgerCode).FirstOrDefault();
+                                    ledgerTypeCode = Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["ACNO"]).Trim()).Select(x=>x.MappedCustomerLedgerCode).FirstOrDefault();
                                 }
 
-                                string oldVNo = Convert.ToString(dr["vno"]).TrimEnd();
-                                //var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
+                                string oldVNo = Convert.ToString(dr["vno"]).Trim();
+                                var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
 
-                                PharmaDAL.Entity.BillOutStandings newBillOS = new PharmaDAL.Entity.BillOutStandings()
+                               PharmaDAL.Entity.BillOutStandings newBillOS = new PharmaDAL.Entity.BillOutStandings();
+
+                                if (header != null)
                                 {
-                                    //PurchaseSaleBookHeaderID= header.MappedPurchaseHeaderID,
-                                    VoucherNumber = (Convert.ToString(dr["vno"]).TrimEnd()).PadLeft(8, '0'),// header.MappedVoucherNumber,
-                                    VoucherTypeCode= mappedVoucherTypeCode,
-                                    VoucherDate= Convert.ToDateTime(dr["vdt"]),
-                                    DueDate= Convert.ToDateTime(dr["duedt"]),
-                                    LedgerType = ledgerType,
-                                    LedgerTypeCode= ledgerTypeCode,
-                                    BillAmount= Convert.ToDecimal(dr["osamt"]),
-                                    OSAmount= Convert.ToDecimal(dr["osamt"]),
-                                    IsHold= Convert.ToString(dr["vno"]).TrimEnd()=="Y" ? true :false,
-                                    HOLDRemarks=null
-                                };
+                                    newBillOS.PurchaseSaleBookHeaderID = header.MappedPurchaseHeaderID;
+                                    newBillOS.VoucherNumber = header.MappedVoucherNumber;
+                                }
+                                else
+                                {
+                                    newBillOS.VoucherNumber = (Convert.ToString(dr["vno"]).Trim()).PadLeft(8, '0');
+                                    log.Info(string.Format("BILLOS: Voucher No  Not found in for VNO {0}", oldVNo));
+                                }
+                                                               
+                                newBillOS.VoucherTypeCode = mappedVoucherTypeCode;
+                                newBillOS.VoucherDate = (DateTime)CommonMethods.SafeConversionDatetime(Convert.ToString(dr["vdt"]));
+                                newBillOS.DueDate = CommonMethods.SafeConversionDatetime(Convert.ToString(dr["duedt"]));
+                                newBillOS.LedgerType = ledgerType;
+                                newBillOS.LedgerTypeCode = ledgerTypeCode;
+                                newBillOS.BillAmount = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["osamt"])) ?? default(decimal);
+                                newBillOS.OSAmount = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["osamt"])) ?? default(decimal);
+                                newBillOS.IsHold = Convert.ToString(dr["vno"]).Trim() == "Y" ? true : false;
+                                newBillOS.HOLDRemarks = null;
+                                
 
                                 listBillOutstandings.Add(newBillOS);
                             }
                             catch (Exception)
                             {
-                                log.Info(string.Format("BILL OUTSTANDING: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).TrimEnd()));
+                                log.Info(string.Format("BILL OUTSTANDING: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).Trim()));
                             }
                         }
                     }

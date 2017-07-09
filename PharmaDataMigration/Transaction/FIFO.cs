@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Data.Entity.Validation;
 using PharmaBusinessObjects.Common;
+using System.Diagnostics;
 
 namespace PharmaDataMigration.Master
 {
@@ -40,7 +41,7 @@ namespace PharmaDataMigration.Master
                         {
                             try
                             {
-                                string originalItemCode = Convert.ToString(dr["itemc"]).TrimEnd();
+                                string originalItemCode = Convert.ToString(dr["itemc"]).Trim();
                                 string mappedItemCode = Common.itemCodeMap.Where(x => x.OriginalItemCode == originalItemCode).Select(x => x.MappedItemCode).FirstOrDefault();
 
                                 if (string.IsNullOrEmpty(mappedItemCode))
@@ -49,41 +50,59 @@ namespace PharmaDataMigration.Master
                                     throw new Exception();
                                 }
 
+
                                 PharmaDAL.Entity.FIFO newFIFO = new PharmaDAL.Entity.FIFO();
 
-                                string oldVNo = Convert.ToString(dr["vno"]).TrimEnd();
-                                var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
+                                string oldVNo = Convert.ToString(dr["vno"]).Trim();
+                                var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber.Trim() == oldVNo).FirstOrDefault();
 
-                                newFIFO.PurchaseSaleBookHeaderID = header.MappedPurchaseHeaderID;
-                                newFIFO.VoucherNumber = header.MappedVoucherNumber;
-                                newFIFO.VoucherDate = Convert.ToDateTime(dr["vdt"]);
-                                newFIFO.SRLNO = Convert.ToInt32(dr["srlno"]);
-                                newFIFO.ItemCode = mappedItemCode;
-                                newFIFO.PurchaseBillNo = Convert.ToString(dr["pbillno"]).TrimEnd();
-                                newFIFO.Batch = Convert.ToString(dr["batch"]).TrimEnd();
-                                newFIFO.ExpiryDate = CommonMethods.SafeConversionDatetime(Convert.ToString(dr["expdt"]).TrimEnd());
-                                newFIFO.Quantity = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["qty"]).TrimEnd()) ?? default(decimal);
-                                newFIFO.BalanceQuanity = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["bqty"]).TrimEnd()) ?? default(decimal);
-                                newFIFO.PurchaseTypeId = null;
-                                newFIFO.PurchaseRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["prate"]).TrimEnd()) ?? default(decimal);
-                                newFIFO.EffectivePurchaseRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["eprate"]).TrimEnd());
-                                newFIFO.SaleRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["srate"]).TrimEnd()) ?? default(decimal);
-                                newFIFO.WholeSaleRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["wsrate"]).TrimEnd());
-                                newFIFO.SpecialRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["splrate"]).TrimEnd());
-                                newFIFO.MRP = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["mrp"]).TrimEnd()) ?? default(decimal);
-                                newFIFO.Scheme1 = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["scheme1"]).TrimEnd());
-                                newFIFO.Scheme2 = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["scheme2"]).TrimEnd());
-                                newFIFO.IsOnHold = Convert.ToString(dr["hold"]).TrimEnd() == "Y" ? true : false;
-                                newFIFO.OnHoldRemarks = null;
-                                newFIFO.MfgDate = CommonMethods.SafeConversionDatetime(Convert.ToString(dr["mfgdt"]).TrimEnd());
-                                newFIFO.UPC = Convert.ToString(dr["barcode"]).TrimEnd();
+                                if (header != null)
+                                {
+                                    newFIFO.PurchaseSaleBookHeaderID = header.MappedPurchaseHeaderID;
+                                    newFIFO.VoucherNumber = header.MappedVoucherNumber;
+                                }
+                                else
+                                {
+                                    newFIFO.VoucherNumber = (Convert.ToString(dr["vno"]).Trim()).PadLeft(8, '0');
+                                    log.Info(string.Format("FIFO: Voucher No  Not found in for VNO {0}", oldVNo));
+                                }
+
+                               
+                                    newFIFO.VoucherDate = Convert.ToDateTime(dr["vdt"]);
+                                    newFIFO.SRLNO = Convert.ToInt32(dr["srlno"]);
+                                    newFIFO.ItemCode = mappedItemCode;
+                                    newFIFO.PurchaseBillNo = Convert.ToString(dr["pbillno"]).Trim();
+                                    newFIFO.Batch = Convert.ToString(dr["batch"]).Trim();
+                                    newFIFO.ExpiryDate = CommonMethods.SafeConversionDatetime(Convert.ToString(dr["expdt"]).Trim());
+                                    newFIFO.Quantity = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["qty"]).Trim()) ?? default(decimal);
+                                    newFIFO.BalanceQuanity = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["bqty"]).Trim()) ?? default(decimal);
+                                    newFIFO.PurchaseTypeId = null;
+                                    newFIFO.PurchaseRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["prate"]).Trim()) ?? default(decimal);
+                                    newFIFO.EffectivePurchaseRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["eprate"]).Trim());
+                                    newFIFO.SaleRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["srate"]).Trim()) ?? default(decimal);
+                                    newFIFO.WholeSaleRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["wsrate"]).Trim());
+                                    newFIFO.SpecialRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["splrate"]).Trim());
+                                    newFIFO.MRP = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["mrp"]).Trim()) ?? default(decimal);
+                                    newFIFO.Scheme1 = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["scheme1"]).Trim());
+                                    newFIFO.Scheme2 = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["scheme2"]).Trim());
+                                    newFIFO.IsOnHold = false;// Convert.ToString(dr["hold"]).Trim() == "Y" ? true : false;
+                                    newFIFO.OnHoldRemarks = null;
+                                    newFIFO.MfgDate = CommonMethods.SafeConversionDatetime(Convert.ToString(dr["mfgdt"]).Trim());
+                                    newFIFO.UPC = Convert.ToString(dr["barcode"]).Trim();
 
 
-                                listFIFO.Add(newFIFO);
+                                    listFIFO.Add(newFIFO);
+                               
+
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-                                log.Info(string.Format("FIFO: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).TrimEnd()));
+                                log.Info(string.Format("FIFO: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).Trim()));
+
+                                //Get a StackTrace object for the exception
+                                StackTrace st = new StackTrace(ex, true);
+
+
                             }
                         }
                     }

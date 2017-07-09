@@ -243,6 +243,9 @@ namespace PharmaDataMigration
             result = itemMaster.InsertItemMasterData();
 
             SetProcessingText(grdDataMigration, "Item Master", rowIndex, "Completed", result, false);
+
+
+
             result = 0;
             rowIndex += 1;
             SetProcessingText(grdDataMigration, "Supplier Ledger", rowIndex, "Processing", result, true);
@@ -259,20 +262,20 @@ namespace PharmaDataMigration
             SetProcessingText(grdDataMigration, "Customer Ledger", rowIndex, "Completed", result, false);
 
 
-            //result = 0;
-            //rowIndex += 1;
-            //SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Processing", result, true);
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Processing", result, true);
 
-            //result = customerLedgerMaster.InsertCustomerCompanyReferenceData();
+            result = customerLedgerMaster.InsertCustomerCompanyReferenceData();
 
-            //SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Completed", result, false);
-            //result = 0;
-            //rowIndex += 1;
-            //SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Processing", result, true);
+            SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Completed", result, false);
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Processing", result, true);
 
-            //result = supplierLedgerMaster.InsertSupplierCompanyReferenceData();
+            result = supplierLedgerMaster.InsertSupplierCompanyReferenceData();
 
-            //SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Completed", result, false);
+            SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Completed", result, false);
 
             /*------------------------------------------------------------*/
 
@@ -333,29 +336,7 @@ namespace PharmaDataMigration
                     grdDataMigration.Rows[rowIndex].Cells[2].Value = result;
                 }
             }
-        }
-
-        //private void SetProcessingText(string tablname,int rowIndex,string message,int result,bool addRow)
-        //{
-        //    if (grdDataMigration.InvokeRequired)
-        //    {
-        //        grdDataMigration.Invoke(new MethodInvoker(() => { SetProcessingText(tablname, rowIndex, message, result, addRow); }));
-        //    }
-        //    else
-        //    {
-        //        if (addRow)
-        //        {
-        //            grdDataMigration.Rows.Add(tablname, message, result);
-        //        }
-        //        else
-        //        {
-        //            grdDataMigration.Rows[rowIndex].Cells[1].Value = message;
-        //            grdDataMigration.Rows[rowIndex].Cells[2].Value = result;
-        //        }
-        //    }
-
-
-        //}
+        }       
 
     }
 }
