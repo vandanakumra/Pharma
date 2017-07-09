@@ -21,59 +21,46 @@ namespace PharmaDataMigration.Transaction
             dbConnection = new DBFConnectionManager(Common.DataDirectory);
         }
 
-        public int InsertPurchaseSaleBookHeaderData()
+
+        private int InsertData(DataTable dtSalePur)
         {
-            try
+            int result = 0;
+
+            List<PharmaDAL.Entity.PurchaseSaleBookHeader> listPurchaseSaleBookHeader = new List<PharmaDAL.Entity.PurchaseSaleBookHeader>();
+
+            using (PharmaDBEntities context = new PharmaDBEntities())
             {
-                int result = 0;
-                string query = "select * from SalePur1";
-                DataTable dtSalePur = dbConnection.GetData(query);
-
-                List<PharmaDAL.Entity.PurchaseSaleBookHeader> listPurchaseSaleBookHeader = new List<PharmaDAL.Entity.PurchaseSaleBookHeader>();
-                
-                using (PharmaDBEntities context = new PharmaDBEntities())
+                if (dtSalePur != null && dtSalePur.Rows.Count > 0)
                 {
-                    if (dtSalePur != null && dtSalePur.Rows.Count > 0)
+                    var personRouteList = context.PersonRouteMaster.Select(r => r).ToList();
+                    var areaList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.AREA).Select(r => r).ToList();
+                    var salesmanList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.SALESMAN).Select(r => r).ToList();
+                    var routeList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ROUTE).Select(r => r).ToList();
+                    var asmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ASM).Select(r => r).ToList();
+                    var rsmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.RSM).Select(r => r).ToList();
+                    var zsmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ZSM).Select(r => r).ToList();
+
+                    var customerTypeList = context.CustomerType.Select(p => p);
+
+                    foreach (DataRow dr in dtSalePur.Rows)
                     {
-                        var personRouteList = context.PersonRouteMaster.Select(r => r).ToList();
-                        var areaList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.AREA).Select(r => r).ToList();
-                        var salesmanList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.SALESMAN).Select(r => r).ToList();
-                        var routeList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ROUTE).Select(r => r).ToList();
-                        var asmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ASM).Select(r => r).ToList();
-                        var rsmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.RSM).Select(r => r).ToList();
-                        var zsmList = personRouteList.Where(q => q.RecordType.SystemName == PharmaBusinessObjects.Common.Constants.RecordType.ZSM).Select(r => r).ToList();
-
-                        var customerTypeList = context.CustomerType.Select(p => p);
-
-
-                        foreach (var item in Common.voucherTypeMap)
+                        try
                         {
-                            log.Info(string.Format("Voucher Type Map {0} --> {1}",item.OriginalVoucherType,item.MappedVoucherType));
-                        }
+                            PharmaDAL.Entity.PurchaseSaleBookHeader newPurchaseSaleBookHeader = new PharmaDAL.Entity.PurchaseSaleBookHeader();
 
-                        foreach (DataRow dr in dtSalePur.Rows)
-                        {
-                            try
-                            {                                
-                                PharmaDAL.Entity.PurchaseSaleBookHeader newPurchaseSaleBookHeader = new PharmaDAL.Entity.PurchaseSaleBookHeader();
+                            string oldVNo = Convert.ToString(dr["vno"]).TrimEnd();
+                            string newVNo = (Convert.ToString(dr["vno"]).TrimEnd()).PadLeft(8, '0');
 
-                                string oldVNo = Convert.ToString(dr["vno"]).TrimEnd();
-                                string newVNo = (Convert.ToString(dr["vno"]).TrimEnd()).PadLeft(8, '0');
+                            Common.voucherNumberMap.Add(new VoucherNumberMap() { OriginalVoucherNumber = oldVNo, MappedVoucherNumber = newVNo });
 
-                                Common.voucherNumberMap.Add(new VoucherNumberMap() {OriginalVoucherNumber = oldVNo , MappedVoucherNumber = newVNo });
+                            string ledgerType = string.Empty;
+                            string ledgerTypeCode = string.Empty;
 
-                                
+                            string originalVoucherTypeCode = Convert.ToString(dr["vtyp"]).TrimEnd();
+                            string mappedVoucherTypeCode = Common.voucherTypeMap.Where(x => x.OriginalVoucherType == originalVoucherTypeCode).Select(x => x.MappedVoucherType).FirstOrDefault();
 
-                                string ledgerType = string.Empty;
-                                string ledgerTypeCode = string.Empty;
-
-                               
-
-                                string originalVoucherTypeCode = Convert.ToString(dr["vtyp"]).TrimEnd();
-                                string mappedVoucherTypeCode = Common.voucherTypeMap.Where(x => x.OriginalVoucherType == originalVoucherTypeCode).Select(x => x.MappedVoucherType).FirstOrDefault();
-
-                                log.Info(string.Format("Under loop orginal Voucher Type Code is {0} --> {1} ",originalVoucherTypeCode,mappedVoucherTypeCode));
-
+                            if (!string.IsNullOrEmpty(mappedVoucherTypeCode))
+                            {
 
                                 if (Convert.ToString(dr["slcd"]).TrimEnd() == "SL")
                                 {
@@ -228,33 +215,52 @@ namespace PharmaDataMigration.Transaction
                                 newPurchaseSaleBookHeader.LastBalance = dr["LBAL"] == null ? default(decimal) : Convert.ToDecimal(dr["LBAL"]);
 
                                 //newPurchaseSaleBookHeader.PurchaseSaleEntryFormID = (Convert.ToString(dr["vno"]).TrimEnd()).PadLeft(8, '0');
-                              
+
                                 newPurchaseSaleBookHeader.CreatedBy = "admin";
                                 newPurchaseSaleBookHeader.CreatedOn = DateTime.Now;
-                               
+
 
 
                                 listPurchaseSaleBookHeader.Add(newPurchaseSaleBookHeader);
                             }
-                            catch (Exception ex)
+                            else
                             {
-                                log.Info(string.Format("PurchaseSaleBookHeader: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).TrimEnd()));
+                                log.Info(string.Format("PurchaseSaleBookHeader: Error in Voucher Type {0} for VNo {1}}", Convert.ToString(dr["vtyp"]).TrimEnd(), Convert.ToString(dr["vno"]).TrimEnd()));
                             }
                         }
+                        catch (Exception ex)
+                        {
+                            log.Info(string.Format("PurchaseSaleBookHeader: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).TrimEnd()));
+                        }
                     }
-
-                    context.PurchaseSaleBookHeader.AddRange(listPurchaseSaleBookHeader);
-                    result = context.SaveChanges();
-
-                    
                 }
 
-                if(result > 0)
-                {
-                    FillVoucherNumberMapping();
-                }
+                context.PurchaseSaleBookHeader.AddRange(listPurchaseSaleBookHeader);
+                result = context.SaveChanges();
+
 
                 return result;
+               
+            }
+
+        }
+
+        public int InsertPurchaseSaleBookHeaderData()
+        {
+            try
+            {
+                int _result = 0;
+
+                foreach (var item in Common.voucherTypeMap)
+                {
+                    string query = string.Format("select * from SalePur1 WHERE VTYP = '{0}'", item.OriginalVoucherType);
+                    DataTable dtSalePur = dbConnection.GetData(query);
+                    _result += InsertData(dtSalePur);
+                }
+               
+                FillVoucherNumberMapping();
+
+                return _result;
             }
             catch (DbEntityValidationException ex)
             {
@@ -288,18 +294,27 @@ namespace PharmaDataMigration.Transaction
             {
                 using (PharmaDBEntities context = new PharmaDBEntities())
                 {
-                    var list = context.PurchaseSaleBookHeader.Select(p => new PurchaseSaleBookHeader()
+                    var list = context.PurchaseSaleBookHeader.Select(p => new 
                     {
                         PurchaseSaleBookHeaderID = p.PurchaseSaleBookHeaderID,
-                        VoucherNumber = p.VoucherNumber
+                        VoucherNumber = p.VoucherNumber,
+                        LocalCentral = p.LocalCentral
                     }).ToList();
 
-                    Common.voucherNumberMap.ForEach(p => p.MappedPurchaseHeaderID = list.Where(q => q.VoucherNumber == p.MappedVoucherNumber).FirstOrDefault().PurchaseSaleBookHeaderID);
-
-
+                    if (list != null && list.Count > 0)
+                    {
+                        foreach (var item in Common.voucherNumberMap)
+                        {
+                            var dd = list.Where(p => p.VoucherNumber == item.MappedVoucherNumber).FirstOrDefault();
+                            item.MappedPurchaseHeaderID = dd.PurchaseSaleBookHeaderID;
+                            item.LocalCentral = dd.LocalCentral;
+                        }
+                    }
                 }
             }
-            catch {}
+            catch(Exception ex) {
+                log.Info("PurchaseSaleBookHeader FillVoucherNumberMapping -->  " + ex.Message);
+            }
         }
     }
 }

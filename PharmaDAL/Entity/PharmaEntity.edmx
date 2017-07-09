@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PharmaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountLedgerMaster">
           <Key>
             <PropertyRef Name="AccountLedgerID" />
@@ -192,6 +192,18 @@
           <Property Name="CustomerTypeShortName" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ExternalItemNameMapping">
+          <Key>
+            <PropertyRef Name="ExternalItemMapID" />
+            <PropertyRef Name="SoftwareName" />
+            <PropertyRef Name="ItemNameColumn" />
+          </Key>
+          <Property Name="ExternalItemMapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SoftwareName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemNameColumn" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="FIFO">
           <Key>
             <PropertyRef Name="FifoID" />
@@ -293,6 +305,16 @@
           <Property Name="SaltCode" Type="nvarchar" MaxLength="50" />
           <Property Name="SaltName" Type="nvarchar" MaxLength="100" />
           <Property Name="HSNCode" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="ItemExt1" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt2" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt3" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt4" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt5" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt6" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt7" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt8" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt9" Type="nvarchar" MaxLength="30" />
+          <Property Name="ItemExt10" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -463,7 +485,7 @@
           <Property Name="FreeQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PurchaseSaleRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="EffecivePurchaseSaleRate" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="PurchaseSaleTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PurchaseSaleTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="SurCharge" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SalePurchaseTax" Type="decimal" Precision="18" Scale="2" />
           <Property Name="LocalCentral" Type="nvarchar" MaxLength="1" Nullable="false" />
@@ -736,7 +758,7 @@
           <Property Name="FreeQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PurchaseSaleRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="EffecivePurchaseSaleRate" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="PurchaseSaleTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PurchaseSaleTypeCode" Type="nvarchar" MaxLength="10" />
           <Property Name="SurCharge" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PurchaseSaleTax" Type="decimal" Precision="18" Scale="2" />
           <Property Name="LocalCentral" Type="nvarchar" MaxLength="1" Nullable="false" />
@@ -1443,6 +1465,13 @@
           <EntitySet Name="TRN" EntityType="Self.TRN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VoucherType" EntityType="Self.VoucherType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExternalItemNameMapping" EntityType="Self.ExternalItemNameMapping" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ExternalItemNameMapping].[ExternalItemMapID] AS [ExternalItemMapID], 
+    [ExternalItemNameMapping].[SoftwareName] AS [SoftwareName], 
+    [ExternalItemNameMapping].[ItemNameColumn] AS [ItemNameColumn]
+    FROM [dbo].[ExternalItemNameMapping] AS [ExternalItemNameMapping]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Users__RoleID__5C37ACAD" Association="Self.FK__Users__RoleID__5C37ACAD">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
@@ -1628,7 +1657,8 @@
             <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PharmaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1961,6 +1991,16 @@
           <Property Name="SaltCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SaltName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HSNCode" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemExt1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt4" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt5" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt6" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt7" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt8" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt9" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ItemExt10" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AccountLedgerMaster" Relationship="Self.FK_ItemMaster_AccountLedgerMaster" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="AccountLedgerMaster1" Relationship="Self.FK_ItemMaster_AccountLedgerMasterPurchase" FromRole="ItemMaster" ToRole="AccountLedgerMaster" />
           <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_ItemMaster_CompanyMaster" FromRole="ItemMaster" ToRole="CompanyMaster" />
@@ -2129,6 +2169,7 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="SaleChallanHeaderID" Type="Int64" />
           <NavigationProperty Name="BillOutStandings" Relationship="Self.FK_BillOutStandings_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="BillOutStandings" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="BillOutStandingsAudjustment" />
           <NavigationProperty Name="BillOutStandingsAudjustment1" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="BillOutStandingsAudjustment" />
@@ -2136,7 +2177,6 @@
           <NavigationProperty Name="PurchaseSaleBookLineItem" Relationship="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="PurchaseSaleBookLineItem" />
           <NavigationProperty Name="TempBillOutStandingsAudjustment" Relationship="Self.FK_TempBillOutStandingsAudjustment_PurchaseSaleBookHeader1" FromRole="PurchaseSaleBookHeader" ToRole="TempBillOutStandingsAudjustment" />
           <NavigationProperty Name="TRN" Relationship="Self.FK_TRN_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookHeader" ToRole="TRN" />
-          <Property Name="SaleChallanHeaderID" Type="Int64" />
         </EntityType>
         <EntityType Name="PurchaseSaleBookLineItem">
           <Key>
@@ -2155,7 +2195,7 @@
           <Property Name="FreeQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PurchaseSaleRate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="EffecivePurchaseSaleRate" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PurchaseSaleTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PurchaseSaleTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SurCharge" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="SalePurchaseTax" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="LocalCentral" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
@@ -2430,8 +2470,8 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="OldPurchaseSaleBookHeaderID" Type="Int64" />
-          <NavigationProperty Name="TempPurchaseSaleBookLineItem" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookHeader" ToRole="TempPurchaseSaleBookLineItem" />
           <Property Name="SaleChallanHeaderID" Type="Int64" />
+          <NavigationProperty Name="TempPurchaseSaleBookLineItem" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookHeader" ToRole="TempPurchaseSaleBookLineItem" />
         </EntityType>
         <EntityType Name="TempPurchaseSaleBookLineItem">
           <Key>
@@ -2450,7 +2490,7 @@
           <Property Name="FreeQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PurchaseSaleRate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="EffecivePurchaseSaleRate" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PurchaseSaleTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PurchaseSaleTypeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="SurCharge" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PurchaseSaleTax" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="LocalCentral" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
@@ -2565,6 +2605,16 @@
           <Property Name="VoucherTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VoucherTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExternalItemNameMapping">
+          <Key>
+            <PropertyRef Name="ExternalItemMapID" />
+            <PropertyRef Name="SoftwareName" />
+            <PropertyRef Name="ItemNameColumn" />
+          </Key>
+          <Property Name="ExternalItemMapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoftwareName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemNameColumn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_AccountLedgerMaster_AccountLedgerType">
           <End Role="AccountLedgerType" Type="Self.AccountLedgerType" Multiplicity="1" />
@@ -3162,6 +3212,7 @@
           <EntitySet Name="TRN" EntityType="Self.TRN" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="VoucherType" EntityType="Self.VoucherType" />
+          <EntitySet Name="ExternalItemNameMapping" EntityType="Self.ExternalItemNameMapping" />
           <AssociationSet Name="FK_AccountLedgerMaster_AccountLedgerType" Association="Self.FK_AccountLedgerMaster_AccountLedgerType">
             <End Role="AccountLedgerType" EntitySet="AccountLedgerType" />
             <End Role="AccountLedgerMaster" EntitySet="AccountLedgerMaster" />
@@ -3654,6 +3705,16 @@
                 <ScalarProperty Name="SaltCode" ColumnName="SaltCode" />
                 <ScalarProperty Name="SaltName" ColumnName="SaltName" />
                 <ScalarProperty Name="HSNCode" ColumnName="HSNCode" />
+                <ScalarProperty Name="ItemExt1" ColumnName="ItemExt1" />
+                <ScalarProperty Name="ItemExt2" ColumnName="ItemExt2" />
+                <ScalarProperty Name="ItemExt3" ColumnName="ItemExt3" />
+                <ScalarProperty Name="ItemExt4" ColumnName="ItemExt4" />
+                <ScalarProperty Name="ItemExt5" ColumnName="ItemExt5" />
+                <ScalarProperty Name="ItemExt6" ColumnName="ItemExt6" />
+                <ScalarProperty Name="ItemExt7" ColumnName="ItemExt7" />
+                <ScalarProperty Name="ItemExt8" ColumnName="ItemExt8" />
+                <ScalarProperty Name="ItemExt9" ColumnName="ItemExt9" />
+                <ScalarProperty Name="ItemExt10" ColumnName="ItemExt10" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3742,7 +3803,6 @@
           <EntitySetMapping Name="PurchaseSaleBookHeader">
             <EntityTypeMapping TypeName="PharmaDBModel.PurchaseSaleBookHeader">
               <MappingFragment StoreEntitySet="PurchaseSaleBookHeader">
-                <ScalarProperty Name="SaleChallanHeaderID" ColumnName="SaleChallanHeaderID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
@@ -3813,6 +3873,7 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="SaleChallanHeaderID" ColumnName="SaleChallanHeaderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4035,7 +4096,6 @@
           <EntitySetMapping Name="TempPurchaseSaleBookHeader">
             <EntityTypeMapping TypeName="PharmaDBModel.TempPurchaseSaleBookHeader">
               <MappingFragment StoreEntitySet="TempPurchaseSaleBookHeader">
-                <ScalarProperty Name="SaleChallanHeaderID" ColumnName="SaleChallanHeaderID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
                 <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />
@@ -4098,6 +4158,7 @@
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="OldPurchaseSaleBookHeaderID" ColumnName="OldPurchaseSaleBookHeaderID" />
+                <ScalarProperty Name="SaleChallanHeaderID" ColumnName="SaleChallanHeaderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4231,6 +4292,15 @@
                 <ScalarProperty Name="VoucherTypeID" ColumnName="VoucherTypeID" />
                 <ScalarProperty Name="VoucherTypeName" ColumnName="VoucherTypeName" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExternalItemNameMapping">
+            <EntityTypeMapping TypeName="PharmaDBModel.ExternalItemNameMapping">
+              <MappingFragment StoreEntitySet="ExternalItemNameMapping">
+                <ScalarProperty Name="ExternalItemMapID" ColumnName="ExternalItemMapID" />
+                <ScalarProperty Name="SoftwareName" ColumnName="SoftwareName" />
+                <ScalarProperty Name="ItemNameColumn" ColumnName="ItemNameColumn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -43,9 +43,9 @@ namespace PharmaDataMigration.Master
                                 string originalItemCode = Convert.ToString(dr["itemc"]).TrimEnd();
                                 string mappedItemCode = Common.itemCodeMap.Where(x => x.OriginalItemCode == originalItemCode).Select(x => x.MappedItemCode).FirstOrDefault();
 
-                                if(mappedItemCode == null)
+                                if (string.IsNullOrEmpty(mappedItemCode))
                                 {
-                                    log.Error(string.Format("FIFO: Item Code Not found in Item Master {0}", originalItemCode));
+                                    log.Info(string.Format("FIFO: Item Code Not found in Item Master {0}", originalItemCode));
                                     throw new Exception();
                                 }
 
@@ -81,7 +81,7 @@ namespace PharmaDataMigration.Master
 
                                 listFIFO.Add(newFIFO);
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
                                 log.Info(string.Format("FIFO: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).TrimEnd()));
                             }

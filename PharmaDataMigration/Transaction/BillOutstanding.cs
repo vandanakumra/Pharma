@@ -68,12 +68,12 @@ namespace PharmaDataMigration.Master
                                 }
 
                                 string oldVNo = Convert.ToString(dr["vno"]).TrimEnd();
-                                var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
+                                //var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
 
                                 PharmaDAL.Entity.BillOutStandings newBillOS = new PharmaDAL.Entity.BillOutStandings()
                                 {
-                                    PurchaseSaleBookHeaderID= header.MappedPurchaseHeaderID,
-                                    VoucherNumber = header.MappedVoucherNumber,
+                                    //PurchaseSaleBookHeaderID= header.MappedPurchaseHeaderID,
+                                    VoucherNumber = (Convert.ToString(dr["vno"]).TrimEnd()).PadLeft(8, '0'),// header.MappedVoucherNumber,
                                     VoucherTypeCode= mappedVoucherTypeCode,
                                     VoucherDate= Convert.ToDateTime(dr["vdt"]),
                                     DueDate= Convert.ToDateTime(dr["duedt"]),

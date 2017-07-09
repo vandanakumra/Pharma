@@ -452,12 +452,22 @@ namespace PharmaDataMigration.Master
 
                                 if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 5%") == 0)
                                 {
-                                    salePurchaseTaxType = 5;
+                                    salePurchaseTaxType = Convert.ToDecimal(5);
                                     bcontinue = true;
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 12.5%") == 0)
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 12.5%") == 0 || (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 12%") == 0))
                                 {
                                     salePurchaseTaxType = Convert.ToDecimal(12);
+                                    bcontinue = true;
+                                }
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 18%") == 0)
+                                {
+                                    salePurchaseTaxType = Convert.ToDecimal(18);
+                                    bcontinue = true;
+                                }
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAXABLE 28%") == 0)
+                                {
+                                    salePurchaseTaxType = Convert.ToDecimal(28);
                                     bcontinue = true;
                                 }
                                 else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "PURCHASE - TAX EXEMPTED") == 0)
@@ -548,11 +558,19 @@ namespace PharmaDataMigration.Master
 
                                 if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 5%") == 0)
                                 {
-                                    salePurchaseTaxType = 5;
+                                    salePurchaseTaxType = Convert.ToDecimal(5);
                                 }
-                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 12.5%") == 0)
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 12.5%") == 0 || (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 12%") == 0))
                                 {
-                                    salePurchaseTaxType = Convert.ToDecimal(12);
+                                    salePurchaseTaxType = Convert.ToDecimal(12);                                    
+                                }
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 18%") == 0)
+                                {
+                                    salePurchaseTaxType = Convert.ToDecimal(18);
+                                }
+                                else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAXABLE 28%") == 0)
+                                {
+                                    salePurchaseTaxType = Convert.ToDecimal(28);
                                 }
                                 else if (string.Compare(Convert.ToString(dr["ACNAME"]).TrimEnd(), "SALE - TAX EXEMPTED") == 0)
                                 {

@@ -31,16 +31,16 @@ namespace PharmaDataMigration
             Common.voucherTypeMap = new List<VoucherTypeMap>();
             Common.ledgerTypeMap = new List<LedgerTypeMap>();
             Common.voucherNumberMap = new List<VoucherNumberMap>();
-          
+
 
             FillVoucherType();
             FillLedgerType();
         }
-     
+
         private void FillLedgerType()
         {
-            Common.ledgerTypeMap.Add(new LedgerTypeMap() {OriginaLedgerType = "CL" , MappedLedgerType = Constants.LedgerType.CustomerLedger });
-            Common.ledgerTypeMap.Add(new LedgerTypeMap() {OriginaLedgerType = "SL" , MappedLedgerType = Constants.LedgerType.SupplierLedger });
+            Common.ledgerTypeMap.Add(new LedgerTypeMap() { OriginaLedgerType = "CL", MappedLedgerType = Constants.LedgerType.CustomerLedger });
+            Common.ledgerTypeMap.Add(new LedgerTypeMap() { OriginaLedgerType = "SL", MappedLedgerType = Constants.LedgerType.SupplierLedger });
         }
 
         private void FillVoucherType()
@@ -105,12 +105,12 @@ namespace PharmaDataMigration
 
                 MessageBox.Show(ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-           
+
         }
 
         private void StartMigration()
@@ -331,7 +331,7 @@ namespace PharmaDataMigration
                 {
                     grdDataMigration.Rows[rowIndex].Cells[1].Value = message;
                     grdDataMigration.Rows[rowIndex].Cells[2].Value = result;
-                }     
+                }
             }
         }
 
@@ -353,7 +353,7 @@ namespace PharmaDataMigration
         //            grdDataMigration.Rows[rowIndex].Cells[2].Value = result;
         //        }
         //    }
-           
+
 
         //}
 
