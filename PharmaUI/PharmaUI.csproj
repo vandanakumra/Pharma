@@ -380,6 +380,12 @@
     <Compile Include="Reports\frmReportViewer.Designer.cs">
       <DependentUpon>frmReportViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\frmSaleReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\frmSaleReport.Designer.cs">
+      <DependentUpon>frmSaleReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sale Entry\frmAllBillForCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -549,6 +555,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmReportViewer.resx">
       <DependentUpon>frmReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSaleReport.resx">
+      <DependentUpon>frmSaleReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\GSTInvoice.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

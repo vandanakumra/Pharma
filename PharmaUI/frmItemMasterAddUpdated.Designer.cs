@@ -29,6 +29,63 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbxSCOnPurchase = new System.Windows.Forms.TextBox();
+            this.tbxPurchaseRate = new System.Windows.Forms.TextBox();
+            this.lblSCOnPurchase = new System.Windows.Forms.Label();
+            this.lblPurchaseRate = new System.Windows.Forms.Label();
+            this.tbxPurchaseExcise = new System.Windows.Forms.TextBox();
+            this.tbxTaxOnPurchase = new System.Windows.Forms.TextBox();
+            this.lblTaxOnPurchase = new System.Windows.Forms.Label();
+            this.lblPurchaseExcise = new System.Windows.Forms.Label();
+            this.lblDiscountRec = new System.Windows.Forms.Label();
+            this.tbxDiscountRecieved = new System.Windows.Forms.TextBox();
+            this.lblSplDiscRecieved = new System.Windows.Forms.Label();
+            this.tbxSpecialDiscountRecieved = new System.Windows.Forms.TextBox();
+            this.lblPurchaseType = new System.Windows.Forms.Label();
+            this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblWhSaleRate = new System.Windows.Forms.Label();
+            this.lblSpecialRate = new System.Windows.Forms.Label();
+            this.lblSaleRate = new System.Windows.Forms.Label();
+            this.tbxWholeSaleRate = new System.Windows.Forms.TextBox();
+            this.tbxSCOnSale = new System.Windows.Forms.TextBox();
+            this.lblMRP = new System.Windows.Forms.Label();
+            this.cbxSaleType = new System.Windows.Forms.ComboBox();
+            this.lblSaleType = new System.Windows.Forms.Label();
+            this.lblSCSale = new System.Windows.Forms.Label();
+            this.tbxMRP = new System.Windows.Forms.TextBox();
+            this.tbxSpecialRate = new System.Windows.Forms.TextBox();
+            this.tbxSaleRate = new System.Windows.Forms.TextBox();
+            this.tbxSaleExcise = new System.Windows.Forms.TextBox();
+            this.lblSaleExcise = new System.Windows.Forms.Label();
+            this.lblSaleTax = new System.Windows.Forms.Label();
+            this.tbxTaxOnSale = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbxMaxDiscount = new System.Windows.Forms.TextBox();
+            this.lblMaxDisc = new System.Windows.Forms.Label();
+            this.lblMaxQty = new System.Windows.Forms.Label();
+            this.tbxMaxQty = new System.Windows.Forms.TextBox();
+            this.tbxFixedDiscountRate = new System.Windows.Forms.TextBox();
+            this.lblFixedDiscount = new System.Windows.Forms.Label();
+            this.cbxFixedDiscount = new System.Windows.Forms.ComboBox();
+            this.lblSpclDiscount = new System.Windows.Forms.Label();
+            this.tbxSpecialDiscount = new System.Windows.Forms.TextBox();
+            this.cbxQtrScheme = new System.Windows.Forms.ComboBox();
+            this.lblQtrScheme = new System.Windows.Forms.Label();
+            this.lblHalfScheme = new System.Windows.Forms.Label();
+            this.tbxScheme2 = new System.Windows.Forms.TextBox();
+            this.lblScheme1 = new System.Windows.Forms.Label();
+            this.tbxScheme1 = new System.Windows.Forms.TextBox();
+            this.tbxSpecialDiscountOnQty = new System.Windows.Forms.TextBox();
+            this.cbxHalfScheme = new System.Windows.Forms.ComboBox();
+            this.errorProviderItem = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbxCompany = new System.Windows.Forms.TextBox();
@@ -56,65 +113,7 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.cbxStatus = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbxPurchaseType = new System.Windows.Forms.ComboBox();
-            this.lblPurchaseType = new System.Windows.Forms.Label();
-            this.tbxSpecialDiscountRecieved = new System.Windows.Forms.TextBox();
-            this.lblSplDiscRecieved = new System.Windows.Forms.Label();
-            this.lblTaxOnPurchase = new System.Windows.Forms.Label();
-            this.tbxDiscountRecieved = new System.Windows.Forms.TextBox();
-            this.lblSCOnPurchase = new System.Windows.Forms.Label();
-            this.tbxTaxOnPurchase = new System.Windows.Forms.TextBox();
-            this.lblPurchaseExcise = new System.Windows.Forms.Label();
-            this.tbxPurchaseExcise = new System.Windows.Forms.TextBox();
-            this.tbxSCOnPurchase = new System.Windows.Forms.TextBox();
-            this.tbxPurchaseRate = new System.Windows.Forms.TextBox();
-            this.lblPurchaseRate = new System.Windows.Forms.Label();
-            this.lblDiscountRec = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbxSaleType = new System.Windows.Forms.ComboBox();
-            this.lblSaleType = new System.Windows.Forms.Label();
-            this.tbxTaxOnSale = new System.Windows.Forms.TextBox();
-            this.lblSaleTax = new System.Windows.Forms.Label();
-            this.lblSCSale = new System.Windows.Forms.Label();
-            this.tbxSCOnSale = new System.Windows.Forms.TextBox();
-            this.lblSaleExcise = new System.Windows.Forms.Label();
-            this.lblWhSaleRate = new System.Windows.Forms.Label();
-            this.tbxSaleExcise = new System.Windows.Forms.TextBox();
-            this.lblSpecialRate = new System.Windows.Forms.Label();
-            this.lblSaleRate = new System.Windows.Forms.Label();
-            this.tbxWholeSaleRate = new System.Windows.Forms.TextBox();
-            this.lblMRP = new System.Windows.Forms.Label();
-            this.tbxMRP = new System.Windows.Forms.TextBox();
-            this.tbxSpecialRate = new System.Windows.Forms.TextBox();
-            this.tbxSaleRate = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tbxMaxDiscount = new System.Windows.Forms.TextBox();
-            this.lblMaxDisc = new System.Windows.Forms.Label();
-            this.lblMaxQty = new System.Windows.Forms.Label();
-            this.tbxMaxQty = new System.Windows.Forms.TextBox();
-            this.tbxFixedDiscountRate = new System.Windows.Forms.TextBox();
-            this.lblFixedDiscount = new System.Windows.Forms.Label();
-            this.cbxFixedDiscount = new System.Windows.Forms.ComboBox();
-            this.lblSpclDiscount = new System.Windows.Forms.Label();
-            this.tbxSpecialDiscount = new System.Windows.Forms.TextBox();
-            this.cbxQtrScheme = new System.Windows.Forms.ComboBox();
-            this.lblQtrScheme = new System.Windows.Forms.Label();
-            this.lblHalfScheme = new System.Windows.Forms.Label();
-            this.tbxScheme2 = new System.Windows.Forms.TextBox();
-            this.lblScheme1 = new System.Windows.Forms.Label();
-            this.tbxScheme1 = new System.Windows.Forms.TextBox();
-            this.tbxSpecialDiscountOnQty = new System.Windows.Forms.TextBox();
-            this.cbxHalfScheme = new System.Windows.Forms.ComboBox();
-            this.errorProviderItem = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.tbxHSNCode = new System.Windows.Forms.TextBox();
-            this.panel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -122,294 +121,16 @@
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderItem)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Location = new System.Drawing.Point(12, 56);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1042, 119);
-            this.panel1.TabIndex = 0;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Controls.Add(this.tbxCompany, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblMaxStock, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tbxMaximumStock, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblMinStock, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tbxLocation, 5, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblLocation, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tbxMinimumStock, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblShortName, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbxItemName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblCompanyCode, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblItemCode, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbxItemCode, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbxShortName, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblPacking, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbxPacking, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblConvRate, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbxConvRate, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblItemName, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblUPC, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tbxUPC, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblQtyPerCase, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tbxQtyPerCase, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tbxHSNCode, 5, 3);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1040, 117);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // tbxCompany
-            // 
-            this.tbxCompany.Location = new System.Drawing.Point(522, 3);
-            this.tbxCompany.Name = "tbxCompany";
-            this.tbxCompany.Size = new System.Drawing.Size(142, 20);
-            this.tbxCompany.TabIndex = 102;
-            // 
-            // lblMaxStock
-            // 
-            this.lblMaxStock.AutoSize = true;
-            this.lblMaxStock.Location = new System.Drawing.Point(349, 72);
-            this.lblMaxStock.Margin = new System.Windows.Forms.Padding(3);
-            this.lblMaxStock.Name = "lblMaxStock";
-            this.lblMaxStock.Size = new System.Drawing.Size(82, 13);
-            this.lblMaxStock.TabIndex = 76;
-            this.lblMaxStock.Text = "Maximum Stock";
-            // 
-            // tbxMaximumStock
-            // 
-            this.tbxMaximumStock.Location = new System.Drawing.Point(522, 72);
-            this.tbxMaximumStock.Name = "tbxMaximumStock";
-            this.tbxMaximumStock.Size = new System.Drawing.Size(142, 20);
-            this.tbxMaximumStock.TabIndex = 111;
-            this.tbxMaximumStock.Text = "0";
-            // 
-            // lblMinStock
-            // 
-            this.lblMinStock.AutoSize = true;
-            this.lblMinStock.Location = new System.Drawing.Point(3, 72);
-            this.lblMinStock.Margin = new System.Windows.Forms.Padding(3);
-            this.lblMinStock.Name = "lblMinStock";
-            this.lblMinStock.Size = new System.Drawing.Size(79, 13);
-            this.lblMinStock.TabIndex = 75;
-            this.lblMinStock.Text = "Minimum Stock";
-            // 
-            // tbxLocation
-            // 
-            this.tbxLocation.Location = new System.Drawing.Point(868, 49);
-            this.tbxLocation.Name = "tbxLocation";
-            this.tbxLocation.Size = new System.Drawing.Size(142, 20);
-            this.tbxLocation.TabIndex = 109;
-            // 
-            // lblLocation
-            // 
-            this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(695, 49);
-            this.lblLocation.Margin = new System.Windows.Forms.Padding(3);
-            this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(48, 13);
-            this.lblLocation.TabIndex = 32;
-            this.lblLocation.Text = "Location";
-            // 
-            // tbxMinimumStock
-            // 
-            this.tbxMinimumStock.Location = new System.Drawing.Point(176, 72);
-            this.tbxMinimumStock.Name = "tbxMinimumStock";
-            this.tbxMinimumStock.Size = new System.Drawing.Size(142, 20);
-            this.tbxMinimumStock.TabIndex = 110;
-            this.tbxMinimumStock.Text = "0";
-            // 
-            // lblShortName
-            // 
-            this.lblShortName.AutoSize = true;
-            this.lblShortName.Location = new System.Drawing.Point(3, 26);
-            this.lblShortName.Margin = new System.Windows.Forms.Padding(3);
-            this.lblShortName.Name = "lblShortName";
-            this.lblShortName.Size = new System.Drawing.Size(63, 13);
-            this.lblShortName.TabIndex = 102;
-            this.lblShortName.Text = "Short Name";
-            // 
-            // tbxItemName
-            // 
-            this.tbxItemName.Location = new System.Drawing.Point(176, 3);
-            this.tbxItemName.Name = "tbxItemName";
-            this.tbxItemName.Size = new System.Drawing.Size(142, 20);
-            this.tbxItemName.TabIndex = 101;
-            // 
-            // lblCompanyCode
-            // 
-            this.lblCompanyCode.AutoSize = true;
-            this.lblCompanyCode.Location = new System.Drawing.Point(349, 3);
-            this.lblCompanyCode.Margin = new System.Windows.Forms.Padding(3);
-            this.lblCompanyCode.Name = "lblCompanyCode";
-            this.lblCompanyCode.Size = new System.Drawing.Size(82, 13);
-            this.lblCompanyCode.TabIndex = 43;
-            this.lblCompanyCode.Text = "Company Name";
-            // 
-            // lblItemCode
-            // 
-            this.lblItemCode.AutoSize = true;
-            this.lblItemCode.Location = new System.Drawing.Point(695, 3);
-            this.lblItemCode.Margin = new System.Windows.Forms.Padding(3);
-            this.lblItemCode.Name = "lblItemCode";
-            this.lblItemCode.Size = new System.Drawing.Size(55, 13);
-            this.lblItemCode.TabIndex = 45;
-            this.lblItemCode.Text = "Item Code";
-            // 
-            // tbxItemCode
-            // 
-            this.tbxItemCode.Enabled = false;
-            this.tbxItemCode.Location = new System.Drawing.Point(868, 3);
-            this.tbxItemCode.Name = "tbxItemCode";
-            this.tbxItemCode.ReadOnly = true;
-            this.tbxItemCode.Size = new System.Drawing.Size(142, 20);
-            this.tbxItemCode.TabIndex = 103;
-            // 
-            // tbxShortName
-            // 
-            this.tbxShortName.Location = new System.Drawing.Point(176, 26);
-            this.tbxShortName.Name = "tbxShortName";
-            this.tbxShortName.Size = new System.Drawing.Size(142, 20);
-            this.tbxShortName.TabIndex = 104;
-            // 
-            // lblPacking
-            // 
-            this.lblPacking.AutoSize = true;
-            this.lblPacking.Location = new System.Drawing.Point(349, 26);
-            this.lblPacking.Margin = new System.Windows.Forms.Padding(3);
-            this.lblPacking.Name = "lblPacking";
-            this.lblPacking.Size = new System.Drawing.Size(46, 13);
-            this.lblPacking.TabIndex = 104;
-            this.lblPacking.Text = "Packing";
-            // 
-            // tbxPacking
-            // 
-            this.tbxPacking.Location = new System.Drawing.Point(522, 26);
-            this.tbxPacking.Name = "tbxPacking";
-            this.tbxPacking.Size = new System.Drawing.Size(142, 20);
-            this.tbxPacking.TabIndex = 105;
-            this.tbxPacking.Text = "0";
-            // 
-            // lblConvRate
-            // 
-            this.lblConvRate.AutoSize = true;
-            this.lblConvRate.Location = new System.Drawing.Point(695, 26);
-            this.lblConvRate.Margin = new System.Windows.Forms.Padding(3);
-            this.lblConvRate.Name = "lblConvRate";
-            this.lblConvRate.Size = new System.Drawing.Size(86, 13);
-            this.lblConvRate.TabIndex = 106;
-            this.lblConvRate.Text = "Conversion Rate";
-            // 
-            // tbxConvRate
-            // 
-            this.tbxConvRate.Location = new System.Drawing.Point(868, 26);
-            this.tbxConvRate.Name = "tbxConvRate";
-            this.tbxConvRate.Size = new System.Drawing.Size(142, 20);
-            this.tbxConvRate.TabIndex = 106;
-            this.tbxConvRate.Text = "0";
-            // 
-            // lblItemName
-            // 
-            this.lblItemName.AutoSize = true;
-            this.lblItemName.Location = new System.Drawing.Point(3, 3);
-            this.lblItemName.Margin = new System.Windows.Forms.Padding(3);
-            this.lblItemName.Name = "lblItemName";
-            this.lblItemName.Size = new System.Drawing.Size(58, 13);
-            this.lblItemName.TabIndex = 3;
-            this.lblItemName.Text = "Item Name";
-            // 
-            // lblUPC
-            // 
-            this.lblUPC.AutoSize = true;
-            this.lblUPC.Location = new System.Drawing.Point(3, 49);
-            this.lblUPC.Margin = new System.Windows.Forms.Padding(3);
-            this.lblUPC.Name = "lblUPC";
-            this.lblUPC.Size = new System.Drawing.Size(29, 13);
-            this.lblUPC.TabIndex = 108;
-            this.lblUPC.Text = "UPC";
-            // 
-            // tbxUPC
-            // 
-            this.tbxUPC.Location = new System.Drawing.Point(176, 49);
-            this.tbxUPC.Name = "tbxUPC";
-            this.tbxUPC.Size = new System.Drawing.Size(142, 20);
-            this.tbxUPC.TabIndex = 107;
-            // 
-            // lblQtyPerCase
-            // 
-            this.lblQtyPerCase.AutoSize = true;
-            this.lblQtyPerCase.Location = new System.Drawing.Point(349, 49);
-            this.lblQtyPerCase.Margin = new System.Windows.Forms.Padding(3);
-            this.lblQtyPerCase.Name = "lblQtyPerCase";
-            this.lblQtyPerCase.Size = new System.Drawing.Size(92, 13);
-            this.lblQtyPerCase.TabIndex = 110;
-            this.lblQtyPerCase.Text = "Quantity Per Case";
-            // 
-            // tbxQtyPerCase
-            // 
-            this.tbxQtyPerCase.Location = new System.Drawing.Point(522, 49);
-            this.tbxQtyPerCase.Name = "tbxQtyPerCase";
-            this.tbxQtyPerCase.Size = new System.Drawing.Size(142, 20);
-            this.tbxQtyPerCase.TabIndex = 108;
-            this.tbxQtyPerCase.Text = "0";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(3, 95);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(3);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(37, 13);
-            this.lblStatus.TabIndex = 77;
-            this.lblStatus.Text = "Status";
-            // 
-            // cbxStatus
-            // 
-            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxStatus.FormattingEnabled = true;
-            this.cbxStatus.Location = new System.Drawing.Point(176, 95);
-            this.cbxStatus.Name = "cbxStatus";
-            this.cbxStatus.Size = new System.Drawing.Size(142, 21);
-            this.cbxStatus.TabIndex = 113;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(695, 72);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 113;
-            this.label1.Text = "HSN Code";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel2);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 190);
+            this.groupBox1.Location = new System.Drawing.Point(8, 227);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox1.Size = new System.Drawing.Size(345, 220);
@@ -422,20 +143,20 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.cbxPurchaseType, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.lblPurchaseType, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.tbxSpecialDiscountRecieved, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.lblSplDiscRecieved, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.lblTaxOnPurchase, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.tbxDiscountRecieved, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lblSCOnPurchase, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tbxTaxOnPurchase, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblPurchaseExcise, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.tbxPurchaseExcise, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.tbxSCOnPurchase, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tbxSCOnPurchase, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.tbxPurchaseRate, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblSCOnPurchase, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.lblPurchaseRate, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblDiscountRec, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.tbxPurchaseExcise, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.tbxTaxOnPurchase, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblTaxOnPurchase, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.lblPurchaseExcise, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.lblDiscountRec, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tbxDiscountRecieved, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblSplDiscRecieved, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tbxSpecialDiscountRecieved, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblPurchaseType, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.cbxPurchaseType, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 23);
@@ -452,104 +173,14 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(325, 187);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // cbxPurchaseType
-            // 
-            this.cbxPurchaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPurchaseType.FormattingEnabled = true;
-            this.cbxPurchaseType.Location = new System.Drawing.Point(165, 165);
-            this.cbxPurchaseType.Name = "cbxPurchaseType";
-            this.cbxPurchaseType.Size = new System.Drawing.Size(142, 21);
-            this.cbxPurchaseType.TabIndex = 208;
-            // 
-            // lblPurchaseType
-            // 
-            this.lblPurchaseType.AutoSize = true;
-            this.lblPurchaseType.Location = new System.Drawing.Point(3, 165);
-            this.lblPurchaseType.Margin = new System.Windows.Forms.Padding(3);
-            this.lblPurchaseType.Name = "lblPurchaseType";
-            this.lblPurchaseType.Size = new System.Drawing.Size(79, 13);
-            this.lblPurchaseType.TabIndex = 208;
-            this.lblPurchaseType.Text = "Purchase Type";
-            // 
-            // tbxSpecialDiscountRecieved
-            // 
-            this.tbxSpecialDiscountRecieved.Location = new System.Drawing.Point(165, 138);
-            this.tbxSpecialDiscountRecieved.Name = "tbxSpecialDiscountRecieved";
-            this.tbxSpecialDiscountRecieved.Size = new System.Drawing.Size(142, 20);
-            this.tbxSpecialDiscountRecieved.TabIndex = 207;
-            this.tbxSpecialDiscountRecieved.Text = "0";
-            // 
-            // lblSplDiscRecieved
-            // 
-            this.lblSplDiscRecieved.AutoSize = true;
-            this.lblSplDiscRecieved.Location = new System.Drawing.Point(3, 138);
-            this.lblSplDiscRecieved.Margin = new System.Windows.Forms.Padding(3);
-            this.lblSplDiscRecieved.Name = "lblSplDiscRecieved";
-            this.lblSplDiscRecieved.Size = new System.Drawing.Size(136, 13);
-            this.lblSplDiscRecieved.TabIndex = 72;
-            this.lblSplDiscRecieved.Text = "Special Discount Recieved";
-            // 
-            // lblTaxOnPurchase
-            // 
-            this.lblTaxOnPurchase.AutoSize = true;
-            this.lblTaxOnPurchase.Location = new System.Drawing.Point(3, 84);
-            this.lblTaxOnPurchase.Margin = new System.Windows.Forms.Padding(3);
-            this.lblTaxOnPurchase.Name = "lblTaxOnPurchase";
-            this.lblTaxOnPurchase.Size = new System.Drawing.Size(90, 13);
-            this.lblTaxOnPurchase.TabIndex = 70;
-            this.lblTaxOnPurchase.Text = "Tax On Purchase";
-            // 
-            // tbxDiscountRecieved
-            // 
-            this.tbxDiscountRecieved.Location = new System.Drawing.Point(165, 111);
-            this.tbxDiscountRecieved.Name = "tbxDiscountRecieved";
-            this.tbxDiscountRecieved.Size = new System.Drawing.Size(142, 20);
-            this.tbxDiscountRecieved.TabIndex = 205;
-            this.tbxDiscountRecieved.Text = "0";
-            // 
-            // lblSCOnPurchase
-            // 
-            this.lblSCOnPurchase.AutoSize = true;
-            this.lblSCOnPurchase.Location = new System.Drawing.Point(3, 57);
-            this.lblSCOnPurchase.Margin = new System.Windows.Forms.Padding(3);
-            this.lblSCOnPurchase.Name = "lblSCOnPurchase";
-            this.lblSCOnPurchase.Size = new System.Drawing.Size(121, 13);
-            this.lblSCOnPurchase.TabIndex = 69;
-            this.lblSCOnPurchase.Text = "Surcharge On Purchase";
-            // 
-            // tbxTaxOnPurchase
-            // 
-            this.tbxTaxOnPurchase.Location = new System.Drawing.Point(165, 84);
-            this.tbxTaxOnPurchase.Name = "tbxTaxOnPurchase";
-            this.tbxTaxOnPurchase.Size = new System.Drawing.Size(142, 20);
-            this.tbxTaxOnPurchase.TabIndex = 204;
-            this.tbxTaxOnPurchase.Text = "0";
-            // 
-            // lblPurchaseExcise
-            // 
-            this.lblPurchaseExcise.AutoSize = true;
-            this.lblPurchaseExcise.Location = new System.Drawing.Point(3, 30);
-            this.lblPurchaseExcise.Margin = new System.Windows.Forms.Padding(3);
-            this.lblPurchaseExcise.Name = "lblPurchaseExcise";
-            this.lblPurchaseExcise.Size = new System.Drawing.Size(86, 13);
-            this.lblPurchaseExcise.TabIndex = 56;
-            this.lblPurchaseExcise.Text = "Purchase Excise";
-            // 
-            // tbxPurchaseExcise
-            // 
-            this.tbxPurchaseExcise.Location = new System.Drawing.Point(165, 30);
-            this.tbxPurchaseExcise.Name = "tbxPurchaseExcise";
-            this.tbxPurchaseExcise.Size = new System.Drawing.Size(142, 20);
-            this.tbxPurchaseExcise.TabIndex = 202;
-            this.tbxPurchaseExcise.Text = "0";
-            // 
             // tbxSCOnPurchase
             // 
-            this.tbxSCOnPurchase.Location = new System.Drawing.Point(165, 57);
+            this.tbxSCOnPurchase.Location = new System.Drawing.Point(165, 165);
             this.tbxSCOnPurchase.Name = "tbxSCOnPurchase";
             this.tbxSCOnPurchase.Size = new System.Drawing.Size(142, 20);
-            this.tbxSCOnPurchase.TabIndex = 203;
+            this.tbxSCOnPurchase.TabIndex = 806;
             this.tbxSCOnPurchase.Text = "0";
+            this.tbxSCOnPurchase.Visible = false;
             // 
             // tbxPurchaseRate
             // 
@@ -558,6 +189,17 @@
             this.tbxPurchaseRate.Size = new System.Drawing.Size(142, 20);
             this.tbxPurchaseRate.TabIndex = 201;
             this.tbxPurchaseRate.Text = "0";
+            // 
+            // lblSCOnPurchase
+            // 
+            this.lblSCOnPurchase.AutoSize = true;
+            this.lblSCOnPurchase.Location = new System.Drawing.Point(3, 165);
+            this.lblSCOnPurchase.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSCOnPurchase.Name = "lblSCOnPurchase";
+            this.lblSCOnPurchase.Size = new System.Drawing.Size(121, 13);
+            this.lblSCOnPurchase.TabIndex = 805;
+            this.lblSCOnPurchase.Text = "Surcharge On Purchase";
+            this.lblSCOnPurchase.Visible = false;
             // 
             // lblPurchaseRate
             // 
@@ -569,21 +211,107 @@
             this.lblPurchaseRate.TabIndex = 46;
             this.lblPurchaseRate.Text = "Purchase Rate";
             // 
+            // tbxPurchaseExcise
+            // 
+            this.tbxPurchaseExcise.Location = new System.Drawing.Point(165, 138);
+            this.tbxPurchaseExcise.Name = "tbxPurchaseExcise";
+            this.tbxPurchaseExcise.Size = new System.Drawing.Size(142, 20);
+            this.tbxPurchaseExcise.TabIndex = 804;
+            this.tbxPurchaseExcise.Text = "0";
+            this.tbxPurchaseExcise.Visible = false;
+            // 
+            // tbxTaxOnPurchase
+            // 
+            this.tbxTaxOnPurchase.Location = new System.Drawing.Point(165, 111);
+            this.tbxTaxOnPurchase.Name = "tbxTaxOnPurchase";
+            this.tbxTaxOnPurchase.Size = new System.Drawing.Size(142, 20);
+            this.tbxTaxOnPurchase.TabIndex = 204;
+            this.tbxTaxOnPurchase.Text = "0";
+            this.tbxTaxOnPurchase.Visible = false;
+            // 
+            // lblTaxOnPurchase
+            // 
+            this.lblTaxOnPurchase.AutoSize = true;
+            this.lblTaxOnPurchase.Location = new System.Drawing.Point(3, 111);
+            this.lblTaxOnPurchase.Margin = new System.Windows.Forms.Padding(3);
+            this.lblTaxOnPurchase.Name = "lblTaxOnPurchase";
+            this.lblTaxOnPurchase.Size = new System.Drawing.Size(90, 13);
+            this.lblTaxOnPurchase.TabIndex = 70;
+            this.lblTaxOnPurchase.Text = "Tax On Purchase";
+            this.lblTaxOnPurchase.Visible = false;
+            // 
+            // lblPurchaseExcise
+            // 
+            this.lblPurchaseExcise.AutoSize = true;
+            this.lblPurchaseExcise.Location = new System.Drawing.Point(3, 138);
+            this.lblPurchaseExcise.Margin = new System.Windows.Forms.Padding(3);
+            this.lblPurchaseExcise.Name = "lblPurchaseExcise";
+            this.lblPurchaseExcise.Size = new System.Drawing.Size(86, 13);
+            this.lblPurchaseExcise.TabIndex = 803;
+            this.lblPurchaseExcise.Text = "Purchase Excise";
+            this.lblPurchaseExcise.Visible = false;
+            // 
             // lblDiscountRec
             // 
             this.lblDiscountRec.AutoSize = true;
-            this.lblDiscountRec.Location = new System.Drawing.Point(3, 111);
+            this.lblDiscountRec.Location = new System.Drawing.Point(3, 30);
             this.lblDiscountRec.Margin = new System.Windows.Forms.Padding(3);
             this.lblDiscountRec.Name = "lblDiscountRec";
             this.lblDiscountRec.Size = new System.Drawing.Size(98, 13);
             this.lblDiscountRec.TabIndex = 71;
             this.lblDiscountRec.Text = "Discount Recieved";
             // 
+            // tbxDiscountRecieved
+            // 
+            this.tbxDiscountRecieved.Location = new System.Drawing.Point(165, 30);
+            this.tbxDiscountRecieved.Name = "tbxDiscountRecieved";
+            this.tbxDiscountRecieved.Size = new System.Drawing.Size(142, 20);
+            this.tbxDiscountRecieved.TabIndex = 205;
+            this.tbxDiscountRecieved.Text = "0";
+            // 
+            // lblSplDiscRecieved
+            // 
+            this.lblSplDiscRecieved.AutoSize = true;
+            this.lblSplDiscRecieved.Location = new System.Drawing.Point(3, 57);
+            this.lblSplDiscRecieved.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSplDiscRecieved.Name = "lblSplDiscRecieved";
+            this.lblSplDiscRecieved.Size = new System.Drawing.Size(136, 13);
+            this.lblSplDiscRecieved.TabIndex = 72;
+            this.lblSplDiscRecieved.Text = "Special Discount Recieved";
+            // 
+            // tbxSpecialDiscountRecieved
+            // 
+            this.tbxSpecialDiscountRecieved.Location = new System.Drawing.Point(165, 57);
+            this.tbxSpecialDiscountRecieved.Name = "tbxSpecialDiscountRecieved";
+            this.tbxSpecialDiscountRecieved.Size = new System.Drawing.Size(142, 20);
+            this.tbxSpecialDiscountRecieved.TabIndex = 207;
+            this.tbxSpecialDiscountRecieved.Text = "0";
+            // 
+            // lblPurchaseType
+            // 
+            this.lblPurchaseType.AutoSize = true;
+            this.lblPurchaseType.Location = new System.Drawing.Point(3, 84);
+            this.lblPurchaseType.Margin = new System.Windows.Forms.Padding(3);
+            this.lblPurchaseType.Name = "lblPurchaseType";
+            this.lblPurchaseType.Size = new System.Drawing.Size(104, 13);
+            this.lblPurchaseType.TabIndex = 208;
+            this.lblPurchaseType.Text = "GST Purchase Type";
+            // 
+            // cbxPurchaseType
+            // 
+            this.cbxPurchaseType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPurchaseType.FormattingEnabled = true;
+            this.cbxPurchaseType.Location = new System.Drawing.Point(165, 84);
+            this.cbxPurchaseType.Name = "cbxPurchaseType";
+            this.cbxPurchaseType.Size = new System.Drawing.Size(142, 21);
+            this.cbxPurchaseType.TabIndex = 208;
+            this.cbxPurchaseType.SelectedIndexChanged += new System.EventHandler(this.cbxPurchaseType_SelectedIndexChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(361, 190);
+            this.groupBox2.Location = new System.Drawing.Point(356, 227);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox2.Size = new System.Drawing.Size(338, 220);
@@ -596,22 +324,22 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.cbxSaleType, 1, 7);
-            this.tableLayoutPanel3.Controls.Add(this.lblSaleType, 0, 7);
-            this.tableLayoutPanel3.Controls.Add(this.tbxTaxOnSale, 1, 6);
-            this.tableLayoutPanel3.Controls.Add(this.lblSaleTax, 0, 6);
-            this.tableLayoutPanel3.Controls.Add(this.lblSCSale, 0, 5);
-            this.tableLayoutPanel3.Controls.Add(this.tbxSCOnSale, 1, 5);
-            this.tableLayoutPanel3.Controls.Add(this.lblSaleExcise, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.lblWhSaleRate, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.tbxSaleExcise, 1, 4);
             this.tableLayoutPanel3.Controls.Add(this.lblSpecialRate, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.lblSaleRate, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.tbxWholeSaleRate, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.tbxSCOnSale, 1, 7);
             this.tableLayoutPanel3.Controls.Add(this.lblMRP, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cbxSaleType, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.lblSaleType, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.lblSCSale, 0, 7);
             this.tableLayoutPanel3.Controls.Add(this.tbxMRP, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.tbxSpecialRate, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.tbxSaleRate, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tbxSaleExcise, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.lblSaleExcise, 0, 6);
+            this.tableLayoutPanel3.Controls.Add(this.lblSaleTax, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.tbxTaxOnSale, 1, 5);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel3.Location = new System.Drawing.Point(10, 23);
@@ -629,71 +357,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(318, 187);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
-            // cbxSaleType
-            // 
-            this.cbxSaleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxSaleType.FormattingEnabled = true;
-            this.cbxSaleType.Location = new System.Drawing.Point(162, 164);
-            this.cbxSaleType.Name = "cbxSaleType";
-            this.cbxSaleType.Size = new System.Drawing.Size(142, 21);
-            this.cbxSaleType.TabIndex = 308;
-            // 
-            // lblSaleType
-            // 
-            this.lblSaleType.AutoSize = true;
-            this.lblSaleType.Location = new System.Drawing.Point(3, 164);
-            this.lblSaleType.Margin = new System.Windows.Forms.Padding(3);
-            this.lblSaleType.Name = "lblSaleType";
-            this.lblSaleType.Size = new System.Drawing.Size(52, 13);
-            this.lblSaleType.TabIndex = 74;
-            this.lblSaleType.Text = "SaleType";
-            // 
-            // tbxTaxOnSale
-            // 
-            this.tbxTaxOnSale.Location = new System.Drawing.Point(162, 141);
-            this.tbxTaxOnSale.Name = "tbxTaxOnSale";
-            this.tbxTaxOnSale.Size = new System.Drawing.Size(142, 20);
-            this.tbxTaxOnSale.TabIndex = 307;
-            this.tbxTaxOnSale.Text = "0";
-            // 
-            // lblSaleTax
-            // 
-            this.lblSaleTax.AutoSize = true;
-            this.lblSaleTax.Location = new System.Drawing.Point(3, 141);
-            this.lblSaleTax.Margin = new System.Windows.Forms.Padding(3);
-            this.lblSaleTax.Name = "lblSaleTax";
-            this.lblSaleTax.Size = new System.Drawing.Size(66, 13);
-            this.lblSaleTax.TabIndex = 59;
-            this.lblSaleTax.Text = "Tax On Sale";
-            // 
-            // lblSCSale
-            // 
-            this.lblSCSale.AutoSize = true;
-            this.lblSCSale.Location = new System.Drawing.Point(3, 118);
-            this.lblSCSale.Margin = new System.Windows.Forms.Padding(3);
-            this.lblSCSale.Name = "lblSCSale";
-            this.lblSCSale.Size = new System.Drawing.Size(97, 13);
-            this.lblSCSale.TabIndex = 58;
-            this.lblSCSale.Text = "Surcharge On Sale";
-            // 
-            // tbxSCOnSale
-            // 
-            this.tbxSCOnSale.Location = new System.Drawing.Point(162, 118);
-            this.tbxSCOnSale.Name = "tbxSCOnSale";
-            this.tbxSCOnSale.Size = new System.Drawing.Size(142, 20);
-            this.tbxSCOnSale.TabIndex = 306;
-            this.tbxSCOnSale.Text = "0";
-            // 
-            // lblSaleExcise
-            // 
-            this.lblSaleExcise.AutoSize = true;
-            this.lblSaleExcise.Location = new System.Drawing.Point(3, 95);
-            this.lblSaleExcise.Margin = new System.Windows.Forms.Padding(3);
-            this.lblSaleExcise.Name = "lblSaleExcise";
-            this.lblSaleExcise.Size = new System.Drawing.Size(62, 13);
-            this.lblSaleExcise.TabIndex = 57;
-            this.lblSaleExcise.Text = "Sale Excise";
-            // 
             // lblWhSaleRate
             // 
             this.lblWhSaleRate.AutoSize = true;
@@ -703,14 +366,6 @@
             this.lblWhSaleRate.Size = new System.Drawing.Size(88, 13);
             this.lblWhSaleRate.TabIndex = 56;
             this.lblWhSaleRate.Text = "Whole Sale Rate";
-            // 
-            // tbxSaleExcise
-            // 
-            this.tbxSaleExcise.Location = new System.Drawing.Point(162, 95);
-            this.tbxSaleExcise.Name = "tbxSaleExcise";
-            this.tbxSaleExcise.Size = new System.Drawing.Size(142, 20);
-            this.tbxSaleExcise.TabIndex = 305;
-            this.tbxSaleExcise.Text = "0";
             // 
             // lblSpecialRate
             // 
@@ -740,6 +395,15 @@
             this.tbxWholeSaleRate.TabIndex = 304;
             this.tbxWholeSaleRate.Text = "0";
             // 
+            // tbxSCOnSale
+            // 
+            this.tbxSCOnSale.Location = new System.Drawing.Point(162, 164);
+            this.tbxSCOnSale.Name = "tbxSCOnSale";
+            this.tbxSCOnSale.Size = new System.Drawing.Size(142, 20);
+            this.tbxSCOnSale.TabIndex = 306;
+            this.tbxSCOnSale.Text = "0";
+            this.tbxSCOnSale.Visible = false;
+            // 
             // lblMRP
             // 
             this.lblMRP.AutoSize = true;
@@ -749,6 +413,37 @@
             this.lblMRP.Size = new System.Drawing.Size(31, 13);
             this.lblMRP.TabIndex = 53;
             this.lblMRP.Text = "MRP";
+            // 
+            // cbxSaleType
+            // 
+            this.cbxSaleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxSaleType.Enabled = false;
+            this.cbxSaleType.FormattingEnabled = true;
+            this.cbxSaleType.Location = new System.Drawing.Point(162, 95);
+            this.cbxSaleType.Name = "cbxSaleType";
+            this.cbxSaleType.Size = new System.Drawing.Size(142, 21);
+            this.cbxSaleType.TabIndex = 308;
+            // 
+            // lblSaleType
+            // 
+            this.lblSaleType.AutoSize = true;
+            this.lblSaleType.Location = new System.Drawing.Point(3, 95);
+            this.lblSaleType.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSaleType.Name = "lblSaleType";
+            this.lblSaleType.Size = new System.Drawing.Size(80, 13);
+            this.lblSaleType.TabIndex = 74;
+            this.lblSaleType.Text = "GST Sale Type";
+            // 
+            // lblSCSale
+            // 
+            this.lblSCSale.AutoSize = true;
+            this.lblSCSale.Location = new System.Drawing.Point(3, 164);
+            this.lblSCSale.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSCSale.Name = "lblSCSale";
+            this.lblSCSale.Size = new System.Drawing.Size(97, 13);
+            this.lblSCSale.TabIndex = 58;
+            this.lblSCSale.Text = "Surcharge On Sale";
+            this.lblSCSale.Visible = false;
             // 
             // tbxMRP
             // 
@@ -774,11 +469,53 @@
             this.tbxSaleRate.TabIndex = 302;
             this.tbxSaleRate.Text = "0";
             // 
+            // tbxSaleExcise
+            // 
+            this.tbxSaleExcise.Location = new System.Drawing.Point(162, 141);
+            this.tbxSaleExcise.Name = "tbxSaleExcise";
+            this.tbxSaleExcise.Size = new System.Drawing.Size(142, 20);
+            this.tbxSaleExcise.TabIndex = 305;
+            this.tbxSaleExcise.Text = "0";
+            this.tbxSaleExcise.Visible = false;
+            // 
+            // lblSaleExcise
+            // 
+            this.lblSaleExcise.AutoSize = true;
+            this.lblSaleExcise.Location = new System.Drawing.Point(3, 141);
+            this.lblSaleExcise.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSaleExcise.Name = "lblSaleExcise";
+            this.lblSaleExcise.Size = new System.Drawing.Size(62, 13);
+            this.lblSaleExcise.TabIndex = 57;
+            this.lblSaleExcise.Text = "Sale Excise";
+            this.lblSaleExcise.Visible = false;
+            // 
+            // lblSaleTax
+            // 
+            this.lblSaleTax.AutoSize = true;
+            this.lblSaleTax.Location = new System.Drawing.Point(3, 118);
+            this.lblSaleTax.Margin = new System.Windows.Forms.Padding(3);
+            this.lblSaleTax.Name = "lblSaleTax";
+            this.lblSaleTax.Size = new System.Drawing.Size(66, 13);
+            this.lblSaleTax.TabIndex = 59;
+            this.lblSaleTax.Text = "Tax On Sale";
+            this.lblSaleTax.Visible = false;
+            // 
+            // tbxTaxOnSale
+            // 
+            this.tbxTaxOnSale.Location = new System.Drawing.Point(162, 118);
+            this.tbxTaxOnSale.Name = "tbxTaxOnSale";
+            this.tbxTaxOnSale.Size = new System.Drawing.Size(142, 20);
+            this.tbxTaxOnSale.TabIndex = 307;
+            this.tbxTaxOnSale.Text = "0";
+            this.tbxTaxOnSale.Visible = false;
+            // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.tableLayoutPanel4);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(703, 190);
+            this.groupBox3.Location = new System.Drawing.Point(698, 227);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox3.Size = new System.Drawing.Size(358, 220);
@@ -940,7 +677,7 @@
             // 
             this.tbxScheme2.Location = new System.Drawing.Point(222, 3);
             this.tbxScheme2.Name = "tbxScheme2";
-            this.tbxScheme2.Size = new System.Drawing.Size(76, 20);
+            this.tbxScheme2.Size = new System.Drawing.Size(108, 20);
             this.tbxScheme2.TabIndex = 402;
             this.tbxScheme2.Text = "0";
             // 
@@ -985,7 +722,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(559, 448);
+            this.btnCancel.Location = new System.Drawing.Point(559, 460);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 30);
             this.btnCancel.TabIndex = 802;
@@ -995,7 +732,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(478, 448);
+            this.btnSave.Location = new System.Drawing.Point(478, 460);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 30);
             this.btnSave.TabIndex = 801;
@@ -1003,30 +740,324 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.panel1);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(13, 67);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(1043, 154);
+            this.groupBox4.TabIndex = 803;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Item Detail";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
+            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Location = new System.Drawing.Point(5, 21);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1032, 125);
+            this.panel1.TabIndex = 2;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.Controls.Add(this.tbxCompany, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblMaxStock, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tbxMaximumStock, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblMinStock, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tbxLocation, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblLocation, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbxMinimumStock, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblShortName, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbxItemName, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblCompanyCode, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblItemCode, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbxItemCode, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbxShortName, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblPacking, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbxPacking, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblConvRate, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbxConvRate, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblItemName, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblUPC, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbxUPC, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblQtyPerCase, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbxQtyPerCase, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.cbxStatus, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tbxHSNCode, 5, 3);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1032, 125);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tbxCompany
+            // 
+            this.tbxCompany.Location = new System.Drawing.Point(516, 6);
+            this.tbxCompany.Name = "tbxCompany";
+            this.tbxCompany.Size = new System.Drawing.Size(136, 20);
+            this.tbxCompany.TabIndex = 102;
+            // 
+            // lblMaxStock
+            // 
+            this.lblMaxStock.AutoSize = true;
+            this.lblMaxStock.Location = new System.Drawing.Point(346, 75);
+            this.lblMaxStock.Margin = new System.Windows.Forms.Padding(3);
+            this.lblMaxStock.Name = "lblMaxStock";
+            this.lblMaxStock.Size = new System.Drawing.Size(82, 13);
+            this.lblMaxStock.TabIndex = 76;
+            this.lblMaxStock.Text = "Maximum Stock";
+            // 
+            // tbxMaximumStock
+            // 
+            this.tbxMaximumStock.Location = new System.Drawing.Point(516, 75);
+            this.tbxMaximumStock.Name = "tbxMaximumStock";
+            this.tbxMaximumStock.Size = new System.Drawing.Size(136, 20);
+            this.tbxMaximumStock.TabIndex = 111;
+            this.tbxMaximumStock.Text = "0";
+            // 
+            // lblMinStock
+            // 
+            this.lblMinStock.AutoSize = true;
+            this.lblMinStock.Location = new System.Drawing.Point(6, 75);
+            this.lblMinStock.Margin = new System.Windows.Forms.Padding(3);
+            this.lblMinStock.Name = "lblMinStock";
+            this.lblMinStock.Size = new System.Drawing.Size(79, 13);
+            this.lblMinStock.TabIndex = 75;
+            this.lblMinStock.Text = "Minimum Stock";
+            // 
+            // tbxLocation
+            // 
+            this.tbxLocation.Location = new System.Drawing.Point(856, 52);
+            this.tbxLocation.Name = "tbxLocation";
+            this.tbxLocation.Size = new System.Drawing.Size(132, 20);
+            this.tbxLocation.TabIndex = 109;
+            // 
+            // lblLocation
+            // 
+            this.lblLocation.AutoSize = true;
+            this.lblLocation.Location = new System.Drawing.Point(686, 52);
+            this.lblLocation.Margin = new System.Windows.Forms.Padding(3);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(48, 13);
+            this.lblLocation.TabIndex = 32;
+            this.lblLocation.Text = "Location";
+            // 
+            // tbxMinimumStock
+            // 
+            this.tbxMinimumStock.Location = new System.Drawing.Point(176, 75);
+            this.tbxMinimumStock.Name = "tbxMinimumStock";
+            this.tbxMinimumStock.Size = new System.Drawing.Size(131, 20);
+            this.tbxMinimumStock.TabIndex = 110;
+            this.tbxMinimumStock.Text = "0";
+            // 
+            // lblShortName
+            // 
+            this.lblShortName.AutoSize = true;
+            this.lblShortName.Location = new System.Drawing.Point(6, 29);
+            this.lblShortName.Margin = new System.Windows.Forms.Padding(3);
+            this.lblShortName.Name = "lblShortName";
+            this.lblShortName.Size = new System.Drawing.Size(63, 13);
+            this.lblShortName.TabIndex = 102;
+            this.lblShortName.Text = "Short Name";
+            // 
+            // tbxItemName
+            // 
+            this.tbxItemName.Location = new System.Drawing.Point(176, 6);
+            this.tbxItemName.Name = "tbxItemName";
+            this.tbxItemName.Size = new System.Drawing.Size(131, 20);
+            this.tbxItemName.TabIndex = 101;
+            // 
+            // lblCompanyCode
+            // 
+            this.lblCompanyCode.AutoSize = true;
+            this.lblCompanyCode.Location = new System.Drawing.Point(346, 6);
+            this.lblCompanyCode.Margin = new System.Windows.Forms.Padding(3);
+            this.lblCompanyCode.Name = "lblCompanyCode";
+            this.lblCompanyCode.Size = new System.Drawing.Size(82, 13);
+            this.lblCompanyCode.TabIndex = 43;
+            this.lblCompanyCode.Text = "Company Name";
+            // 
+            // lblItemCode
+            // 
+            this.lblItemCode.AutoSize = true;
+            this.lblItemCode.Location = new System.Drawing.Point(686, 6);
+            this.lblItemCode.Margin = new System.Windows.Forms.Padding(3);
+            this.lblItemCode.Name = "lblItemCode";
+            this.lblItemCode.Size = new System.Drawing.Size(55, 13);
+            this.lblItemCode.TabIndex = 45;
+            this.lblItemCode.Text = "Item Code";
+            // 
+            // tbxItemCode
+            // 
+            this.tbxItemCode.Enabled = false;
+            this.tbxItemCode.Location = new System.Drawing.Point(856, 6);
+            this.tbxItemCode.Name = "tbxItemCode";
+            this.tbxItemCode.ReadOnly = true;
+            this.tbxItemCode.Size = new System.Drawing.Size(132, 20);
+            this.tbxItemCode.TabIndex = 103;
+            // 
+            // tbxShortName
+            // 
+            this.tbxShortName.Location = new System.Drawing.Point(176, 29);
+            this.tbxShortName.Name = "tbxShortName";
+            this.tbxShortName.Size = new System.Drawing.Size(131, 20);
+            this.tbxShortName.TabIndex = 104;
+            // 
+            // lblPacking
+            // 
+            this.lblPacking.AutoSize = true;
+            this.lblPacking.Location = new System.Drawing.Point(346, 29);
+            this.lblPacking.Margin = new System.Windows.Forms.Padding(3);
+            this.lblPacking.Name = "lblPacking";
+            this.lblPacking.Size = new System.Drawing.Size(46, 13);
+            this.lblPacking.TabIndex = 104;
+            this.lblPacking.Text = "Packing";
+            // 
+            // tbxPacking
+            // 
+            this.tbxPacking.Location = new System.Drawing.Point(516, 29);
+            this.tbxPacking.Name = "tbxPacking";
+            this.tbxPacking.Size = new System.Drawing.Size(136, 20);
+            this.tbxPacking.TabIndex = 105;
+            this.tbxPacking.Text = "0";
+            // 
+            // lblConvRate
+            // 
+            this.lblConvRate.AutoSize = true;
+            this.lblConvRate.Location = new System.Drawing.Point(686, 29);
+            this.lblConvRate.Margin = new System.Windows.Forms.Padding(3);
+            this.lblConvRate.Name = "lblConvRate";
+            this.lblConvRate.Size = new System.Drawing.Size(86, 13);
+            this.lblConvRate.TabIndex = 106;
+            this.lblConvRate.Text = "Conversion Rate";
+            // 
+            // tbxConvRate
+            // 
+            this.tbxConvRate.Location = new System.Drawing.Point(856, 29);
+            this.tbxConvRate.Name = "tbxConvRate";
+            this.tbxConvRate.Size = new System.Drawing.Size(132, 20);
+            this.tbxConvRate.TabIndex = 106;
+            this.tbxConvRate.Text = "0";
+            // 
+            // lblItemName
+            // 
+            this.lblItemName.AutoSize = true;
+            this.lblItemName.Location = new System.Drawing.Point(6, 6);
+            this.lblItemName.Margin = new System.Windows.Forms.Padding(3);
+            this.lblItemName.Name = "lblItemName";
+            this.lblItemName.Size = new System.Drawing.Size(58, 13);
+            this.lblItemName.TabIndex = 3;
+            this.lblItemName.Text = "Item Name";
+            // 
+            // lblUPC
+            // 
+            this.lblUPC.AutoSize = true;
+            this.lblUPC.Location = new System.Drawing.Point(6, 52);
+            this.lblUPC.Margin = new System.Windows.Forms.Padding(3);
+            this.lblUPC.Name = "lblUPC";
+            this.lblUPC.Size = new System.Drawing.Size(29, 13);
+            this.lblUPC.TabIndex = 108;
+            this.lblUPC.Text = "UPC";
+            // 
+            // tbxUPC
+            // 
+            this.tbxUPC.Location = new System.Drawing.Point(176, 52);
+            this.tbxUPC.Name = "tbxUPC";
+            this.tbxUPC.Size = new System.Drawing.Size(131, 20);
+            this.tbxUPC.TabIndex = 107;
+            // 
+            // lblQtyPerCase
+            // 
+            this.lblQtyPerCase.AutoSize = true;
+            this.lblQtyPerCase.Location = new System.Drawing.Point(346, 52);
+            this.lblQtyPerCase.Margin = new System.Windows.Forms.Padding(3);
+            this.lblQtyPerCase.Name = "lblQtyPerCase";
+            this.lblQtyPerCase.Size = new System.Drawing.Size(92, 13);
+            this.lblQtyPerCase.TabIndex = 110;
+            this.lblQtyPerCase.Text = "Quantity Per Case";
+            // 
+            // tbxQtyPerCase
+            // 
+            this.tbxQtyPerCase.Location = new System.Drawing.Point(516, 52);
+            this.tbxQtyPerCase.Name = "tbxQtyPerCase";
+            this.tbxQtyPerCase.Size = new System.Drawing.Size(136, 20);
+            this.tbxQtyPerCase.TabIndex = 108;
+            this.tbxQtyPerCase.Text = "0";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(6, 98);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(3);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblStatus.TabIndex = 77;
+            this.lblStatus.Text = "Status";
+            // 
+            // cbxStatus
+            // 
+            this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxStatus.FormattingEnabled = true;
+            this.cbxStatus.Location = new System.Drawing.Point(176, 98);
+            this.cbxStatus.Name = "cbxStatus";
+            this.cbxStatus.Size = new System.Drawing.Size(131, 21);
+            this.cbxStatus.TabIndex = 113;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(686, 75);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 113;
+            this.label1.Text = "HSN Code";
+            // 
             // tbxHSNCode
             // 
-            this.tbxHSNCode.Location = new System.Drawing.Point(868, 72);
+            this.tbxHSNCode.Location = new System.Drawing.Point(856, 75);
             this.tbxHSNCode.Name = "tbxHSNCode";
-            this.tbxHSNCode.Size = new System.Drawing.Size(142, 20);
+            this.tbxHSNCode.Size = new System.Drawing.Size(132, 20);
             this.tbxHSNCode.TabIndex = 112;
             // 
             // frmItemMasterAddUpdated
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1066, 601);
+            this.ClientSize = new System.Drawing.Size(1074, 500);
+            this.ControlBox = false;
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmItemMasterAddUpdated";
-            this.Text = "frmItemMasterAddUpdatedNew";
             this.Load += new System.EventHandler(this.frmItemMasterAddUpdatedNew_Load);
-            this.panel1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -1037,50 +1068,24 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderItem)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lblItemName;
-        private System.Windows.Forms.TextBox tbxItemName;
-        private System.Windows.Forms.Label lblCompanyCode;
-        private System.Windows.Forms.Label lblItemCode;
-        private System.Windows.Forms.TextBox tbxItemCode;
-        private System.Windows.Forms.Label lblShortName;
-        private System.Windows.Forms.TextBox tbxShortName;
-        private System.Windows.Forms.Label lblPacking;
-        private System.Windows.Forms.TextBox tbxPacking;
-        private System.Windows.Forms.Label lblConvRate;
-        private System.Windows.Forms.TextBox tbxConvRate;
-        private System.Windows.Forms.Label lblUPC;
-        private System.Windows.Forms.TextBox tbxUPC;
-        private System.Windows.Forms.Label lblQtyPerCase;
-        private System.Windows.Forms.TextBox tbxQtyPerCase;
-        private System.Windows.Forms.Label lblLocation;
-        private System.Windows.Forms.TextBox tbxLocation;
-        private System.Windows.Forms.ComboBox cbxStatus;
-        private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Label lblMaxStock;
-        private System.Windows.Forms.TextBox tbxMaximumStock;
-        private System.Windows.Forms.Label lblMinStock;
-        private System.Windows.Forms.TextBox tbxMinimumStock;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox tbxPurchaseRate;
         private System.Windows.Forms.Label lblPurchaseRate;
-        private System.Windows.Forms.Label lblPurchaseExcise;
-        private System.Windows.Forms.TextBox tbxPurchaseExcise;
         private System.Windows.Forms.TextBox tbxSpecialDiscountRecieved;
         private System.Windows.Forms.Label lblSplDiscRecieved;
         private System.Windows.Forms.Label lblTaxOnPurchase;
         private System.Windows.Forms.TextBox tbxDiscountRecieved;
-        private System.Windows.Forms.Label lblSCOnPurchase;
         private System.Windows.Forms.TextBox tbxTaxOnPurchase;
-        private System.Windows.Forms.TextBox tbxSCOnPurchase;
         private System.Windows.Forms.Label lblDiscountRec;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -1124,7 +1129,37 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cbxPurchaseType;
         private System.Windows.Forms.Label lblPurchaseType;
+        private System.Windows.Forms.TextBox tbxSCOnPurchase;
+        private System.Windows.Forms.Label lblSCOnPurchase;
+        private System.Windows.Forms.TextBox tbxPurchaseExcise;
+        private System.Windows.Forms.Label lblPurchaseExcise;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox tbxCompany;
+        private System.Windows.Forms.Label lblMaxStock;
+        private System.Windows.Forms.TextBox tbxMaximumStock;
+        private System.Windows.Forms.Label lblMinStock;
+        private System.Windows.Forms.TextBox tbxLocation;
+        private System.Windows.Forms.Label lblLocation;
+        private System.Windows.Forms.TextBox tbxMinimumStock;
+        private System.Windows.Forms.Label lblShortName;
+        private System.Windows.Forms.TextBox tbxItemName;
+        private System.Windows.Forms.Label lblCompanyCode;
+        private System.Windows.Forms.Label lblItemCode;
+        private System.Windows.Forms.TextBox tbxItemCode;
+        private System.Windows.Forms.TextBox tbxShortName;
+        private System.Windows.Forms.Label lblPacking;
+        private System.Windows.Forms.TextBox tbxPacking;
+        private System.Windows.Forms.Label lblConvRate;
+        private System.Windows.Forms.TextBox tbxConvRate;
+        private System.Windows.Forms.Label lblItemName;
+        private System.Windows.Forms.Label lblUPC;
+        private System.Windows.Forms.TextBox tbxUPC;
+        private System.Windows.Forms.Label lblQtyPerCase;
+        private System.Windows.Forms.TextBox tbxQtyPerCase;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.ComboBox cbxStatus;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbxHSNCode;
     }

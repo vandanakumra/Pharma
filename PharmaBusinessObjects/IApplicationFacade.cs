@@ -165,6 +165,8 @@ namespace PharmaBusinessObjects
         bool IsTempSaleEntryExists(long purchaseSaleBookHeaderID);
         void RollbackSaleEntry(long purchaseSaleBookHeaderID);
         PersonRouteMaster GetPersonRouteMasterByCode(string personRouteCode);
+        List<BillOutstanding> GetSaleChallanForCustomer(string customerCode, string invoiceDate);
+        List<PharmaBusinessObjects.Transaction.PurchaseSaleBookLineItem> GetSaleChallanLineItems(long saleChallanHeaderID, long purchaseSaleBookHeaderID);
         #endregion
         #region "Reports"
         DataTable GetSaleInvoiceData(long purchaseSaleBookHeaderID);

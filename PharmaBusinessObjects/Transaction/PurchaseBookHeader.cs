@@ -76,6 +76,7 @@ namespace PharmaBusinessObjects.Transaction
         //public Nullable<int> RouteId { get; set; }
 
         public Nullable<long> OldPurchaseSaleBookHeaderID { get; set; }
+        public long? SaleChallanHeaderID { get; set; }
 
     }
 
