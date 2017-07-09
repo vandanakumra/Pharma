@@ -72,8 +72,8 @@ namespace PharmaDataMigration.Master
 
                                 PharmaDAL.Entity.BillOutStandings newBillOS = new PharmaDAL.Entity.BillOutStandings()
                                 {
-                                    //PurchaseSaleBookHeaderID= header.MappedPurchaseHeaderID,
-                                    VoucherNumber = Convert.ToString(dr["vno"]).TrimEnd(),//header.MappedVoucherNumber,
+                                    PurchaseSaleBookHeaderID= header.MappedPurchaseHeaderID,
+                                    VoucherNumber = header.MappedVoucherNumber,
                                     VoucherTypeCode= mappedVoucherTypeCode,
                                     VoucherDate= Convert.ToDateTime(dr["vdt"]),
                                     DueDate= Convert.ToDateTime(dr["duedt"]),

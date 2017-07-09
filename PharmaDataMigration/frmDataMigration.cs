@@ -5,6 +5,7 @@ using PharmaDataMigration.Master;
 using System.Data.Entity.Validation;
 using PharmaDataMigration.DBFWriter;
 using PharmaBusinessObjects.Common;
+using PharmaDataMigration.Transaction;
 
 namespace PharmaDataMigration
 {
@@ -58,6 +59,7 @@ namespace PharmaDataMigration
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "JV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "R9", MappedVoucherType = Constants.VoucherTypeCode.SALERETURNBREAKAGEEXPIRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "S9", MappedVoucherType = Constants.VoucherTypeCode.BREAKAGEEXPIRY });
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "RT", MappedVoucherType = Constants.VoucherTypeCode.RECEIPTFROMCUSTOMER });
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PT", MappedVoucherType = Constants.VoucherTypeCode.PAYMENTTOSUPPLIER });
         }
@@ -123,6 +125,10 @@ namespace PharmaDataMigration
             CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
             BillOutstanding billOutstanding = new BillOutstanding();
             FIFO fifo = new FIFO();
+            PurchaseSaleBookHeaderMigration purchaseSaleBookHeaderMigration = new PurchaseSaleBookHeaderMigration();
+            PurchaseSaleBookLineItemMigration purchaseSaleBookLineItemMigration = new PurchaseSaleBookLineItemMigration();
+
+
 
             int result = 0;
             int rowIndex = 0;
@@ -251,23 +257,40 @@ namespace PharmaDataMigration
             result = customerLedgerMaster.InsertCustomerLedgerMasterData(); //confirm mapping columns for columns having comments in CustomerLedgerMaster
 
             SetProcessingText(grdDataMigration, "Customer Ledger", rowIndex, "Completed", result, false);
-            result = 0;
-            rowIndex += 1;
-            SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Processing", result, true);
 
-            result = customerLedgerMaster.InsertCustomerCompanyReferenceData();
 
-            SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Completed", result, false);
-            result = 0;
-            rowIndex += 1;
-            SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Processing", result, true);
+            //result = 0;
+            //rowIndex += 1;
+            //SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Processing", result, true);
 
-            result = supplierLedgerMaster.InsertSupplierCompanyReferenceData();
+            //result = customerLedgerMaster.InsertCustomerCompanyReferenceData();
 
-            SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Completed", result, false);
+            //SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Completed", result, false);
+            //result = 0;
+            //rowIndex += 1;
+            //SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Processing", result, true);
+
+            //result = supplierLedgerMaster.InsertSupplierCompanyReferenceData();
+
+            //SetProcessingText(grdDataMigration, "Suppiier Compnay Discount Ref", rowIndex, "Completed", result, false);
 
             /*------------------------------------------------------------*/
 
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Processing", result, true);
+
+            result = purchaseSaleBookHeaderMigration.InsertPurchaseSaleBookHeaderData();
+
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Completed", result, false);
+
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookLineItemData", rowIndex, "Processing", result, true);
+
+            result = purchaseSaleBookLineItemMigration.InsertPurchaseSaleBookLineItemData();
+
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookLineItemData", rowIndex, "Completed", result, false);
 
 
             result = 0;

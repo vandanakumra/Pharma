@@ -45,6 +45,12 @@ namespace PharmaDataMigration.Transaction
 
                         var customerTypeList = context.CustomerType.Select(p => p);
 
+
+                        foreach (var item in Common.voucherTypeMap)
+                        {
+                            log.Info(string.Format("Voucher Type Map {0} --> {1}",item.OriginalVoucherType,item.MappedVoucherType));
+                        }
+
                         foreach (DataRow dr in dtSalePur.Rows)
                         {
                             try
@@ -56,13 +62,18 @@ namespace PharmaDataMigration.Transaction
 
                                 Common.voucherNumberMap.Add(new VoucherNumberMap() {OriginalVoucherNumber = oldVNo , MappedVoucherNumber = newVNo });
 
-                                newPurchaseSaleBookHeader.VoucherNumber = newVNo;
+                                
 
                                 string ledgerType = string.Empty;
                                 string ledgerTypeCode = string.Empty;
 
+                               
+
                                 string originalVoucherTypeCode = Convert.ToString(dr["vtyp"]).TrimEnd();
                                 string mappedVoucherTypeCode = Common.voucherTypeMap.Where(x => x.OriginalVoucherType == originalVoucherTypeCode).Select(x => x.MappedVoucherType).FirstOrDefault();
+
+                                log.Info(string.Format("Under loop orginal Voucher Type Code is {0} --> {1} ",originalVoucherTypeCode,mappedVoucherTypeCode));
+
 
                                 if (Convert.ToString(dr["slcd"]).TrimEnd() == "SL")
                                 {
@@ -76,6 +87,7 @@ namespace PharmaDataMigration.Transaction
                                 }
 
                                 newPurchaseSaleBookHeader.VoucherTypeCode = mappedVoucherTypeCode;
+                                newPurchaseSaleBookHeader.VoucherNumber = newVNo;
                                 newPurchaseSaleBookHeader.VoucherDate = Convert.ToDateTime(dr["vdt"]);
                                 newPurchaseSaleBookHeader.DueDate = Convert.ToDateTime(dr["DUEDT"]);
                                 newPurchaseSaleBookHeader.PurchaseBillNo = Convert.ToString(dr["PBILLNO"]).TrimEnd();
@@ -191,8 +203,15 @@ namespace PharmaDataMigration.Transaction
                                     newPurchaseSaleBookHeader.ReturBillDate = Convert.ToDateTime(dr["RINVDT"]);
                                 }
 
-                                newPurchaseSaleBookHeader.LocalCentral = Convert.ToString(dr["SALE_LORC"]);
-                                                              
+                                if (dr["SALE_LORC"] == null || string.IsNullOrEmpty(Convert.ToString(dr["SALE_LORC"])))
+                                {
+                                    newPurchaseSaleBookHeader.LocalCentral = "L";
+                                }
+                                else
+                                {
+                                    newPurchaseSaleBookHeader.LocalCentral = Convert.ToString(dr["SALE_LORC"]);
+                                }
+
                                 newPurchaseSaleBookHeader.OrderNumber = Convert.ToString(dr["ORDNO1"]);
                                 newPurchaseSaleBookHeader.ChallanNumber = Convert.ToString(dr["CHNO1"]);
                                 newPurchaseSaleBookHeader.Message = Convert.ToString(dr["MESS1"]);
@@ -240,6 +259,19 @@ namespace PharmaDataMigration.Transaction
             catch (DbEntityValidationException ex)
             {
                 log.Info(string.Format("PurchaseSaleBookHeader: Error {0}", ex.Message));
+
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+                log.Info(exceptionMessage);
+
                 throw ex;
             }
             catch (Exception ex)

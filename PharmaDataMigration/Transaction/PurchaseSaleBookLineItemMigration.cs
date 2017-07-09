@@ -64,15 +64,33 @@ namespace PharmaDataMigration.Transaction
                                 newPurchaseSaleBookLineItem.Quantity = Convert.ToInt32(dr["QTY"]);
                                 newPurchaseSaleBookLineItem.FreeQuantity = Convert.ToInt32(dr["FQTY"]);
                                 newPurchaseSaleBookLineItem.PurchaseSaleRate = Convert.ToDecimal(dr["PSRATE"]);
-                                newPurchaseSaleBookLineItem.EffecivePurchaseSaleRate = Convert.ToDecimal(dr["EPSRATE"]); //??
+                                newPurchaseSaleBookLineItem.EffecivePurchaseSaleRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["EPSRATE"])) + CommonMethods.SafeConversionDecimal(Convert.ToString(dr["EPCOST"]));
                                 newPurchaseSaleBookLineItem.PurchaseSaleTypeCode = newPSType;
                                 newPurchaseSaleBookLineItem.SurCharge = Convert.ToDecimal(dr["SC"]);
                                 newPurchaseSaleBookLineItem.SalePurchaseTax = Convert.ToDecimal(dr["TAX"]);
-                                newPurchaseSaleBookLineItem.LocalCentral = Convert.ToString(dr["SALE_LORC"]);
-                                newPurchaseSaleBookLineItem.SGST = default(decimal);
-                                newPurchaseSaleBookLineItem.IGST = default(decimal);
-                                newPurchaseSaleBookLineItem.CGST = default(decimal);
-                                newPurchaseSaleBookLineItem.Amount = Convert.ToDecimal(dr["SALEAMT"]); // ????
+                                newPurchaseSaleBookLineItem.TaxAmount = dr["TAXAMT"] == null ? default(decimal) : Convert.ToDecimal(dr["TAXAMT"]);
+
+                                if (dr["SALE_LORC"] == null || string.IsNullOrEmpty(Convert.ToString(dr["SALE_LORC"])))
+                                {
+                                    newPurchaseSaleBookLineItem.LocalCentral = "L";
+                                }
+                                else
+                                {
+                                    newPurchaseSaleBookLineItem.LocalCentral = Convert.ToString(dr["SALE_LORC"]);
+                                }
+
+                                if(newPurchaseSaleBookLineItem.LocalCentral == "L")
+                                {
+                                    newPurchaseSaleBookLineItem.SGST = newPurchaseSaleBookLineItem.TaxAmount * (decimal)0.5 ;                                   
+                                    newPurchaseSaleBookLineItem.CGST = newPurchaseSaleBookLineItem.TaxAmount * (decimal)0.5;
+                                }
+                                else
+                                {
+                                    newPurchaseSaleBookLineItem.IGST = newPurchaseSaleBookLineItem.TaxAmount;
+                                }                             
+                              
+                                
+                                newPurchaseSaleBookLineItem.Amount = Convert.ToDecimal(dr["SALEAMT"]); //  PSSRATE * QYTY = GROSS = SALEAMT
 
                                 newPurchaseSaleBookLineItem.Discount = Convert.ToDecimal(dr["DIS"]);
                                 newPurchaseSaleBookLineItem.SpecialDiscount = Convert.ToDecimal(dr["SPLDIS"]);
@@ -84,8 +102,8 @@ namespace PharmaDataMigration.Transaction
                                 newPurchaseSaleBookLineItem.HalfSchemeRate =    Convert.ToDecimal(dr["HALFP"]);
 
 
-                                newPurchaseSaleBookLineItem.CostAmount = Convert.ToDecimal(dr["EPCOST"]); //??
-                                newPurchaseSaleBookLineItem.GrossAmount = 0;// Convert.ToDecimal(dr["HALFP"]); // ??
+                                newPurchaseSaleBookLineItem.CostAmount = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["EPSRATE"])) + CommonMethods.SafeConversionDecimal(Convert.ToString(dr["EPCOST"]));//??
+                                newPurchaseSaleBookLineItem.GrossAmount = Convert.ToDecimal(dr["SALEAMT"]); 
                                 newPurchaseSaleBookLineItem.SchemeAmount = Convert.ToDecimal(dr["SCAMT"]);
                                 newPurchaseSaleBookLineItem.DiscountAmount = Convert.ToDecimal(dr["DISAMT"]);
                                 newPurchaseSaleBookLineItem.SurchargeAmount = Convert.ToDecimal(dr["SCAMT"]);
@@ -93,15 +111,15 @@ namespace PharmaDataMigration.Transaction
                                 newPurchaseSaleBookLineItem.MRP = Convert.ToDecimal(dr["MRP"]);
 
                                // newPurchaseSaleBookLineItem.MfgDate = Convert.ToDateTime(dr["MRP"]);
-                                newPurchaseSaleBookLineItem.ExpiryDate = Convert.ToDateTime(dr["EXPDT"]);
+                                newPurchaseSaleBookLineItem.ExpiryDate = CommonMethods.SafeConversionDatetime(Convert.ToString(dr["EXPDT"]));
                                 newPurchaseSaleBookLineItem.SaleRate = 0;//Convert.ToDecimal(dr["MRP"]); //??
                                 newPurchaseSaleBookLineItem.WholeSaleRate = Convert.ToDecimal(dr["WSRATE"]);
                                 newPurchaseSaleBookLineItem.SpecialRate = Convert.ToDecimal(dr["SPLRATE"]);
 
-                                newPurchaseSaleBookLineItem.TaxAmount = Convert.ToDecimal(dr["TAXAMT"]);
+                               
                                 newPurchaseSaleBookLineItem.SpecialDiscountAmount = 0;// Convert.ToDecimal(dr["SPLRATE"]);
                                 newPurchaseSaleBookLineItem.VolumeDiscountAmount = 0;// Convert.ToDecimal(dr["SPLRATE"]);
-                                newPurchaseSaleBookLineItem.TotalDiscountAmount = Convert.ToDecimal(dr["TDISAMT"]);
+                                newPurchaseSaleBookLineItem.TotalDiscountAmount = Convert.ToDecimal(dr["DISAMT"]);
 
 
                                 newPurchaseSaleBookLineItem.CreatedBy = "admin";
@@ -126,7 +144,9 @@ namespace PharmaDataMigration.Transaction
             }
             catch (DbEntityValidationException ex)
             {
-                log.Info(string.Format("PurchaseSaleBookLineItem: Error {0}", ex.Message));
+                log.Info(string.Format("PurchaseSaleBookHeader: Error {0}", ex.Message));
+                log.Info(string.Format("{0}{1}Validation errors:{1}{2}", ex, Environment.NewLine, ex.EntityValidationErrors.Select(e => string.Join(Environment.NewLine, e.ValidationErrors.Select(v => string.Format("{0} - {1}", v.PropertyName, v.ErrorMessage))))));
+
                 throw ex;
             }
             catch (Exception ex)
