@@ -277,6 +277,10 @@ namespace PharmaUI
             dgvLineItem.Columns["FifoID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvLineItem.Columns["FifoID"].Visible = false;
 
+            dgvLineItem.Columns.Add("LineItemGroupID", "LineItemGroupID");
+            dgvLineItem.Columns["LineItemGroupID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLineItem.Columns["LineItemGroupID"].Visible = false;
+
 
             dgvLineItem.KeyDown += dgvLineItem_KeyDown;
             dgvLineItem.CellBeginEdit += DgvLineItem_CellBeginEdit;
@@ -345,9 +349,12 @@ namespace PharmaUI
 
                 if (columnName == "Quantity" || columnName == "FreeQuantity")
                 {
-                    int rowIndex = dgvLineItem.Rows.Cast<DataGridViewRow>().Where(p => Convert.ToString(p.Cells["ItemCode"].Value) == Convert.ToString(dgvLineItem.Rows[e.RowIndex].Cells["ItemCode"].Value)).Select(p => p.Index).ToList().OrderByDescending(p => p).FirstOrDefault();
+                    int lineItemGroupID = 0;
+                    Int32.TryParse(dgvLineItem.Rows[e.RowIndex].Cells["LineItemGroupID"].Value.ToString(), out lineItemGroupID);
 
-                    if (rowIndex != e.RowIndex)
+                    int rowIndex = dgvLineItem.Rows.Cast<DataGridViewRow>().Where(p => Convert.ToString(p.Cells["ItemCode"].Value) == Convert.ToString(dgvLineItem.Rows[e.RowIndex].Cells["ItemCode"].Value) && Convert.ToInt32(p.Cells["LineItemGroupID"].Value) == lineItemGroupID).Select(p => p.Index).ToList().OrderByDescending(p => p).FirstOrDefault();
+
+                    if (rowIndex != e.RowIndex && dgvLineItem.Rows.Cast<DataGridViewRow>().Any(p => Convert.ToInt32(p.Cells["LineItemGroupID"].Value) == lineItemGroupID && Convert.ToInt32(p.Cells["FreeQuantity"].Value) > 0))
                     {
                         e.Cancel = true;
                         MessageBox.Show("Please edit last row of same item code");
@@ -449,9 +456,8 @@ namespace PharmaUI
                 decimal qty = 0;
                 decimal calFreeQuantity = 0;
                 decimal.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value), out qty);
-
                 decimal.TryParse(Convert.ToString(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value), out freeQuantity);
-
+                
                 if (qty == 0)
                 {
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
@@ -460,6 +466,7 @@ namespace PharmaUI
                 {
                     MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["Quantity"];
+                    dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value = oldQuantity;
                 }
                 else
                 {
@@ -482,6 +489,7 @@ namespace PharmaUI
                 {
                     MessageBox.Show("Quantity entered is out of stock. Please change the quantity");
                     dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"];
+                    dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value = oldFreeQuantity;
                 }
                 else
                 {
@@ -1153,7 +1161,13 @@ namespace PharmaUI
                 if (e.KeyData == Keys.Enter || e.KeyData == Keys.Right)
                 {
                     e.Handled = true;
+                    oldFreeQuantity = 0; oldQuantity = 0;
 
+                    if(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value != null)
+                        decimal.TryParse(dgvLineItem.Rows[rowIndex].Cells["Quantity"].Value.ToString(), out oldQuantity);
+
+                    if (dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value != null)
+                        decimal.TryParse(dgvLineItem.Rows[rowIndex].Cells["FreeQuantity"].Value.ToString(), out oldFreeQuantity);
                     this.BeginInvoke(new MethodInvoker(() =>
                     {
                         OpenDialogAndMoveToNextControl(rowIndex, columnIndex, false);
@@ -1263,11 +1277,11 @@ namespace PharmaUI
                 dgvLineItem.Rows.Add();
                 dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells["ItemCode"];
             }
-            else if (rowIndex < dgvLineItem.Rows.Count - 1)
-            {
-                dgvLineItem.Rows[rowIndex + 1].Selected = true;
-                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells["ItemCode"];
-            }
+            //else if (rowIndex < dgvLineItem.Rows.Count - 1)
+            //{
+            //    dgvLineItem.Rows[rowIndex + 1].Selected = true;
+            //    dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells["ItemCode"];
+            //}
         }
 
         private void ItemMaster_FormClosed(object sender, FormClosedEventArgs e)
@@ -1369,7 +1383,7 @@ namespace PharmaUI
                     dgvLineItem.Rows[i].Cells["IGST"].Value = lineItemList[i].IGST;
                     dgvLineItem.Rows[i].Cells["CGST"].Value = lineItemList[i].CGST;
                     dgvLineItem.Rows[i].Cells["ConversionRate"].Value = lineItemList[i].ConversionRate;
-
+                    dgvLineItem.Rows[i].Cells["LineItemGroupID"].Value = lineItemList[i].LineItemGroupID;
                 }
                 
             }
@@ -1391,7 +1405,7 @@ namespace PharmaUI
                                                     RwIndex = r.Index
                                                 }).ToList();
 
-                List<PurchaseSaleBookLineItem> lineItemList = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID > 0 && p.PurchaseSaleBookHeaderID > 0).OrderBy(p => p.PurchaseSaleBookLineItemID).ToList();
+                List<PurchaseSaleBookLineItem> lineItemList = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID > 0 && p.PurchaseSaleBookHeaderID > 0).OrderBy(p => p.LineItemGroupID).ThenBy(p=>p.PurchaseSaleBookLineItemID).ToList();
                 PurchaseSaleBookLineItem totalLineItemDetail = allLineItemList.Where(p => p.PurchaseSaleBookLineItemID == 0).FirstOrDefault();
 
                 isSetGrid = true;
@@ -1457,7 +1471,7 @@ namespace PharmaUI
                     dgvLineItem.Rows[rowIndex].Cells["IGST"].Value = lineItemList[i].IGST;
                     dgvLineItem.Rows[rowIndex].Cells["CGST"].Value = lineItemList[i].CGST;
                     dgvLineItem.Rows[rowIndex].Cells["ConversionRate"].Value = lineItemList[i].ConversionRate;
-
+                    dgvLineItem.Rows[rowIndex].Cells["LineItemGroupID"].Value = lineItemList[i].LineItemGroupID;
 
                 }
                 isSetGrid = false;
@@ -1468,9 +1482,10 @@ namespace PharmaUI
                 {
                     //dgvLineItem.Rows[rowIndex].Selected = true;
 
+
                     if (lineItemList.Count > 1)
                     {
-                        dgvLineItem.Rows[rowIndex - 1].Selected = true;
+                        dgvLineItem.Rows[rowIndex].Selected = true;
                         dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex].Cells["SaleRate"];
                     }
                     else
@@ -1640,6 +1655,10 @@ namespace PharmaUI
 
                 decimal.TryParse(Convert.ToString(row.Cells["WholeSaleRate"].Value), out dValue);
                 item.WholeSaleRate = dValue;
+
+                Int32.TryParse(Convert.ToString(row.Cells["LineItemGroupID"].Value), out id);
+                item.LineItemGroupID = id;
+
             }
 
             return item;

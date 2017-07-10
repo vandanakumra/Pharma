@@ -62,6 +62,7 @@ namespace PharmaBusinessObjects.Transaction
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public int LineItemGroupID { get; set; }
 
         public PurchaseSaleBookLineItem()
         {
@@ -78,7 +79,8 @@ namespace PharmaBusinessObjects.Transaction
             PurchaseSaleTax = default(decimal);
             IGST = SGST = CGST = default(decimal);
             CostAmount = DiscountAmount = SpecialDiscountAmount = VolumeDiscountAmount = GrossAmount = TaxAmount = default(decimal);
-            SchemeAmount = SurchargeAmount = TotalDiscountAmount = default(decimal);           
+            SchemeAmount = SurchargeAmount = TotalDiscountAmount = default(decimal);
+            LineItemGroupID = 0;
         }
     }
 }
