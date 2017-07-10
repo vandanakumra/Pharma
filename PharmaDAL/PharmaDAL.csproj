@@ -107,6 +107,9 @@
     <Compile Include="Entity\CustomerType.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\ExternalItemNameMapping.cs">
+      <DependentUpon>PharmaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\FIFO.cs">
       <DependentUpon>PharmaEntity.tt</DependentUpon>
     </Compile>
@@ -240,6 +243,7 @@
       <Name>PharmaBusinessObjects</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Entity\PharmaEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

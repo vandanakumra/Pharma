@@ -47,7 +47,7 @@ namespace PharmaDataMigration.Master
                                 maxCompanyCode++;
 
                                 string companyCode = maxCompanyCode.ToString().PadLeft(6, '0');
-                                string originalCompanyCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+                                string originalCompanyCode = Convert.ToString(dr["ACNO"]).Trim();
                                 Common.companyCodeMap.Add(new CompanyCodeMap() { OriginalCompanyCode = originalCompanyCode, MappedCompanyCode = companyCode });
 
                                 PharmaDAL.Entity.CompanyMaster newCompanyMaster = new PharmaDAL.Entity.CompanyMaster()
@@ -58,7 +58,7 @@ namespace PharmaDataMigration.Master
                                     //IsDirect = Convert.ToChar(dr["HALF"]) == 'D' ? true : false,
                                     OrderPreferenceRating = Convert.ToInt32(dr["CONVRATE"]),
                                     BillingPreferenceRating = Convert.ToInt32(dr["DISQTY"]),
-                                    CompanyName = Convert.ToString(dr["ACNAME"]).TrimEnd(),
+                                    CompanyName = Convert.ToString(dr["ACNAME"]).Trim(),
                                     CreatedBy = "admin",
                                     CreatedOn = DateTime.Now
                                 };
@@ -67,7 +67,7 @@ namespace PharmaDataMigration.Master
                             }
                             catch (Exception)
                             {
-                                log.Info("COMPANY MASTER : Error in ACName --> " + Convert.ToString(dr["ACName"]).TrimEnd());
+                                log.Info("COMPANY MASTER : Error in ACName --> " + Convert.ToString(dr["ACName"]).Trim());
                             }
                         }
                     }

@@ -5,6 +5,7 @@ using PharmaDataMigration.Master;
 using System.Data.Entity.Validation;
 using PharmaDataMigration.DBFWriter;
 using PharmaBusinessObjects.Common;
+using PharmaDataMigration.Transaction;
 
 namespace PharmaDataMigration
 {
@@ -30,16 +31,16 @@ namespace PharmaDataMigration
             Common.voucherTypeMap = new List<VoucherTypeMap>();
             Common.ledgerTypeMap = new List<LedgerTypeMap>();
             Common.voucherNumberMap = new List<VoucherNumberMap>();
-          
+
 
             FillVoucherType();
             FillLedgerType();
         }
-     
+
         private void FillLedgerType()
         {
-            Common.ledgerTypeMap.Add(new LedgerTypeMap() {OriginaLedgerType = "CL" , MappedLedgerType = Constants.LedgerType.CustomerLedger });
-            Common.ledgerTypeMap.Add(new LedgerTypeMap() {OriginaLedgerType = "SL" , MappedLedgerType = Constants.LedgerType.SupplierLedger });
+            Common.ledgerTypeMap.Add(new LedgerTypeMap() { OriginaLedgerType = "CL", MappedLedgerType = Constants.LedgerType.CustomerLedger });
+            Common.ledgerTypeMap.Add(new LedgerTypeMap() { OriginaLedgerType = "SL", MappedLedgerType = Constants.LedgerType.SupplierLedger });
         }
 
         private void FillVoucherType()
@@ -58,6 +59,7 @@ namespace PharmaDataMigration
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "JV", MappedVoucherType = Constants.VoucherTypeCode.VOUCHERENTRY });
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "R9", MappedVoucherType = Constants.VoucherTypeCode.SALERETURNBREAKAGEEXPIRY });
+            Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "S9", MappedVoucherType = Constants.VoucherTypeCode.BREAKAGEEXPIRY });
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "RT", MappedVoucherType = Constants.VoucherTypeCode.RECEIPTFROMCUSTOMER });
             Common.voucherTypeMap.Add(new VoucherTypeMap() { OriginalVoucherType = "PT", MappedVoucherType = Constants.VoucherTypeCode.PAYMENTTOSUPPLIER });
         }
@@ -103,12 +105,12 @@ namespace PharmaDataMigration
 
                 MessageBox.Show(ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-           
+
         }
 
         private void StartMigration()
@@ -123,6 +125,10 @@ namespace PharmaDataMigration
             CustomerLedgerMaster customerLedgerMaster = new CustomerLedgerMaster();
             BillOutstanding billOutstanding = new BillOutstanding();
             FIFO fifo = new FIFO();
+            PurchaseSaleBookHeaderMigration purchaseSaleBookHeaderMigration = new PurchaseSaleBookHeaderMigration();
+            PurchaseSaleBookLineItemMigration purchaseSaleBookLineItemMigration = new PurchaseSaleBookLineItemMigration();
+
+
 
             int result = 0;
             int rowIndex = 0;
@@ -237,6 +243,9 @@ namespace PharmaDataMigration
             result = itemMaster.InsertItemMasterData();
 
             SetProcessingText(grdDataMigration, "Item Master", rowIndex, "Completed", result, false);
+
+
+
             result = 0;
             rowIndex += 1;
             SetProcessingText(grdDataMigration, "Supplier Ledger", rowIndex, "Processing", result, true);
@@ -251,6 +260,8 @@ namespace PharmaDataMigration
             result = customerLedgerMaster.InsertCustomerLedgerMasterData(); //confirm mapping columns for columns having comments in CustomerLedgerMaster
 
             SetProcessingText(grdDataMigration, "Customer Ledger", rowIndex, "Completed", result, false);
+
+
             result = 0;
             rowIndex += 1;
             SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Processing", result, true);
@@ -268,6 +279,21 @@ namespace PharmaDataMigration
 
             /*------------------------------------------------------------*/
 
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Processing", result, true);
+
+            result = purchaseSaleBookHeaderMigration.InsertPurchaseSaleBookHeaderData();
+
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Completed", result, false);
+
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookLineItemData", rowIndex, "Processing", result, true);
+
+            result = purchaseSaleBookLineItemMigration.InsertPurchaseSaleBookLineItemData();
+
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookLineItemData", rowIndex, "Completed", result, false);
 
 
             result = 0;
@@ -308,31 +334,9 @@ namespace PharmaDataMigration
                 {
                     grdDataMigration.Rows[rowIndex].Cells[1].Value = message;
                     grdDataMigration.Rows[rowIndex].Cells[2].Value = result;
-                }     
+                }
             }
-        }
-
-        //private void SetProcessingText(string tablname,int rowIndex,string message,int result,bool addRow)
-        //{
-        //    if (grdDataMigration.InvokeRequired)
-        //    {
-        //        grdDataMigration.Invoke(new MethodInvoker(() => { SetProcessingText(tablname, rowIndex, message, result, addRow); }));
-        //    }
-        //    else
-        //    {
-        //        if (addRow)
-        //        {
-        //            grdDataMigration.Rows.Add(tablname, message, result);
-        //        }
-        //        else
-        //        {
-        //            grdDataMigration.Rows[rowIndex].Cells[1].Value = message;
-        //            grdDataMigration.Rows[rowIndex].Cells[2].Value = result;
-        //        }
-        //    }
-           
-
-        //}
+        }       
 
     }
 }

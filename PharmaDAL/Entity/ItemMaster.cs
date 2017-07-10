@@ -70,6 +70,16 @@ namespace PharmaDAL.Entity
         public string SaltCode { get; set; }
         public string SaltName { get; set; }
         public string HSNCode { get; set; }
+        public string ItemExt1 { get; set; }
+        public string ItemExt2 { get; set; }
+        public string ItemExt3 { get; set; }
+        public string ItemExt4 { get; set; }
+        public string ItemExt5 { get; set; }
+        public string ItemExt6 { get; set; }
+        public string ItemExt7 { get; set; }
+        public string ItemExt8 { get; set; }
+        public string ItemExt9 { get; set; }
+        public string ItemExt10 { get; set; }
     
         public virtual AccountLedgerMaster AccountLedgerMaster { get; set; }
         public virtual AccountLedgerMaster AccountLedgerMaster1 { get; set; }

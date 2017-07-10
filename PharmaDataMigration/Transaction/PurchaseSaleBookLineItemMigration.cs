@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -21,87 +22,143 @@ namespace PharmaDataMigration.Transaction
             dbConnection = new DBFConnectionManager(Common.DataDirectory);
         }
 
-        public int InsertPurchaseSaleBookLineItemData()
-        {
-            try
-            {
-                string query = "select * from SalePur2";
-                DataTable dtSalePur = dbConnection.GetData(query);
 
-                List<PharmaDAL.Entity.PurchaseSaleBookLineItem> listPurchaseSaleBookLineItem = new List<PharmaDAL.Entity.PurchaseSaleBookLineItem>();
+        public int InsertData(DataTable dtSalePur)
+        {
+            using (PharmaDBEntities context = new PharmaDBEntities())
+            {
                 int _result = 0;
 
-                using (PharmaDBEntities context = new PharmaDBEntities())
+                List<PharmaDAL.Entity.PurchaseSaleBookLineItem> listPurchaseSaleBookLineItem = new List<PharmaDAL.Entity.PurchaseSaleBookLineItem>();
+
+                if (dtSalePur != null && dtSalePur.Rows.Count > 0)
                 {
-                    if (dtSalePur != null && dtSalePur.Rows.Count > 0)
-                    {    
-                        foreach (DataRow dr in dtSalePur.Rows)
+                    foreach (DataRow dr in dtSalePur.Rows)
+                    {
+                        try
                         {
-                            try
+                            PharmaDAL.Entity.PurchaseSaleBookLineItem newPurchaseSaleBookLineItem = new PharmaDAL.Entity.PurchaseSaleBookLineItem();
+
+                            string oldVNo = string.Empty;
+                            string oldPVNo = string.Empty;
+
+                            oldVNo = Convert.ToString(dr["vno"]).Trim();
+                            oldPVNo = Convert.ToString(dr["PURVNO"]).Trim();
+
+                            var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
+
+                            if (header != null)
                             {
-                                PharmaDAL.Entity.PurchaseSaleBookLineItem newPurchaseSaleBookLineItem = new PharmaDAL.Entity.PurchaseSaleBookLineItem();
 
-                                string oldVNo = Convert.ToString(dr["vno"]).TrimEnd();
-                                string oldPVNo = Convert.ToString(dr["PURVNO"]).TrimEnd();                               
-
-                                var header = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldVNo).FirstOrDefault();
-                                var pHeader = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldPVNo).FirstOrDefault();
-
-                                string oldItemCode = Convert.ToString(dr["ITEMC"]);
+                                string oldItemCode = Convert.ToString(dr["ITEMC"]).Trim();
                                 string newItemCode = Common.itemCodeMap.Where(p => p.OriginalItemCode == oldItemCode).Select(p => p.MappedItemCode).FirstOrDefault();
 
-                                string oldPSType  = Convert.ToString(dr["PSTYPE"]);
-                                string newPSType = Common.accountLedgerCodeMap.Where(p => p.OriginalAccountLedgerCode == oldPSType).Select(p => p.MappedAccountLedgerCode).FirstOrDefault();
+                                if (string.IsNullOrEmpty(newItemCode))
+                                {                                    
+                                    throw new Exception(string.Format("FIFO: Item Code Not found in Item Master {0}", oldItemCode));
+                                }                              
+
+
+                                string oldPSType = Convert.ToString(dr["PSTYPE"]);
+                                if (!string.IsNullOrEmpty(oldPSType))
+                                {
+
+                                    string newPSType = Common.accountLedgerCodeMap.Where(p => p.OriginalAccountLedgerCode == oldPSType).Select(p => p.MappedAccountLedgerCode).FirstOrDefault();
+
+                                    if (!string.IsNullOrEmpty(newPSType))
+                                    {
+                                        newPurchaseSaleBookLineItem.PurchaseSaleTypeCode = newPSType;
+                                    }
+                                }
 
                                 newPurchaseSaleBookLineItem.PurchaseSaleBookHeaderID = header.MappedPurchaseHeaderID;
-                                newPurchaseSaleBookLineItem.FifoID = 0;
-                                newPurchaseSaleBookLineItem.PurchaseBillDate = Convert.ToDateTime(dr["PURVDT"]);
-                                newPurchaseSaleBookLineItem.PurchaseVoucherNumber = pHeader.MappedVoucherNumber;
-                                newPurchaseSaleBookLineItem.PurchaseSrlNo = Convert.ToInt32(dr["PURSRLNO"]);
+
+
+                                //newPurchaseSaleBookLineItem.FifoID = 0;
+
+                                if (dr["PURVDT"] != null)
+                                {
+                                    newPurchaseSaleBookLineItem.PurchaseBillDate = CommonMethods.SafeConversionDatetime(Convert.ToString(dr["PURVDT"]));
+                                }
+
+                                if (!string.IsNullOrEmpty(oldPVNo))
+                                {
+                                    var pHeader = Common.voucherNumberMap.Where(p => p.OriginalVoucherNumber == oldPVNo).FirstOrDefault();
+
+                                    if (pHeader != null)
+                                    {
+                                        newPurchaseSaleBookLineItem.PurchaseVoucherNumber = pHeader.MappedVoucherNumber;
+                                    }
+                                }
+
+                                if (dr["PURSRLNO"] != null && !string.IsNullOrEmpty(Convert.ToString(dr["PURSRLNO"])))
+                                {
+                                    newPurchaseSaleBookLineItem.PurchaseSrlNo = Convert.ToInt32(Convert.ToString(dr["PURSRLNO"]).Trim());
+                                }
+
+
                                 newPurchaseSaleBookLineItem.ItemCode = newItemCode;
                                 newPurchaseSaleBookLineItem.Batch = Convert.ToString(dr["BATCH"]);
                                 newPurchaseSaleBookLineItem.BatchNew = Convert.ToString(dr["BATCH1"]);
-                                newPurchaseSaleBookLineItem.Quantity = Convert.ToInt32(dr["QTY"]);
-                                newPurchaseSaleBookLineItem.FreeQuantity = Convert.ToInt32(dr["FQTY"]);
-                                newPurchaseSaleBookLineItem.PurchaseSaleRate = Convert.ToDecimal(dr["PSRATE"]);
-                                newPurchaseSaleBookLineItem.EffecivePurchaseSaleRate = Convert.ToDecimal(dr["EPSRATE"]); //??
-                                newPurchaseSaleBookLineItem.PurchaseSaleTypeCode = newPSType;
-                                newPurchaseSaleBookLineItem.SurCharge = Convert.ToDecimal(dr["SC"]);
-                                newPurchaseSaleBookLineItem.SalePurchaseTax = Convert.ToDecimal(dr["TAX"]);
-                                newPurchaseSaleBookLineItem.LocalCentral = Convert.ToString(dr["SALE_LORC"]);
-                                newPurchaseSaleBookLineItem.SGST = default(decimal);
-                                newPurchaseSaleBookLineItem.IGST = default(decimal);
-                                newPurchaseSaleBookLineItem.CGST = default(decimal);
-                                newPurchaseSaleBookLineItem.Amount = Convert.ToDecimal(dr["SALEAMT"]); // ????
-
-                                newPurchaseSaleBookLineItem.Discount = Convert.ToDecimal(dr["DIS"]);
-                                newPurchaseSaleBookLineItem.SpecialDiscount = Convert.ToDecimal(dr["SPLDIS"]);
-                                newPurchaseSaleBookLineItem.DiscountQuantity = Convert.ToDecimal(dr["DISQTY"]);
-                                newPurchaseSaleBookLineItem.VolumeDiscount = Convert.ToDecimal(dr["VDIS"]);
-                                newPurchaseSaleBookLineItem.Scheme1 = Convert.ToDecimal(dr["SCHEME1"]);
-                                newPurchaseSaleBookLineItem.Scheme2 = Convert.ToDecimal(dr["SCHEME2"]);
-                                newPurchaseSaleBookLineItem.IsHalfScheme = Convert.ToString(dr["HALF"]) == "Y" ? true : false;//  Convert.ToBoolean(dr["HALF"]); // ???
-                                newPurchaseSaleBookLineItem.HalfSchemeRate =    Convert.ToDecimal(dr["HALFP"]);
+                                newPurchaseSaleBookLineItem.Quantity = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["QTY"]));
+                                newPurchaseSaleBookLineItem.FreeQuantity = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["FQTY"]));
+                                newPurchaseSaleBookLineItem.PurchaseSaleRate = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["PSRATE"]));
 
 
-                                newPurchaseSaleBookLineItem.CostAmount = Convert.ToDecimal(dr["EPCOST"]); //??
-                                newPurchaseSaleBookLineItem.GrossAmount = 0;// Convert.ToDecimal(dr["HALFP"]); // ??
-                                newPurchaseSaleBookLineItem.SchemeAmount = Convert.ToDecimal(dr["SCAMT"]);
-                                newPurchaseSaleBookLineItem.DiscountAmount = Convert.ToDecimal(dr["DISAMT"]);
-                                newPurchaseSaleBookLineItem.SurchargeAmount = Convert.ToDecimal(dr["SCAMT"]);
-                                newPurchaseSaleBookLineItem.ConversionRate = Convert.ToDecimal(dr["CONVRATE"]);
-                                newPurchaseSaleBookLineItem.MRP = Convert.ToDecimal(dr["MRP"]);
+                                newPurchaseSaleBookLineItem.EffecivePurchaseSaleRate = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["EPSRATE"])) 
+                                    + CommonMethods.SafeConversionDecimal(Convert.ToString(dr["EPCOST"]));
 
-                               // newPurchaseSaleBookLineItem.MfgDate = Convert.ToDateTime(dr["MRP"]);
-                                newPurchaseSaleBookLineItem.ExpiryDate = Convert.ToDateTime(dr["EXPDT"]);
+                                newPurchaseSaleBookLineItem.SurCharge = CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SC"]));
+                                newPurchaseSaleBookLineItem.SalePurchaseTax = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["TAX"]));
+                                newPurchaseSaleBookLineItem.TaxAmount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["TAXAMT"]));
+
+
+                                newPurchaseSaleBookLineItem.LocalCentral = header.LocalCentral;                               
+
+                                if (header.LocalCentral == "L")
+                                {
+                                    newPurchaseSaleBookLineItem.SGST = newPurchaseSaleBookLineItem.TaxAmount * (decimal)0.5;
+                                    newPurchaseSaleBookLineItem.CGST = newPurchaseSaleBookLineItem.TaxAmount * (decimal)0.5;
+                                }
+                                else
+                                {
+                                    newPurchaseSaleBookLineItem.IGST = newPurchaseSaleBookLineItem.TaxAmount;
+                                }
+
+
+                                newPurchaseSaleBookLineItem.Amount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SALEAMT"])); //  PSSRATE * QYTY = GROSS = SALEAMT
+
+                                newPurchaseSaleBookLineItem.Discount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["DIS"]));
+                                newPurchaseSaleBookLineItem.SpecialDiscount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SPLDIS"]));
+                                newPurchaseSaleBookLineItem.DiscountQuantity = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["DISQTY"]));
+                                newPurchaseSaleBookLineItem.VolumeDiscount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["VDIS"]));
+                                newPurchaseSaleBookLineItem.Scheme1 = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SCHEME1"]));
+                                newPurchaseSaleBookLineItem.Scheme2 = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SCHEME2"]));
+                                newPurchaseSaleBookLineItem.IsHalfScheme = false;// Convert.ToString(dr["HALF"]) == "Y" ? true : false;//  Convert.ToBoolean(dr["HALF"]); // ???
+                                newPurchaseSaleBookLineItem.HalfSchemeRate = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["HALFP"]));
+
+
+                                newPurchaseSaleBookLineItem.CostAmount = 
+                                    CommonMethods.SafeConversionDecimal(Convert.ToString(dr["EPSRATE"])) 
+                                    + CommonMethods.SafeConversionDecimal(Convert.ToString(dr["EPCOST"]));//??
+
+                                newPurchaseSaleBookLineItem.GrossAmount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SALEAMT"]));
+                                newPurchaseSaleBookLineItem.SchemeAmount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SCAMT"]));
+                                newPurchaseSaleBookLineItem.DiscountAmount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["DISAMT"]));
+                                newPurchaseSaleBookLineItem.SurchargeAmount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SCAMT"]));
+                                newPurchaseSaleBookLineItem.ConversionRate = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["CONVRATE"]));
+                                newPurchaseSaleBookLineItem.MRP = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["MRP"]));
+
+                                // newPurchaseSaleBookLineItem.MfgDate = Convert.ToDateTime(dr["MRP"]);
+                                newPurchaseSaleBookLineItem.ExpiryDate = CommonMethods.SafeConversionDatetime(Convert.ToString(dr["EXPDT"]));
                                 newPurchaseSaleBookLineItem.SaleRate = 0;//Convert.ToDecimal(dr["MRP"]); //??
-                                newPurchaseSaleBookLineItem.WholeSaleRate = Convert.ToDecimal(dr["WSRATE"]);
-                                newPurchaseSaleBookLineItem.SpecialRate = Convert.ToDecimal(dr["SPLRATE"]);
+                                newPurchaseSaleBookLineItem.WholeSaleRate = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["WSRATE"]));
+                                newPurchaseSaleBookLineItem.SpecialRate = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["SPLRATE"]));
 
-                                newPurchaseSaleBookLineItem.TaxAmount = Convert.ToDecimal(dr["TAXAMT"]);
+
                                 newPurchaseSaleBookLineItem.SpecialDiscountAmount = 0;// Convert.ToDecimal(dr["SPLRATE"]);
                                 newPurchaseSaleBookLineItem.VolumeDiscountAmount = 0;// Convert.ToDecimal(dr["SPLRATE"]);
-                                newPurchaseSaleBookLineItem.TotalDiscountAmount = Convert.ToDecimal(dr["TDISAMT"]);
+                                newPurchaseSaleBookLineItem.TotalDiscountAmount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["DISAMT"]));
 
 
                                 newPurchaseSaleBookLineItem.CreatedBy = "admin";
@@ -111,22 +168,63 @@ namespace PharmaDataMigration.Transaction
 
                                 listPurchaseSaleBookLineItem.Add(newPurchaseSaleBookLineItem);
                             }
-                            catch (Exception ex)
+                            else
                             {
-                                log.Info(string.Format("PurchaseSaleBookLineItem: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).TrimEnd()));
+                                log.Info(string.Format("PurchaseSaleBookHeader: Error in VNo {0}}", Convert.ToString(dr["vno"]).Trim()));
                             }
                         }
+                        catch (Exception ex)
+                        {                            
+                            log.Info(string.Format("PurchaseSaleBookLineItem: Error in Voucher Number {0}", Convert.ToString(dr["vno"]).Trim()));
+                            log.Info(ex.ToString());
+                        }
                     }
-
-                    context.PurchaseSaleBookLineItem.AddRange(listPurchaseSaleBookLineItem);
-                    _result = context.SaveChanges();
-
-                    return _result;
                 }
+
+                context.PurchaseSaleBookLineItem.AddRange(listPurchaseSaleBookLineItem);
+                _result = context.SaveChanges();
+
+                return _result;
+            }
+        }
+
+        public int InsertPurchaseSaleBookLineItemData()
+        {
+            try
+            {
+                int _result = 0;
+
+                foreach (var item in Common.voucherTypeMap)
+                {
+                    string query = string.Format("select * from SalePur2 WHERE VTYP = '{0}'", item.OriginalVoucherType);
+                    DataTable dtSalePur = dbConnection.GetData(query);
+
+                    if (dtSalePur != null && dtSalePur.Rows.Count > 0)
+                    {
+                        log.Info(string.Format("PurchaseSaleBookLineItem: Record Count For VType {0} is {1}", item.MappedVoucherType , dtSalePur.Rows.Count));
+
+                        _result += InsertData(dtSalePur);
+                    }
+                }
+
+                return _result;
             }
             catch (DbEntityValidationException ex)
             {
                 log.Info(string.Format("PurchaseSaleBookLineItem: Error {0}", ex.Message));
+
+                // Retrieve the error messages as a list of strings.
+                var errorMessages = ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                // Join the list to a single string.
+                var fullErrorMessage = string.Join("; ", errorMessages);
+
+                // Combine the original exception message with the new one.
+                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+                log.Info(exceptionMessage);
+
                 throw ex;
             }
             catch (Exception ex)

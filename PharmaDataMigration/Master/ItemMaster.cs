@@ -71,9 +71,11 @@ namespace PharmaDataMigration.Master
 
                                 string itemCode = string.Concat(companyCode, totalItemsFromSameCompany.ToString().PadLeft((9 - companyCode.Length), '0'));
                                 string originalItemCode = Convert.ToString(dr["ACNO"]).TrimEnd();
+
                                 Common.itemCodeMap.Add(new ItemCodeMap() { OriginalItemCode = originalItemCode, MappedItemCode = itemCode });
 
-                                string saleLedgerCode = Common.accountLedgerCodeMap.Where(q => q.OriginalAccountLedgerCode == Convert.ToString(dr["SType"]).TrimEnd()).FirstOrDefault().MappedAccountLedgerCode;
+                                string originalSleType = Convert.ToString(dr["SType"]).TrimEnd();
+                                string saleLedgerCode = Common.accountLedgerCodeMap.Where(q => q.OriginalAccountLedgerCode == originalSleType).FirstOrDefault().MappedAccountLedgerCode;
                                 var saleType = accountLedgerMaster.Where(p => p.AccountLedgerCode == saleLedgerCode).FirstOrDefault();
 
                                 PharmaDAL.Entity.AccountLedgerMaster purchaseType = null;
@@ -148,7 +150,7 @@ namespace PharmaDataMigration.Master
 
                     context.ItemMaster.AddRange(listItemMaster);
                     _result = context.SaveChanges();
-
+                   
                     return _result;
                 }
             }

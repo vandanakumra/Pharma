@@ -64,5 +64,6 @@ namespace PharmaDAL.Entity
         public virtual DbSet<TRN> TRN { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<VoucherType> VoucherType { get; set; }
+        public virtual DbSet<ExternalItemNameMapping> ExternalItemNameMapping { get; set; }
     }
 }
