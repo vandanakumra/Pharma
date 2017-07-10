@@ -74,7 +74,9 @@ namespace PharmaDataMigration.Transaction
                                     ledgerTypeCode = Common.customerLedgerCodeMap.Where(p => p.OriginalCustomerLedgerCode == Convert.ToString(dr["ACNO"]).Trim()).Select(x => x.MappedCustomerLedgerCode).FirstOrDefault();
                                 }
 
-                                if (dr["SALE_LORC"] == null || string.IsNullOrEmpty(Convert.ToString(dr["SALE_LORC"])))
+                               // log.Info(string.Format("PurchaseSaleBookHeader LOCALCENTRAL --> {0} for VNO ", Convert.ToString(dr["SALE_LORC"]), oldVNo));
+
+                                if (dr["SALE_LORC"] == null || string.IsNullOrEmpty(Convert.ToString(dr["SALE_LORC"]).Trim()))
                                 {
                                     newPurchaseSaleBookHeader.LocalCentral = "L";
                                 }
