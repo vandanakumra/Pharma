@@ -221,7 +221,7 @@ namespace PharmaDAL.Transaction
                             item.EffecivePurchaseSaleRate = Convert.IsDBNull(row["EffecivePurchaseSaleRate"]) ? 0 : Convert.ToDecimal(row["EffecivePurchaseSaleRate"]);
                             item.PurchaseSaleRate = Convert.IsDBNull(row["PurchaseSaleRate"]) ? 0 : Convert.ToDecimal(row["PurchaseSaleRate"]);
                             item.FifoID = Convert.IsDBNull(row["Fifoid"]) ? 0 : Convert.ToInt32(row["Fifoid"]);
-
+                            item.LineItemGroupID = Convert.IsDBNull(row["LineItemGroupID"]) ? 0 : Convert.ToInt32(row["LineItemGroupID"]);
                             item.SchemeAmount = Convert.IsDBNull(row["SchemeAmount"]) ? 0 : Convert.ToDecimal(row["SchemeAmount"]);
                             item.GrossAmount = Convert.IsDBNull(row["GrossAmount"]) ? 0 : Convert.ToDecimal(row["GrossAmount"]);
                             item.TaxAmount = Convert.IsDBNull(row["TaxAmount"]) ? 0 : Convert.ToDecimal(row["TaxAmount"]);
