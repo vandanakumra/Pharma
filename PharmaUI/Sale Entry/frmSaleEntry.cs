@@ -1277,6 +1277,10 @@ namespace PharmaUI
                 dgvLineItem.Rows.Add();
                 dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells["ItemCode"];
             }
+            else
+            {
+                dgvLineItem.CurrentCell = dgvLineItem.Rows[rowIndex + 1].Cells["ItemCode"];
+            }
             //else if (rowIndex < dgvLineItem.Rows.Count - 1)
             //{
             //    dgvLineItem.Rows[rowIndex + 1].Selected = true;
