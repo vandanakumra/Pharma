@@ -57,7 +57,11 @@ namespace PharmaDataMigration.Master
 
                                 string customerLedgerCode = "C" + maxCustomerLedgerID.ToString().PadLeft(6, '0');
                                 string originalCustomerLedgerCode = Convert.ToString(dr["ACNO"]).Trim();
-                                Common.customerLedgerCodeMap.Add(new CustomerLedgerCodeMap() { OriginalCustomerLedgerCode = originalCustomerLedgerCode, MappedCustomerLedgerCode = customerLedgerCode });
+                                Common.customerLedgerCodeMap.Add(new CustomerLedgerCodeMap() {
+                                    OriginalCustomerLedgerCode = originalCustomerLedgerCode
+                                    , MappedCustomerLedgerCode = customerLedgerCode
+                                    ,CustomerLedgerName = Convert.ToString(dr["ACNAME"]).Trim()
+                                });
 
                                 string areaCode = string.IsNullOrEmpty(Convert.ToString(dr["Parea"]).Trim()) ? null : Common.areaCodeMap.Where(p => p.OriginalAreaCode == Convert.ToString(dr["Parea"]).Trim()).FirstOrDefault().MappedAreaCode;
                                 int? areaID = areaCode == null ? (int?)null : areaList.Where(q => q.PersonRouteCode == areaCode).FirstOrDefault().PersonRouteID;

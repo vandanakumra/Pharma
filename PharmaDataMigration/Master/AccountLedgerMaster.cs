@@ -269,7 +269,13 @@ namespace PharmaDataMigration.Master
                                 string originalDebitControlCode = Convert.ToString(dr["Cad"]).Trim();
                                 string mappedDebitControlCode = Common.controlCodeMap.Where(q => q.OriginalControlCode == originalDebitControlCode).FirstOrDefault().MappedControlCode;
                                 int debitControlCodeID = context.AccountLedgerMaster.Where(p => p.AccountLedgerCode == mappedDebitControlCode).FirstOrDefault().AccountLedgerID;
-                                Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap() { OriginalAccountLedgerCode = originalAccountLedgerCode, MappedAccountLedgerCode = accountLedgerCode, AccountLedgerTypeID = accountLedgerTypeID });
+                                Common.accountLedgerCodeMap.Add(new AccountLedgerCodeMap()
+                                {
+                                    OriginalAccountLedgerCode = originalAccountLedgerCode
+                                    , MappedAccountLedgerCode = accountLedgerCode
+                                    , AccountLedgerTypeID = accountLedgerTypeID
+                                    ,AccountLedgerName = Convert.ToString(dr["ACName"]).Trim()
+                                });
 
                                 PharmaDAL.Entity.AccountLedgerMaster newTransactionLedgerMaster = new PharmaDAL.Entity.AccountLedgerMaster()
                                 {

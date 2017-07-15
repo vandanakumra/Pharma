@@ -31,7 +31,8 @@ namespace PharmaDataMigration
             Common.voucherTypeMap = new List<VoucherTypeMap>();
             Common.ledgerTypeMap = new List<LedgerTypeMap>();
             Common.voucherNumberMap = new List<VoucherNumberMap>();
-
+            Common.receiptPaymentVoucherNumberMap = new List<ReceiptPaymentVoucherMap>();
+            
 
             FillVoucherType();
             FillLedgerType();
@@ -128,6 +129,7 @@ namespace PharmaDataMigration
             PurchaseSaleBookHeaderMigration purchaseSaleBookHeaderMigration = new PurchaseSaleBookHeaderMigration();
             PurchaseSaleBookLineItemMigration purchaseSaleBookLineItemMigration = new PurchaseSaleBookLineItemMigration();
             TRN trn = new TRN();
+            ReceiptPaymentMigration receiptPayment = new ReceiptPaymentMigration();
 
 
             int result = 0;
@@ -252,11 +254,11 @@ namespace PharmaDataMigration
 
             /*------------------------------------------------------------*/
 
-            result = 0;
-            rowIndex += 1;
-            SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Processing", result, true);
-            result = purchaseSaleBookHeaderMigration.InsertPurchaseSaleBookHeaderData();
-            SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Completed", result, false);
+            //result = 0;
+            //rowIndex += 1;
+            //SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Processing", result, true);
+            //result = purchaseSaleBookHeaderMigration.InsertPurchaseSaleBookHeaderData();
+            //SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Completed", result, false);
 
             //result = 0;
             //rowIndex += 1;
@@ -278,11 +280,18 @@ namespace PharmaDataMigration
             //SetProcessingText(grdDataMigration, "Bill Outstanding", rowIndex, "Completed", result, false);
 
 
+            //result = 0;
+            //rowIndex += 1;
+            //SetProcessingText(grdDataMigration, "TRN", rowIndex, "Processing", result, true);
+            //trn.InsertTRNData();
+            //SetProcessingText(grdDataMigration, "TRN", rowIndex, "Completed", 0, false);
+
+
             result = 0;
             rowIndex += 1;
-            SetProcessingText(grdDataMigration, "TRN", rowIndex, "Processing", result, true);
-            trn.InsertTRNData();
-            SetProcessingText(grdDataMigration, "TRN", rowIndex, "Completed", 0, false);
+            SetProcessingText(grdDataMigration, "ReceiptPayment", rowIndex, "Processing", result, true);
+            receiptPayment.InsertReceiptPaymentData();
+            SetProcessingText(grdDataMigration, "ReceiptPayment", rowIndex, "Completed", 0, false);
 
             /* ---------------------------------------  ---------------------------------------*/
 

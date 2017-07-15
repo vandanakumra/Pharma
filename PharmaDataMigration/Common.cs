@@ -22,7 +22,16 @@ namespace PharmaDataMigration
         public static List<VoucherTypeMap> voucherTypeMap;
         public static List<LedgerTypeMap> ledgerTypeMap;
         public static List<VoucherNumberMap> voucherNumberMap;
-      //  public static List<VoucherNumberPurchaseHeaderIDMap> voucherNumberPurchaseHeaderIDMap;
+        public static List<ReceiptPaymentVoucherMap> receiptPaymentVoucherNumberMap;
+
+    }
+
+    public class ReceiptPaymentVoucherMap
+    {
+        public string OriginalVoucherNumber { get; set; }
+        public string MappedVoucherNumber { get; set; }
+        public long MappedReceiptPaymentID { get; set; }
+        
     }
 
     public class VoucherNumberMap
@@ -110,17 +119,21 @@ namespace PharmaDataMigration
         public string OriginalAccountLedgerCode { get; set; }
         public string MappedAccountLedgerCode { get; set; }
         public int AccountLedgerTypeID { get; set; }
+        public string AccountLedgerName { get; set; }
     }
 
     public class SupplierLedgerCodeMap
     {
         public string OriginalSupplierLedgerCode { get; set; }
         public string MappedSupplierLedgerCode { get; set; }
+
+        public string SupplierLedgerName { get; set; }
     }
 
     public class CustomerLedgerCodeMap
     {
         public string OriginalCustomerLedgerCode { get; set; }
         public string MappedCustomerLedgerCode { get; set; }
+        public string CustomerLedgerName { get; set; }
     }
 }
