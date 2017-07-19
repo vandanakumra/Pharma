@@ -130,6 +130,7 @@ namespace PharmaDataMigration
             PurchaseSaleBookLineItemMigration purchaseSaleBookLineItemMigration = new PurchaseSaleBookLineItemMigration();
             TRN trn = new TRN();
             ReceiptPaymentMigration receiptPayment = new ReceiptPaymentMigration();
+            BillOutStandingsAudjustmentMigration billOsAdjustment = new BillOutStandingsAudjustmentMigration();
 
 
             int result = 0;
@@ -239,7 +240,7 @@ namespace PharmaDataMigration
             SetProcessingText(grdDataMigration, "Customer Ledger", rowIndex, "Processing", result, true);
             result = customerLedgerMaster.InsertCustomerLedgerMasterData(); //confirm mapping columns for columns having comments in CustomerLedgerMaster
             SetProcessingText(grdDataMigration, "Customer Ledger", rowIndex, "Completed", result, false);
-            
+
             //result = 0;
             //rowIndex += 1;
             //SetProcessingText(grdDataMigration, "Customer Compnay Discount Ref", rowIndex, "Processing", result, true);
@@ -254,44 +255,48 @@ namespace PharmaDataMigration
 
             /*------------------------------------------------------------*/
 
-            //result = 0;
-            //rowIndex += 1;
-            //SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Processing", result, true);
-            //result = purchaseSaleBookHeaderMigration.InsertPurchaseSaleBookHeaderData();
-            //SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Completed", result, false);
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Processing", result, true);
+            result = purchaseSaleBookHeaderMigration.InsertPurchaseSaleBookHeaderData();
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookHeaderData", rowIndex, "Completed", result, false);
 
-            //result = 0;
-            //rowIndex += 1;
-            //SetProcessingText(grdDataMigration, "PurchaseSaleBookLineItemData", rowIndex, "Processing", result, true);
-            //result = purchaseSaleBookLineItemMigration.InsertPurchaseSaleBookLineItemData();
-            //SetProcessingText(grdDataMigration, "PurchaseSaleBookLineItemData", rowIndex, "Completed", result, false);
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookLineItemData", rowIndex, "Processing", result, true);
+            result = purchaseSaleBookLineItemMigration.InsertPurchaseSaleBookLineItemData();
+            SetProcessingText(grdDataMigration, "PurchaseSaleBookLineItemData", rowIndex, "Completed", result, false);
 
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Fifo", rowIndex, "Processing", result, true);
+            result = fifo.InsertFIFOData();
+            SetProcessingText(grdDataMigration, "Fifo", rowIndex, "Completed", result, false);
 
-            //result = 0;
-            //rowIndex += 1;
-            //SetProcessingText(grdDataMigration, "Fifo", rowIndex, "Processing", result, true);
-            //result = fifo.InsertFIFOData();
-            //SetProcessingText(grdDataMigration, "Fifo", rowIndex, "Completed", result, false);
-
-            //result = 0;
-            //rowIndex += 1;
-            //SetProcessingText(grdDataMigration, "Bill Outstanding", rowIndex, "Processing", result, true);
-            //result = billOutstanding.InsertBillOutstandingData();
-            //SetProcessingText(grdDataMigration, "Bill Outstanding", rowIndex, "Completed", result, false);
-
-
-            //result = 0;
-            //rowIndex += 1;
-            //SetProcessingText(grdDataMigration, "TRN", rowIndex, "Processing", result, true);
-            //trn.InsertTRNData();
-            //SetProcessingText(grdDataMigration, "TRN", rowIndex, "Completed", 0, false);
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "Bill Outstanding", rowIndex, "Processing", result, true);
+            result = billOutstanding.InsertBillOutstandingData();
+            SetProcessingText(grdDataMigration, "Bill Outstanding", rowIndex, "Completed", result, false);
 
 
             result = 0;
             rowIndex += 1;
+            SetProcessingText(grdDataMigration, "TRN", rowIndex, "Processing", result, true);
+            trn.InsertTRNData();
+            SetProcessingText(grdDataMigration, "TRN", rowIndex, "Completed", 0, false);
+
+            result = 0;
+            rowIndex += 1;
             SetProcessingText(grdDataMigration, "ReceiptPayment", rowIndex, "Processing", result, true);
-            receiptPayment.InsertReceiptPaymentData();
+            result  = receiptPayment.InsertReceiptPaymentData();
             SetProcessingText(grdDataMigration, "ReceiptPayment", rowIndex, "Completed", 0, false);
+
+            result = 0;
+            rowIndex += 1;
+            SetProcessingText(grdDataMigration, "BillOutStandingsAudjustment", rowIndex, "Processing", result, true);
+            result = billOsAdjustment.InsertBillOutStandingsAudjustmentData();
+            SetProcessingText(grdDataMigration, "BillOutStandingsAudjustment", rowIndex, "Completed", 0, false);
 
             /* ---------------------------------------  ---------------------------------------*/
 

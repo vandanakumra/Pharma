@@ -521,6 +521,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           <Property Name="VolumeDiscountAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalDiscountAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="MfgDate" Type="datetime" />
+          <Property Name="LineItemGroupID" Type="int" />
         </EntityType>
         <EntityType Name="PurchaseSaleEntryForm">
           <Key>
@@ -797,6 +798,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           <Property Name="BalanceQuantity" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OldPurchaseSaleBookLineItemID" Type="bigint" />
           <Property Name="MfgDate" Type="datetime" />
+          <Property Name="LineItemGroupID" Type="int" />
         </EntityType>
         <EntityType Name="TempReceiptPayment">
           <Key>
@@ -830,7 +832,8 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
             <PropertyRef Name="TrnID" />
           </Key>
           <Property Name="TrnID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" Nullable="false" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="bigint" />
+          <Property Name="ReceiptPaymentID" Type="bigint" />
           <Property Name="VoucherNumber" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="VoucherDate" Type="datetime" Nullable="false" />
@@ -1414,7 +1417,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TRN_PurchaseSaleBookHeader">
-          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
+          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
           <End Role="TRN" Type="Self.TRN" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseSaleBookHeader">
@@ -1422,6 +1425,18 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
             </Principal>
             <Dependent Role="TRN">
               <PropertyRef Name="PurchaseSaleBookHeaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_ReceiptPayment">
+          <End Role="ReceiptPayment" Type="Self.ReceiptPayment" Multiplicity="0..1" />
+          <End Role="TRN" Type="Self.TRN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiptPayment">
+              <PropertyRef Name="ReceiptPaymentID" />
+            </Principal>
+            <Dependent Role="TRN">
+              <PropertyRef Name="ReceiptPaymentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1654,6 +1669,10 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           </AssociationSet>
           <AssociationSet Name="FK_TRN_PurchaseSaleBookHeader" Association="Self.FK_TRN_PurchaseSaleBookHeader">
             <End Role="PurchaseSaleBookHeader" EntitySet="PurchaseSaleBookHeader" />
+            <End Role="TRN" EntitySet="TRN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_ReceiptPayment" Association="Self.FK_TRN_ReceiptPayment">
+            <End Role="ReceiptPayment" EntitySet="ReceiptPayment" />
             <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
         </EntityContainer>
@@ -2231,6 +2250,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           <Property Name="VolumeDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalDiscountAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="MfgDate" Type="DateTime" Precision="3" />
+          <Property Name="LineItemGroupID" Type="Int32" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_PurchaseSaleBookLineItem_FIFO" FromRole="PurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_PurchaseSaleBookLineItem_PurchaseSaleBookHeader" FromRole="PurchaseSaleBookLineItem" ToRole="PurchaseSaleBookHeader" />
         </EntityType>
@@ -2291,6 +2311,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           <Property Name="BankAccountLedgerTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BillOutStandingsAudjustment" Relationship="Self.FK_BillOutStandingsAudjustment_ReceiptPayment" FromRole="ReceiptPayment" ToRole="BillOutStandingsAudjustment" />
           <NavigationProperty Name="BillOutStandingsAudjustment1" Relationship="Self.FK_TempBillOutStandingsAudjustment_ReceiptPayment" FromRole="ReceiptPayment" ToRole="BillOutStandingsAudjustment" />
+          <NavigationProperty Name="TRN" Relationship="Self.FK_TRN_ReceiptPayment" FromRole="ReceiptPayment" ToRole="TRN" />
         </EntityType>
         <EntityType Name="RecordType">
           <Key>
@@ -2529,6 +2550,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           <Property Name="BalanceQuantity" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OldPurchaseSaleBookLineItemID" Type="Int64" />
           <Property Name="MfgDate" Type="DateTime" Precision="3" />
+          <Property Name="LineItemGroupID" Type="Int32" />
           <NavigationProperty Name="FIFO" Relationship="Self.FK_TempPurchaseSaleBookLineItem_FIFO" FromRole="TempPurchaseSaleBookLineItem" ToRole="FIFO" />
           <NavigationProperty Name="TempPurchaseSaleBookHeader" Relationship="Self.FK_TempPurchaseSaleBookLineItem_TempPurchaseSaleBookHeader" FromRole="TempPurchaseSaleBookLineItem" ToRole="TempPurchaseSaleBookHeader" />
         </EntityType>
@@ -2565,7 +2587,8 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
             <PropertyRef Name="TrnID" />
           </Key>
           <Property Name="TrnID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" Nullable="false" />
+          <Property Name="PurchaseSaleBookHeaderID" Type="Int64" />
+          <Property Name="ReceiptPaymentID" Type="Int64" />
           <Property Name="VoucherNumber" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="VoucherDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -2579,6 +2602,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           <Property Name="ChequeClearedDate" Type="DateTime" Precision="3" />
           <Property Name="ChequeNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PurchaseSaleBookHeader" Relationship="Self.FK_TRN_PurchaseSaleBookHeader" FromRole="TRN" ToRole="PurchaseSaleBookHeader" />
+          <NavigationProperty Name="ReceiptPayment" Relationship="Self.FK_TRN_ReceiptPayment" FromRole="TRN" ToRole="ReceiptPayment" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -3087,7 +3111,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TRN_PurchaseSaleBookHeader">
-          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="1" />
+          <End Role="PurchaseSaleBookHeader" Type="Self.PurchaseSaleBookHeader" Multiplicity="0..1" />
           <End Role="TRN" Type="Self.TRN" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseSaleBookHeader">
@@ -3107,6 +3131,18 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
             </Principal>
             <Dependent Role="PurchaseSaleEntryForm">
               <PropertyRef Name="PurchaseSaleEntryTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_ReceiptPayment">
+          <End Role="ReceiptPayment" Type="Self.ReceiptPayment" Multiplicity="0..1" />
+          <End Role="TRN" Type="Self.TRN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceiptPayment">
+              <PropertyRef Name="ReceiptPaymentID" />
+            </Principal>
+            <Dependent Role="TRN">
+              <PropertyRef Name="ReceiptPaymentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3376,6 +3412,10 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
           <AssociationSet Name="FK_PurchaseSaleEntryForm_PurchaseSaleEntryType" Association="Self.FK_PurchaseSaleEntryForm_PurchaseSaleEntryType">
             <End Role="PurchaseSaleEntryType" EntitySet="PurchaseSaleEntryType" />
             <End Role="PurchaseSaleEntryForm" EntitySet="PurchaseSaleEntryForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_ReceiptPayment" Association="Self.FK_TRN_ReceiptPayment">
+            <End Role="ReceiptPayment" EntitySet="ReceiptPayment" />
+            <End Role="TRN" EntitySet="TRN" />
           </AssociationSet>
           <AssociationSet Name="FK_RolePrivledges_Roles" Association="Self.FK_RolePrivledges_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -3929,6 +3969,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
                 <ScalarProperty Name="VolumeDiscountAmount" ColumnName="VolumeDiscountAmount" />
                 <ScalarProperty Name="TotalDiscountAmount" ColumnName="TotalDiscountAmount" />
                 <ScalarProperty Name="MfgDate" ColumnName="MfgDate" />
+                <ScalarProperty Name="LineItemGroupID" ColumnName="LineItemGroupID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4217,6 +4258,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
                 <ScalarProperty Name="BalanceQuantity" ColumnName="BalanceQuantity" />
                 <ScalarProperty Name="OldPurchaseSaleBookLineItemID" ColumnName="OldPurchaseSaleBookLineItemID" />
                 <ScalarProperty Name="MfgDate" ColumnName="MfgDate" />
+                <ScalarProperty Name="LineItemGroupID" ColumnName="LineItemGroupID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4253,6 +4295,7 @@ warning 6002: The table/view 'PharmaDB.dbo.ExternalItemNameMapping' does not hav
               <MappingFragment StoreEntitySet="TRN">
                 <ScalarProperty Name="TrnID" ColumnName="TrnID" />
                 <ScalarProperty Name="PurchaseSaleBookHeaderID" ColumnName="PurchaseSaleBookHeaderID" />
+                <ScalarProperty Name="ReceiptPaymentID" ColumnName="ReceiptPaymentID" />
                 <ScalarProperty Name="VoucherNumber" ColumnName="VoucherNumber" />
                 <ScalarProperty Name="VoucherTypeCode" ColumnName="VoucherTypeCode" />
                 <ScalarProperty Name="VoucherDate" ColumnName="VoucherDate" />

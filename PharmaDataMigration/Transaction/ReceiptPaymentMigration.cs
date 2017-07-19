@@ -222,7 +222,11 @@ namespace PharmaDataMigration.Transaction
                         foreach (var item in Common.receiptPaymentVoucherNumberMap)
                         {
                             var dd = list.Where(p => p.VoucherNumber == item.MappedVoucherNumber).FirstOrDefault();
-                            item.MappedReceiptPaymentID = dd.PurchaseSaleBookHeaderID;
+
+                            if (dd != null)
+                            {
+                                item.MappedReceiptPaymentID = dd.PurchaseSaleBookHeaderID;
+                            }
                         }
                     }
                 }
