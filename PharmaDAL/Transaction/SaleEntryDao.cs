@@ -460,13 +460,13 @@ namespace PharmaDAL.Transaction
 
         public List<PharmaBusinessObjects.Transaction.ReceiptPayment.BillOutstanding> GetSaleChallanByCustomer(string customerCode, string invoiceDate)
         {
+            
             DateTime dt;
-            DateTime.TryParse(invoiceDate, out dt);
-
-            DateTime.TryParse(dt.ToString("dd/MM/yyyy h:mm:ss"), out dt);
+            dt = DateTime.ParseExact(invoiceDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture );
 
             using (PharmaDBEntities context = new PharmaDBEntities())
             {
+                
                 return (
                             from challan in context.PurchaseSaleBookHeader
                             join invoice in context.PurchaseSaleBookHeader
