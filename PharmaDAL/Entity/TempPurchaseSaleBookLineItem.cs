@@ -66,6 +66,7 @@ namespace PharmaDAL.Entity
         public Nullable<decimal> BalanceQuantity { get; set; }
         public Nullable<long> OldPurchaseSaleBookLineItemID { get; set; }
         public Nullable<System.DateTime> MfgDate { get; set; }
+        public Nullable<int> LineItemGroupID { get; set; }
     
         public virtual FIFO FIFO { get; set; }
         public virtual TempPurchaseSaleBookHeader TempPurchaseSaleBookHeader { get; set; }

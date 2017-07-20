@@ -159,8 +159,7 @@ namespace PharmaDataMigration.Transaction
                                 newPurchaseSaleBookLineItem.SpecialDiscountAmount = 0;// Convert.ToDecimal(dr["SPLRATE"]);
                                 newPurchaseSaleBookLineItem.VolumeDiscountAmount = 0;// Convert.ToDecimal(dr["SPLRATE"]);
                                 newPurchaseSaleBookLineItem.TotalDiscountAmount = (decimal)CommonMethods.SafeConversionDecimal(Convert.ToString(dr["DISAMT"]));
-
-
+                                
                                 newPurchaseSaleBookLineItem.CreatedBy = "admin";
                                 newPurchaseSaleBookLineItem.CreatedOn = DateTime.Now;
                                 newPurchaseSaleBookLineItem.ModifiedBy = "admin";

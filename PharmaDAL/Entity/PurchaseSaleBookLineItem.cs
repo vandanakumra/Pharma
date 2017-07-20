@@ -63,6 +63,7 @@ namespace PharmaDAL.Entity
         public Nullable<decimal> VolumeDiscountAmount { get; set; }
         public Nullable<decimal> TotalDiscountAmount { get; set; }
         public Nullable<System.DateTime> MfgDate { get; set; }
+        public Nullable<int> LineItemGroupID { get; set; }
     
         public virtual FIFO FIFO { get; set; }
         public virtual PurchaseSaleBookHeader PurchaseSaleBookHeader { get; set; }

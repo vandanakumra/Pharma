@@ -31,6 +31,7 @@ namespace PharmaDataMigration
         public string OriginalVoucherNumber { get; set; }
         public string MappedVoucherNumber { get; set; }
         public long MappedReceiptPaymentID { get; set; }
+       
         
     }
 
@@ -40,6 +41,7 @@ namespace PharmaDataMigration
         public string MappedVoucherNumber { get; set; }
         public long MappedPurchaseHeaderID { get; set; }
         public string LocalCentral { get; set; }
+        public long BillOutstandingID { get; set; }
     }   
 
     public class LedgerTypeMap

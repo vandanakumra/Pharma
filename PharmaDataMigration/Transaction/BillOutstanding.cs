@@ -80,7 +80,7 @@ namespace PharmaDataMigration.Master
                                 else
                                 {
                                     newBillOS.VoucherNumber = (Convert.ToString(dr["vno"]).Trim()).PadLeft(8, '0');
-                                    log.Info(string.Format("BILLOS: Voucher No  Not found in for VNO {0}", oldVNo));
+                                    //log.Info(string.Format("BILLOS: Voucher No  Not found in for VNO {0}", oldVNo));
                                 }
                                                                
                                 newBillOS.VoucherTypeCode = mappedVoucherTypeCode;
@@ -105,9 +105,12 @@ namespace PharmaDataMigration.Master
 
                     context.BillOutStandings.AddRange(listBillOutstandings);
                     _result = context.SaveChanges();
-
-                    return _result;
+                   
                 }
+
+                FillBillOsId();
+
+                return _result;
             }
             catch (DbEntityValidationException ex)
             {
@@ -116,6 +119,42 @@ namespace PharmaDataMigration.Master
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        private void FillBillOsId()
+        {
+            try
+            {
+                log.Info("BillOutStandings FillBillOustandingIDs --> STARTED ");
+                using (PharmaDBEntities context = new PharmaDBEntities())
+                {
+                    var list = context.BillOutStandings.Select(p => new
+                    {
+                        PurchaseSaleBookHeaderID = p.PurchaseSaleBookHeaderID,
+                        VoucherNumber = p.VoucherNumber,
+                        BillOutStandingsID = p.BillOutStandingsID
+                    }).ToList();
+
+                    log.Info("BillOutStandings FillBillOustandingIDs --> list --> " + list.Count.ToString());
+
+                    if (list != null && list.Count > 0)
+                    {
+                        foreach (var item in Common.voucherNumberMap)
+                        {
+                            var dd = list.Where(p => p.VoucherNumber == item.MappedVoucherNumber).FirstOrDefault();
+
+                            if (dd != null)
+                            {
+                                item.BillOutstandingID = dd.BillOutStandingsID;
+                            }                       
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Info("BillOutStandings FillBillOustandingIDs -->  " + ex.Message);
             }
         }
     }
